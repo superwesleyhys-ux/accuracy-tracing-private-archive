@@ -1,0 +1,266 @@
+{
+  "scope": "Synthetic offline probes, not observed live failure counts or semantic accuracy tests.",
+  "module": "/workspace/scratch/2e116a7450bf/accuracy-fix-v03/newsverify/provenance.py",
+  "duplicate_id_overwrite": {
+    "interpretation": "Two faithful, source-owned fragments with one ID silently collapse. Reobserving unchanged a changes the winner even though neither owner's Analysis changes.",
+    "before_repeat": {
+      "errors": [],
+      "assessment_valid": true,
+      "material_contents": {
+        "a": "Notice A says the bridge is closed.",
+        "b": "Notice B says the bridge is open."
+      },
+      "accepted_analyses": {
+        "a": {
+          "fragments": [
+            {
+              "id": "same-id",
+              "text": "Notice A says the bridge is closed.",
+              "span": {
+                "version_id": "a",
+                "start": 0,
+                "end": 35,
+                "quote": "Notice A says the bridge is closed."
+              },
+              "parent_id": "synthetic-target",
+              "qualifiers": [],
+              "qualifier_spans": []
+            }
+          ],
+          "relations": [],
+          "gaps": [],
+          "resolutions": [],
+          "origins": [],
+          "notes": "",
+          "revisit_versions": []
+        },
+        "b": {
+          "fragments": [
+            {
+              "id": "same-id",
+              "text": "Notice B says the bridge is open.",
+              "span": {
+                "version_id": "b",
+                "start": 0,
+                "end": 33,
+                "quote": "Notice B says the bridge is open."
+              },
+              "parent_id": "synthetic-target",
+              "qualifiers": [],
+              "qualifier_spans": []
+            }
+          ],
+          "relations": [],
+          "gaps": [],
+          "resolutions": [],
+          "origins": [],
+          "notes": "",
+          "revisit_versions": []
+        }
+      },
+      "projected_fragments": [
+        {
+          "id": "same-id",
+          "text": "Notice B says the bridge is open.",
+          "span": {
+            "version_id": "b",
+            "start": 0,
+            "end": 33,
+            "quote": "Notice B says the bridge is open."
+          },
+          "parent_id": "synthetic-target",
+          "qualifiers": [],
+          "qualifier_spans": []
+        }
+      ],
+      "observations": [
+        {
+          "version_id": "a",
+          "retrieved_at": "2026-09-04T12:00:00Z",
+          "duplicate": false,
+          "eligible": true,
+          "reasons": []
+        },
+        {
+          "version_id": "b",
+          "retrieved_at": "2026-09-04T12:00:00Z",
+          "duplicate": false,
+          "eligible": true,
+          "reasons": []
+        }
+      ]
+    },
+    "after_repeat": {
+      "errors": [],
+      "assessment_valid": true,
+      "material_contents": {
+        "a": "Notice A says the bridge is closed.",
+        "b": "Notice B says the bridge is open."
+      },
+      "accepted_analyses": {
+        "b": {
+          "fragments": [
+            {
+              "id": "same-id",
+              "text": "Notice B says the bridge is open.",
+              "span": {
+                "version_id": "b",
+                "start": 0,
+                "end": 33,
+                "quote": "Notice B says the bridge is open."
+              },
+              "parent_id": "synthetic-target",
+              "qualifiers": [],
+              "qualifier_spans": []
+            }
+          ],
+          "relations": [],
+          "gaps": [],
+          "resolutions": [],
+          "origins": [],
+          "notes": "",
+          "revisit_versions": []
+        },
+        "a": {
+          "fragments": [
+            {
+              "id": "same-id",
+              "text": "Notice A says the bridge is closed.",
+              "span": {
+                "version_id": "a",
+                "start": 0,
+                "end": 35,
+                "quote": "Notice A says the bridge is closed."
+              },
+              "parent_id": "synthetic-target",
+              "qualifiers": [],
+              "qualifier_spans": []
+            }
+          ],
+          "relations": [],
+          "gaps": [],
+          "resolutions": [],
+          "origins": [],
+          "notes": "",
+          "revisit_versions": []
+        }
+      },
+      "projected_fragments": [
+        {
+          "id": "same-id",
+          "text": "Notice A says the bridge is closed.",
+          "span": {
+            "version_id": "a",
+            "start": 0,
+            "end": 35,
+            "quote": "Notice A says the bridge is closed."
+          },
+          "parent_id": "synthetic-target",
+          "qualifiers": [],
+          "qualifier_spans": []
+        }
+      ],
+      "observations": [
+        {
+          "version_id": "a",
+          "retrieved_at": "2026-09-04T12:00:00Z",
+          "duplicate": false,
+          "eligible": true,
+          "reasons": []
+        },
+        {
+          "version_id": "b",
+          "retrieved_at": "2026-09-04T12:00:00Z",
+          "duplicate": false,
+          "eligible": true,
+          "reasons": []
+        },
+        {
+          "version_id": "a",
+          "retrieved_at": "2026-09-04T12:00:00Z",
+          "duplicate": true,
+          "eligible": true,
+          "reasons": []
+        }
+      ]
+    },
+    "owner_analyses_unchanged": true,
+    "winner_changed": true
+  },
+  "other_material_fragment": {
+    "interpretation": "Accepted: b's Analysis owns a fragment whose decisive span comes only from a. Whether this is allowed must be defined explicitly; arbitrary cross-material relation bases are not inherently invalid.",
+    "errors": [],
+    "assessment_valid": true,
+    "analysis_for_b": {
+      "fragments": [
+        {
+          "id": "b-owned-a-fragment",
+          "text": "Notice A says the bridge is closed.",
+          "span": {
+            "version_id": "a",
+            "start": 0,
+            "end": 35,
+            "quote": "Notice A says the bridge is closed."
+          },
+          "parent_id": "synthetic-target",
+          "qualifiers": [],
+          "qualifier_spans": []
+        }
+      ],
+      "relations": [],
+      "gaps": [],
+      "resolutions": [],
+      "origins": [],
+      "notes": "",
+      "revisit_versions": []
+    }
+  },
+  "unknown_gap_resolution_by_decomposer": {
+    "errors": [],
+    "assessment_valid": true,
+    "open_gap_ids": [
+      "origin:synthetic-target"
+    ],
+    "resolutions": [
+      {
+        "gap_id": "never-registered-gap",
+        "basis": [
+          {
+            "version_id": "a",
+            "start": 0,
+            "end": 35,
+            "quote": "Notice A says the bridge is closed."
+          }
+        ],
+        "rationale": "Synthetic resolution of an absent gap ID."
+      }
+    ]
+  },
+  "unknown_gap_resolution_by_verifier": {
+    "errors": [],
+    "assessment_valid": true,
+    "open_gap_ids": [
+      "origin:synthetic-target"
+    ],
+    "resolutions": [
+      {
+        "gap_id": "never-registered-gap",
+        "basis": [
+          {
+            "version_id": "a",
+            "start": 0,
+            "end": 35,
+            "quote": "Notice A says the bridge is closed."
+          }
+        ],
+        "rationale": "Synthetic resolution of an absent gap ID."
+      }
+    ]
+  },
+  "caveats": [
+    "A legitimate relation may cite multiple materials. The probes do not propose banning cross-material evidence.",
+    "If fragment IDs intentionally identify shared findings, conflicting definitions still need an explicit merge or conflict rule; last writer wins is not that rule.",
+    "An unknown gap ID has no registered stage, so no claim about its actual stage can be inferred from its spelling.",
+    "All seven observed failed shared prefixes stopped before verification; these probes identify separate latent defects."
+  ]
+}
