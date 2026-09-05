@@ -1,5 +1,10 @@
 # Accuracy Tracing — NewsVerify Harness
 
+An experimental [shared-checkpoint ablation pilot](docs/PROOF_EXPERIMENT.md) now
+separates three-round verification, psi reanalysis and independent resampling.
+Its real-source-derived reference labels are provisional pending human review;
+it does not establish real-news accuracy or general superiority.
+
 Version 0.3.0: a bounded news provenance loop with **decomposition on every material return**, separate evidence/world assessments, task-directed snapshot retrieval, and a shared single-round/multi-round decision policy.
 
 **Status: model adapter and targeted regression experiments implemented.** The optional OpenAI adapter is in `experiments/`; the original demos remain hand-annotated. A searchable snapshot provider executes fetch/search/reanalysis tasks and reports missing coverage. It does not browse the open web. There is no independently reviewed real-news accuracy claim. See [v0.3 repair contract](docs/REPAIR_V0.3.md) and [observed results](reports/REPAIR_RESULTS_V0.3.md).

@@ -8,11 +8,11 @@ default decomposer deliberately leaves provenance unresolved. All inputs are dat
 from __future__ import annotations
 
 from copy import deepcopy
-from dataclasses import asdict, dataclass
+from dataclasses import asdict, dataclass, fields, is_dataclass, replace
 from datetime import datetime, timezone
 import hashlib
 import json
-from typing import Iterable, Protocol
+from typing import Callable, Iterable, Protocol
 
 
 @dataclass(frozen=True)
@@ -126,6 +126,71 @@ class TraceConfig:
     max_rounds: int = 5
     max_documents: int = 30
     max_decomposition_calls: int = 30
+    experimental_force_rounds: bool = False
+
+
+@dataclass(frozen=True)
+class TraceCheckpoint:
+    """An isolated, in-memory continuation point after a successful verification.
+
+    ``state`` retains typed analyses and exact collection order. The checksum
+    detects accidental edits; this is not an authenticated interchange format.
+    Provider, decomposer, and verifier instances are deliberately not retained.
+    """
+
+    target: Target
+    config: TraceConfig
+    state: dict
+    schema_version: str = "experimental-round-checkpoint-v1"
+    sha256: str = ""
+
+
+def _checkpoint_value(value):
+    # Mapping order affects future contexts and search tasks, so encode mappings
+    # as ordered entries. Tagged tuples also preserve the origin graph's keys.
+    if is_dataclass(value) and not isinstance(value, type):
+        return {"type": type(value).__name__, "fields": {
+            field.name: _checkpoint_value(getattr(value, field.name)) for field in fields(value)}}
+    if isinstance(value, dict):
+        return {"mapping": [[_checkpoint_value(key), _checkpoint_value(item)]
+                            for key, item in value.items()]}
+    if isinstance(value, tuple):
+        return {"tuple": [_checkpoint_value(item) for item in value]}
+    if isinstance(value, (set, frozenset)):
+        items = [_checkpoint_value(item) for item in value]
+        return {"set": sorted(items, key=lambda item: json.dumps(item, sort_keys=True))}
+    if isinstance(value, list):
+        return [_checkpoint_value(item) for item in value]
+    if value is None or type(value) in (str, int, float, bool):
+        return value
+    raise ValueError(f"unsupported checkpoint value: {type(value).__name__}")
+
+
+def canonical_checkpoint_json(checkpoint: TraceCheckpoint) -> str:
+    """Return deterministic audit JSON, excluding the stored checksum itself.
+
+    This serialization is for inspection and hashing, not external resumption.
+    """
+    if not isinstance(checkpoint, TraceCheckpoint):
+        raise ValueError("checkpoint must be a TraceCheckpoint")
+    payload = {"schema_version": checkpoint.schema_version,
+               "target": _checkpoint_value(checkpoint.target),
+               "config": _checkpoint_value(checkpoint.config),
+               "state": _checkpoint_value(checkpoint.state)}
+    return json.dumps(payload, sort_keys=True, separators=(",", ":"), ensure_ascii=False, allow_nan=False)
+
+
+def checkpoint_sha256(checkpoint: TraceCheckpoint) -> str:
+    return hashlib.sha256(canonical_checkpoint_json(checkpoint).encode("utf-8")).hexdigest()
+
+
+_CHECKPOINT_STATE_KEYS = frozenset({
+    "materials", "eligible", "fingerprints", "current_analyses", "history", "verifications",
+    "operations", "observations", "errors", "initial", "gaps", "resolved", "verification_gaps",
+    "verification_resolved", "runtime_gaps", "fragments", "relations", "origins", "usage",
+    "fact_status", "decision_status", "assessments", "stop_reason", "fatal", "seen_structures",
+    "previous_structure", "has_verifier",
+})
 
 
 class TraceProvider(Protocol):
@@ -350,19 +415,35 @@ def _validate_analysis(analysis, target, material, materials):
 
 def run_provenance(target: Target | dict, provider: TraceProvider,
                    decomposer: Decomposer | None = None, verifier: Verifier | None = None,
-                   config: TraceConfig | dict | None = None) -> dict:
+                   config: TraceConfig | dict | None = None, *,
+                   checkpoint: TraceCheckpoint | None = None,
+                   checkpoint_callback: Callable[[TraceCheckpoint], None] | None = None) -> dict:
     """Run a bounded trace. Provider/analysis errors are audited and fail unresolved.
 
     Historical eligibility needs an explicit, evidenced ``available_at`` for the
     exact version. ``published_at`` alone never proves historical availability.
     A late retrieval of an evidenced old version is allowed; there is no age cap.
     All returned valid versions, including duplicates/ineligible ones, visit psi.
+
+    Experimental checkpoints retain all runner state after a verified round and
+    before its terminal stop event. Resumption starts at the next round without
+    rerunning the prefix. Explicit continuation config may change round limits
+    and forced stopping behavior, but must retain the shared document and
+    decomposition budgets. Omitting config inherits the checkpoint's config.
+    Callbacks receive isolated copies; callback exceptions propagate to callers.
+    Forced rounds still stop on empty retrieval, fatal errors, and any budget.
     """
     if isinstance(target, dict):
         raw_target = dict(target)
         if isinstance(raw_target.get("evidence_scope"), list):
             raw_target["evidence_scope"] = tuple(raw_target["evidence_scope"])
         target = Target(**raw_target)
+    if checkpoint is not None and not isinstance(checkpoint, TraceCheckpoint):
+        raise ValueError("checkpoint must be a TraceCheckpoint")
+    if checkpoint_callback is not None and not callable(checkpoint_callback):
+        raise ValueError("checkpoint_callback must be callable")
+    if config is None and checkpoint is not None:
+        config = checkpoint.config
     config = TraceConfig(**config) if isinstance(config, dict) else (config or TraceConfig())
     if not isinstance(target, Target) or not isinstance(config, TraceConfig):
         raise ValueError("invalid target or config type")
@@ -379,6 +460,30 @@ def run_provenance(target: Target | dict, provider: TraceProvider,
     for name in ("max_rounds", "max_documents", "max_decomposition_calls"):
         if type(getattr(config, name)) is not int or getattr(config, name) < 1:
             raise ValueError(f"{name} must be a positive integer")
+    if type(config.experimental_force_rounds) is not bool:
+        raise ValueError("experimental_force_rounds must be boolean")
+    saved = None
+    if checkpoint is not None:
+        if checkpoint.target != target:
+            raise ValueError("checkpoint target mismatch")
+        if checkpoint.schema_version != "experimental-round-checkpoint-v1":
+            raise ValueError("unsupported checkpoint schema version")
+        if not isinstance(checkpoint.config, TraceConfig) or not isinstance(checkpoint.state, dict):
+            raise ValueError("invalid checkpoint config or state")
+        if checkpoint.sha256 != checkpoint_sha256(checkpoint):
+            raise ValueError("checkpoint integrity checksum mismatch")
+        if set(checkpoint.state) != _CHECKPOINT_STATE_KEYS:
+            raise ValueError("invalid checkpoint state fields")
+        for name in ("max_documents", "max_decomposition_calls"):
+            if getattr(config, name) != getattr(checkpoint.config, name):
+                raise ValueError(f"checkpoint continuation must preserve {name}")
+        saved = deepcopy(checkpoint.state)
+        if saved["fatal"] or not saved["verifications"] or not saved["has_verifier"]:
+            raise ValueError("checkpoint must follow a successful verification")
+        if verifier is None:
+            raise ValueError("checkpoint continuation requires a verifier")
+        if config.max_rounds < saved["usage"]["rounds"]:
+            raise ValueError("max_rounds is below the checkpoint round")
     decomposer = decomposer or ConservativeDecomposer()
     materials = {}
     eligible = {}
@@ -404,6 +509,33 @@ def run_provenance(target: Target | dict, provider: TraceProvider,
     assessments = None
     stop_reason = "round_budget"
     fatal = False
+
+    if saved is not None:
+        materials = saved["materials"]
+        eligible = saved["eligible"]
+        fingerprints = saved["fingerprints"]
+        current_analyses = saved["current_analyses"]
+        history = saved["history"]
+        verifications = saved["verifications"]
+        operations = saved["operations"]
+        observations = saved["observations"]
+        errors = saved["errors"]
+        initial = saved["initial"]
+        gaps = saved["gaps"]
+        resolved = saved["resolved"]
+        verification_gaps = saved["verification_gaps"]
+        verification_resolved = saved["verification_resolved"]
+        runtime_gaps = saved["runtime_gaps"]
+        fragments = saved["fragments"]
+        relations = saved["relations"]
+        origins = saved["origins"]
+        usage = saved["usage"]
+        fact_status = saved["fact_status"]
+        decision_status = saved["decision_status"]
+        assessments = saved["assessments"]
+        if usage["rounds"] >= config.max_rounds:
+            # A no-op resume reproduces the completed prefix's terminal reason.
+            stop_reason = saved["stop_reason"]
 
     def event(action, **values):
         operations.append({"sequence": len(operations) + 1, "round": usage["rounds"], "action": action, **values})
@@ -519,14 +651,34 @@ def run_provenance(target: Target | dict, provider: TraceProvider,
         event("graph_updated", version_id=material.version_id, open_gaps=len(gaps))
         return analysis.revisit_versions
 
-    seen_structures = {structural_fingerprint()}
-    previous_structure = structural_fingerprint()
-    for round_number in range(1, config.max_rounds + 1):
+    seen_structures = saved["seen_structures"] if saved is not None else {structural_fingerprint()}
+    previous_structure = saved["previous_structure"] if saved is not None else structural_fingerprint()
+
+    def save_checkpoint():
+        if checkpoint_callback is None or not round_verified:
+            return
+        state = deepcopy({
+            "materials": materials, "eligible": eligible, "fingerprints": fingerprints,
+            "current_analyses": current_analyses, "history": history, "verifications": verifications,
+            "operations": operations, "observations": observations, "errors": errors,
+            "initial": initial, "gaps": gaps, "resolved": resolved,
+            "verification_gaps": verification_gaps, "verification_resolved": verification_resolved,
+            "runtime_gaps": runtime_gaps, "fragments": fragments, "relations": relations,
+            "origins": origins, "usage": usage, "fact_status": fact_status,
+            "decision_status": decision_status, "assessments": assessments, "stop_reason": stop_reason,
+            "fatal": fatal, "seen_structures": seen_structures, "previous_structure": previous_structure,
+            "has_verifier": verifier is not None,
+        })
+        point = TraceCheckpoint(target=target, config=config, state=state)
+        checkpoint_callback(replace(point, sha256=checkpoint_sha256(point)))
+
+    for round_number in range(usage["rounds"] + 1, config.max_rounds + 1):
         capacity = min(config.max_documents - usage["documents"], config.max_decomposition_calls - usage["decomposition_calls"])
         if capacity <= 0:
             stop_reason = "document_budget" if usage["documents"] >= config.max_documents else "decomposition_budget"
             break
         usage["rounds"] = round_number
+        round_verified = False
         tasks = tuple(gaps.values()) or (Gap("inspect-lineage", "Inspect unresolved upstream lineage"),)
         event("search", tasks=[asdict(item) for item in tasks], limit=capacity)
         try:
@@ -610,8 +762,8 @@ def run_provenance(target: Target | dict, provider: TraceProvider,
         feedback = getattr(provider, "last_feedback", ())
         for item in feedback:
             event("retrieval_feedback", feedback=deepcopy(dict(item)))
-        if received == 0 and feedback:
-            stop_reason = "provider_exhausted"
+        if received == 0 and (feedback or config.experimental_force_rounds):
+            stop_reason = "provider_exhausted" if feedback else "empty_results"
             break
         if verifier is not None and eligible:
             usage["verification_calls"] += 1
@@ -676,28 +828,35 @@ def run_provenance(target: Target | dict, provider: TraceProvider,
             if previous_assessments != assessments:
                 event("assessment_changed", previous=previous_assessments, current=deepcopy(assessments),
                       basis=[asdict(s) for s in check.basis], world_basis=[asdict(s) for s in check.world_basis])
+            round_verified = True
         provenance_complete = has_origin_path() and not any(item.stage == "provenance" and item.blocking for item in gaps.values())
-        if provenance_complete and (verifier is None or decision_status != "unresolved") and not any(
+        if not config.experimental_force_rounds and provenance_complete and (verifier is None or decision_status != "unresolved") and not any(
                 g.blocking and gap_dimension(g) in {"provenance", target.assessment_mode} for g in gaps.values()):
             stop_reason = "complete"
+            save_checkpoint()
             break
         if received == 0:
             stop_reason = "provider_exhausted" if feedback else "empty_results"
+            save_checkpoint()
             break
         structure = structural_fingerprint()
         structural_progress = structure not in seen_structures
         event("progress_checked", new_eligible_versions=new_eligible, new_structure=structural_progress)
-        if new_eligible == 0 and not structural_progress:
+        if not config.experimental_force_rounds and new_eligible == 0 and not structural_progress:
             stop_reason = "no_new_eligible_materials" if structure == previous_structure else "repeated_state"
+            save_checkpoint()
             break
         seen_structures.add(structure)
         previous_structure = structure
         if usage["documents"] >= config.max_documents:
             stop_reason = "document_budget"
+            save_checkpoint()
             break
         if usage["decomposition_calls"] >= config.max_decomposition_calls:
             stop_reason = "decomposition_budget"
+            save_checkpoint()
             break
+        save_checkpoint()
     provenance_status = "original_material_located" if has_origin_path() and not any(item.stage == "provenance" and item.blocking for item in gaps.values()) else ("partial" if eligible else "unresolved")
     if fatal:
         provenance_status = "unresolved"

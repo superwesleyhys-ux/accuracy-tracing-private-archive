@@ -1,0 +1,349 @@
+{
+  "schema_version": 1,
+  "review_status": "passed_for_provisional_pilot",
+  "review_completed_at": "2026-09-05T09:40:10Z",
+  "reviewer_kind": "separate_execution_team_ai_agent",
+  "reviewer_task": "gold_review",
+  "review_design": "The reviewer saw proposed source labels and rationales, independently reopened primary sources and clicked the four retained citation links, and remained blind to model predictions. This is not independent human labeling or blinded independent initial annotation.",
+  "model_predictions_seen": false,
+  "model_api_calls_made": false,
+  "credentials_accessed": false,
+  "gold_modified_by_reviewer": false,
+  "human_adjudication_complete": false,
+  "human_review_still_required": true,
+  "held_out_benchmark": false,
+  "ready_for_provisional_freeze": true,
+  "file_hash_algorithm": "sha256_raw_file_bytes",
+  "reviewed_files": {
+    "inputs.json": "4b1e1d3bbad7d72f77822aa8cf402e923db1af9d85df3b5c732a5279ac2fa825",
+    "gold.json": "4cd818aecf0693559c2b877a7067a7b765159abc4b6b832535fb6a14add13ce5",
+    "sources.json": "2869b635d092d556edf35f0d57b2d150cca0728f80516614a8faaf74df8c989c",
+    "ANNOTATION.md": "96d3564170a85830fefb8066efa59f100873f2585a6da7b8d719a27359562777"
+  },
+  "counts": {
+    "events": 8,
+    "cases": 8,
+    "source_versions": 15,
+    "supported": 3,
+    "contradicted": 3,
+    "unresolved": 2,
+    "basis_quotes_verified_as_material_substrings": 12,
+    "documentary_origins_evaluable": 3,
+    "observed_citation_edges_evaluable": 4
+  },
+  "blocking_issues": [],
+  "checks": {
+    "inference_ids_neutral": true,
+    "annotation_labels_absent_from_input_schema": true,
+    "basis_quotes_match_materials": true,
+    "material_hashes_match_manifest": true,
+    "document_publication_dates_separate_from_collection_availability": true,
+    "historical_exact_version_capture_claimed": false,
+    "documentary_origins_distinguished_from_world_truth": true,
+    "copied_or_dependent_sources_asserted_independent": false,
+    "false_probes_attributed_as_published_news": false,
+    "actual_runtime_prompt_boundary_reviewed": false
+  },
+  "case_reviews": [
+    {
+      "case_id": "p01",
+      "reviewed_decision": "true",
+      "agreement": true,
+      "source_versions_checked": [
+        "m01",
+        "m02"
+      ],
+      "finding": "The October 11, 2022 announcement states a 32-minute shortening with approximately ±2 minutes uncertainty. A later revision to 33 minutes does not negate what that announcement reported.",
+      "origin_evaluable": true,
+      "edges_evaluable": true
+    },
+    {
+      "case_id": "p02",
+      "reviewed_decision": "false",
+      "agreement": true,
+      "source_versions_checked": [
+        "m03",
+        "m04"
+      ],
+      "finding": "The February 15, 2024 record states 121.6 grams as the bulk total and distinguishes the previously measured 70.3 grams. The exact final-total assertion is explicitly contradicted.",
+      "origin_evaluable": false,
+      "edges_evaluable": false
+    },
+    {
+      "case_id": "p03",
+      "reviewed_decision": "true",
+      "agreement": true,
+      "source_versions_checked": [
+        "m05",
+        "m06"
+      ],
+      "finding": "The official FIPS 203 abstract names three ML-KEM parameter sets: 512, 768, and 1024. This concerns parameter sets within FIPS 203, separate from the number of finalized standards.",
+      "origin_evaluable": true,
+      "edges_evaluable": true
+    },
+    {
+      "case_id": "p04",
+      "reviewed_decision": "false",
+      "agreement": true,
+      "source_versions_checked": [
+        "m07",
+        "m08"
+      ],
+      "finding": "NOAA assigns 1.29°C to its 20th-century baseline and 1.46°C to 1850–1900. NASA separately reports 1.28°C against 1951–1980 and about 1.47°C against 1850–1900; that other estimate does not answer the named NOAA scope.",
+      "origin_evaluable": false,
+      "edges_evaluable": false
+    },
+    {
+      "case_id": "p05",
+      "reviewed_decision": "unverifiable",
+      "agreement": true,
+      "source_versions_checked": [
+        "m09"
+      ],
+      "finding": "The January 25 record describes the helicopter as upright after the flight but explicitly leaves its orientation at touchdown under investigation. Later upright position entails neither upright nor non-upright orientation at the earlier moment. This is a document-scoped unknown.",
+      "origin_evaluable": false,
+      "edges_evaluable": false
+    },
+    {
+      "case_id": "p06",
+      "reviewed_decision": "unverifiable",
+      "agreement": true,
+      "source_versions_checked": [
+        "m10",
+        "m11"
+      ],
+      "finding": "Habitability and searching for conditions that could support life establish neither the existence nor absence of organisms. The mission-capability statement is not a biological detection result.",
+      "origin_evaluable": false,
+      "edges_evaluable": false
+    },
+    {
+      "case_id": "p07",
+      "reviewed_decision": "false",
+      "agreement": true,
+      "source_versions_checked": [
+        "m12",
+        "m13"
+      ],
+      "finding": "The July 8 bulletin dates renaming to July 7, 2024, upon attaining geostationary orbit. June 25 was launch day. The retrospective links to the bulletin but is not independent corroboration.",
+      "origin_evaluable": false,
+      "edges_evaluable": true
+    },
+    {
+      "case_id": "p08",
+      "reviewed_decision": "true",
+      "agreement": true,
+      "source_versions_checked": [
+        "m14",
+        "m15"
+      ],
+      "finding": "The April 20, 2020 national release explicitly describes combining six Apollo-era regional maps with newer satellite-mission information. The center article links to that release; the mapped data have other contributors.",
+      "origin_evaluable": true,
+      "edges_evaluable": true
+    }
+  ],
+  "source_checks": [
+    {
+      "version_id": "m01",
+      "url": "https://www.nasa.gov/science-research/planetary-science/from-impact-to-innovation-a-year-of-science-and-triumph-for-historic-dart-mission/",
+      "final_url": "https://www.nasa.gov/science-research/planetary-science/from-impact-to-innovation-a-year-of-science-and-triumph-for-historic-dart-mission/",
+      "publication_date": "2023-09-26",
+      "source_text_checked_by_reviewer": true,
+      "publication_date_checked_by_reviewer": true,
+      "material_hash_verified": true,
+      "excerpt_sha256": "dd36e6af43cc30111ebab00f388d54140c2e54f0f3cd7e74308300c62990347d"
+    },
+    {
+      "version_id": "m02",
+      "url": "https://www.nasa.gov/press-release/nasa-confirms-dart-mission-impact-changed-asteroid-s-motion-in-space",
+      "final_url": "https://www.nasa.gov/news-release/nasa-confirms-dart-mission-impact-changed-asteroids-motion-in-space/",
+      "publication_date": "2022-10-11",
+      "source_text_checked_by_reviewer": true,
+      "publication_date_checked_by_reviewer": true,
+      "material_hash_verified": true,
+      "excerpt_sha256": "63e82925fc872c995d71c0ccfdf0129251253659cdbcd84667acadab37928615"
+    },
+    {
+      "version_id": "m03",
+      "url": "https://science.nasa.gov/blogs/osiris-rex/2024/02/15/nasa-announces-osiris-rex-bulk-sample-mass/",
+      "final_url": "https://science.nasa.gov/blogs/osiris-rex/2024/02/15/nasa-announces-osiris-rex-bulk-sample-mass/",
+      "publication_date": "2024-02-15",
+      "source_text_checked_by_reviewer": true,
+      "publication_date_checked_by_reviewer": true,
+      "material_hash_verified": true,
+      "excerpt_sha256": "7430e03a5256012ae83d55a8c738d3f9094d9ae079cc4de8d4b9335a733075f0"
+    },
+    {
+      "version_id": "m04",
+      "url": "https://science.nasa.gov/blogs/osiris-rex/2023/10/20/nasas-osiris-rex-achieves-sample-mass-milestone/",
+      "final_url": "https://science.nasa.gov/blogs/osiris-rex/2023/10/20/nasas-osiris-rex-achieves-sample-mass-milestone/",
+      "publication_date": "2023-10-20",
+      "source_text_checked_by_reviewer": true,
+      "publication_date_checked_by_reviewer": true,
+      "material_hash_verified": true,
+      "excerpt_sha256": "35d3348bab64cde0acb26719a0cba734635b899cfcfa982dad41dada869ced15"
+    },
+    {
+      "version_id": "m05",
+      "url": "https://www.nist.gov/news-events/news/2024/08/nist-releases-first-3-finalized-post-quantum-encryption-standards",
+      "final_url": "https://www.nist.gov/news-events/news/2024/08/nist-releases-first-3-finalized-post-quantum-encryption-standards",
+      "publication_date": "2024-08-13",
+      "source_text_checked_by_reviewer": true,
+      "publication_date_checked_by_reviewer": true,
+      "material_hash_verified": true,
+      "excerpt_sha256": "52a3bd44ced3329807bd8bc3eda0adcfb219bb45654b7a6abe24c70761e1b051"
+    },
+    {
+      "version_id": "m06",
+      "url": "https://csrc.nist.gov/pubs/fips/203/final",
+      "final_url": "https://csrc.nist.gov/pubs/fips/203/final",
+      "publication_date": "2024-08-13",
+      "source_text_checked_by_reviewer": true,
+      "publication_date_checked_by_reviewer": true,
+      "material_hash_verified": true,
+      "excerpt_sha256": "99f1a1e2295d05709ade4e5344950965ed8aa515be279a55d254ac061831be38"
+    },
+    {
+      "version_id": "m07",
+      "url": "https://www.ncei.noaa.gov/news/global-climate-202413",
+      "final_url": "https://www.ncei.noaa.gov/news/global-climate-202413",
+      "publication_date": "2025-01-10",
+      "source_text_checked_by_reviewer": true,
+      "publication_date_checked_by_reviewer": true,
+      "material_hash_verified": true,
+      "excerpt_sha256": "fad84424152da5114e64fbde697caf23885b7afe5f135d77e63eb18112b339a9"
+    },
+    {
+      "version_id": "m08",
+      "url": "https://www.nasa.gov/news-release/temperatures-rising-nasa-confirms-2024-warmest-year-on-record/",
+      "final_url": "https://www.nasa.gov/news-release/temperatures-rising-nasa-confirms-2024-warmest-year-on-record/",
+      "publication_date": "2025-01-10",
+      "source_text_checked_by_reviewer": true,
+      "publication_date_checked_by_reviewer": true,
+      "material_hash_verified": true,
+      "excerpt_sha256": "debf5fb4e5b01f9a6a1eb0538f68db4d2a4ee34c7db1a5871a8e1357ff4551b6"
+    },
+    {
+      "version_id": "m09",
+      "url": "https://www.nasa.gov/news-release/after-three-years-on-mars-nasas-ingenuity-helicopter-mission-ends/",
+      "final_url": "https://www.nasa.gov/news-release/after-three-years-on-mars-nasas-ingenuity-helicopter-mission-ends/",
+      "publication_date": "2024-01-25",
+      "source_text_checked_by_reviewer": true,
+      "publication_date_checked_by_reviewer": true,
+      "material_hash_verified": true,
+      "excerpt_sha256": "afadd67120aeaec69f3e6ca0c2e84611da63fa3a5a344564074fc3f5549bfa03"
+    },
+    {
+      "version_id": "m10",
+      "url": "https://www.nasa.gov/news-release/liftoff-nasas-europa-clipper-sails-toward-ocean-moon-of-jupiter/",
+      "final_url": "https://www.nasa.gov/news-release/liftoff-nasas-europa-clipper-sails-toward-ocean-moon-of-jupiter/",
+      "publication_date": "2024-10-14",
+      "source_text_checked_by_reviewer": true,
+      "publication_date_checked_by_reviewer": true,
+      "material_hash_verified": true,
+      "excerpt_sha256": "cf6c7dc7ea1277442f3bd0e913efbf7c1c5a91257d0e396ba058d704bef46e01"
+    },
+    {
+      "version_id": "m11",
+      "url": "https://www.nasa.gov/podcasts/curious-universe/europa-clippers-voyage-to-jupiters-ocean-moon/",
+      "final_url": "https://www.nasa.gov/podcasts/curious-universe/europa-clippers-voyage-to-jupiters-ocean-moon/",
+      "publication_date": "2024-10-01",
+      "source_text_checked_by_reviewer": true,
+      "publication_date_checked_by_reviewer": true,
+      "material_hash_verified": true,
+      "excerpt_sha256": "26b87690da769267840a46bb3685eb859a94541646ae3b19bcc708a04a2138e8"
+    },
+    {
+      "version_id": "m12",
+      "url": "https://www.nesdis.noaa.gov/news/noaas-goes-u-satellite-one-year-later",
+      "final_url": "https://www.nesdis.noaa.gov/news/noaas-goes-u-satellite-one-year-later",
+      "publication_date": "2025-06-25",
+      "source_text_checked_by_reviewer": true,
+      "publication_date_checked_by_reviewer": true,
+      "material_hash_verified": true,
+      "excerpt_sha256": "39d767d59bb164293dcc5f1891f12052237e99a3e9941886f0879fe9859c7720"
+    },
+    {
+      "version_id": "m13",
+      "url": "https://www.nesdis.noaa.gov/news/noaas-goes-u-reaches-geostationary-orbit-now-designated-goes-19",
+      "final_url": "https://www.nesdis.noaa.gov/news/noaas-goes-u-reaches-geostationary-orbit-now-designated-goes-19",
+      "publication_date": "2024-07-08",
+      "source_text_checked_by_reviewer": true,
+      "publication_date_checked_by_reviewer": true,
+      "material_hash_verified": true,
+      "excerpt_sha256": "41e302e1235443884edceeda9cb4f1c187e20a72d9f4c6a64a403749b11059ed"
+    },
+    {
+      "version_id": "m14",
+      "url": "https://www.usgs.gov/news/astrogeology-releases-new-map-moon",
+      "final_url": "https://www.usgs.gov/news/astrogeology-releases-new-map-moon",
+      "publication_date": "2020-04-20",
+      "source_text_checked_by_reviewer": true,
+      "publication_date_checked_by_reviewer": true,
+      "material_hash_verified": true,
+      "excerpt_sha256": "c05f280eb484e365800e028a3553a97cc952edb781eb19cdba8f8750eecdbb13"
+    },
+    {
+      "version_id": "m15",
+      "url": "https://www.usgs.gov/news/usgs-releases-first-ever-comprehensive-geologic-map-moon",
+      "final_url": "https://www.usgs.gov/news/national-news-release/usgs-releases-first-ever-comprehensive-geologic-map-moon",
+      "publication_date": "2020-04-20",
+      "source_text_checked_by_reviewer": true,
+      "publication_date_checked_by_reviewer": true,
+      "material_hash_verified": true,
+      "excerpt_sha256": "ab284042e2d124dd397f4dc3e711706cda3dd5ce6ddd4c40d9502adb1fbec137"
+    }
+  ],
+  "observed_edges": [
+    {
+      "from": "m01",
+      "to": "m02",
+      "relation": "cites",
+      "anchor": "NASA Confirms DART Mission Impact Changed Asteroid’s Motion in Space (Oct. 11, 2022)",
+      "observed_href": "https://www.nasa.gov/press-release/nasa-confirms-dart-mission-impact-changed-asteroid-s-motion-in-space",
+      "resolved_url": "https://www.nasa.gov/news-release/nasa-confirms-dart-mission-impact-changed-asteroids-motion-in-space/",
+      "reviewer_clicked": true
+    },
+    {
+      "from": "m05",
+      "to": "m06",
+      "relation": "cites",
+      "anchor": "Federal Information Processing Standard (FIPS) 203",
+      "observed_href": "https://csrc.nist.gov/pubs/fips/203/final",
+      "resolved_url": "https://csrc.nist.gov/pubs/fips/203/final",
+      "reviewer_clicked": true
+    },
+    {
+      "from": "m12",
+      "to": "m13",
+      "relation": "cites",
+      "anchor": "reached geostationary orbit",
+      "observed_href": "https://www.nesdis.noaa.gov/news/noaas-goes-u-reaches-geostationary-orbit-now-designated-goes-19",
+      "resolved_url": "https://www.nesdis.noaa.gov/news/noaas-goes-u-reaches-geostationary-orbit-now-designated-goes-19",
+      "reviewer_clicked": true
+    },
+    {
+      "from": "m14",
+      "to": "m15",
+      "relation": "cites",
+      "anchor": "https://www.usgs.gov/news/usgs-releases-first-ever-comprehensive-geologic-map-moon",
+      "observed_href": "https://www.usgs.gov/news/usgs-releases-first-ever-comprehensive-geologic-map-moon",
+      "resolved_url": "https://www.usgs.gov/news/national-news-release/usgs-releases-first-ever-comprehensive-geologic-map-moon",
+      "reviewer_clicked": true
+    }
+  ],
+  "issues_resolved_before_freeze": [
+    {
+      "issue": "The Bennu February article links an old blogs.nasa.gov October URL that currently redirects to a general archive, not the selected migrated October article.",
+      "resolution": "Both current primary pages were individually checked; no Bennu citation edge is labeled and the limitation is documented."
+    }
+  ],
+  "limitations": [
+    "Labels remain provisional AI annotations pending qualified human review. Source rechecking is independent of the authoring agent, but not an independent human gold set.",
+    "Eight purposively chosen source-derived probes are not representative real-news accuracy evidence or a held-out test set.",
+    "Seven cases are entailment tasks constrained to named excerpts. The one world-mode case stays unresolved; documentary authority does not prove the world claim.",
+    "The reviewer verified current displayed primary text and selected excerpts. There is no archived historical HTML capture, authenticated page revision, or full-page byte verification.",
+    "Only three supported cases have evaluable corpus-relative documentary origins; four cases have observed citation edges. An omitted dimension is not a negative provenance label.",
+    "Inference input schema was checked for annotation leakage. Runtime prompt construction and exposure of separate gold files are outside this source review.",
+    "Nullable last-update fields in source metadata are not an exhaustive record of every page modification."
+  ]
+}
