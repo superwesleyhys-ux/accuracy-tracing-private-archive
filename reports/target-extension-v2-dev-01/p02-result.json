@@ -1,0 +1,71 @@
+{
+  "id": "p02",
+  "assessment_mode": "evidence",
+  "status": "error",
+  "prediction": null,
+  "checkpoints": [
+    {
+      "round": 1,
+      "id": "p02",
+      "decision": "false",
+      "assessment_mode": "evidence",
+      "assessments": {
+        "evidence": {
+          "raw_verdict": "contradicted",
+          "decision": "contradicted",
+          "blocking_gap_ids": []
+        },
+        "world": {
+          "raw_verdict": "contradicted",
+          "decision": "contradicted",
+          "blocking_gap_ids": []
+        }
+      },
+      "provenance_status": "original_material_located"
+    }
+  ],
+  "target_plan_sha256": "0b87f1ec79ba39a0254bb72e4f2776578d690f25fcb5f3a8615b36ba686799df",
+  "native_prediction": {
+    "id": "p02",
+    "assessment_mode": "evidence",
+    "as_of": "2026-09-05T09:34:36Z",
+    "decision": "unverifiable",
+    "assessments": {
+      "evidence": {
+        "raw_verdict": "contradicted",
+        "decision": "contradicted",
+        "blocking_gap_ids": []
+      },
+      "world": {
+        "raw_verdict": "contradicted",
+        "decision": "contradicted",
+        "blocking_gap_ids": []
+      }
+    },
+    "provenance_status": "unresolved",
+    "assessment_valid": false,
+    "stop_reason": "decomposer_error"
+  },
+  "engine_usage": {
+    "rounds": 2,
+    "documents": 4,
+    "unique_versions": 2,
+    "decomposition_calls": 4,
+    "verification_calls": 1
+  },
+  "error_type": "ValueError",
+  "usage": {
+    "model_calls": 16,
+    "input_tokens": 67968,
+    "output_tokens": 9094,
+    "seconds": 152.43308603401238
+  },
+  "checkpoint_hashes": [
+    {
+      "round": 1,
+      "sha256": "ef704f4a25e18158ff20d066f77b391ddd7b989c4082a4215788404f3149d17b"
+    }
+  ],
+  "new_api_attempts": 16,
+  "returned_responses": 15
+}

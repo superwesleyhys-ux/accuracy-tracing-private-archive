@@ -1,0 +1,666 @@
+{
+  "schema_version": "target-extension-smoke-gate-v1",
+  "passed": false,
+  "checks_run": 40,
+  "checks_passed": 29,
+  "failed_checks": [
+    "execution.completed_without_errors",
+    "execution.retained_rounds",
+    "execution.aggregate_status",
+    "labels.smoke_accuracy",
+    "labels.no_baseline_fixes_or_breaks",
+    "labels.no_round1_to_final_changes",
+    "probe_audit.structural_coverage",
+    "probe_audit.accepted_cycles",
+    "labels.frozen_case_labels",
+    "p07.time_and_designation_contradictions",
+    "p07.name_identity_results"
+  ],
+  "checks": [
+    {
+      "id": "freeze.smoke_contract",
+      "passed": true,
+      "expected": "unique smoke cases, positive round count, and one gold decision per case",
+      "actual": {
+        "cases": [
+          "p02",
+          "p07",
+          "p08"
+        ],
+        "rounds": [
+          1,
+          2
+        ],
+        "expected_labels": {
+          "p02": "false",
+          "p07": "false",
+          "p08": "true"
+        }
+      },
+      "detail": ""
+    },
+    {
+      "id": "freeze.hashes",
+      "passed": true,
+      "expected": "frozen hashes match in 'executed' mode",
+      "actual": {
+        "mismatches": [],
+        "unavailable_or_skipped": [
+          "experiments/staged_score.py",
+          "experiments/target_extension_compare_score.py",
+          "experiments/target_extension_smoke_gate.py",
+          "tests/test_extended_semantic.py",
+          "tests/test_extended_staged_integration.py",
+          "tests/test_staged_origin_scope.py",
+          "tests/test_provenance.py",
+          "tests/test_staged_run.py",
+          "tests/test_target_extension_compare_score.py",
+          "tests/test_target_extension_smoke_gate.py",
+          "tests/test_transport_diagnostics.py",
+          "docs/TARGET_EXTENSION.md",
+          "docs/STAGED_PSI.md",
+          "docs/TARGET_EXTENSION_SCORING.md"
+        ]
+      },
+      "detail": "Executed mode validates captured runtime files and recorded runtime hashes; non-executed historical files are disclosed rather than read from a changed workspace."
+    },
+    {
+      "id": "freeze.next_run",
+      "passed": true,
+      "expected": "reports/target-extension-v2-smoke-05",
+      "actual": "reports/target-extension-v2-smoke-05",
+      "detail": ""
+    },
+    {
+      "id": "freeze.preserved_run_directories",
+      "passed": true,
+      "expected": "every named preserved-run directory still exists",
+      "actual": [],
+      "detail": "Existence is checkable; byte-for-byte non-overwrite history is not."
+    },
+    {
+      "id": "execution.required_artifacts",
+      "passed": true,
+      "expected": "all aggregate and per-case smoke artifacts exist",
+      "actual": [],
+      "detail": ""
+    },
+    {
+      "id": "execution.frozen_config",
+      "passed": true,
+      "expected": "run configuration equals the frozen smoke contract",
+      "actual": {
+        "experiment": "target_extended_psi_development_v2",
+        "target_plan_schema": "decision-probe-v2",
+        "model": "gpt-6-astra",
+        "reasoning_effort": "medium",
+        "case_ids": [
+          "p02",
+          "p07",
+          "p08"
+        ],
+        "scheduled_cases": 3,
+        "rounds": 2,
+        "forced_rounds": true,
+        "automatic_transport_retries": 0,
+        "budget_per_case": {
+          "calls": 64,
+          "output_tokens": 64000,
+          "per_call_output_tokens": 4000,
+          "seconds": 900.0
+        },
+        "workers": 1,
+        "target_structure_repairs": 1,
+        "target_extension_repairs": 1,
+        "extension_output_repairs": 1,
+        "material_structure_repairs": 1,
+        "material_semantic_repairs": 1,
+        "judgement_repairs": 1,
+        "probe_result_structure_repairs": 1,
+        "input_sha256": "4b1e1d3bbad7d72f77822aa8cf402e923db1af9d85df3b5c732a5279ac2fa825"
+      },
+      "detail": ""
+    },
+    {
+      "id": "execution.transport_and_repair_declarations",
+      "passed": true,
+      "expected": {
+        "automatic_transport_retries": 0,
+        "target_structure_repairs": 1,
+        "target_extension_repairs": 1,
+        "extension_output_repairs": 1,
+        "material_structure_repairs": 1,
+        "material_semantic_repairs": 1,
+        "judgement_repairs": 1,
+        "probe_result_structure_repairs": 1,
+        "executed_sdk_max_retries": 0
+      },
+      "actual": {
+        "automatic_transport_retries": 0,
+        "target_structure_repairs": 1,
+        "target_extension_repairs": 1,
+        "extension_output_repairs": 1,
+        "material_structure_repairs": 1,
+        "material_semantic_repairs": 1,
+        "judgement_repairs": 1,
+        "probe_result_structure_repairs": 1,
+        "executed_sdk_max_retries": 0
+      },
+      "detail": "The executed SDK retry value is checked when captured model_io.py is available."
+    },
+    {
+      "id": "execution.executed_source_hashes",
+      "passed": true,
+      "expected": "all frozen files recorded by the run use their frozen hashes",
+      "actual": [],
+      "detail": ""
+    },
+    {
+      "id": "execution.case_set",
+      "passed": true,
+      "expected": [
+        "p02",
+        "p07",
+        "p08"
+      ],
+      "actual": {
+        "results": [
+          "p02",
+          "p07",
+          "p08"
+        ],
+        "inputs": [
+          "p02",
+          "p07",
+          "p08"
+        ]
+      },
+      "detail": ""
+    },
+    {
+      "id": "execution.completed_without_errors",
+      "passed": false,
+      "expected": "every smoke case completed with a valid report and no errors",
+      "actual": {
+        "row_errors": {
+          "p07": {
+            "status": "error",
+            "error_type": "ValueError",
+            "error_stage": null
+          }
+        },
+        "report_errors": {
+          "p07": [
+            {
+              "stage": "verifier",
+              "type": "StagedSemanticError",
+              "message": "staged semantic evidence: exact-designation result uses an incompatible relation"
+            }
+          ]
+        }
+      },
+      "detail": ""
+    },
+    {
+      "id": "execution.retained_rounds",
+      "passed": false,
+      "expected": "rounds [1, 2] plus matching retained checkpoint hashes",
+      "actual": [
+        "p07: checkpoint rounds are []",
+        "p07: retained checkpoint hashes cover []"
+      ],
+      "detail": ""
+    },
+    {
+      "id": "execution.calls_models_and_budgets",
+      "passed": true,
+      "expected": "all calls returned, used the frozen model, stopped cleanly, and stayed in budget",
+      "actual": [],
+      "detail": ""
+    },
+    {
+      "id": "execution.aggregate_status",
+      "passed": false,
+      "expected": "aggregate status and usage exactly reconcile",
+      "actual": [
+        "aggregate status is not completed",
+        "aggregate scheduled/completed counts are not 3/3"
+      ],
+      "detail": ""
+    },
+    {
+      "id": "comparison.independent_audit",
+      "passed": true,
+      "expected": "independent scorer completes without error",
+      "actual": null,
+      "detail": ""
+    },
+    {
+      "id": "labels.smoke_accuracy",
+      "passed": false,
+      "expected": "extension completes and agrees with 3/3 provisional labels",
+      "actual": {
+        "completed": 2,
+        "correct": 2
+      },
+      "detail": ""
+    },
+    {
+      "id": "labels.completed_baselines",
+      "passed": true,
+      "expected": "both baselines complete and agree on 3/3",
+      "actual": {
+        "original": {
+          "completed": 3,
+          "correct": 3
+        },
+        "staged": {
+          "completed": 3,
+          "correct": 3
+        }
+      },
+      "detail": ""
+    },
+    {
+      "id": "labels.no_baseline_fixes_or_breaks",
+      "passed": false,
+      "expected": "3 pairs and zero fixes/breaks against each baseline",
+      "actual": {
+        "original": {
+          "case_pairs": 3,
+          "fixes": 0,
+          "breaks": 1
+        },
+        "staged": {
+          "case_pairs": 3,
+          "fixes": 0,
+          "breaks": 1
+        }
+      },
+      "detail": ""
+    },
+    {
+      "id": "labels.no_round1_to_final_changes",
+      "passed": false,
+      "expected": "3 paired cases and zero round-1-to-final fixes/breaks",
+      "actual": {
+        "paired_completed_cases_with_round1": 2,
+        "fixes": 0,
+        "breaks": 0
+      },
+      "detail": ""
+    },
+    {
+      "id": "probe_audit.v2_plans",
+      "passed": true,
+      "expected": "3 independently valid decision-probe-v2 plans",
+      "actual": {
+        "plans_present": 3,
+        "plans_valid": 3,
+        "contracts": [
+          "decision-probe-v2",
+          "decision-probe-v2",
+          "decision-probe-v2"
+        ]
+      },
+      "detail": ""
+    },
+    {
+      "id": "probe_audit.structural_coverage",
+      "passed": false,
+      "expected": "binding, projection, and executed-stage coverage are each 1.0",
+      "actual": {
+        "required_probe_coverage": 1.0,
+        "projection_coverage": 1.0,
+        "executed_stage_projection_coverage": 0.9078947368421053
+      },
+      "detail": ""
+    },
+    {
+      "id": "probe_audit.accepted_cycles",
+      "passed": false,
+      "expected": "6 accepted and audited judgement cycles",
+      "actual": {
+        "accepted_judgement_cycles": 4,
+        "audited_judgement_cycles": 4
+      },
+      "detail": ""
+    },
+    {
+      "id": "probe_audit.result_slot_coverage",
+      "passed": true,
+      "expected": 1.0,
+      "actual": 1.0,
+      "detail": ""
+    },
+    {
+      "id": "probe_audit.grounded_conclusive_rate",
+      "passed": true,
+      "expected": 1.0,
+      "actual": 1.0,
+      "detail": ""
+    },
+    {
+      "id": "labels.frozen_case_labels",
+      "passed": false,
+      "expected": {
+        "p02": {
+          "round1": "false",
+          "final": "false"
+        },
+        "p07": {
+          "round1": "false",
+          "final": "false"
+        },
+        "p08": {
+          "round1": "true",
+          "final": "true"
+        }
+      },
+      "actual": {
+        "p02": {
+          "round1": "false",
+          "final": "false"
+        },
+        "p07": {
+          "round1": null,
+          "final": null
+        },
+        "p08": {
+          "round1": "true",
+          "final": "true"
+        }
+      },
+      "detail": ""
+    },
+    {
+      "id": "p02.attribution_structure",
+      "passed": true,
+      "expected": "one attribution parent plus linked attributed-content child(ren)",
+      "actual": {
+        "parents": 1,
+        "children": 1,
+        "linked": true
+      },
+      "detail": ""
+    },
+    {
+      "id": "p02.attribution_boundary",
+      "passed": true,
+      "expected": "all parent dimensions end at or before target offset 63",
+      "actual": [
+        4,
+        49,
+        24,
+        36,
+        58
+      ],
+      "detail": ""
+    },
+    {
+      "id": "p02.content_dimensions",
+      "passed": true,
+      "expected": "final-total, Bennu, OSIRIS-REx, and 70.3 grams are child dimensions",
+      "actual": {
+        "final total": true,
+        "Bennu": true,
+        "OSIRIS-REx": true,
+        "70.3 grams": true
+      },
+      "detail": ""
+    },
+    {
+      "id": "p02.final_total_each_round",
+      "passed": true,
+      "expected": "one m03-grounded contradicted result in evidence and world for rounds 1 and 2",
+      "actual": {
+        "probe_ids": [
+          "p02:probe:72b6e0029920f1bebf80"
+        ],
+        "outcomes": [
+          {
+            "round": 1,
+            "stage": "evidence",
+            "matches": 1,
+            "contradicted": true,
+            "grounded_in_m03": true
+          },
+          {
+            "round": 1,
+            "stage": "world",
+            "matches": 1,
+            "contradicted": true,
+            "grounded_in_m03": true
+          },
+          {
+            "round": 2,
+            "stage": "evidence",
+            "matches": 1,
+            "contradicted": true,
+            "grounded_in_m03": true
+          },
+          {
+            "round": 2,
+            "stage": "world",
+            "matches": 1,
+            "contradicted": true,
+            "grounded_in_m03": true
+          }
+        ]
+      },
+      "detail": ""
+    },
+    {
+      "id": "p07.single_claim",
+      "passed": true,
+      "expected": "single logic with exactly one claim",
+      "actual": {
+        "logic": "single",
+        "claims": 1
+      },
+      "detail": ""
+    },
+    {
+      "id": "p07.old_and_new_name_dimensions",
+      "passed": true,
+      "expected": "one GOES-U entity_identity and one GOES-19 exact_designation",
+      "actual": {
+        "goes_u_entity_identity": 1,
+        "goes_19_exact_designation": 1
+      },
+      "detail": ""
+    },
+    {
+      "id": "p07.no_duplicates_or_identity_overlap",
+      "passed": true,
+      "expected": "unique dimension/probe ids and no identity/designation overlap",
+      "actual": {
+        "dimension_ids": [
+          "p07:dimension:14678ed378d725572a86",
+          "p07:dimension:ecddd9d6e54c564b03dd",
+          "p07:dimension:ba8521d4b4e1b19dc73d",
+          "p07:dimension:67746ff18b2b11d2a99d",
+          "p07:dimension:8d3435a7afe261cd66ea",
+          "p07:dimension:abf413c224d169bf691a"
+        ],
+        "probe_ids": [
+          "p07:probe:139f856c46e9f77e9778",
+          "p07:probe:f4487773555bbae0625b",
+          "p07:probe:ae3d14a9ef5fd7eedcdc",
+          "p07:probe:0a4d57e7c0fde227b3df",
+          "p07:probe:0dea7da87aa6baa994e2",
+          "p07:probe:37c270bcd6de2622519e",
+          "p07:probe:d89d902009ccfa05abe8"
+        ],
+        "overlaps": []
+      },
+      "detail": ""
+    },
+    {
+      "id": "p07.designation_relation",
+      "passed": true,
+      "expected": "one all-dimension designation_relation with frozen routes/gate/policy",
+      "actual": [
+        {
+          "id": "p07:probe:139f856c46e9f77e9778",
+          "claim_id": "p07:claim:ca48e93865ef528ae277",
+          "kind": "designation_relation",
+          "dimension_ids": [
+            "p07:dimension:14678ed378d725572a86",
+            "p07:dimension:67746ff18b2b11d2a99d",
+            "p07:dimension:8d3435a7afe261cd66ea",
+            "p07:dimension:abf413c224d169bf691a",
+            "p07:dimension:ba8521d4b4e1b19dc73d",
+            "p07:dimension:ecddd9d6e54c564b03dd"
+          ],
+          "question": "Does the scoped evidence establish together the complete directed relation that NOAA renamed GOES-U to GOES-19 on June 25, 2024, including actor, action, prior referent, asserted designation and date qualifier, rather than assembling separately true facts?",
+          "decision_impact": "Determines whether the complete renaming relation is supported.",
+          "match_policy": "semantic_constraint",
+          "routes": [
+            "atoms",
+            "evidence",
+            "world"
+          ],
+          "gate": "always"
+        }
+      ],
+      "detail": ""
+    },
+    {
+      "id": "p07.time_and_designation_contradictions",
+      "passed": false,
+      "expected": "time_boundary and designation_relation are contradicted from m13's July 7, 2024 basis in evidence/world for every round",
+      "actual": {
+        "time_probe_ids": [
+          "p07:probe:d89d902009ccfa05abe8"
+        ],
+        "relation_probe_ids": [
+          "p07:probe:139f856c46e9f77e9778"
+        ],
+        "outcomes": []
+      },
+      "detail": ""
+    },
+    {
+      "id": "p07.name_identity_results",
+      "passed": false,
+      "expected": "GOES-U same-referent and GOES-19 exact-designation results are supported from m13 in both layers of every round",
+      "actual": [],
+      "detail": ""
+    },
+    {
+      "id": "p07.no_relevant_gaps",
+      "passed": true,
+      "expected": "no time-boundary, designation-relation, exact-designation, or identity gap",
+      "actual": [],
+      "detail": ""
+    },
+    {
+      "id": "p08.identity_structure",
+      "passed": true,
+      "expected": "no exact_designation dimension/probe and no within-claim identity overlap",
+      "actual": {
+        "identity_spans": [
+          [
+            "p08:claim:d01a763cfbcb54acff80",
+            "p08:dimension:a2c89326d73603af102b",
+            4,
+            41
+          ],
+          [
+            "p08:claim:b81ac5628a45a35d34b3",
+            "p08:dimension:c2876ca29eb45b32809c",
+            4,
+            41
+          ]
+        ],
+        "designation_probes": [],
+        "overlaps": []
+      },
+      "detail": ""
+    },
+    {
+      "id": "p08.map_identity_results",
+      "passed": true,
+      "expected": "every map-product identity probe uses same_referent and is supported from m15 in evidence rounds 1 and 2 by an allowed referent relation",
+      "actual": {
+        "probe_ids": [
+          "p08:probe:d0fe3e40e53ea0df2cad",
+          "p08:probe:dfc82fa956761ed0d3e0"
+        ],
+        "policies_ok": true,
+        "outcomes": [
+          {
+            "round": 1,
+            "probe_id": "p08:probe:d0fe3e40e53ea0df2cad",
+            "matches": 1,
+            "supported": true,
+            "relation": "description",
+            "m15_basis": true
+          },
+          {
+            "round": 1,
+            "probe_id": "p08:probe:dfc82fa956761ed0d3e0",
+            "matches": 1,
+            "supported": true,
+            "relation": "description",
+            "m15_basis": true
+          },
+          {
+            "round": 2,
+            "probe_id": "p08:probe:d0fe3e40e53ea0df2cad",
+            "matches": 1,
+            "supported": true,
+            "relation": "description",
+            "m15_basis": true
+          },
+          {
+            "round": 2,
+            "probe_id": "p08:probe:dfc82fa956761ed0d3e0",
+            "matches": 1,
+            "supported": true,
+            "relation": "description",
+            "m15_basis": true
+          }
+        ]
+      },
+      "detail": ""
+    },
+    {
+      "id": "p08.no_identity_gap",
+      "passed": true,
+      "expected": "no map-product/identity gap is emitted or retained",
+      "actual": [],
+      "detail": ""
+    },
+    {
+      "id": "p08.no_repeated_visible_fetch",
+      "passed": true,
+      "expected": "no fetch task repeats an already-visible m14/m15 URL",
+      "actual": [],
+      "detail": ""
+    },
+    {
+      "id": "p08.provenance_graph",
+      "passed": true,
+      "expected": "m14 -> m15 direct cites edge and m15 origin",
+      "actual": {
+        "matching_edges": 1,
+        "matching_origins": 1
+      },
+      "detail": ""
+    }
+  ],
+  "comparison_audit_error": null,
+  "uncheckable_clauses": [
+    {
+      "clause": "No failed run directory was overwritten before this check.",
+      "reason": "A final filesystem snapshot has no append-only creation history. The checker can confirm that the preserved directories still exist, but cannot prove that their earlier bytes were never replaced."
+    },
+    {
+      "clause": "A failed gate stops every later full run.",
+      "reason": "The checker returns a nonzero process status on failure, but a future caller must consume that status; one completed artifact cannot prove future orchestration behavior."
+    }
+  ],
+  "interpretation": "Passing is a development smoke-gate result, not proof of an accuracy increase or real-world correctness."
+}

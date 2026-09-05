@@ -1,0 +1,186 @@
+{
+  "event": {
+    "title": "NASA称机智号在2024年1月18日飞行着陆期间旋翼受损，但材料未确定其触地瞬间是否直立。",
+    "date": "2024-01-18",
+    "summary": "m09称机智号目前仍保持直立，并与地面控制人员保持通信。\nm09明确称触地时的姿态仍在调查，因此不支持将“目前直立”推定为“触地瞬间直立”；该瞬间的实际姿态未知。\n影像显示，机智号一个或多个旋翼叶片在1月18日着陆期间受损，已无法继续飞行。\n机智号在距地表约1米处与通信中继火星车失联，次日恢复通信。\nNASA于2024年1月25日发布消息，宣布机智号任务结束。",
+    "sources": [],
+    "relation": "",
+    "causes": [],
+    "confidence": 0.0,
+    "grounded": false
+  },
+  "direct_response": "NASA的m09证实机智号于2024年1月18日飞行，但“触地瞬间直立”的证据在1个信源中未找到，该说法不获支持，实际姿态未知。“仍直立”指声明时，非触地时。当天距地约1米失联，次日恢复通信；1月25日宣布任务结束，原因是着陆期间旋翼受损、无法再飞。失联原因及触地姿态仍在调查，失联与损伤的因果关系未定；仅有单一来源，无来源间分歧。（基于1个信源 | 覆盖1类媒体 | 0条事实多源一致 | 0条存在分歧 | 因果锚定0/0）",
+  "credibility": {
+    "source_count": 1,
+    "source_types": [
+      "官方媒体"
+    ],
+    "consistent_count": 0,
+    "disputed_count": 0,
+    "grounding_rate": 0.0,
+    "grounded_count": 0,
+    "total_causal_nodes": 0
+  },
+  "event_timeline": [
+    {
+      "date": "2024-01-18",
+      "title": "机智号着陆过程中失联，旋翼在此次着陆期间受损",
+      "description": "据NASA报道，机智号在距地表约1米时，与担任通信中继的火星车失去联系。后续传回的影像显示，一个或多个旋翼叶片在此次着陆期间受损，导致其无法继续飞行；材料未确定失联原因及触地瞬间的姿态，也未确定失联与损伤之间的因果关系。",
+      "significance": "重大",
+      "sources": [
+        {
+          "url": "https://www.nasa.gov/news-release/after-three-years-on-mars-nasas-ingenuity-helicopter-mission-ends/",
+          "title": "NASA：After Three Years on Mars, NASA’s Ingenuity Helicopter Mission Ends"
+        }
+      ],
+      "perspectives": [],
+      "verified": false,
+      "causal_links": [
+        "NASA宣布机智号任务结束"
+      ]
+    },
+    {
+      "date": "2024-01-19",
+      "title": "机智号恢复通信并传回更多飞行信息",
+      "description": "NASA称，机智号在失联次日恢复通信。更多有关此次飞行的信息随后传送至NASA喷气推进实验室的地面控制人员。",
+      "significance": "重要",
+      "sources": [
+        {
+          "url": "https://www.nasa.gov/news-release/after-three-years-on-mars-nasas-ingenuity-helicopter-mission-ends/",
+          "title": "NASA：After Three Years on Mars, NASA’s Ingenuity Helicopter Mission Ends"
+        }
+      ],
+      "perspectives": [],
+      "verified": false,
+      "causal_links": []
+    },
+    {
+      "date": "2024年1月19日后数日（1月25日声明前）",
+      "title": "旋翼受损影像传回地球",
+      "description": "恢复通信数日后，显示旋翼叶片损伤的影像传回地球。NASA据这些影像报告机智号在1月18日着陆期间受损，并表示其已不具备继续飞行的能力。",
+      "significance": "重要",
+      "sources": [
+        {
+          "url": "https://www.nasa.gov/news-release/after-three-years-on-mars-nasas-ingenuity-helicopter-mission-ends/",
+          "title": "NASA：After Three Years on Mars, NASA’s Ingenuity Helicopter Mission Ends"
+        }
+      ],
+      "perspectives": [],
+      "verified": false,
+      "causal_links": [
+        "NASA宣布机智号任务结束"
+      ]
+    },
+    {
+      "date": "2024-01-25",
+      "title": "NASA宣布机智号任务结束",
+      "description": "NASA发布声明，宣布因旋翼受损而无法继续飞行的机智号结束任务。声明称机智号当时仍保持直立并与地面通信，但触地瞬间的姿态和失联原因仍在调查，因此不能据“目前直立”认定其触地瞬间也直立。",
+      "significance": "重大",
+      "sources": [
+        {
+          "url": "https://www.nasa.gov/news-release/after-three-years-on-mars-nasas-ingenuity-helicopter-mission-ends/",
+          "title": "NASA：After Three Years on Mars, NASA’s Ingenuity Helicopter Mission Ends"
+        }
+      ],
+      "perspectives": [],
+      "verified": false,
+      "causal_links": []
+    }
+  ],
+  "sources": [
+    {
+      "outlet": "NASA（美国国家航空航天局）",
+      "url": "https://www.nasa.gov/news-release/after-three-years-on-mars-nasas-ingenuity-helicopter-mission-ends/",
+      "publish_time": "2024-01-25",
+      "source_type": "官方媒体",
+      "is_original": true,
+      "key_facts": [
+        {
+          "claim": "NASA宣布机智号任务结束；1月18日飞行的影像显示，其一个或多个旋翼叶片在着陆期间受损，已无法继续飞行。",
+          "source_urls": [
+            "https://www.nasa.gov/news-release/after-three-years-on-mars-nasas-ingenuity-helicopter-mission-ends/"
+          ],
+          "agreed": true
+        },
+        {
+          "claim": "机智号在距地面约1米时，与担任通信中继的火星车失去联系；通信于次日恢复，显示旋翼叶片损伤的影像在数日后传回。",
+          "source_urls": [
+            "https://www.nasa.gov/news-release/after-three-years-on-mars-nasas-ingenuity-helicopter-mission-ends/"
+          ],
+          "agreed": true
+        },
+        {
+          "claim": "NASA发布声明时，机智号仍保持直立，并与地面控制人员保持通信。",
+          "source_urls": [
+            "https://www.nasa.gov/news-release/after-three-years-on-mars-nasas-ingenuity-helicopter-mission-ends/"
+          ],
+          "agreed": true
+        },
+        {
+          "claim": "NASA表示，通信中断的原因及机智号接地瞬间的姿态仍在调查中。",
+          "source_urls": [
+            "https://www.nasa.gov/news-release/after-three-years-on-mars-nasas-ingenuity-helicopter-mission-ends/"
+          ],
+          "agreed": true
+        }
+      ]
+    }
+  ],
+  "source_timeline": [
+    {
+      "outlet": "NASA（美国国家航空航天局）",
+      "url": "https://www.nasa.gov/news-release/after-three-years-on-mars-nasas-ingenuity-helicopter-mission-ends/",
+      "publish_time": "2024-01-25",
+      "source_type": "官方媒体",
+      "is_original": true,
+      "key_facts": [
+        {
+          "claim": "NASA宣布机智号任务结束；1月18日飞行的影像显示，其一个或多个旋翼叶片在着陆期间受损，已无法继续飞行。",
+          "source_urls": [
+            "https://www.nasa.gov/news-release/after-three-years-on-mars-nasas-ingenuity-helicopter-mission-ends/"
+          ],
+          "agreed": true
+        },
+        {
+          "claim": "机智号在距地面约1米时，与担任通信中继的火星车失去联系；通信于次日恢复，显示旋翼叶片损伤的影像在数日后传回。",
+          "source_urls": [
+            "https://www.nasa.gov/news-release/after-three-years-on-mars-nasas-ingenuity-helicopter-mission-ends/"
+          ],
+          "agreed": true
+        },
+        {
+          "claim": "NASA发布声明时，机智号仍保持直立，并与地面控制人员保持通信。",
+          "source_urls": [
+            "https://www.nasa.gov/news-release/after-three-years-on-mars-nasas-ingenuity-helicopter-mission-ends/"
+          ],
+          "agreed": true
+        },
+        {
+          "claim": "NASA表示，通信中断的原因及机智号接地瞬间的姿态仍在调查中。",
+          "source_urls": [
+            "https://www.nasa.gov/news-release/after-three-years-on-mars-nasas-ingenuity-helicopter-mission-ends/"
+          ],
+          "agreed": true
+        }
+      ]
+    }
+  ],
+  "key_findings": [
+    "【文档记载】NASA材料m09称，机智号在2024年1月18日着陆、距地表约1米时失联，次日恢复通信，数日后传回显示旋翼损伤的影像；NASA于1月25日宣布任务结束。",
+    "【目标命题评估】m09不支持“机智号在1月18日触地瞬间保持直立”。材料仅称其在声明时仍保持直立，并明确表示触地姿态仍在调查。不支持该命题不等于证明其为假；现实中的触地姿态仍未知。",
+    "【因果依据】m09明确将着陆期间的旋翼损伤与无法继续飞行、任务结束相联系，但未确定失联原因，也未建立失联导致旋翼损伤的因果关系。",
+    "【信源边界】全部信息来自NASA单一材料m09；时间线与因果树是对同一来源的整理，不构成独立交叉确认。因果锚定为0/0，未提供额外节点验证结果。"
+  ],
+  "information_gaps": [
+    "触地瞬间的实际姿态、失联原因及旋翼损伤的具体机制均未确定。",
+    "旋翼损伤影像抵达地球的准确日期未给出，仅称恢复通信数日后。",
+    "所供材料是2026年9月5日采集的节选，并非2024年发布时的完整历史快照；不能据此判断后续调查是否已有结论。",
+    "未提供独立影像分析、遥测数据或其他信源；本评估确定的是m09的表述与支持范围，不是对事件真实性的独立核验。"
+  ],
+  "consistent_facts": [],
+  "disputed_facts": [],
+  "causal_summary": "据m09，机智号在1月18日着陆接近地面时失去通信，次日恢复联系，随后传回的影像显示旋翼在此次着陆期间受损。NASA据此报告其已无法继续飞行，并于1月25日宣布任务结束。有文档依据的因果链是“旋翼受损—无法继续飞行—任务结束”；失联与损伤之间只有已知的时间关联，不能推断前者导致后者。同样，声明时仍保持直立，也不能反推触地瞬间的姿态。",
+  "bias_notes": [
+    "NASA既是任务执行方也是唯一信息发布方，报道以官方任务视角展开，并强调任务超出预期的成就。这属于叙事侧重；现有材料不足以比较不同来源的立场偏差，也不足以认定其事实陈述失真。"
+  ]
+}

@@ -1,0 +1,188 @@
+[
+  {
+    "id": "p02",
+    "assessment_mode": "evidence",
+    "status": "completed",
+    "prediction": "false",
+    "checkpoints": [
+      {
+        "round": 1,
+        "id": "p02",
+        "decision": "false",
+        "assessment_mode": "evidence",
+        "assessments": {
+          "evidence": {
+            "raw_verdict": "contradicted",
+            "decision": "contradicted",
+            "blocking_gap_ids": []
+          },
+          "world": {
+            "raw_verdict": "contradicted",
+            "decision": "contradicted",
+            "blocking_gap_ids": []
+          }
+        },
+        "provenance_status": "original_material_located"
+      },
+      {
+        "round": 2,
+        "id": "p02",
+        "decision": "false",
+        "assessment_mode": "evidence",
+        "assessments": {
+          "evidence": {
+            "raw_verdict": "contradicted",
+            "decision": "contradicted",
+            "blocking_gap_ids": []
+          },
+          "world": {
+            "raw_verdict": "contradicted",
+            "decision": "contradicted",
+            "blocking_gap_ids": []
+          }
+        },
+        "provenance_status": "original_material_located"
+      }
+    ],
+    "target_plan_sha256": "006029b23e92743ba710d55e1d7118de63af3532b93635424d8ebad79695be9b",
+    "native_prediction": {
+      "id": "p02",
+      "assessment_mode": "evidence",
+      "as_of": "2026-09-05T09:34:36Z",
+      "decision": "false",
+      "assessments": {
+        "evidence": {
+          "raw_verdict": "contradicted",
+          "decision": "contradicted",
+          "blocking_gap_ids": []
+        },
+        "world": {
+          "raw_verdict": "contradicted",
+          "decision": "contradicted",
+          "blocking_gap_ids": []
+        }
+      },
+      "provenance_status": "original_material_located",
+      "assessment_valid": true,
+      "stop_reason": "round_budget"
+    },
+    "engine_usage": {
+      "rounds": 2,
+      "documents": 4,
+      "unique_versions": 2,
+      "decomposition_calls": 4,
+      "verification_calls": 2
+    },
+    "usage": {
+      "model_calls": 20,
+      "input_tokens": 93063,
+      "output_tokens": 10646,
+      "seconds": 180.67244191899954
+    },
+    "checkpoint_hashes": [
+      {
+        "round": 1,
+        "sha256": "2339f748cc7c512ed2e4c8e49e5c6c7f024eee261c8e20c6c188b90a986a71f6"
+      },
+      {
+        "round": 2,
+        "sha256": "58c1403a760db5b7dd3ff3547d178f2ab5764f37b46349ded9a2b3c20299590d"
+      }
+    ],
+    "new_api_attempts": 20,
+    "returned_responses": 20
+  },
+  {
+    "id": "p08",
+    "assessment_mode": "evidence",
+    "status": "completed",
+    "prediction": "true",
+    "checkpoints": [
+      {
+        "round": 1,
+        "id": "p08",
+        "decision": "true",
+        "assessment_mode": "evidence",
+        "assessments": {
+          "evidence": {
+            "raw_verdict": "supported",
+            "decision": "supported",
+            "blocking_gap_ids": []
+          },
+          "world": {
+            "raw_verdict": "supported",
+            "decision": "supported",
+            "blocking_gap_ids": []
+          }
+        },
+        "provenance_status": "original_material_located"
+      },
+      {
+        "round": 2,
+        "id": "p08",
+        "decision": "true",
+        "assessment_mode": "evidence",
+        "assessments": {
+          "evidence": {
+            "raw_verdict": "supported",
+            "decision": "supported",
+            "blocking_gap_ids": []
+          },
+          "world": {
+            "raw_verdict": "supported",
+            "decision": "supported",
+            "blocking_gap_ids": []
+          }
+        },
+        "provenance_status": "original_material_located"
+      }
+    ],
+    "target_plan_sha256": "49fb13741f0c75245e8e65ff11b4572a83898835cad46a366c766b233d599e29",
+    "native_prediction": {
+      "id": "p08",
+      "assessment_mode": "evidence",
+      "as_of": "2026-09-05T09:34:36Z",
+      "decision": "true",
+      "assessments": {
+        "evidence": {
+          "raw_verdict": "supported",
+          "decision": "supported",
+          "blocking_gap_ids": []
+        },
+        "world": {
+          "raw_verdict": "supported",
+          "decision": "supported",
+          "blocking_gap_ids": []
+        }
+      },
+      "provenance_status": "original_material_located",
+      "assessment_valid": true,
+      "stop_reason": "round_budget"
+    },
+    "engine_usage": {
+      "rounds": 2,
+      "documents": 4,
+      "unique_versions": 2,
+      "decomposition_calls": 5,
+      "verification_calls": 2
+    },
+    "usage": {
+      "model_calls": 23,
+      "input_tokens": 101747,
+      "output_tokens": 11702,
+      "seconds": 205.96754393201263
+    },
+    "checkpoint_hashes": [
+      {
+        "round": 1,
+        "sha256": "0cb383c151f15a77aaf6e5b25a362ebdff25982bd563045800fedd761e7b2b95"
+      },
+      {
+        "round": 2,
+        "sha256": "c61e6b127eba04ca2a29880e5d3bc205f4844ea396e54e1ec2caebfde099eacf"
+      }
+    ],
+    "new_api_attempts": 23,
+    "returned_responses": 23
+  }
+]

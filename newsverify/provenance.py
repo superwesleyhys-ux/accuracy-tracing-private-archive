@@ -38,6 +38,20 @@ class MaterialVersion:
 
 
 @dataclass(frozen=True)
+class RetrievalHit:
+    """One provider return attributed to one or more tasks issued this round.
+
+    Bare ``MaterialVersion`` returns remain valid in the legacy-compatible
+    runner mode.  A ``RetrievalHit`` always opts into attribution validation;
+    strict runner mode additionally requires every provider return to use this
+    envelope.
+    """
+
+    material: MaterialVersion
+    task_ids: tuple[str, ...]
+
+
+@dataclass(frozen=True)
 class Span:
     version_id: str
     start: int
@@ -123,6 +137,16 @@ class ProbeAssessment:
 
 
 @dataclass(frozen=True)
+class ProbeStop:
+    """Auditable reason why one unresolved probe has no retrieval task."""
+
+    probe_id: str
+    stage: str
+    reason: str
+    rationale: str
+
+
+@dataclass(frozen=True)
 class VerificationResult:
     verdict: str = "unresolved"
     basis: tuple[Span, ...] = ()
@@ -135,6 +159,8 @@ class VerificationResult:
     world_rationale: str = ""
     evidence_probe_results: tuple[ProbeAssessment, ...] = ()
     world_probe_results: tuple[ProbeAssessment, ...] = ()
+    strict_probe_followups: bool = False
+    probe_stops: tuple[ProbeStop, ...] = ()
 
 
 @dataclass(frozen=True)
@@ -206,13 +232,13 @@ _CHECKPOINT_STATE_KEYS = frozenset({
     "verification_resolved", "runtime_gaps", "fragments", "relations", "origins", "usage",
     "fact_status", "decision_status", "assessments", "stop_reason", "fatal", "seen_structures",
     "previous_structure", "has_verifier",
-    "gap_registry", "gap_owners",
+    "gap_registry", "gap_owners", "strict_retrieval_attribution",
 })
 
 
 class TraceProvider(Protocol):
     def search(self, target: Target, tasks: tuple[Gap, ...], round_number: int,
-               limit: int) -> Iterable[MaterialVersion]: ...
+               limit: int) -> Iterable[MaterialVersion | RetrievalHit]: ...
 
 
 class Decomposer(Protocol):
@@ -392,6 +418,175 @@ def _probe_assessment(item, stage, materials):
         raise ValueError("conclusive probe assessment needs source basis")
     if item.status == "conflicting" and len(item.basis) < 2:
         raise ValueError("conflicting probe assessment needs at least two source passages")
+
+
+_PROBE_STOP_REASONS = {"no_source_lead", "corpus_exhausted", "budget_exhausted"}
+
+
+def _probe_stop(item):
+    if not isinstance(item, ProbeStop):
+        raise ValueError("invalid probe stop type")
+    _nonempty(item.probe_id, "probe stop probe_id")
+    if item.stage not in {"evidence", "world"}:
+        raise ValueError("probe stop stage must be evidence or world")
+    if item.reason not in _PROBE_STOP_REASONS:
+        raise ValueError("invalid probe stop reason")
+    _nonempty(item.rationale, "probe stop rationale")
+
+
+def _retrieval_return(value, issued_tasks, strict):
+    """Validate and unwrap one provider return before material processing."""
+    if isinstance(value, RetrievalHit):
+        if not isinstance(value.material, MaterialVersion):
+            raise ValueError("retrieval hit material must be a MaterialVersion")
+        if (not isinstance(value.task_ids, tuple) or not value.task_ids or
+                any(not isinstance(item, str) or not item.strip()
+                    for item in value.task_ids)):
+            raise ValueError("retrieval hit task_ids must be a nonempty tuple of task IDs")
+        if len(value.task_ids) != len(set(value.task_ids)):
+            raise ValueError("retrieval hit contains duplicate task attribution")
+        unknown = [item for item in value.task_ids if item not in issued_tasks]
+        if unknown:
+            raise ValueError("retrieval hit references a task not issued in this round: " +
+                             ", ".join(unknown))
+        probe_ids = tuple(dict.fromkeys(
+            issued_tasks[item].probe_id for item in value.task_ids
+            if issued_tasks[item].probe_id is not None))
+        return value.material, value.task_ids, probe_ids, True
+    if not isinstance(value, MaterialVersion):
+        raise ValueError("provider must yield MaterialVersion or RetrievalHit objects")
+    if strict:
+        raise ValueError("strict retrieval attribution requires RetrievalHit objects")
+    return value, (), (), False
+
+
+def _verification_record(check):
+    """Keep legacy histories byte-shaped unless strict follow-ups are enabled."""
+    record = asdict(check)
+    if not check.strict_probe_followups:
+        record.pop("strict_probe_followups")
+        record.pop("probe_stops")
+    return record
+
+
+def _strict_followup_projection(check, candidate_verify_gaps, current_probe_results,
+                                superseded_gap_ids=()):
+    """Validate strict probe/task XOR and apply explicit no-task stops.
+
+    A stop ends any older active task for the same layer/probe without claiming
+    an evidence resolution.  It remains auditable in verification history.
+    """
+    if type(check.strict_probe_followups) is not bool:
+        raise ValueError("strict_probe_followups must be boolean")
+    _tuple_of(check.probe_stops, ProbeStop, "probe_stops")
+    stops = {}
+    for item in check.probe_stops:
+        _probe_stop(item)
+        key = (item.stage, item.probe_id)
+        if key in stops:
+            raise ValueError("duplicate probe stop in one verification result")
+        stops[key] = item
+    if not check.strict_probe_followups:
+        if stops:
+            raise ValueError("probe stops require strict_probe_followups")
+        return candidate_verify_gaps, {}
+
+    current_gap_ids = set()
+    current_gap_keys = set()
+    superseded_gap_ids = set(superseded_gap_ids)
+    for gap in check.gaps:
+        if gap.id in current_gap_ids:
+            raise ValueError("duplicate strict follow-up gap ID")
+        if gap.id in superseded_gap_ids:
+            raise ValueError("a superseded strict follow-up gap ID cannot be reactivated")
+        current_gap_ids.add(gap.id)
+        if gap.probe_id is None or gap.dimension not in {"evidence", "world"}:
+            raise ValueError(
+                "strict verification follow-up gaps need an explicit layer and probe_id")
+        key = (gap.dimension, gap.probe_id)
+        if key not in current_probe_results:
+            raise ValueError("strict verification gap references an unassessed layer/probe")
+        if current_probe_results[key].status != "unresolved":
+            raise ValueError("conclusive probes cannot retain a gap or stop")
+        if key in current_gap_keys:
+            raise ValueError("duplicate strict follow-up gap for one layer/probe")
+        if key in stops:
+            raise ValueError("an unresolved probe cannot have both a gap and a stop")
+        current_gap_keys.add(key)
+    for key in stops:
+        if key not in current_probe_results:
+            raise ValueError("probe stop references an unassessed layer/probe")
+
+    # A newly emitted task atomically supersedes any older active task in the
+    # same (layer, probe) slot.  The lifecycle identity may legitimately gain a
+    # new ID/action/locator as new source leads arrive.  Cross-layer tasks are
+    # distinct slots and are never replaced here.  Supersession is not an
+    # evidence-bearing Resolution: both definitions remain in the registry and
+    # the transition is retained in the operation audit.
+    new_gaps_by_slot = {
+        (gap.dimension, gap.probe_id): gap for gap in check.gaps
+    }
+    superseded_prior_gaps = []
+    for gap_id, gap in list(candidate_verify_gaps.items()):
+        key = (gap_dimension(gap), gap.probe_id) if gap.probe_id is not None else None
+        replacement = new_gaps_by_slot.get(key)
+        if replacement is not None and replacement.id != gap_id:
+            candidate_verify_gaps.pop(gap_id)
+            superseded_prior_gaps.append({
+                "stage": key[0], "probe_id": key[1],
+                "prior_gap_id": gap_id, "replacement_gap_id": replacement.id,
+            })
+
+    # A current stop likewise replaces older active search tasks for the same
+    # probe but does not fabricate an evidence-bearing Resolution.
+    stopped_gap_ids = []
+    for gap_id, gap in list(candidate_verify_gaps.items()):
+        key = (gap_dimension(gap), gap.probe_id) if gap.probe_id is not None else None
+        if key in stops:
+            candidate_verify_gaps.pop(gap_id)
+            stopped_gap_ids.append(gap_id)
+
+    layer_verdicts = {
+        "evidence": (check.evidence_verdict
+                     if check.evidence_verdict is not None else check.verdict),
+        "world": (check.world_verdict
+                  if check.world_verdict is not None else check.verdict),
+    }
+    active_by_probe = {}
+    for gap in candidate_verify_gaps.values():
+        if gap.probe_id is None or gap.dimension not in {"evidence", "world"}:
+            raise ValueError(
+                "strict active verification gaps need an explicit layer and probe_id")
+        expected_blocking = layer_verdicts[gap.dimension] == "unresolved"
+        if gap.blocking is not expected_blocking:
+            raise ValueError(
+                "strict probe follow-up blocking must match whether its layer is unresolved")
+        key = (gap.dimension, gap.probe_id)
+        if key not in current_probe_results:
+            raise ValueError("strict active gap references an unassessed layer/probe")
+        active_by_probe.setdefault(key, []).append(gap.id)
+
+    for key, assessment in current_probe_results.items():
+        gap_ids = active_by_probe.get(key, [])
+        has_stop = key in stops
+        if assessment.status == "unresolved":
+            if (len(gap_ids) == 1) == has_stop:
+                raise ValueError(
+                    "each unresolved probe needs exactly one active gap or one stop")
+        elif gap_ids or has_stop:
+            raise ValueError("conclusive probes cannot retain a gap or stop")
+    return candidate_verify_gaps, {
+        "active": [{"stage": stage, "probe_id": probe_id,
+                    "gap_id": gap_ids[0],
+                    "blocking": candidate_verify_gaps[gap_ids[0]].blocking}
+                   for (stage, probe_id), gap_ids in sorted(active_by_probe.items())],
+        "stops": [asdict(item) for _, item in sorted(stops.items())],
+        "stopped_prior_gap_ids": sorted(stopped_gap_ids),
+        "superseded_prior_gaps": sorted(
+            superseded_prior_gaps,
+            key=lambda item: (item["stage"], item["probe_id"],
+                              item["prior_gap_id"], item["replacement_gap_id"])),
+    }
 
 
 def _index_findings(items, kind):
@@ -600,7 +795,8 @@ def run_provenance(target: Target | dict, provider: TraceProvider,
                    decomposer: Decomposer | None = None, verifier: Verifier | None = None,
                    config: TraceConfig | dict | None = None, *,
                    checkpoint: TraceCheckpoint | None = None,
-                   checkpoint_callback: Callable[[TraceCheckpoint], None] | None = None) -> dict:
+                   checkpoint_callback: Callable[[TraceCheckpoint], None] | None = None,
+                   strict_retrieval_attribution: bool = False) -> dict:
     """Run a bounded trace. Provider/analysis errors are audited and fail unresolved.
 
     Historical eligibility needs an explicit, evidenced ``available_at`` for the
@@ -615,6 +811,10 @@ def run_provenance(target: Target | dict, provider: TraceProvider,
     decomposition budgets. Omitting config inherits the checkpoint's config.
     Callbacks receive isolated copies; callback exceptions propagate to callers.
     Forced rounds still stop on empty retrieval, fatal errors, and any budget.
+    Strict retrieval attribution requires each provider return to be a
+    ``RetrievalHit`` tied only to tasks issued in that exact round.  The keyword
+    is outside ``TraceConfig`` so legacy v1-v3 serialized run configurations
+    remain unchanged.
     """
     if isinstance(target, dict):
         raw_target = dict(target)
@@ -625,6 +825,8 @@ def run_provenance(target: Target | dict, provider: TraceProvider,
         raise ValueError("checkpoint must be a TraceCheckpoint")
     if checkpoint_callback is not None and not callable(checkpoint_callback):
         raise ValueError("checkpoint_callback must be callable")
+    if type(strict_retrieval_attribution) is not bool:
+        raise ValueError("strict_retrieval_attribution must be boolean")
     if config is None and checkpoint is not None:
         config = checkpoint.config
     config = TraceConfig(**config) if isinstance(config, dict) else (config or TraceConfig())
@@ -657,6 +859,8 @@ def run_provenance(target: Target | dict, provider: TraceProvider,
             raise ValueError("checkpoint integrity checksum mismatch")
         if set(checkpoint.state) != _CHECKPOINT_STATE_KEYS:
             raise ValueError("invalid checkpoint state fields")
+        if checkpoint.state["strict_retrieval_attribution"] is not strict_retrieval_attribution:
+            raise ValueError("checkpoint continuation must preserve strict retrieval attribution")
         for name in ("max_documents", "max_decomposition_calls"):
             if getattr(config, name) != getattr(checkpoint.config, name):
                 raise ValueError(f"checkpoint continuation must preserve {name}")
@@ -694,6 +898,7 @@ def run_provenance(target: Target | dict, provider: TraceProvider,
     assessments = None
     stop_reason = "round_budget"
     fatal = False
+    current_round_returns = []
 
     if saved is not None:
         materials = saved["materials"]
@@ -724,11 +929,37 @@ def run_provenance(target: Target | dict, provider: TraceProvider,
             # A no-op resume reproduces the completed prefix's terminal reason.
             stop_reason = saved["stop_reason"]
 
+    # Superseded task IDs are permanent tombstones.  Reconstruct them from the
+    # append-only operation audit so checkpoint resumes preserve the rule
+    # without extending the frozen checkpoint schema.
+    superseded_gap_ids = set()
+    for operation in operations:
+        if not isinstance(operation, dict) or operation.get(
+                "action") != "probe_followups_validated":
+            continue
+        # Pre-supersession v2 checkpoints could contain strict follow-up events
+        # without this field; those runs could not have accepted a replacement,
+        # so the compatible reconstruction is an empty transition list.
+        transitions = operation.get("superseded_prior_gaps", [])
+        if not isinstance(transitions, list):
+            raise ValueError("invalid superseded follow-up lifecycle audit")
+        for transition in transitions:
+            if (not isinstance(transition, dict) or set(transition) != {
+                    "stage", "probe_id", "prior_gap_id", "replacement_gap_id"} or
+                    transition.get("stage") not in {"evidence", "world"} or
+                    any(not isinstance(transition.get(key), str) or
+                        not transition[key].strip()
+                        for key in ("probe_id", "prior_gap_id", "replacement_gap_id")) or
+                    transition["prior_gap_id"] == transition["replacement_gap_id"] or
+                    transition["prior_gap_id"] in superseded_gap_ids):
+                raise ValueError("invalid superseded follow-up lifecycle audit")
+            superseded_gap_ids.add(transition["prior_gap_id"])
+
     def event(action, **values):
         operations.append({"sequence": len(operations) + 1, "round": usage["rounds"], "action": action, **values})
 
     def context():
-        return deepcopy({
+        payload = {
             "target": asdict(target), "materials": [asdict(item) for item in eligible.values()],
             "analyses": {key: asdict(item) for key, item in current_analyses.items()},
             "fragments": [asdict(item) for item in fragments.values()],
@@ -739,7 +970,15 @@ def run_provenance(target: Target | dict, provider: TraceProvider,
             "resolutions": [asdict(item) for item in resolved.values()],
             "verification_history": deepcopy(verifications), "usage": dict(usage),
             "assessments": deepcopy(assessments),
-        })
+        }
+        # Strict routing exposes an immutable snapshot of every provider return
+        # attributed in this round.  The verifier can therefore audit whether
+        # its new material came from a frozen round-start task, without
+        # reconstructing ownership from active gaps that decomposition may have
+        # since changed.  Preserve the legacy prompt shape outside strict mode.
+        if strict_retrieval_attribution:
+            payload["current_round_returns"] = deepcopy(current_round_returns)
+        return deepcopy(payload)
 
     def project(analyses, available, registry, owners, verify_gaps, verify_resolved,
                 updated_owner=None, verification_update=None):
@@ -835,12 +1074,32 @@ def run_provenance(target: Target | dict, provider: TraceProvider,
         errors.append(error)
         event("error", stage=stage, message=str(exc))
 
-    def analyze(material, reasons, duplicate, revisit=False):
+    def analyze(material, reasons, duplicate, revisit=False, retrieval_attribution=None):
         usage["decomposition_calls"] += 1
-        event("decompose_started", version_id=material.version_id, duplicate=duplicate, revisit=revisit)
+        attribution_event = {}
+        if retrieval_attribution is not None:
+            attribution_event = {
+                "trigger_task_ids": list(retrieval_attribution["task_ids"]),
+                "trigger_probe_ids": list(retrieval_attribution["probe_ids"]),
+            }
+        event("decompose_started", version_id=material.version_id, duplicate=duplicate,
+              revisit=revisit, **attribution_event)
         psi_context = context()
         psi_context["current_material_eligible"] = not reasons
         psi_context["current_material_exclusion_reasons"] = reasons
+        if retrieval_attribution is not None:
+            current_return = {
+                "version_id": material.version_id,
+                "trigger_task_ids": list(retrieval_attribution["task_ids"]),
+                "trigger_probe_ids": list(retrieval_attribution["probe_ids"]),
+                "issued_tasks": [asdict(item)
+                                 for item in retrieval_attribution["issued_tasks"]],
+            }
+            psi_context["current_return"] = current_return
+            # Direct aliases keep plug-ins simple while ``current_return`` makes
+            # the per-return ownership explicit in persisted prompt context.
+            psi_context["trigger_task_ids"] = list(retrieval_attribution["task_ids"])
+            psi_context["trigger_probe_ids"] = list(retrieval_attribution["probe_ids"])
         # Archive decomposition is isolated from stateful semantic plugins: a
         # future version must not contaminate a historical prediction.
         analysis = (ConservativeDecomposer().decompose(target, material, {}) if reasons
@@ -864,8 +1123,12 @@ def run_provenance(target: Target | dict, provider: TraceProvider,
         revision = {"revision": len(history) + 1, "round": usage["rounds"],
                     "version_id": material.version_id, "duplicate": duplicate, "revisit": revisit,
                     "accepted": not reasons, "analysis": asdict(analysis), "exclusion_reasons": reasons}
+        if retrieval_attribution is not None:
+            revision.update(trigger_task_ids=list(retrieval_attribution["task_ids"]),
+                            trigger_probe_ids=list(retrieval_attribution["probe_ids"]))
         history.append(revision)
-        event("decompose_completed", version_id=material.version_id, revision=revision["revision"])
+        event("decompose_completed", version_id=material.version_id,
+              revision=revision["revision"], **attribution_event)
         if reasons:
             event("excluded_from_graph", version_id=material.version_id, reasons=reasons)
             return ()
@@ -895,6 +1158,7 @@ def run_provenance(target: Target | dict, provider: TraceProvider,
             "decision_status": decision_status, "assessments": assessments, "stop_reason": stop_reason,
             "fatal": fatal, "seen_structures": seen_structures, "previous_structure": previous_structure,
             "has_verifier": verifier is not None,
+            "strict_retrieval_attribution": strict_retrieval_attribution,
         })
         point = TraceCheckpoint(target=target, config=config, state=state)
         checkpoint_callback(replace(point, sha256=checkpoint_sha256(point)))
@@ -914,6 +1178,7 @@ def run_provenance(target: Target | dict, provider: TraceProvider,
                 fail("integrity", exc)
                 break
         event("search", tasks=[asdict(item) for item in tasks], limit=capacity)
+        issued_tasks = {item.id: item for item in tasks}
         try:
             iterator = iter(provider.search(target, tasks, round_number, capacity))
         except Exception as exc:
@@ -921,17 +1186,49 @@ def run_provenance(target: Target | dict, provider: TraceProvider,
             break
         new_eligible = 0
         received = 0
+        probe_owned_novel_returns = []
+        current_round_returns = []
         for _ in range(capacity):
             if usage["decomposition_calls"] >= config.max_decomposition_calls:
                 break
             try:
-                material = next(iterator)
+                returned = next(iterator)
             except StopIteration:
                 break
             except Exception as exc:
                 fail("provider", exc)
                 break
             received += 1
+            try:
+                material, trigger_task_ids, trigger_probe_ids, attributed = _retrieval_return(
+                    returned, issued_tasks, strict_retrieval_attribution)
+            except Exception as exc:
+                event("retrieval_attribution_rejected",
+                      return_type=type(returned).__name__, message=str(exc))
+                fail("provider", exc)
+                break
+            retrieval_attribution = ({"task_ids": trigger_task_ids,
+                                      "probe_ids": trigger_probe_ids,
+                                      # Freeze the exact round-start tasks for
+                                      # this hit. Active gaps may change after
+                                      # an earlier return from the same provider
+                                      # iterator, so downstream semantic stages
+                                      # must not infer issuance from live state.
+                                      "issued_tasks": tuple(
+                                          issued_tasks[item]
+                                          for item in trigger_task_ids)}
+                                     if attributed else None)
+            if attributed:
+                current_round_returns.append({
+                    "version_id": material.version_id,
+                    "trigger_task_ids": list(trigger_task_ids),
+                    "trigger_probe_ids": list(trigger_probe_ids),
+                    "issued_tasks": [asdict(item)
+                                     for item in retrieval_attribution["issued_tasks"]],
+                })
+                event("retrieval_attribution_validated", version_id=material.version_id,
+                      trigger_task_ids=list(trigger_task_ids),
+                      trigger_probe_ids=list(trigger_probe_ids))
             usage["documents"] += 1
             try:
                 reasons = _material_eligibility(material, cutoff)
@@ -948,14 +1245,21 @@ def run_provenance(target: Target | dict, provider: TraceProvider,
                 materials[material.version_id] = material
                 fingerprints[material.version_id] = fingerprint
                 usage["unique_versions"] += 1
-            observations.append({"version_id": material.version_id, "retrieved_at": material.retrieved_at,
-                                 "duplicate": duplicate, "eligible": not reasons, "reasons": reasons})
+            observation = {"version_id": material.version_id,
+                           "retrieved_at": material.retrieved_at,
+                           "duplicate": duplicate, "eligible": not reasons,
+                           "reasons": reasons}
+            if retrieval_attribution is not None:
+                observation.update(trigger_task_ids=list(trigger_task_ids),
+                                   trigger_probe_ids=list(trigger_probe_ids))
+            observations.append(observation)
             event("snapshot_saved" if not duplicate else "duplicate_observed", version_id=material.version_id,
                   sha256=fingerprint, eligible=not reasons)
             was_eligible = material.version_id in eligible
             try:
                 # Nothing may enter the graph or verifier before this call.
-                pending = list(analyze(material, reasons, duplicate))
+                pending = list(analyze(material, reasons, duplicate,
+                                       retrieval_attribution=retrieval_attribution))
                 # New upstream snapshots can invalidate an old 'not yet seen'
                 # interpretation even if the semantic plugin forgot to request
                 # reanalysis. Schedule psi; never silently promote the edge.
@@ -990,6 +1294,24 @@ def run_provenance(target: Target | dict, provider: TraceProvider,
                 continue
             if not was_eligible:
                 new_eligible += 1
+            if (strict_retrieval_attribution and
+                    not config.experimental_force_rounds and round_number > 1 and
+                    not duplicate and not reasons):
+                qualifying_task_ids = [task_id for task_id in trigger_task_ids
+                    if issued_tasks[task_id].stage == "verification" and
+                    gap_dimension(issued_tasks[task_id]) in {"evidence", "world"} and
+                    issued_tasks[task_id].probe_id is not None and
+                    issued_tasks[task_id].action in {"fetch", "search"}]
+                if qualifying_task_ids:
+                    driver = {
+                        "version_id": material.version_id,
+                        "task_ids": qualifying_task_ids,
+                        "probe_ids": list(dict.fromkeys(
+                            issued_tasks[task_id].probe_id
+                            for task_id in qualifying_task_ids)),
+                    }
+                    probe_owned_novel_returns.append(driver)
+                    event("probe_owned_novel_return_accepted", **driver)
         if fatal:
             break
         feedback = getattr(provider, "last_feedback", ())
@@ -998,9 +1320,16 @@ def run_provenance(target: Target | dict, provider: TraceProvider,
         if received == 0 and (feedback or config.experimental_force_rounds):
             stop_reason = "provider_exhausted" if feedback else "empty_results"
             break
-        if verifier is not None and eligible:
+        adaptive_driver_required = (strict_retrieval_attribution and
+                                    not config.experimental_force_rounds and
+                                    round_number > 1)
+        verification_permitted = (not adaptive_driver_required or
+                                  bool(probe_owned_novel_returns))
+        if verifier is not None and eligible and verification_permitted:
             usage["verification_calls"] += 1
-            event("verification_started")
+            event("verification_started", **(
+                {"probe_owned_novel_returns": deepcopy(probe_owned_novel_returns)}
+                if adaptive_driver_required else {}))
             check = None
             try:
                 check = verifier.verify(target, context())
@@ -1022,6 +1351,11 @@ def run_provenance(target: Target | dict, provider: TraceProvider,
                         _span(item, eligible)
                 _tuple_of(check.gaps, Gap, "verification gaps")
                 _tuple_of(check.resolutions, Resolution, "verification resolutions")
+                if type(check.strict_probe_followups) is not bool:
+                    raise ValueError("strict_probe_followups must be boolean")
+                _tuple_of(check.probe_stops, ProbeStop, "probe_stops")
+                for item in check.probe_stops:
+                    _probe_stop(item)
                 for item in check.gaps:
                     _gap(item, target, eligible)
                     if item.stage != "verification":
@@ -1119,14 +1453,26 @@ def run_provenance(target: Target | dict, provider: TraceProvider,
                         tuple(automatic_resolutions), candidate_registry, "verification")
                     candidate_verify_resolved.update(
                         _combine_resolutions(automatic_resolutions))
+                candidate_verify_gaps, followup_audit = _strict_followup_projection(
+                    check, candidate_verify_gaps, current_probe_results,
+                    superseded_gap_ids)
                 projection = project(current_analyses, eligible, candidate_registry, candidate_owners,
                     candidate_verify_gaps, candidate_verify_resolved, verification_update=check)
+                if check.strict_probe_followups:
+                    # Publish lifecycle transitions only after the complete
+                    # candidate projection has validated. A later projection
+                    # failure must roll back active state and tombstones too.
+                    event("probe_followups_validated", **followup_audit)
+                    superseded_gap_ids.update(
+                        item["prior_gap_id"]
+                        for item in followup_audit["superseded_prior_gaps"])
             except Exception as exc:
-                event("verification_rejected", verification=asdict(check) if isinstance(check, VerificationResult) else None,
+                event("verification_rejected", verification=_verification_record(check)
+                      if isinstance(check, VerificationResult) else None,
                       message=str(exc))
                 fail("verifier", exc)
                 break
-            verifications.append({"round": round_number, **asdict(check)})
+            verifications.append({"round": round_number, **_verification_record(check)})
             verification_gaps = candidate_verify_gaps
             verification_resolved = candidate_verify_resolved
             commit_projection(projection)
@@ -1136,21 +1482,31 @@ def run_provenance(target: Target | dict, provider: TraceProvider,
             decision_status = assessments[target.assessment_mode]["decision"]
             event("verification_completed", verdict=fact_status, decision=decision_status,
                   assessments=deepcopy(assessments), followup_tasks=len(check.gaps),
+                  probe_stops=len(check.probe_stops),
                   provenance_status="original_material_located" if has_origin_path() and not any(
                       g.stage == "provenance" and g.blocking for g in gaps.values()) else "partial")
             if previous_assessments != assessments:
                 event("assessment_changed", previous=previous_assessments, current=deepcopy(assessments),
                       basis=[asdict(s) for s in check.basis], world_basis=[asdict(s) for s in check.world_basis])
             round_verified = True
+        elif verifier is not None and eligible and adaptive_driver_required:
+            event("verification_skipped",
+                  reason="no_probe_owned_novel_return",
+                  received=received, new_eligible_versions=new_eligible)
         provenance_complete = has_origin_path() and not any(item.stage == "provenance" and item.blocking for item in gaps.values())
-        if not config.experimental_force_rounds and provenance_complete and (verifier is None or decision_status != "unresolved") and not any(
-                g.blocking and gap_dimension(g) in {"provenance", target.assessment_mode} for g in gaps.values()):
+        if (not config.experimental_force_rounds and not adaptive_driver_required and
+                provenance_complete and (verifier is None or decision_status != "unresolved") and not any(
+                g.blocking and gap_dimension(g) in {"provenance", target.assessment_mode}
+                for g in gaps.values())):
             stop_reason = "complete"
             save_checkpoint()
             break
         if received == 0:
             stop_reason = "provider_exhausted" if feedback else "empty_results"
             save_checkpoint()
+            break
+        if adaptive_driver_required and not probe_owned_novel_returns and round_number >= config.max_rounds:
+            stop_reason = "no_probe_owned_novel_evidence"
             break
         structure = structural_fingerprint()
         structural_progress = structure not in seen_structures
@@ -1177,6 +1533,8 @@ def run_provenance(target: Target | dict, provider: TraceProvider,
     return {
         "schema_version": "0.3", "scope": "plugin-supplied semantic analyses; no built-in truth oracle",
         "target": asdict(target), "config": asdict(config), "provenance_status": provenance_status,
+        "retrieval_attribution_mode": ("strict" if strict_retrieval_attribution
+                                       else "legacy-compatible"),
         "fact_status": fact_status, "stop_reason": stop_reason, "usage": usage,
         "decision_status": decision_status, "assessments": assessments, "assessment_valid": not fatal,
         "materials": [asdict(item) for item in materials.values()],

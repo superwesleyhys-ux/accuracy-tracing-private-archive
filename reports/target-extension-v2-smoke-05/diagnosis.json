@@ -1,0 +1,44 @@
+{
+  "classification": "protocol_execution_failure_not_label_error",
+  "scheduled_cases": 3,
+  "completed_cases": 2,
+  "completed_and_reference_correct": 2,
+  "failed_case": "p07",
+  "transport": {
+    "api_attempts": 58,
+    "returned_responses": 58,
+    "http_429": 0
+  },
+  "p07": {
+    "target_plan_valid": true,
+    "first_evidence_semantics": {
+      "designation_relation": "contradicted",
+      "time_boundary": "contradicted",
+      "semantic_core_actor_action": "unresolved",
+      "goes_u_identity": "supported",
+      "goes_19_exact_designation": "supported",
+      "would_aggregate_to": "contradicted"
+    },
+    "invalid_cross_field_pair": {
+      "probe_policy": "exact_designation",
+      "status": "supported",
+      "returned_referent_relation": "not_applicable",
+      "required_referent_relation": "exact"
+    },
+    "repair_attempt": {
+      "performed": true,
+      "repeated_same_invalid_pair": true,
+      "second_attempt_input_tokens": 3625,
+      "second_attempt_output_tokens": 715,
+      "second_attempt_service_seconds": 11.694181861996185
+    },
+    "consequence": "Evidence assembly failed closed before world, judgement critic, checkpoint creation and round two."
+  },
+  "independent_scorer_issue": {
+    "classification": "post-run_auditor_compatibility_failure",
+    "cause": "The scorer accepted only legacy planner repair counters and rejected the new extension_output counter.",
+    "fixed_without_changing_live_artifacts": true,
+    "postfix_audit": "reports/target-extension-v2-smoke-comparison-05-postfix.json"
+  },
+  "next_fix": "Use an explicit match_policy/status/referent_relation table in both verifier and judgement-critic prompts, return actionable expected values in repair errors, retain fail-closed validation, support both legacy and current planner-history counter sets, and rerun all smoke cases under a new freeze."
+}

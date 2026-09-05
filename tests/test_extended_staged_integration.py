@@ -16,6 +16,136 @@ s = importlib.import_module("staged_semantic")
 p = s.p
 
 
+def accepted_extension(payload):
+    """Return a complete v4 extension for the planner's frozen claim contract."""
+    probes = []
+    for claim in payload["claim_contract"]["claims"]:
+        by_kind = {}
+        for dimension in claim["dimensions"]:
+            by_kind.setdefault(dimension["kind"], []).append(dimension["id"])
+        bindings = [
+            ("predicate_core", by_kind["predicate"]),
+            ("source_lineage", []),
+        ]
+        for dimension, probe in (("negation", "polarity"),
+                                 ("quantity_unit", "quantity_unit"),
+                                 ("baseline_scope", "baseline_scope")):
+            bindings.extend((probe, [identifier])
+                            for identifier in by_kind.get(dimension, ()))
+        bindings.extend(("time_boundary", [identifier])
+                        for identifier in by_kind.get("time", ()))
+        bindings.extend(("location", [identifier])
+                        for identifier in by_kind.get("location", ()))
+        for dimension in ("condition", "modality"):
+            bindings.extend(("condition_modality", [identifier])
+                            for identifier in by_kind.get(dimension, ()))
+        bindings.extend(("actor_role", [identifier])
+                        for identifier in by_kind.get("actor_role", ()))
+        bindings.extend(("entity_identity", [identifier])
+                        for identifier in by_kind.get("entity_identity", ()))
+        bindings.extend(("exact_designation", [identifier])
+                        for identifier in by_kind.get("exact_designation", ()))
+        all_ids = [dimension["id"] for dimension in claim["dimensions"]]
+        if claim["role"] == "attributed_content":
+            bindings.append(("attribution_relation", []))
+        elif by_kind.get("exact_designation"):
+            bindings.append(("designation_relation", all_ids))
+        elif payload["claim_contract"]["logic"] in {
+                "conditional", "comparison", "causal"}:
+            bindings.append((payload["claim_contract"]["logic"] + "_relation",
+                             all_ids))
+        else:
+            bindings.append(("claim_composition", all_ids))
+        if payload["target"]["assessment_mode"] == "world":
+            bindings.append(("source_independence", []))
+        probes.extend({
+            "claim_id": claim["id"],
+            "kind": kind,
+            "dimension_ids": dimension_ids,
+            # V4 replaces both strings with program-owned canonical text.
+            "question": "Planner placeholder for " + kind + ".",
+            "decision_impact": "Planner placeholder impact.",
+        } for kind, dimension_ids in bindings)
+
+    dimensions = {
+        dimension["id"]: dimension
+        for claim in payload["claim_contract"]["claims"]
+        for dimension in claim["dimensions"]
+    }
+    coverage_ledger = []
+    for segment in payload["coverage_segments"]:
+        overlapping = [dimension for dimension in dimensions.values()
+                       if max(segment["anchor"]["start"],
+                              dimension["anchor"]["start"]) <
+                       min(segment["anchor"]["end"],
+                           dimension["anchor"]["end"])]
+        allowed = e.CUE_DIMENSION_KINDS.get(segment["cue_kind"])
+        compatible = [dimension for dimension in overlapping
+                      if allowed is None or dimension["kind"] in allowed]
+        if segment["high_signal"]:
+            owner = next(claim for claim in payload["claim_contract"]["claims"]
+                         if claim["id"] == segment["claim_id"])
+            relation_owned = (segment["cue_kind"] == "lexical_content" and
+                (payload["claim_contract"]["logic"] in
+                    {"conditional", "comparison", "causal"} or
+                 owner["role"] == "attributed_content" or
+                 any(item["kind"] == "exact_designation"
+                     for item in owner["dimensions"])))
+            if compatible:
+                status, bound = "covered_by_dimension", overlapping
+            elif relation_owned:
+                status, bound = "covered_by_relation", []
+            else:
+                status, bound = "suspected_missing", []
+        elif segment["cue_kind"] == "logic_connector":
+            status, bound = "logic_connector", []
+        elif overlapping:
+            status, bound = "covered_by_dimension", overlapping
+        else:
+            status, bound = "context_only", []
+        coverage_ledger.append({
+            "segment_id": segment["id"],
+            "status": status,
+            "dimension_ids": [dimension["id"] for dimension in bound],
+        })
+    return {
+        "decision": "accept",
+        "repair_quote": "",
+        "repair_issue": "",
+        "probes": probes,
+        "coverage_ledger": coverage_ledger,
+        "notes": "",
+    }
+
+
+def material_probe_checks(payload, response, stage):
+    """Bind every v4 material finding to the projected probe ledger."""
+    findings = response["atoms" if stage == "atoms" else "citations"]
+    indexes = list(range(len(findings)))
+    origin_used = stage == "lineage" and response.get("origin") is not None
+    addressed = bool(indexes) or origin_used
+    return [{
+        "probe_id": probe["id"],
+        "status": "addressed" if addressed else "absent",
+        "finding_indexes": indexes,
+        "origin_used": origin_used,
+        "rationale": ("The current return contains a mapped finding."
+                      if addressed else
+                      "The current return has no material finding for this probe."),
+    } for probe in payload["target_plan"]["probes"]]
+
+
+def no_lead_stops(response):
+    """Give every unresolved v4 result exactly one task or explicit stop."""
+    tasked = {item["probe_id"] for item in response["gaps"]}
+    return [{
+        "probe_id": result["probe_id"],
+        "reason": "no_source_lead",
+        "rationale": "This return provides no concrete additional source lead.",
+    } for result in response["probe_results"]
+        if result["status"] == "unresolved" and result["probe_id"] not in tasked]
+
+
 class PlanClient:
     def __init__(self): self.calls = []
     def call(self, system, user, schema):
@@ -27,19 +157,7 @@ class PlanClient:
                     {"kind": "predicate", "quote": "rose"},
                     {"kind": "baseline_scope", "quote": "above the 2024 baseline"}]}],
                 "logic": "single", "notes": ""}
-        claim = payload["claim_contract"]["claims"][0]
-        dimensions = {item["kind"]: item["id"] for item in claim["dimensions"]}
-        bindings = {
-            "semantic_core": [dimensions["subject"], dimensions["predicate"]],
-            "baseline_scope": [dimensions["baseline_scope"]],
-            "source_lineage": [],
-        }
-        return {"decision": "accept", "repair_quote": "", "repair_issue": "", "notes": "",
-            "probes": [{"claim_id": claim["id"], "kind": kind,
-                         "dimension_ids": dimension_ids,
-                         "question": "Check " + kind + ".",
-                         "decision_impact": "A mismatch changes the decision."}
-                       for kind, dimension_ids in bindings.items()]}
+        return accepted_extension(payload)
 
 
 class SemanticClient:
@@ -54,7 +172,14 @@ class SemanticClient:
         if stage != expected: raise AssertionError(f"expected {expected}, received {stage}")
         self.calls.append({"stage": stage, "payload": json.loads(user)})
         payload = self.calls[-1]["payload"]
-        return deepcopy(response(payload) if callable(response) else response)
+        result = deepcopy(response(payload) if callable(response) else response)
+        if schema == s.ATOMS_V4_SCHEMA and "probe_checks" not in result:
+            result["probe_checks"] = material_probe_checks(payload, result, "atoms")
+        elif schema == s.LINEAGE_V4_SCHEMA and "probe_checks" not in result:
+            result["probe_checks"] = material_probe_checks(payload, result, "lineage")
+        elif schema == s.PROBED_LAYER_V4_SCHEMA and "no_leads" not in result:
+            result["no_leads"] = no_lead_stops(result)
+        return result
 
 
 class ExtendedStagedIntegrationTests(unittest.TestCase):
@@ -90,10 +215,12 @@ class ExtendedStagedIntegrationTests(unittest.TestCase):
                 results.append({"probe_id": probe["id"], "status": verdict,
                     "basis_indexes": [0], "rationale": "The shared passage answers this probe.",
                     "referent_relation": relation})
-            return {"basis": [{"version_id": version, "quote": quote}],
+            raw = {"basis": [{"version_id": version, "quote": quote}],
                 "probe_results": results,
                 "rationale": "The exact source resolves this layer.",
                 "gaps": [], "resolutions": []}
+            raw["no_leads"] = no_lead_stops(raw)
+            return raw
         return response
 
     @staticmethod
@@ -149,9 +276,251 @@ class ExtendedStagedIntegrationTests(unittest.TestCase):
             self.assertEqual(plan.sha256, call["payload"]["target_plan"]["plan_sha256"])
         atom_kinds = {item["kind"] for item in client.calls[0]["payload"]["target_plan"]["probes"]}
         lineage_kinds = {item["kind"] for item in client.calls[1]["payload"]["target_plan"]["probes"]}
-        self.assertEqual({"semantic_core", "baseline_scope"}, atom_kinds)
+        self.assertEqual({"predicate_core", "claim_composition", "baseline_scope"},
+                         atom_kinds)
         self.assertEqual({"source_lineage"}, lineage_kinds)
         self.assertEqual("critic", client.calls[-1]["payload"]["target_plan"]["stage"])
+
+    def test_v4_strict_returns_are_saved_decomposed_and_assessed_by_probe(self):
+        target = p.Target(
+            "strict-target", "Output rose above the 2024 baseline.",
+            "2026-09-04T20:00:00Z", source_version_id="a",
+            assessment_mode="world", evidence_scope=("a",))
+        first = p.MaterialVersion(
+            "a", "https://example.org/a",
+            target.text + " Sources: https://example.org/b and https://example.org/c.",
+            "2026-09-04T19:00:00Z", "2026-09-03T00:00:00Z",
+            "2026-09-03T00:00:00Z", "Synthetic exact archive.")
+        second = p.MaterialVersion(
+            "b", "https://example.org/b",
+            "Independent laboratory record: " + target.text,
+            "2026-09-04T19:30:00Z", "2026-09-03T01:00:00Z",
+            "2026-09-03T01:00:00Z", "Synthetic independent archive.")
+        third = p.MaterialVersion(
+            "c", "https://example.org/c",
+            "Independent auditor record: " + target.text,
+            "2026-09-04T19:45:00Z", "2026-09-03T02:00:00Z",
+            "2026-09-03T02:00:00Z", "Second independent archive.")
+        plan = e.TargetPlanner(PlanClient()).prepare(target)
+        views = {stage: plan.projection(stage).to_payload()
+                 for stage in ("atoms", "lineage", "critic", "evidence", "world")}
+        independence_probe = next(
+            probe.id for probe in plan.probes if probe.kind == "source_independence")
+
+        atom = lambda material: {"atoms": [{
+            "statement": material.content,
+            "quote": material.content,
+            "qualifier_quotes": ["above the 2024 baseline"],
+        }], "notes": ""}
+        source_lineage = {"citations": [{
+            "locator": material.url, "quote": first.content, "kind": "cites",
+            "rationale": "The source explicitly cites this upstream record.",
+            "decision_impact": "Locating it determines the source lineage.",
+        } for material in (second, third)], "origin": None, "notes": ""}
+
+        def root_lineage(material):
+            return {"citations": [], "origin": {
+                "kind": "original_record", "quote": material.content,
+                "rationale": "This material identifies itself as the producing record.",
+            }, "notes": ""}
+        critic_accept = {"decision": "accept", "stage": "none",
+                         "quote": "", "issue": ""}
+        judgement_accept = {"decision": "accept", "stage": "none",
+                            "probe_id": "", "issue": "", "basis": []}
+
+        def world_with_task(payload):
+            raw = self.layer(first.version_id, first.content, "supported")(payload)
+            result = next(item for item in raw["probe_results"]
+                          if item["probe_id"] == independence_probe)
+            result.update(status="unresolved", referent_relation="not_applicable",
+                          rationale="One independent return is still needed.")
+            raw["gaps"] = [{
+                "probe_id": independence_probe,
+                "question": next(probe["question"] for probe in
+                    payload["target_plan"]["probes"]
+                    if probe["id"] == independence_probe),
+                "action": "search",
+                "locator": "independent output record",
+                "basis": [{"version_id": first.version_id,
+                           "quote": first.content}],
+                "decision_impact": next(
+                    probe["decision_impact"] for probe in
+                    payload["target_plan"]["probes"]
+                    if probe["id"] == independence_probe),
+            }]
+            raw["no_leads"] = no_lead_stops(raw)
+            return raw
+
+        def world_with_independent_roots(payload):
+            basis = [
+                {"version_id": second.version_id, "quote": second.content},
+                {"version_id": third.version_id, "quote": third.content},
+            ]
+            results = []
+            for probe in payload["target_plan"]["probes"]:
+                results.append({
+                    "probe_id": probe["id"], "status": "supported",
+                    "basis_indexes": ([0, 1] if probe["id"] == independence_probe
+                                      else [0]),
+                    "rationale": "The rooted records answer this probe.",
+                    "referent_relation": "not_applicable",
+                })
+            return {"basis": basis, "probe_results": results,
+                    "rationale": "Two distinct terminal roots support the claim.",
+                    "gaps": [], "no_leads": [], "resolutions": []}
+
+        client = SemanticClient([
+            ("atoms", atom(first)), ("lineage", source_lineage),
+            ("critic", critic_accept),
+            ("atoms", atom(second)), ("lineage", root_lineage(second)),
+            ("critic", critic_accept),
+            # Arrival of b deterministically revisits a and turns its declared
+            # b citation into a direct edge before the first world judgement.
+            ("atoms", atom(first)), ("lineage", source_lineage),
+            ("critic", critic_accept),
+            ("evidence", self.layer(first.version_id, first.content, "supported")),
+            ("world", world_with_task),
+            ("judgement_critic", judgement_accept),
+            ("atoms", atom(third)), ("lineage", root_lineage(third)),
+            ("critic", critic_accept),
+            # Arrival of c revisits a again, creating the second direct edge.
+            ("atoms", atom(first)), ("lineage", source_lineage),
+            ("critic", critic_accept),
+            ("evidence", self.layer(first.version_id, first.content, "supported")),
+            ("world", world_with_independent_roots),
+            ("judgement_critic", judgement_accept),
+        ])
+        decomposer = s.StagedDecomposer(client, target_plan=views)
+        verifier = s.StagedVerifier(client, target_plan=views)
+
+        class Provider:
+            def __init__(self):
+                self.issued = []
+                self.returned_task_ids = []
+
+            def search(self, target, tasks, round_number, limit):
+                self.issued.append(tuple(tasks))
+                if round_number == 1:
+                    selected = next(item for item in tasks
+                                    if item.id == "origin:" + target.id)
+                    materials = (first, second)
+                else:
+                    selected = next(item for item in tasks
+                                    if item.probe_id == independence_probe)
+                    materials = (third,)
+                for material in materials:
+                    self.returned_task_ids.append(selected.id)
+                    yield p.RetrievalHit(material, (selected.id,))
+
+        provider = Provider()
+        report = p.run_provenance(
+            target, provider, decomposer, verifier,
+            p.TraceConfig(max_rounds=2, max_documents=4,
+                          max_decomposition_calls=8,
+                          experimental_force_rounds=True),
+            strict_retrieval_attribution=True)
+
+        self.assertFalse(report["errors"])
+        self.assertEqual(["a", "b", "a", "c", "a"],
+                         [item["version_id"] for item in report["analysis_history"]])
+        self.assertTrue(all(item["accepted"] for item in report["analysis_history"]))
+        self.assertEqual(["origin:" + target.id],
+                         report["analysis_history"][0]["trigger_task_ids"])
+        direct_returns = [item for item in report["analysis_history"]
+                          if not item["revisit"]]
+        self.assertEqual(["a", "b", "c"],
+                         [item["version_id"] for item in direct_returns])
+        self.assertEqual([independence_probe],
+                         direct_returns[-1]["trigger_probe_ids"])
+        second_issued = {item.id: item for item in provider.issued[1]}
+        self.assertIn(provider.returned_task_ids[-1], second_issued)
+        self.assertEqual(independence_probe,
+                         second_issued[provider.returned_task_ids[-1]].probe_id)
+
+        atoms_calls = [call for call in client.calls if call["stage"] == "atoms"]
+        first_attribution = atoms_calls[0]["payload"]["retrieval_attribution"]
+        self.assertEqual({"version_id": "a",
+                          "trigger_task_ids": ["origin:" + target.id],
+                          "trigger_probe_ids": []},
+                         {key: first_attribution[key] for key in (
+                             "version_id", "trigger_task_ids",
+                             "trigger_probe_ids")})
+        self.assertEqual(["origin:" + target.id],
+                         [item["id"] for item in first_attribution["issued_tasks"]])
+        direct_atom_calls = [call for call in atoms_calls
+                             if (call["payload"].get("retrieval_attribution") or {})
+                             .get("trigger_task_ids")]
+        self.assertEqual(["a", "b", "c"], [call["payload"]
+            ["retrieval_attribution"]["version_id"] for call in direct_atom_calls])
+        self.assertEqual("c",
+                         direct_atom_calls[-1]["payload"]
+                         ["retrieval_attribution"]["version_id"])
+        self.assertEqual([independence_probe],
+                         direct_atom_calls[-1]["payload"]["retrieval_attribution"]
+                         ["trigger_probe_ids"])
+        direct_receipt = direct_atom_calls[-1]["payload"]["loop_receipt"]
+        self.assertEqual("c",
+                         direct_receipt["return_attribution"]["version_id"])
+        self.assertEqual("unresolved",
+                         direct_receipt["probe_results"][0]["status"])
+        self.assertEqual(independence_probe,
+                         direct_receipt["probe_results"][0]["probe_id"])
+        revisit_atom_calls = [call for call in atoms_calls
+                              if call["payload"]["retrieval_attribution"] is None]
+        self.assertTrue(revisit_atom_calls)
+        self.assertTrue(all(call["payload"]["loop_receipt"]["tasks"] == []
+                            for call in revisit_atom_calls))
+        for call in client.calls:
+            if call["stage"] not in {"atoms", "lineage", "critic"}:
+                continue
+            self.assertIn("loop_receipt", call["payload"])
+            if call["payload"]["material"]["version_id"] == "c":
+                self.assertEqual(independence_probe,
+                    call["payload"]["loop_receipt"]["probe_results"][0]
+                    ["probe_id"])
+
+        evidence_calls = [call for call in client.calls
+                          if call["stage"] == "evidence"]
+        world_calls = [call for call in client.calls if call["stage"] == "world"]
+        self.assertEqual([], evidence_calls[0]["payload"]
+                         ["current_round_receipts"])
+        self.assertEqual([], world_calls[0]["payload"]
+                         ["current_round_receipts"])
+        self.assertEqual([], evidence_calls[-1]["payload"]
+                         ["current_round_receipts"])
+        final_receipt, = world_calls[-1]["payload"]["current_round_receipts"]
+        self.assertEqual("c",
+                         final_receipt["return_attribution"]["version_id"])
+        self.assertEqual([independence_probe],
+                         final_receipt["return_attribution"]
+                         ["trigger_probe_ids"])
+        self.assertEqual("world", final_receipt["probe_results"][0]["layer"])
+        self.assertEqual("unresolved",
+                         final_receipt["probe_results"][0]["status"])
+
+        operations = report["operations"]
+        for version_id in ("a", "b", "c"):
+            saved = next(item["sequence"] for item in operations
+                         if item["action"] == "snapshot_saved" and
+                         item["version_id"] == version_id)
+            started = next(item["sequence"] for item in operations
+                           if item["action"] == "decompose_started" and
+                           item["version_id"] == version_id)
+            completed = next(item["sequence"] for item in operations
+                             if item["action"] == "decompose_completed" and
+                             item["version_id"] == version_id)
+            self.assertLess(saved, started)
+            self.assertLess(started, completed)
+
+        first_check, final_check = report["verification_history"]
+        first_world = {item["probe_id"]: item["status"]
+                       for item in first_check["world_probe_results"]}
+        final_world = {item["probe_id"]: item["status"]
+                       for item in final_check["world_probe_results"]}
+        self.assertEqual("unresolved", first_world[independence_probe])
+        self.assertEqual("supported", final_world[independence_probe])
+        self.assertTrue(all("probe_checks" in item for item in decomposer.history
+                            if item["stage"] in {"atoms", "lineage"}))
 
     def test_judgement_repair_reruns_only_named_layer_then_reviews_again(self):
         target, material, context, plan, views = self.fixture()
@@ -512,28 +881,7 @@ class ExtendedStagedIntegrationTests(unittest.TestCase):
                             {"kind": "exact_designation", "quote": "GOES-19"},
                             {"kind": "time", "quote": "June 25, 2024"},
                         ]}], "logic": "single", "notes": ""}
-                claim = payload["claim_contract"]["claims"][0]
-                by_kind = {}
-                for item in claim["dimensions"]:
-                    by_kind.setdefault(item["kind"], []).append(item["id"])
-                bindings = [
-                    ("semantic_core", by_kind["subject"] + by_kind["predicate"]),
-                    ("source_lineage", []),
-                    ("time_boundary", by_kind["time"]),
-                    ("designation_relation", [item["id"]
-                                               for item in claim["dimensions"]]),
-                ]
-                bindings.extend(("entity_identity", [identifier])
-                                for identifier in by_kind["entity_identity"])
-                bindings.extend(("exact_designation", [identifier])
-                                for identifier in by_kind["exact_designation"])
-                return {"decision": "accept", "repair_quote": "",
-                    "repair_issue": "", "notes": "", "probes": [{
-                        "claim_id": claim["id"], "kind": kind,
-                        "dimension_ids": dimensions,
-                        "question": "Check " + kind + ".",
-                        "decision_impact": "A mismatch changes the decision.",
-                    } for kind, dimensions in bindings]}
+                return accepted_extension(payload)
 
         plan = e.TargetPlanner(RenameClient()).prepare(target)
         views = {stage: plan.projection(stage).to_payload()
@@ -566,7 +914,7 @@ class ExtendedStagedIntegrationTests(unittest.TestCase):
                     "referent_relation": relation_value})
             return {"basis": [{"version_id": "m13", "quote": content}],
                 "probe_results": results, "rationale": "Synthetic layer.",
-                "gaps": [], "resolutions": []}
+                "gaps": [], "no_leads": [], "resolutions": []}
 
         disconnected_cases = (
             "NOAA operates satellites. GOES-U launched. GOES-19 appears in a catalogue. "
@@ -597,9 +945,10 @@ class ExtendedStagedIntegrationTests(unittest.TestCase):
             kind = probes_by_id[result["probe_id"]]["kind"]
             if kind == "time_boundary":
                 result["status"] = "contradicted"
-            elif kind == "semantic_core":
+            elif kind == "predicate_core":
                 result["status"] = "unresolved"
                 result["basis_indexes"] = []
+        actual_p07["no_leads"] = no_lead_stops(actual_p07)
         assembled = s.StagedVerifier._assemble_layer(
             target, "evidence", actual_p07,
             {"m13": {"version_id": "m13", "content": connected}}, {}, False,
@@ -654,27 +1003,7 @@ class ExtendedStagedIntegrationTests(unittest.TestCase):
                               "newer lunar-mission data"},
                          ]},
                     ], "logic": "and", "notes": ""}
-                probes = []
-                for claim in payload["claim_contract"]["claims"]:
-                    by_kind = {}
-                    for dimension in claim["dimensions"]:
-                        by_kind.setdefault(dimension["kind"], []).append(dimension["id"])
-                    bindings = [
-                        ("semantic_core", by_kind["subject"] + by_kind["predicate"]),
-                        ("source_lineage", []),
-                    ]
-                    bindings.extend(("time_boundary", [identifier])
-                                    for identifier in by_kind.get("time", ()))
-                    if "quantity_unit" in by_kind:
-                        bindings.append(("quantity_unit", by_kind["quantity_unit"]))
-                    probes.extend({
-                        "claim_id": claim["id"], "kind": kind,
-                        "dimension_ids": dimensions,
-                        "question": "Check " + kind + ".",
-                        "decision_impact": "A mismatch changes the decision.",
-                    } for kind, dimensions in bindings)
-                return {"decision": "accept", "repair_quote": "",
-                    "repair_issue": "", "notes": "", "probes": probes}
+                return accepted_extension(payload)
 
         plan = e.TargetPlanner(MultiTimeClient()).prepare(target)
         views = {stage: plan.projection(stage).to_payload()
@@ -710,11 +1039,15 @@ class ExtendedStagedIntegrationTests(unittest.TestCase):
             ensure_ascii=False, separators=(",", ":")).encode()).hexdigest()
         for view in malformed.values():
             view["plan_sha256"] = malformed_sha
-        with self.assertRaisesRegex(ValueError, "exactly cover"):
+        with self.assertRaisesRegex(ValueError, "program canonical|exactly cover"):
             s._validate_target_plan(malformed, target)
 
         evidence_view = views["evidence"]
         newer_id = time_by_quote["newer lunar-mission data"]
+        newer_probe_id = next(
+            probe["id"] for probe in evidence_view["probes"]
+            if (probe["kind"] == "time_boundary" and
+                tuple(probe["dimension_ids"]) == (newer_id,)))
         raw_results = []
         for probe in evidence_view["probes"]:
             unresolved = (probe["kind"] == "time_boundary" and
@@ -731,7 +1064,11 @@ class ExtendedStagedIntegrationTests(unittest.TestCase):
             "basis": [{"version_id": "m15", "quote": target.text}],
             "probe_results": raw_results,
             "rationale": "The two time boundaries have independent results.",
-            "gaps": [], "resolutions": [],
+            "gaps": [],
+            "no_leads": [{"probe_id": newer_probe_id,
+                          "reason": "no_source_lead",
+                          "rationale": "The newer-data boundary has no source lead."}],
+            "resolutions": [],
         }, {"m15": {"version_id": "m15", "content": target.text}}, {}, False,
             plan_view=evidence_view)
         self.assertEqual("unresolved", assembled["verdict"])
@@ -746,7 +1083,7 @@ class ExtendedStagedIntegrationTests(unittest.TestCase):
             time_by_quote["Apollo-era regional maps"]])
         self.assertEqual("unresolved", time_status_by_dimension[newer_id])
 
-    def test_runtime_keeps_v2_archive_readable_but_rejects_v3_disguise(self):
+    def test_runtime_keeps_v2_archive_readable_while_v4_is_program_canonical(self):
         target = p.Target("archive",
             "Alpha is called Item Three.", "2026-09-05T00:00:00Z",
             source_version_id="m1", assessment_mode="evidence",
@@ -762,28 +1099,21 @@ class ExtendedStagedIntegrationTests(unittest.TestCase):
                             {"kind": "predicate", "quote": "called"},
                             {"kind": "exact_designation", "quote": "Item Three"},
                         ]}], "logic": "single", "notes": ""}
-                claim = payload["claim_contract"]["claims"][0]
-                by_kind = {item["kind"]: item["id"] for item in claim["dimensions"]}
-                bindings = [
-                    ("semantic_core", [by_kind["subject"], by_kind["predicate"]]),
-                    ("exact_designation", [by_kind["exact_designation"]]),
-                    ("designation_relation", [item["id"]
-                                                for item in claim["dimensions"]]),
-                    ("source_lineage", []),
-                ]
-                return {"decision": "accept", "repair_quote": "",
-                    "repair_issue": "", "notes": "", "probes": [{
-                        "claim_id": claim["id"], "kind": kind,
-                        "dimension_ids": dimensions,
-                        "question": "Did Alpha perform the calling action?",
-                        "decision_impact": "A mismatch changes the decision.",
-                    } for kind, dimensions in bindings]}
+                return accepted_extension(payload)
 
         plan = e.TargetPlanner(IdentityClient()).prepare(target)
         generated = {stage: plan.projection(stage).to_payload()
                      for stage in ("atoms", "lineage", "critic", "evidence", "world")}
-        self.assertEqual({"decision-probe-v3"},
+        self.assertEqual({"decision-probe-v4"},
                          {view["schema_version"] for view in generated.values()})
+        exact = next(probe for probe in generated["critic"]["probes"]
+                     if probe["kind"] == "exact_designation")
+        self.assertEqual(
+            'Does the evidence establish "Item Three" as the exact asserted name, '
+            'title, label or designation?', exact["question"])
+        self.assertEqual(
+            "A different name, title, label or designation prevents "
+            "exact-designation support.", exact["decision_impact"])
 
         def rehash(views, schema_version):
             for view in views.values():
@@ -798,7 +1128,15 @@ class ExtendedStagedIntegrationTests(unittest.TestCase):
 
         archived_v2 = deepcopy(generated)
         for view in archived_v2.values():
+            view.pop("coverage_ledger")
+            claim = view["claims"][0] if view["claims"] else None
+            dimensions = ({item["kind"]: item["id"]
+                           for item in claim["dimensions"]} if claim else {})
             for probe in view["probes"]:
+                if probe["kind"] == "predicate_core":
+                    probe["kind"] = "semantic_core"
+                    probe["dimension_ids"] = [dimensions["subject"],
+                                              dimensions["predicate"]]
                 if probe["kind"] == "exact_designation":
                     probe["question"] = "Did Alpha perform the calling action?"
         rehash(archived_v2, "decision-probe-v2")
@@ -809,12 +1147,13 @@ class ExtendedStagedIntegrationTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "identity question.*canonical"):
             s._validate_target_plan(disguised_v3, target)
 
-    def test_v2_plan_tampering_is_rejected_before_any_model_call(self):
+    def test_v4_plan_tampering_is_rejected_before_any_model_call(self):
         target, material, context, plan, original = self.fixture()
         s._validate_target_plan(original, target)
         critic = original["critic"]
         canonical = {key: critic[key] for key in (
-            "schema_version", "target_signature", "logic", "claims", "probes", "notes")}
+            "schema_version", "target_signature", "logic", "claims", "probes",
+            "coverage_ledger", "notes")}
         digest = hashlib.sha256(json.dumps(canonical, sort_keys=True, ensure_ascii=False,
                                            separators=(",", ":")).encode()).hexdigest()
         self.assertEqual(plan.sha256, digest)
@@ -827,7 +1166,7 @@ class ExtendedStagedIntegrationTests(unittest.TestCase):
             def change(views):
                 for view in views.values():
                     for probe in view["probes"]:
-                        if probe["kind"] == "semantic_core":
+                        if probe["kind"] == "predicate_core":
                             probe[field] = value
             return change
 
@@ -858,25 +1197,33 @@ class ExtendedStagedIntegrationTests(unittest.TestCase):
                             s.StagedVerifier(client, target_plan=views).verify(target, context)
                     self.assertEqual([], client.calls)
 
-    def test_v2_probe_gap_is_linked_and_same_visible_url_gets_bounded_repair(self):
+    def test_v4_probe_gap_is_linked_and_same_visible_url_gets_bounded_repair(self):
         target, material, context, _, views = self.fixture()
+
+        repaired_url = "https://example.org/a?version=2026-09-03"
+        material = p.MaterialVersion(
+            material.version_id, material.url,
+            material.content + " Archived snapshot: " + repaired_url,
+            material.retrieved_at, material.published_at, material.available_at,
+            material.availability_basis, material.issuer)
+        context["materials"] = [asdict(material)]
 
         def with_gap(locator):
             def response(payload):
                 raw = self.layer(material.version_id, material.content, "unresolved")(payload)
-                probe_id = payload["target_plan"]["probes"][0]["id"]
+                probe = payload["target_plan"]["probes"][0]
                 raw["gaps"] = [{
-                    "probe_id": probe_id,
-                    "question": "Retrieve a distinct snapshot that resolves this probe.",
+                    "probe_id": probe["id"],
+                    "question": probe["question"],
                     "action": "fetch",
                     "locator": locator,
                     "basis": [{"version_id": material.version_id, "quote": material.content}],
-                    "decision_impact": "Without it this probe remains unresolved.",
+                    "decision_impact": probe["decision_impact"],
                 }]
+                raw["no_leads"] = no_lead_stops(raw)
                 return raw
             return response
 
-        repaired_url = "https://example.org/a?version=2026-09-03"
         accept = {"decision": "accept", "stage": "none", "probe_id": "",
                   "issue": "", "basis": []}
         client = SemanticClient([

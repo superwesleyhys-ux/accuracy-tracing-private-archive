@@ -1,0 +1,92 @@
+{
+  "id": "p02",
+  "assessment_mode": "evidence",
+  "status": "completed",
+  "prediction": "false",
+  "checkpoints": [
+    {
+      "round": 1,
+      "id": "p02",
+      "decision": "false",
+      "assessment_mode": "evidence",
+      "assessments": {
+        "evidence": {
+          "raw_verdict": "contradicted",
+          "decision": "contradicted",
+          "blocking_gap_ids": []
+        },
+        "world": {
+          "raw_verdict": "contradicted",
+          "decision": "contradicted",
+          "blocking_gap_ids": []
+        }
+      },
+      "provenance_status": "original_material_located"
+    },
+    {
+      "round": 2,
+      "id": "p02",
+      "decision": "false",
+      "assessment_mode": "evidence",
+      "assessments": {
+        "evidence": {
+          "raw_verdict": "contradicted",
+          "decision": "contradicted",
+          "blocking_gap_ids": []
+        },
+        "world": {
+          "raw_verdict": "contradicted",
+          "decision": "contradicted",
+          "blocking_gap_ids": []
+        }
+      },
+      "provenance_status": "original_material_located"
+    }
+  ],
+  "native_prediction": {
+    "id": "p02",
+    "assessment_mode": "evidence",
+    "as_of": "2026-09-05T09:34:36Z",
+    "decision": "false",
+    "assessments": {
+      "evidence": {
+        "raw_verdict": "contradicted",
+        "decision": "contradicted",
+        "blocking_gap_ids": []
+      },
+      "world": {
+        "raw_verdict": "contradicted",
+        "decision": "contradicted",
+        "blocking_gap_ids": []
+      }
+    },
+    "provenance_status": "original_material_located",
+    "assessment_valid": true,
+    "stop_reason": "round_budget"
+  },
+  "engine_usage": {
+    "rounds": 2,
+    "documents": 4,
+    "unique_versions": 2,
+    "decomposition_calls": 4,
+    "verification_calls": 2
+  },
+  "usage": {
+    "model_calls": 18,
+    "input_tokens": 39946,
+    "output_tokens": 5701,
+    "seconds": 113.72490098398703
+  },
+  "checkpoint_hashes": [
+    {
+      "round": 1,
+      "sha256": "10a3dd9a1bbfc3ab52c1a9cefbac9b0db2a6a46d91008efb3b2b0c002acafc6a"
+    },
+    {
+      "round": 2,
+      "sha256": "4330a3637a770fa8dc6afa8559e2af8034886002bffbf52075100b458b2b1a55"
+    }
+  ],
+  "new_api_attempts": 18,
+  "returned_responses": 18
+}

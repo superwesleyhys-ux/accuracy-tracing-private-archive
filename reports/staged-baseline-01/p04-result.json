@@ -1,0 +1,32 @@
+{
+  "id": "p04",
+  "arm": "original",
+  "assessment_mode": "evidence",
+  "status": "completed",
+  "prediction": {
+    "decision": "false",
+    "origins": [
+      "m07",
+      "m08"
+    ],
+    "edges": [],
+    "provenance_evaluable": true,
+    "origin_evaluable": true,
+    "edges_evaluable": false,
+    "edge_export_limit": "No native source-to-source edge representation"
+  },
+  "extractor_answer_text": "仅据m07，NOAA、2025年1月10日、2024年及1.29°C均有记载，但声明与文本矛盾：1.29°C对应20世纪均值，1850—1900年对应1.46°C。2024年超过2023年纪录0.10°C，次年发布总结。错误在于基准错配，形成原因在2个信源中未找到。范围外NASA估计约1.47°C，与NOAA差0.01°C，未必构成矛盾；文本一致不代表独立核验，现实核验未知。（基于2个信源 | 覆盖1类媒体 | 2条事实多源一致 | 1条存在分歧 | 因果锚定1/1）",
+  "extraction": {
+    "decision": "false",
+    "extractable": true,
+    "basis_quote": "但声明与文本矛盾：1.29°C对应20世纪均值，1850—1900年对应1.46°C。"
+  },
+  "usage": {
+    "model_calls": 16,
+    "input_tokens": 22296,
+    "output_tokens": 11935,
+    "seconds": 198.6744759400026
+  },
+  "new_api_attempts": 16,
+  "returned_responses": 16
+}

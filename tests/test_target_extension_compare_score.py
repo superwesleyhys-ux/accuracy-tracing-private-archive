@@ -4,6 +4,7 @@ import hashlib
 import json
 import os
 from pathlib import Path
+import shutil
 import subprocess
 import sys
 import tempfile
@@ -12,10 +13,24 @@ import unittest
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "experiments"))
 
-from target_extension_compare_score import (PLAN_SCHEMA_V2, PLAN_SCHEMA_V3, _audit_plan,
+import extended_semantic as runtime_contract
+from target_extension_compare_score import (CUE_DIMENSION_KINDS, PLAN_NOTES_V4,
+                                             PLAN_SCHEMA_V2, PLAN_SCHEMA_V3, PLAN_SCHEMA_V4,
+                                             TASK_ROUTED_PROVIDER,
+                                             V4_FIXED_EXPERIMENT,
+                                             V4_TASK_ROUTED_EXPERIMENT,
+                                             V4_PROBE_ROUTES_AND_GATES,
+                                             _active_retrieval_tasks_by_round,
+                                             _audit_plan,
+                                             _audit_probe_delta_attribution,
+                                             _audit_retrieval_attribution,
+                                             _audit_world_provenance_probe,
+                                             _canonical_decision_impact,
                                              _canonical_digest, _extension_schedule,
+                                             _canonical_probe_question,
                                              _history, _loop_counts, _plan_coverage,
-                                             _required_probe_bindings, score)
+                                             _required_probe_bindings,
+                                             _target_segments_v4, score)
 
 
 class TargetExtensionCompareTests(unittest.TestCase):
@@ -110,11 +125,185 @@ class TargetExtensionCompareTests(unittest.TestCase):
         return target, {**base, "sha256": checksum, "projections": projections}
 
     @staticmethod
+    def _v4_plan():
+        """Build one canonical offline v4 artifact with every new scalar kind."""
+        target = {"id": "v4", "text":
+                  "Agency delivered 3 parcels in Paris on 5 September 2025.",
+                  "as_of": "2026-09-05T00:00:00Z", "source_version_id": "m1",
+                  "assessment_mode": "world", "evidence_scope": ["m1"]}
+
+        class Client:
+            def call(self, system, user, schema):
+                payload = json.loads(user)
+                if system == runtime_contract.CLAIM_CONTRACT_PROMPT:
+                    return {"claims": [{"statement": target["text"],
+                        "quote": target["text"], "role": "main", "dimensions": [
+                            {"kind": "subject", "quote": "Agency"},
+                            {"kind": "predicate", "quote": "delivered"},
+                            {"kind": "actor_role", "quote": "Agency"},
+                            {"kind": "quantity_unit", "quote": "3 parcels"},
+                            {"kind": "entity_identity", "quote": "parcels"},
+                            {"kind": "location", "quote": "in Paris"},
+                            {"kind": "time", "quote": "on 5 September 2025"},
+                        ]}], "logic": "single", "notes": ""}
+                claim = payload["claim_contract"]["claims"][0]
+                converted_dimensions = tuple(runtime_contract.ClaimDimension(
+                    item["id"], item["kind"],
+                    runtime_contract.TextAnchor(**item["anchor"]))
+                    for item in claim["dimensions"])
+                converted_claim = runtime_contract.TargetClaim(
+                    claim["id"], claim["statement"],
+                    runtime_contract.TextAnchor(**claim["anchor"]), claim["role"],
+                    converted_dimensions, claim["parent_claim_id"])
+                bindings = runtime_contract._required_probe_bindings(
+                    converted_claim, target["assessment_mode"], "single")
+                probes = [{"claim_id": claim["id"], "kind": kind,
+                    "dimension_ids": list(dimension_ids),
+                    "question": "placeholder?", "decision_impact": "placeholder"}
+                    for kind, dimension_ids in bindings]
+
+                dimensions = {item["id"]: item for item in claim["dimensions"]}
+                ledger = []
+                for segment in payload["coverage_segments"]:
+                    overlapping = [item for item in dimensions.values()
+                        if max(segment["anchor"]["start"], item["anchor"]["start"]) <
+                        min(segment["anchor"]["end"], item["anchor"]["end"])]
+                    allowed = runtime_contract.CUE_DIMENSION_KINDS.get(
+                        segment["cue_kind"])
+                    compatible = [item for item in overlapping
+                                  if allowed is None or item["kind"] in allowed]
+                    if segment["high_signal"]:
+                        status = ("covered_by_dimension" if compatible
+                                  else "suspected_missing")
+                        bound = compatible
+                    elif segment["cue_kind"] == "logic_connector":
+                        status, bound = "logic_connector", []
+                    elif overlapping:
+                        status, bound = "covered_by_dimension", overlapping
+                    else:
+                        status, bound = "context_only", []
+                    ledger.append({"segment_id": segment["id"], "status": status,
+                                   "dimension_ids": [item["id"] for item in bound]})
+                return {"decision": "accept", "repair_quote": "",
+                        "repair_issue": "", "probes": probes,
+                        "coverage_ledger": ledger, "notes": ""}
+
+        plan = runtime_contract.TargetPlanner(Client()).prepare(target)
+        artifact = plan.to_payload()
+        artifact["projections"] = {
+            stage: plan.projection(stage).to_payload()
+            for stage in ("atoms", "lineage", "critic", "evidence", "world")}
+        return target, artifact
+
+    @staticmethod
+    def _manual_v4_plan(target, claim_specs, logic="single", ledger_override=None):
+        """Build deterministic v4 fixtures without invoking planner validation."""
+        signature = _canonical_digest(target)
+        claims = []
+        for spec in claim_specs:
+            quote = spec["quote"]
+            claim_start = spec.get("start", target["text"].index(quote))
+            claim_anchor = {"start": claim_start, "end": claim_start + len(quote),
+                            "quote": quote}
+            raw_dimensions = []
+            for index, dimension_spec in enumerate(spec["dimensions"]):
+                kind, dimension_quote = dimension_spec[:2]
+                relative = (dimension_spec[2] if len(dimension_spec) == 3 else
+                            quote.index(dimension_quote))
+                start = claim_start + relative
+                raw_dimensions.append({"name": str(index), "kind": kind,
+                    "anchor": {"start": start, "end": start + len(dimension_quote),
+                               "quote": dimension_quote}})
+            predicate = next(item for item in raw_dimensions
+                             if item["kind"] == "predicate")["anchor"]
+            claim_id = target["id"] + ":claim:" + _canonical_digest([
+                signature, claim_anchor["start"], claim_anchor["end"], spec["role"],
+                predicate["start"], predicate["end"],
+            ])[:20]
+            dimensions = []
+            for raw in raw_dimensions:
+                anchor = raw["anchor"]
+                dimensions.append({"id": target["id"] + ":dimension:" +
+                    _canonical_digest([signature, claim_id, raw["kind"],
+                                       anchor["start"], anchor["end"]])[:20],
+                    "kind": raw["kind"], "anchor": anchor})
+            claims.append({"id": claim_id, "statement": quote, "anchor": claim_anchor,
+                           "role": spec["role"], "dimensions": sorted(dimensions,
+                               key=lambda item: (item["anchor"]["start"],
+                                                 item["anchor"]["end"],
+                                                 item["kind"], item["id"])),
+                           "parent_claim_id": spec.get("parent")})
+        for claim in claims:
+            if type(claim["parent_claim_id"]) is int:
+                claim["parent_claim_id"] = claims[claim["parent_claim_id"]]["id"]
+        claims.sort(key=lambda item: (item["anchor"]["start"], item["anchor"]["end"],
+                                      item["role"], item["id"]))
+        claims_by_id = {claim["id"]: claim for claim in claims}
+        probes = []
+        for claim in claims:
+            dimensions_by_id = {item["id"]: item for item in claim["dimensions"]}
+            bindings = _required_probe_bindings(
+                claim, target["assessment_mode"], logic, plan_schema=PLAN_SCHEMA_V4)
+            for kind, dimension_ids in bindings:
+                dimension_ids = tuple(sorted(dimension_ids))
+                probe_id = target["id"] + ":probe:" + _canonical_digest([
+                    signature, claim["id"], kind, *dimension_ids])[:20]
+                routes, gate = V4_PROBE_ROUTES_AND_GATES[kind]
+                probes.append({"id": probe_id, "claim_id": claim["id"], "kind": kind,
+                    "dimension_ids": list(dimension_ids),
+                    "question": _canonical_probe_question(
+                        claim, kind, dimension_ids, dimensions_by_id, claims_by_id),
+                    "decision_impact": _canonical_decision_impact(kind),
+                    "match_policy": ({"entity_identity": "same_referent",
+                                      "exact_designation": "exact_designation"}.get(
+                                          kind, "semantic_constraint")),
+                    "routes": list(routes), "gate": gate})
+        probes.sort(key=lambda item: (item["claim_id"], item["kind"],
+                                      tuple(item["dimension_ids"]), item["id"]))
+        dimensions = {item["id"]: item for claim in claims
+                      for item in claim["dimensions"]}
+        ledger = []
+        for segment in _target_segments_v4(target, signature, claims):
+            overlapping = [item for item in dimensions.values()
+                           if max(segment["anchor"]["start"], item["anchor"]["start"]) <
+                           min(segment["anchor"]["end"], item["anchor"]["end"])]
+            allowed = CUE_DIMENSION_KINDS.get(segment["cue_kind"])
+            compatible = [item for item in overlapping
+                          if allowed is None or item["kind"] in allowed]
+            if compatible:
+                status, bound = "covered_by_dimension", compatible
+            elif segment["cue_kind"] == "logic_connector":
+                status, bound = "logic_connector", []
+            elif segment["cue_kind"] == "context" and not segment["high_signal"]:
+                status, bound = "context_only", []
+            elif (segment["cue_kind"] == "lexical_content" and
+                  (logic in {"conditional", "comparison", "causal"} or
+                   claims_by_id[segment["claim_id"]]["role"] == "attributed_content")):
+                status, bound = "covered_by_relation", []
+            else:
+                status, bound = "suspected_missing", []
+            entry = {**segment, "status": status,
+                     "dimension_ids": sorted(item["id"] for item in bound)}
+            if ledger_override is not None:
+                entry = ledger_override(entry, dimensions) or entry
+            ledger.append(entry)
+        ledger.sort(key=lambda item: (item["claim_id"], item["anchor"]["start"],
+                                      item["anchor"]["end"], item["cue_kind"],
+                                      item["segment_id"]))
+        plan = {"schema_version": PLAN_SCHEMA_V4, "target_signature": signature,
+                "logic": logic, "claims": claims, "probes": probes,
+                "coverage_ledger": ledger, "notes": PLAN_NOTES_V4,
+                "sha256": "", "projections": {}}
+        return TargetExtensionCompareTests._rehash(plan)
+
+    @staticmethod
     def _rehash(plan):
-        fields = ("target_signature", "logic", "claims", "probes", "notes")
+        fields = ["target_signature", "logic", "claims", "probes", "notes"]
+        if plan.get("schema_version") == PLAN_SCHEMA_V4:
+            fields.insert(-1, "coverage_ledger")
         payload = {key: plan[key] for key in fields}
         plan_schema = plan.get("schema_version")
-        if plan_schema in {PLAN_SCHEMA_V2, PLAN_SCHEMA_V3}:
+        if plan_schema in {PLAN_SCHEMA_V2, PLAN_SCHEMA_V3, PLAN_SCHEMA_V4}:
             payload = {"schema_version": plan_schema, **payload}
         plan["sha256"] = _canonical_digest(payload)
         for stage in ("atoms", "lineage", "critic", "evidence", "world"):
@@ -126,9 +315,15 @@ class TargetExtensionCompareTests(unittest.TestCase):
             view = {"target_signature": plan["target_signature"],
                     "plan_sha256": plan["sha256"], "stage": stage,
                     "claims": claims, "probes": selected}
-            if plan_schema in {PLAN_SCHEMA_V2, PLAN_SCHEMA_V3}:
+            if plan_schema in {PLAN_SCHEMA_V2, PLAN_SCHEMA_V3, PLAN_SCHEMA_V4}:
                 view = {"schema_version": plan_schema, **view,
                         "logic": plan["logic"], "notes": plan["notes"]}
+                if plan_schema == PLAN_SCHEMA_V4:
+                    dimension_ids = {dimension["id"] for claim in claims
+                                     for dimension in claim["dimensions"]}
+                    view["coverage_ledger"] = [entry for entry in plan["coverage_ledger"]
+                        if entry["claim_id"] in claim_ids or
+                        set(entry["dimension_ids"]) & dimension_ids]
             plan["projections"][stage] = view
         return plan
 
@@ -335,6 +530,1086 @@ class TargetExtensionCompareTests(unittest.TestCase):
             result[stage + "_probe_results"] = values
         return [result]
 
+    def _audit_v4_static(self, target, plan):
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "plan.json"
+            path.write_text(json.dumps(plan))
+            return _audit_plan(
+                path, target, {"target_plan_sha256": plan["sha256"]}, [], [],
+                expected_contract=PLAN_SCHEMA_V4)
+
+    def _v4_dynamic_fixture(self):
+        """Return a minimal completed task-routed v4 artifact join."""
+        target, plan = self._v4_plan()
+        content = target["text"]
+        source_span = {"version_id": "m1", "start": 0, "end": len(content),
+                       "quote": content}
+        atoms_ids = [probe["id"] for probe in plan["probes"]
+                     if "atoms" in probe["routes"]]
+        lineage_ids = [probe["id"] for probe in plan["probes"]
+                       if "lineage" in probe["routes"]]
+
+        def checks(ids, origin=False):
+            result = []
+            for index, probe_id in enumerate(ids):
+                uses_finding = index == 0 and not origin
+                result.append({"probe_id": probe_id,
+                    "status": "addressed" if uses_finding or origin else "absent",
+                    "finding_indexes": [0] if uses_finding else [],
+                    "origin_used": origin,
+                    "rationale": "Mapped only to retained material findings."})
+            return result
+
+        psi = [
+            {"sequence": 1, "material": "m1", "round": 1, "stage": "atoms",
+             "repair": 0, "status": "accepted", "probe_checks": checks(atoms_ids)},
+            {"sequence": 2, "material": "m1", "round": 1, "stage": "lineage",
+             "repair": 0, "status": "accepted", "probe_checks": checks(lineage_ids, True)},
+            {"sequence": 3, "material": "m1", "round": 1, "stage": "critic",
+             "repair": 0, "status": "accepted"},
+        ]
+        verification = [{"sequence": 1, "material": None, "round": 1,
+                         "stage": "judgement_critic", "repair": 0,
+                         "status": "accepted"}]
+
+        unresolved_probe = next(probe for probe in plan["probes"]
+                                if probe["kind"] == "source_independence")
+        record = {"round": 1, "gaps": [], "resolutions": [],
+                  "strict_probe_followups": True,
+                  "probe_stops": [{"probe_id": unresolved_probe["id"],
+                      "stage": "world", "reason": "no_source_lead",
+                      "rationale": "No independent-source locator is visible."}]}
+        for stage in ("evidence", "world"):
+            results = []
+            for probe in plan["probes"]:
+                if stage not in probe["routes"]:
+                    continue
+                unresolved = stage == "world" and probe["id"] == unresolved_probe["id"]
+                relation = ("exact" if probe["kind"] == "entity_identity" and
+                            not unresolved else
+                            "unresolved" if probe["kind"] in
+                            {"entity_identity", "exact_designation"} else "not_applicable")
+                results.append({"probe_id": probe["id"],
+                    "claim_id": probe["claim_id"], "stage": stage,
+                    "status": "unresolved" if unresolved else "supported",
+                    "basis": [] if unresolved else [source_span],
+                    "rationale": "Checked against the exact retained source span.",
+                    "referent_relation": relation})
+            record[stage + "_probe_results"] = results
+
+        origin = {"target_id": target["id"], "version_id": "m1"}
+        origin_resolution = {"gap_id": "origin:" + target["id"],
+                             "basis": [source_span],
+                             "rationale": "The retained material is the terminal source."}
+        analysis = {"fragments": [{"id": "fragment:one"}], "relations": [],
+                    "gaps": [], "resolutions": [origin_resolution],
+                    "origins": [origin], "notes": ""}
+        task = {"id": "origin:" + target["id"],
+                "question": "Find the producing record and evidenced lineage for: " +
+                            target["text"],
+                "stage": "provenance", "dimension": "auto", "blocking": True,
+                "target_id": None, "basis": [], "decision_impact": "",
+                "action": "search", "locator": None, "probe_id": None}
+        retrieval = [{"round": 1, "kind": "task_routed_fixed_corpus",
+                      "tasks": [task], "returned": ["m1"],
+                      "attribution": [{"version_id": "m1",
+                                       "task_ids": [task["id"]]}],
+                      "feedback": []}]
+        history_entry = {"revision": 1, "round": 1, "version_id": "m1",
+                         "duplicate": False, "revisit": False, "accepted": True,
+                         "analysis": analysis, "exclusion_reasons": [],
+                         "trigger_task_ids": [task["id"]], "trigger_probe_ids": []}
+        report = {"target": target, "retrieval_attribution_mode": "strict",
+                  "materials": [{"version_id": "m1"}],
+                  "eligible_version_ids": ["m1"], "analyses": {"m1": analysis},
+                  "analysis_history": [history_entry], "relations": [],
+                  "origins": [origin], "gaps": [], "gap_registry": [task],
+                  "resolutions": [origin_resolution], "verification_history": [record],
+                  "usage": {"rounds": 1, "verification_calls": 1},
+                  "observations": [{"version_id": "m1", "duplicate": False,
+                                    "eligible": True,
+                                    "trigger_task_ids": [task["id"]],
+                                    "trigger_probe_ids": []}],
+                  "operations": [
+                      {"sequence": 1, "round": 1, "action": "search",
+                       "tasks": [task], "limit": 1},
+                      {"sequence": 2, "round": 1,
+                       "action": "retrieval_attribution_validated", "version_id": "m1",
+                       "trigger_task_ids": [task["id"]], "trigger_probe_ids": []},
+                      {"sequence": 3, "round": 1, "action": "snapshot_saved",
+                       "version_id": "m1", "eligible": True},
+                      {"sequence": 4, "round": 1, "action": "decompose_started",
+                       "version_id": "m1", "trigger_task_ids": [task["id"]],
+                       "trigger_probe_ids": []},
+                      {"sequence": 5, "round": 1, "action": "decompose_completed",
+                       "version_id": "m1", "trigger_task_ids": [task["id"]],
+                       "trigger_probe_ids": []},
+                      {"sequence": 6, "round": 1,
+                       "action": "probe_followups_validated",
+                       "active": [], "stops": record["probe_stops"],
+                       "stopped_prior_gap_ids": [],
+                       "superseded_prior_gaps": []},
+                  ]}
+        materials = [{"version_id": "m1", "content": content}]
+        return target, plan, psi, verification, report, materials, retrieval
+
+    def _audit_v4_dynamic(self, fixture):
+        target, plan, psi, verification, report, materials, retrieval = fixture
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "plan.json"
+            path.write_text(json.dumps(plan))
+            return _audit_plan(path, target,
+                {"status": "completed", "target_plan_sha256": plan["sha256"]},
+                psi, verification, expected_contract=PLAN_SCHEMA_V4,
+                report_history=report["verification_history"], materials=materials,
+                report=report, retrieval=retrieval, strict_retrieval=True)
+
+    def test_v4_canonical_plan_covers_ledger_composition_actor_and_location(self):
+        target, plan = self._v4_plan()
+        result = self._audit_v4_static(target, plan)
+
+        self.assertEqual(PLAN_SCHEMA_V4, result["plan_contract"])
+        self.assertTrue(plan["coverage_ledger"])
+        self.assertEqual(1, sum(probe["kind"] == "claim_composition"
+                                for probe in plan["probes"]))
+        for kind in ("actor_role", "location"):
+            probe, = [item for item in plan["probes"] if item["kind"] == kind]
+            self.assertEqual(1, len(probe["dimension_ids"]))
+
+    def test_v4_rejects_rehashed_missing_or_forged_coverage_ledger(self):
+        target, original = self._v4_plan()
+        variants = {}
+        missing = deepcopy(original)
+        missing["coverage_ledger"].pop()
+        variants["missing"] = missing
+        forged = deepcopy(original)
+        forged["coverage_ledger"][0]["segment_id"] = "v4:segment:forged"
+        variants["forged"] = forged
+
+        for name, candidate in variants.items():
+            with self.subTest(name=name):
+                self._rehash(candidate)
+                with self.assertRaisesRegex(ValueError, "coverage|segment"):
+                    self._audit_v4_static(target, candidate)
+
+    def test_v4_rejects_rehashed_noncanonical_question_and_impact(self):
+        target, original = self._v4_plan()
+        variants = {}
+        question = deepcopy(original)
+        next(item for item in question["probes"]
+             if item["kind"] == "entity_identity")["question"] = (
+                 "Did the agency perform the delivery action?")
+        variants["question"] = (question, "question.*canonical")
+        impact = deepcopy(original)
+        next(item for item in impact["probes"]
+             if item["kind"] == "actor_role")["decision_impact"] = (
+                 "A generic mismatch might matter.")
+        variants["impact"] = (impact, "impact.*canonical")
+
+        for name, (candidate, message) in variants.items():
+            with self.subTest(name=name):
+                self._rehash(candidate)
+                with self.assertRaisesRegex(ValueError, message):
+                    self._audit_v4_static(target, candidate)
+
+    def test_v4_rejects_missing_composition_and_merged_actor_location_bindings(self):
+        target, original = self._v4_plan()
+        missing = deepcopy(original)
+        missing["probes"] = [probe for probe in missing["probes"]
+                             if probe["kind"] != "claim_composition"]
+        self._rehash(missing)
+        with self.assertRaisesRegex(ValueError, "composition|exactly cover|required"):
+            self._audit_v4_static(target, missing)
+
+        claim = original["claims"][0]
+        extra_ids = {
+            "actor_role": next(item["id"] for item in claim["dimensions"]
+                               if item["kind"] == "predicate"),
+            "location": next(item["id"] for item in claim["dimensions"]
+                             if item["kind"] == "time"),
+        }
+        for kind, extra_id in extra_ids.items():
+            with self.subTest(kind=kind):
+                merged = deepcopy(original)
+                probe = next(item for item in merged["probes"]
+                             if item["kind"] == kind)
+                probe["dimension_ids"] = sorted([*probe["dimension_ids"], extra_id])
+                probe["id"] = target["id"] + ":probe:" + _canonical_digest([
+                    merged["target_signature"], probe["claim_id"],
+                    probe["kind"], *probe["dimension_ids"]])[:20]
+                self._rehash(merged)
+                with self.assertRaisesRegex(
+                        ValueError, "singleton|binding|exactly cover|required"):
+                    self._audit_v4_static(target, merged)
+
+    def test_v4_rejects_rehashed_context_only_conjunct_omission(self):
+        target = {"id": "conj", "text":
+                  "Alpha launched Orion and Beta cancelled Nova.",
+                  "as_of": "2026-09-05T00:00:00Z", "source_version_id": "m1",
+                  "assessment_mode": "evidence", "evidence_scope": ["m1"]}
+
+        def hide_missing(entry, _dimensions):
+            if entry["status"] == "suspected_missing":
+                entry.update(status="context_only", dimension_ids=[])
+            return entry
+
+        forged = self._manual_v4_plan(target, [{"quote": target["text"],
+            "role": "main", "dimensions": [
+                ("subject", "Alpha"), ("predicate", "launched")]}],
+            ledger_override=hide_missing)
+        with self.assertRaisesRegex(ValueError, "obvious conjunct|separately anchored predicate"):
+            self._audit_v4_static(target, forged)
+
+    def test_v4_month_has_time_precedence_and_rejects_rehashed_location(self):
+        target = {"id": "month", "text": "Revenue rose in March.",
+                  "as_of": "2026-09-05T00:00:00Z", "source_version_id": "m1",
+                  "assessment_mode": "evidence", "evidence_scope": ["m1"]}
+        correct = self._manual_v4_plan(target, [{"quote": target["text"],
+            "role": "main", "dimensions": [
+                ("subject", "Revenue"), ("predicate", "rose"), ("time", "March")]}])
+        self.assertEqual(PLAN_SCHEMA_V4,
+                         self._audit_v4_static(target, correct)["plan_contract"])
+        date_entry, = [item for item in correct["coverage_ledger"]
+                       if item["cue_kind"] == "date"]
+        time_id, = date_entry["dimension_ids"]
+        self.assertEqual("time", next(dimension["kind"] for dimension in
+            correct["claims"][0]["dimensions"] if dimension["id"] == time_id))
+
+        def forge_location(entry, dimensions):
+            if entry["cue_kind"] == "date":
+                location_id = next(identifier for identifier, dimension in dimensions.items()
+                                   if dimension["kind"] == "location")
+                entry.update(status="covered_by_dimension", dimension_ids=[location_id])
+            return entry
+
+        wrong = self._manual_v4_plan(target, [{"quote": target["text"],
+            "role": "main", "dimensions": [
+                ("subject", "Revenue"), ("predicate", "rose"),
+                ("location", "in March")]}], ledger_override=forge_location)
+        with self.assertRaisesRegex(ValueError, "compatible dimension"):
+            self._audit_v4_static(target, wrong)
+
+    def test_v4_recomputes_attribution_boundary_and_parent_orientation(self):
+        proper_target = {"id": "said", "text": "NOAA said that temperatures rose.",
+                         "as_of": "2026-09-05T00:00:00Z",
+                         "source_version_id": "m1", "assessment_mode": "evidence",
+                         "evidence_scope": ["m1"]}
+        proper = self._manual_v4_plan(proper_target, [
+            {"quote": "NOAA said that", "role": "attribution",
+             "dimensions": [("subject", "NOAA"), ("predicate", "said")]},
+            {"quote": "temperatures rose.", "role": "attributed_content", "parent": 0,
+             "dimensions": [("subject", "temperatures"), ("predicate", "rose")]},
+        ], logic="attribution")
+        self.assertEqual(PLAN_SCHEMA_V4,
+                         self._audit_v4_static(proper_target, proper)["plan_contract"])
+
+        reversed_plan = self._manual_v4_plan(proper_target, [
+            {"quote": "NOAA said that", "role": "attributed_content", "parent": 1,
+             "dimensions": [("subject", "NOAA"), ("predicate", "said")]},
+            {"quote": "temperatures rose.", "role": "attribution",
+             "dimensions": [("subject", "temperatures"), ("predicate", "rose")]},
+        ], logic="attribution")
+        with self.assertRaisesRegex(ValueError, "reverse|reporting cue owner"):
+            self._audit_v4_static(proper_target, reversed_plan)
+
+        according = {"id": "according", "text":
+                     "According to NOAA, temperatures rose.",
+                     "as_of": "2026-09-05T00:00:00Z", "source_version_id": "m1",
+                     "assessment_mode": "evidence", "evidence_scope": ["m1"]}
+
+        def hide_missing(entry, _dimensions):
+            if entry["status"] == "suspected_missing":
+                entry.update(status="context_only", dimension_ids=[])
+            return entry
+
+        flattened = self._manual_v4_plan(according, [{"quote": according["text"],
+            "role": "main", "dimensions": [
+                ("subject", "temperatures"), ("predicate", "rose")]}],
+            ledger_override=hide_missing)
+        with self.assertRaisesRegex(ValueError, "explicit attribution|flattened"):
+            self._audit_v4_static(according, flattened)
+
+    def test_v4_dynamic_audits_join_findings_followups_and_task_returns(self):
+        result = self._audit_v4_dynamic(self._v4_dynamic_fixture())
+        audit = result["v4_audit"]
+        self.assertEqual(audit["coverage_ledger"]["expected_segments"],
+                         audit["coverage_ledger"]["ledger_entries"])
+        self.assertEqual(2, audit["material_probe_ledger"]["stage_calls"])
+        self.assertEqual(audit["material_probe_ledger"]["expected_probe_checks"],
+                         audit["material_probe_ledger"]["probe_checks"])
+        self.assertEqual(1, audit["material_probe_ledger"]["findings"])
+        self.assertEqual(1, audit["material_probe_ledger"]["referenced_findings"])
+        self.assertEqual(1, audit["strict_followups"]["unresolved_probe_slots"])
+        self.assertEqual(1, audit["strict_followups"]["allowed_stops"])
+        self.assertEqual(1, audit["retrieval_attribution"]["provider_returns"])
+        self.assertEqual(1, audit["retrieval_attribution"]["valid_task_links"])
+
+    def test_v4_rejects_material_probe_ledger_tampering(self):
+        variants = {}
+        missing = self._v4_dynamic_fixture()
+        missing[2][0]["probe_checks"].pop()
+        variants["missing projected check"] = (missing, "exactly cover")
+        invalid_index = self._v4_dynamic_fixture()
+        check = next(item for item in invalid_index[2][0]["probe_checks"]
+                     if item["finding_indexes"])
+        check["finding_indexes"] = [1]
+        variants["invalid finding index"] = (invalid_index, "finding index")
+        origin = self._v4_dynamic_fixture()
+        origin[2][0]["probe_checks"][0]["origin_used"] = True
+        variants["atoms origin"] = (origin, "atoms.*origin")
+        no_lineage = self._v4_dynamic_fixture()
+        no_lineage[2].pop(1)
+        no_lineage[2][1]["sequence"] = 2
+        variants["stage call is not coverage"] = (no_lineage, "lacks final atoms or lineage")
+        for name, (fixture, message) in variants.items():
+            with self.subTest(name=name):
+                with self.assertRaisesRegex(ValueError, message):
+                    self._audit_v4_dynamic(fixture)
+
+    def test_v4_rejects_strict_followup_tampering(self):
+        missing = self._v4_dynamic_fixture()
+        missing[4]["verification_history"][0]["probe_stops"] = []
+        with self.assertRaisesRegex(ValueError, "exactly one task or allowed stop"):
+            self._audit_v4_dynamic(missing)
+
+        duplicate = self._v4_dynamic_fixture()
+        stop = duplicate[4]["verification_history"][0]["probe_stops"][0]
+        duplicate[4]["verification_history"][0]["probe_stops"].append(deepcopy(stop))
+        with self.assertRaisesRegex(ValueError, "repeats a probe slot"):
+            self._audit_v4_dynamic(duplicate)
+
+        invalid_stop = self._v4_dynamic_fixture()
+        invalid_stop[4]["verification_history"][0]["probe_stops"][0]["reason"] = (
+            "corpus_exhausted")
+        with self.assertRaisesRegex(ValueError, "allowed unresolved-probe stop"):
+            self._audit_v4_dynamic(invalid_stop)
+
+    def test_v4_accepts_nonblocking_gap_and_rejects_gap_field_tampering(self):
+        def fixture_with_gap():
+            fixture = self._v4_dynamic_fixture()
+            target, plan, _, _, report, materials, _ = fixture
+            record = report["verification_history"][0]
+            probe = next(item for item in plan["probes"]
+                         if item["kind"] == "source_independence")
+            source = {"version_id": "m1", "start": 0,
+                      "end": len(materials[0]["content"]),
+                      "quote": materials[0]["content"]}
+            gap = {"id": "world-followup", "question": probe["question"],
+                   "stage": "verification", "dimension": "world",
+                   "blocking": False, "target_id": target["id"], "basis": [source],
+                   "decision_impact": probe["decision_impact"], "action": "search",
+                   "locator": "Agency independent parcels", "probe_id": probe["id"]}
+            record.update(verdict="supported", evidence_verdict="supported",
+                          world_verdict="supported", gaps=[gap], probe_stops=[])
+            report["gaps"] = [gap]
+            report["gap_registry"].append(gap)
+            followup_event = next(item for item in report["operations"]
+                                  if item["action"] == "probe_followups_validated")
+            followup_event.update(
+                active=[{"stage": "world", "probe_id": probe["id"],
+                         "gap_id": gap["id"], "blocking": False}],
+                stops=[], stopped_prior_gap_ids=[], superseded_prior_gaps=[])
+            return fixture
+
+        result = self._audit_v4_dynamic(fixture_with_gap())
+        self.assertEqual(1, result["v4_audit"]["strict_followups"]["task_followups"])
+
+        variants = {}
+        blocking = fixture_with_gap()
+        blocking[4]["verification_history"][0]["gaps"][0]["blocking"] = True
+        variants["blocking"] = (blocking, "invalid probe ownership")
+        question = fixture_with_gap()
+        question[4]["verification_history"][0]["gaps"][0]["question"] = "Other question?"
+        variants["question"] = (question, "canonical probe question")
+        impact = fixture_with_gap()
+        impact[4]["verification_history"][0]["gaps"][0]["decision_impact"] = (
+            "Arbitrary impact.")
+        variants["impact"] = (impact, "canonical probe question or impact")
+        locator = fixture_with_gap()
+        locator[4]["verification_history"][0]["gaps"][0]["locator"] = "banana aliens"
+        variants["locator"] = (locator, "unrelated to its probe and basis")
+        for name, (fixture, message) in variants.items():
+            with self.subTest(name=name):
+                with self.assertRaisesRegex(ValueError, message):
+                    self._audit_v4_dynamic(fixture)
+
+    def test_v4_rejects_round_one_basis_from_round_two_material(self):
+        fixture = self._v4_dynamic_fixture()
+        future_content = "Future-only corroborating record."
+        fixture[5].append({"version_id": "m2", "content": future_content})
+        fixture[4]["analysis_history"].append({
+            "revision": 2, "round": 2, "version_id": "m2", "accepted": True})
+        fixture[6].append({"round": 2, "returned": ["m2"]})
+        result = next(item for item in
+                      fixture[4]["verification_history"][0]["world_probe_results"]
+                      if item["status"] == "supported" and
+                      next(probe for probe in fixture[1]["probes"]
+                           if probe["id"] == item["probe_id"])["kind"] == "actor_role")
+        result["basis"] = [{"version_id": "m2", "start": 0,
+                            "end": len(future_content), "quote": future_content}]
+        with self.assertRaisesRegex(ValueError, "outside the stage evidence scope"):
+            self._audit_v4_dynamic(fixture)
+
+    def test_v4_world_source_probes_require_direct_independent_terminal_roots(self):
+        target = {"id": "roots", "source_version_id": "seed"}
+        report = {
+            "materials": [{"version_id": item} for item in ("seed", "r1", "r2")],
+            "eligible_version_ids": ["seed", "r1", "r2"],
+            "origins": [{"target_id": "roots", "version_id": "r1"},
+                        {"target_id": "roots", "version_id": "r2"}],
+            "relations": [
+                {"from_version": "seed", "to_version": "r1",
+                 "kind": "cites", "status": "direct"},
+                {"from_version": "seed", "to_version": "r2",
+                 "kind": "derives", "status": "direct"},
+            ],
+        }
+
+        def span(version_id):
+            return {"version_id": version_id, "start": 0, "end": 1, "quote": "x"}
+
+        independence = {"kind": "source_independence"}
+        supported = {"status": "supported", "basis": [span("r1"), span("r2")]}
+        self.assertIsNone(_audit_world_provenance_probe(
+            independence, supported, report, target, "independence"))
+
+        single = deepcopy(supported)
+        single["basis"] = [span("r1")]
+        with self.assertRaisesRegex(ValueError, "fewer than two sources"):
+            _audit_world_provenance_probe(independence, single, report, target, "single")
+
+        disconnected = deepcopy(report)
+        disconnected["relations"].pop()
+        with self.assertRaisesRegex(ValueError, "fewer than two sources"):
+            _audit_world_provenance_probe(
+                independence, supported, disconnected, target, "disconnected")
+
+        copy_chain = deepcopy(report)
+        copy_chain["materials"].extend([{"version_id": "a"}, {"version_id": "b"}])
+        copy_chain["eligible_version_ids"].extend(["a", "b"])
+        copy_chain["relations"].extend([
+            {"from_version": "a", "to_version": "r1",
+             "kind": "reprints", "status": "direct"},
+            {"from_version": "b", "to_version": "a",
+             "kind": "quotes", "status": "direct"},
+        ])
+        copied_basis = {"status": "supported", "basis": [span("a"), span("b")]}
+        with self.assertRaisesRegex(ValueError, "shares one derivation component"):
+            _audit_world_provenance_probe(
+                independence, copied_basis, copy_chain, target, "copied")
+
+        broken_support = deepcopy(copy_chain)
+        broken_support["materials"].append({"version_id": "orphan"})
+        broken_support["eligible_version_ids"].append("orphan")
+        broken_basis = {"status": "supported",
+                        "basis": [span("r1"), span("orphan")]}
+        with self.assertRaisesRegex(ValueError, "derivation component"):
+            _audit_world_provenance_probe(
+                independence, broken_basis, broken_support, target, "broken")
+
+        lineage = {"kind": "source_lineage"}
+        no_path = deepcopy(report)
+        no_path["relations"] = []
+        with self.assertRaisesRegex(ValueError, "confirmed terminal path"):
+            _audit_world_provenance_probe(
+                lineage, {"status": "supported", "basis": [span("seed")]},
+                no_path, target, "lineage")
+
+    def test_v4_rejects_retrieval_attribution_and_outcome_tampering(self):
+        variants = {}
+        unknown = self._v4_dynamic_fixture()
+        unknown[6][0]["attribution"][0]["task_ids"] = ["not-issued"]
+        variants["unknown task link"] = (unknown, "issued-task attribution")
+        mismatched = self._v4_dynamic_fixture()
+        mismatched[4]["analysis_history"][0]["trigger_task_ids"] = ["not-issued"]
+        variants["report cross-check"] = (mismatched, "disagrees across provider and report")
+        for name, (fixture, message) in variants.items():
+            with self.subTest(name=name):
+                with self.assertRaisesRegex(ValueError, message):
+                    self._audit_v4_dynamic(fixture)
+
+        no_outcome = self._v4_dynamic_fixture()
+        no_outcome[6][0]["returned"] = []
+        no_outcome[6][0]["attribution"] = []
+        with self.assertRaisesRegex(ValueError, "hit-or-exhausted"):
+            _audit_retrieval_attribution(
+                no_outcome[1], no_outcome[6], no_outcome[4], [(1, "m1")],
+                strict=True, required=True)
+
+    def test_v4_rejects_missing_reversed_or_mismatched_snapshot_chain(self):
+        variants = {}
+        missing = self._v4_dynamic_fixture()
+        missing[4]["operations"] = [item for item in missing[4]["operations"]
+                                    if item["action"] != "snapshot_saved"]
+        for sequence, item in enumerate(missing[4]["operations"], 1):
+            item["sequence"] = sequence
+        variants["missing"] = missing
+
+        reversed_chain = self._v4_dynamic_fixture()
+        operations = reversed_chain[4]["operations"]
+        saved = next(item for item in operations if item["action"] == "snapshot_saved")
+        operations.remove(saved)
+        completed_index = next(index for index, item in enumerate(operations)
+                               if item["action"] == "decompose_completed")
+        operations.insert(completed_index, saved)
+        for sequence, item in enumerate(operations, 1):
+            item["sequence"] = sequence
+        variants["reversed"] = reversed_chain
+
+        mismatched = self._v4_dynamic_fixture()
+        next(item for item in mismatched[4]["operations"]
+             if item["action"] == "snapshot_saved")["round"] = 2
+        variants["wrong round"] = mismatched
+
+        for name, fixture in variants.items():
+            with self.subTest(name=name):
+                with self.assertRaisesRegex(ValueError, "save/decompose|precede save"):
+                    self._audit_v4_dynamic(fixture)
+
+    def test_v4_two_round_active_replay_accepts_provenance_and_probe_tasks(self):
+        target, plan = self._v4_plan()
+        origin = {"id": "origin:" + target["id"],
+                  "question": "Find the producing record and evidenced lineage for: " +
+                              target["text"],
+                  "stage": "provenance", "dimension": "auto", "blocking": True,
+                  "target_id": None, "basis": [], "decision_impact": "",
+                  "action": "search", "locator": None, "probe_id": None}
+        source = {"version_id": "m1", "start": 0, "end": len(target["text"]),
+                  "quote": target["text"]}
+        locator = "Agency record"
+        upstream_id = "m1:upstream:" + hashlib.sha256(json.dumps(
+            [target["id"], "search", locator], sort_keys=True,
+            ensure_ascii=False).encode()).hexdigest()[:20]
+        upstream = {"id": upstream_id,
+                    "question": "Locate the explicitly cited upstream: " + locator,
+                    "stage": "provenance", "dimension": "provenance",
+                    "blocking": True, "target_id": target["id"], "basis": [source],
+                    "decision_impact": "The upstream record determines lineage.",
+                    "action": "search", "locator": locator, "probe_id": None}
+        probe = next(item for item in plan["probes"]
+                     if item["kind"] == "source_independence")
+        follow = {"id": "verify:test", "question": probe["question"],
+                  "stage": "verification", "dimension": "world", "blocking": True,
+                  "target_id": target["id"], "basis": [source],
+                  "decision_impact": probe["decision_impact"], "action": "search",
+                  "locator": "Agency independent record", "probe_id": probe["id"]}
+        resolution = {"gap_id": origin["id"], "basis": [source],
+                      "rationale": "The second record closes the origin task."}
+        empty = {"fragments": [], "relations": [], "gaps": [], "resolutions": [],
+                 "origins": [], "notes": ""}
+        declared = {"id": "declared:one", "from_version": "m1",
+                    "to_version": None, "kind": "cites", "status": "declared",
+                    "basis": [source], "rationale": "The source names an upstream.",
+                    "upstream_locator": locator}
+        first_analysis = {**empty, "relations": [declared], "gaps": [upstream]}
+        second_analysis = {**empty, "resolutions": [resolution]}
+        first_record = {"round": 1, "verdict": "unresolved",
+                        "evidence_verdict": "supported", "world_verdict": "unresolved",
+                        "strict_probe_followups": True,
+                        "evidence_probe_results": [],
+                        "world_probe_results": [{"probe_id": probe["id"],
+                                                  "status": "unresolved"}],
+                        "gaps": [follow], "resolutions": [], "probe_stops": []}
+        second_record = {"round": 2, "verdict": "supported",
+                         "evidence_verdict": "supported", "world_verdict": "supported",
+                         "strict_probe_followups": True,
+                         "evidence_probe_results": [],
+                         "world_probe_results": [{"probe_id": probe["id"],
+                                                   "status": "supported"}],
+                         "gaps": [], "resolutions": [], "probe_stops": []}
+        round_one = {"round": 1, "kind": "task_routed_fixed_corpus",
+                     "tasks": [origin], "returned": ["m1"],
+                     "attribution": [{"version_id": "m1",
+                                      "task_ids": [origin["id"]]}], "feedback": []}
+        feedback = {"task_id": origin["id"], "probe_id": None,
+                    "status": "corpus_exhausted", "detail": "origin already returned"}
+        round_two_tasks = [origin, upstream, follow]
+        round_two = {"round": 2, "kind": "task_routed_fixed_corpus",
+                     "tasks": round_two_tasks, "returned": ["m2"],
+                     "attribution": [{"version_id": "m2",
+                                      "task_ids": [upstream["id"], follow["id"]]}],
+                     "feedback": [feedback]}
+        report = {"target": target, "retrieval_attribution_mode": "strict",
+                  "analysis_history": [
+                      {"revision": 1, "round": 1, "version_id": "m1",
+                       "accepted": True, "duplicate": False, "revisit": False,
+                       "analysis": first_analysis, "trigger_task_ids": [origin["id"]],
+                       "trigger_probe_ids": []},
+                      {"revision": 2, "round": 2, "version_id": "m2",
+                       "accepted": True, "duplicate": False, "revisit": False,
+                       "analysis": second_analysis,
+                       "trigger_task_ids": [upstream["id"], follow["id"]],
+                       "trigger_probe_ids": [probe["id"]]},
+                      {"revision": 3, "round": 2, "version_id": "m1",
+                       "accepted": True, "duplicate": True, "revisit": True,
+                       "analysis": empty}],
+                  "verification_history": [first_record, second_record],
+                  "gap_registry": [origin, upstream, follow], "gaps": [],
+                  "observations": [
+                      {"version_id": "m1", "trigger_task_ids": [origin["id"]],
+                       "trigger_probe_ids": []},
+                      {"version_id": "m2",
+                       "trigger_task_ids": [upstream["id"], follow["id"]],
+                       "trigger_probe_ids": [probe["id"]]}],
+                  "operations": []}
+        operations = [
+            {"round": 1, "action": "search", "tasks": [origin]},
+            {"round": 1, "action": "retrieval_attribution_validated",
+             "version_id": "m1", "trigger_task_ids": [origin["id"]],
+             "trigger_probe_ids": []},
+            {"round": 1, "action": "snapshot_saved", "version_id": "m1",
+             "eligible": True},
+            {"round": 1, "action": "decompose_started", "version_id": "m1",
+             "trigger_task_ids": [origin["id"]], "trigger_probe_ids": []},
+            {"round": 1, "action": "decompose_completed", "version_id": "m1",
+             "trigger_task_ids": [origin["id"]], "trigger_probe_ids": []},
+            {"round": 1, "action": "verification_started"},
+            {"round": 1, "action": "probe_followups_validated",
+             "active": [{"stage": "world", "probe_id": probe["id"],
+                         "gap_id": follow["id"], "blocking": True}],
+             "stops": [], "stopped_prior_gap_ids": [],
+             "superseded_prior_gaps": []},
+            {"round": 2, "action": "search", "tasks": round_two_tasks},
+            {"round": 2, "action": "retrieval_attribution_validated",
+             "version_id": "m2", "trigger_task_ids": [upstream["id"], follow["id"]],
+             "trigger_probe_ids": [probe["id"]]},
+            {"round": 2, "action": "snapshot_saved", "version_id": "m2",
+             "eligible": True},
+            {"round": 2, "action": "decompose_started", "version_id": "m2",
+             "trigger_task_ids": [upstream["id"], follow["id"]],
+             "trigger_probe_ids": [probe["id"]]},
+            {"round": 2, "action": "decompose_completed", "version_id": "m2",
+             "trigger_task_ids": [upstream["id"], follow["id"]],
+             "trigger_probe_ids": [probe["id"]]},
+            {"round": 2, "action": "decompose_started", "version_id": "m1"},
+            {"round": 2, "action": "decompose_completed", "version_id": "m1"},
+            {"round": 2, "action": "retrieval_feedback", "feedback": feedback},
+            {"round": 2, "action": "verification_started"},
+            {"round": 2, "action": "probe_followups_validated",
+             "active": [], "stops": [], "stopped_prior_gap_ids": [],
+             "superseded_prior_gaps": []},
+        ]
+        for sequence, item in enumerate(operations, 1):
+            item["sequence"] = sequence
+        report["operations"] = operations
+        metrics = _audit_retrieval_attribution(
+            plan, [round_one, round_two], report,
+            [(1, "m1"), (2, "m2"), (2, "m1")], strict=True, required=True)
+        self.assertEqual((1, 1), (metrics["later_probe_owned_tasks"],
+                                  metrics["later_probe_owned_hit_tasks"]))
+
+        stale = deepcopy(report)
+        stale["analysis_history"].insert(1, {
+            "revision": 2, "round": 1, "version_id": "m1", "accepted": True,
+            "duplicate": True, "revisit": True, "analysis": empty})
+        with self.assertRaisesRegex(ValueError, "replayed active gap set"):
+            _audit_retrieval_attribution(
+                plan, [round_one, round_two], stale,
+                [(1, "m1"), (2, "m2"), (2, "m1")], strict=True, required=True)
+
+    def test_v4_replays_exact_probe_slot_supersession_and_forbids_reissue(self):
+        target = {"id": "supersede", "text": "Alpha changed.",
+                  "source_version_id": "m1"}
+        source = {"version_id": "m1", "start": 0, "end": 1, "quote": "A"}
+
+        def gap(identifier, locator):
+            return {"id": identifier, "question": "Did Alpha change?",
+                    "stage": "verification", "dimension": "world",
+                    "blocking": True, "target_id": target["id"], "basis": [source],
+                    "decision_impact": "This decides the claim.", "action": "search",
+                    "locator": locator, "probe_id": "probe:change"}
+
+        old = gap("follow:old", "initial source lead")
+        replacement = gap("follow:new", "better source lead")
+        result = {"probe_id": "probe:change", "status": "unresolved"}
+        empty_results = {"evidence_probe_results": [],
+                         "world_probe_results": [result],
+                         "world_verdict": "unresolved",
+                         "strict_probe_followups": True,
+                         "resolutions": [], "probe_stops": []}
+        first = {"round": 1, **empty_results, "gaps": [old]}
+        second = {"round": 2, **empty_results, "gaps": [replacement]}
+        origin_resolution = {"gap_id": "origin:" + target["id"],
+                             "basis": [source], "rationale": "Located."}
+        analysis = {"gaps": [], "resolutions": [origin_resolution],
+                    "relations": [],
+                    "origins": [{"target_id": target["id"], "version_id": "m1"}]}
+        supersession = [{"stage": "world", "probe_id": "probe:change",
+                         "prior_gap_id": old["id"],
+                         "replacement_gap_id": replacement["id"]}]
+        report = {
+            "analysis_history": [{"round": 1, "version_id": "m1",
+                                  "accepted": True, "analysis": analysis}],
+            "verification_history": [first, second],
+            "operations": [
+                {"sequence": 1, "round": 1,
+                 "action": "probe_followups_validated",
+                 "active": [{"stage": "world", "probe_id": "probe:change",
+                             "gap_id": old["id"], "blocking": True}],
+                 "stops": [], "stopped_prior_gap_ids": [],
+                 "superseded_prior_gaps": []},
+                {"sequence": 2, "round": 2,
+                 "action": "probe_followups_validated",
+                 "active": [{"stage": "world", "probe_id": "probe:change",
+                             "gap_id": replacement["id"], "blocking": True}],
+                 "stops": [], "stopped_prior_gap_ids": [],
+                 "superseded_prior_gaps": supersession},
+            ],
+        }
+        expected, final_active = _active_retrieval_tasks_by_round(report, target, 3)
+        self.assertEqual([old["id"]], [item["id"] for item in expected[2]])
+        self.assertEqual([replacement["id"]], [item["id"] for item in expected[3]])
+        self.assertEqual([replacement["id"]], [item["id"] for item in final_active])
+
+        forged = deepcopy(report)
+        forged["operations"][1]["superseded_prior_gaps"][0]["prior_gap_id"] = (
+            "follow:forged")
+        with self.assertRaisesRegex(ValueError, "supersession ledger disagrees"):
+            _active_retrieval_tasks_by_round(forged, target, 3)
+
+        missing = deepcopy(report)
+        missing["operations"].pop()
+        with self.assertRaisesRegex(ValueError, "exact verifier supersession events"):
+            _active_retrieval_tasks_by_round(missing, target, 3)
+
+        reissued = deepcopy(report)
+        reissued["verification_history"].append(
+            {"round": 3, **empty_results, "gaps": [old]})
+        reissued["operations"].append(
+            {"sequence": 3, "round": 3, "action": "probe_followups_validated",
+             "active": [{"stage": "world", "probe_id": "probe:change",
+                         "gap_id": old["id"], "blocking": True}],
+             "stops": [], "stopped_prior_gap_ids": [],
+             "superseded_prior_gaps": [{
+                 "stage": "world", "probe_id": "probe:change",
+                 "prior_gap_id": replacement["id"],
+                 "replacement_gap_id": old["id"],
+             }]})
+        with self.assertRaisesRegex(ValueError, "reissues a superseded"):
+            _active_retrieval_tasks_by_round(reissued, target, 3)
+
+    def test_v4_probe_delta_requires_probe_owned_novel_receipt_and_decisive_change(self):
+        target, plan = self._v4_plan()
+        probe = next(item for item in plan["probes"] if item["kind"] == "actor_role")
+        m1 = {"version_id": "m1", "start": 0, "end": 1, "quote": "a"}
+        m2 = {"version_id": "m2", "start": 0, "end": 1, "quote": "b"}
+
+        def result(status, basis):
+            return {"probe_id": probe["id"], "status": status, "basis": basis,
+                    "referent_relation": "not_applicable"}
+
+        history = [
+            {"round": 1, "verdict": "supported", "world_verdict": "supported",
+             "evidence_probe_results": [],
+             "world_probe_results": [result("supported", [m1])]},
+            {"round": 2, "verdict": "contradicted", "world_verdict": "contradicted",
+             "evidence_probe_results": [],
+             "world_probe_results": [result("contradicted", [m2])]},
+        ]
+        origin = {"id": "origin", "probe_id": None, "action": "search",
+                  "dimension": "provenance"}
+        task = {"id": "probe-task", "probe_id": probe["id"], "action": "search",
+                "dimension": "world"}
+        retrieval = [
+            {"round": 1, "tasks": [origin], "returned": ["m1"],
+             "attribution": [{"version_id": "m1", "task_ids": ["origin"]}]},
+            {"round": 2, "tasks": [task], "returned": ["m2"],
+             "attribution": [{"version_id": "m2", "task_ids": ["probe-task"]}]},
+        ]
+        empty = {"relations": [], "origins": []}
+        report = {"analysis_history": [
+            {"round": 1, "version_id": "m1", "accepted": True,
+             "revisit": False, "analysis": empty,
+             "trigger_task_ids": ["origin"], "trigger_probe_ids": []},
+            {"round": 2, "version_id": "m2", "accepted": True,
+             "revisit": False, "analysis": empty,
+             "trigger_task_ids": ["probe-task"], "trigger_probe_ids": [probe["id"]]},
+        ]}
+        row = {"prediction": "false", "checkpoints": [
+            {"round": 1, "decision": "true"}, {"round": 2, "decision": "false"}]}
+        psi = [{"round": 2, "material": "m2", "stage": "atoms",
+                "status": "accepted", "probe_checks": [
+                    {"probe_id": probe["id"], "status": "addressed"}]}]
+        metrics = _audit_probe_delta_attribution(
+            plan, history, retrieval, report, target, row, strict=True, required=True,
+            psi=psi)
+        self.assertEqual(1, metrics["semantic_deltas"])
+        self.assertEqual(1, metrics["traced_semantic_deltas"])
+        self.assertEqual(1, metrics["probe_owned_novel_second_pass_cases"])
+        self.assertEqual(1, metrics["label_changes_with_decisive_delta"])
+
+        no_trigger = deepcopy(retrieval)
+        no_trigger[1]["tasks"][0]["probe_id"] = None
+        with self.assertRaisesRegex(ValueError, "not attributable"):
+            _audit_probe_delta_attribution(
+                plan, history, no_trigger, report, target, row, strict=True, required=True,
+                psi=psi)
+        wrong_layer = deepcopy(retrieval)
+        wrong_layer[1]["tasks"][0]["dimension"] = "evidence"
+        with self.assertRaisesRegex(ValueError, "not attributable"):
+            _audit_probe_delta_attribution(
+                plan, history, wrong_layer, report, target, row, strict=True,
+                required=True, psi=psi)
+        old_basis = deepcopy(history)
+        old_basis[1]["world_probe_results"][0]["basis"] = [m1]
+        with self.assertRaisesRegex(ValueError, "not attributable"):
+            _audit_probe_delta_attribution(
+                plan, old_basis, retrieval, report, target, row, strict=True, required=True,
+                psi=psi)
+
+        absent = deepcopy(psi)
+        absent[0]["probe_checks"][0]["status"] = "absent"
+        with self.assertRaisesRegex(ValueError, "not attributable"):
+            _audit_probe_delta_attribution(
+                plan, history, retrieval, report, target, row, strict=True, required=True,
+                psi=absent)
+
+        drift = deepcopy(history)
+        drift[1]["world_probe_results"][0]["status"] = "supported"
+        drift[1]["world_verdict"] = drift[1]["verdict"] = "supported"
+        drift_metrics = _audit_probe_delta_attribution(
+            plan, drift, retrieval, report, target,
+            {"prediction": "true", "checkpoints": [{"round": 1, "decision": "true"}]},
+            strict=True, required=True, psi=psi)
+        self.assertEqual((0, 1), (drift_metrics["semantic_deltas"],
+                                  drift_metrics["basis_drifts"]))
+
+        label_only = deepcopy(drift)
+        with self.assertRaisesRegex(ValueError, "public label change|counterfactual"):
+            _audit_probe_delta_attribution(
+                plan, label_only, retrieval, report, target, row,
+                strict=True, required=True, psi=psi)
+
+        ineligible_target = {**target, "assessment_mode": "evidence",
+                             "evidence_scope": ["m2"]}
+        ineligible_history = [
+            {"round": 1, "evidence_verdict": "unresolved",
+             "evidence_probe_results": [result("unresolved", [])],
+             "world_probe_results": []},
+            {"round": 2, "evidence_verdict": "supported",
+             "evidence_probe_results": [result("supported", [m2])],
+             "world_probe_results": []},
+        ]
+        ineligible_retrieval = deepcopy(retrieval)
+        ineligible_retrieval[1]["tasks"][0]["dimension"] = "evidence"
+        ineligible_report = deepcopy(report)
+        ineligible_report["analysis_history"][1]["accepted"] = False
+        with self.assertRaisesRegex(ValueError, "aggregate disagrees"):
+            _audit_probe_delta_attribution(
+                plan, ineligible_history, ineligible_retrieval, ineligible_report,
+                ineligible_target, {"prediction": "unverifiable", "checkpoints": []},
+                strict=True, required=True, psi=psi)
+
+    def test_v4_graph_probe_delta_can_trace_a_novel_lineage_path(self):
+        target, plan = self._v4_plan()
+        probe = next(item for item in plan["probes"]
+                     if item["kind"] == "source_lineage")
+        base_probe = next(item for item in plan["probes"]
+                          if item["kind"] == "claim_composition")
+        base = {"probe_id": base_probe["id"], "status": "supported",
+                "basis": [{"version_id": "m1", "start": 0,
+                           "end": 1, "quote": "a"}],
+                "referent_relation": "not_applicable"}
+        prior = {"probe_id": probe["id"], "status": "unresolved", "basis": [],
+                 "referent_relation": "not_applicable"}
+        final = {**prior, "status": "supported",
+                 "basis": [{"version_id": "m2", "start": 0,
+                            "end": 1, "quote": "b"}]}
+        history = [
+            {"round": 1, "verdict": "unresolved", "world_verdict": "unresolved",
+             "evidence_probe_results": [], "world_probe_results": [base, prior]},
+            {"round": 2, "verdict": "supported", "world_verdict": "supported",
+             "evidence_probe_results": [], "world_probe_results": [base, final]},
+        ]
+        retrieval = [
+            {"round": 1, "tasks": [{"id": "origin", "probe_id": None,
+                                      "action": "search", "dimension": "provenance"}],
+             "returned": ["m1"],
+             "attribution": [{"version_id": "m1", "task_ids": ["origin"]}]},
+            {"round": 2, "tasks": [{"id": "upstream", "probe_id": probe["id"],
+                                      "action": "fetch", "dimension": "world"}],
+             "returned": ["m2"],
+             "attribution": [{"version_id": "m2", "task_ids": ["upstream"]}]},
+        ]
+        report = {"analysis_history": [
+            {"round": 1, "version_id": "m1", "accepted": True,
+             "revisit": False, "analysis": {"relations": [], "origins": []},
+             "trigger_task_ids": ["origin"], "trigger_probe_ids": []},
+            {"round": 2, "version_id": "m2", "accepted": True,
+             "revisit": False, "analysis": {"relations": [], "origins": [
+                 {"target_id": target["id"], "version_id": "m2"}]},
+             "trigger_task_ids": ["upstream"], "trigger_probe_ids": []},
+            {"round": 2, "version_id": "m1", "accepted": True,
+             "revisit": True, "analysis": {"relations": [
+                 {"from_version": "m1", "to_version": "m2", "kind": "cites",
+                  "status": "direct"}], "origins": []}},
+        ]}
+        psi = [{"round": 2, "material": "m2", "stage": "lineage",
+                "status": "accepted", "probe_checks": [
+                    {"probe_id": probe["id"], "status": "addressed"}]}]
+        metrics = _audit_probe_delta_attribution(
+            plan, history, retrieval, report, target,
+            {"prediction": "true", "checkpoints": [{"round": 1,
+                                                       "decision": "unverifiable"}]},
+            strict=True, required=True, psi=psi)
+        self.assertEqual(1, metrics["graph_traced_semantic_deltas"])
+        self.assertEqual(1, metrics["probe_owned_novel_second_pass_cases"])
+
+        broken = deepcopy(report)
+        broken["analysis_history"][-1]["analysis"]["relations"] = []
+        with self.assertRaisesRegex(ValueError, "not attributable"):
+            _audit_probe_delta_attribution(
+                plan, history, retrieval, broken, target,
+                {"prediction": "unverifiable", "checkpoints": []},
+                strict=True, required=True, psi=psi)
+
+        absent = deepcopy(psi)
+        absent[0]["probe_checks"][0]["status"] = "absent"
+        with self.assertRaisesRegex(ValueError, "not attributable"):
+            _audit_probe_delta_attribution(
+                plan, history, retrieval, report, target,
+                {"prediction": "unverifiable", "checkpoints": []},
+                strict=True, required=True, psi=absent)
+
+        # A provenance-only hit may build the new graph while an unrelated
+        # probe-owned hit arrives in the same round.  That combination must not
+        # be credited to this frozen source-lineage slot.
+        mixed_retrieval = deepcopy(retrieval)
+        mixed_retrieval[1] = {
+            "round": 2,
+            "tasks": [
+                {"id": "provenance-upstream", "probe_id": None,
+                 "action": "fetch", "dimension": "provenance"},
+                {"id": "probe-unrelated", "probe_id": probe["id"],
+                 "action": "search", "dimension": "world"},
+            ],
+            "returned": ["m2", "m3"],
+            "attribution": [
+                {"version_id": "m2", "task_ids": ["provenance-upstream"]},
+                {"version_id": "m3", "task_ids": ["probe-unrelated"]},
+            ],
+        }
+        mixed_report = deepcopy(report)
+        mixed_report["analysis_history"][1]["trigger_task_ids"] = [
+            "provenance-upstream"]
+        mixed_report["analysis_history"][1]["trigger_probe_ids"] = []
+        mixed_report["analysis_history"].insert(2, {
+            "round": 2, "version_id": "m3", "accepted": True,
+            "revisit": False, "analysis": {"relations": [
+                # This is a real graph delta, but it is only a side edge:
+                # m3 is not reachable from the target m1.  Counting every edge
+                # endpoint would falsely let this probe-owned return borrow the
+                # target path that the provenance-only m2 return established.
+                {"from_version": "m3", "to_version": "m2", "kind": "cites",
+                 "status": "direct"}], "origins": []},
+            "trigger_task_ids": ["probe-unrelated"],
+            "trigger_probe_ids": [probe["id"]],
+        })
+        mixed_psi = deepcopy(psi) + [{
+            "round": 2, "material": "m3", "stage": "lineage",
+            "status": "accepted", "probe_checks": [
+                {"probe_id": probe["id"], "status": "addressed"}],
+        }]
+        with self.assertRaisesRegex(ValueError, "not attributable"):
+            _audit_probe_delta_attribution(
+                plan, history, mixed_retrieval, mixed_report, target,
+                {"prediction": "unverifiable", "checkpoints": []},
+                strict=True, required=True, psi=mixed_psi)
+
+    def test_v4_label_change_uses_frozen_and_or_novel_counterfactual(self):
+        target = {"id": "counterfactual", "assessment_mode": "world",
+                  "source_version_id": "m1", "evidence_scope": []}
+        claims = [{"id": "claim:a"}, {"id": "claim:b"}]
+        probes = [{"id": "probe:a", "claim_id": "claim:a", "kind": "actor_role",
+                   "routes": ["atoms", "world"], "gate": "always"},
+                  {"id": "probe:b", "claim_id": "claim:b", "kind": "actor_role",
+                   "routes": ["atoms", "world"], "gate": "always"}]
+        m1 = {"version_id": "m1", "start": 0, "end": 1, "quote": "a"}
+        m2 = {"version_id": "m2", "start": 0, "end": 1, "quote": "b"}
+        retrieval = [
+            {"round": 1,
+             "tasks": [{"id": "origin", "probe_id": None,
+                        "action": "search", "dimension": "provenance"}],
+             "returned": ["m1"],
+             "attribution": [{"version_id": "m1", "task_ids": ["origin"]}]},
+            {"round": 2,
+             "tasks": [
+                 {"id": "novel-a", "probe_id": "probe:a",
+                  "action": "search", "dimension": "world"},
+                 {"id": "reanalyse-b", "probe_id": "probe:b",
+                  "action": "reanalyse", "dimension": "world"},
+             ],
+             "returned": ["m2", "m1"],
+             "attribution": [
+                 {"version_id": "m2", "task_ids": ["novel-a"]},
+                 {"version_id": "m1", "task_ids": ["reanalyse-b"]},
+             ]},
+        ]
+        report = {"analysis_history": [
+            {"round": 1, "version_id": "m1", "accepted": True,
+             "revisit": False, "analysis": {"relations": [], "origins": [],
+                                               "interpretation": "old"},
+             "trigger_task_ids": ["origin"], "trigger_probe_ids": []},
+            {"round": 2, "version_id": "m2", "accepted": True,
+             "revisit": False, "analysis": {"relations": [], "origins": []},
+             "trigger_task_ids": ["novel-a"], "trigger_probe_ids": ["probe:a"]},
+            {"round": 2, "version_id": "m1", "accepted": True,
+             "revisit": False, "analysis": {"relations": [], "origins": [],
+                                               "interpretation": "new"},
+             "trigger_task_ids": ["reanalyse-b"],
+             "trigger_probe_ids": ["probe:b"]},
+        ]}
+        psi = [
+            {"round": 2, "material": "m2", "stage": "atoms", "status": "accepted",
+             "probe_checks": [{"probe_id": "probe:a", "status": "addressed"}]},
+            {"round": 2, "material": "m1", "stage": "atoms", "status": "accepted",
+             "probe_checks": [{"probe_id": "probe:b", "status": "addressed"}]},
+        ]
+
+        def result(probe_id, status, basis):
+            return {"probe_id": probe_id, "status": status, "basis": basis,
+                    "referent_relation": "not_applicable"}
+
+        def run(logic, prior, final, prior_verdict, final_verdict):
+            plan = {"logic": logic, "claims": claims, "probes": probes}
+            history = [
+                {"round": 1, "world_verdict": prior_verdict,
+                 "evidence_probe_results": [], "world_probe_results": [
+                     result("probe:a", prior[0], [] if prior[0] == "unresolved" else [m1]),
+                     result("probe:b", prior[1], [] if prior[1] == "unresolved" else [m1])]},
+                {"round": 2, "world_verdict": final_verdict,
+                 "evidence_probe_results": [], "world_probe_results": [
+                     result("probe:a", final[0], [] if final[0] == "unresolved" else [m2]),
+                     result("probe:b", final[1], [] if final[1] == "unresolved" else [m1])]},
+            ]
+            labels = {"supported": "true", "contradicted": "false",
+                      "conflicting": "mixed", "unresolved": "unverifiable"}
+            row = {"prediction": labels[final_verdict], "checkpoints": [
+                {"round": 1, "decision": labels[prior_verdict]}]}
+            return _audit_probe_delta_attribution(
+                plan, history, retrieval, report, target, row,
+                strict=True, required=True, psi=psi)
+
+        # In both negative cases, the novel A delta is insufficient without B's
+        # duplicate reanalysis, so the headline label change is not novel-driven.
+        with self.assertRaisesRegex(ValueError, "counterfactual"):
+            run("and", ("unresolved", "unresolved"),
+                ("supported", "supported"), "unresolved", "supported")
+        with self.assertRaisesRegex(ValueError, "counterfactual"):
+            run("or", ("contradicted", "contradicted"),
+                ("unresolved", "supported"), "contradicted", "supported")
+
+        # Novel A alone determines these final AND/OR aggregates; B's changed
+        # interpretation is retained diagnostically but is not causal credit.
+        and_positive = run("and", ("supported", "supported"),
+                           ("contradicted", "unresolved"),
+                           "supported", "contradicted")
+        or_positive = run("or", ("contradicted", "contradicted"),
+                          ("supported", "unresolved"),
+                          "contradicted", "supported")
+        self.assertEqual(1, and_positive["label_changes_with_decisive_delta"])
+        self.assertEqual(1, or_positive["label_changes_with_decisive_delta"])
+
     def test_retained_failed_smoke_uses_extension_subset_as_denominator(self):
         result = score(self.GOLD, self.ORIGINAL, self.STAGED, self.EXTENSION_SMOKE)
         self.assertEqual(["p02", "p04"], result["selected_case_ids"])
@@ -500,6 +1775,54 @@ class TargetExtensionCompareTests(unittest.TestCase):
                 _audit_plan(path, target, {"target_plan_sha256": plan["sha256"]}, [], [],
                             expected_contract="legacy-decision-probe-v1")
 
+    def test_v4_provider_modes_are_exact_and_task_routed_delta_is_withheld(self):
+        base = json.loads((self.EXTENSION_SMOKE / "config.json").read_text())
+        fixed = deepcopy(base)
+        fixed.update(experiment=V4_FIXED_EXPERIMENT,
+                     target_plan_schema=PLAN_SCHEMA_V4,
+                     provider_mode="fixed_reanalysis",
+                     strict_retrieval_attribution=False,
+                     retrieval_attribution_mode="legacy")
+        fixed["trace_config"]["max_rounds"] = 2
+        fixed["trace_config"]["experimental_force_rounds"] = True
+        self.assertEqual(["p02", "p04"], _extension_schedule(fixed))
+
+        routed = deepcopy(fixed)
+        routed.update(experiment=V4_TASK_ROUTED_EXPERIMENT,
+                      provider=TASK_ROUTED_PROVIDER,
+                      provider_mode="task_routed",
+                      strict_retrieval_attribution=True,
+                      retrieval_attribution_mode="strict")
+        routed["trace_config"]["experimental_force_rounds"] = False
+        self.assertEqual(["p02", "p04"], _extension_schedule(routed))
+
+        for name, changed in {
+                "undeclared provider": {**routed, "provider": "another corpus"},
+                "forced routed rounds": {**routed, "trace_config": {
+                    **routed["trace_config"], "experimental_force_rounds": True}},
+                "unforced fixed rounds": {**fixed, "trace_config": {
+                    **fixed["trace_config"], "experimental_force_rounds": False}},
+        }.items():
+            with self.subTest(name=name):
+                with self.assertRaisesRegex(ValueError, "provider|contract|forced"):
+                    _extension_schedule(changed)
+
+        with tempfile.TemporaryDirectory() as directory:
+            run = Path(directory) / "routed"
+            shutil.copytree(self.EXTENSION_SMOKE, run)
+            (run / "config.json").write_text(json.dumps(routed))
+            result = score(self.GOLD, self.ORIGINAL, self.STAGED, run)
+        self.assertFalse(result["material_exposure_comparable"])
+        self.assertFalse(result["cross_arm_extension_accuracy_comparable"])
+        self.assertEqual("within_extension_round1_to_final_and_v4_ledgers",
+                         result["primary_comparison"])
+        cross_arm = result["label_comparisons"]["extension_vs_staged"]
+        self.assertFalse(cross_arm["material_exposure_comparable"])
+        self.assertIsNone(cross_arm["all_scheduled"]["candidate_minus_baseline"])
+        self.assertIn("not_a_fair_or_causal", cross_arm["accuracy_interpretation"])
+        self.assertTrue(any("no fair or causal accuracy delta" in item
+                            for item in result["limits"]))
+
     def test_v2_archive_questions_pass_but_relabeling_the_plan_v3_fails(self):
         target, archive = self._renamed_plan(PLAN_SCHEMA_V2)
 
@@ -607,6 +1930,18 @@ class TargetExtensionCompareTests(unittest.TestCase):
         self.assertEqual({"applicable": True, "origin_count": 2,
                           "direct_lineage_edges": 2, "reachable_origin_count": 2,
                           "terminal_roots": True}, terminal)
+
+    def test_v3_complete_chain_rejects_spurious_active_lineage_gap(self):
+        relations = [
+            {"from_version": "m1", "to_version": "m14",
+             "kind": "cites", "status": "direct"},
+            {"from_version": "m14", "to_version": "m15",
+             "kind": "quotes", "status": "direct"},
+        ]
+        report = self._origin_report(
+            ["m14", "m15"], ["m15"], relations, [self._lineage_gap()])
+        with self.assertRaisesRegex(ValueError, "spurious active lineage gap"):
+            self._audit_origin_report(3, report)
 
     def test_v2_archives_are_exempt_from_v3_terminal_candidate_reconstruction(self):
         legacy_shape = {"origins": [{"version_id": "downstream"},

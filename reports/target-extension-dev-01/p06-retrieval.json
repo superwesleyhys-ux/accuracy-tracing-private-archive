@@ -1,0 +1,46 @@
+[
+  {
+    "round": 1,
+    "kind": "fixed_corpus_development_reanalysis",
+    "tasks": [
+      {
+        "id": "origin:p06",
+        "question": "Find the producing record and evidenced lineage for: Living organisms exist in the ocean beneath Europa's ice.",
+        "stage": "provenance",
+        "dimension": "auto",
+        "blocking": true,
+        "target_id": null,
+        "basis": [],
+        "decision_impact": "",
+        "action": "search",
+        "locator": null
+      }
+    ],
+    "returned": [
+      "m10",
+      "m11"
+    ]
+  },
+  {
+    "round": 2,
+    "kind": "fixed_corpus_development_reanalysis",
+    "tasks": [
+      {
+        "id": "origin:p06",
+        "question": "Find the producing record and evidenced lineage for: Living organisms exist in the ocean beneath Europa's ice.",
+        "stage": "provenance",
+        "dimension": "auto",
+        "blocking": true,
+        "target_id": null,
+        "basis": [],
+        "decision_impact": "",
+        "action": "search",
+        "locator": null
+      }
+    ],
+    "returned": [
+      "m10",
+      "m11"
+    ]
+  }
+]

@@ -1,0 +1,840 @@
+{
+  "schema_version": "0.3",
+  "scope": "plugin-supplied semantic analyses; no built-in truth oracle",
+  "target": {
+    "id": "p05",
+    "text": "Ingenuity was upright at the moment it touched down during its January 18, 2024 flight.",
+    "as_of": "2026-09-05T09:34:36Z",
+    "source_version_id": "m09",
+    "assessment_mode": "evidence",
+    "evidence_scope": [
+      "m09"
+    ]
+  },
+  "config": {
+    "max_rounds": 2,
+    "max_documents": 24,
+    "max_decomposition_calls": 24,
+    "experimental_force_rounds": true
+  },
+  "provenance_status": "partial",
+  "fact_status": "unresolved",
+  "stop_reason": "round_budget",
+  "usage": {
+    "rounds": 2,
+    "documents": 2,
+    "unique_versions": 1,
+    "decomposition_calls": 2,
+    "verification_calls": 2
+  },
+  "decision_status": "unresolved",
+  "assessments": {
+    "evidence": {
+      "raw_verdict": "unresolved",
+      "decision": "unresolved",
+      "blocking_gap_ids": []
+    },
+    "world": {
+      "raw_verdict": "unresolved",
+      "decision": "unresolved",
+      "blocking_gap_ids": [
+        "p05:verification:world:c0768b66668bc366e5db"
+      ]
+    }
+  },
+  "assessment_valid": true,
+  "materials": [
+    {
+      "version_id": "m09",
+      "url": "https://www.nasa.gov/news-release/after-three-years-on-mars-nasas-ingenuity-helicopter-mission-ends/",
+      "content": "After Three Years on Mars, NASA’s Ingenuity Helicopter Mission Ends\nPublication date: 2024-01-25\n\nNASA’s history-making Ingenuity Mars Helicopter has ended its mission at the Red Planet after surpassing expectations and making dozens more flights than planned. While the helicopter remains upright and in communication with ground controllers, imagery of its Jan. 18 flight sent to Earth this week indicates one or more of its rotor blades sustained damage during landing, and it is no longer capable of flight.\n\nHowever, about 3 feet (1 meter) above the surface, Ingenuity lost contact with the rover, which serves as a communications relay for the rotorcraft. The following day, communications were reestablished and more information about the flight was relayed to ground controllers at NASA JPL. Imagery revealing damage to the rotor blade arrived several days later. The cause of the communications dropout and the helicopter’s orientation at time of touchdown are still being investigated.",
+      "retrieved_at": "2026-09-05T09:34:36Z",
+      "published_at": null,
+      "available_at": "2026-09-05T09:34:36Z",
+      "availability_basis": "Current web-tool collection completed at retrieved_at on 2026-09-05. The supplied material is a selected, whitespace-normalized excerpt, not a full page or historical exact-version capture. Availability is asserted only at collection completion. The source's displayed publication date is preserved in content; no exact timezone-qualified publication instant is known.",
+      "issuer": "NASA Headquarters"
+    }
+  ],
+  "eligible_version_ids": [
+    "m09"
+  ],
+  "observations": [
+    {
+      "version_id": "m09",
+      "retrieved_at": "2026-09-05T09:34:36Z",
+      "duplicate": false,
+      "eligible": true,
+      "reasons": []
+    },
+    {
+      "version_id": "m09",
+      "retrieved_at": "2026-09-05T09:34:36Z",
+      "duplicate": true,
+      "eligible": true,
+      "reasons": []
+    }
+  ],
+  "analyses": {
+    "m09": {
+      "fragments": [
+        {
+          "id": "m09:atom:976d90d7624bab8f7af3",
+          "text": "Ingenuity remains upright at the time of the report following its Jan. 18 flight.",
+          "span": {
+            "version_id": "m09",
+            "start": 261,
+            "end": 511,
+            "quote": "While the helicopter remains upright and in communication with ground controllers, imagery of its Jan. 18 flight sent to Earth this week indicates one or more of its rotor blades sustained damage during landing, and it is no longer capable of flight."
+          },
+          "parent_id": "p05",
+          "qualifiers": [
+            "remains upright",
+            "its Jan. 18 flight"
+          ],
+          "qualifier_spans": [
+            {
+              "version_id": "m09",
+              "start": 282,
+              "end": 297,
+              "quote": "remains upright"
+            },
+            {
+              "version_id": "m09",
+              "start": 355,
+              "end": 373,
+              "quote": "its Jan. 18 flight"
+            }
+          ]
+        },
+        {
+          "id": "m09:atom:c8b87b37b4c042b57d76",
+          "text": "Ingenuity’s orientation at the time of touchdown was still being investigated when the report was published.",
+          "span": {
+            "version_id": "m09",
+            "start": 872,
+            "end": 995,
+            "quote": "The cause of the communications dropout and the helicopter’s orientation at time of touchdown are still being investigated."
+          },
+          "parent_id": "p05",
+          "qualifiers": [
+            "at time of touchdown",
+            "still being investigated"
+          ],
+          "qualifier_spans": [
+            {
+              "version_id": "m09",
+              "start": 945,
+              "end": 965,
+              "quote": "at time of touchdown"
+            },
+            {
+              "version_id": "m09",
+              "start": 970,
+              "end": 994,
+              "quote": "still being investigated"
+            }
+          ]
+        }
+      ],
+      "relations": [],
+      "gaps": [],
+      "resolutions": [],
+      "origins": [],
+      "notes": "Both previous atomic findings remain supported; none require withdrawal. The excerpt identifies the subject as NASA’s Ingenuity Mars Helicopter. The reported upright condition is a report-time state, distinct from orientation at the precise moment of touchdown, which the source explicitly describes as still under investigation. The report displays a publication date of 2024-01-25 and identifies the flight as Jan. 18.\nNo explicit upstream record name or URL is cited. The excerpt describes information relayed to NASA JPL ground controllers and subsequently received imagery, but does not establish the current material’s producing role as an original record or observation of touchdown orientation. The imagery is described as revealing rotor-blade damage, not upright touchdown. The statement that the helicopter “remains upright” reports its subsequent condition; treating it as evidence of orientation at touchdown would require inference. The source expressly states: “The cause of the communications dropout and the helicopter’s orientation at time of touchdown are still being investigated.” The previous lineage findings remain supported; no withdrawals are needed.",
+      "revisit_versions": []
+    }
+  },
+  "analysis_history": [
+    {
+      "revision": 1,
+      "round": 1,
+      "version_id": "m09",
+      "duplicate": false,
+      "revisit": false,
+      "accepted": true,
+      "analysis": {
+        "fragments": [
+          {
+            "id": "m09:atom:976d90d7624bab8f7af3",
+            "text": "Ingenuity remains upright at the time of the report following its Jan. 18 flight.",
+            "span": {
+              "version_id": "m09",
+              "start": 261,
+              "end": 511,
+              "quote": "While the helicopter remains upright and in communication with ground controllers, imagery of its Jan. 18 flight sent to Earth this week indicates one or more of its rotor blades sustained damage during landing, and it is no longer capable of flight."
+            },
+            "parent_id": "p05",
+            "qualifiers": [
+              "remains upright",
+              "its Jan. 18 flight"
+            ],
+            "qualifier_spans": [
+              {
+                "version_id": "m09",
+                "start": 282,
+                "end": 297,
+                "quote": "remains upright"
+              },
+              {
+                "version_id": "m09",
+                "start": 355,
+                "end": 373,
+                "quote": "its Jan. 18 flight"
+              }
+            ]
+          },
+          {
+            "id": "m09:atom:c8b87b37b4c042b57d76",
+            "text": "Ingenuity’s orientation at the time of touchdown was still being investigated when the report was published.",
+            "span": {
+              "version_id": "m09",
+              "start": 872,
+              "end": 995,
+              "quote": "The cause of the communications dropout and the helicopter’s orientation at time of touchdown are still being investigated."
+            },
+            "parent_id": "p05",
+            "qualifiers": [
+              "at time of touchdown",
+              "still being investigated"
+            ],
+            "qualifier_spans": [
+              {
+                "version_id": "m09",
+                "start": 945,
+                "end": 965,
+                "quote": "at time of touchdown"
+              },
+              {
+                "version_id": "m09",
+                "start": 970,
+                "end": 994,
+                "quote": "still being investigated"
+              }
+            ]
+          }
+        ],
+        "relations": [],
+        "gaps": [],
+        "resolutions": [],
+        "origins": [],
+        "notes": "The excerpt identifies the helicopter as Ingenuity. Its reported current upright state and its orientation at touchdown are distinct temporal claims; the latter is explicitly under investigation. No previous findings were supplied.\nThe excerpt names no explicit upstream record or URL. It describes flight information relayed to NASA JPL ground controllers and imagery received later, but does not establish the current material’s producing role as an original record or observation of touchdown orientation. The statement that Ingenuity “remains upright” concerns its subsequent condition; it is not attributed evidence of its orientation at touchdown. The source explicitly states: “The cause of the communications dropout and the helicopter’s orientation at time of touchdown are still being investigated.” No previous findings require withdrawal.",
+        "revisit_versions": []
+      },
+      "exclusion_reasons": []
+    },
+    {
+      "revision": 2,
+      "round": 2,
+      "version_id": "m09",
+      "duplicate": true,
+      "revisit": false,
+      "accepted": true,
+      "analysis": {
+        "fragments": [
+          {
+            "id": "m09:atom:976d90d7624bab8f7af3",
+            "text": "Ingenuity remains upright at the time of the report following its Jan. 18 flight.",
+            "span": {
+              "version_id": "m09",
+              "start": 261,
+              "end": 511,
+              "quote": "While the helicopter remains upright and in communication with ground controllers, imagery of its Jan. 18 flight sent to Earth this week indicates one or more of its rotor blades sustained damage during landing, and it is no longer capable of flight."
+            },
+            "parent_id": "p05",
+            "qualifiers": [
+              "remains upright",
+              "its Jan. 18 flight"
+            ],
+            "qualifier_spans": [
+              {
+                "version_id": "m09",
+                "start": 282,
+                "end": 297,
+                "quote": "remains upright"
+              },
+              {
+                "version_id": "m09",
+                "start": 355,
+                "end": 373,
+                "quote": "its Jan. 18 flight"
+              }
+            ]
+          },
+          {
+            "id": "m09:atom:c8b87b37b4c042b57d76",
+            "text": "Ingenuity’s orientation at the time of touchdown was still being investigated when the report was published.",
+            "span": {
+              "version_id": "m09",
+              "start": 872,
+              "end": 995,
+              "quote": "The cause of the communications dropout and the helicopter’s orientation at time of touchdown are still being investigated."
+            },
+            "parent_id": "p05",
+            "qualifiers": [
+              "at time of touchdown",
+              "still being investigated"
+            ],
+            "qualifier_spans": [
+              {
+                "version_id": "m09",
+                "start": 945,
+                "end": 965,
+                "quote": "at time of touchdown"
+              },
+              {
+                "version_id": "m09",
+                "start": 970,
+                "end": 994,
+                "quote": "still being investigated"
+              }
+            ]
+          }
+        ],
+        "relations": [],
+        "gaps": [],
+        "resolutions": [],
+        "origins": [],
+        "notes": "Both previous atomic findings remain supported; none require withdrawal. The excerpt identifies the subject as NASA’s Ingenuity Mars Helicopter. The reported upright condition is a report-time state, distinct from orientation at the precise moment of touchdown, which the source explicitly describes as still under investigation. The report displays a publication date of 2024-01-25 and identifies the flight as Jan. 18.\nNo explicit upstream record name or URL is cited. The excerpt describes information relayed to NASA JPL ground controllers and subsequently received imagery, but does not establish the current material’s producing role as an original record or observation of touchdown orientation. The imagery is described as revealing rotor-blade damage, not upright touchdown. The statement that the helicopter “remains upright” reports its subsequent condition; treating it as evidence of orientation at touchdown would require inference. The source expressly states: “The cause of the communications dropout and the helicopter’s orientation at time of touchdown are still being investigated.” The previous lineage findings remain supported; no withdrawals are needed.",
+        "revisit_versions": []
+      },
+      "exclusion_reasons": []
+    }
+  ],
+  "fragments": [
+    {
+      "id": "m09:atom:976d90d7624bab8f7af3",
+      "text": "Ingenuity remains upright at the time of the report following its Jan. 18 flight.",
+      "span": {
+        "version_id": "m09",
+        "start": 261,
+        "end": 511,
+        "quote": "While the helicopter remains upright and in communication with ground controllers, imagery of its Jan. 18 flight sent to Earth this week indicates one or more of its rotor blades sustained damage during landing, and it is no longer capable of flight."
+      },
+      "parent_id": "p05",
+      "qualifiers": [
+        "remains upright",
+        "its Jan. 18 flight"
+      ],
+      "qualifier_spans": [
+        {
+          "version_id": "m09",
+          "start": 282,
+          "end": 297,
+          "quote": "remains upright"
+        },
+        {
+          "version_id": "m09",
+          "start": 355,
+          "end": 373,
+          "quote": "its Jan. 18 flight"
+        }
+      ]
+    },
+    {
+      "id": "m09:atom:c8b87b37b4c042b57d76",
+      "text": "Ingenuity’s orientation at the time of touchdown was still being investigated when the report was published.",
+      "span": {
+        "version_id": "m09",
+        "start": 872,
+        "end": 995,
+        "quote": "The cause of the communications dropout and the helicopter’s orientation at time of touchdown are still being investigated."
+      },
+      "parent_id": "p05",
+      "qualifiers": [
+        "at time of touchdown",
+        "still being investigated"
+      ],
+      "qualifier_spans": [
+        {
+          "version_id": "m09",
+          "start": 945,
+          "end": 965,
+          "quote": "at time of touchdown"
+        },
+        {
+          "version_id": "m09",
+          "start": 970,
+          "end": 994,
+          "quote": "still being investigated"
+        }
+      ]
+    }
+  ],
+  "relations": [],
+  "origins": [],
+  "gaps": [
+    {
+      "id": "origin:p05",
+      "question": "Find the producing record and evidenced lineage for: Ingenuity was upright at the moment it touched down during its January 18, 2024 flight.",
+      "stage": "provenance",
+      "dimension": "auto",
+      "blocking": true,
+      "target_id": null,
+      "basis": [],
+      "decision_impact": "",
+      "action": "search",
+      "locator": null
+    },
+    {
+      "id": "p05:verification:world:c0768b66668bc366e5db",
+      "question": "Did NASA or JPL’s investigation establish Ingenuity’s orientation at touchdown on January 18, 2024?",
+      "stage": "verification",
+      "dimension": "world",
+      "blocking": true,
+      "target_id": "p05",
+      "basis": [
+        {
+          "version_id": "m09",
+          "start": 872,
+          "end": 995,
+          "quote": "The cause of the communications dropout and the helicopter’s orientation at time of touchdown are still being investigated."
+        }
+      ],
+      "decision_impact": "Findings establishing orientation at the instant of touchdown could support or contradict the target; its later upright position cannot resolve this.",
+      "action": "search",
+      "locator": "NASA/JPL follow-up findings on Ingenuity’s January 18, 2024 landing investigation, available by 2026-09-05T09:34:36Z"
+    }
+  ],
+  "gap_registry": [
+    {
+      "id": "origin:p05",
+      "question": "Find the producing record and evidenced lineage for: Ingenuity was upright at the moment it touched down during its January 18, 2024 flight.",
+      "stage": "provenance",
+      "dimension": "auto",
+      "blocking": true,
+      "target_id": null,
+      "basis": [],
+      "decision_impact": "",
+      "action": "search",
+      "locator": null
+    },
+    {
+      "id": "p05:verification:world:c0768b66668bc366e5db",
+      "question": "Did NASA or JPL’s investigation establish Ingenuity’s orientation at touchdown on January 18, 2024?",
+      "stage": "verification",
+      "dimension": "world",
+      "blocking": true,
+      "target_id": "p05",
+      "basis": [
+        {
+          "version_id": "m09",
+          "start": 872,
+          "end": 995,
+          "quote": "The cause of the communications dropout and the helicopter’s orientation at time of touchdown are still being investigated."
+        }
+      ],
+      "decision_impact": "Findings establishing orientation at the instant of touchdown could support or contradict the target; its later upright position cannot resolve this.",
+      "action": "search",
+      "locator": "NASA/JPL follow-up findings on Ingenuity’s January 18, 2024 landing investigation, available by 2026-09-05T09:34:36Z"
+    }
+  ],
+  "resolutions": [],
+  "verification_history": [
+    {
+      "round": 1,
+      "verdict": "unresolved",
+      "basis": [
+        {
+          "version_id": "m09",
+          "start": 98,
+          "end": 260,
+          "quote": "NASA’s history-making Ingenuity Mars Helicopter has ended its mission at the Red Planet after surpassing expectations and making dozens more flights than planned."
+        },
+        {
+          "version_id": "m09",
+          "start": 261,
+          "end": 511,
+          "quote": "While the helicopter remains upright and in communication with ground controllers, imagery of its Jan. 18 flight sent to Earth this week indicates one or more of its rotor blades sustained damage during landing, and it is no longer capable of flight."
+        },
+        {
+          "version_id": "m09",
+          "start": 872,
+          "end": 995,
+          "quote": "The cause of the communications dropout and the helicopter’s orientation at time of touchdown are still being investigated."
+        }
+      ],
+      "rationale": "m09 identifies the helicopter as Ingenuity and reports it upright after its Jan. 18 flight. That later state does not establish its orientation at the precise moment of touchdown, which the source explicitly leaves under investigation. The target is therefore neither established nor contradicted.",
+      "gaps": [
+        {
+          "id": "p05:verification:world:c0768b66668bc366e5db",
+          "question": "Did NASA or JPL’s investigation establish Ingenuity’s orientation at touchdown on January 18, 2024?",
+          "stage": "verification",
+          "dimension": "world",
+          "blocking": true,
+          "target_id": "p05",
+          "basis": [
+            {
+              "version_id": "m09",
+              "start": 872,
+              "end": 995,
+              "quote": "The cause of the communications dropout and the helicopter’s orientation at time of touchdown are still being investigated."
+            }
+          ],
+          "decision_impact": "Findings establishing the orientation at the instant of touchdown could support or contradict the target, unlike evidence of its later resting position.",
+          "action": "search",
+          "locator": "NASA/JPL follow-up findings on Ingenuity’s January 18, 2024 landing investigation, available by 2026-09-05T09:34:36Z"
+        }
+      ],
+      "resolutions": [],
+      "evidence_verdict": "unresolved",
+      "world_verdict": "unresolved",
+      "world_basis": [
+        {
+          "version_id": "m09",
+          "start": 98,
+          "end": 260,
+          "quote": "NASA’s history-making Ingenuity Mars Helicopter has ended its mission at the Red Planet after surpassing expectations and making dozens more flights than planned."
+        },
+        {
+          "version_id": "m09",
+          "start": 261,
+          "end": 511,
+          "quote": "While the helicopter remains upright and in communication with ground controllers, imagery of its Jan. 18 flight sent to Earth this week indicates one or more of its rotor blades sustained damage during landing, and it is no longer capable of flight."
+        },
+        {
+          "version_id": "m09",
+          "start": 872,
+          "end": 995,
+          "quote": "The cause of the communications dropout and the helicopter’s orientation at time of touchdown are still being investigated."
+        }
+      ],
+      "world_rationale": "The NASA mission report identifies the helicopter as Ingenuity, so entity identity is clear. Its assertion that Ingenuity remains upright describes its condition after the flight, not its orientation at touchdown. The report attributes landing-damage evidence to imagery but explicitly leaves touchdown orientation under investigation. This primary-source account neither establishes nor contradicts the target; no completed investigation or independent confirmation is supplied as of the cutoff."
+    },
+    {
+      "round": 2,
+      "verdict": "unresolved",
+      "basis": [
+        {
+          "version_id": "m09",
+          "start": 261,
+          "end": 511,
+          "quote": "While the helicopter remains upright and in communication with ground controllers, imagery of its Jan. 18 flight sent to Earth this week indicates one or more of its rotor blades sustained damage during landing, and it is no longer capable of flight."
+        },
+        {
+          "version_id": "m09",
+          "start": 872,
+          "end": 995,
+          "quote": "The cause of the communications dropout and the helicopter’s orientation at time of touchdown are still being investigated."
+        }
+      ],
+      "rationale": "m09 identifies the helicopter as Ingenuity and describes it as upright after its January 18 flight, at the time of reporting. It explicitly leaves its orientation at touchdown under investigation. Thus, the scoped evidence neither establishes nor denies that Ingenuity was upright at the precise moment claimed.",
+      "gaps": [
+        {
+          "id": "p05:verification:world:c0768b66668bc366e5db",
+          "question": "Did NASA or JPL’s investigation establish Ingenuity’s orientation at touchdown on January 18, 2024?",
+          "stage": "verification",
+          "dimension": "world",
+          "blocking": true,
+          "target_id": "p05",
+          "basis": [
+            {
+              "version_id": "m09",
+              "start": 872,
+              "end": 995,
+              "quote": "The cause of the communications dropout and the helicopter’s orientation at time of touchdown are still being investigated."
+            }
+          ],
+          "decision_impact": "Findings establishing orientation at the instant of touchdown could support or contradict the target; its later upright position cannot resolve this.",
+          "action": "search",
+          "locator": "NASA/JPL follow-up findings on Ingenuity’s January 18, 2024 landing investigation, available by 2026-09-05T09:34:36Z"
+        }
+      ],
+      "resolutions": [],
+      "evidence_verdict": "unresolved",
+      "world_verdict": "unresolved",
+      "world_basis": [
+        {
+          "version_id": "m09",
+          "start": 98,
+          "end": 260,
+          "quote": "NASA’s history-making Ingenuity Mars Helicopter has ended its mission at the Red Planet after surpassing expectations and making dozens more flights than planned."
+        },
+        {
+          "version_id": "m09",
+          "start": 261,
+          "end": 511,
+          "quote": "While the helicopter remains upright and in communication with ground controllers, imagery of its Jan. 18 flight sent to Earth this week indicates one or more of its rotor blades sustained damage during landing, and it is no longer capable of flight."
+        },
+        {
+          "version_id": "m09",
+          "start": 872,
+          "end": 995,
+          "quote": "The cause of the communications dropout and the helicopter’s orientation at time of touchdown are still being investigated."
+        }
+      ],
+      "world_rationale": "The NASA-issued snapshot identifies the helicopter as Ingenuity, so entity identity is clear. Its report of an upright post-flight condition does not establish orientation at the instant of touchdown. The imagery is cited for blade damage, not touchdown orientation, which NASA explicitly describes as under investigation. No completed investigation or independent confirmation is supplied. The target is therefore neither established nor contradicted as of the cutoff."
+    }
+  ],
+  "operations": [
+    {
+      "sequence": 1,
+      "round": 1,
+      "action": "search",
+      "tasks": [
+        {
+          "id": "origin:p05",
+          "question": "Find the producing record and evidenced lineage for: Ingenuity was upright at the moment it touched down during its January 18, 2024 flight.",
+          "stage": "provenance",
+          "dimension": "auto",
+          "blocking": true,
+          "target_id": null,
+          "basis": [],
+          "decision_impact": "",
+          "action": "search",
+          "locator": null
+        }
+      ],
+      "limit": 24
+    },
+    {
+      "sequence": 2,
+      "round": 1,
+      "action": "snapshot_saved",
+      "version_id": "m09",
+      "sha256": "88daa87858f24c87dbf3a67f2ac8fea6e63173214ca55721bf539d8fcf2c3e2a",
+      "eligible": true
+    },
+    {
+      "sequence": 3,
+      "round": 1,
+      "action": "decompose_started",
+      "version_id": "m09",
+      "duplicate": false,
+      "revisit": false
+    },
+    {
+      "sequence": 4,
+      "round": 1,
+      "action": "decompose_completed",
+      "version_id": "m09",
+      "revision": 1
+    },
+    {
+      "sequence": 5,
+      "round": 1,
+      "action": "alignment_checked",
+      "version_id": "m09",
+      "analysis_changed": true
+    },
+    {
+      "sequence": 6,
+      "round": 1,
+      "action": "graph_updated",
+      "version_id": "m09",
+      "open_gaps": 1
+    },
+    {
+      "sequence": 7,
+      "round": 1,
+      "action": "verification_started"
+    },
+    {
+      "sequence": 8,
+      "round": 1,
+      "action": "verification_completed",
+      "verdict": "unresolved",
+      "decision": "unresolved",
+      "assessments": {
+        "evidence": {
+          "raw_verdict": "unresolved",
+          "decision": "unresolved",
+          "blocking_gap_ids": []
+        },
+        "world": {
+          "raw_verdict": "unresolved",
+          "decision": "unresolved",
+          "blocking_gap_ids": [
+            "p05:verification:world:c0768b66668bc366e5db"
+          ]
+        }
+      },
+      "followup_tasks": 1,
+      "provenance_status": "partial"
+    },
+    {
+      "sequence": 9,
+      "round": 1,
+      "action": "assessment_changed",
+      "previous": null,
+      "current": {
+        "evidence": {
+          "raw_verdict": "unresolved",
+          "decision": "unresolved",
+          "blocking_gap_ids": []
+        },
+        "world": {
+          "raw_verdict": "unresolved",
+          "decision": "unresolved",
+          "blocking_gap_ids": [
+            "p05:verification:world:c0768b66668bc366e5db"
+          ]
+        }
+      },
+      "basis": [
+        {
+          "version_id": "m09",
+          "start": 98,
+          "end": 260,
+          "quote": "NASA’s history-making Ingenuity Mars Helicopter has ended its mission at the Red Planet after surpassing expectations and making dozens more flights than planned."
+        },
+        {
+          "version_id": "m09",
+          "start": 261,
+          "end": 511,
+          "quote": "While the helicopter remains upright and in communication with ground controllers, imagery of its Jan. 18 flight sent to Earth this week indicates one or more of its rotor blades sustained damage during landing, and it is no longer capable of flight."
+        },
+        {
+          "version_id": "m09",
+          "start": 872,
+          "end": 995,
+          "quote": "The cause of the communications dropout and the helicopter’s orientation at time of touchdown are still being investigated."
+        }
+      ],
+      "world_basis": [
+        {
+          "version_id": "m09",
+          "start": 98,
+          "end": 260,
+          "quote": "NASA’s history-making Ingenuity Mars Helicopter has ended its mission at the Red Planet after surpassing expectations and making dozens more flights than planned."
+        },
+        {
+          "version_id": "m09",
+          "start": 261,
+          "end": 511,
+          "quote": "While the helicopter remains upright and in communication with ground controllers, imagery of its Jan. 18 flight sent to Earth this week indicates one or more of its rotor blades sustained damage during landing, and it is no longer capable of flight."
+        },
+        {
+          "version_id": "m09",
+          "start": 872,
+          "end": 995,
+          "quote": "The cause of the communications dropout and the helicopter’s orientation at time of touchdown are still being investigated."
+        }
+      ]
+    },
+    {
+      "sequence": 10,
+      "round": 1,
+      "action": "progress_checked",
+      "new_eligible_versions": 1,
+      "new_structure": true
+    },
+    {
+      "sequence": 11,
+      "round": 2,
+      "action": "search",
+      "tasks": [
+        {
+          "id": "origin:p05",
+          "question": "Find the producing record and evidenced lineage for: Ingenuity was upright at the moment it touched down during its January 18, 2024 flight.",
+          "stage": "provenance",
+          "dimension": "auto",
+          "blocking": true,
+          "target_id": null,
+          "basis": [],
+          "decision_impact": "",
+          "action": "search",
+          "locator": null
+        },
+        {
+          "id": "p05:verification:world:c0768b66668bc366e5db",
+          "question": "Did NASA or JPL’s investigation establish Ingenuity’s orientation at touchdown on January 18, 2024?",
+          "stage": "verification",
+          "dimension": "world",
+          "blocking": true,
+          "target_id": "p05",
+          "basis": [
+            {
+              "version_id": "m09",
+              "start": 872,
+              "end": 995,
+              "quote": "The cause of the communications dropout and the helicopter’s orientation at time of touchdown are still being investigated."
+            }
+          ],
+          "decision_impact": "Findings establishing the orientation at the instant of touchdown could support or contradict the target, unlike evidence of its later resting position.",
+          "action": "search",
+          "locator": "NASA/JPL follow-up findings on Ingenuity’s January 18, 2024 landing investigation, available by 2026-09-05T09:34:36Z"
+        }
+      ],
+      "limit": 23
+    },
+    {
+      "sequence": 12,
+      "round": 2,
+      "action": "duplicate_observed",
+      "version_id": "m09",
+      "sha256": "88daa87858f24c87dbf3a67f2ac8fea6e63173214ca55721bf539d8fcf2c3e2a",
+      "eligible": true
+    },
+    {
+      "sequence": 13,
+      "round": 2,
+      "action": "decompose_started",
+      "version_id": "m09",
+      "duplicate": true,
+      "revisit": false
+    },
+    {
+      "sequence": 14,
+      "round": 2,
+      "action": "decompose_completed",
+      "version_id": "m09",
+      "revision": 2
+    },
+    {
+      "sequence": 15,
+      "round": 2,
+      "action": "alignment_checked",
+      "version_id": "m09",
+      "analysis_changed": true
+    },
+    {
+      "sequence": 16,
+      "round": 2,
+      "action": "graph_updated",
+      "version_id": "m09",
+      "open_gaps": 2
+    },
+    {
+      "sequence": 17,
+      "round": 2,
+      "action": "verification_started"
+    },
+    {
+      "sequence": 18,
+      "round": 2,
+      "action": "verification_completed",
+      "verdict": "unresolved",
+      "decision": "unresolved",
+      "assessments": {
+        "evidence": {
+          "raw_verdict": "unresolved",
+          "decision": "unresolved",
+          "blocking_gap_ids": []
+        },
+        "world": {
+          "raw_verdict": "unresolved",
+          "decision": "unresolved",
+          "blocking_gap_ids": [
+            "p05:verification:world:c0768b66668bc366e5db"
+          ]
+        }
+      },
+      "followup_tasks": 1,
+      "provenance_status": "partial"
+    },
+    {
+      "sequence": 19,
+      "round": 2,
+      "action": "progress_checked",
+      "new_eligible_versions": 0,
+      "new_structure": false
+    },
+    {
+      "sequence": 20,
+      "round": 2,
+      "action": "stopped",
+      "reason": "round_budget"
+    }
+  ],
+  "errors": []
+}

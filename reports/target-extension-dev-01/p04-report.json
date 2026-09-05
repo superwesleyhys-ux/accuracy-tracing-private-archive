@@ -1,0 +1,1443 @@
+{
+  "schema_version": "0.3",
+  "scope": "plugin-supplied semantic analyses; no built-in truth oracle",
+  "target": {
+    "id": "p04",
+    "text": "NOAA's January 10, 2025 annual climate summary reported that the global surface temperature in 2024 was 1.29°C above the 1850–1900 average.",
+    "as_of": "2026-09-05T09:34:36Z",
+    "source_version_id": "m07",
+    "assessment_mode": "evidence",
+    "evidence_scope": [
+      "m07"
+    ]
+  },
+  "config": {
+    "max_rounds": 2,
+    "max_documents": 24,
+    "max_decomposition_calls": 24,
+    "experimental_force_rounds": true
+  },
+  "provenance_status": "partial",
+  "fact_status": "contradicted",
+  "stop_reason": "round_budget",
+  "usage": {
+    "rounds": 2,
+    "documents": 4,
+    "unique_versions": 2,
+    "decomposition_calls": 4,
+    "verification_calls": 2
+  },
+  "decision_status": "contradicted",
+  "assessments": {
+    "evidence": {
+      "raw_verdict": "contradicted",
+      "decision": "contradicted",
+      "blocking_gap_ids": []
+    },
+    "world": {
+      "raw_verdict": "contradicted",
+      "decision": "contradicted",
+      "blocking_gap_ids": []
+    }
+  },
+  "assessment_valid": true,
+  "materials": [
+    {
+      "version_id": "m07",
+      "url": "https://www.ncei.noaa.gov/news/global-climate-202413",
+      "content": "Assessing the Global Climate in 2024\nPublication date: 2025-01-10\n\nIn 2024, global surface temperature was 2.32°F (1.29°C) above the 20th-century average. This ranks as the highest global temperature in the period of 1850–2024, beating the next warmest year (2023) by 0.18°F (0.10°C). The 10 warmest years since 1850 have all occurred in the past decade. In 2024, global temperature exceeded the pre-industrial (1850–1900) average by 2.63°F (1.46°C).",
+      "retrieved_at": "2026-09-05T09:34:36Z",
+      "published_at": null,
+      "available_at": "2026-09-05T09:34:36Z",
+      "availability_basis": "Current web-tool collection completed at retrieved_at on 2026-09-05. The supplied material is a selected, whitespace-normalized excerpt, not a full page or historical exact-version capture. Availability is asserted only at collection completion. The source's displayed publication date is preserved in content; no exact timezone-qualified publication instant is known.",
+      "issuer": "NOAA National Centers for Environmental Information"
+    },
+    {
+      "version_id": "m08",
+      "url": "https://www.nasa.gov/news-release/temperatures-rising-nasa-confirms-2024-warmest-year-on-record/",
+      "content": "Temperatures Rising: NASA Confirms 2024 Warmest Year on Record\nPublication date: 2025-01-10\n\nEarth’s average surface temperature in 2024 was the warmest on record, according to an analysis led by NASA scientists.\n\nGlobal temperatures in 2024 were 2.30 degrees Fahrenheit (1.28 degrees Celsius) above the agency’s 20th-century baseline (1951-1980), which tops the record set in 2023. The new record comes after 15 consecutive months (June 2023 through August 2024) of monthly temperature records — an unprecedented heat streak.\n\nNASA scientists further estimate Earth in 2024 was about 2.65 degrees Fahrenheit (1.47 degrees Celsius) warmer than the mid-19th century average (1850-1900).",
+      "retrieved_at": "2026-09-05T09:34:36Z",
+      "published_at": null,
+      "available_at": "2026-09-05T09:34:36Z",
+      "availability_basis": "Current web-tool collection completed at retrieved_at on 2026-09-05. The supplied material is a selected, whitespace-normalized excerpt, not a full page or historical exact-version capture. Availability is asserted only at collection completion. The source's displayed publication date is preserved in content; no exact timezone-qualified publication instant is known.",
+      "issuer": "NASA"
+    }
+  ],
+  "eligible_version_ids": [
+    "m07",
+    "m08"
+  ],
+  "observations": [
+    {
+      "version_id": "m07",
+      "retrieved_at": "2026-09-05T09:34:36Z",
+      "duplicate": false,
+      "eligible": true,
+      "reasons": []
+    },
+    {
+      "version_id": "m08",
+      "retrieved_at": "2026-09-05T09:34:36Z",
+      "duplicate": false,
+      "eligible": true,
+      "reasons": []
+    },
+    {
+      "version_id": "m07",
+      "retrieved_at": "2026-09-05T09:34:36Z",
+      "duplicate": true,
+      "eligible": true,
+      "reasons": []
+    },
+    {
+      "version_id": "m08",
+      "retrieved_at": "2026-09-05T09:34:36Z",
+      "duplicate": true,
+      "eligible": true,
+      "reasons": []
+    }
+  ],
+  "analyses": {
+    "m07": {
+      "fragments": [
+        {
+          "id": "m07:atom:2faed4a3da8ba7f4a4e9",
+          "text": "The summary reports that global temperature in 2024 exceeded the pre-industrial (1850–1900) average by 2.63°F (1.46°C).",
+          "span": {
+            "version_id": "m07",
+            "start": 355,
+            "end": 450,
+            "quote": "In 2024, global temperature exceeded the pre-industrial (1850–1900) average by 2.63°F (1.46°C)."
+          },
+          "parent_id": "p04",
+          "qualifiers": [
+            "In 2024",
+            "pre-industrial (1850–1900) average",
+            "2.63°F (1.46°C)"
+          ],
+          "qualifier_spans": [
+            {
+              "version_id": "m07",
+              "start": 355,
+              "end": 362,
+              "quote": "In 2024"
+            },
+            {
+              "version_id": "m07",
+              "start": 396,
+              "end": 430,
+              "quote": "pre-industrial (1850–1900) average"
+            },
+            {
+              "version_id": "m07",
+              "start": 434,
+              "end": 449,
+              "quote": "2.63°F (1.46°C)"
+            }
+          ]
+        },
+        {
+          "id": "m07:atom:75cbbe95495fec63fefb",
+          "text": "The summary titled “Assessing the Global Climate in 2024” displays a publication date of January 10, 2025.",
+          "span": {
+            "version_id": "m07",
+            "start": 0,
+            "end": 65,
+            "quote": "Assessing the Global Climate in 2024\nPublication date: 2025-01-10"
+          },
+          "parent_id": "p04",
+          "qualifiers": [
+            "2025-01-10"
+          ],
+          "qualifier_spans": [
+            {
+              "version_id": "m07",
+              "start": 55,
+              "end": 65,
+              "quote": "2025-01-10"
+            }
+          ]
+        },
+        {
+          "id": "m07:atom:bcf0a55972c8d79e9d6f",
+          "text": "The summary reports that global surface temperature in 2024 was 2.32°F (1.29°C) above the 20th-century average.",
+          "span": {
+            "version_id": "m07",
+            "start": 67,
+            "end": 154,
+            "quote": "In 2024, global surface temperature was 2.32°F (1.29°C) above the 20th-century average."
+          },
+          "parent_id": "p04",
+          "qualifiers": [
+            "In 2024",
+            "2.32°F (1.29°C)",
+            "above the 20th-century average"
+          ],
+          "qualifier_spans": [
+            {
+              "version_id": "m07",
+              "start": 67,
+              "end": 74,
+              "quote": "In 2024"
+            },
+            {
+              "version_id": "m07",
+              "start": 107,
+              "end": 122,
+              "quote": "2.32°F (1.29°C)"
+            },
+            {
+              "version_id": "m07",
+              "start": 123,
+              "end": 153,
+              "quote": "above the 20th-century average"
+            }
+          ]
+        }
+      ],
+      "relations": [],
+      "gaps": [],
+      "resolutions": [],
+      "origins": [],
+      "notes": "All three previous atoms remain supported; none withdrawn. Structured issuer metadata identifies NOAA National Centers for Environmental Information, while the content itself does not name NOAA. The displayed publication date is January 10, 2025. Both temperature statements concern 2024 and remain attributed to the summary: 1.29°C is paired with the 20th-century average, whereas the pre-industrial (1850–1900) average is paired with 1.46°C.\nRechecked the current excerpt; no prior lineage findings require withdrawal. The target directly identifies m07. Structured issuer and URL metadata connect it to NOAA NCEI, while the content identifies “Assessing the Global Climate in 2024” and “Publication date: 2025-01-10”. No explicit upstream citation or producing/publishing-role statement establishes originality. The temperature content appears directly in the identified summary, without a stated intervening calculation: “In 2024, global surface temperature was 2.32°F (1.29°C) above the 20th-century average.” It separately reports: “In 2024, global temperature exceeded the pre-industrial (1850–1900) average by 2.63°F (1.46°C).” Thus the parent source is traceable, but its reported content does not pair 1.29°C with the 1850–1900 baseline. These statements remain summary-attributed content, not independent actual-world findings.",
+      "revisit_versions": []
+    },
+    "m08": {
+      "fragments": [
+        {
+          "id": "m08:atom:5335e873f32244d62ffd",
+          "text": "The NASA item titled “Temperatures Rising: NASA Confirms 2024 Warmest Year on Record” displays a publication date of January 10, 2025.",
+          "span": {
+            "version_id": "m08",
+            "start": 0,
+            "end": 91,
+            "quote": "Temperatures Rising: NASA Confirms 2024 Warmest Year on Record\nPublication date: 2025-01-10"
+          },
+          "parent_id": "p04",
+          "qualifiers": [
+            "Publication date: 2025-01-10"
+          ],
+          "qualifier_spans": [
+            {
+              "version_id": "m08",
+              "start": 63,
+              "end": 91,
+              "quote": "Publication date: 2025-01-10"
+            }
+          ]
+        },
+        {
+          "id": "m08:atom:f4a027f6474243708066",
+          "text": "The NASA item reports that global temperatures in 2024 were 2.30 degrees Fahrenheit (1.28 degrees Celsius) above the agency’s 20th-century baseline of 1951–1980.",
+          "span": {
+            "version_id": "m08",
+            "start": 93,
+            "end": 382,
+            "quote": "Earth’s average surface temperature in 2024 was the warmest on record, according to an analysis led by NASA scientists.\n\nGlobal temperatures in 2024 were 2.30 degrees Fahrenheit (1.28 degrees Celsius) above the agency’s 20th-century baseline (1951-1980), which tops the record set in 2023."
+          },
+          "parent_id": "p04",
+          "qualifiers": [
+            "Global temperatures in 2024",
+            "2.30 degrees Fahrenheit (1.28 degrees Celsius)",
+            "above the agency’s 20th-century baseline (1951-1980)"
+          ],
+          "qualifier_spans": [
+            {
+              "version_id": "m08",
+              "start": 214,
+              "end": 241,
+              "quote": "Global temperatures in 2024"
+            },
+            {
+              "version_id": "m08",
+              "start": 247,
+              "end": 293,
+              "quote": "2.30 degrees Fahrenheit (1.28 degrees Celsius)"
+            },
+            {
+              "version_id": "m08",
+              "start": 294,
+              "end": 346,
+              "quote": "above the agency’s 20th-century baseline (1951-1980)"
+            }
+          ]
+        },
+        {
+          "id": "m08:atom:fb046580490fb383ceb1",
+          "text": "NASA scientists estimate that Earth in 2024 was about 2.65 degrees Fahrenheit (1.47 degrees Celsius) warmer than the mid-19th century average of 1850–1900.",
+          "span": {
+            "version_id": "m08",
+            "start": 528,
+            "end": 685,
+            "quote": "NASA scientists further estimate Earth in 2024 was about 2.65 degrees Fahrenheit (1.47 degrees Celsius) warmer than the mid-19th century average (1850-1900)."
+          },
+          "parent_id": "p04",
+          "qualifiers": [
+            "NASA scientists further estimate",
+            "Earth in 2024",
+            "about 2.65 degrees Fahrenheit (1.47 degrees Celsius)",
+            "warmer than the mid-19th century average (1850-1900)"
+          ],
+          "qualifier_spans": [
+            {
+              "version_id": "m08",
+              "start": 528,
+              "end": 560,
+              "quote": "NASA scientists further estimate"
+            },
+            {
+              "version_id": "m08",
+              "start": 561,
+              "end": 574,
+              "quote": "Earth in 2024"
+            },
+            {
+              "version_id": "m08",
+              "start": 579,
+              "end": 631,
+              "quote": "about 2.65 degrees Fahrenheit (1.47 degrees Celsius)"
+            },
+            {
+              "version_id": "m08",
+              "start": 632,
+              "end": 684,
+              "quote": "warmer than the mid-19th century average (1850-1900)"
+            }
+          ]
+        }
+      ],
+      "relations": [],
+      "gaps": [],
+      "resolutions": [],
+      "origins": [],
+      "notes": "All three previous atoms remain supported; none withdrawn. These findings describe current material m08, not the fixed evidence scope m07. The displayed January 10, 2025 date belongs to the NASA item. Its text attributes analysis and estimates to NASA scientists, not NOAA, and does not identify NOAA’s annual summary or report 1.29°C. Both temperature differences concern 2024, but 1.28°C uses 1951–1980 and the approximate 1.47°C estimate uses 1850–1900. These NASA-attributed statements are not promoted into content attributed to the target’s NOAA summary.\nThe current excerpt has no explicit citation naming or locating an upstream record. Its attribution to an analysis led by NASA scientists does not identify a cited record. For both lineage probes, neither the excerpt nor known_relations connects this NASA item to NOAA's identified summary, m07. The displayed January 10, 2025 date belongs to the NASA item. Its temperature figures are 1.28°C above 1951–1980 and about 1.47°C above 1850–1900; they do not trace the parent-attributed 1.29°C content to NOAA. NASA's producing role for its own analysis does not establish origin for the whole NOAA-attributed target. Previous lineage findings were empty and remain so; no withdrawals are required.",
+      "revisit_versions": []
+    }
+  },
+  "analysis_history": [
+    {
+      "revision": 1,
+      "round": 1,
+      "version_id": "m07",
+      "duplicate": false,
+      "revisit": false,
+      "accepted": true,
+      "analysis": {
+        "fragments": [
+          {
+            "id": "m07:atom:2faed4a3da8ba7f4a4e9",
+            "text": "The summary reports that global temperature in 2024 exceeded the pre-industrial (1850–1900) average by 2.63°F (1.46°C).",
+            "span": {
+              "version_id": "m07",
+              "start": 355,
+              "end": 450,
+              "quote": "In 2024, global temperature exceeded the pre-industrial (1850–1900) average by 2.63°F (1.46°C)."
+            },
+            "parent_id": "p04",
+            "qualifiers": [
+              "In 2024",
+              "pre-industrial (1850–1900) average",
+              "2.63°F (1.46°C)"
+            ],
+            "qualifier_spans": [
+              {
+                "version_id": "m07",
+                "start": 355,
+                "end": 362,
+                "quote": "In 2024"
+              },
+              {
+                "version_id": "m07",
+                "start": 396,
+                "end": 430,
+                "quote": "pre-industrial (1850–1900) average"
+              },
+              {
+                "version_id": "m07",
+                "start": 434,
+                "end": 449,
+                "quote": "2.63°F (1.46°C)"
+              }
+            ]
+          },
+          {
+            "id": "m07:atom:75cbbe95495fec63fefb",
+            "text": "The summary titled “Assessing the Global Climate in 2024” displays a publication date of January 10, 2025.",
+            "span": {
+              "version_id": "m07",
+              "start": 0,
+              "end": 65,
+              "quote": "Assessing the Global Climate in 2024\nPublication date: 2025-01-10"
+            },
+            "parent_id": "p04",
+            "qualifiers": [
+              "2025-01-10"
+            ],
+            "qualifier_spans": [
+              {
+                "version_id": "m07",
+                "start": 55,
+                "end": 65,
+                "quote": "2025-01-10"
+              }
+            ]
+          },
+          {
+            "id": "m07:atom:bcf0a55972c8d79e9d6f",
+            "text": "The summary reports that global surface temperature in 2024 was 2.32°F (1.29°C) above the 20th-century average.",
+            "span": {
+              "version_id": "m07",
+              "start": 67,
+              "end": 154,
+              "quote": "In 2024, global surface temperature was 2.32°F (1.29°C) above the 20th-century average."
+            },
+            "parent_id": "p04",
+            "qualifiers": [
+              "In 2024",
+              "2.32°F (1.29°C)",
+              "above the 20th-century average"
+            ],
+            "qualifier_spans": [
+              {
+                "version_id": "m07",
+                "start": 67,
+                "end": 74,
+                "quote": "In 2024"
+              },
+              {
+                "version_id": "m07",
+                "start": 107,
+                "end": 122,
+                "quote": "2.32°F (1.29°C)"
+              },
+              {
+                "version_id": "m07",
+                "start": 123,
+                "end": 153,
+                "quote": "above the 20th-century average"
+              }
+            ]
+          }
+        ],
+        "relations": [],
+        "gaps": [],
+        "resolutions": [],
+        "origins": [],
+        "notes": "Structured issuer metadata identifies NOAA National Centers for Environmental Information; the excerpt itself does not name NOAA. The reported 1.29°C difference is bound to the 20th-century baseline, while the 1850–1900 baseline is paired with 1.46°C. Both temperature statements are preserved as summary-reported content. No previous findings were supplied.\nThe target identifies m07 directly. Its NOAA NCEI issuer and URL metadata connect it to NOAA; the content identifies “Assessing the Global Climate in 2024” and “Publication date: 2025-01-10”. No explicit upstream citation or producing/publishing-role statement establishes originality, so origin remains null. The temperature figures appear directly in this summary, with no stated intervening calculation: “In 2024, global surface temperature was 2.32°F (1.29°C) above the 20th-century average.” Separately, it states: “In 2024, global temperature exceeded the pre-industrial (1850–1900) average by 2.63°F (1.46°C).” Thus the parent source is traceable, but its attributed content does not pair 1.29°C with the 1850–1900 baseline.",
+        "revisit_versions": []
+      },
+      "exclusion_reasons": []
+    },
+    {
+      "revision": 2,
+      "round": 1,
+      "version_id": "m08",
+      "duplicate": false,
+      "revisit": false,
+      "accepted": true,
+      "analysis": {
+        "fragments": [
+          {
+            "id": "m08:atom:5335e873f32244d62ffd",
+            "text": "The NASA item titled “Temperatures Rising: NASA Confirms 2024 Warmest Year on Record” displays a publication date of January 10, 2025.",
+            "span": {
+              "version_id": "m08",
+              "start": 0,
+              "end": 91,
+              "quote": "Temperatures Rising: NASA Confirms 2024 Warmest Year on Record\nPublication date: 2025-01-10"
+            },
+            "parent_id": "p04",
+            "qualifiers": [
+              "Publication date: 2025-01-10"
+            ],
+            "qualifier_spans": [
+              {
+                "version_id": "m08",
+                "start": 63,
+                "end": 91,
+                "quote": "Publication date: 2025-01-10"
+              }
+            ]
+          },
+          {
+            "id": "m08:atom:ab4ee91cc326b8fa94e5",
+            "text": "NASA scientists estimate that Earth in 2024 was about 2.65 degrees Fahrenheit (1.47 degrees Celsius) warmer than the 1850–1900 average.",
+            "span": {
+              "version_id": "m08",
+              "start": 528,
+              "end": 685,
+              "quote": "NASA scientists further estimate Earth in 2024 was about 2.65 degrees Fahrenheit (1.47 degrees Celsius) warmer than the mid-19th century average (1850-1900)."
+            },
+            "parent_id": "p04",
+            "qualifiers": [
+              "NASA scientists further estimate",
+              "Earth in 2024",
+              "about 2.65 degrees Fahrenheit (1.47 degrees Celsius)",
+              "warmer than the mid-19th century average (1850-1900)"
+            ],
+            "qualifier_spans": [
+              {
+                "version_id": "m08",
+                "start": 528,
+                "end": 560,
+                "quote": "NASA scientists further estimate"
+              },
+              {
+                "version_id": "m08",
+                "start": 561,
+                "end": 574,
+                "quote": "Earth in 2024"
+              },
+              {
+                "version_id": "m08",
+                "start": 579,
+                "end": 631,
+                "quote": "about 2.65 degrees Fahrenheit (1.47 degrees Celsius)"
+              },
+              {
+                "version_id": "m08",
+                "start": 632,
+                "end": 684,
+                "quote": "warmer than the mid-19th century average (1850-1900)"
+              }
+            ]
+          },
+          {
+            "id": "m08:atom:fb1bad3c72017ba0cdda",
+            "text": "The NASA item reports that global temperatures in 2024 were 2.30 degrees Fahrenheit (1.28 degrees Celsius) above the agency’s 1951–1980 baseline.",
+            "span": {
+              "version_id": "m08",
+              "start": 93,
+              "end": 382,
+              "quote": "Earth’s average surface temperature in 2024 was the warmest on record, according to an analysis led by NASA scientists.\n\nGlobal temperatures in 2024 were 2.30 degrees Fahrenheit (1.28 degrees Celsius) above the agency’s 20th-century baseline (1951-1980), which tops the record set in 2023."
+            },
+            "parent_id": "p04",
+            "qualifiers": [
+              "according to an analysis led by NASA scientists",
+              "Global temperatures in 2024",
+              "2.30 degrees Fahrenheit (1.28 degrees Celsius)",
+              "above the agency’s 20th-century baseline (1951-1980)"
+            ],
+            "qualifier_spans": [
+              {
+                "version_id": "m08",
+                "start": 164,
+                "end": 211,
+                "quote": "according to an analysis led by NASA scientists"
+              },
+              {
+                "version_id": "m08",
+                "start": 214,
+                "end": 241,
+                "quote": "Global temperatures in 2024"
+              },
+              {
+                "version_id": "m08",
+                "start": 247,
+                "end": 293,
+                "quote": "2.30 degrees Fahrenheit (1.28 degrees Celsius)"
+              },
+              {
+                "version_id": "m08",
+                "start": 294,
+                "end": 346,
+                "quote": "above the agency’s 20th-century baseline (1951-1980)"
+              }
+            ]
+          }
+        ],
+        "relations": [],
+        "gaps": [],
+        "resolutions": [],
+        "origins": [],
+        "notes": "The current material is m08, a NASA item, whereas the fixed evidence scope is m07. These atoms describe only m08 and are not attributed to NOAA. Its displayed date concerns the NASA item; its two temperature differences concern 2024 but use different baselines. The excerpt does not mention NOAA or 1.29°C. No previous findings were supplied.\nThe current excerpt contains no explicit citation to NOAA's identified annual summary or another locatable upstream record. It attributes its analysis and estimates to NASA scientists, reporting 1.28°C above 1951–1980 and 1.47°C above 1850–1900, not tracing the target's attributed 1.29°C figure to NOAA. Neither the reporting attribution nor its temperature content is connected to m07 by this excerpt or the supplied known_relations. NASA's producing role for its own analysis does not establish origin for the whole NOAA-attributed target. No previous findings require withdrawal.",
+        "revisit_versions": []
+      },
+      "exclusion_reasons": []
+    },
+    {
+      "revision": 3,
+      "round": 2,
+      "version_id": "m07",
+      "duplicate": true,
+      "revisit": false,
+      "accepted": true,
+      "analysis": {
+        "fragments": [
+          {
+            "id": "m07:atom:2faed4a3da8ba7f4a4e9",
+            "text": "The summary reports that global temperature in 2024 exceeded the pre-industrial (1850–1900) average by 2.63°F (1.46°C).",
+            "span": {
+              "version_id": "m07",
+              "start": 355,
+              "end": 450,
+              "quote": "In 2024, global temperature exceeded the pre-industrial (1850–1900) average by 2.63°F (1.46°C)."
+            },
+            "parent_id": "p04",
+            "qualifiers": [
+              "In 2024",
+              "pre-industrial (1850–1900) average",
+              "2.63°F (1.46°C)"
+            ],
+            "qualifier_spans": [
+              {
+                "version_id": "m07",
+                "start": 355,
+                "end": 362,
+                "quote": "In 2024"
+              },
+              {
+                "version_id": "m07",
+                "start": 396,
+                "end": 430,
+                "quote": "pre-industrial (1850–1900) average"
+              },
+              {
+                "version_id": "m07",
+                "start": 434,
+                "end": 449,
+                "quote": "2.63°F (1.46°C)"
+              }
+            ]
+          },
+          {
+            "id": "m07:atom:75cbbe95495fec63fefb",
+            "text": "The summary titled “Assessing the Global Climate in 2024” displays a publication date of January 10, 2025.",
+            "span": {
+              "version_id": "m07",
+              "start": 0,
+              "end": 65,
+              "quote": "Assessing the Global Climate in 2024\nPublication date: 2025-01-10"
+            },
+            "parent_id": "p04",
+            "qualifiers": [
+              "2025-01-10"
+            ],
+            "qualifier_spans": [
+              {
+                "version_id": "m07",
+                "start": 55,
+                "end": 65,
+                "quote": "2025-01-10"
+              }
+            ]
+          },
+          {
+            "id": "m07:atom:bcf0a55972c8d79e9d6f",
+            "text": "The summary reports that global surface temperature in 2024 was 2.32°F (1.29°C) above the 20th-century average.",
+            "span": {
+              "version_id": "m07",
+              "start": 67,
+              "end": 154,
+              "quote": "In 2024, global surface temperature was 2.32°F (1.29°C) above the 20th-century average."
+            },
+            "parent_id": "p04",
+            "qualifiers": [
+              "In 2024",
+              "2.32°F (1.29°C)",
+              "above the 20th-century average"
+            ],
+            "qualifier_spans": [
+              {
+                "version_id": "m07",
+                "start": 67,
+                "end": 74,
+                "quote": "In 2024"
+              },
+              {
+                "version_id": "m07",
+                "start": 107,
+                "end": 122,
+                "quote": "2.32°F (1.29°C)"
+              },
+              {
+                "version_id": "m07",
+                "start": 123,
+                "end": 153,
+                "quote": "above the 20th-century average"
+              }
+            ]
+          }
+        ],
+        "relations": [],
+        "gaps": [],
+        "resolutions": [],
+        "origins": [],
+        "notes": "All three previous atoms remain supported; none withdrawn. Structured issuer metadata identifies NOAA National Centers for Environmental Information, while the content itself does not name NOAA. The displayed publication date is January 10, 2025. Both temperature statements concern 2024 and remain attributed to the summary: 1.29°C is paired with the 20th-century average, whereas the pre-industrial (1850–1900) average is paired with 1.46°C.\nRechecked the current excerpt; no prior lineage findings require withdrawal. The target directly identifies m07. Structured issuer and URL metadata connect it to NOAA NCEI, while the content identifies “Assessing the Global Climate in 2024” and “Publication date: 2025-01-10”. No explicit upstream citation or producing/publishing-role statement establishes originality. The temperature content appears directly in the identified summary, without a stated intervening calculation: “In 2024, global surface temperature was 2.32°F (1.29°C) above the 20th-century average.” It separately reports: “In 2024, global temperature exceeded the pre-industrial (1850–1900) average by 2.63°F (1.46°C).” Thus the parent source is traceable, but its reported content does not pair 1.29°C with the 1850–1900 baseline. These statements remain summary-attributed content, not independent actual-world findings.",
+        "revisit_versions": []
+      },
+      "exclusion_reasons": []
+    },
+    {
+      "revision": 4,
+      "round": 2,
+      "version_id": "m08",
+      "duplicate": true,
+      "revisit": false,
+      "accepted": true,
+      "analysis": {
+        "fragments": [
+          {
+            "id": "m08:atom:5335e873f32244d62ffd",
+            "text": "The NASA item titled “Temperatures Rising: NASA Confirms 2024 Warmest Year on Record” displays a publication date of January 10, 2025.",
+            "span": {
+              "version_id": "m08",
+              "start": 0,
+              "end": 91,
+              "quote": "Temperatures Rising: NASA Confirms 2024 Warmest Year on Record\nPublication date: 2025-01-10"
+            },
+            "parent_id": "p04",
+            "qualifiers": [
+              "Publication date: 2025-01-10"
+            ],
+            "qualifier_spans": [
+              {
+                "version_id": "m08",
+                "start": 63,
+                "end": 91,
+                "quote": "Publication date: 2025-01-10"
+              }
+            ]
+          },
+          {
+            "id": "m08:atom:f4a027f6474243708066",
+            "text": "The NASA item reports that global temperatures in 2024 were 2.30 degrees Fahrenheit (1.28 degrees Celsius) above the agency’s 20th-century baseline of 1951–1980.",
+            "span": {
+              "version_id": "m08",
+              "start": 93,
+              "end": 382,
+              "quote": "Earth’s average surface temperature in 2024 was the warmest on record, according to an analysis led by NASA scientists.\n\nGlobal temperatures in 2024 were 2.30 degrees Fahrenheit (1.28 degrees Celsius) above the agency’s 20th-century baseline (1951-1980), which tops the record set in 2023."
+            },
+            "parent_id": "p04",
+            "qualifiers": [
+              "Global temperatures in 2024",
+              "2.30 degrees Fahrenheit (1.28 degrees Celsius)",
+              "above the agency’s 20th-century baseline (1951-1980)"
+            ],
+            "qualifier_spans": [
+              {
+                "version_id": "m08",
+                "start": 214,
+                "end": 241,
+                "quote": "Global temperatures in 2024"
+              },
+              {
+                "version_id": "m08",
+                "start": 247,
+                "end": 293,
+                "quote": "2.30 degrees Fahrenheit (1.28 degrees Celsius)"
+              },
+              {
+                "version_id": "m08",
+                "start": 294,
+                "end": 346,
+                "quote": "above the agency’s 20th-century baseline (1951-1980)"
+              }
+            ]
+          },
+          {
+            "id": "m08:atom:fb046580490fb383ceb1",
+            "text": "NASA scientists estimate that Earth in 2024 was about 2.65 degrees Fahrenheit (1.47 degrees Celsius) warmer than the mid-19th century average of 1850–1900.",
+            "span": {
+              "version_id": "m08",
+              "start": 528,
+              "end": 685,
+              "quote": "NASA scientists further estimate Earth in 2024 was about 2.65 degrees Fahrenheit (1.47 degrees Celsius) warmer than the mid-19th century average (1850-1900)."
+            },
+            "parent_id": "p04",
+            "qualifiers": [
+              "NASA scientists further estimate",
+              "Earth in 2024",
+              "about 2.65 degrees Fahrenheit (1.47 degrees Celsius)",
+              "warmer than the mid-19th century average (1850-1900)"
+            ],
+            "qualifier_spans": [
+              {
+                "version_id": "m08",
+                "start": 528,
+                "end": 560,
+                "quote": "NASA scientists further estimate"
+              },
+              {
+                "version_id": "m08",
+                "start": 561,
+                "end": 574,
+                "quote": "Earth in 2024"
+              },
+              {
+                "version_id": "m08",
+                "start": 579,
+                "end": 631,
+                "quote": "about 2.65 degrees Fahrenheit (1.47 degrees Celsius)"
+              },
+              {
+                "version_id": "m08",
+                "start": 632,
+                "end": 684,
+                "quote": "warmer than the mid-19th century average (1850-1900)"
+              }
+            ]
+          }
+        ],
+        "relations": [],
+        "gaps": [],
+        "resolutions": [],
+        "origins": [],
+        "notes": "All three previous atoms remain supported; none withdrawn. These findings describe current material m08, not the fixed evidence scope m07. The displayed January 10, 2025 date belongs to the NASA item. Its text attributes analysis and estimates to NASA scientists, not NOAA, and does not identify NOAA’s annual summary or report 1.29°C. Both temperature differences concern 2024, but 1.28°C uses 1951–1980 and the approximate 1.47°C estimate uses 1850–1900. These NASA-attributed statements are not promoted into content attributed to the target’s NOAA summary.\nThe current excerpt has no explicit citation naming or locating an upstream record. Its attribution to an analysis led by NASA scientists does not identify a cited record. For both lineage probes, neither the excerpt nor known_relations connects this NASA item to NOAA's identified summary, m07. The displayed January 10, 2025 date belongs to the NASA item. Its temperature figures are 1.28°C above 1951–1980 and about 1.47°C above 1850–1900; they do not trace the parent-attributed 1.29°C content to NOAA. NASA's producing role for its own analysis does not establish origin for the whole NOAA-attributed target. Previous lineage findings were empty and remain so; no withdrawals are required.",
+        "revisit_versions": []
+      },
+      "exclusion_reasons": []
+    }
+  ],
+  "fragments": [
+    {
+      "id": "m07:atom:2faed4a3da8ba7f4a4e9",
+      "text": "The summary reports that global temperature in 2024 exceeded the pre-industrial (1850–1900) average by 2.63°F (1.46°C).",
+      "span": {
+        "version_id": "m07",
+        "start": 355,
+        "end": 450,
+        "quote": "In 2024, global temperature exceeded the pre-industrial (1850–1900) average by 2.63°F (1.46°C)."
+      },
+      "parent_id": "p04",
+      "qualifiers": [
+        "In 2024",
+        "pre-industrial (1850–1900) average",
+        "2.63°F (1.46°C)"
+      ],
+      "qualifier_spans": [
+        {
+          "version_id": "m07",
+          "start": 355,
+          "end": 362,
+          "quote": "In 2024"
+        },
+        {
+          "version_id": "m07",
+          "start": 396,
+          "end": 430,
+          "quote": "pre-industrial (1850–1900) average"
+        },
+        {
+          "version_id": "m07",
+          "start": 434,
+          "end": 449,
+          "quote": "2.63°F (1.46°C)"
+        }
+      ]
+    },
+    {
+      "id": "m07:atom:75cbbe95495fec63fefb",
+      "text": "The summary titled “Assessing the Global Climate in 2024” displays a publication date of January 10, 2025.",
+      "span": {
+        "version_id": "m07",
+        "start": 0,
+        "end": 65,
+        "quote": "Assessing the Global Climate in 2024\nPublication date: 2025-01-10"
+      },
+      "parent_id": "p04",
+      "qualifiers": [
+        "2025-01-10"
+      ],
+      "qualifier_spans": [
+        {
+          "version_id": "m07",
+          "start": 55,
+          "end": 65,
+          "quote": "2025-01-10"
+        }
+      ]
+    },
+    {
+      "id": "m07:atom:bcf0a55972c8d79e9d6f",
+      "text": "The summary reports that global surface temperature in 2024 was 2.32°F (1.29°C) above the 20th-century average.",
+      "span": {
+        "version_id": "m07",
+        "start": 67,
+        "end": 154,
+        "quote": "In 2024, global surface temperature was 2.32°F (1.29°C) above the 20th-century average."
+      },
+      "parent_id": "p04",
+      "qualifiers": [
+        "In 2024",
+        "2.32°F (1.29°C)",
+        "above the 20th-century average"
+      ],
+      "qualifier_spans": [
+        {
+          "version_id": "m07",
+          "start": 67,
+          "end": 74,
+          "quote": "In 2024"
+        },
+        {
+          "version_id": "m07",
+          "start": 107,
+          "end": 122,
+          "quote": "2.32°F (1.29°C)"
+        },
+        {
+          "version_id": "m07",
+          "start": 123,
+          "end": 153,
+          "quote": "above the 20th-century average"
+        }
+      ]
+    },
+    {
+      "id": "m08:atom:5335e873f32244d62ffd",
+      "text": "The NASA item titled “Temperatures Rising: NASA Confirms 2024 Warmest Year on Record” displays a publication date of January 10, 2025.",
+      "span": {
+        "version_id": "m08",
+        "start": 0,
+        "end": 91,
+        "quote": "Temperatures Rising: NASA Confirms 2024 Warmest Year on Record\nPublication date: 2025-01-10"
+      },
+      "parent_id": "p04",
+      "qualifiers": [
+        "Publication date: 2025-01-10"
+      ],
+      "qualifier_spans": [
+        {
+          "version_id": "m08",
+          "start": 63,
+          "end": 91,
+          "quote": "Publication date: 2025-01-10"
+        }
+      ]
+    },
+    {
+      "id": "m08:atom:f4a027f6474243708066",
+      "text": "The NASA item reports that global temperatures in 2024 were 2.30 degrees Fahrenheit (1.28 degrees Celsius) above the agency’s 20th-century baseline of 1951–1980.",
+      "span": {
+        "version_id": "m08",
+        "start": 93,
+        "end": 382,
+        "quote": "Earth’s average surface temperature in 2024 was the warmest on record, according to an analysis led by NASA scientists.\n\nGlobal temperatures in 2024 were 2.30 degrees Fahrenheit (1.28 degrees Celsius) above the agency’s 20th-century baseline (1951-1980), which tops the record set in 2023."
+      },
+      "parent_id": "p04",
+      "qualifiers": [
+        "Global temperatures in 2024",
+        "2.30 degrees Fahrenheit (1.28 degrees Celsius)",
+        "above the agency’s 20th-century baseline (1951-1980)"
+      ],
+      "qualifier_spans": [
+        {
+          "version_id": "m08",
+          "start": 214,
+          "end": 241,
+          "quote": "Global temperatures in 2024"
+        },
+        {
+          "version_id": "m08",
+          "start": 247,
+          "end": 293,
+          "quote": "2.30 degrees Fahrenheit (1.28 degrees Celsius)"
+        },
+        {
+          "version_id": "m08",
+          "start": 294,
+          "end": 346,
+          "quote": "above the agency’s 20th-century baseline (1951-1980)"
+        }
+      ]
+    },
+    {
+      "id": "m08:atom:fb046580490fb383ceb1",
+      "text": "NASA scientists estimate that Earth in 2024 was about 2.65 degrees Fahrenheit (1.47 degrees Celsius) warmer than the mid-19th century average of 1850–1900.",
+      "span": {
+        "version_id": "m08",
+        "start": 528,
+        "end": 685,
+        "quote": "NASA scientists further estimate Earth in 2024 was about 2.65 degrees Fahrenheit (1.47 degrees Celsius) warmer than the mid-19th century average (1850-1900)."
+      },
+      "parent_id": "p04",
+      "qualifiers": [
+        "NASA scientists further estimate",
+        "Earth in 2024",
+        "about 2.65 degrees Fahrenheit (1.47 degrees Celsius)",
+        "warmer than the mid-19th century average (1850-1900)"
+      ],
+      "qualifier_spans": [
+        {
+          "version_id": "m08",
+          "start": 528,
+          "end": 560,
+          "quote": "NASA scientists further estimate"
+        },
+        {
+          "version_id": "m08",
+          "start": 561,
+          "end": 574,
+          "quote": "Earth in 2024"
+        },
+        {
+          "version_id": "m08",
+          "start": 579,
+          "end": 631,
+          "quote": "about 2.65 degrees Fahrenheit (1.47 degrees Celsius)"
+        },
+        {
+          "version_id": "m08",
+          "start": 632,
+          "end": 684,
+          "quote": "warmer than the mid-19th century average (1850-1900)"
+        }
+      ]
+    }
+  ],
+  "relations": [],
+  "origins": [],
+  "gaps": [
+    {
+      "id": "origin:p04",
+      "question": "Find the producing record and evidenced lineage for: NOAA's January 10, 2025 annual climate summary reported that the global surface temperature in 2024 was 1.29°C above the 1850–1900 average.",
+      "stage": "provenance",
+      "dimension": "auto",
+      "blocking": true,
+      "target_id": null,
+      "basis": [],
+      "decision_impact": "",
+      "action": "search",
+      "locator": null
+    }
+  ],
+  "gap_registry": [
+    {
+      "id": "origin:p04",
+      "question": "Find the producing record and evidenced lineage for: NOAA's January 10, 2025 annual climate summary reported that the global surface temperature in 2024 was 1.29°C above the 1850–1900 average.",
+      "stage": "provenance",
+      "dimension": "auto",
+      "blocking": true,
+      "target_id": null,
+      "basis": [],
+      "decision_impact": "",
+      "action": "search",
+      "locator": null
+    }
+  ],
+  "resolutions": [],
+  "verification_history": [
+    {
+      "round": 1,
+      "verdict": "contradicted",
+      "basis": [
+        {
+          "version_id": "m07",
+          "start": 0,
+          "end": 65,
+          "quote": "Assessing the Global Climate in 2024\nPublication date: 2025-01-10"
+        },
+        {
+          "version_id": "m07",
+          "start": 67,
+          "end": 154,
+          "quote": "In 2024, global surface temperature was 2.32°F (1.29°C) above the 20th-century average."
+        },
+        {
+          "version_id": "m07",
+          "start": 355,
+          "end": 450,
+          "quote": "In 2024, global temperature exceeded the pre-industrial (1850–1900) average by 2.63°F (1.46°C)."
+        }
+      ],
+      "rationale": "The supplied issuer metadata identifies NOAA NCEI, and the text confirms the annual summary's date and measurement year. However, the target misattributes the baseline: the summary reports 1.29°C above the 20th-century average, not the 1850–1900 average. For 1850–1900, it reports 1.46°C. Thus the attributed reporting claim is contradicted.",
+      "gaps": [],
+      "resolutions": [],
+      "evidence_verdict": "contradicted",
+      "world_verdict": "contradicted",
+      "world_basis": [
+        {
+          "version_id": "m07",
+          "start": 0,
+          "end": 65,
+          "quote": "Assessing the Global Climate in 2024\nPublication date: 2025-01-10"
+        },
+        {
+          "version_id": "m07",
+          "start": 67,
+          "end": 154,
+          "quote": "In 2024, global surface temperature was 2.32°F (1.29°C) above the 20th-century average."
+        },
+        {
+          "version_id": "m07",
+          "start": 355,
+          "end": 450,
+          "quote": "In 2024, global temperature exceeded the pre-industrial (1850–1900) average by 2.63°F (1.46°C)."
+        }
+      ],
+      "world_rationale": "The supplied NOAA NCEI issuer and official-source URL identify m07 as a direct source for NOAA's reporting; its title and displayed date identify the annual summary. The temperature content comes directly from that summary, not another source or an intervening calculation. It assigns 1.29°C to the 20th-century baseline and 1.46°C to 1850–1900, contradicting the target's attributed content. This assesses what NOAA reported, not an independent measurement of actual temperatures. The snapshot was available at as_of; no historical exact-version claim is needed."
+    },
+    {
+      "round": 2,
+      "verdict": "contradicted",
+      "basis": [
+        {
+          "version_id": "m07",
+          "start": 0,
+          "end": 65,
+          "quote": "Assessing the Global Climate in 2024\nPublication date: 2025-01-10"
+        },
+        {
+          "version_id": "m07",
+          "start": 67,
+          "end": 154,
+          "quote": "In 2024, global surface temperature was 2.32°F (1.29°C) above the 20th-century average."
+        },
+        {
+          "version_id": "m07",
+          "start": 355,
+          "end": 450,
+          "quote": "In 2024, global temperature exceeded the pre-industrial (1850–1900) average by 2.63°F (1.46°C)."
+        }
+      ],
+      "rationale": "The supplied issuer metadata identifies NOAA NCEI, and the text confirms the annual summary's January 10, 2025 date and measurement year of 2024. However, the target misattributes the baseline: the summary reports 1.29°C above the 20th-century average, not the 1850–1900 average. For 1850–1900, it reports 1.46°C. Thus the attributed reporting claim is contradicted.",
+      "gaps": [],
+      "resolutions": [],
+      "evidence_verdict": "contradicted",
+      "world_verdict": "contradicted",
+      "world_basis": [
+        {
+          "version_id": "m07",
+          "start": 0,
+          "end": 65,
+          "quote": "Assessing the Global Climate in 2024\nPublication date: 2025-01-10"
+        },
+        {
+          "version_id": "m07",
+          "start": 67,
+          "end": 154,
+          "quote": "In 2024, global surface temperature was 2.32°F (1.29°C) above the 20th-century average."
+        },
+        {
+          "version_id": "m07",
+          "start": 355,
+          "end": 450,
+          "quote": "In 2024, global temperature exceeded the pre-industrial (1850–1900) average by 2.63°F (1.46°C)."
+        }
+      ],
+      "world_rationale": "The supplied NOAA NCEI issuer metadata and official source URL identify m07 as NOAA's own summary; its title and displayed date match the attributed report. This is direct evidence of NOAA's reporting, not a downstream paraphrase or intervening calculation. The summary assigns 1.29°C to the 20th-century baseline and 1.46°C to 1850–1900, contradicting the target's attribution. This assessment concerns what NOAA reported, not independent verification of the underlying temperature measurements."
+    }
+  ],
+  "operations": [
+    {
+      "sequence": 1,
+      "round": 1,
+      "action": "search",
+      "tasks": [
+        {
+          "id": "origin:p04",
+          "question": "Find the producing record and evidenced lineage for: NOAA's January 10, 2025 annual climate summary reported that the global surface temperature in 2024 was 1.29°C above the 1850–1900 average.",
+          "stage": "provenance",
+          "dimension": "auto",
+          "blocking": true,
+          "target_id": null,
+          "basis": [],
+          "decision_impact": "",
+          "action": "search",
+          "locator": null
+        }
+      ],
+      "limit": 24
+    },
+    {
+      "sequence": 2,
+      "round": 1,
+      "action": "snapshot_saved",
+      "version_id": "m07",
+      "sha256": "3242e694748be6066f315a59a40aec291d9a59c1e51a44465120ebfa66c751ba",
+      "eligible": true
+    },
+    {
+      "sequence": 3,
+      "round": 1,
+      "action": "decompose_started",
+      "version_id": "m07",
+      "duplicate": false,
+      "revisit": false
+    },
+    {
+      "sequence": 4,
+      "round": 1,
+      "action": "decompose_completed",
+      "version_id": "m07",
+      "revision": 1
+    },
+    {
+      "sequence": 5,
+      "round": 1,
+      "action": "alignment_checked",
+      "version_id": "m07",
+      "analysis_changed": true
+    },
+    {
+      "sequence": 6,
+      "round": 1,
+      "action": "graph_updated",
+      "version_id": "m07",
+      "open_gaps": 1
+    },
+    {
+      "sequence": 7,
+      "round": 1,
+      "action": "snapshot_saved",
+      "version_id": "m08",
+      "sha256": "fb4827ec97490f34169df492ec893ace42fc56fcb2a3ea7282a053225e7d8102",
+      "eligible": true
+    },
+    {
+      "sequence": 8,
+      "round": 1,
+      "action": "decompose_started",
+      "version_id": "m08",
+      "duplicate": false,
+      "revisit": false
+    },
+    {
+      "sequence": 9,
+      "round": 1,
+      "action": "decompose_completed",
+      "version_id": "m08",
+      "revision": 2
+    },
+    {
+      "sequence": 10,
+      "round": 1,
+      "action": "alignment_checked",
+      "version_id": "m08",
+      "analysis_changed": true
+    },
+    {
+      "sequence": 11,
+      "round": 1,
+      "action": "graph_updated",
+      "version_id": "m08",
+      "open_gaps": 1
+    },
+    {
+      "sequence": 12,
+      "round": 1,
+      "action": "verification_started"
+    },
+    {
+      "sequence": 13,
+      "round": 1,
+      "action": "verification_completed",
+      "verdict": "contradicted",
+      "decision": "contradicted",
+      "assessments": {
+        "evidence": {
+          "raw_verdict": "contradicted",
+          "decision": "contradicted",
+          "blocking_gap_ids": []
+        },
+        "world": {
+          "raw_verdict": "contradicted",
+          "decision": "contradicted",
+          "blocking_gap_ids": []
+        }
+      },
+      "followup_tasks": 0,
+      "provenance_status": "partial"
+    },
+    {
+      "sequence": 14,
+      "round": 1,
+      "action": "assessment_changed",
+      "previous": null,
+      "current": {
+        "evidence": {
+          "raw_verdict": "contradicted",
+          "decision": "contradicted",
+          "blocking_gap_ids": []
+        },
+        "world": {
+          "raw_verdict": "contradicted",
+          "decision": "contradicted",
+          "blocking_gap_ids": []
+        }
+      },
+      "basis": [
+        {
+          "version_id": "m07",
+          "start": 0,
+          "end": 65,
+          "quote": "Assessing the Global Climate in 2024\nPublication date: 2025-01-10"
+        },
+        {
+          "version_id": "m07",
+          "start": 67,
+          "end": 154,
+          "quote": "In 2024, global surface temperature was 2.32°F (1.29°C) above the 20th-century average."
+        },
+        {
+          "version_id": "m07",
+          "start": 355,
+          "end": 450,
+          "quote": "In 2024, global temperature exceeded the pre-industrial (1850–1900) average by 2.63°F (1.46°C)."
+        }
+      ],
+      "world_basis": [
+        {
+          "version_id": "m07",
+          "start": 0,
+          "end": 65,
+          "quote": "Assessing the Global Climate in 2024\nPublication date: 2025-01-10"
+        },
+        {
+          "version_id": "m07",
+          "start": 67,
+          "end": 154,
+          "quote": "In 2024, global surface temperature was 2.32°F (1.29°C) above the 20th-century average."
+        },
+        {
+          "version_id": "m07",
+          "start": 355,
+          "end": 450,
+          "quote": "In 2024, global temperature exceeded the pre-industrial (1850–1900) average by 2.63°F (1.46°C)."
+        }
+      ]
+    },
+    {
+      "sequence": 15,
+      "round": 1,
+      "action": "progress_checked",
+      "new_eligible_versions": 2,
+      "new_structure": true
+    },
+    {
+      "sequence": 16,
+      "round": 2,
+      "action": "search",
+      "tasks": [
+        {
+          "id": "origin:p04",
+          "question": "Find the producing record and evidenced lineage for: NOAA's January 10, 2025 annual climate summary reported that the global surface temperature in 2024 was 1.29°C above the 1850–1900 average.",
+          "stage": "provenance",
+          "dimension": "auto",
+          "blocking": true,
+          "target_id": null,
+          "basis": [],
+          "decision_impact": "",
+          "action": "search",
+          "locator": null
+        }
+      ],
+      "limit": 22
+    },
+    {
+      "sequence": 17,
+      "round": 2,
+      "action": "duplicate_observed",
+      "version_id": "m07",
+      "sha256": "3242e694748be6066f315a59a40aec291d9a59c1e51a44465120ebfa66c751ba",
+      "eligible": true
+    },
+    {
+      "sequence": 18,
+      "round": 2,
+      "action": "decompose_started",
+      "version_id": "m07",
+      "duplicate": true,
+      "revisit": false
+    },
+    {
+      "sequence": 19,
+      "round": 2,
+      "action": "decompose_completed",
+      "version_id": "m07",
+      "revision": 3
+    },
+    {
+      "sequence": 20,
+      "round": 2,
+      "action": "alignment_checked",
+      "version_id": "m07",
+      "analysis_changed": true
+    },
+    {
+      "sequence": 21,
+      "round": 2,
+      "action": "graph_updated",
+      "version_id": "m07",
+      "open_gaps": 1
+    },
+    {
+      "sequence": 22,
+      "round": 2,
+      "action": "duplicate_observed",
+      "version_id": "m08",
+      "sha256": "fb4827ec97490f34169df492ec893ace42fc56fcb2a3ea7282a053225e7d8102",
+      "eligible": true
+    },
+    {
+      "sequence": 23,
+      "round": 2,
+      "action": "decompose_started",
+      "version_id": "m08",
+      "duplicate": true,
+      "revisit": false
+    },
+    {
+      "sequence": 24,
+      "round": 2,
+      "action": "decompose_completed",
+      "version_id": "m08",
+      "revision": 4
+    },
+    {
+      "sequence": 25,
+      "round": 2,
+      "action": "alignment_checked",
+      "version_id": "m08",
+      "analysis_changed": true
+    },
+    {
+      "sequence": 26,
+      "round": 2,
+      "action": "graph_updated",
+      "version_id": "m08",
+      "open_gaps": 1
+    },
+    {
+      "sequence": 27,
+      "round": 2,
+      "action": "verification_started"
+    },
+    {
+      "sequence": 28,
+      "round": 2,
+      "action": "verification_completed",
+      "verdict": "contradicted",
+      "decision": "contradicted",
+      "assessments": {
+        "evidence": {
+          "raw_verdict": "contradicted",
+          "decision": "contradicted",
+          "blocking_gap_ids": []
+        },
+        "world": {
+          "raw_verdict": "contradicted",
+          "decision": "contradicted",
+          "blocking_gap_ids": []
+        }
+      },
+      "followup_tasks": 0,
+      "provenance_status": "partial"
+    },
+    {
+      "sequence": 29,
+      "round": 2,
+      "action": "progress_checked",
+      "new_eligible_versions": 0,
+      "new_structure": true
+    },
+    {
+      "sequence": 30,
+      "round": 2,
+      "action": "stopped",
+      "reason": "round_budget"
+    }
+  ],
+  "errors": []
+}

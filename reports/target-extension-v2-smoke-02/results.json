@@ -1,0 +1,113 @@
+[
+  {
+    "id": "p02",
+    "assessment_mode": "evidence",
+    "status": "completed",
+    "prediction": "false",
+    "checkpoints": [
+      {
+        "round": 1,
+        "id": "p02",
+        "decision": "false",
+        "assessment_mode": "evidence",
+        "assessments": {
+          "evidence": {
+            "raw_verdict": "contradicted",
+            "decision": "contradicted",
+            "blocking_gap_ids": []
+          },
+          "world": {
+            "raw_verdict": "contradicted",
+            "decision": "contradicted",
+            "blocking_gap_ids": []
+          }
+        },
+        "provenance_status": "original_material_located"
+      },
+      {
+        "round": 2,
+        "id": "p02",
+        "decision": "false",
+        "assessment_mode": "evidence",
+        "assessments": {
+          "evidence": {
+            "raw_verdict": "contradicted",
+            "decision": "contradicted",
+            "blocking_gap_ids": []
+          },
+          "world": {
+            "raw_verdict": "contradicted",
+            "decision": "contradicted",
+            "blocking_gap_ids": []
+          }
+        },
+        "provenance_status": "original_material_located"
+      }
+    ],
+    "target_plan_sha256": "52a9102db7a694111cb6f8b4529952aaf3632a93d9bf8a955b14d2cc2ff6d023",
+    "native_prediction": {
+      "id": "p02",
+      "assessment_mode": "evidence",
+      "as_of": "2026-09-05T09:34:36Z",
+      "decision": "false",
+      "assessments": {
+        "evidence": {
+          "raw_verdict": "contradicted",
+          "decision": "contradicted",
+          "blocking_gap_ids": []
+        },
+        "world": {
+          "raw_verdict": "contradicted",
+          "decision": "contradicted",
+          "blocking_gap_ids": []
+        }
+      },
+      "provenance_status": "original_material_located",
+      "assessment_valid": true,
+      "stop_reason": "round_budget"
+    },
+    "engine_usage": {
+      "rounds": 2,
+      "documents": 4,
+      "unique_versions": 2,
+      "decomposition_calls": 4,
+      "verification_calls": 2
+    },
+    "usage": {
+      "model_calls": 20,
+      "input_tokens": 95070,
+      "output_tokens": 11047,
+      "seconds": 186.6487246260076
+    },
+    "checkpoint_hashes": [
+      {
+        "round": 1,
+        "sha256": "00576c395c315ae2ff3e8dfb81d08beb6ddf7b8ba988e0283f204b7ccc2acfb3"
+      },
+      {
+        "round": 2,
+        "sha256": "433732083992475235935bd3eaed73b238de5a310db6050c7f04fa9191fff92d"
+      }
+    ],
+    "new_api_attempts": 20,
+    "returned_responses": 20
+  },
+  {
+    "id": "p08",
+    "assessment_mode": "evidence",
+    "status": "error",
+    "prediction": null,
+    "checkpoints": [],
+    "error_type": "TargetPlanningError",
+    "error_stage": "extension",
+    "usage": {
+      "model_calls": 2,
+      "input_tokens": 2362,
+      "output_tokens": 2535,
+      "seconds": 50.93070071699913
+    },
+    "checkpoint_hashes": [],
+    "new_api_attempts": 2,
+    "returned_responses": 2
+  }
+]

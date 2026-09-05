@@ -1,0 +1,93 @@
+{
+  "id": "p02",
+  "assessment_mode": "evidence",
+  "status": "completed",
+  "prediction": "false",
+  "checkpoints": [
+    {
+      "round": 1,
+      "id": "p02",
+      "decision": "false",
+      "assessment_mode": "evidence",
+      "assessments": {
+        "evidence": {
+          "raw_verdict": "contradicted",
+          "decision": "contradicted",
+          "blocking_gap_ids": []
+        },
+        "world": {
+          "raw_verdict": "contradicted",
+          "decision": "contradicted",
+          "blocking_gap_ids": []
+        }
+      },
+      "provenance_status": "original_material_located"
+    },
+    {
+      "round": 2,
+      "id": "p02",
+      "decision": "false",
+      "assessment_mode": "evidence",
+      "assessments": {
+        "evidence": {
+          "raw_verdict": "contradicted",
+          "decision": "contradicted",
+          "blocking_gap_ids": []
+        },
+        "world": {
+          "raw_verdict": "contradicted",
+          "decision": "contradicted",
+          "blocking_gap_ids": []
+        }
+      },
+      "provenance_status": "original_material_located"
+    }
+  ],
+  "target_plan_sha256": "5b7e14c64f04a49a18555b7826fe182c51b3f7a1945ff0c4e8fcb6c4748c88f5",
+  "native_prediction": {
+    "id": "p02",
+    "assessment_mode": "evidence",
+    "as_of": "2026-09-05T09:34:36Z",
+    "decision": "false",
+    "assessments": {
+      "evidence": {
+        "raw_verdict": "contradicted",
+        "decision": "contradicted",
+        "blocking_gap_ids": []
+      },
+      "world": {
+        "raw_verdict": "contradicted",
+        "decision": "contradicted",
+        "blocking_gap_ids": []
+      }
+    },
+    "provenance_status": "original_material_located",
+    "assessment_valid": true,
+    "stop_reason": "round_budget"
+  },
+  "engine_usage": {
+    "rounds": 2,
+    "documents": 4,
+    "unique_versions": 2,
+    "decomposition_calls": 4,
+    "verification_calls": 2
+  },
+  "usage": {
+    "model_calls": 22,
+    "input_tokens": 91837,
+    "output_tokens": 9482,
+    "seconds": 170.9808445009985
+  },
+  "checkpoint_hashes": [
+    {
+      "round": 1,
+      "sha256": "fcb51d95f33f1f21ee8111b0bf5ea3a408f3589d1d237eea5038b982d1bdd91e"
+    },
+    {
+      "round": 2,
+      "sha256": "da6edb0acfeed3e990f82fddbffbf65ba76b16e085c484db2b6350712fb3602e"
+    }
+  ],
+  "new_api_attempts": 22,
+  "returned_responses": 22
+}

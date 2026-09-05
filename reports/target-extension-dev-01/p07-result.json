@@ -1,0 +1,93 @@
+{
+  "id": "p07",
+  "assessment_mode": "evidence",
+  "status": "completed",
+  "prediction": "false",
+  "checkpoints": [
+    {
+      "round": 1,
+      "id": "p07",
+      "decision": "false",
+      "assessment_mode": "evidence",
+      "assessments": {
+        "evidence": {
+          "raw_verdict": "contradicted",
+          "decision": "contradicted",
+          "blocking_gap_ids": []
+        },
+        "world": {
+          "raw_verdict": "contradicted",
+          "decision": "contradicted",
+          "blocking_gap_ids": []
+        }
+      },
+      "provenance_status": "partial"
+    },
+    {
+      "round": 2,
+      "id": "p07",
+      "decision": "false",
+      "assessment_mode": "evidence",
+      "assessments": {
+        "evidence": {
+          "raw_verdict": "contradicted",
+          "decision": "contradicted",
+          "blocking_gap_ids": []
+        },
+        "world": {
+          "raw_verdict": "contradicted",
+          "decision": "contradicted",
+          "blocking_gap_ids": []
+        }
+      },
+      "provenance_status": "partial"
+    }
+  ],
+  "target_plan_sha256": "83b99a6905c0fa0e4dd2849a935a6bd162019ce1ef2868c67a9580233623e4a7",
+  "native_prediction": {
+    "id": "p07",
+    "assessment_mode": "evidence",
+    "as_of": "2026-09-05T09:34:36Z",
+    "decision": "false",
+    "assessments": {
+      "evidence": {
+        "raw_verdict": "contradicted",
+        "decision": "contradicted",
+        "blocking_gap_ids": []
+      },
+      "world": {
+        "raw_verdict": "contradicted",
+        "decision": "contradicted",
+        "blocking_gap_ids": []
+      }
+    },
+    "provenance_status": "partial",
+    "assessment_valid": true,
+    "stop_reason": "round_budget"
+  },
+  "engine_usage": {
+    "rounds": 2,
+    "documents": 4,
+    "unique_versions": 2,
+    "decomposition_calls": 5,
+    "verification_calls": 2
+  },
+  "usage": {
+    "model_calls": 23,
+    "input_tokens": 65878,
+    "output_tokens": 5807,
+    "seconds": 119.91508494400478
+  },
+  "checkpoint_hashes": [
+    {
+      "round": 1,
+      "sha256": "d97680dd23f533b18004cd278c63e853d2ecfd548b0cb065ef3830fe64f154e8"
+    },
+    {
+      "round": 2,
+      "sha256": "0b63aa7e72bf55171db39003e17435ecda501f26096394c1f3bb1112b37d69f3"
+    }
+  ],
+  "new_api_attempts": 23,
+  "returned_responses": 23
+}

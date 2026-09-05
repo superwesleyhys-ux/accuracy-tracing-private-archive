@@ -1,0 +1,36 @@
+[
+  {
+    "id": "p02",
+    "assessment_mode": "evidence",
+    "status": "error",
+    "prediction": null,
+    "checkpoints": [],
+    "error_type": "TargetPlanningError",
+    "usage": {
+      "model_calls": 1,
+      "input_tokens": 480,
+      "output_tokens": 511,
+      "seconds": 21.66808985998796
+    },
+    "checkpoint_hashes": [],
+    "new_api_attempts": 1,
+    "returned_responses": 1
+  },
+  {
+    "id": "p04",
+    "assessment_mode": "evidence",
+    "status": "error",
+    "prediction": null,
+    "checkpoints": [],
+    "error_type": "TargetPlanningError",
+    "usage": {
+      "model_calls": 1,
+      "input_tokens": 481,
+      "output_tokens": 561,
+      "seconds": 22.51259446601034
+    },
+    "checkpoint_hashes": [],
+    "new_api_attempts": 1,
+    "returned_responses": 1
+  }
+]

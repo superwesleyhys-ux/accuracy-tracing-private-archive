@@ -1,0 +1,17 @@
+{
+  "id": "p02",
+  "assessment_mode": "evidence",
+  "status": "error",
+  "prediction": null,
+  "checkpoints": [],
+  "error_type": "ModuleNotFoundError",
+  "usage": {
+    "model_calls": 0,
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "seconds": 0
+  },
+  "checkpoint_hashes": [],
+  "new_api_attempts": 0,
+  "returned_responses": 0
+}

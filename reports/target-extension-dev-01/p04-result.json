@@ -1,0 +1,93 @@
+{
+  "id": "p04",
+  "assessment_mode": "evidence",
+  "status": "completed",
+  "prediction": "false",
+  "checkpoints": [
+    {
+      "round": 1,
+      "id": "p04",
+      "decision": "false",
+      "assessment_mode": "evidence",
+      "assessments": {
+        "evidence": {
+          "raw_verdict": "contradicted",
+          "decision": "contradicted",
+          "blocking_gap_ids": []
+        },
+        "world": {
+          "raw_verdict": "contradicted",
+          "decision": "contradicted",
+          "blocking_gap_ids": []
+        }
+      },
+      "provenance_status": "partial"
+    },
+    {
+      "round": 2,
+      "id": "p04",
+      "decision": "false",
+      "assessment_mode": "evidence",
+      "assessments": {
+        "evidence": {
+          "raw_verdict": "contradicted",
+          "decision": "contradicted",
+          "blocking_gap_ids": []
+        },
+        "world": {
+          "raw_verdict": "contradicted",
+          "decision": "contradicted",
+          "blocking_gap_ids": []
+        }
+      },
+      "provenance_status": "partial"
+    }
+  ],
+  "target_plan_sha256": "0d091f955f5f0c07ad68c2ce1014e4c8811683a002cf68935ff7b5ef019e1248",
+  "native_prediction": {
+    "id": "p04",
+    "assessment_mode": "evidence",
+    "as_of": "2026-09-05T09:34:36Z",
+    "decision": "false",
+    "assessments": {
+      "evidence": {
+        "raw_verdict": "contradicted",
+        "decision": "contradicted",
+        "blocking_gap_ids": []
+      },
+      "world": {
+        "raw_verdict": "contradicted",
+        "decision": "contradicted",
+        "blocking_gap_ids": []
+      }
+    },
+    "provenance_status": "partial",
+    "assessment_valid": true,
+    "stop_reason": "round_budget"
+  },
+  "engine_usage": {
+    "rounds": 2,
+    "documents": 4,
+    "unique_versions": 2,
+    "decomposition_calls": 4,
+    "verification_calls": 2
+  },
+  "usage": {
+    "model_calls": 20,
+    "input_tokens": 67485,
+    "output_tokens": 6187,
+    "seconds": 117.92094609400374
+  },
+  "checkpoint_hashes": [
+    {
+      "round": 1,
+      "sha256": "2301a58e428dfb86b07ccab5c497404affc0a004738635f6c609af7bf5213e90"
+    },
+    {
+      "round": 2,
+      "sha256": "5ccb5e9ce4c1ecf7af8ab80e4330a4d7f8eb96338a2eb1c630aa95deac878b22"
+    }
+  ],
+  "new_api_attempts": 20,
+  "returned_responses": 20
+}

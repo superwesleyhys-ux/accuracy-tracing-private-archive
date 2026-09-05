@@ -1,0 +1,38 @@
+[
+  {
+    "sequence": 1,
+    "stage": "claim_contract",
+    "repair": {
+      "structure": 0,
+      "extension": 0
+    },
+    "status": "validated"
+  },
+  {
+    "sequence": 2,
+    "stage": "extension",
+    "repair": {
+      "structure": 0,
+      "extension": 0
+    },
+    "status": "repair_requested"
+  },
+  {
+    "sequence": 3,
+    "stage": "claim_contract",
+    "repair": {
+      "structure": 0,
+      "extension": 1
+    },
+    "status": "validated"
+  },
+  {
+    "sequence": 4,
+    "stage": "extension",
+    "repair": {
+      "structure": 0,
+      "extension": 1
+    },
+    "status": "accepted"
+  }
+]

@@ -1,0 +1,18 @@
+{
+  "id": "p07",
+  "assessment_mode": "evidence",
+  "status": "error",
+  "prediction": null,
+  "checkpoints": [],
+  "error_type": "TargetPlanningError",
+  "error_stage": "claim_contract",
+  "usage": {
+    "model_calls": 2,
+    "input_tokens": 1738,
+    "output_tokens": 522,
+    "seconds": 19.506730326000252
+  },
+  "checkpoint_hashes": [],
+  "new_api_attempts": 2,
+  "returned_responses": 2
+}

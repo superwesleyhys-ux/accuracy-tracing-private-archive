@@ -1,0 +1,1036 @@
+{
+  "schema_version": "0.3",
+  "scope": "plugin-supplied semantic analyses; no built-in truth oracle",
+  "target": {
+    "id": "p08",
+    "text": "The USGS Unified Geologic Map of the Moon released in 2020 combined six Apollo-era regional maps with newer lunar-mission data.",
+    "as_of": "2026-09-05T09:34:36Z",
+    "source_version_id": "m14",
+    "assessment_mode": "evidence",
+    "evidence_scope": [
+      "m15"
+    ]
+  },
+  "config": {
+    "max_rounds": 2,
+    "max_documents": 24,
+    "max_decomposition_calls": 24,
+    "experimental_force_rounds": true
+  },
+  "provenance_status": "unresolved",
+  "fact_status": "unresolved",
+  "stop_reason": "verifier_error",
+  "usage": {
+    "rounds": 1,
+    "documents": 2,
+    "unique_versions": 2,
+    "decomposition_calls": 3,
+    "verification_calls": 1
+  },
+  "decision_status": "unresolved",
+  "assessments": null,
+  "assessment_valid": false,
+  "materials": [
+    {
+      "version_id": "m14",
+      "url": "https://www.usgs.gov/news/astrogeology-releases-new-map-moon",
+      "content": "Astrogeology releases a new map of the Moon\nPublication date: 2020-04-20\n\nThe USGS Astrogeology Science Center (ASC), in collaboration with NASA and the Lunar and Planetary Institute, has released a new definitive geologic map of the Moon!\n\nChallenges of the decade-long process included the fact that the Apollo-era lunar maps were only available in paper format and early digitized versions of the paper maps did not align with updated and more accurate images. The original six maps were digitally renovated and reconciled to the newer datasets.\n\nFind the press release here: https://www.usgs.gov/news/usgs-releases-first-ever-comprehensive-geologic-map-moon.",
+      "retrieved_at": "2026-09-05T09:34:36Z",
+      "published_at": null,
+      "available_at": "2026-09-05T09:34:36Z",
+      "availability_basis": "Current web-tool collection completed at retrieved_at on 2026-09-05. The supplied material is a selected, whitespace-normalized excerpt, not a full page or historical exact-version capture. Availability is asserted only at collection completion. The source's displayed publication date is preserved in content; no exact timezone-qualified publication instant is known.",
+      "issuer": "USGS Astrogeology Science Center"
+    },
+    {
+      "version_id": "m15",
+      "url": "https://www.usgs.gov/news/usgs-releases-first-ever-comprehensive-geologic-map-moon",
+      "content": "USGS Releases First-Ever Comprehensive Geologic Map of the Moon\nPublication date: 2020-04-20\n\nTo create the new digital map, scientists used information from six Apollo-era regional maps along with updated information from recent satellite missions to the moon. The existing historical maps were redrawn to align them with the modern data sets, thus preserving previous observations and interpretations. Along with merging new and old data, USGS researchers also developed a unified description of the stratigraphy, or rock layers, of the moon.\n\nThis resolved issues from previous maps where rock names, descriptions and ages were sometimes inconsistent.",
+      "retrieved_at": "2026-09-05T09:34:36Z",
+      "published_at": null,
+      "available_at": "2026-09-05T09:34:36Z",
+      "availability_basis": "Current web-tool collection completed at retrieved_at on 2026-09-05. The supplied material is a selected, whitespace-normalized excerpt, not a full page or historical exact-version capture. Availability is asserted only at collection completion. The source's displayed publication date is preserved in content; no exact timezone-qualified publication instant is known.",
+      "issuer": "USGS Communications and Publishing"
+    }
+  ],
+  "eligible_version_ids": [
+    "m14",
+    "m15"
+  ],
+  "observations": [
+    {
+      "version_id": "m14",
+      "retrieved_at": "2026-09-05T09:34:36Z",
+      "duplicate": false,
+      "eligible": true,
+      "reasons": []
+    },
+    {
+      "version_id": "m15",
+      "retrieved_at": "2026-09-05T09:34:36Z",
+      "duplicate": false,
+      "eligible": true,
+      "reasons": []
+    }
+  ],
+  "analyses": {
+    "m14": {
+      "fragments": [
+        {
+          "id": "m14:atom:82476951f5edb12a5e03",
+          "text": "An announcement dated April 20, 2020 reported that the USGS Astrogeology Science Center, collaborating with NASA and the Lunar and Planetary Institute, had released a new definitive geologic map of the Moon.",
+          "span": {
+            "version_id": "m14",
+            "start": 44,
+            "end": 239,
+            "quote": "Publication date: 2020-04-20\n\nThe USGS Astrogeology Science Center (ASC), in collaboration with NASA and the Lunar and Planetary Institute, has released a new definitive geologic map of the Moon!"
+          },
+          "parent_id": "p08",
+          "qualifiers": [
+            "Publication date: 2020-04-20",
+            "in collaboration with NASA and the Lunar and Planetary Institute"
+          ],
+          "qualifier_spans": [
+            {
+              "version_id": "m14",
+              "start": 44,
+              "end": 72,
+              "quote": "Publication date: 2020-04-20"
+            },
+            {
+              "version_id": "m14",
+              "start": 118,
+              "end": 182,
+              "quote": "in collaboration with NASA and the Lunar and Planetary Institute"
+            }
+          ]
+        },
+        {
+          "id": "m14:atom:ffadea78b15f7ab9fa71",
+          "text": "In producing the newly released USGS lunar geologic map, six original Apollo-era lunar maps were digitally renovated and reconciled to newer datasets after early digitized paper maps failed to align with updated, more accurate images.",
+          "span": {
+            "version_id": "m14",
+            "start": 74,
+            "end": 548,
+            "quote": "The USGS Astrogeology Science Center (ASC), in collaboration with NASA and the Lunar and Planetary Institute, has released a new definitive geologic map of the Moon!\n\nChallenges of the decade-long process included the fact that the Apollo-era lunar maps were only available in paper format and early digitized versions of the paper maps did not align with updated and more accurate images. The original six maps were digitally renovated and reconciled to the newer datasets."
+          },
+          "parent_id": "p08",
+          "qualifiers": [
+            "Apollo-era lunar maps",
+            "early digitized versions of the paper maps did not align with updated and more accurate images",
+            "The original six maps",
+            "to the newer datasets"
+          ],
+          "qualifier_spans": [
+            {
+              "version_id": "m14",
+              "start": 306,
+              "end": 327,
+              "quote": "Apollo-era lunar maps"
+            },
+            {
+              "version_id": "m14",
+              "start": 368,
+              "end": 462,
+              "quote": "early digitized versions of the paper maps did not align with updated and more accurate images"
+            },
+            {
+              "version_id": "m14",
+              "start": 464,
+              "end": 485,
+              "quote": "The original six maps"
+            },
+            {
+              "version_id": "m14",
+              "start": 526,
+              "end": 547,
+              "quote": "to the newer datasets"
+            }
+          ]
+        }
+      ],
+      "relations": [
+        {
+          "id": "m14:citation:54729b46ed7d838140fb",
+          "from_version": "m14",
+          "to_version": "m15",
+          "kind": "cites",
+          "status": "direct",
+          "basis": [
+            {
+              "version_id": "m14",
+              "start": 550,
+              "end": 662,
+              "quote": "Find the press release here: https://www.usgs.gov/news/usgs-releases-first-ever-comprehensive-geologic-map-moon."
+            }
+          ],
+          "rationale": "The announcement explicitly cites a separate press release. It does not establish quotation, reprinting or derivation from that release.",
+          "upstream_locator": "https://www.usgs.gov/news/usgs-releases-first-ever-comprehensive-geologic-map-moon"
+        }
+      ],
+      "gaps": [],
+      "resolutions": [
+        {
+          "gap_id": "m14:upstream:f8810be1fbf6e4303b9d",
+          "basis": [
+            {
+              "version_id": "m14",
+              "start": 550,
+              "end": 662,
+              "quote": "Find the press release here: https://www.usgs.gov/news/usgs-releases-first-ever-comprehensive-geologic-map-moon."
+            }
+          ],
+          "rationale": "The source-side citation now identifies a visible upstream version."
+        }
+      ],
+      "origins": [],
+      "notes": "Both previous atomic findings remain supported and are re-emitted; none withdrawn. The release and production discussion bind to one newly released USGS lunar geologic map, with no competing map referent; absence of the target's exact title is not an identity contradiction. “The original six maps” refers back to the Apollo-era lunar maps, establishing six maps as the counted unit and Apollo-era as their temporal qualifier. Regional coverage is not specified. Reconciliation explicitly connects those maps with newer datasets, with recency contrasted against the older maps and digitizations, not an unrelated baseline. The datasets' lunar-mission origin remains unresolved because the excerpt identifies neither missions nor data sources; the narrower reconciliation wording is retained. The displayed 2020 date dates an announcement reporting a completed release, rather than explicitly specifying its release date. These atoms extract current material m14 only; no content from the fixed evidence scope m15 was supplied. Prior provenance findings are outside this stage.\nThe prior citation remains supported; no lineage findings require withdrawal. The excerpt identifies USGS ASC and collaborators as releasing the map, but does not establish this page as the original map record, dataset or observation. Both routed probes concern provenance within m15. Only m15's locator is supplied, not its content, so neither probe can be resolved within the as_of boundary here. The current material describes six Apollo-era maps reconciled to newer datasets and displays a 2020 publication date, but cites no individual input records and does not specify lunar-mission provenance.",
+      "revisit_versions": []
+    },
+    "m15": {
+      "fragments": [
+        {
+          "id": "m15:atom:6df3aab67eb09b03a043",
+          "text": "USGS announced the release of its comprehensive geologic map of the Moon in a publication dated April 20, 2020.",
+          "span": {
+            "version_id": "m15",
+            "start": 0,
+            "end": 92,
+            "quote": "USGS Releases First-Ever Comprehensive Geologic Map of the Moon\nPublication date: 2020-04-20"
+          },
+          "parent_id": "p08",
+          "qualifiers": [
+            "Publication date: 2020-04-20"
+          ],
+          "qualifier_spans": [
+            {
+              "version_id": "m15",
+              "start": 64,
+              "end": 92,
+              "quote": "Publication date: 2020-04-20"
+            }
+          ]
+        },
+        {
+          "id": "m15:atom:edd6034aa5c24e2f69ca",
+          "text": "Scientists created the new USGS digital geologic map of the Moon using information from six Apollo-era regional maps together with updated information from recent satellite missions to the Moon, aligning the historical maps with modern datasets.",
+          "span": {
+            "version_id": "m15",
+            "start": 94,
+            "end": 403,
+            "quote": "To create the new digital map, scientists used information from six Apollo-era regional maps along with updated information from recent satellite missions to the moon. The existing historical maps were redrawn to align them with the modern data sets, thus preserving previous observations and interpretations."
+          },
+          "parent_id": "p08",
+          "qualifiers": [
+            "six Apollo-era regional maps",
+            "along with updated information from recent satellite missions to the moon",
+            "The existing historical maps were redrawn to align them with the modern data sets"
+          ],
+          "qualifier_spans": [
+            {
+              "version_id": "m15",
+              "start": 158,
+              "end": 186,
+              "quote": "six Apollo-era regional maps"
+            },
+            {
+              "version_id": "m15",
+              "start": 187,
+              "end": 260,
+              "quote": "along with updated information from recent satellite missions to the moon"
+            },
+            {
+              "version_id": "m15",
+              "start": 262,
+              "end": 343,
+              "quote": "The existing historical maps were redrawn to align them with the modern data sets"
+            }
+          ]
+        }
+      ],
+      "relations": [],
+      "gaps": [],
+      "resolutions": [],
+      "origins": [
+        {
+          "target_id": "p08",
+          "version_id": "m15",
+          "basis": [
+            {
+              "version_id": "m15",
+              "start": 0,
+              "end": 544,
+              "quote": "USGS Releases First-Ever Comprehensive Geologic Map of the Moon\nPublication date: 2020-04-20\n\nTo create the new digital map, scientists used information from six Apollo-era regional maps along with updated information from recent satellite missions to the moon. The existing historical maps were redrawn to align them with the modern data sets, thus preserving previous observations and interpretations. Along with merging new and old data, USGS researchers also developed a unified description of the stratigraphy, or rock layers, of the moon."
+            }
+          ],
+          "material_kind": "original_record",
+          "rationale": "This is an agency release documenting its own map-production work, established by the release heading together with the description of USGS researchers' contribution. It concerns the released map and its combined inputs, not merely an incidental statistic. The declared citation from m14 exactly identifies m15's URL, providing the required connection to the target source."
+        }
+      ],
+      "notes": "The headline and “the new digital map” bind the release and combined inputs to one lunar geologic map; the excerpt presents no competing map referent. This is descriptive/anaphoric binding, not evidence of the exact formal title. Six counts regional maps, and Apollo-era modifies those maps. “Along with” establishes joint use; historical maps versus modern datasets establishes the relative-recency baseline. The dated release headline supports a 2020 release announcement, without specifying a separate release instant. No previous findings were supplied.\nThe release-year provenance is the release heading and displayed publication date; the input-combination provenance is the accompanying account of map production. The excerpt describes the historical maps and satellite inputs but supplies no explicit cited record names or URLs, so no source-side citations are extracted. Its displayed date is not an exact publication timestamp or proof of historical version availability. No previous findings were supplied.",
+      "revisit_versions": []
+    }
+  },
+  "analysis_history": [
+    {
+      "revision": 1,
+      "round": 1,
+      "version_id": "m14",
+      "duplicate": false,
+      "revisit": false,
+      "accepted": true,
+      "analysis": {
+        "fragments": [
+          {
+            "id": "m14:atom:03dadcbc980986dacf67",
+            "text": "A USGS announcement dated April 20, 2020 reported that the USGS Astrogeology Science Center, collaborating with NASA and the Lunar and Planetary Institute, had released a new definitive geologic map of the Moon.",
+            "span": {
+              "version_id": "m14",
+              "start": 44,
+              "end": 239,
+              "quote": "Publication date: 2020-04-20\n\nThe USGS Astrogeology Science Center (ASC), in collaboration with NASA and the Lunar and Planetary Institute, has released a new definitive geologic map of the Moon!"
+            },
+            "parent_id": "p08",
+            "qualifiers": [
+              "Publication date: 2020-04-20",
+              "in collaboration with NASA and the Lunar and Planetary Institute"
+            ],
+            "qualifier_spans": [
+              {
+                "version_id": "m14",
+                "start": 44,
+                "end": 72,
+                "quote": "Publication date: 2020-04-20"
+              },
+              {
+                "version_id": "m14",
+                "start": 118,
+                "end": 182,
+                "quote": "in collaboration with NASA and the Lunar and Planetary Institute"
+              }
+            ]
+          },
+          {
+            "id": "m14:atom:29a4f6224a3544f91ffd",
+            "text": "In the process of producing the new USGS lunar geologic map, six original Apollo-era lunar maps were digitally renovated and reconciled to newer datasets, following alignment problems between early digitized paper maps and updated, more accurate images.",
+            "span": {
+              "version_id": "m14",
+              "start": 74,
+              "end": 548,
+              "quote": "The USGS Astrogeology Science Center (ASC), in collaboration with NASA and the Lunar and Planetary Institute, has released a new definitive geologic map of the Moon!\n\nChallenges of the decade-long process included the fact that the Apollo-era lunar maps were only available in paper format and early digitized versions of the paper maps did not align with updated and more accurate images. The original six maps were digitally renovated and reconciled to the newer datasets."
+            },
+            "parent_id": "p08",
+            "qualifiers": [
+              "Apollo-era lunar maps",
+              "early digitized versions of the paper maps did not align with updated and more accurate images",
+              "The original six maps",
+              "to the newer datasets"
+            ],
+            "qualifier_spans": [
+              {
+                "version_id": "m14",
+                "start": 306,
+                "end": 327,
+                "quote": "Apollo-era lunar maps"
+              },
+              {
+                "version_id": "m14",
+                "start": 368,
+                "end": 462,
+                "quote": "early digitized versions of the paper maps did not align with updated and more accurate images"
+              },
+              {
+                "version_id": "m14",
+                "start": 464,
+                "end": 485,
+                "quote": "The original six maps"
+              },
+              {
+                "version_id": "m14",
+                "start": 526,
+                "end": 547,
+                "quote": "to the newer datasets"
+              }
+            ]
+          }
+        ],
+        "relations": [
+          {
+            "id": "m14:citation:54729b46ed7d838140fb",
+            "from_version": "m14",
+            "to_version": null,
+            "kind": "cites",
+            "status": "declared",
+            "basis": [
+              {
+                "version_id": "m14",
+                "start": 550,
+                "end": 662,
+                "quote": "Find the press release here: https://www.usgs.gov/news/usgs-releases-first-ever-comprehensive-geologic-map-moon."
+              }
+            ],
+            "rationale": "The announcement explicitly directs readers to a separate press release; it does not establish quotation or derivation from that release.",
+            "upstream_locator": "https://www.usgs.gov/news/usgs-releases-first-ever-comprehensive-geologic-map-moon"
+          }
+        ],
+        "gaps": [
+          {
+            "id": "m14:upstream:f8810be1fbf6e4303b9d",
+            "question": "Locate the explicitly cited upstream: https://www.usgs.gov/news/usgs-releases-first-ever-comprehensive-geologic-map-moon",
+            "stage": "provenance",
+            "dimension": "provenance",
+            "blocking": true,
+            "target_id": "p08",
+            "basis": [
+              {
+                "version_id": "m14",
+                "start": 550,
+                "end": 662,
+                "quote": "Find the press release here: https://www.usgs.gov/news/usgs-releases-first-ever-comprehensive-geologic-map-moon."
+              }
+            ],
+            "decision_impact": "Locating the release could clarify the release date, map identity, and provenance of the six-map reconciliation and newer inputs. Its contents are not supplied here.",
+            "action": "fetch",
+            "locator": "https://www.usgs.gov/news/usgs-releases-first-ever-comprehensive-geologic-map-moon",
+            "probe_id": null
+          }
+        ],
+        "resolutions": [],
+        "origins": [],
+        "notes": "The release and production discussion concern one newly released USGS lunar geologic map; no competing map referent appears, and identical title wording is not required. “The original six maps” refers back to the Apollo-era lunar maps, establishing both count and temporal qualification. Reconciliation explicitly connects those maps to newer datasets; the comparison is with the older maps and their digitizations, not an unrelated baseline. The excerpt does not specify the maps’ regional coverage or establish lunar-mission provenance for the newer datasets, so those dimensions are not added to the atoms. The displayed 2020 date dates the release announcement, not an explicit release-day statement. These are extractions from the supplied current material m14; the fixed evidence scope lists m15, whose content is not supplied here. No previous findings were supplied.\nThe current excerpt identifies USGS ASC and collaborators as releasing the map, but does not establish this page as the original map record or underlying dataset. It displays a 2020 publication date and describes reconciliation of six Apollo-era maps with newer datasets, without identifying lunar missions or citing individual input records. Both routed probes request provenance within m15; no m15 content is supplied, so that provenance cannot be checked. No previous findings require withdrawal.",
+        "revisit_versions": []
+      },
+      "exclusion_reasons": []
+    },
+    {
+      "revision": 2,
+      "round": 1,
+      "version_id": "m15",
+      "duplicate": false,
+      "revisit": false,
+      "accepted": true,
+      "analysis": {
+        "fragments": [
+          {
+            "id": "m15:atom:6df3aab67eb09b03a043",
+            "text": "USGS announced the release of its comprehensive geologic map of the Moon in a publication dated April 20, 2020.",
+            "span": {
+              "version_id": "m15",
+              "start": 0,
+              "end": 92,
+              "quote": "USGS Releases First-Ever Comprehensive Geologic Map of the Moon\nPublication date: 2020-04-20"
+            },
+            "parent_id": "p08",
+            "qualifiers": [
+              "Publication date: 2020-04-20"
+            ],
+            "qualifier_spans": [
+              {
+                "version_id": "m15",
+                "start": 64,
+                "end": 92,
+                "quote": "Publication date: 2020-04-20"
+              }
+            ]
+          },
+          {
+            "id": "m15:atom:edd6034aa5c24e2f69ca",
+            "text": "Scientists created the new USGS digital geologic map of the Moon using information from six Apollo-era regional maps together with updated information from recent satellite missions to the Moon, aligning the historical maps with modern datasets.",
+            "span": {
+              "version_id": "m15",
+              "start": 94,
+              "end": 403,
+              "quote": "To create the new digital map, scientists used information from six Apollo-era regional maps along with updated information from recent satellite missions to the moon. The existing historical maps were redrawn to align them with the modern data sets, thus preserving previous observations and interpretations."
+            },
+            "parent_id": "p08",
+            "qualifiers": [
+              "six Apollo-era regional maps",
+              "along with updated information from recent satellite missions to the moon",
+              "The existing historical maps were redrawn to align them with the modern data sets"
+            ],
+            "qualifier_spans": [
+              {
+                "version_id": "m15",
+                "start": 158,
+                "end": 186,
+                "quote": "six Apollo-era regional maps"
+              },
+              {
+                "version_id": "m15",
+                "start": 187,
+                "end": 260,
+                "quote": "along with updated information from recent satellite missions to the moon"
+              },
+              {
+                "version_id": "m15",
+                "start": 262,
+                "end": 343,
+                "quote": "The existing historical maps were redrawn to align them with the modern data sets"
+              }
+            ]
+          }
+        ],
+        "relations": [],
+        "gaps": [],
+        "resolutions": [],
+        "origins": [
+          {
+            "target_id": "p08",
+            "version_id": "m15",
+            "basis": [
+              {
+                "version_id": "m15",
+                "start": 0,
+                "end": 544,
+                "quote": "USGS Releases First-Ever Comprehensive Geologic Map of the Moon\nPublication date: 2020-04-20\n\nTo create the new digital map, scientists used information from six Apollo-era regional maps along with updated information from recent satellite missions to the moon. The existing historical maps were redrawn to align them with the modern data sets, thus preserving previous observations and interpretations. Along with merging new and old data, USGS researchers also developed a unified description of the stratigraphy, or rock layers, of the moon."
+              }
+            ],
+            "material_kind": "original_record",
+            "rationale": "This is an agency release documenting its own map-production work, established by the release heading together with the description of USGS researchers' contribution. It concerns the released map and its combined inputs, not merely an incidental statistic. The declared citation from m14 exactly identifies m15's URL, providing the required connection to the target source."
+          }
+        ],
+        "notes": "The headline and “the new digital map” bind the release and combined inputs to one lunar geologic map; the excerpt presents no competing map referent. This is descriptive/anaphoric binding, not evidence of the exact formal title. Six counts regional maps, and Apollo-era modifies those maps. “Along with” establishes joint use; historical maps versus modern datasets establishes the relative-recency baseline. The dated release headline supports a 2020 release announcement, without specifying a separate release instant. No previous findings were supplied.\nThe release-year provenance is the release heading and displayed publication date; the input-combination provenance is the accompanying account of map production. The excerpt describes the historical maps and satellite inputs but supplies no explicit cited record names or URLs, so no source-side citations are extracted. Its displayed date is not an exact publication timestamp or proof of historical version availability. No previous findings were supplied.",
+        "revisit_versions": []
+      },
+      "exclusion_reasons": []
+    },
+    {
+      "revision": 3,
+      "round": 1,
+      "version_id": "m14",
+      "duplicate": true,
+      "revisit": true,
+      "accepted": true,
+      "analysis": {
+        "fragments": [
+          {
+            "id": "m14:atom:82476951f5edb12a5e03",
+            "text": "An announcement dated April 20, 2020 reported that the USGS Astrogeology Science Center, collaborating with NASA and the Lunar and Planetary Institute, had released a new definitive geologic map of the Moon.",
+            "span": {
+              "version_id": "m14",
+              "start": 44,
+              "end": 239,
+              "quote": "Publication date: 2020-04-20\n\nThe USGS Astrogeology Science Center (ASC), in collaboration with NASA and the Lunar and Planetary Institute, has released a new definitive geologic map of the Moon!"
+            },
+            "parent_id": "p08",
+            "qualifiers": [
+              "Publication date: 2020-04-20",
+              "in collaboration with NASA and the Lunar and Planetary Institute"
+            ],
+            "qualifier_spans": [
+              {
+                "version_id": "m14",
+                "start": 44,
+                "end": 72,
+                "quote": "Publication date: 2020-04-20"
+              },
+              {
+                "version_id": "m14",
+                "start": 118,
+                "end": 182,
+                "quote": "in collaboration with NASA and the Lunar and Planetary Institute"
+              }
+            ]
+          },
+          {
+            "id": "m14:atom:ffadea78b15f7ab9fa71",
+            "text": "In producing the newly released USGS lunar geologic map, six original Apollo-era lunar maps were digitally renovated and reconciled to newer datasets after early digitized paper maps failed to align with updated, more accurate images.",
+            "span": {
+              "version_id": "m14",
+              "start": 74,
+              "end": 548,
+              "quote": "The USGS Astrogeology Science Center (ASC), in collaboration with NASA and the Lunar and Planetary Institute, has released a new definitive geologic map of the Moon!\n\nChallenges of the decade-long process included the fact that the Apollo-era lunar maps were only available in paper format and early digitized versions of the paper maps did not align with updated and more accurate images. The original six maps were digitally renovated and reconciled to the newer datasets."
+            },
+            "parent_id": "p08",
+            "qualifiers": [
+              "Apollo-era lunar maps",
+              "early digitized versions of the paper maps did not align with updated and more accurate images",
+              "The original six maps",
+              "to the newer datasets"
+            ],
+            "qualifier_spans": [
+              {
+                "version_id": "m14",
+                "start": 306,
+                "end": 327,
+                "quote": "Apollo-era lunar maps"
+              },
+              {
+                "version_id": "m14",
+                "start": 368,
+                "end": 462,
+                "quote": "early digitized versions of the paper maps did not align with updated and more accurate images"
+              },
+              {
+                "version_id": "m14",
+                "start": 464,
+                "end": 485,
+                "quote": "The original six maps"
+              },
+              {
+                "version_id": "m14",
+                "start": 526,
+                "end": 547,
+                "quote": "to the newer datasets"
+              }
+            ]
+          }
+        ],
+        "relations": [
+          {
+            "id": "m14:citation:54729b46ed7d838140fb",
+            "from_version": "m14",
+            "to_version": "m15",
+            "kind": "cites",
+            "status": "direct",
+            "basis": [
+              {
+                "version_id": "m14",
+                "start": 550,
+                "end": 662,
+                "quote": "Find the press release here: https://www.usgs.gov/news/usgs-releases-first-ever-comprehensive-geologic-map-moon."
+              }
+            ],
+            "rationale": "The announcement explicitly cites a separate press release. It does not establish quotation, reprinting or derivation from that release.",
+            "upstream_locator": "https://www.usgs.gov/news/usgs-releases-first-ever-comprehensive-geologic-map-moon"
+          }
+        ],
+        "gaps": [],
+        "resolutions": [
+          {
+            "gap_id": "m14:upstream:f8810be1fbf6e4303b9d",
+            "basis": [
+              {
+                "version_id": "m14",
+                "start": 550,
+                "end": 662,
+                "quote": "Find the press release here: https://www.usgs.gov/news/usgs-releases-first-ever-comprehensive-geologic-map-moon."
+              }
+            ],
+            "rationale": "The source-side citation now identifies a visible upstream version."
+          }
+        ],
+        "origins": [],
+        "notes": "Both previous atomic findings remain supported and are re-emitted; none withdrawn. The release and production discussion bind to one newly released USGS lunar geologic map, with no competing map referent; absence of the target's exact title is not an identity contradiction. “The original six maps” refers back to the Apollo-era lunar maps, establishing six maps as the counted unit and Apollo-era as their temporal qualifier. Regional coverage is not specified. Reconciliation explicitly connects those maps with newer datasets, with recency contrasted against the older maps and digitizations, not an unrelated baseline. The datasets' lunar-mission origin remains unresolved because the excerpt identifies neither missions nor data sources; the narrower reconciliation wording is retained. The displayed 2020 date dates an announcement reporting a completed release, rather than explicitly specifying its release date. These atoms extract current material m14 only; no content from the fixed evidence scope m15 was supplied. Prior provenance findings are outside this stage.\nThe prior citation remains supported; no lineage findings require withdrawal. The excerpt identifies USGS ASC and collaborators as releasing the map, but does not establish this page as the original map record, dataset or observation. Both routed probes concern provenance within m15. Only m15's locator is supplied, not its content, so neither probe can be resolved within the as_of boundary here. The current material describes six Apollo-era maps reconciled to newer datasets and displays a 2020 publication date, but cites no individual input records and does not specify lunar-mission provenance.",
+        "revisit_versions": []
+      },
+      "exclusion_reasons": []
+    }
+  ],
+  "fragments": [
+    {
+      "id": "m14:atom:82476951f5edb12a5e03",
+      "text": "An announcement dated April 20, 2020 reported that the USGS Astrogeology Science Center, collaborating with NASA and the Lunar and Planetary Institute, had released a new definitive geologic map of the Moon.",
+      "span": {
+        "version_id": "m14",
+        "start": 44,
+        "end": 239,
+        "quote": "Publication date: 2020-04-20\n\nThe USGS Astrogeology Science Center (ASC), in collaboration with NASA and the Lunar and Planetary Institute, has released a new definitive geologic map of the Moon!"
+      },
+      "parent_id": "p08",
+      "qualifiers": [
+        "Publication date: 2020-04-20",
+        "in collaboration with NASA and the Lunar and Planetary Institute"
+      ],
+      "qualifier_spans": [
+        {
+          "version_id": "m14",
+          "start": 44,
+          "end": 72,
+          "quote": "Publication date: 2020-04-20"
+        },
+        {
+          "version_id": "m14",
+          "start": 118,
+          "end": 182,
+          "quote": "in collaboration with NASA and the Lunar and Planetary Institute"
+        }
+      ]
+    },
+    {
+      "id": "m14:atom:ffadea78b15f7ab9fa71",
+      "text": "In producing the newly released USGS lunar geologic map, six original Apollo-era lunar maps were digitally renovated and reconciled to newer datasets after early digitized paper maps failed to align with updated, more accurate images.",
+      "span": {
+        "version_id": "m14",
+        "start": 74,
+        "end": 548,
+        "quote": "The USGS Astrogeology Science Center (ASC), in collaboration with NASA and the Lunar and Planetary Institute, has released a new definitive geologic map of the Moon!\n\nChallenges of the decade-long process included the fact that the Apollo-era lunar maps were only available in paper format and early digitized versions of the paper maps did not align with updated and more accurate images. The original six maps were digitally renovated and reconciled to the newer datasets."
+      },
+      "parent_id": "p08",
+      "qualifiers": [
+        "Apollo-era lunar maps",
+        "early digitized versions of the paper maps did not align with updated and more accurate images",
+        "The original six maps",
+        "to the newer datasets"
+      ],
+      "qualifier_spans": [
+        {
+          "version_id": "m14",
+          "start": 306,
+          "end": 327,
+          "quote": "Apollo-era lunar maps"
+        },
+        {
+          "version_id": "m14",
+          "start": 368,
+          "end": 462,
+          "quote": "early digitized versions of the paper maps did not align with updated and more accurate images"
+        },
+        {
+          "version_id": "m14",
+          "start": 464,
+          "end": 485,
+          "quote": "The original six maps"
+        },
+        {
+          "version_id": "m14",
+          "start": 526,
+          "end": 547,
+          "quote": "to the newer datasets"
+        }
+      ]
+    },
+    {
+      "id": "m15:atom:6df3aab67eb09b03a043",
+      "text": "USGS announced the release of its comprehensive geologic map of the Moon in a publication dated April 20, 2020.",
+      "span": {
+        "version_id": "m15",
+        "start": 0,
+        "end": 92,
+        "quote": "USGS Releases First-Ever Comprehensive Geologic Map of the Moon\nPublication date: 2020-04-20"
+      },
+      "parent_id": "p08",
+      "qualifiers": [
+        "Publication date: 2020-04-20"
+      ],
+      "qualifier_spans": [
+        {
+          "version_id": "m15",
+          "start": 64,
+          "end": 92,
+          "quote": "Publication date: 2020-04-20"
+        }
+      ]
+    },
+    {
+      "id": "m15:atom:edd6034aa5c24e2f69ca",
+      "text": "Scientists created the new USGS digital geologic map of the Moon using information from six Apollo-era regional maps together with updated information from recent satellite missions to the Moon, aligning the historical maps with modern datasets.",
+      "span": {
+        "version_id": "m15",
+        "start": 94,
+        "end": 403,
+        "quote": "To create the new digital map, scientists used information from six Apollo-era regional maps along with updated information from recent satellite missions to the moon. The existing historical maps were redrawn to align them with the modern data sets, thus preserving previous observations and interpretations."
+      },
+      "parent_id": "p08",
+      "qualifiers": [
+        "six Apollo-era regional maps",
+        "along with updated information from recent satellite missions to the moon",
+        "The existing historical maps were redrawn to align them with the modern data sets"
+      ],
+      "qualifier_spans": [
+        {
+          "version_id": "m15",
+          "start": 158,
+          "end": 186,
+          "quote": "six Apollo-era regional maps"
+        },
+        {
+          "version_id": "m15",
+          "start": 187,
+          "end": 260,
+          "quote": "along with updated information from recent satellite missions to the moon"
+        },
+        {
+          "version_id": "m15",
+          "start": 262,
+          "end": 343,
+          "quote": "The existing historical maps were redrawn to align them with the modern data sets"
+        }
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "m14:citation:54729b46ed7d838140fb",
+      "from_version": "m14",
+      "to_version": "m15",
+      "kind": "cites",
+      "status": "direct",
+      "basis": [
+        {
+          "version_id": "m14",
+          "start": 550,
+          "end": 662,
+          "quote": "Find the press release here: https://www.usgs.gov/news/usgs-releases-first-ever-comprehensive-geologic-map-moon."
+        }
+      ],
+      "rationale": "The announcement explicitly cites a separate press release. It does not establish quotation, reprinting or derivation from that release.",
+      "upstream_locator": "https://www.usgs.gov/news/usgs-releases-first-ever-comprehensive-geologic-map-moon"
+    }
+  ],
+  "origins": [
+    {
+      "target_id": "p08",
+      "version_id": "m15",
+      "basis": [
+        {
+          "version_id": "m15",
+          "start": 0,
+          "end": 544,
+          "quote": "USGS Releases First-Ever Comprehensive Geologic Map of the Moon\nPublication date: 2020-04-20\n\nTo create the new digital map, scientists used information from six Apollo-era regional maps along with updated information from recent satellite missions to the moon. The existing historical maps were redrawn to align them with the modern data sets, thus preserving previous observations and interpretations. Along with merging new and old data, USGS researchers also developed a unified description of the stratigraphy, or rock layers, of the moon."
+        }
+      ],
+      "material_kind": "original_record",
+      "rationale": "This is an agency release documenting its own map-production work, established by the release heading together with the description of USGS researchers' contribution. It concerns the released map and its combined inputs, not merely an incidental statistic. The declared citation from m14 exactly identifies m15's URL, providing the required connection to the target source."
+    }
+  ],
+  "gaps": [
+    {
+      "id": "origin:p08",
+      "question": "Find the producing record and evidenced lineage for: The USGS Unified Geologic Map of the Moon released in 2020 combined six Apollo-era regional maps with newer lunar-mission data.",
+      "stage": "provenance",
+      "dimension": "auto",
+      "blocking": true,
+      "target_id": null,
+      "basis": [],
+      "decision_impact": "",
+      "action": "search",
+      "locator": null,
+      "probe_id": null
+    }
+  ],
+  "gap_registry": [
+    {
+      "id": "origin:p08",
+      "question": "Find the producing record and evidenced lineage for: The USGS Unified Geologic Map of the Moon released in 2020 combined six Apollo-era regional maps with newer lunar-mission data.",
+      "stage": "provenance",
+      "dimension": "auto",
+      "blocking": true,
+      "target_id": null,
+      "basis": [],
+      "decision_impact": "",
+      "action": "search",
+      "locator": null,
+      "probe_id": null
+    },
+    {
+      "id": "m14:upstream:f8810be1fbf6e4303b9d",
+      "question": "Locate the explicitly cited upstream: https://www.usgs.gov/news/usgs-releases-first-ever-comprehensive-geologic-map-moon",
+      "stage": "provenance",
+      "dimension": "provenance",
+      "blocking": true,
+      "target_id": "p08",
+      "basis": [
+        {
+          "version_id": "m14",
+          "start": 550,
+          "end": 662,
+          "quote": "Find the press release here: https://www.usgs.gov/news/usgs-releases-first-ever-comprehensive-geologic-map-moon."
+        }
+      ],
+      "decision_impact": "Locating the release could clarify the release date, map identity, and provenance of the six-map reconciliation and newer inputs. Its contents are not supplied here.",
+      "action": "fetch",
+      "locator": "https://www.usgs.gov/news/usgs-releases-first-ever-comprehensive-geologic-map-moon",
+      "probe_id": null
+    },
+    {
+      "id": "lineage:p08",
+      "question": "Provide the target source version and an evidenced citation/derivation path to an original material",
+      "stage": "provenance",
+      "dimension": "auto",
+      "blocking": true,
+      "target_id": null,
+      "basis": [],
+      "decision_impact": "",
+      "action": "search",
+      "locator": null,
+      "probe_id": null
+    }
+  ],
+  "resolutions": [
+    {
+      "gap_id": "m14:upstream:f8810be1fbf6e4303b9d",
+      "basis": [
+        {
+          "version_id": "m14",
+          "start": 550,
+          "end": 662,
+          "quote": "Find the press release here: https://www.usgs.gov/news/usgs-releases-first-ever-comprehensive-geologic-map-moon."
+        }
+      ],
+      "rationale": "The source-side citation now identifies a visible upstream version."
+    }
+  ],
+  "verification_history": [],
+  "operations": [
+    {
+      "sequence": 1,
+      "round": 1,
+      "action": "search",
+      "tasks": [
+        {
+          "id": "origin:p08",
+          "question": "Find the producing record and evidenced lineage for: The USGS Unified Geologic Map of the Moon released in 2020 combined six Apollo-era regional maps with newer lunar-mission data.",
+          "stage": "provenance",
+          "dimension": "auto",
+          "blocking": true,
+          "target_id": null,
+          "basis": [],
+          "decision_impact": "",
+          "action": "search",
+          "locator": null,
+          "probe_id": null
+        }
+      ],
+      "limit": 24
+    },
+    {
+      "sequence": 2,
+      "round": 1,
+      "action": "snapshot_saved",
+      "version_id": "m14",
+      "sha256": "be19c1d964e76166386f7d359835f607f3bab084e1e73d129d7540d16ecba9ae",
+      "eligible": true
+    },
+    {
+      "sequence": 3,
+      "round": 1,
+      "action": "decompose_started",
+      "version_id": "m14",
+      "duplicate": false,
+      "revisit": false
+    },
+    {
+      "sequence": 4,
+      "round": 1,
+      "action": "decompose_completed",
+      "version_id": "m14",
+      "revision": 1
+    },
+    {
+      "sequence": 5,
+      "round": 1,
+      "action": "alignment_checked",
+      "version_id": "m14",
+      "analysis_changed": true
+    },
+    {
+      "sequence": 6,
+      "round": 1,
+      "action": "graph_updated",
+      "version_id": "m14",
+      "open_gaps": 2
+    },
+    {
+      "sequence": 7,
+      "round": 1,
+      "action": "snapshot_saved",
+      "version_id": "m15",
+      "sha256": "f2bae0e04f48ddf3c68efaf99555290f1d178d18f1e45b103aed999764c495b4",
+      "eligible": true
+    },
+    {
+      "sequence": 8,
+      "round": 1,
+      "action": "decompose_started",
+      "version_id": "m15",
+      "duplicate": false,
+      "revisit": false
+    },
+    {
+      "sequence": 9,
+      "round": 1,
+      "action": "decompose_completed",
+      "version_id": "m15",
+      "revision": 2
+    },
+    {
+      "sequence": 10,
+      "round": 1,
+      "action": "alignment_checked",
+      "version_id": "m15",
+      "analysis_changed": true
+    },
+    {
+      "sequence": 11,
+      "round": 1,
+      "action": "graph_updated",
+      "version_id": "m15",
+      "open_gaps": 3
+    },
+    {
+      "sequence": 12,
+      "round": 1,
+      "action": "upstream_arrival_reanalysis",
+      "version_id": "m14",
+      "upstream_version": "m15",
+      "relation_id": "m14:citation:54729b46ed7d838140fb"
+    },
+    {
+      "sequence": 13,
+      "round": 1,
+      "action": "revisit_requested",
+      "version_id": "m14"
+    },
+    {
+      "sequence": 14,
+      "round": 1,
+      "action": "decompose_started",
+      "version_id": "m14",
+      "duplicate": true,
+      "revisit": true
+    },
+    {
+      "sequence": 15,
+      "round": 1,
+      "action": "decompose_completed",
+      "version_id": "m14",
+      "revision": 3
+    },
+    {
+      "sequence": 16,
+      "round": 1,
+      "action": "alignment_checked",
+      "version_id": "m14",
+      "analysis_changed": true
+    },
+    {
+      "sequence": 17,
+      "round": 1,
+      "action": "graph_updated",
+      "version_id": "m14",
+      "open_gaps": 1
+    },
+    {
+      "sequence": 18,
+      "round": 1,
+      "action": "verification_started"
+    },
+    {
+      "sequence": 19,
+      "round": 1,
+      "action": "verification_rejected",
+      "verification": null,
+      "message": "staged semantic judgement_critic: request or output validation failed (RuntimeError)"
+    },
+    {
+      "sequence": 20,
+      "round": 1,
+      "action": "error",
+      "stage": "verifier",
+      "message": "staged semantic judgement_critic: request or output validation failed (RuntimeError)"
+    },
+    {
+      "sequence": 21,
+      "round": 1,
+      "action": "stopped",
+      "reason": "verifier_error"
+    }
+  ],
+  "errors": [
+    {
+      "stage": "verifier",
+      "type": "StagedSemanticError",
+      "message": "staged semantic judgement_critic: request or output validation failed (RuntimeError)"
+    }
+  ]
+}

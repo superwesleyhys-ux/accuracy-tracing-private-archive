@@ -1,0 +1,12 @@
+{
+  "status": "has_errors",
+  "scheduled_cases": 2,
+  "completed": 0,
+  "new_api_attempts": 0,
+  "returned_responses": 0,
+  "recorded_usage": {
+    "model_calls": 0,
+    "input_tokens": 0,
+    "output_tokens": 0
+  }
+}

@@ -1,0 +1,216 @@
+[
+  {
+    "id": "p01",
+    "assessment_mode": "evidence",
+    "status": "error",
+    "prediction": null,
+    "checkpoints": [],
+    "error_type": "TargetPlanningError",
+    "error_stage": "claim_contract",
+    "usage": {
+      "model_calls": 1,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "seconds": 27.587192235994735
+    },
+    "checkpoint_hashes": [],
+    "new_api_attempts": 1,
+    "returned_responses": 0
+  },
+  {
+    "id": "p02",
+    "assessment_mode": "evidence",
+    "status": "error",
+    "prediction": null,
+    "checkpoints": [
+      {
+        "round": 1,
+        "id": "p02",
+        "decision": "false",
+        "assessment_mode": "evidence",
+        "assessments": {
+          "evidence": {
+            "raw_verdict": "contradicted",
+            "decision": "contradicted",
+            "blocking_gap_ids": []
+          },
+          "world": {
+            "raw_verdict": "contradicted",
+            "decision": "contradicted",
+            "blocking_gap_ids": []
+          }
+        },
+        "provenance_status": "original_material_located"
+      }
+    ],
+    "target_plan_sha256": "0b87f1ec79ba39a0254bb72e4f2776578d690f25fcb5f3a8615b36ba686799df",
+    "native_prediction": {
+      "id": "p02",
+      "assessment_mode": "evidence",
+      "as_of": "2026-09-05T09:34:36Z",
+      "decision": "unverifiable",
+      "assessments": {
+        "evidence": {
+          "raw_verdict": "contradicted",
+          "decision": "contradicted",
+          "blocking_gap_ids": []
+        },
+        "world": {
+          "raw_verdict": "contradicted",
+          "decision": "contradicted",
+          "blocking_gap_ids": []
+        }
+      },
+      "provenance_status": "unresolved",
+      "assessment_valid": false,
+      "stop_reason": "decomposer_error"
+    },
+    "engine_usage": {
+      "rounds": 2,
+      "documents": 4,
+      "unique_versions": 2,
+      "decomposition_calls": 4,
+      "verification_calls": 1
+    },
+    "error_type": "ValueError",
+    "usage": {
+      "model_calls": 16,
+      "input_tokens": 67968,
+      "output_tokens": 9094,
+      "seconds": 152.43308603401238
+    },
+    "checkpoint_hashes": [
+      {
+        "round": 1,
+        "sha256": "ef704f4a25e18158ff20d066f77b391ddd7b989c4082a4215788404f3149d17b"
+      }
+    ],
+    "new_api_attempts": 16,
+    "returned_responses": 15
+  },
+  {
+    "id": "p03",
+    "assessment_mode": "evidence",
+    "status": "error",
+    "prediction": null,
+    "checkpoints": [],
+    "error_type": "TargetPlanningError",
+    "error_stage": "claim_contract",
+    "usage": {
+      "model_calls": 1,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "seconds": 7.657240669999737
+    },
+    "checkpoint_hashes": [],
+    "new_api_attempts": 1,
+    "returned_responses": 0
+  },
+  {
+    "id": "p04",
+    "assessment_mode": "evidence",
+    "status": "error",
+    "prediction": null,
+    "checkpoints": [],
+    "error_type": "TargetPlanningError",
+    "error_stage": "claim_contract",
+    "usage": {
+      "model_calls": 1,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "seconds": 7.649569696994149
+    },
+    "checkpoint_hashes": [],
+    "new_api_attempts": 1,
+    "returned_responses": 0
+  },
+  {
+    "id": "p05",
+    "assessment_mode": "evidence",
+    "status": "error",
+    "prediction": null,
+    "checkpoints": [],
+    "error_type": "TargetPlanningError",
+    "error_stage": "claim_contract",
+    "usage": {
+      "model_calls": 1,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "seconds": 23.979478943001595
+    },
+    "checkpoint_hashes": [],
+    "new_api_attempts": 1,
+    "returned_responses": 0
+  },
+  {
+    "id": "p06",
+    "assessment_mode": "world",
+    "status": "error",
+    "prediction": null,
+    "checkpoints": [],
+    "error_type": "TargetPlanningError",
+    "error_stage": "claim_contract",
+    "usage": {
+      "model_calls": 1,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "seconds": 9.395183655011351
+    },
+    "checkpoint_hashes": [],
+    "new_api_attempts": 1,
+    "returned_responses": 0
+  },
+  {
+    "id": "p07",
+    "assessment_mode": "evidence",
+    "status": "error",
+    "prediction": null,
+    "checkpoints": [],
+    "error_type": "TargetPlanningError",
+    "error_stage": "claim_contract",
+    "usage": {
+      "model_calls": 2,
+      "input_tokens": 1738,
+      "output_tokens": 522,
+      "seconds": 19.506730326000252
+    },
+    "checkpoint_hashes": [],
+    "new_api_attempts": 2,
+    "returned_responses": 2
+  },
+  {
+    "id": "p08",
+    "assessment_mode": "evidence",
+    "status": "error",
+    "prediction": null,
+    "checkpoints": [],
+    "target_plan_sha256": "2e42273488cbd3cc8695fe888d73c2ddbea0f03ffcb575beefbff685e0cae795",
+    "native_prediction": {
+      "id": "p08",
+      "assessment_mode": "evidence",
+      "as_of": "2026-09-05T09:34:36Z",
+      "decision": "unverifiable",
+      "assessments": null,
+      "provenance_status": "unresolved",
+      "assessment_valid": false,
+      "stop_reason": "verifier_error"
+    },
+    "engine_usage": {
+      "rounds": 1,
+      "documents": 2,
+      "unique_versions": 2,
+      "decomposition_calls": 3,
+      "verification_calls": 1
+    },
+    "error_type": "ValueError",
+    "usage": {
+      "model_calls": 14,
+      "input_tokens": 50643,
+      "output_tokens": 7920,
+      "seconds": 136.486625525009
+    },
+    "checkpoint_hashes": [],
+    "new_api_attempts": 14,
+    "returned_responses": 13
+  }
+]

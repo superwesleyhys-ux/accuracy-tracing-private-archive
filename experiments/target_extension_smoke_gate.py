@@ -29,6 +29,21 @@ from target_extension_compare_score import score as comparison_score
 IDENTITY_RELATIONS = {"exact", "alias", "description", "anaphora"}
 IDENTITY_KINDS = {"entity_identity", "exact_designation"}
 PLAN_SCHEMA_V3 = "decision-probe-v3"
+PLAN_SCHEMA_V4 = "decision-probe-v4"
+STRICT_PLAN_SCHEMAS = {PLAN_SCHEMA_V3, PLAN_SCHEMA_V4}
+V4_EXPERIMENT_BY_PROVIDER = {
+    "fixed_reanalysis": "target_extended_psi_development_v4_fixed_reanalysis",
+    "task_routed": "target_extended_psi_development_v4_task_routed",
+}
+V4_PROVIDER_LABELS = {
+    "fixed_reanalysis": "fixed eligible snapshots, no open-web collection",
+    "task_routed": "task-routed fixed eligible snapshots, no open-web collection",
+}
+SECRET_SHAPE_DETECTORS = {
+    "openai_api_key": re.compile(rb"sk-(?:proj-)?[A-Za-z0-9_-]{20,}"),
+    "github_token": re.compile(rb"gh[pousr]_[A-Za-z0-9]{20,}"),
+    "aws_access_key": re.compile(rb"AKIA[0-9A-Z]{16}"),
+}
 
 UNCHECKABLE_CLAUSES = [
     {
@@ -58,6 +73,50 @@ def _canonical_sha256(value: Any) -> str:
     payload = json.dumps(value, sort_keys=True, ensure_ascii=False,
                          separators=(",", ":")).encode()
     return hashlib.sha256(payload).hexdigest()
+
+
+def _secret_shape_audit(paths: list[Path], display_root: Path) -> list[dict[str, str]]:
+    """Return detector names and file paths without ever retaining secret bytes."""
+    findings: list[dict[str, str]] = []
+    root = display_root.resolve()
+    seen: set[Path] = set()
+    for path in paths:
+        resolved = path.resolve()
+        if resolved in seen or not resolved.is_file():
+            continue
+        seen.add(resolved)
+        try:
+            label = resolved.relative_to(root).as_posix()
+        except ValueError:
+            findings.append({"file": str(resolved), "detector": "outside_audit_root"})
+            continue
+        try:
+            payload = resolved.read_bytes()
+        except OSError:
+            findings.append({"file": label, "detector": "unreadable"})
+            continue
+        for detector, pattern in SECRET_SHAPE_DETECTORS.items():
+            if pattern.search(payload):
+                findings.append({"file": label, "detector": detector})
+    return findings
+
+
+def _gate_secret_paths(freeze: dict[str, Any], repo_root: Path,
+                       freeze_path: Path, gold_path: Path,
+                       original_run: Path, staged_run: Path,
+                       extension_run: Path) -> list[Path]:
+    paths = [freeze_path, gold_path]
+    paths.extend(repo_root / relative for relative in freeze.get("files", {})
+                 if isinstance(relative, str))
+    for arm, directory in (("original", original_run), ("staged", staged_run)):
+        manifest = freeze.get("frozen_baselines", {}).get(arm, {}).get("files", {})
+        paths.extend(directory / relative for relative in manifest
+                     if isinstance(relative, str))
+    paths.extend(repo_root / relative for relative in freeze.get("prior_artifacts", {})
+                 if isinstance(relative, str))
+    if extension_run.is_dir():
+        paths.extend(path for path in extension_run.rglob("*") if path.is_file())
+    return paths
 
 
 def _case_inputs(data: dict[str, Any]) -> dict[str, dict[str, Any]]:
@@ -146,6 +205,9 @@ def _exact_config(freeze: dict[str, Any], config: dict[str, Any]) -> tuple[bool,
         "gold_read_during_inference": config.get("gold_read_during_inference"),
         "new_response_only": config.get("new_response_only"),
         "provider": config.get("provider"),
+        "provider_mode": config.get("provider_mode"),
+        "strict_retrieval_attribution": config.get("strict_retrieval_attribution"),
+        "retrieval_attribution_mode": config.get("retrieval_attribution_mode"),
         "dataset_status": config.get("dataset_status"),
     }
     expected = {
@@ -158,7 +220,8 @@ def _exact_config(freeze: dict[str, Any], config: dict[str, Any]) -> tuple[bool,
         "rounds": freeze.get("outer_rounds"),
         "max_documents": freeze.get("max_documents", 24),
         "max_decomposition_calls": freeze.get("max_decomposition_calls", 24),
-        "forced_rounds": True,
+        "forced_rounds": not (freeze.get("target_plan_schema") == PLAN_SCHEMA_V4 and
+                               freeze.get("provider_mode") == "task_routed"),
         "automatic_transport_retries": freeze.get("automatic_transport_retries", 0),
         "budget_per_case": freeze.get("budget_per_case"),
         "workers": freeze.get("workers"),
@@ -178,6 +241,14 @@ def _exact_config(freeze: dict[str, Any], config: dict[str, Any]) -> tuple[bool,
         "new_response_only": True,
         "provider": freeze.get(
             "provider", "fixed eligible snapshots, no open-web collection"),
+        "provider_mode": freeze.get("provider_mode"),
+        "strict_retrieval_attribution": freeze.get("strict_retrieval_attribution"),
+        "retrieval_attribution_mode": (
+            "strict" if freeze.get("target_plan_schema") == PLAN_SCHEMA_V4 and
+            freeze.get("provider_mode") == "task_routed" else
+            "legacy" if freeze.get("target_plan_schema") == PLAN_SCHEMA_V4 and
+            freeze.get("provider_mode") == "fixed_reanalysis" else
+            freeze.get("retrieval_attribution_mode")),
         "dataset_status": freeze.get(
             "dataset_status",
             "previously_seen_development_cases_not_hidden_benchmark"),
@@ -222,26 +293,35 @@ def _execution_control_declarations(freeze: dict[str, Any], config: dict[str, An
 
 
 def _checkpoint_audit(run: Path, rows: dict[str, dict[str, Any]],
-                      case_ids: list[str], required_rounds: list[int]) -> list[str]:
+                      case_ids: list[str],
+                      required_rounds: list[int] | dict[str, list[int]]) -> list[str]:
     errors: list[str] = []
     for case_id in case_ids:
+        expected_rounds = (required_rounds.get(case_id, [])
+                           if isinstance(required_rounds, dict) else required_rounds)
         row = rows.get(case_id, {})
         checkpoints = row.get("checkpoints")
         rounds = [item.get("round") for item in checkpoints] if isinstance(checkpoints, list) else None
-        if rounds != required_rounds:
+        if rounds != expected_rounds:
             errors.append(f"{case_id}: checkpoint rounds are {rounds!r}")
         retained = row.get("checkpoint_hashes")
         hashes = {item.get("round"): item.get("sha256") for item in retained
                   if isinstance(item, dict)} if isinstance(retained, list) else {}
-        if sorted(hashes) != required_rounds:
+        if sorted(hashes) != expected_rounds:
             errors.append(f"{case_id}: retained checkpoint hashes cover {sorted(hashes)!r}")
             continue
-        for round_number in required_rounds:
+        for round_number in expected_rounds:
             path = run / f"{case_id}-checkpoint-{round_number}.json"
             if not path.exists():
                 errors.append(f"{case_id}: missing {path.name}")
             elif _canonical_sha256(_read(path)) != hashes[round_number]:
                 errors.append(f"{case_id}: {path.name} hash mismatch")
+        unexpected = sorted(path.name for path in run.glob(f"{case_id}-checkpoint-*.json")
+                            if path.name not in {
+                                f"{case_id}-checkpoint-{round_number}.json"
+                                for round_number in expected_rounds})
+        if unexpected:
+            errors.append(f"{case_id}: unexpected checkpoint artifacts {unexpected!r}")
     return errors
 
 
@@ -534,7 +614,7 @@ def _p08_checks(checks: _Checks, plan: dict[str, Any], report: dict[str, Any],
                "m14 -> m15 direct cites edge and m15 origin", {
                    "matching_edges": len(edges), "matching_origins": len(origins)})
 
-    if plan.get("schema_version") != PLAN_SCHEMA_V3:
+    if plan.get("schema_version") not in STRICT_PLAN_SCHEMAS:
         return
 
     origin_values = [item.get("version_id") if isinstance(item, dict) else None
@@ -645,6 +725,14 @@ def _p08_checks(checks: _Checks, plan: dict[str, Any], report: dict[str, Any],
     checks.add("p08.v3_time_results_each_round", time_results_ok,
                "both time probes are supported from m15 in evidence/world for every round",
                time_outcomes)
+    active_v3_gaps = [gap for gap in report.get("gaps", [])
+                      if isinstance(gap, dict) and
+                      (gap.get("id") == "lineage:p08" or
+                       gap.get("probe_id") in time_probe_ids or
+                       gap.get("dimension") in {"time", "time_boundary"})]
+    checks.add("p08.v3_no_active_lineage_or_time_gap", not active_v3_gaps,
+               "a complete terminal chain and supported time probes retain no active lineage/time gap",
+               active_v3_gaps)
 
 
 def _p07_checks(checks: _Checks, plan: dict[str, Any], report: dict[str, Any],
@@ -782,7 +870,10 @@ def _p07_checks(checks: _Checks, plan: dict[str, Any], report: dict[str, Any],
                "GOES-U same-referent and GOES-19 exact-designation results are supported "
                "from m13 in both layers of every round", name_outcomes)
 
-    if plan.get("schema_version") == PLAN_SCHEMA_V3:
+    case_specific_protected_probe_ids: set[str] = set()
+    plan_schema = plan.get("schema_version")
+    if plan_schema in STRICT_PLAN_SCHEMAS:
+        schema_label = "v4" if plan_schema == PLAN_SCHEMA_V4 else "v3"
         noaa_dimensions = [item for item in dimensions
                            if item.get("kind") == "entity_identity" and
                            item.get("anchor", {}).get("quote", "").strip().casefold() == "noaa"]
@@ -791,13 +882,15 @@ def _p07_checks(checks: _Checks, plan: dict[str, Any], report: dict[str, Any],
                        if item.get("kind") == "entity_identity" and
                        item.get("dimension_ids") == [noaa_dimension.get("id")]]
         noaa_probe = noaa_probes[0] if len(noaa_probes) == 1 else {}
+        if isinstance(noaa_probe.get("id"), str):
+            case_specific_protected_probe_ids.add(noaa_probe["id"])
         canonical_question = (_canonical_identity_question(
             noaa_dimension.get("anchor", {}), "same_referent")
             if noaa_dimension else None)
         identity_contract_ok = (len(noaa_dimensions) == 1 and len(noaa_probes) == 1 and
                                 noaa_probe.get("match_policy") == "same_referent" and
                                 noaa_probe.get("question") == canonical_question)
-        checks.add("p07.v3_noaa_identity_contract", identity_contract_ok,
+        checks.add(f"p07.{schema_label}_noaa_identity_contract", identity_contract_ok,
                    "NOAA has the program-canonical same-referent question only",
                    {"dimensions": len(noaa_dimensions), "probes": len(noaa_probes),
                     "question": noaa_probe.get("question"),
@@ -809,6 +902,11 @@ def _p07_checks(checks: _Checks, plan: dict[str, Any], report: dict[str, Any],
                 results = record.get(stage + "_probe_results", [])
                 matches = [item for item in results
                            if item.get("probe_id") == noaa_probe.get("id")]
+                exact_noaa_basis = len(matches) == 1 and any(
+                    span.get("version_id") == "m13" and
+                    re.search(r"(?<![A-Za-z0-9])NOAA(?![A-Za-z0-9])",
+                              span.get("quote", ""), re.IGNORECASE)
+                    for span in matches[0].get("basis", []) if isinstance(span, dict))
                 noaa_outcomes.append({
                     "round": record.get("round"), "stage": stage,
                     "matches": len(matches),
@@ -818,32 +916,94 @@ def _p07_checks(checks: _Checks, plan: dict[str, Any], report: dict[str, Any],
                     "m13_basis": len(matches) == 1 and any(
                         span.get("version_id") == "m13"
                         for span in matches[0].get("basis", []) if isinstance(span, dict)),
+                    "exact_noaa_basis": exact_noaa_basis,
                 })
         expected_slots = {(round_number, stage) for round_number in required_rounds
                           for stage in ("evidence", "world")}
         actual_slots = {(item["round"], item["stage"]) for item in noaa_outcomes}
         noaa_results_ok = (identity_contract_ok and actual_slots == expected_slots and
                            all(item["supported"] and item["m13_basis"] and
+                               item["exact_noaa_basis"] and
                                item["relation"] == "exact" for item in noaa_outcomes))
-        checks.add("p07.v3_noaa_identity_results", noaa_results_ok,
+        checks.add(f"p07.{schema_label}_noaa_identity_results", noaa_results_ok,
                    "NOAA identity is exact and supported from m13 in both layers of every round",
                    noaa_outcomes)
 
-        subject_ids = {item.get("id") for item in dimensions if item.get("kind") == "subject"}
-        predicate_ids = {item.get("id") for item in dimensions
-                         if item.get("kind") == "predicate"}
-        semantic_ids = subject_ids | predicate_ids
-        semantic_probes = [item for item in plan.get("probes", [])
-                           if item.get("kind") == "semantic_core" and
-                           set(item.get("dimension_ids", [])) == semantic_ids and
-                           len(item.get("dimension_ids", [])) == len(semantic_ids)]
-        semantic_probe = semantic_probes[0] if len(semantic_probes) == 1 else {}
+        if plan_schema == PLAN_SCHEMA_V4:
+            actor_dimensions = [item for item in dimensions
+                                if item.get("kind") == "actor_role" and
+                                item.get("anchor", {}).get("quote", "").strip().casefold() ==
+                                "noaa"]
+            actor_dimension = actor_dimensions[0] if len(actor_dimensions) == 1 else {}
+            actor_probes = [item for item in plan.get("probes", [])
+                            if item.get("kind") == "actor_role" and
+                            item.get("dimension_ids") == [actor_dimension.get("id")]]
+            actor_probe = actor_probes[0] if len(actor_probes) == 1 else {}
+            actor_anchor = actor_dimension.get("anchor", {})
+            claim_anchor = claim.get("anchor", {})
+            canonical_actor_question = None
+            if (isinstance(actor_anchor.get("quote"), str) and
+                    type(claim_anchor.get("start")) is int and
+                    type(claim_anchor.get("end")) is int):
+                canonical_actor_question = (
+                    "Does the evidence establish " +
+                    json.dumps(actor_anchor["quote"], ensure_ascii=False) +
+                    " in the actor or agent role asserted by target[" +
+                    str(claim_anchor["start"]) + ":" + str(claim_anchor["end"]) + "]?"
+                )
+            actor_contract_ok = (
+                len(actor_dimensions) == 1 and len(actor_probes) == 1 and
+                actor_probe.get("match_policy") == "semantic_constraint" and
+                actor_probe.get("routes") == ["atoms", "evidence", "world"] and
+                actor_probe.get("gate") == "always" and
+                actor_probe.get("question") == canonical_actor_question and
+                actor_probe.get("id") != noaa_probe.get("id") and
+                actor_dimension.get("id") != noaa_dimension.get("id") and
+                noaa_dimension.get("id") not in
+                set(actor_probe.get("dimension_ids", [])))
+            actor_contract_state = {
+                "dimensions": len(actor_dimensions), "probes": len(actor_probes),
+                "question": actor_probe.get("question"),
+                "canonical_question": canonical_actor_question,
+            }
+            checks.add("p07.v4_actor_role_contract", actor_contract_ok,
+                       "one program-canonical singleton NOAA actor_role probe is distinct from identity",
+                       actor_contract_state)
+            actor_check_id = "p07.v4_actor_role_results"
+            actor_check_description = (
+                "the distinct actor_role probe stays unresolved on passive m13 evidence")
+        else:
+            subject_ids = {item.get("id") for item in dimensions
+                           if item.get("kind") == "subject"}
+            predicate_ids = {item.get("id") for item in dimensions
+                             if item.get("kind") == "predicate"}
+            semantic_ids = subject_ids | predicate_ids
+            actor_probes = [item for item in plan.get("probes", [])
+                            if item.get("kind") == "semantic_core" and
+                            set(item.get("dimension_ids", [])) == semantic_ids and
+                            len(item.get("dimension_ids", [])) == len(semantic_ids)]
+            actor_probe = actor_probes[0] if len(actor_probes) == 1 else {}
+            actor_dimension = {}
+            actor_contract_ok = len(actor_probes) == 1
+            actor_check_id = "p07.v3_actor_role_separate"
+            actor_check_description = (
+                "the distinct semantic-core actor check stays unresolved on passive m13 evidence")
+            actor_contract_state = {
+                "semantic_probe_ids": [item.get("id") for item in actor_probes],
+            }
         actor_outcomes: list[dict[str, Any]] = []
         for record in report.get("verification_history", []):
             for stage in ("evidence", "world"):
                 results = record.get(stage + "_probe_results", [])
                 matches = [item for item in results
-                           if item.get("probe_id") == semantic_probe.get("id")]
+                           if item.get("probe_id") == actor_probe.get("id")]
+                passive_m13_basis = len(matches) == 1 and any(
+                    span.get("version_id") == "m13" and
+                    re.search(r"(?<![A-Za-z0-9])NOAA(?:['’]s)?(?![A-Za-z0-9])",
+                              span.get("quote", ""), re.IGNORECASE) and
+                    re.search(r"\b(?:was|is)\s+(?:re)?named\b|\bwas\s+designated\b",
+                              span.get("quote", ""), re.IGNORECASE)
+                    for span in matches[0].get("basis", []) if isinstance(span, dict))
                 actor_outcomes.append({
                     "round": record.get("round"), "stage": stage,
                     "matches": len(matches),
@@ -852,24 +1012,29 @@ def _p07_checks(checks: _Checks, plan: dict[str, Any], report: dict[str, Any],
                     "m13_basis": len(matches) == 1 and any(
                         span.get("version_id") == "m13"
                         for span in matches[0].get("basis", []) if isinstance(span, dict)),
+                    "passive_m13_basis": passive_m13_basis,
                 })
         actor_slots = {(item["round"], item["stage"]) for item in actor_outcomes}
-        actor_separate_ok = (len(semantic_probes) == 1 and identity_contract_ok and
-                             semantic_probe.get("id") != noaa_probe.get("id") and
+        actor_separate_ok = (actor_contract_ok and identity_contract_ok and
+                             actor_probe.get("id") != noaa_probe.get("id") and
+                             actor_dimension.get("id") != noaa_dimension.get("id") and
                              noaa_dimension.get("id") not in
-                             set(semantic_probe.get("dimension_ids", [])) and
+                             set(actor_probe.get("dimension_ids", [])) and
                              actor_slots == expected_slots and
-                             all(item["unresolved"] and item["m13_basis"]
+                             all(item["unresolved"] and item["m13_basis"] and
+                                 item["passive_m13_basis"]
                                  for item in actor_outcomes))
-        checks.add("p07.v3_actor_role_separate", actor_separate_ok,
-                   "the distinct semantic-core actor check stays unresolved on passive m13 evidence",
-                   {"semantic_probe_ids": [item.get("id") for item in semantic_probes],
-                    "identity_probe_id": noaa_probe.get("id"),
-                    "outcomes": actor_outcomes})
+        actor_contract_state.update({
+            "identity_probe_id": noaa_probe.get("id"),
+            "outcomes": actor_outcomes,
+        })
+        checks.add(actor_check_id, actor_separate_ok, actor_check_description,
+                   actor_contract_state)
 
     protected_probe_ids = ({item.get("id") for item in relations} |
                            {item.get("id") for item in time_probes} |
-                           {item[1].get("id") for item in name_probe_specs if item[1]})
+                           {item[1].get("id") for item in name_probe_specs if item[1]} |
+                           case_specific_protected_probe_ids)
     gap_records = []
     gap_sources = [("active", report.get("gaps", [])),
                    ("registry", report.get("gap_registry", []))]
@@ -964,8 +1129,12 @@ def _p04_checks(checks: _Checks, report: dict[str, Any],
             for probe_id, kind in probe_kinds.items():
                 matches = [item for item in results if item.get("probe_id") == probe_id]
                 basis = matches[0].get("basis", []) if len(matches) == 1 else []
-                joined = " ".join(span.get("quote", "") for span in basis
-                                  if isinstance(span, dict))
+                quotes = [span.get("quote", "") for span in basis
+                          if isinstance(span, dict)]
+                pairing_129 = any("1.29" in quote and "20th-century" in quote
+                                  for quote in quotes)
+                pairing_146 = any("1.46" in quote and "1850" in quote and
+                                  "1900" in quote for quote in quotes)
                 outcomes.append({
                     "round": record.get("round"), "stage": stage, "kind": kind,
                     "matches": len(matches),
@@ -974,14 +1143,15 @@ def _p04_checks(checks: _Checks, report: dict[str, Any],
                     "only_m07": bool(basis) and all(
                         isinstance(span, dict) and span.get("version_id") == "m07"
                         for span in basis),
-                    "cross_pair_basis": all(value in joined for value in
-                                            ("1.29", "20th-century", "1.46", "1850")),
+                    "pair_1_29_to_20th_century": pairing_129,
+                    "pair_1_46_to_1850_1900": pairing_146,
                 })
     actual_slots = {(item["round"], item["stage"], item["kind"])
                     for item in outcomes}
     result_ok = (bindings_ok and actual_slots == expected_slots and
                  all(item["contradicted"] and item["only_m07"] and
-                     item["cross_pair_basis"] for item in outcomes))
+                     item["pair_1_29_to_20th_century"] and
+                     item["pair_1_46_to_1850_1900"] for item in outcomes))
     checks.add("p04.crossed_variable_results", result_ok,
                "both crossed-variable probes are contradicted from the two m07 pairings in every layer and round",
                outcomes)
@@ -1087,6 +1257,570 @@ def _frozen_baseline_audit(freeze: dict[str, Any], repo_root: Path,
     return mismatches
 
 
+def _frozen_prior_artifact_audit(freeze: dict[str, Any],
+                                 repo_root: Path) -> list[dict[str, Any]]:
+    """Bind every preregistered historical comparison/gate to its exact bytes."""
+    declared = freeze.get("prior_artifacts")
+    if declared is None:
+        return []
+    if not isinstance(declared, dict):
+        return [{"error": "invalid prior artifact declaration"}]
+    mismatches: list[dict[str, Any]] = []
+    for relative, expected in declared.items():
+        if not isinstance(relative, str) or not isinstance(expected, str):
+            mismatches.append({"file": relative,
+                               "error": "invalid file hash declaration"})
+            continue
+        path = repo_root / relative
+        actual = _sha256(path) if path.is_file() else None
+        if actual != expected:
+            mismatches.append({"file": relative, "expected": expected,
+                               "actual": actual})
+    return mismatches
+
+
+def _v4_audit_state(comparison: dict[str, Any], case_ids: list[str],
+                    required_rounds: list[int] | dict[str, list[int]],
+                    search_rounds: dict[str, int] | None = None,
+                    provider_mode: str = "task_routed",
+                    probe_owned_novel_second_pass_cases: set[str] | None = None
+                    ) -> tuple[bool, dict[str, Any]]:
+    """Fail closed over the scorer's independently reconstructed v4 ledgers.
+
+    The scorer derives this section from the frozen target plan, psi history,
+    final report and retrieval history.  The gate consumes only exact counts;
+    it does not trust a runner-authored pass flag.
+    """
+    coverage = comparison.get("target_plan_probe_coverage")
+    audit = coverage.get("v4_audit") if isinstance(coverage, dict) else None
+    if (not isinstance(audit, dict) or
+            set(audit) != {"applicable_cases", "totals", "cases"}):
+        return False, {"error": "missing target_plan_probe_coverage.v4_audit"}
+    totals = audit.get("totals")
+    cases = audit.get("cases")
+    if not isinstance(totals, dict) or not isinstance(cases, list):
+        return False, {"error": "malformed v4 audit totals or cases", "audit": audit}
+
+    fields = ("coverage_ledger", "material_probe_ledger",
+              "strict_followups", "retrieval_attribution",
+              "probe_delta_attribution")
+
+    def integer(value: Any) -> bool:
+        return type(value) is int and value >= 0
+
+    case_verification_counts = {
+        case_id: len(required_rounds.get(case_id, []))
+        if isinstance(required_rounds, dict) else len(required_rounds)
+        for case_id in case_ids}
+    case_search_counts = {
+        case_id: (search_rounds.get(case_id, 0) if isinstance(search_rounds, dict)
+                  else case_verification_counts[case_id])
+        for case_id in case_ids}
+
+    round_rows = comparison.get("round1_to_final", {}).get(
+        "extension", {}).get("cases")
+    label_change_cases = None
+    if (isinstance(round_rows, list) and
+            [item.get("id") if isinstance(item, dict) else None
+             for item in round_rows] == case_ids):
+        label_change_cases = {item["id"] for item in round_rows
+                              if item.get("first_round") != item.get("final")}
+
+    def validate(block: Any, *, expected_search_rounds: int,
+                 expected_verification_rounds: int,
+                 aggregate: bool = False,
+                 expected_probe_owned_novel_cases: int | None = None,
+                 expected_label_changes: int | None = None) -> bool:
+        if not isinstance(block, dict) or set(block) != set(fields):
+            return False
+        coverage_block = block["coverage_ledger"]
+        material_block = block["material_probe_ledger"]
+        followup_block = block["strict_followups"]
+        retrieval_block = block["retrieval_attribution"]
+        delta_block = block["probe_delta_attribution"]
+        expected_keys = {
+            "coverage_ledger": {"expected_segments", "ledger_entries",
+                                "required_dimensions", "covered_dimensions", "breaks"},
+            "material_probe_ledger": {"stage_calls", "audited_stage_calls",
+                                      "expected_probe_checks", "probe_checks", "findings",
+                                      "referenced_findings", "breaks"},
+            "strict_followups": {"unresolved_probe_slots", "task_followups",
+                                 "allowed_stops", "covered_slots", "breaks"},
+            "retrieval_attribution": {"search_rounds", "issued_tasks",
+                                      "provider_returns", "attributed_returns", "task_links",
+                                      "valid_task_links", "later_probe_owned_tasks",
+                                      "later_probe_owned_hit_tasks", "breaks"},
+            "probe_delta_attribution": {
+                "round_transitions", "probe_slots_compared", "semantic_deltas",
+                "basis_drifts", "traced_semantic_deltas",
+                "graph_traced_semantic_deltas",
+                "probe_owned_novel_second_pass_cases", "label_changes",
+                "label_changes_with_decisive_delta", "breaks"},
+        }
+        for name, value in (("coverage_ledger", coverage_block),
+                            ("material_probe_ledger", material_block),
+                            ("strict_followups", followup_block),
+                            ("retrieval_attribution", retrieval_block),
+                            ("probe_delta_attribution", delta_block)):
+            if (not isinstance(value, dict) or set(value) != expected_keys[name] or
+                    any(not integer(item) for item in value.values())):
+                return False
+        strict_retrieval_ok = (
+            retrieval_block["attributed_returns"] == retrieval_block["provider_returns"] and
+            retrieval_block["task_links"] > 0 and
+            retrieval_block["valid_task_links"] == retrieval_block["task_links"] and
+            retrieval_block["later_probe_owned_hit_tasks"] <=
+                retrieval_block["later_probe_owned_tasks"] <=
+                retrieval_block["issued_tasks"] and
+            (not aggregate or retrieval_block["later_probe_owned_tasks"] > 0 and
+             retrieval_block["later_probe_owned_hit_tasks"] > 0)
+        ) if provider_mode == "task_routed" else (
+            provider_mode == "fixed_reanalysis" and
+            retrieval_block["attributed_returns"] == 0 and
+            retrieval_block["task_links"] == 0 and
+            retrieval_block["valid_task_links"] == 0 and
+            retrieval_block["later_probe_owned_tasks"] == 0 and
+            retrieval_block["later_probe_owned_hit_tasks"] == 0
+        )
+        delta_ok = (
+            delta_block["breaks"] == 0 and
+            delta_block["round_transitions"] ==
+                (max(0, expected_verification_rounds - (0 if aggregate else 1))
+                 if provider_mode == "task_routed" else 0) and
+            delta_block["traced_semantic_deltas"] ==
+                delta_block["semantic_deltas"] and
+            delta_block["semantic_deltas"] <=
+                delta_block["probe_slots_compared"] and
+            delta_block["basis_drifts"] <=
+                delta_block["probe_slots_compared"] and
+            ((delta_block["round_transitions"] == 0) ==
+             (delta_block["probe_slots_compared"] == 0)) and
+            delta_block["graph_traced_semantic_deltas"] <=
+                delta_block["traced_semantic_deltas"] and
+            delta_block["label_changes_with_decisive_delta"] ==
+                delta_block["label_changes"] and
+            (expected_probe_owned_novel_cases is None or
+             delta_block["probe_owned_novel_second_pass_cases"] ==
+                expected_probe_owned_novel_cases) and
+            (expected_label_changes is None or
+             delta_block["label_changes"] == expected_label_changes)
+        )
+        if provider_mode == "task_routed":
+            delta_ok &= (delta_block["probe_owned_novel_second_pass_cases"] <=
+                         delta_block["round_transitions"] and
+                         delta_block["label_changes"] <=
+                         delta_block["probe_owned_novel_second_pass_cases"])
+            if not aggregate:
+                delta_ok &= (delta_block["probe_owned_novel_second_pass_cases"] <= 1 and
+                             delta_block["label_changes"] <= 1)
+            if aggregate:
+                delta_ok &= delta_block["probe_owned_novel_second_pass_cases"] > 0
+        else:
+            delta_ok &= all(delta_block[key] == 0 for key in delta_block)
+        return (
+            coverage_block["breaks"] == 0 and
+            coverage_block["expected_segments"] > 0 and
+            coverage_block["ledger_entries"] == coverage_block["expected_segments"] and
+            coverage_block["required_dimensions"] > 0 and
+            coverage_block["covered_dimensions"] == coverage_block["required_dimensions"] and
+            material_block["breaks"] == 0 and
+            material_block["stage_calls"] > 0 and
+            material_block["audited_stage_calls"] == material_block["stage_calls"] and
+            material_block["expected_probe_checks"] > 0 and
+            material_block["probe_checks"] == material_block["expected_probe_checks"] and
+            material_block["referenced_findings"] == material_block["findings"] and
+            followup_block["breaks"] == 0 and
+            followup_block["covered_slots"] == followup_block["unresolved_probe_slots"] and
+            followup_block["task_followups"] + followup_block["allowed_stops"] ==
+                followup_block["covered_slots"] and
+            retrieval_block["breaks"] == 0 and
+            retrieval_block["search_rounds"] == expected_search_rounds and
+            retrieval_block["issued_tasks"] > 0 and
+            retrieval_block["provider_returns"] > 0 and
+            strict_retrieval_ok and delta_ok
+        )
+
+    case_ids_seen = [item.get("id") for item in cases if isinstance(item, dict)]
+    cases_ok = (len(cases) == len(case_ids) and case_ids_seen == case_ids and
+                all(isinstance(item, dict) and
+                    set(item) == {"id", *fields} and
+                    validate({key: item.get(key) for key in fields},
+                             expected_search_rounds=case_search_counts[case_id],
+                             expected_verification_rounds=
+                                 case_verification_counts[case_id],
+                             expected_probe_owned_novel_cases=(
+                                 int(case_id in probe_owned_novel_second_pass_cases)
+                                 if probe_owned_novel_second_pass_cases is not None else None),
+                             expected_label_changes=(
+                                 int(case_id in label_change_cases)
+                                 if label_change_cases is not None else None))
+                    for case_id, item in zip(case_ids, cases)
+                    ))
+    totals_match_cases = cases_ok and all(
+        totals.get(block, {}).get(field) == sum(
+            item.get(block, {}).get(field, 0) for item in cases)
+        for block in fields
+        for field in totals.get(block, {})
+    )
+    passed = (audit.get("applicable_cases") == len(case_ids) and
+              validate({key: totals.get(key) for key in fields},
+                       expected_search_rounds=sum(case_search_counts.values()),
+                       expected_verification_rounds=sum(
+                           case_verification_counts.values()) - len(case_ids),
+                       aggregate=True,
+                       expected_probe_owned_novel_cases=(
+                           len(probe_owned_novel_second_pass_cases)
+                           if probe_owned_novel_second_pass_cases is not None else None),
+                       expected_label_changes=(len(label_change_cases)
+                                               if label_change_cases is not None else None)) and
+              cases_ok and totals_match_cases)
+    return passed, {
+        "applicable_cases": audit.get("applicable_cases"),
+        "expected_case_ids": case_ids,
+        "case_ids": case_ids_seen,
+        "totals": totals,
+        "cases": cases,
+        "totals_match_cases": totals_match_cases,
+        "verification_rounds": case_verification_counts,
+        "search_rounds": case_search_counts,
+        "expected_probe_owned_novel_second_pass_cases": (
+            sorted(probe_owned_novel_second_pass_cases)
+            if probe_owned_novel_second_pass_cases is not None else None),
+        "label_change_cases": (sorted(label_change_cases)
+                               if label_change_cases is not None else None),
+    }
+
+
+def _outer_loop_audit(rows: dict[str, dict[str, Any]],
+                      reports: dict[str, dict[str, Any]],
+                      retrievals: dict[str, Any], case_ids: list[str],
+                      max_rounds: int, provider_mode: str | None
+                      ) -> tuple[bool, dict[str, Any], dict[str, list[int]], dict[str, int]]:
+    """Independently classify fixed cycles and adaptive task-routed opportunities."""
+    task_routed = provider_mode == "task_routed"
+    verification_rounds: dict[str, list[int]] = {}
+    search_rounds: dict[str, int] = {}
+    cases = []
+    for case_id in case_ids:
+        row = rows.get(case_id, {})
+        report = reports.get(case_id, {})
+        retrieval = retrievals.get(case_id)
+        usage = report.get("usage") if isinstance(report, dict) else None
+        history = report.get("verification_history") if isinstance(report, dict) else None
+        operations = report.get("operations") if isinstance(report, dict) else None
+        valid = (type(max_rounds) is int and max_rounds > 0 and
+                 isinstance(usage, dict) and isinstance(history, list) and
+                 isinstance(operations, list) and isinstance(retrieval, list) and
+                 row.get("engine_usage") == usage)
+        operation_sequences = ([item.get("sequence") if isinstance(item, dict) else None
+                                for item in operations]
+                               if isinstance(operations, list) else [])
+        valid &= operation_sequences == list(range(1, len(operation_sequences) + 1))
+        accepted = ([item.get("round") if isinstance(item, dict) else None
+                     for item in history] if isinstance(history, list) else [])
+        verification_rounds[case_id] = accepted
+        searched = usage.get("rounds") if isinstance(usage, dict) else None
+        search_rounds[case_id] = searched if type(searched) is int else 0
+        verification_calls = (usage.get("verification_calls")
+                              if isinstance(usage, dict) else None)
+        valid &= (type(verification_calls) is int and
+                  accepted == list(range(1, verification_calls + 1)))
+        retrieval_rounds = ([item.get("round") if isinstance(item, dict) else None
+                             for item in retrieval]
+                            if isinstance(retrieval, list) else [])
+        valid &= (type(searched) is int and len(retrieval_rounds) == searched and
+                  retrieval_rounds == list(range(1, searched + 1)))
+        probe_owned_novel_later_hits = 0
+        novel_later_returns = 0
+        reanalysis_later_returns = 0
+        returned_before: set[str] = set()
+        duplicate_by_round: dict[int, set[str]] = {}
+        probe_owned_novel_drivers_by_round: dict[int, list[dict[str, Any]]] = {}
+        if task_routed and isinstance(retrieval, list):
+            for record in retrieval:
+                if not isinstance(record, dict):
+                    valid = False
+                    continue
+                round_number = record.get("round")
+                tasks = record.get("tasks")
+                returned = record.get("returned")
+                attribution = record.get("attribution")
+                feedback = record.get("feedback")
+                if not all(isinstance(value, list)
+                           for value in (tasks, returned, attribution, feedback)):
+                    valid = False
+                    continue
+                task_map = {item.get("id"): item for item in tasks
+                            if isinstance(item, dict) and isinstance(item.get("id"), str)}
+                task_order = {item.get("id"): index for index, item in enumerate(tasks)
+                              if isinstance(item, dict) and
+                              isinstance(item.get("id"), str)}
+                valid &= len(task_map) == len(tasks)
+                valid &= ([item.get("version_id") if isinstance(item, dict) else None
+                           for item in attribution] == returned and
+                          len(returned) == len(set(returned)))
+                hit_tasks: set[str] = set()
+                duplicates = set(returned) & returned_before
+                if type(round_number) is int:
+                    duplicate_by_round[round_number] = duplicates
+                    probe_owned_novel_drivers_by_round[round_number] = []
+                for item in attribution:
+                    task_ids = item.get("task_ids") if isinstance(item, dict) else None
+                    item_valid = (isinstance(task_ids, list) and bool(task_ids) and
+                                  len(task_ids) == len(set(task_ids)) and
+                                  set(task_ids) <= set(task_map))
+                    valid &= item_valid
+                    if not item_valid:
+                        continue
+                    if item["version_id"] in duplicates:
+                        valid &= all(task_map[task_id].get("action") == "reanalyse"
+                                     for task_id in task_ids)
+                    if type(round_number) is int and round_number > 1:
+                        novel = item["version_id"] not in duplicates
+                        qualifying_task_ids = sorted((task_id for task_id in task_ids
+                            if task_map[task_id].get("stage") == "verification" and
+                            task_map[task_id].get("dimension") in {"evidence", "world"} and
+                            task_map[task_id].get("probe_id") is not None and
+                            task_map[task_id].get("action") in {"fetch", "search"}),
+                            key=task_order.__getitem__)
+                        novel_later_returns += int(novel)
+                        reanalysis_later_returns += int(not novel)
+                        if novel and qualifying_task_ids:
+                            driver = {
+                                "version_id": item["version_id"],
+                                "task_ids": qualifying_task_ids,
+                                "probe_ids": list(dict.fromkeys(
+                                    task_map[task_id].get("probe_id")
+                                    for task_id in qualifying_task_ids)),
+                            }
+                            probe_owned_novel_drivers_by_round[round_number].append(driver)
+                            probe_owned_novel_later_hits += 1
+                    hit_tasks.update(task_ids)
+                exhausted: set[str] = set()
+                for item in feedback:
+                    task_id = item.get("task_id") if isinstance(item, dict) else None
+                    item_valid = (task_id in task_map and
+                                  item.get("status") == "corpus_exhausted" and
+                                  item.get("probe_id") == task_map[task_id].get("probe_id") and
+                                  task_id not in exhausted)
+                    valid &= item_valid
+                    if item_valid:
+                        exhausted.add(task_id)
+                valid &= not (hit_tasks & exhausted) and hit_tasks | exhausted == set(task_map)
+                round_ops = [item for item in operations
+                             if isinstance(item, dict) and
+                             item.get("round") == round_number]
+                search_ops = [item for item in round_ops
+                              if item.get("action") == "search"]
+                valid &= (len(search_ops) == 1 and
+                          search_ops[0].get("tasks") == tasks)
+                feedback_ops = [item.get("feedback") for item in round_ops
+                                if item.get("action") == "retrieval_feedback"]
+                valid &= feedback_ops == feedback
+                for attribution_item in attribution:
+                    attribution_ops = [item for item in round_ops
+                        if item.get("action") == "retrieval_attribution_validated" and
+                        item.get("version_id") == attribution_item.get("version_id")]
+                    valid &= (len(attribution_ops) == 1 and
+                              attribution_ops[0].get("trigger_task_ids") ==
+                              attribution_item.get("task_ids"))
+                if type(round_number) is int and round_number > 1:
+                    expected_drivers = probe_owned_novel_drivers_by_round.get(
+                        round_number, [])
+                    driver_events = [{key: item.get(key) for key in
+                                      ("version_id", "task_ids", "probe_ids")}
+                                     for item in round_ops
+                                     if item.get("action") ==
+                                     "probe_owned_novel_return_accepted"]
+                    valid &= driver_events == expected_drivers
+                returned_before.update(returned)
+
+            valid &= bool(retrieval and retrieval[0].get("returned"))
+
+            by_round: dict[int, list[dict[str, Any]]] = {}
+            for operation in operations if isinstance(operations, list) else []:
+                if isinstance(operation, dict):
+                    by_round.setdefault(operation.get("round"), []).append(operation)
+            for round_number in accepted[1:]:
+                returned = retrieval[round_number - 1].get("returned", [])
+                round_ops = by_round.get(round_number, [])
+                starts = [item for item in round_ops
+                          if item.get("action") == "verification_started"]
+                expected_drivers = probe_owned_novel_drivers_by_round.get(round_number, [])
+                valid &= bool(returned) and bool(expected_drivers) and len(starts) == 1
+                valid &= (len(starts) == 1 and
+                          starts[0].get("probe_owned_novel_returns") == expected_drivers)
+                driver_events = [{key: item.get(key) for key in
+                                  ("version_id", "task_ids", "probe_ids")}
+                                 for item in round_ops
+                                 if item.get("action") ==
+                                 "probe_owned_novel_return_accepted"]
+                valid &= driver_events == expected_drivers
+                start = starts[0].get("sequence") if len(starts) == 1 else -1
+                valid &= all(item.get("sequence", start) < start for item in round_ops
+                             if item.get("action") ==
+                             "probe_owned_novel_return_accepted")
+                for version_id in returned:
+                    attr = [item.get("sequence") for item in round_ops
+                            if item.get("action") == "retrieval_attribution_validated" and
+                            item.get("version_id") == version_id]
+                    action = ("duplicate_observed" if version_id in
+                              duplicate_by_round.get(round_number, set()) else "snapshot_saved")
+                    saved = [item.get("sequence") for item in round_ops
+                             if item.get("action") == action and
+                             item.get("version_id") == version_id and
+                             item.get("eligible") is True]
+                    decomposed = [item.get("sequence") for item in round_ops
+                                  if item.get("action") == "decompose_completed" and
+                                  item.get("version_id") == version_id]
+                    valid &= (len(attr) == 1 and len(saved) == 1 and bool(decomposed) and
+                              attr[0] < saved[0] < min(decomposed) < start)
+            if type(verification_calls) is int and type(searched) is int:
+                valid &= 1 <= verification_calls <= max_rounds
+                valid &= verification_calls <= searched <= max_rounds
+                if searched > verification_calls:
+                    final = retrieval[-1]
+                    final_round = final.get("round")
+                    final_drivers = probe_owned_novel_drivers_by_round.get(final_round, [])
+                    empty_exhaustion = (not final.get("returned") and
+                                        bool(final.get("feedback")) and
+                                        report.get("stop_reason") == "provider_exhausted")
+                    nonqualifying_return = (bool(final.get("returned")) and
+                                            not final_drivers and
+                                            report.get("stop_reason") ==
+                                            "no_probe_owned_novel_evidence" and
+                                            report.get("decision_status") == "unresolved")
+                    final_ops = by_round.get(final_round, [])
+                    skipped = [item for item in final_ops
+                               if item.get("action") == "verification_skipped"]
+                    if nonqualifying_return:
+                        valid &= (len(skipped) == 1 and
+                                  skipped[0].get("reason") ==
+                                  "no_probe_owned_novel_return")
+                    valid &= (searched == verification_calls + 1 and
+                              (empty_exhaustion or nonqualifying_return))
+                elif verification_calls == searched == 1:
+                    valid &= report.get("stop_reason") == "complete"
+            valid &= report.get("retrieval_attribution_mode") == "strict"
+        else:
+            valid &= (provider_mode == "fixed_reanalysis" and
+                      verification_calls == max_rounds and searched == max_rounds and
+                      accepted == list(range(1, max_rounds + 1)) and
+                      report.get("retrieval_attribution_mode") == "legacy-compatible")
+
+        cases.append({
+            "id": case_id, "passed": bool(valid),
+            "verification_rounds": accepted, "search_rounds": searched,
+            "stop_reason": report.get("stop_reason") if isinstance(report, dict) else None,
+            "loop_opportunity": bool(task_routed and type(searched) is int and searched > 1),
+            "second_pass": bool(task_routed and type(verification_calls) is int and
+                                verification_calls > 1),
+            "probe_owned_novel_later_hits": probe_owned_novel_later_hits,
+            "novel_later_returns": novel_later_returns,
+            "reanalysis_later_returns": reanalysis_later_returns,
+        })
+    state = {
+        "mode": provider_mode, "cases": cases,
+        "loop_opportunity_cases": [item["id"] for item in cases
+                                   if item["loop_opportunity"]],
+        "second_pass_cases": [item["id"] for item in cases if item["second_pass"]],
+        "probe_owned_novel_second_pass_cases": [item["id"] for item in cases
+            if item["probe_owned_novel_later_hits"] > 0 and item["second_pass"]],
+    }
+    return all(item["passed"] for item in cases), state, verification_rounds, search_rounds
+
+
+def _smoke_label_audit(comparison: dict[str, Any], case_ids: list[str],
+                       expected_labels: dict[str, str],
+                       provider_mode: str | None,
+                       probe_owned_novel_second_pass_cases: set[str] | None = None
+                       ) -> dict[str, Any]:
+    """Recompute smoke label gates without forbidding a task-routed fix."""
+    scheduled = len(case_ids)
+    task_routed = provider_mode == "task_routed"
+    arms = comparison.get("arms", {})
+    extension = arms.get("extension", {})
+    accuracy_state = {key: extension.get(key) for key in ("completed", "correct")}
+    accuracy_ok = accuracy_state == {"completed": scheduled, "correct": scheduled}
+
+    baseline_state = {arm: {key: arms.get(arm, {}).get(key)
+                            for key in ("completed", "correct")}
+                      for arm in ("original", "staged")}
+    baselines_ok = all(value == {"completed": scheduled, "correct": scheduled}
+                       for value in baseline_state.values())
+
+    pair_state: dict[str, dict[str, Any]] = {}
+    pair_ok = True
+    for baseline in ("original", "staged"):
+        values = comparison.get("label_comparisons", {}).get(
+            f"extension_vs_{baseline}", {}).get("all_scheduled", {})
+        compact = {key: values.get(key) for key in
+                   ("case_pairs", "case_ids", "fixes", "breaks", "candidate_correct")}
+        pair_state[baseline] = compact
+        fixes = compact["fixes"]
+        pair_ok &= (compact["case_pairs"] == scheduled and
+                    compact["case_ids"] == case_ids and
+                    compact["candidate_correct"] == scheduled and
+                    compact["breaks"] == 0 and type(fixes) is int and
+                    0 <= fixes <= scheduled and
+                    (provider_mode in {"task_routed", "fixed_reanalysis"} or
+                     fixes == 0))
+
+    round_change = comparison.get("round1_to_final", {}).get("extension", {})
+    round_cases = round_change.get("cases")
+    per_case_ok = isinstance(round_cases, list) and len(round_cases) == scheduled
+    if per_case_ok:
+        per_case_ok = [item.get("id") if isinstance(item, dict) else None
+                       for item in round_cases] == case_ids
+    expected_first_correct = 0
+    expected_fixes = 0
+    if per_case_ok:
+        for item in round_cases:
+            case_id = item["id"]
+            expected = expected_labels.get(case_id)
+            first = item.get("first_round")
+            first_correct = first == expected
+            row_ok = (
+                isinstance(first, str) and item.get("reference") == expected and
+                item.get("paired") is True and item.get("final") == expected and
+                item.get("first_correct") is first_correct and
+                item.get("final_correct") is True and
+                (task_routed or first_correct)
+            )
+            if probe_owned_novel_second_pass_cases is not None:
+                changed = first != item.get("final")
+                row_ok &= ((case_id in probe_owned_novel_second_pass_cases) or
+                           not changed)
+            per_case_ok &= row_ok
+            expected_first_correct += int(first_correct)
+            expected_fixes += int(not first_correct)
+    round_state = {key: round_change.get(key) for key in
+                   ("label_evaluable_scheduled_cases",
+                    "paired_completed_cases_with_round1", "first_round_correct",
+                    "final_correct", "fixes", "breaks")}
+    round_state["cases"] = round_cases
+    round_ok = (
+        per_case_ok and
+        round_state["label_evaluable_scheduled_cases"] == scheduled and
+        round_state["paired_completed_cases_with_round1"] == scheduled and
+        round_state["first_round_correct"] == expected_first_correct and
+        round_state["final_correct"] == scheduled and
+        round_state["fixes"] == expected_fixes and
+        round_state["breaks"] == 0 and
+        (task_routed or expected_fixes == 0)
+    )
+    return {
+        "task_routed": task_routed,
+        "accuracy_ok": accuracy_ok, "accuracy_state": accuracy_state,
+        "baselines_ok": baselines_ok, "baseline_state": baseline_state,
+        "pairs_ok": pair_ok, "pair_state": pair_state,
+        "round_ok": round_ok, "round_state": round_state,
+        "probe_owned_novel_second_pass_cases": (
+            sorted(probe_owned_novel_second_pass_cases)
+            if probe_owned_novel_second_pass_cases is not None else None),
+    }
+
+
 def _evaluate_gate(freeze: dict[str, Any], comparison: dict[str, Any] | None,
                    comparison_error: str | None, freeze_path: Path, gold_path: Path,
                    original_run: Path, staged_run: Path, extension_run: Path,
@@ -1113,6 +1847,43 @@ def _evaluate_gate(freeze: dict[str, Any], comparison: dict[str, Any] | None,
                {"cases": smoke_cases, "rounds": required_rounds,
                 "expected_labels": expected_labels})
 
+    if freeze.get("target_plan_schema") == PLAN_SCHEMA_V4:
+        prior = freeze.get("prior_artifacts")
+        provider_mode = freeze.get("provider_mode")
+        v4_freeze_ok = (
+            freeze.get("status") == "frozen_before_live_calls" and
+            freeze.get("model") == "gpt-6-astra" and
+            freeze.get("reasoning_effort") == "medium" and
+            freeze.get("outer_rounds") == 2 and
+            freeze.get("workers") == 1 and
+            freeze.get("automatic_transport_retries") == 0 and
+            provider_mode in V4_EXPERIMENT_BY_PROVIDER and
+            freeze.get("experiment") == V4_EXPERIMENT_BY_PROVIDER.get(provider_mode) and
+            freeze.get("strict_retrieval_attribution") is
+                (provider_mode == "task_routed") and
+            freeze.get("retrieval_attribution_mode") ==
+                ("strict" if provider_mode == "task_routed" else "legacy") and
+            freeze.get("provider") == V4_PROVIDER_LABELS.get(provider_mode) and
+            isinstance(prior, dict) and bool(prior)
+        )
+        checks.add("freeze.v4_execution_contract", v4_freeze_ok,
+                   "v4 experiment/provider names match; task-routed is strict, fixed reanalysis is not; prior manifest is nonempty",
+                   {"experiment": freeze.get("experiment"),
+                    "status": freeze.get("status"),
+                    "model": freeze.get("model"),
+                    "reasoning_effort": freeze.get("reasoning_effort"),
+                    "outer_rounds": freeze.get("outer_rounds"),
+                    "workers": freeze.get("workers"),
+                    "automatic_transport_retries": freeze.get(
+                        "automatic_transport_retries"),
+                    "provider_mode": freeze.get("provider_mode"),
+                    "strict_retrieval_attribution": freeze.get(
+                        "strict_retrieval_attribution"),
+                    "retrieval_attribution_mode": freeze.get(
+                        "retrieval_attribution_mode"),
+                    "provider": freeze.get("provider"),
+                    "prior_artifact_count": len(prior) if isinstance(prior, dict) else None})
+
     hash_mismatches, hash_skipped = _frozen_hash_audit(
         freeze, repo_root, gold_path, extension_run, hash_mode)
     checks.add("freeze.hashes", not hash_mismatches,
@@ -1120,12 +1891,25 @@ def _evaluate_gate(freeze: dict[str, Any], comparison: dict[str, Any] | None,
                {"mismatches": hash_mismatches, "unavailable_or_skipped": hash_skipped},
                "Executed mode validates captured runtime files and recorded runtime hashes; "
                "non-executed historical files are disclosed rather than read from a changed workspace.")
+    if freeze.get("target_plan_schema") in STRICT_PLAN_SCHEMAS:
+        strict_hash_check = ("freeze.v4_complete_current_hashes"
+                             if freeze.get("target_plan_schema") == PLAN_SCHEMA_V4
+                             else "freeze.v3_complete_current_hashes")
+        checks.add(strict_hash_check,
+                   hash_mode == "current" and not hash_skipped,
+                   "v3/v4 gates require current mode with no skipped source, test, document, input or gold hash",
+                   {"hash_mode": hash_mode, "skipped": hash_skipped})
 
     baseline_mismatches = _frozen_baseline_audit(
         freeze, repo_root, original_run, staged_run)
     checks.add("freeze.baseline_hashes", not baseline_mismatches,
                "the exact preregistered original and staged baseline artifacts",
                baseline_mismatches)
+    if "prior_artifacts" in freeze:
+        prior_mismatches = _frozen_prior_artifact_audit(freeze, repo_root)
+        checks.add("freeze.prior_artifact_hashes", not prior_mismatches,
+                   "every preregistered historical comparison and gate artifact",
+                   prior_mismatches)
 
     try:
         relative_run = extension_run.resolve().relative_to(repo_root).as_posix()
@@ -1139,12 +1923,21 @@ def _evaluate_gate(freeze: dict[str, Any], comparison: dict[str, Any] | None,
                "every named preserved-run directory still exists", missing_preserved,
                "Existence is checkable; byte-for-byte non-overwrite history is not.")
 
+    secret_findings = _secret_shape_audit(
+        _gate_secret_paths(freeze, repo_root, freeze_path, gold_path,
+                           original_run, staged_run, extension_run), repo_root)
+    checks.add("security.no_secret_shapes", not secret_findings,
+               "no recognized API-key or access-token shape occurs in frozen inputs, source, baselines, prior artifacts, or run artifacts",
+               secret_findings,
+               "Findings disclose only a path and detector name; matched bytes are never retained.")
+
     required = [extension_run / name for name in
                 ("config.json", "inputs.json", "results.json", "status.json")]
+    suffixes = ["calls", "report", "result", "target-plan", "verification-history"]
+    if freeze.get("target_plan_schema") == PLAN_SCHEMA_V4:
+        suffixes.extend(("psi-history", "retrieval"))
     required.extend(extension_run / f"{case_id}-{suffix}.json"
-                    for case_id in smoke_cases
-                    for suffix in ("calls", "report", "result", "target-plan",
-                                   "verification-history"))
+                    for case_id in smoke_cases for suffix in suffixes)
     missing = sorted(path.name for path in required if not path.exists())
     checks.add("execution.required_artifacts", not missing,
                "all aggregate and per-case smoke artifacts exist", missing)
@@ -1161,6 +1954,9 @@ def _evaluate_gate(freeze: dict[str, Any], comparison: dict[str, Any] | None,
              for case_id in smoke_cases}
     reports = {case_id: _read(extension_run / f"{case_id}-report.json")
                for case_id in smoke_cases}
+    retrievals = ({case_id: _read(extension_run / f"{case_id}-retrieval.json")
+                   for case_id in smoke_cases}
+                  if freeze.get("target_plan_schema") == PLAN_SCHEMA_V4 else {})
 
     config_ok, actual_config = _exact_config(freeze, config)
     checks.add("execution.frozen_config", config_ok,
@@ -1191,9 +1987,36 @@ def _evaluate_gate(freeze: dict[str, Any], comparison: dict[str, Any] | None,
     checks.add("execution.completed_without_errors", not completed_errors and not report_errors,
                "every smoke case completed with a valid report and no errors",
                {"row_errors": completed_errors, "report_errors": report_errors})
-    checkpoint_errors = _checkpoint_audit(extension_run, rows, smoke_cases, required_rounds)
+    actual_rounds: list[int] | dict[str, list[int]] = required_rounds
+    search_round_counts: dict[str, int] | None = None
+    loop_state: dict[str, Any] | None = None
+    if freeze.get("target_plan_schema") == PLAN_SCHEMA_V4:
+        loop_ok, loop_state, case_rounds, search_round_counts = _outer_loop_audit(
+            rows, reports, retrievals, smoke_cases, rounds_count,
+            freeze.get("provider_mode"))
+        actual_rounds = case_rounds
+        loop_check_id = ("execution.adaptive_task_routed_outer_loop"
+                         if freeze.get("provider_mode") == "task_routed" else
+                         "execution.fixed_reanalysis_outer_loop")
+        checks.add(loop_check_id, loop_ok,
+                   ("each case has 1..2 real verification cycles, complete task outcomes, "
+                    "and every later verification follows a valid material hit"
+                    if freeze.get("provider_mode") == "task_routed" else
+                    "each case has exactly two forced fixed-reanalysis cycles"),
+                   loop_state)
+        if freeze.get("provider_mode") == "task_routed":
+            demonstrated = bool(loop_state.get(
+                "probe_owned_novel_second_pass_cases"))
+            checks.add("execution.task_routed_loop_demonstrated", demonstrated,
+                       "at least one smoke case has a later frozen-probe task that returns material and triggers a real second verification",
+                       {"loop_opportunity_cases": loop_state.get("loop_opportunity_cases"),
+                        "second_pass_cases": loop_state.get("second_pass_cases"),
+                        "probe_owned_novel_second_pass_cases": loop_state.get(
+                            "probe_owned_novel_second_pass_cases")})
+    checkpoint_errors = _checkpoint_audit(
+        extension_run, rows, smoke_cases, actual_rounds)
     checks.add("execution.retained_rounds", not checkpoint_errors,
-               f"rounds {required_rounds} plus matching retained checkpoint hashes",
+               "every accepted verification cycle has one matching retained checkpoint hash and no synthetic checkpoint",
                checkpoint_errors)
     call_errors = _call_audit(extension_run, rows, config, smoke_cases)
     checks.add("execution.calls_models_and_budgets", not call_errors,
@@ -1206,38 +2029,35 @@ def _evaluate_gate(freeze: dict[str, Any], comparison: dict[str, Any] | None,
     checks.add("comparison.independent_audit", comparison_error is None and comparison is not None,
                "independent scorer completes without error", comparison_error)
     if comparison is not None:
-        arms = comparison.get("arms", {})
-        extension_arm = arms.get("extension", {})
         scheduled = len(smoke_cases)
-        checks.add("labels.smoke_accuracy", extension_arm.get("completed") == scheduled and
-                   extension_arm.get("correct") == scheduled,
+        label_audit = _smoke_label_audit(
+            comparison, smoke_cases, expected_labels, freeze.get("provider_mode"),
+            (set(loop_state.get("probe_owned_novel_second_pass_cases", []))
+             if freeze.get("provider_mode") == "task_routed" and
+             isinstance(loop_state, dict) else None))
+        checks.add("labels.smoke_accuracy", label_audit["accuracy_ok"],
                    f"extension completes and agrees with {scheduled}/{scheduled} provisional labels",
-                   {key: extension_arm.get(key) for key in ("completed", "correct")})
-        baseline_state = {arm: {key: arms.get(arm, {}).get(key)
-                                for key in ("completed", "correct")}
-                          for arm in ("original", "staged")}
-        checks.add("labels.completed_baselines", all(value == {
-                   "completed": scheduled, "correct": scheduled}
-                   for value in baseline_state.values()),
+                   label_audit["accuracy_state"])
+        checks.add("labels.completed_baselines", label_audit["baselines_ok"],
                    f"both baselines complete and agree on {scheduled}/{scheduled}",
-                   baseline_state)
-        pairs = comparison.get("label_comparisons", {})
-        pair_state = {}
-        for baseline in ("original", "staged"):
-            values = pairs.get(f"extension_vs_{baseline}", {}).get("all_scheduled", {})
-            pair_state[baseline] = {key: values.get(key)
-                                    for key in ("case_pairs", "fixes", "breaks")}
-        checks.add("labels.no_baseline_fixes_or_breaks", all(
-                   value == {"case_pairs": scheduled, "fixes": 0, "breaks": 0}
-                   for value in pair_state.values()),
-                   f"{scheduled} pairs and zero fixes/breaks against each baseline", pair_state)
-        round_change = comparison.get("round1_to_final", {}).get("extension", {})
-        checks.add("labels.no_round1_to_final_changes",
-                   round_change.get("paired_completed_cases_with_round1") == scheduled and
-                   round_change.get("fixes") == 0 and round_change.get("breaks") == 0,
-                   f"{scheduled} paired cases and zero round-1-to-final fixes/breaks",
-                   {key: round_change.get(key) for key in
-                    ("paired_completed_cases_with_round1", "fixes", "breaks")})
+                   label_audit["baseline_state"])
+        pair_id = ("labels.task_routed_zero_baseline_breaks"
+                   if label_audit["task_routed"]
+                   else "labels.no_baseline_fixes_or_breaks")
+        pair_expected = (f"{scheduled} final-label pairs, zero breaks, and fixes allowed"
+                         if label_audit["task_routed"] else
+                         f"{scheduled} pairs and zero fixes/breaks against each baseline")
+        checks.add(pair_id, label_audit["pairs_ok"], pair_expected,
+                   label_audit["pair_state"])
+        round_id = ("labels.task_routed_round_changes"
+                    if label_audit["task_routed"]
+                    else "labels.no_round1_to_final_changes")
+        round_expected = (
+            f"{scheduled} per-case round-1 records, every final correct, fixes allowed, zero breaks"
+            if label_audit["task_routed"] else
+            f"{scheduled} per-case records with round 1 and final both correct and zero changes")
+        checks.add(round_id, label_audit["round_ok"], round_expected,
+                   label_audit["round_state"])
 
         coverage = comparison.get("target_plan_probe_coverage", {})
         totals = coverage.get("totals", {})
@@ -1261,7 +2081,9 @@ def _evaluate_gate(freeze: dict[str, Any], comparison: dict[str, Any] | None,
         result_totals = comparison.get("target_probe_result_audit", {}).get("totals", {})
         cycle_state = {key: result_totals.get(key) for key in
                        ("accepted_judgement_cycles", "audited_judgement_cycles")}
-        expected_cycles = scheduled * len(required_rounds)
+        expected_cycles = (sum(len(value) for value in actual_rounds.values())
+                           if isinstance(actual_rounds, dict) else
+                           scheduled * len(actual_rounds))
         checks.add("probe_audit.accepted_cycles", cycle_state == {
                    "accepted_judgement_cycles": expected_cycles,
                    "audited_judgement_cycles": expected_cycles},
@@ -1272,14 +2094,34 @@ def _evaluate_gate(freeze: dict[str, Any], comparison: dict[str, Any] | None,
         checks.add("probe_audit.grounded_conclusive_rate",
                    result_totals.get("grounded_conclusive_rate") == 1.0,
                    1.0, result_totals.get("grounded_conclusive_rate"))
+        if freeze.get("target_plan_schema") == PLAN_SCHEMA_V4:
+            v4_ok, v4_state = _v4_audit_state(
+                comparison, smoke_cases, actual_rounds,
+                search_rounds=search_round_counts,
+                provider_mode=freeze.get("provider_mode"),
+                probe_owned_novel_second_pass_cases=(set(loop_state.get(
+                    "probe_owned_novel_second_pass_cases", []))
+                    if freeze.get("provider_mode") == "task_routed" and
+                    isinstance(loop_state, dict) else set()))
+            checks.add("probe_audit.v4_end_to_end_ledgers", v4_ok,
+                       "coverage/material/follow-up/retrieval/probe-delta ledgers are complete with zero breaks",
+                       v4_state)
     else:
+        task_routed = freeze.get("provider_mode") == "task_routed"
+        pair_id = ("labels.task_routed_zero_baseline_breaks" if task_routed
+                   else "labels.no_baseline_fixes_or_breaks")
+        round_id = ("labels.task_routed_round_changes" if task_routed
+                    else "labels.no_round1_to_final_changes")
         for identifier in ("labels.smoke_accuracy", "labels.completed_baselines",
-                           "labels.no_baseline_fixes_or_breaks",
-                           "labels.no_round1_to_final_changes", "probe_audit.frozen_plans",
+                           pair_id, round_id, "probe_audit.frozen_plans",
                            "probe_audit.structural_coverage", "probe_audit.accepted_cycles",
                            "probe_audit.result_slot_coverage",
                            "probe_audit.grounded_conclusive_rate"):
             checks.add(identifier, False, "independent comparison audit data", None,
+                       "Not evaluated because the independent scorer failed.")
+        if freeze.get("target_plan_schema") == PLAN_SCHEMA_V4:
+            checks.add("probe_audit.v4_end_to_end_ledgers", False,
+                       "independent v4 scorer audit data", None,
                        "Not evaluated because the independent scorer failed.")
 
     label_state = {}
@@ -1288,22 +2130,41 @@ def _evaluate_gate(freeze: dict[str, Any], comparison: dict[str, Any] | None,
         first = next((item.get("decision") for item in row.get("checkpoints", [])
                       if item.get("round") == 1), None)
         label_state[case_id] = {"round1": first, "final": row.get("prediction")}
-    checks.add("labels.frozen_case_labels", all(label_state[case_id] == {
-               "round1": expected, "final": expected}
-               for case_id, expected in expected_labels.items()),
-               {case_id: {"round1": expected, "final": expected}
-                for case_id, expected in expected_labels.items()}, label_state)
+    task_routed = freeze.get("provider_mode") == "task_routed"
+    label_ok = all(
+        state["final"] == expected and
+        (task_routed and isinstance(state["round1"], str) or
+         not task_routed and state["round1"] == expected)
+        for case_id, expected in expected_labels.items()
+        for state in (label_state[case_id],))
+    label_expected = ({case_id: {"round1": "any observed decision", "final": expected}
+                       for case_id, expected in expected_labels.items()}
+                      if task_routed else
+                      {case_id: {"round1": expected, "final": expected}
+                       for case_id, expected in expected_labels.items()})
+    label_id = ("labels.task_routed_final_case_labels" if task_routed
+                else "labels.frozen_case_labels")
+    checks.add(label_id, label_ok, label_expected, label_state)
 
     if "p02" in smoke_cases:
+        p02_rounds = (actual_rounds.get("p02", [])
+                      if isinstance(actual_rounds, dict) else actual_rounds)
         _p02_checks(checks, plans["p02"], reports["p02"], inputs["p02"]["target"],
-                    required_rounds)
-    if "p04" in smoke_cases and plans["p04"].get("schema_version") == PLAN_SCHEMA_V3:
-        _p04_checks(checks, reports["p04"], plans["p04"], required_rounds)
+                    p02_rounds)
+    if ("p04" in smoke_cases and
+            plans["p04"].get("schema_version") in STRICT_PLAN_SCHEMAS):
+        p04_rounds = (actual_rounds.get("p04", [])
+                      if isinstance(actual_rounds, dict) else actual_rounds)
+        _p04_checks(checks, reports["p04"], plans["p04"], p04_rounds)
     if "p07" in smoke_cases:
-        _p07_checks(checks, plans["p07"], reports["p07"], required_rounds)
+        p07_rounds = (actual_rounds.get("p07", [])
+                      if isinstance(actual_rounds, dict) else actual_rounds)
+        _p07_checks(checks, plans["p07"], reports["p07"], p07_rounds)
     if "p08" in smoke_cases:
+        p08_rounds = (actual_rounds.get("p08", [])
+                      if isinstance(actual_rounds, dict) else actual_rounds)
         _p08_checks(checks, plans["p08"], reports["p08"], inputs["p08"],
-                    required_rounds)
+                    p08_rounds)
     return checks.finish(comparison_error)
 
 

@@ -1,0 +1,63 @@
+{
+  "status": "frozen_before_live_calls",
+  "supersedes": "target-extension-freeze-06 after the preserved smoke-02 extension-set failure",
+  "experiment": "target_extended_psi_development_v2",
+  "target_plan_schema": "decision-probe-v2",
+  "model": "gpt-6-astra",
+  "reasoning_effort": "medium",
+  "smoke_cases": ["p02", "p08"],
+  "full_cases": ["p01", "p02", "p03", "p04", "p05", "p06", "p07", "p08"],
+  "outer_rounds": 2,
+  "max_target_structure_repairs": 1,
+  "max_target_extension_repairs": 1,
+  "max_extension_output_repairs": 1,
+  "extension_output_repair_contract": "If an accepted immutable claim contract produces an extra, missing or misbound probe, rerun only the extension stage once with that same contract. Do not rerun or revise first-layer claim decomposition. Relation probes are legal only when the target logic has that exact relation kind.",
+  "max_material_structure_repairs_per_return": 1,
+  "max_material_semantic_repairs": 1,
+  "max_judgement_repairs": 1,
+  "budget_per_case": {
+    "calls": 64,
+    "output_tokens": 64000,
+    "per_call_output_tokens": 4000,
+    "seconds": 900
+  },
+  "workers": 2,
+  "offline_tests": 271,
+  "inputs_sha256": "4b1e1d3bbad7d72f77822aa8cf402e923db1af9d85df3b5c732a5279ac2fa825",
+  "provisional_reference_sha256": "4cd818aecf0693559c2b877a7067a7b765159abc4b6b832535fb6a14add13ce5",
+  "files": {
+    "experiments/extended_semantic.py": "28d41196594371af49c672a739be5c688adcc178e6a32dcdb0d607371253c06d",
+    "experiments/staged_semantic.py": "bda70c454c9c8f97fcbefe9d760ba4fd261fa606386d62f233540e3ca0768fe6",
+    "experiments/staged_run.py": "de70cd6252fbba21edd8a590ce5975cd2513c5c81a21e2d7555caaeb658e0a04",
+    "experiments/staged_score.py": "ac4ecb9364420084123367812075f365fb4e878b176a5c56797144cc04730a89",
+    "experiments/target_extension_compare_score.py": "f7a9d8e9b548775c70c670509cd0bd2e5c03198b0be9cf17f76f9ec2ae1bd14b",
+    "newsverify/provenance.py": "c30393c96bc39f944c788edb4b00bca9fbb00fc2c09a339177d7477150731bc7",
+    "tests/test_extended_semantic.py": "a5592e6882fa5c0a9915474e58e92fea46760bda22a61c19a2f4461e26d2e8b2",
+    "tests/test_extended_staged_integration.py": "6734f65a055f44bc9d6a277ec9828d84becb7393b98fb531ca5bd783c8bfd5aa",
+    "tests/test_staged_origin_scope.py": "d88f2ec2fad4a46f24550253f332db41e839f51ba116e4647a48620fa4959b82",
+    "tests/test_provenance.py": "1dc9c5f35d4731b290ccfe2e2605e3c691c3fc27ced6159581ac2ee1488500c3",
+    "tests/test_staged_run.py": "4efc05600dc1b463e1ab8016ac77c76785fb883764117969b2bf5255045e32de",
+    "tests/test_target_extension_compare_score.py": "6cbf4e16a1a14c3bf8ae7ed92d413b7aa53dfea936d5196c64a34893d587d9f4",
+    "docs/TARGET_EXTENSION.md": "9ca2fa22593db4912088f56d94afa70f8eca737dd7bf357c364d2d9d3453bfb7",
+    "docs/STAGED_PSI.md": "d685fd4ddcca8b9cf2b2848cbe6fa6a55a92d189800f06432712bd2895210346",
+    "docs/TARGET_EXTENSION_SCORING.md": "339dbb50685812aada8bda3a48496e945139e6186bf78d788aa5cf210a6c8f3b"
+  },
+  "preserved_failed_runs": {
+    "reports/target-extension-v2-smoke-01": "Execution environment lacked the optional model client; zero API attempts.",
+    "reports/target-extension-v2-smoke-02": "p02 completed, while p08 returned one illegal comparison_relation probe under global and logic after two successful API calls; the strict validator stopped the run."
+  },
+  "logic_contract": "single retains one claim; and/or contain only flat standalone branches; attribution contains one reporting parent plus flat conjunctive attributed-content children; conditional/comparison/causal retain one complete relation and require a relation-specific all-dimension probe; mixed fails closed without an expression tree.",
+  "identity_contract": "entity_identity is same-referent matching and accepts exact mention, alias, unambiguous description or anaphora. exact_designation is permitted only for an explicit naming predicate. Overlapping nested identity spans are rejected.",
+  "result_contract": "Evidence and world return exactly one grounded result per projected probe. Python validates plan checksum, projections, bindings, result relations and basis, then deterministically aggregates; the model cannot choose or override the overall verdict.",
+  "loop_contract": "Every returned snapshot is decomposed again. Probe-owned gaps are linked to one unresolved probe. Each round recomputes whether prior active gaps still block; nondecisive unresolved branches become nonblocking without being falsely marked resolved, and conclusive probe results close their prior tasks with current basis.",
+  "next_run": "reports/target-extension-v2-smoke-03",
+  "gate": {
+    "execution": "p02 and p08 must both complete two rounds with no call error, model mismatch or budget overrun; returned responses must equal attempts and checkpoints must be rounds 1 and 2.",
+    "labels": "p02 round1 and final must be false; p08 round1 and final must be true. Smoke accuracy must be 2/2 with zero fixes and zero breaks against both completed baselines.",
+    "probe_audit": "Both plans must pass independent v2 SHA, target-anchor, binding, projection and program-policy validation. Four accepted verification cycles must have exactly-one result-slot coverage 1.0 and grounded-conclusive rate 1.0.",
+    "p02": "Exactly one attribution parent and at least one linked attributed-content child; no parent dimension may extend past 'reported that'. Final-total, Bennu, OSIRIS-REx and 70.3 grams belong to content. Every round must ground the contradicted final-total obligation in m03.",
+    "p08": "No overlapping entity/designation spans and no exact_designation probe. The map-product entity probe must use same_referent and be supported in both evidence rounds from m15 by exact/alias/description/anaphora, with no identity gap. No fetch may repeat an already-visible m14/m15 URL. The graph must retain m14 to m15 direct citation and m15 as origin.",
+    "failure_policy": "Any failed conjunct preserves smoke-03 and stops the full run. A code or prompt change requires a new freeze and a fresh smoke directory. No failed run is overwritten."
+  },
+  "proof_limit": "The two-case gate detects the known regression and the eight seen development cases can show recovery or non-regression only. Neither proves an accuracy increase; that requires event-disjoint, independently adjudicated held-out cases."
+}

@@ -1,0 +1,250 @@
+{
+  "event": {
+    "title": "NOAA发布2024年度气候总结；m07快照与目标声明矛盾：1.29°C对应20世纪平均值，而非1850—1900年平均值。",
+    "date": "2025-01-10",
+    "summary": "m07标示的发布日期为2025年1月10日。\nm07报告2024年全球地表温度比20世纪平均值高1.29°C，比1850—1900年平均值高1.46°C。\nm07称2024年是1850—2024年期间全球温度最高的一年，比此前最暖的2023年高0.10°C。\nm07称1850年以来最暖的十个年份均出现在过去十年。",
+    "sources": [],
+    "relation": "",
+    "causes": [
+      {
+        "title": "目标声明混用了两种温度距平的参照基准",
+        "date": "形成时间不详",
+        "summary": "m07同时报告：2024年全球地表温度比20世纪平均值高1.29°C，比1850—1900年平均值高1.46°C。目标声明把前一个数值与后一个基准组合，构成明确的文本矛盾；但其是否源于摘录或转述失误，快照未提供直接证据。",
+        "sources": [
+          {
+            "url": "https://www.ncei.noaa.gov/news/global-climate-202413",
+            "title": "NOAA NCEI — Assessing the Global Climate in 2024（m07快照）"
+          }
+        ],
+        "relation": "可能直接导致目标声明的基准错配；错误形成机制属于推断",
+        "causes": [],
+        "confidence": 0.65,
+        "grounded": true
+      }
+    ],
+    "confidence": 0.0,
+    "grounded": true
+  },
+  "direct_response": "仅据m07，NOAA、2025年1月10日、2024年及1.29°C均有记载，但声明与文本矛盾：1.29°C对应20世纪均值，1850—1900年对应1.46°C。2024年超过2023年纪录0.10°C，次年发布总结。错误在于基准错配，形成原因在2个信源中未找到。范围外NASA估计约1.47°C，与NOAA差0.01°C，未必构成矛盾；文本一致不代表独立核验，现实核验未知。（基于2个信源 | 覆盖1类媒体 | 2条事实多源一致 | 1条存在分歧 | 因果锚定1/1）",
+  "credibility": {
+    "source_count": 2,
+    "source_types": [
+      "官方媒体"
+    ],
+    "consistent_count": 2,
+    "disputed_count": 1,
+    "grounding_rate": 1.0,
+    "grounded_count": 1,
+    "total_causal_nodes": 1
+  },
+  "event_timeline": [
+    {
+      "date": "2023年",
+      "title": "2023年创下随后被2024年超过的全球年均地表温度纪录",
+      "description": "NOAA和NASA的2024年度分析均将2023年列为此前的纪录年份。NOAA称，2024年全球地表温度比2023年高0.10°C；此处两份材料的一致表述不等于完成了独立的现实核验。",
+      "significance": "背景",
+      "sources": [
+        {
+          "url": "https://www.ncei.noaa.gov/news/global-climate-202413",
+          "title": "NOAA NCEI — Assessing the Global Climate in 2024"
+        },
+        {
+          "url": "https://www.nasa.gov/news-release/temperatures-rising-nasa-confirms-2024-warmest-year-on-record/",
+          "title": "NASA — Temperatures Rising: NASA Confirms 2024 Warmest Year on Record"
+        }
+      ],
+      "perspectives": [],
+      "verified": true,
+      "causal_links": []
+    },
+    {
+      "date": "2023年6月至2024年8月",
+      "title": "NASA报告连续15个月刷新对应月份温度纪录",
+      "description": "NASA材料称，2023年6月至2024年8月连续15个月出现月度温度纪录，并将其描述为前所未有的持续高温。该过程为2024年全年创新高提供背景，但材料未据此建立直接因果关系。",
+      "significance": "重要",
+      "sources": [
+        {
+          "url": "https://www.nasa.gov/news-release/temperatures-rising-nasa-confirms-2024-warmest-year-on-record/",
+          "title": "NASA — Temperatures Rising: NASA Confirms 2024 Warmest Year on Record"
+        }
+      ],
+      "perspectives": [],
+      "verified": false,
+      "causal_links": []
+    },
+    {
+      "date": "2025-01-10",
+      "title": "NOAA与NASA发布2024年最暖年度分析，NOAA明确区分两种温度基准",
+      "description": "按快照所示发布日期，NOAA与NASA均于当日发布分析：NOAA称2024年为1850—2024年最暖年份，比20世纪平均值高1.29°C、比1850—1900年平均值高1.46°C，并称最暖的十年均出现在过去十年。NASA也称2024年创纪录，比1951—1980年基准高1.28°C、比1850—1900年平均值高约1.47°C。仅依据指定证据m07，目标声明将1.29°C对应到1850—1900年平均值，与NOAA快照明确矛盾；这一判断针对文本内容，现实温度的独立核验仍为未知，混用基准的形成时间与原因亦无直接证据。",
+      "significance": "重要",
+      "sources": [
+        {
+          "url": "https://www.ncei.noaa.gov/news/global-climate-202413",
+          "title": "NOAA NCEI — Assessing the Global Climate in 2024（m07）"
+        },
+        {
+          "url": "https://www.nasa.gov/news-release/temperatures-rising-nasa-confirms-2024-warmest-year-on-record/",
+          "title": "NASA — Temperatures Rising: NASA Confirms 2024 Warmest Year on Record（m08）"
+        }
+      ],
+      "perspectives": [],
+      "verified": true,
+      "causal_links": []
+    }
+  ],
+  "sources": [
+    {
+      "outlet": "美国国家海洋和大气管理局国家环境信息中心（NOAA NCEI）",
+      "url": "https://www.ncei.noaa.gov/news/global-climate-202413",
+      "publish_time": "2025-01-10",
+      "source_type": "官方媒体",
+      "is_original": true,
+      "key_facts": [
+        {
+          "claim": "NOAA年度总结报告称，2024年全球地表温度比20世纪平均值高1.29°C，而不是比1850—1900年平均值高1.29°C。",
+          "source_urls": [
+            "https://www.ncei.noaa.gov/news/global-climate-202413"
+          ],
+          "agreed": true
+        },
+        {
+          "claim": "报告称，2024年全球温度比工业化前的1850—1900年平均值高1.46°C。",
+          "source_urls": [
+            "https://www.ncei.noaa.gov/news/global-climate-202413"
+          ],
+          "agreed": true
+        },
+        {
+          "claim": "报告将2024年列为1850—2024年间最暖年份，比此前最暖的2023年高0.10°C；自1850年以来最暖的10年均出现在过去十年。",
+          "source_urls": [
+            "https://www.ncei.noaa.gov/news/global-climate-202413"
+          ],
+          "agreed": true
+        }
+      ]
+    },
+    {
+      "outlet": "美国国家航空航天局（NASA）",
+      "url": "https://www.nasa.gov/news-release/temperatures-rising-nasa-confirms-2024-warmest-year-on-record/",
+      "publish_time": "2025-01-10",
+      "source_type": "官方媒体",
+      "is_original": true,
+      "key_facts": [
+        {
+          "claim": "NASA发布的分析称，2024年地球平均地表温度为有记录以来最高，比其1951—1980年基准平均值高1.28°C，超过2023年的纪录。",
+          "source_urls": [
+            "https://www.nasa.gov/news-release/temperatures-rising-nasa-confirms-2024-warmest-year-on-record/"
+          ],
+          "agreed": true
+        },
+        {
+          "claim": "NASA科学家估计，2024年地球温度比1850—1900年平均值高约1.47°C。",
+          "source_urls": [
+            "https://www.nasa.gov/news-release/temperatures-rising-nasa-confirms-2024-warmest-year-on-record/"
+          ],
+          "agreed": true
+        }
+      ]
+    }
+  ],
+  "source_timeline": [
+    {
+      "outlet": "美国国家海洋和大气管理局国家环境信息中心（NOAA NCEI）",
+      "url": "https://www.ncei.noaa.gov/news/global-climate-202413",
+      "publish_time": "2025-01-10",
+      "source_type": "官方媒体",
+      "is_original": true,
+      "key_facts": [
+        {
+          "claim": "NOAA年度总结报告称，2024年全球地表温度比20世纪平均值高1.29°C，而不是比1850—1900年平均值高1.29°C。",
+          "source_urls": [
+            "https://www.ncei.noaa.gov/news/global-climate-202413"
+          ],
+          "agreed": true
+        },
+        {
+          "claim": "报告称，2024年全球温度比工业化前的1850—1900年平均值高1.46°C。",
+          "source_urls": [
+            "https://www.ncei.noaa.gov/news/global-climate-202413"
+          ],
+          "agreed": true
+        },
+        {
+          "claim": "报告将2024年列为1850—2024年间最暖年份，比此前最暖的2023年高0.10°C；自1850年以来最暖的10年均出现在过去十年。",
+          "source_urls": [
+            "https://www.ncei.noaa.gov/news/global-climate-202413"
+          ],
+          "agreed": true
+        }
+      ]
+    },
+    {
+      "outlet": "美国国家航空航天局（NASA）",
+      "url": "https://www.nasa.gov/news-release/temperatures-rising-nasa-confirms-2024-warmest-year-on-record/",
+      "publish_time": "2025-01-10",
+      "source_type": "官方媒体",
+      "is_original": true,
+      "key_facts": [
+        {
+          "claim": "NASA发布的分析称，2024年地球平均地表温度为有记录以来最高，比其1951—1980年基准平均值高1.28°C，超过2023年的纪录。",
+          "source_urls": [
+            "https://www.nasa.gov/news-release/temperatures-rising-nasa-confirms-2024-warmest-year-on-record/"
+          ],
+          "agreed": true
+        },
+        {
+          "claim": "NASA科学家估计，2024年地球温度比1850—1900年平均值高约1.47°C。",
+          "source_urls": [
+            "https://www.nasa.gov/news-release/temperatures-rising-nasa-confirms-2024-warmest-year-on-record/"
+          ],
+          "agreed": true
+        }
+      ]
+    }
+  ],
+  "key_findings": [
+    "【文本判定】目标声明与指定证据m07明确矛盾：NOAA报告的1.29°C对应20世纪平均值；相对1850—1900年平均值的升温为1.46°C。此结论评估材料说了什么，不要求独立核实实际温度。",
+    "【时间线】两份快照均标示2025年1月10日发布，并称2024年超过2023年成为最暖年份。NASA还报告2023年6月至2024年8月连续15个月刷新对应月份纪录；这提供时间背景，但不构成直接因果证明。",
+    "【信源】目标判定仅依据证据范围内的NOAA快照m07；NASA快照m08仅作背景比较。两者表述一致不等于完成独立现实核验，相对1850—1900年基准的1.46°C与约1.47°C之差也不足以认定实质矛盾。",
+    "【因果】可直接查证的是目标声明将一个温度数值与另一个参照基准错误配对；将其归因于摘录、编辑或转述失误则属于推断，材料未展示错误形成过程。"
+  ],
+  "information_gaps": [
+    "现实温度及各机构估算结果的独立核验状态为未知；材料未提供原始观测、计算方法或不确定性范围。",
+    "快照是2026年9月5日采集的选取并规范化空白的摘录，不是完整页面或2025年发布时的精确历史版本；准确发布时间与时区未知。",
+    "目标声明的形成时间、传播路径和基准错配原因无法验证。",
+    "材料未解释两机构估计相差0.01°C的原因，也未提供2024年创纪录高温的物理归因证据。"
+  ],
+  "consistent_facts": [
+    {
+      "claim": "2024年全球平均地表温度创有记录以来最高值，超过2023年的纪录。",
+      "source_urls": [
+        "https://www.ncei.noaa.gov/news/global-climate-202413",
+        "https://www.nasa.gov/news-release/temperatures-rising-nasa-confirms-2024-warmest-year-on-record/"
+      ],
+      "agreed": true
+    },
+    {
+      "claim": "两份材料显示的发布日期均为2025年1月10日。",
+      "source_urls": [
+        "https://www.ncei.noaa.gov/news/global-climate-202413",
+        "https://www.nasa.gov/news-release/temperatures-rising-nasa-confirms-2024-warmest-year-on-record/"
+      ],
+      "agreed": true
+    }
+  ],
+  "disputed_facts": [
+    {
+      "claim": "2024年相对1850—1900年平均值的升温估计存在0.01°C的数值差异；材料不足以认定这是实质矛盾。",
+      "source_urls": [
+        "https://www.ncei.noaa.gov/news/global-climate-202413",
+        "https://www.nasa.gov/news-release/temperatures-rising-nasa-confirms-2024-warmest-year-on-record/"
+      ],
+      "agreed": false
+    }
+  ],
+  "causal_summary": "据所供材料，2023年创下温度纪录后，NASA报告了一段持续至2024年8月的月度纪录高温；随后，两机构在标示为2025年1月10日的分析中称2024年刷新年度纪录。当前争议不是材料是否报告了最暖年份，而是目标声明是否准确转述NOAA：m07将1.29°C对应20世纪平均值，将1.46°C对应1850—1900年平均值，目标却把前一数值接到了后一基准上。因此，文本矛盾有据可查；错误如何产生以及高温由何种物理机制驱动，均不能由这些摘录确定。",
+  "bias_notes": [
+    "所供摘录未显示明显立场冲突；核心问题是数值与基准错配，而非可确认的立场偏差。",
+    "信源限于两家美国科学机构的官方材料，缺少外部方法评议；不能把官方身份或一致表述直接视为独立验证。"
+  ]
+}

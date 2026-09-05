@@ -1,0 +1,223 @@
+[
+  {
+    "id": "p02",
+    "assessment_mode": "evidence",
+    "status": "completed",
+    "prediction": "false",
+    "checkpoints": [
+      {
+        "round": 1,
+        "id": "p02",
+        "decision": "false",
+        "assessment_mode": "evidence",
+        "assessments": {
+          "evidence": {
+            "raw_verdict": "contradicted",
+            "decision": "contradicted",
+            "blocking_gap_ids": []
+          },
+          "world": {
+            "raw_verdict": "contradicted",
+            "decision": "contradicted",
+            "blocking_gap_ids": []
+          }
+        },
+        "provenance_status": "original_material_located"
+      },
+      {
+        "round": 2,
+        "id": "p02",
+        "decision": "false",
+        "assessment_mode": "evidence",
+        "assessments": {
+          "evidence": {
+            "raw_verdict": "contradicted",
+            "decision": "contradicted",
+            "blocking_gap_ids": []
+          },
+          "world": {
+            "raw_verdict": "contradicted",
+            "decision": "contradicted",
+            "blocking_gap_ids": []
+          }
+        },
+        "provenance_status": "original_material_located"
+      }
+    ],
+    "target_plan_sha256": "4db996d07f8fe242c3e4739f33eb49f5f8204054bf6f21792919797183f0df97",
+    "native_prediction": {
+      "id": "p02",
+      "assessment_mode": "evidence",
+      "as_of": "2026-09-05T09:34:36Z",
+      "decision": "false",
+      "assessments": {
+        "evidence": {
+          "raw_verdict": "contradicted",
+          "decision": "contradicted",
+          "blocking_gap_ids": []
+        },
+        "world": {
+          "raw_verdict": "contradicted",
+          "decision": "contradicted",
+          "blocking_gap_ids": []
+        }
+      },
+      "provenance_status": "original_material_located",
+      "assessment_valid": true,
+      "stop_reason": "round_budget"
+    },
+    "engine_usage": {
+      "rounds": 2,
+      "documents": 4,
+      "unique_versions": 2,
+      "decomposition_calls": 4,
+      "verification_calls": 2
+    },
+    "usage": {
+      "model_calls": 20,
+      "input_tokens": 98468,
+      "output_tokens": 11428,
+      "seconds": 193.4711575199908
+    },
+    "checkpoint_hashes": [
+      {
+        "round": 1,
+        "sha256": "35a5fefbf071b50aa235b5986ac68f80185a0ece03437251c848500932db7337"
+      },
+      {
+        "round": 2,
+        "sha256": "dd3a1caae27bdcd6096d9c275495d3c40af1c16bb061e20673c6a4d8f0340325"
+      }
+    ],
+    "new_api_attempts": 20,
+    "returned_responses": 20
+  },
+  {
+    "id": "p07",
+    "assessment_mode": "evidence",
+    "status": "error",
+    "prediction": null,
+    "checkpoints": [],
+    "target_plan_sha256": "c628561ed86eb684cc3a5b7e45fb0313aeec6aedf12db7e244a960e141ce4efe",
+    "native_prediction": {
+      "id": "p07",
+      "assessment_mode": "evidence",
+      "as_of": "2026-09-05T09:34:36Z",
+      "decision": "unverifiable",
+      "assessments": null,
+      "provenance_status": "unresolved",
+      "assessment_valid": false,
+      "stop_reason": "verifier_error"
+    },
+    "engine_usage": {
+      "rounds": 1,
+      "documents": 2,
+      "unique_versions": 2,
+      "decomposition_calls": 3,
+      "verification_calls": 1
+    },
+    "error_type": "ValueError",
+    "usage": {
+      "model_calls": 13,
+      "input_tokens": 37915,
+      "output_tokens": 5156,
+      "seconds": 100.31352206099837
+    },
+    "checkpoint_hashes": [],
+    "new_api_attempts": 13,
+    "returned_responses": 13
+  },
+  {
+    "id": "p08",
+    "assessment_mode": "evidence",
+    "status": "completed",
+    "prediction": "true",
+    "checkpoints": [
+      {
+        "round": 1,
+        "id": "p08",
+        "decision": "true",
+        "assessment_mode": "evidence",
+        "assessments": {
+          "evidence": {
+            "raw_verdict": "supported",
+            "decision": "supported",
+            "blocking_gap_ids": []
+          },
+          "world": {
+            "raw_verdict": "supported",
+            "decision": "supported",
+            "blocking_gap_ids": []
+          }
+        },
+        "provenance_status": "original_material_located"
+      },
+      {
+        "round": 2,
+        "id": "p08",
+        "decision": "true",
+        "assessment_mode": "evidence",
+        "assessments": {
+          "evidence": {
+            "raw_verdict": "supported",
+            "decision": "supported",
+            "blocking_gap_ids": []
+          },
+          "world": {
+            "raw_verdict": "supported",
+            "decision": "supported",
+            "blocking_gap_ids": []
+          }
+        },
+        "provenance_status": "original_material_located"
+      }
+    ],
+    "target_plan_sha256": "ff591ac5502e467aa9d9b8095c049876aef88e124e2ec1f65f2feac00e3bd7e1",
+    "native_prediction": {
+      "id": "p08",
+      "assessment_mode": "evidence",
+      "as_of": "2026-09-05T09:34:36Z",
+      "decision": "true",
+      "assessments": {
+        "evidence": {
+          "raw_verdict": "supported",
+          "decision": "supported",
+          "blocking_gap_ids": []
+        },
+        "world": {
+          "raw_verdict": "supported",
+          "decision": "supported",
+          "blocking_gap_ids": []
+        }
+      },
+      "provenance_status": "original_material_located",
+      "assessment_valid": true,
+      "stop_reason": "round_budget"
+    },
+    "engine_usage": {
+      "rounds": 2,
+      "documents": 4,
+      "unique_versions": 2,
+      "decomposition_calls": 5,
+      "verification_calls": 2
+    },
+    "usage": {
+      "model_calls": 25,
+      "input_tokens": 98997,
+      "output_tokens": 11196,
+      "seconds": 196.6843056790094
+    },
+    "checkpoint_hashes": [
+      {
+        "round": 1,
+        "sha256": "25d701818d5b9ca14183f1f222b1aa39ee7380ef4b55f99d3a5df15e74bf66aa"
+      },
+      {
+        "round": 2,
+        "sha256": "4ce22641845d64f50a7d94265d640de6a95b677ed8189916c947a6fedde1c344"
+      }
+    ],
+    "new_api_attempts": 25,
+    "returned_responses": 25
+  }
+]

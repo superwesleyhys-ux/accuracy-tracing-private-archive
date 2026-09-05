@@ -1,0 +1,81 @@
+{
+  "schema_version": 1,
+  "cases": [
+    {
+      "target": {
+        "id": "p02",
+        "text": "NASA's February 15, 2024 bulk-sample announcement reported that the final total mass of the Bennu sample returned by OSIRIS-REx was 70.3 grams.",
+        "as_of": "2026-09-05T09:34:36Z",
+        "source_version_id": "m03",
+        "assessment_mode": "evidence",
+        "evidence_scope": [
+          "m03"
+        ]
+      },
+      "materials": [
+        {
+          "version_id": "m03",
+          "url": "https://science.nasa.gov/blogs/osiris-rex/2024/02/15/nasa-announces-osiris-rex-bulk-sample-mass/",
+          "content": "NASA Announces OSIRIS-REx Bulk Sample Mass\nPublication date: 2024-02-15\n\nNASA’s OSIRIS-REx spacecraft delivered 4.29 ounces (121.6 grams) of material from asteroid Bennu when it returned to Earth on Sep. 24, 2023; the largest asteroid sample ever collected in space and over twice the mission’s requirement.\n\nAfter designing, producing, and testing new tools, the ARES curation engineers successfully removed the fasteners in January and completed disassembly of the TAGSAM head. The remaining Bennu sample was revealed and carefully poured into wedge-shaped containers. 1.81 ounces (51.2 grams) were collected from this pour.\n\nCombined with the previously measured 2.48 ounces (70.3 grams) and additional particles collected outside of the pour, the bulk Bennu sample mass totals 4.29 ounces (121.6 grams). NASA will preserve at least 70% of the sample at Johnson for further research by scientists worldwide, including future generations.",
+          "retrieved_at": "2026-09-05T09:34:36Z",
+          "published_at": null,
+          "available_at": "2026-09-05T09:34:36Z",
+          "availability_basis": "Current web-tool collection completed at retrieved_at on 2026-09-05. The supplied material is a selected, whitespace-normalized excerpt, not a full page or historical exact-version capture. Availability is asserted only at collection completion. The source's displayed publication date is preserved in content; no exact timezone-qualified publication instant is known.",
+          "issuer": "NASA"
+        },
+        {
+          "version_id": "m04",
+          "url": "https://science.nasa.gov/blogs/osiris-rex/2023/10/20/nasas-osiris-rex-achieves-sample-mass-milestone/",
+          "content": "NASA’s OSIRIS-REx Achieves Sample Mass Milestone\nPublication date: 2023-10-20\n\nThe curation team processing NASA’s asteroid Bennu sample has removed and collected 2.48 ounces (70.3 grams) of rocks and dust from the sampler hardware – surpassing the agency’s goal of bringing at least 60 grams to Earth.\n\nAnd the good news is, there’s still more of NASA’s OSIRIS-REx (Origins, Spectral Interpretation, Resource Identification, and Security–Regolith Explorer) sample to collect.\n\nThe sample processed so far includes the rocks and dust found on the outside of the sampler head, as well as a portion of the bulk sample from inside the head, which was accessed through the head’s mylar flap. Additional material remaining inside the sampler head, called the Touch-and-Go Sample Acquisition Mechanism, or TAGSAM, is set for removal later, adding to the mass total.",
+          "retrieved_at": "2026-09-05T09:34:36Z",
+          "published_at": null,
+          "available_at": "2026-09-05T09:34:36Z",
+          "availability_basis": "Current web-tool collection completed at retrieved_at on 2026-09-05. The supplied material is a selected, whitespace-normalized excerpt, not a full page or historical exact-version capture. Availability is asserted only at collection completion. The source's displayed publication date is preserved in content; no exact timezone-qualified publication instant is known.",
+          "issuer": "NASA"
+        }
+      ],
+      "seed_ids": [
+        "m04"
+      ],
+      "full_evidence_control": true
+    },
+    {
+      "target": {
+        "id": "p08",
+        "text": "The USGS Unified Geologic Map of the Moon released in 2020 combined six Apollo-era regional maps with newer lunar-mission data.",
+        "as_of": "2026-09-05T09:34:36Z",
+        "source_version_id": "m14",
+        "assessment_mode": "evidence",
+        "evidence_scope": [
+          "m15"
+        ]
+      },
+      "materials": [
+        {
+          "version_id": "m14",
+          "url": "https://www.usgs.gov/news/astrogeology-releases-new-map-moon",
+          "content": "Astrogeology releases a new map of the Moon\nPublication date: 2020-04-20\n\nThe USGS Astrogeology Science Center (ASC), in collaboration with NASA and the Lunar and Planetary Institute, has released a new definitive geologic map of the Moon!\n\nChallenges of the decade-long process included the fact that the Apollo-era lunar maps were only available in paper format and early digitized versions of the paper maps did not align with updated and more accurate images. The original six maps were digitally renovated and reconciled to the newer datasets.\n\nFind the press release here: https://www.usgs.gov/news/usgs-releases-first-ever-comprehensive-geologic-map-moon.",
+          "retrieved_at": "2026-09-05T09:34:36Z",
+          "published_at": null,
+          "available_at": "2026-09-05T09:34:36Z",
+          "availability_basis": "Current web-tool collection completed at retrieved_at on 2026-09-05. The supplied material is a selected, whitespace-normalized excerpt, not a full page or historical exact-version capture. Availability is asserted only at collection completion. The source's displayed publication date is preserved in content; no exact timezone-qualified publication instant is known.",
+          "issuer": "USGS Astrogeology Science Center"
+        },
+        {
+          "version_id": "m15",
+          "url": "https://www.usgs.gov/news/usgs-releases-first-ever-comprehensive-geologic-map-moon",
+          "content": "USGS Releases First-Ever Comprehensive Geologic Map of the Moon\nPublication date: 2020-04-20\n\nTo create the new digital map, scientists used information from six Apollo-era regional maps along with updated information from recent satellite missions to the moon. The existing historical maps were redrawn to align them with the modern data sets, thus preserving previous observations and interpretations. Along with merging new and old data, USGS researchers also developed a unified description of the stratigraphy, or rock layers, of the moon.\n\nThis resolved issues from previous maps where rock names, descriptions and ages were sometimes inconsistent.",
+          "retrieved_at": "2026-09-05T09:34:36Z",
+          "published_at": null,
+          "available_at": "2026-09-05T09:34:36Z",
+          "availability_basis": "Current web-tool collection completed at retrieved_at on 2026-09-05. The supplied material is a selected, whitespace-normalized excerpt, not a full page or historical exact-version capture. Availability is asserted only at collection completion. The source's displayed publication date is preserved in content; no exact timezone-qualified publication instant is known.",
+          "issuer": "USGS Communications and Publishing"
+        }
+      ],
+      "seed_ids": [
+        "m14"
+      ],
+      "full_evidence_control": true
+    }
+  ]
+}

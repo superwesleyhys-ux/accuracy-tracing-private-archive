@@ -1,0 +1,10 @@
+{
+  "status": "preserved_pre_freeze_audit_interruption",
+  "scheduled_cases": ["p02", "p07", "p08"],
+  "case_in_progress": "p02",
+  "recorded_api_attempts": 5,
+  "completed_predictions": 0,
+  "scored": false,
+  "reason": "The live run was stopped as soon as an independent preregistration audit found that target semantic-extension repair and probe-output repair shared one counter while freeze-08 declared separate budgets. The executed source snapshot and call ledger are retained; no result from this run is used in the comparison.",
+  "superseded_by": "target-extension-freeze-09 and reports/target-extension-v2-smoke-05"
+}

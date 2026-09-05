@@ -1,0 +1,38 @@
+{
+  "target": {
+    "id": "p07",
+    "text": "NOAA renamed GOES-U to GOES-19 on June 25, 2024.",
+    "as_of": "2026-09-05T09:34:36Z",
+    "source_version_id": "m12",
+    "assessment_mode": "evidence",
+    "evidence_scope": [
+      "m13"
+    ]
+  },
+  "materials": [
+    {
+      "version_id": "m12",
+      "url": "https://www.nesdis.noaa.gov/news/noaas-goes-u-satellite-one-year-later",
+      "content": "NOAA’s GOES-U Satellite: One Year Later\nPublication date: 2025-06-25\n\nOn June 25, 2024, GOES-U, the final satellite in NOAA’s GOES-R Series, launched from NASA’s Kennedy Space Center in Florida. Once GOES-U [reached geostationary orbit](https://www.nesdis.noaa.gov/news/noaas-goes-u-reaches-geostationary-orbit-now-designated-goes-19) on July 7, the satellite was renamed GOES-19. As NOAA marks the first anniversary of sending GOES-U into space, we check in with the newest satellite in NOAA’s fleet.",
+      "retrieved_at": "2026-09-05T09:34:36Z",
+      "published_at": null,
+      "available_at": "2026-09-05T09:34:36Z",
+      "availability_basis": "Current web-tool collection completed at retrieved_at on 2026-09-05. The supplied material is a selected, whitespace-normalized excerpt, not a full page or historical exact-version capture. Availability is asserted only at collection completion. The source's displayed publication date is preserved in content; no exact timezone-qualified publication instant is known.",
+      "issuer": "NOAA NESDIS"
+    },
+    {
+      "version_id": "m13",
+      "url": "https://www.nesdis.noaa.gov/news/noaas-goes-u-reaches-geostationary-orbit-now-designated-goes-19",
+      "content": "NOAA’s GOES-U Reaches Geostationary Orbit, Now Designated GOES-19\nPublication date: 2024-07-08\n\nOn July 7, 2024, NOAA's GOES-U satellite reached geostationary orbit above Earth's equator and was renamed GOES-19.\n\nOn July 7, 2024, NOAA’s GOES-U executed its final engine burn, placing the satellite in geostationary orbit 22,236 miles above Earth’s equator. Upon reaching this milestone, GOES-U was renamed GOES-19. GOES satellites are designated with a letter prior to launch and a number once they achieve geostationary orbit.",
+      "retrieved_at": "2026-09-05T09:34:36Z",
+      "published_at": null,
+      "available_at": "2026-09-05T09:34:36Z",
+      "availability_basis": "Current web-tool collection completed at retrieved_at on 2026-09-05. The supplied material is a selected, whitespace-normalized excerpt, not a full page or historical exact-version capture. Availability is asserted only at collection completion. The source's displayed publication date is preserved in content; no exact timezone-qualified publication instant is known.",
+      "issuer": "NOAA NESDIS"
+    }
+  ],
+  "seed_ids": [
+    "m12"
+  ],
+  "full_evidence_control": true
+}

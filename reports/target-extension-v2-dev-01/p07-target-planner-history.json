@@ -1,0 +1,20 @@
+[
+  {
+    "sequence": 1,
+    "stage": "claim_contract",
+    "repair": {
+      "structure": 0,
+      "extension": 0
+    },
+    "status": "structure_repair_requested"
+  },
+  {
+    "sequence": 2,
+    "stage": "claim_contract",
+    "repair": {
+      "structure": 1,
+      "extension": 0
+    },
+    "status": "structure_repair_exhausted"
+  }
+]
