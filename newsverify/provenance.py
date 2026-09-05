@@ -141,7 +141,7 @@ class TraceCheckpoint:
     target: Target
     config: TraceConfig
     state: dict
-    schema_version: str = "experimental-round-checkpoint-v1"
+    schema_version: str = "experimental-round-checkpoint-v2"
     sha256: str = ""
 
 
@@ -190,6 +190,7 @@ _CHECKPOINT_STATE_KEYS = frozenset({
     "verification_resolved", "runtime_gaps", "fragments", "relations", "origins", "usage",
     "fact_status", "decision_status", "assessments", "stop_reason", "fatal", "seen_structures",
     "previous_structure", "has_verifier",
+    "gap_registry", "gap_owners",
 })
 
 
@@ -353,6 +354,67 @@ def _resolution(resolution, materials):
     _basis(resolution.basis, materials)
 
 
+def _index_findings(items, kind):
+    """Shared IDs denote exactly equal findings; conflicting definitions fail.
+
+    Revisions are permitted by replacing the submitting owner's analysis before
+    building this index. Equal shared findings are deliberately deduplicated.
+    """
+    indexed = {}
+    for item in items:
+        if item.id in indexed and indexed[item.id] != item:
+            raise ValueError(f"conflicting {kind} id: {item.id}")
+        indexed[item.id] = item
+    return indexed
+
+
+def _gap_identity(gap, target):
+    # Description and source support may improve within an owner's revisions;
+    # an ID must never silently become a task in another lifecycle or scope.
+    return (gap.stage, gap_dimension(gap), gap.target_id or target.id,
+            gap.action, gap.locator)
+
+
+def _register_gaps(registry, owners, items, owner, target):
+    updated, updated_owners = dict(registry), {key: set(value) for key, value in owners.items()}
+    for item in _index_findings(items, "gap").values():
+        previous = updated.get(item.id)
+        if previous is not None:
+            if _gap_identity(previous, target) != _gap_identity(item, target):
+                raise ValueError(f"conflicting gap lifecycle identity: {item.id}")
+            if previous != item and owner not in updated_owners[item.id]:
+                raise ValueError(f"conflicting gap id across owners: {item.id}")
+        updated[item.id] = item
+        updated_owners.setdefault(item.id, set()).add(owner)
+    return updated, updated_owners
+
+
+def _validate_resolution_references(resolutions, registry, stage):
+    for item in resolutions:
+        known = registry.get(item.gap_id)
+        if known is None:
+            raise ValueError(f"resolution references unknown gap: {item.gap_id}")
+        if stage == "verification" and (known.stage != "verification"
+                                          or gap_dimension(known) not in {"evidence", "world"}):
+            raise ValueError(f"verifier may not resolve provenance gaps: {item.gap_id}")
+
+
+def _combine_resolutions(items):
+    # A gap ID is a reference, not ownership of a resolution finding. Different
+    # materials may independently supply valid closure evidence for one task.
+    by_gap = {}
+    for item in items:
+        by_gap.setdefault(item.gap_id, []).append(item)
+    combined = {}
+    for gap_id, contributions in by_gap.items():
+        basis = {span for item in contributions for span in item.basis}
+        rationales = {item.rationale for item in contributions}
+        combined[gap_id] = Resolution(gap_id,
+            tuple(sorted(basis, key=lambda span: (span.version_id, span.start, span.end, span.quote))),
+            "\n".join(sorted(rationales)))
+    return combined
+
+
 def _validate_analysis(analysis, target, material, materials):
     if not isinstance(analysis, Analysis):
         raise ValueError("decomposer must return Analysis")
@@ -361,6 +423,8 @@ def _validate_analysis(analysis, target, material, materials):
         _tuple_of(getattr(analysis, name), cls, name)
     if not isinstance(analysis.notes, str):
         raise ValueError("analysis.notes must be a string")
+    for name in ("fragments", "relations", "gaps"):
+        _index_findings(getattr(analysis, name), name.rstrip("s"))
     _tuple_of(analysis.revisit_versions, str, "revisit_versions")
     if any(version not in materials for version in analysis.revisit_versions):
         raise ValueError("revisit_versions must refer to available material versions")
@@ -466,8 +530,8 @@ def run_provenance(target: Target | dict, provider: TraceProvider,
     if checkpoint is not None:
         if checkpoint.target != target:
             raise ValueError("checkpoint target mismatch")
-        if checkpoint.schema_version != "experimental-round-checkpoint-v1":
-            raise ValueError("unsupported checkpoint schema version")
+        if checkpoint.schema_version != "experimental-round-checkpoint-v2":
+            raise ValueError("unsupported checkpoint schema version; v2 requires historical gap registration; regenerate the verified prefix")
         if not isinstance(checkpoint.config, TraceConfig) or not isinstance(checkpoint.state, dict):
             raise ValueError("invalid checkpoint config or state")
         if checkpoint.sha256 != checkpoint_sha256(checkpoint):
@@ -495,6 +559,8 @@ def run_provenance(target: Target | dict, provider: TraceProvider,
     observations = []
     errors = []
     initial = Gap("origin:" + target.id, "Find the producing record and evidenced lineage for: " + target.text)
+    gap_registry = {initial.id: initial}
+    gap_owners = {initial.id: {"runner"}}
     gaps = {initial.id: initial}
     resolved = {}
     verification_gaps = {}
@@ -521,6 +587,8 @@ def run_provenance(target: Target | dict, provider: TraceProvider,
         observations = saved["observations"]
         errors = saved["errors"]
         initial = saved["initial"]
+        gap_registry = saved["gap_registry"]
+        gap_owners = saved["gap_owners"]
         gaps = saved["gaps"]
         resolved = saved["resolved"]
         verification_gaps = saved["verification_gaps"]
@@ -548,45 +616,72 @@ def run_provenance(target: Target | dict, provider: TraceProvider,
             "relations": [asdict(item) for item in relations.values()],
             "origins": [asdict(item) for item in origins.values()],
             "gaps": [asdict(item) for item in gaps.values()],
+            "gap_registry": [asdict(item) for item in gap_registry.values()],
+            "resolutions": [asdict(item) for item in resolved.values()],
             "verification_history": deepcopy(verifications), "usage": dict(usage),
             "assessments": deepcopy(assessments),
         })
 
-    def rebuild():
-        # Rebuild from current revisions so removed findings cannot linger.
-        fragments.clear()
-        relations.clear()
-        origins.clear()
-        proposed_gaps = {initial.id: initial, **runtime_gaps}
-        proposed_resolved = {}
-        for analysis in current_analyses.values():
-            for item in analysis.fragments:
-                fragments[item.id] = item
-            for item in analysis.relations:
-                relations[item.id] = item
+    def project(analyses, available, registry, owners, verify_gaps, verify_resolved,
+                updated_owner=None, verification_update=None):
+        """Build and validate a candidate without modifying any accepted state."""
+        projected_fragments = _index_findings(
+            (item for analysis in analyses.values() for item in analysis.fragments), "fragment")
+        projected_relations = _index_findings(
+            (item for analysis in analyses.values() for item in analysis.relations), "relation")
+        projected_origins = {}
+        proposed_gaps = _index_findings(
+            [initial, *runtime_gaps.values(),
+             *(item for analysis in analyses.values() for item in analysis.gaps),
+             *verify_gaps.values()], "gap")
+        # A fresh verifier request reopens its task. An older psi resolution
+        # cannot silently close it again just because another owner is updated.
+        analysis_rounds = {entry["version_id"]: entry["round"] for entry in history if entry["accepted"]}
+        if updated_owner is not None:
+            analysis_rounds[updated_owner] = usage["rounds"]
+        reopened_rounds = {item["id"]: entry["round"] for entry in verifications for item in entry["gaps"]}
+        if verification_update is not None:
+            reopened_rounds.update({item.id: usage["rounds"] for item in verification_update.gaps})
+        resolution_items = []
+        for owner, analysis in analyses.items():
+            _validate_resolution_references(analysis.resolutions, registry, "decomposition")
             for item in analysis.origins:
-                origins[(item.target_id, item.version_id)] = item
-            for item in analysis.gaps:
-                proposed_gaps[item.id] = item
+                projected_origins[(item.target_id, item.version_id)] = item
             for item in analysis.resolutions:
-                proposed_resolved[item.gap_id] = item
+                if item.gap_id not in verify_gaps or analysis_rounds.get(owner, 0) > reopened_rounds.get(item.gap_id, 0):
+                    resolution_items.append(item)
         # Preserve verification tasks until explicitly resolved by either stage.
-        proposed_gaps.update(verification_gaps)
-        proposed_resolved.update(verification_resolved)
-        if origins and not has_origin_path():
-            proposed_gaps["lineage:" + target.id] = Gap("lineage:" + target.id,
+        _validate_resolution_references(tuple(verify_resolved.values()), registry, "verification")
+        resolution_items.extend(verify_resolved.values())
+        proposed_resolved = _combine_resolutions(resolution_items)
+        generated_gaps = list(runtime_gaps.values())
+        if projected_origins and not has_origin_path(available, projected_origins, projected_relations):
+            lineage_gap = Gap("lineage:" + target.id,
                 "Provide the target source version and an evidenced citation/derivation path to an original material")
-        gaps.clear()
-        gaps.update({key: value for key, value in proposed_gaps.items() if key not in proposed_resolved})
-        resolved.clear()
-        resolved.update(proposed_resolved)
+            generated_gaps.append(lineage_gap)
+            proposed_gaps = _index_findings([*proposed_gaps.values(), lineage_gap], "gap")
+        registry, owners = _register_gaps(registry, owners, generated_gaps, "runner", target)
+        return (projected_fragments, projected_relations, projected_origins,
+                {key: value for key, value in proposed_gaps.items() if key not in proposed_resolved},
+                proposed_resolved, registry, owners)
 
-    def has_origin_path():
-        if target.source_version_id is None or target.source_version_id not in eligible:
+    def commit_projection(projection):
+        nonlocal fragments, relations, origins, gaps, resolved, gap_registry, gap_owners
+        fragments, relations, origins, gaps, resolved, gap_registry, gap_owners = projection
+
+    def rebuild():
+        commit_projection(project(current_analyses, eligible, gap_registry, gap_owners,
+                                  verification_gaps, verification_resolved))
+
+    def has_origin_path(available=None, origin_findings=None, relation_findings=None):
+        available = eligible if available is None else available
+        origin_findings = origins if origin_findings is None else origin_findings
+        relation_findings = relations if relation_findings is None else relation_findings
+        if target.source_version_id is None or target.source_version_id not in available:
             return False
-        roots = {item.version_id for item in origins.values()}
+        roots = {item.version_id for item in origin_findings.values()}
         adjacency = {}
-        for edge in relations.values():
+        for edge in relation_findings.values():
             if edge.status == "direct" and edge.kind in {"quotes", "cites", "reprints", "translates", "derives"}:
                 adjacency.setdefault(edge.from_version, set()).add(edge.to_version)
         pending = [target.source_version_id]
@@ -634,7 +729,20 @@ def run_provenance(target: Target | dict, provider: TraceProvider,
                     else decomposer.decompose(target, material, psi_context))
         validation_materials = dict(eligible)
         validation_materials[material.version_id] = material
-        _validate_analysis(analysis, target, material, validation_materials)
+        try:
+            _validate_analysis(analysis, target, material, validation_materials)
+            if not reasons:
+                candidate_registry, candidate_owners = _register_gaps(
+                    gap_registry, gap_owners, analysis.gaps, "material:" + material.version_id, target)
+                _validate_resolution_references(analysis.resolutions, candidate_registry, "decomposition")
+                candidate_analyses = {**current_analyses, material.version_id: analysis}
+                projection = project(candidate_analyses, validation_materials, candidate_registry,
+                    candidate_owners, verification_gaps, verification_resolved, updated_owner=material.version_id)
+        except Exception as exc:
+            event("analysis_rejected", version_id=material.version_id,
+                  analysis=asdict(analysis) if isinstance(analysis, Analysis) else None,
+                  message=str(exc))
+            raise
         revision = {"revision": len(history) + 1, "round": usage["rounds"],
                     "version_id": material.version_id, "duplicate": duplicate, "revisit": revisit,
                     "accepted": not reasons, "analysis": asdict(analysis), "exclusion_reasons": reasons}
@@ -644,10 +752,10 @@ def run_provenance(target: Target | dict, provider: TraceProvider,
             event("excluded_from_graph", version_id=material.version_id, reasons=reasons)
             return ()
         eligible[material.version_id] = material
-        previous = current_analyses.pop(material.version_id, None)
+        previous = current_analyses.get(material.version_id)
         current_analyses[material.version_id] = analysis
         event("alignment_checked", version_id=material.version_id, analysis_changed=previous != analysis)
-        rebuild()
+        commit_projection(projection)
         event("graph_updated", version_id=material.version_id, open_gaps=len(gaps))
         return analysis.revisit_versions
 
@@ -662,6 +770,7 @@ def run_provenance(target: Target | dict, provider: TraceProvider,
             "current_analyses": current_analyses, "history": history, "verifications": verifications,
             "operations": operations, "observations": observations, "errors": errors,
             "initial": initial, "gaps": gaps, "resolved": resolved,
+            "gap_registry": gap_registry, "gap_owners": gap_owners,
             "verification_gaps": verification_gaps, "verification_resolved": verification_resolved,
             "runtime_gaps": runtime_gaps, "fragments": fragments, "relations": relations,
             "origins": origins, "usage": usage, "fact_status": fact_status,
@@ -680,6 +789,12 @@ def run_provenance(target: Target | dict, provider: TraceProvider,
         usage["rounds"] = round_number
         round_verified = False
         tasks = tuple(gaps.values()) or (Gap("inspect-lineage", "Inspect unresolved upstream lineage"),)
+        if not gaps:
+            try:
+                gap_registry, gap_owners = _register_gaps(gap_registry, gap_owners, tasks, "runner", target)
+            except Exception as exc:
+                fail("integrity", exc)
+                break
         event("search", tasks=[asdict(item) for item in tasks], limit=capacity)
         try:
             iterator = iter(provider.search(target, tasks, round_number, capacity))
@@ -768,6 +883,7 @@ def run_provenance(target: Target | dict, provider: TraceProvider,
         if verifier is not None and eligible:
             usage["verification_calls"] += 1
             event("verification_started")
+            check = None
             try:
                 check = verifier.verify(target, context())
                 if not isinstance(check, VerificationResult):
@@ -794,8 +910,6 @@ def run_provenance(target: Target | dict, provider: TraceProvider,
                         raise ValueError("verifier search gaps must use stage=verification")
                 for item in check.resolutions:
                     _resolution(item, eligible)
-                    if item.gap_id in gaps and gaps[item.gap_id].stage != "verification":
-                        raise ValueError("verifier may not resolve provenance gaps")
                 if check.evidence_verdict not in {None, "unresolved"}:
                     _basis(check.basis, eligible)
                     if target.evidence_scope and not {s.version_id for s in check.basis} <= set(target.evidence_scope):
@@ -806,17 +920,28 @@ def run_provenance(target: Target | dict, provider: TraceProvider,
                 if check.world_verdict not in {None, "unresolved"}:
                     _basis(check.world_basis, eligible)
                     _nonempty(check.world_rationale, "world_rationale")
+                candidate_registry, candidate_owners = _register_gaps(
+                    gap_registry, gap_owners, check.gaps, "verifier", target)
+                _validate_resolution_references(check.resolutions, candidate_registry, "verification")
+                candidate_verify_gaps = dict(verification_gaps)
+                candidate_verify_resolved = dict(verification_resolved)
+                for item in check.gaps:
+                    candidate_verify_gaps[item.id] = item
+                    candidate_verify_resolved.pop(item.id, None)
+                for item in check.resolutions:
+                    candidate_verify_gaps.pop(item.gap_id, None)
+                candidate_verify_resolved.update(_combine_resolutions(check.resolutions))
+                projection = project(current_analyses, eligible, candidate_registry, candidate_owners,
+                    candidate_verify_gaps, candidate_verify_resolved, verification_update=check)
             except Exception as exc:
+                event("verification_rejected", verification=asdict(check) if isinstance(check, VerificationResult) else None,
+                      message=str(exc))
                 fail("verifier", exc)
                 break
             verifications.append({"round": round_number, **asdict(check)})
-            for item in check.gaps:
-                verification_gaps[item.id] = item
-                verification_resolved.pop(item.id, None)
-            for item in check.resolutions:
-                verification_gaps.pop(item.gap_id, None)
-                verification_resolved[item.gap_id] = item
-            rebuild()
+            verification_gaps = candidate_verify_gaps
+            verification_resolved = candidate_verify_resolved
+            commit_projection(projection)
             previous_assessments = assessments
             assessments = select_assessments(check, target, gaps.values())
             fact_status = assessments["world"]["decision"]
@@ -873,6 +998,7 @@ def run_provenance(target: Target | dict, provider: TraceProvider,
         "relations": [asdict(item) for item in relations.values()],
         "origins": [asdict(item) for item in origins.values()],
         "gaps": [asdict(item) for item in gaps.values()],
+        "gap_registry": [asdict(item) for item in gap_registry.values()],
         "resolutions": [asdict(item) for item in resolved.values()],
         "verification_history": verifications, "operations": operations, "errors": errors,
     }

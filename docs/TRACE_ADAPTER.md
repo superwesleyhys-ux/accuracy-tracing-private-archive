@@ -182,9 +182,19 @@ lineage remains partial.
 Keep the original target text and all raw version contents unchanged. A new
 analysis replaces that version's current analysis; all prior analyses remain in
 `analysis_history`. The current graph is rebuilt from current revisions so deleted
-findings do not linger. Stable fragment/relation IDs permit explicit revisions;
-the latest analysis wins for a reused ID. Use globally unique IDs for distinct
-facts and only reuse an ID when intentionally revising the same finding.
+findings do not linger. Stable fragment/relation IDs permit revisions by their
+owning material. Distinct findings must have distinct IDs; conflicting definitions
+from different owners are rejected before the candidate update is committed.
+Exactly identical shared definitions are allowed. Reobserving a source must not
+select a different conflicting definition merely by changing update order.
+
+`context.gap_registry` contains current and historically registered gap descriptors.
+Resolutions must reference this lifecycle, and a verifier may only resolve known
+verification gaps even after they have closed. Current checkpoints use schema v2
+to retain the lifecycle registry; old v1 experimental checkpoints are rejected.
+Generate a fresh verified prefix to continue under v2: v1 did not preserve the
+historical descriptors and ownership needed for a safe automatic migration.
+Historical result artifacts and their executed-code snapshots remain unchanged.
 
 `revisit_versions` names eligible old materials affected by a new finding. Each is
 passed back to psi with updated context under the decomposition-call budget.

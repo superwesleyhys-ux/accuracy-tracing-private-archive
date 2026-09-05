@@ -1,0 +1,22 @@
+{
+  "status": "frozen_before_live_calls",
+  "offline_tests": 186,
+  "files": {
+    "newsverify/provenance.py": "8671ccb1066016a73d1f511622bbe52bcd442f2bcc4e82e6194d0c875f1dbb7f",
+    "experiments/staged_semantic.py": "02365e163e078aefa896f80925628e941b9a8cbf04aa271a8d0192f429668c67",
+    "experiments/staged_run.py": "a10efac2aa8b4f698b2dcf84b15f36c2b8d9a628cf3e4a45e056bd725fe3df72",
+    "experiments/staged_score.py": "ac4ecb9364420084123367812075f365fb4e878b176a5c56797144cc04730a89",
+    "tests/test_state_integrity.py": "90c0ead9ea5cd3e60a9558c975cb3f708dc9bd688d3d2f17e6b0cc8eb6ad3e00",
+    "tests/test_staged_semantic.py": "e42c414afd28b4360a30d547311ed559f0fee9ebfa526b6855ffaea00bb2991b",
+    "tests/test_staged_run.py": "9bab4d787e05d866e57975b41252611a0b037b784d1f0901193ead048876e911",
+    "docs/STAGED_PSI.md": "5bdee87ced9856cf5af97676b10f9b850b17d4aff4d099e4e78f155f5c04e130",
+    "docs/TRACE_ADAPTER.md": "b463c315f6958f47a670fecd5c5dfac38102bc5eef324c7b5b71dad1d12cfb98"
+  },
+  "smoke_cases": [
+    "p02",
+    "p04"
+  ],
+  "rounds": 2,
+  "model": "gpt-6-astra",
+  "reasoning_effort": "medium"
+}
