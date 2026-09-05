@@ -27,11 +27,18 @@ class PlanClient:
                     {"kind": "baseline_scope", "quote": "above the 2024 baseline"}]}],
                 "logic": "single", "notes": ""}
         claim = payload["claim_contract"]["claims"][0]
+        dimensions = {item["kind"]: item["id"] for item in claim["dimensions"]}
+        bindings = {
+            "semantic_core": [dimensions["subject"], dimensions["predicate"]],
+            "baseline_scope": [dimensions["baseline_scope"]],
+            "source_lineage": [],
+        }
         return {"decision": "accept", "repair_quote": "", "repair_issue": "", "notes": "",
             "probes": [{"claim_id": claim["id"], "kind": kind,
+                         "dimension_ids": dimension_ids,
                          "question": "Check " + kind + ".",
                          "decision_impact": "A mismatch changes the decision."}
-                       for kind in ("semantic_core", "baseline_scope", "source_lineage")]}
+                       for kind, dimension_ids in bindings.items()]}
 
 
 class SemanticClient:
@@ -121,6 +128,56 @@ class ExtendedStagedIntegrationTests(unittest.TestCase):
         self.assertEqual(evidence_probe, client.calls[3]["payload"]["repair"]["probe_id"])
         self.assertEqual(1, sum(item["status"] == "repair_requested" for item in verifier.history))
         self.assertEqual("accepted", verifier.history[-1]["status"])
+
+    def test_evidence_repair_basis_cannot_escape_evidence_scope(self):
+        target, material, context, plan, views = self.fixture()
+        other = p.MaterialVersion("b", "https://example.org/b",
+            "An outside report says output rose above its own baseline.",
+            "2026-09-04T20:00:00Z", "2026-09-03T00:00:00Z",
+            "2026-09-03T00:00:00Z", "Synthetic exact archive.")
+        context["materials"].append(asdict(other))
+        evidence_probe = next(item.id for item in plan.probes if item.kind == "baseline_scope")
+        bad_repair = {"decision": "repair", "stage": "evidence", "probe_id": evidence_probe,
+            "issue": "Use an out-of-scope report to change the evidence verdict.",
+            "basis": [{"version_id": "b", "quote": other.content}]}
+        client = SemanticClient([
+            ("evidence", self.layer("a", material.content, "contradicted")),
+            ("world", self.layer("a", material.content, "unresolved")),
+            ("judgement_critic", bad_repair),
+        ])
+        verifier = s.StagedVerifier(client, target_plan=views)
+        with self.assertRaisesRegex(s.StagedSemanticError,
+                                    "outside the requested stage's permitted materials"):
+            verifier.verify(target, context)
+        self.assertEqual(["evidence", "world", "judgement_critic"],
+                         [call["stage"] for call in client.calls])
+        self.assertEqual("failed", verifier.history[-1]["status"])
+
+    def test_world_repair_basis_may_use_visible_material_outside_evidence_scope(self):
+        target, material, context, plan, views = self.fixture()
+        other = p.MaterialVersion("b", "https://example.org/b",
+            "An independent report addresses the same output claim.",
+            "2026-09-04T20:00:00Z", "2026-09-03T00:00:00Z",
+            "2026-09-03T00:00:00Z", "Synthetic exact archive.")
+        context["materials"].append(asdict(other))
+        world_probe = next(item.id for item in plan.probes if item.kind == "source_lineage")
+        repair = {"decision": "repair", "stage": "world", "probe_id": world_probe,
+            "issue": "Recheck whether the visible outside report changes world corroboration.",
+            "basis": [{"version_id": "b", "quote": other.content}]}
+        accept = {"decision": "accept", "stage": "none", "probe_id": "", "issue": "", "basis": []}
+        client = SemanticClient([
+            ("evidence", self.layer("a", material.content, "contradicted")),
+            ("world", self.layer("a", material.content, "unresolved")),
+            ("judgement_critic", repair),
+            ("world", self.layer("b", other.content, "unresolved")),
+            ("judgement_critic", accept),
+        ])
+        verifier = s.StagedVerifier(client, target_plan=views)
+        result = verifier.verify(target, context)
+        self.assertEqual("contradicted", result.evidence_verdict)
+        self.assertEqual(["evidence", "world", "judgement_critic", "world", "judgement_critic"],
+                         [call["stage"] for call in client.calls])
+        self.assertEqual("b", client.calls[3]["payload"]["repair"]["basis"][0]["version_id"])
 
     def test_changed_target_and_cross_routed_repair_fail_closed(self):
         target, material, context, plan, views = self.fixture()

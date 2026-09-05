@@ -65,10 +65,17 @@ class StagedRunMockTests(unittest.TestCase):
                     "logic": "single", "notes": ""}
             elif stage == "extension":
                 claim = payload["claim_contract"]["claims"][0]
+                dimensions = {item["kind"]: item["id"] for item in claim["dimensions"]}
+                bindings = {
+                    "semantic_core": [dimensions["subject"], dimensions["predicate"]],
+                    "time_boundary": [dimensions["time"]],
+                    "source_lineage": [],
+                }
                 answer = {"decision": "accept", "repair_quote": "", "repair_issue": "", "notes": "",
                     "probes": [{"claim_id": claim["id"], "kind": kind,
+                        "dimension_ids": dimension_ids,
                         "question": "Check " + kind + ".", "decision_impact": "This can change the decision."}
-                        for kind in ("semantic_core", "time_boundary", "source_lineage")]}
+                        for kind, dimension_ids in bindings.items()]}
             elif stage == "atoms":
                 answer = {"atoms": [{"statement": claim_quote, "quote": claim_quote,
                                      "qualifier_quotes": ["until 8 September 2026"]}], "notes": ""}

@@ -7,9 +7,10 @@ plan checksum; the model only proposes target clauses and bounded questions.
 """
 from __future__ import annotations
 
-from dataclasses import asdict, dataclass, is_dataclass
+from dataclasses import asdict, dataclass, is_dataclass, replace
 import hashlib
 import json
+import re
 
 
 def _string(maximum=1200, minimum=1, values=None):
@@ -29,7 +30,7 @@ def _object(**properties):
 
 
 CLAIM_ROLES = ("main", "conjunct", "alternative", "condition", "exception",
-               "comparison", "cause", "effect")
+               "comparison", "cause", "effect", "attribution", "attributed_content")
 DIMENSION_KINDS = ("subject", "predicate", "quantity_unit", "time",
                    "baseline_scope", "negation", "condition", "modality",
                    "entity_identity")
@@ -46,7 +47,7 @@ CLAIM_CONTRACT_SCHEMA = _object(
             kind=_string(values=DIMENSION_KINDS),
             quote=_string(1200)), 9)), 4),
     logic=_string(values=("single", "and", "or", "conditional", "comparison",
-                          "causal", "mixed")),
+                          "causal", "attribution", "mixed")),
     notes=_string(1200, 0),
 )
 
@@ -57,8 +58,9 @@ EXTENSION_SCHEMA = _object(
     probes=_array(_object(
         claim_id=_string(500),
         kind=_string(values=PROBE_KINDS),
+        dimension_ids=_array(_string(500), 9),
         question=_string(900),
-        decision_impact=_string(900)), 32),
+        decision_impact=_string(900)), 40),
     notes=_string(1200, 0),
 )
 
@@ -69,15 +71,30 @@ Use exact target quotations and expand them when necessary to make each anchor u
 Do not output offsets or invent identifiers.
 """
 
+# Deliberately match explicit embedded-proposition syntax only. Broad words
+# such as "report" alone are insufficient: "Company reported revenue" can be
+# one proposition, while "Company reported that revenue rose" cannot.
+_NESTED_ATTRIBUTION_CUE = re.compile(
+    r"\b(?:reported|announced|stated|said|wrote|concluded|found)\s+that\b",
+    re.IGNORECASE,
+)
+
 CLAIM_CONTRACT_PROMPT = DATA_RULE + """Stage: target claim contract.
 Split the target into at most four decision-bearing clauses. Preserve conjunction,
 alternative, comparison, condition, exception and causal direction. For each clause,
 write an unambiguous statement and quote the smallest unique target passage that contains it.
 Extract each explicit dimension separately: subject, predicate, quantity together with unit,
 time, comparison baseline/scope, negation, condition, modality and entity identity.
-Every dimension quote must occur uniquely inside its parent clause quote. Include subject and
-predicate for every clause. Do not inspect news material, decide truth, propose sources or emit
-verification questions. If repair is supplied, fix that issue and return the complete contract.
+
+An attribution such as "X reported/announced that Y" contains two decision-bearing clauses:
+one attribution clause for X's reporting act and one attributed_content clause for Y. Split
+those clauses even when their smallest unique clause quotations overlap. Except for
+entity_identity, do not put two dimensions of the same kind in one clause. Register every
+distinct named entity separately, so entity_identity may repeat with different quotations.
+Every dimension quote must occur uniquely inside its parent clause quote. Include exactly one
+subject and one predicate for every clause. Do not inspect news material, decide truth, propose
+sources or emit verification questions. If repair is supplied, fix that issue and return the
+complete replacement contract.
 """
 
 EXTENSION_PROMPT = DATA_RULE + """Stage: target decision-probe extension and contract review.
@@ -90,8 +107,13 @@ For every accepted claim, create bounded questions that later source analysis mu
 Always include semantic_core and source_lineage. Include polarity, time_boundary,
 quantity_unit, baseline_scope, condition_modality or entity_identity whenever the corresponding
 dimension appears. Include source_independence for world assessment. Reference only supplied
-claim IDs. Questions are hypotheses/check obligations, not facts, findings, citations, verdicts
-or evidence. Do not answer them and do not add quotations from any news material.
+claim and dimension IDs. Bind semantic_core to that claim's subject and predicate IDs. Bind
+each dimension-specific probe to exactly the dimension IDs it checks; emit a separate
+entity_identity probe for every entity_identity ID. Claim-wide source probes use an empty
+dimension_ids list. An attributed_content claim must retain its parent_claim_id scope: ask
+whether the parent attributed that content, not whether the content is independently true.
+Questions are hypotheses/check obligations, not facts, findings, citations,
+verdicts or evidence. Do not answer them and do not add quotations from any news material.
 """
 
 
@@ -103,6 +125,15 @@ class TargetPlanningError(ValueError):
         super().__init__(f"target planning {stage}: {reason}")
 
 
+class _StructureRepairNeeded(ValueError):
+    """A model draft is valid JSON but combines separable target clauses."""
+
+    def __init__(self, quote, issue):
+        self.quote = quote
+        self.issue = issue
+        super().__init__(issue)
+
+
 @dataclass(frozen=True)
 class TextAnchor:
     start: int
@@ -112,6 +143,7 @@ class TextAnchor:
 
 @dataclass(frozen=True)
 class ClaimDimension:
+    id: str
     kind: str
     anchor: TextAnchor
 
@@ -123,6 +155,7 @@ class TargetClaim:
     anchor: TextAnchor
     role: str
     dimensions: tuple[ClaimDimension, ...]
+    parent_claim_id: str | None = None
 
 
 @dataclass(frozen=True)
@@ -130,6 +163,7 @@ class DecisionProbe:
     id: str
     claim_id: str
     kind: str
+    dimension_ids: tuple[str, ...]
     question: str
     decision_impact: str
     routes: tuple[str, ...]
@@ -244,6 +278,7 @@ def _claim_payload(claim):
         "anchor": asdict(claim.anchor),
         "role": claim.role,
         "dimensions": [asdict(item) for item in claim.dimensions],
+        "parent_claim_id": claim.parent_claim_id,
     }
 
 
@@ -270,23 +305,34 @@ def _routes_and_gate(kind):
     raise ValueError("unknown probe kind")
 
 
-def _required_probe_kinds(claim, assessment_mode):
-    dimensions = {item.kind for item in claim.dimensions}
-    required = {"semantic_core", "source_lineage"}
-    if "negation" in dimensions:
-        required.add("polarity")
-    if "time" in dimensions:
-        required.add("time_boundary")
-    if "quantity_unit" in dimensions:
-        required.add("quantity_unit")
-    if "baseline_scope" in dimensions:
-        required.add("baseline_scope")
-    if dimensions & {"condition", "modality"}:
-        required.add("condition_modality")
-    if "entity_identity" in dimensions:
-        required.add("entity_identity")
+def _required_probe_bindings(claim, assessment_mode):
+    """Return every permitted and required (kind, dimension IDs) binding."""
+    by_kind = {}
+    for item in claim.dimensions:
+        by_kind.setdefault(item.kind, []).append(item.id)
+
+    def ids(*kinds):
+        return tuple(sorted(identifier for kind in kinds
+                            for identifier in by_kind.get(kind, ())))
+
+    required = {
+        ("semantic_core", ids("subject", "predicate")),
+        ("source_lineage", ()),
+    }
+    for dimension, probe in (
+        ("negation", "polarity"),
+        ("time", "time_boundary"),
+        ("quantity_unit", "quantity_unit"),
+        ("baseline_scope", "baseline_scope"),
+    ):
+        if dimension in by_kind:
+            required.add((probe, ids(dimension)))
+    if set(by_kind) & {"condition", "modality"}:
+        required.add(("condition_modality", ids("condition", "modality")))
+    for identifier in by_kind.get("entity_identity", ()):
+        required.add(("entity_identity", (identifier,)))
     if assessment_mode == "world":
-        required.add("source_independence")
+        required.add(("source_independence", ()))
     return required
 
 
@@ -307,13 +353,22 @@ def project_plan(plan, stage):
 
 
 class TargetPlanner:
-    """Create one reviewed plan for one immutable target signature."""
+    """Create one reviewed plan for one immutable target signature.
 
-    def __init__(self, client, max_repairs=1):
+    ``max_structure_repairs`` is reserved for deterministic assembly failures
+    such as a nested attribution collapsed into one clause. ``max_repairs`` is
+    independently reserved for the extension review.  One failure class can
+    therefore never consume the other's only retry.
+    """
+
+    def __init__(self, client, max_repairs=1, max_structure_repairs=1):
         if type(max_repairs) is not int or max_repairs not in (0, 1):
             raise ValueError("max_repairs must be 0 or 1")
+        if type(max_structure_repairs) is not int or max_structure_repairs not in (0, 1):
+            raise ValueError("max_structure_repairs must be 0 or 1")
         self.client = client
         self.max_repairs = max_repairs
+        self.max_structure_repairs = max_structure_repairs
         self.history = []
         self._cache = {}
 
@@ -336,13 +391,27 @@ class TargetPlanner:
         signature = _digest(payload)
         if signature in self._cache:
             return self._cache[signature]
+        structure_repairs = 0
+        extension_repairs = 0
         repair = None
-        for repair_count in range(self.max_repairs + 1):
+        while True:
+            repair_state = {"structure": structure_repairs,
+                            "extension": extension_repairs}
             raw_claims = self._call("claim_contract", CLAIM_CONTRACT_PROMPT,
                                     {"target": payload, "repair": repair},
-                                    CLAIM_CONTRACT_SCHEMA, repair_count)
+                                    CLAIM_CONTRACT_SCHEMA, repair_state)
             try:
                 claims = self._assemble_claims(payload, signature, raw_claims)
+            except _StructureRepairNeeded as exc:
+                if structure_repairs >= self.max_structure_repairs:
+                    self.history[-1]["status"] = "structure_repair_exhausted"
+                    raise TargetPlanningError(
+                        "claim_contract", "structure repair budget exhausted: " + exc.issue
+                    ) from None
+                self.history[-1]["status"] = "structure_repair_requested"
+                structure_repairs += 1
+                repair = {"quote": exc.quote, "issue": exc.issue}
+                continue
             except ValueError as exc:
                 self.history[-1]["status"] = "failed"
                 raise TargetPlanningError("claim_contract", str(exc)) from None
@@ -351,7 +420,7 @@ class TargetPlanner:
                     "logic": raw_claims["logic"],
                     "claims": [_claim_payload(item) for item in claims],
                     "notes": raw_claims["notes"],
-                }}, EXTENSION_SCHEMA, repair_count)
+                }}, EXTENSION_SCHEMA, repair_state)
             decision = raw_extension["decision"]
             if decision == "accept":
                 if raw_extension["repair_quote"] or raw_extension["repair_issue"]:
@@ -379,15 +448,15 @@ class TargetPlanner:
             except ValueError as exc:
                 self.history[-1]["status"] = "failed"
                 raise TargetPlanningError("extension", str(exc)) from None
-            if decision == "reject" or repair_count >= self.max_repairs:
+            if decision == "reject" or extension_repairs >= self.max_repairs:
                 self.history[-1]["status"] = ("rejected" if decision == "reject"
                                                 else "repair_exhausted")
                 reason = "contract rejected" if decision == "reject" else "repair budget exhausted"
                 raise TargetPlanningError("extension", reason)
             self.history[-1]["status"] = "repair_requested"
+            extension_repairs += 1
             repair = {"quote": raw_extension["repair_quote"],
                       "issue": raw_extension["repair_issue"]}
-        raise AssertionError("bounded planner loop escaped")
 
     @staticmethod
     def _assemble_claims(target, signature, raw):
@@ -397,48 +466,98 @@ class TargetPlanner:
         keys = set()
         for item in raw["claims"]:
             anchor = _unique_anchor(target["text"], item["quote"])
-            dimensions = []
-            kinds = set()
+            anchored_dimensions = []
+            dimension_keys = set()
+            by_kind = {}
             for value in item["dimensions"]:
-                if value["kind"] in kinds:
-                    raise ValueError("duplicate claim dimension")
-                kinds.add(value["kind"])
-                dimensions.append(ClaimDimension(value["kind"],
-                                                  _child_anchor(anchor, value["quote"])))
-            if not {"subject", "predicate"} <= kinds:
+                child = _child_anchor(anchor, value["quote"])
+                dimension_key = (value["kind"], child.start, child.end)
+                if dimension_key in dimension_keys:
+                    raise ValueError("duplicate anchored claim dimension")
+                dimension_keys.add(dimension_key)
+                anchored_dimensions.append((value["kind"], child))
+                by_kind.setdefault(value["kind"], []).append(child)
+            repeated = sorted(kind for kind, anchors in by_kind.items()
+                              if kind != "entity_identity" and len(anchors) > 1)
+            if repeated:
+                joined = ", ".join(repeated)
+                raise _StructureRepairNeeded(
+                    item["quote"],
+                    "One clause contains multiple " + joined +
+                    " dimensions. Split nested attribution/reporting from its attributed "
+                    "content and give each clause exactly one subject and predicate."
+                )
+            if not {"subject", "predicate"} <= set(by_kind):
                 raise ValueError("every claim needs subject and predicate anchors")
-            dimensions.sort(key=lambda value: (value.anchor.start, value.anchor.end, value.kind))
-            predicate = next(value.anchor for value in dimensions if value.kind == "predicate")
+            predicate = by_kind["predicate"][0]
             key = (anchor.start, anchor.end, item["role"], predicate.start, predicate.end)
             if key in keys:
                 raise ValueError("duplicate target claim")
             keys.add(key)
             identifier = target["id"] + ":claim:" + _digest([signature, *key])[:20]
+            dimensions = []
+            for kind, child in anchored_dimensions:
+                dimension_id = target["id"] + ":dimension:" + _digest(
+                    [signature, identifier, kind, child.start, child.end])[:20]
+                dimensions.append(ClaimDimension(dimension_id, kind, child))
+            dimensions.sort(key=lambda value: (value.anchor.start, value.anchor.end,
+                                                value.kind, value.id))
             claims.append(TargetClaim(identifier, item["statement"], anchor,
                                       item["role"], tuple(dimensions)))
+
+        roles = {claim.role for claim in claims}
+        explicit_nested_attribution = bool(_NESTED_ATTRIBUTION_CUE.search(target["text"]))
+        has_attribution_structure = bool(roles & {"attribution", "attributed_content"})
+        if explicit_nested_attribution or has_attribution_structure:
+            attributions = [claim for claim in claims if claim.role == "attribution"]
+            contents = [claim for claim in claims if claim.role == "attributed_content"]
+            if len(attributions) != 1 or not contents or raw["logic"] not in {
+                    "attribution", "mixed"}:
+                raise _StructureRepairNeeded(
+                    target["text"],
+                    "The target contains an explicit attribution with embedded content. "
+                    "Return exactly one attribution clause, one or more attributed_content "
+                    "clauses, and logic=attribution or mixed; do not flatten the attributed "
+                    "content into the reporting predicate."
+                )
+            parent = attributions[0]
+            claims = [replace(claim, parent_claim_id=parent.id)
+                      if claim.role == "attributed_content" else claim
+                      for claim in claims]
         return tuple(sorted(claims, key=lambda value: (value.anchor.start, value.anchor.end,
                                                         value.role, value.id)))
 
     @staticmethod
     def _assemble_probes(target, signature, claims, raw):
         known = {item.id: item for item in claims}
+        required = {(claim.id, kind, dimension_ids)
+                    for claim in claims
+                    for kind, dimension_ids in _required_probe_bindings(
+                        claim, target["assessment_mode"])}
         probes = []
         seen = set()
         for item in raw["probes"]:
             if item["claim_id"] not in known:
                 raise ValueError("probe references unknown claim")
-            key = (item["claim_id"], item["kind"])
+            if len(set(item["dimension_ids"])) != len(item["dimension_ids"]):
+                raise ValueError("probe repeats a dimension binding")
+            dimension_ids = tuple(sorted(item["dimension_ids"]))
+            owned = {dimension.id for dimension in known[item["claim_id"]].dimensions}
+            if not set(dimension_ids) <= owned:
+                raise ValueError("probe references a dimension outside its claim")
+            key = (item["claim_id"], item["kind"], dimension_ids)
             if key in seen:
                 raise ValueError("duplicate decision probe")
+            if key not in required:
+                raise ValueError("probe binding does not match claim dimensions")
             seen.add(key)
             routes, gate = _routes_and_gate(item["kind"])
             identifier = target["id"] + ":probe:" + _digest(
-                [signature, item["claim_id"], item["kind"]])[:20]
+                [signature, item["claim_id"], item["kind"], *dimension_ids])[:20]
             probes.append(DecisionProbe(identifier, item["claim_id"], item["kind"],
-                item["question"], item["decision_impact"], routes, gate))
-        required = {(claim.id, kind) for claim in claims
-                    for kind in _required_probe_kinds(claim, target["assessment_mode"])}
+                dimension_ids, item["question"], item["decision_impact"], routes, gate))
         missing = required - seen
         if missing:
-            raise ValueError("accepted extension is missing required claim probes")
-        return tuple(sorted(probes, key=lambda value: (value.claim_id, value.kind)))
+            raise ValueError("accepted extension is missing required dimension-bound probes")
+        return tuple(sorted(probes, key=lambda value: (
+            value.claim_id, value.kind, value.dimension_ids, value.id)))

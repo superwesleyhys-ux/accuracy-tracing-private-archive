@@ -75,6 +75,10 @@ def run(args):
         "reasoning_effort": args.reasoning_effort, "budget_per_case": asdict(budget),
         "trace_config": asdict(trace_config), "max_inner_repairs": args.max_repairs,
         "target_extension": extension_enabled,
+        "target_structure_repairs": args.max_repairs if extension_enabled else None,
+        "target_extension_repairs": args.max_repairs if extension_enabled else None,
+        "material_stage_repairs": args.max_repairs,
+        "judgement_repairs": args.max_repairs if extension_enabled else None,
         "target_extension_contract": ("one immutable target contract and decision-probe extension per case; "
             "bounded target and judgement repair; plan never counts as evidence" if extension_enabled else None),
         "workers": args.workers, "ordering_seed": 20260906,
@@ -140,7 +144,8 @@ def run(args):
             eligible = [m for m in materials if not p._material_eligibility(m, cutoff)]
             target_plan = None
             if extension_enabled:
-                planner = TargetPlanner(client, max_repairs=args.max_repairs)
+                planner = TargetPlanner(client, max_repairs=args.max_repairs,
+                                        max_structure_repairs=args.max_repairs)
                 plan = planner.prepare(target)
                 target_plan = {stage: project_plan(plan, stage).to_payload()
                                for stage in ("atoms", "lineage", "critic", "evidence", "world")}
@@ -166,6 +171,8 @@ def run(args):
             row["status"] = "completed"
         except Exception as exc:
             row["error_type"] = type(exc).__name__
+            if getattr(exc, "stage", None):
+                row["error_stage"] = exc.stage
         finally:
             row["usage"] = client.usage() if client else {k: 0 for k in
                 ("model_calls", "input_tokens", "output_tokens", "seconds")}

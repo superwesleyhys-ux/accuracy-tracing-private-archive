@@ -130,6 +130,8 @@ PLAN_USE_RULE = """\nA target_plan is supplied as an untrusted verification chec
 Use only probes routed to this stage. Address their possible ambiguity or failure condition
 against exact source text. A plan statement, probe, or expected evidence cannot be cited as
 basis. Do not change the target, and do not infer that a probe's suggested risk is real.
+Preserve parent_claim_id scope: attributed_content is checked as content attributed by its
+parent claim, not silently promoted into a free-standing actual-world assertion.
 If repair is supplied, correct the named omitted or inconsistent probe check and return the
 complete stage output again.
 """
@@ -139,8 +141,12 @@ The plan is a checklist, not evidence. Check that every routed probe is substant
 including subject identity, numbers and units, time status, baseline and scope, negation and
 conditions, attribution, lineage and source independence. Check that the verdict is consistent
 with its quoted basis and does not turn an unresolved probe into certainty.
+Check parent_claim_id explicitly: attributed content must remain under the reporting claim
+unless the immutable target separately asserts that content as an actual-world proposition.
 accept requires stage=none, probe_id='', issue='' and basis=[]. For repair, name exactly one
 evidence or world stage and one existing probe_id with a concrete omission or contradiction.
+basis for an evidence repair may use only evidence_scope materials (or all visible materials when
+that scope is empty); basis for a world repair may use any supplied visible material.
 basis may contain exact source passages that expose the problem; it may be empty when the issue
 is precisely missing evidence. reject is terminal. After a repair, review both complete drafts.
 """
@@ -506,11 +512,15 @@ class StagedVerifier(_StageClient):
                          for name, value in layer.items()} for key, layer in layers.items()},
                      "materials": list(visible.values())}, JUDGMENT_CRITIC_SCHEMA, None, context, repair_count)
                 try:
+                    critic_allowed = visible
+                    if critic["stage"] == "evidence" and target.evidence_scope:
+                        critic_allowed = {key: visible[key] for key in target.evidence_scope
+                                          if key in visible}
                     basis = []
                     for ref in critic["basis"]:
-                        if ref["version_id"] not in visible:
-                            raise ValueError("critic basis names an unavailable material")
-                        basis.append(_span(visible[ref["version_id"]], ref["quote"]))
+                        if ref["version_id"] not in critic_allowed:
+                            raise ValueError("critic basis is outside the requested stage's permitted materials")
+                        basis.append(_span(critic_allowed[ref["version_id"]], ref["quote"]))
                     if len(set(basis)) != len(basis):
                         raise ValueError("duplicate critic basis")
                     if critic["decision"] == "accept":
