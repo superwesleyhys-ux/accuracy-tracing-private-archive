@@ -1,0 +1,71 @@
+{
+  "schema_version": 1,
+  "scope": "Recovered saved news-tracking / accuracy-tracing chat deliverables; not a claim to inspect unsaved buffers in other sessions.",
+  "repository": "superwesleyhys-ux/accuracy-tracing",
+  "branch": "codex/fix-layered-provenance-v03",
+  "base_commit": "a60995d174f180807b92c017e306c8e9981736b2",
+  "earlier_branch": {
+    "name": "codex/fix-layered-loop-v03",
+    "commit": "243827e47dde23db08c3ae88dd260b0f5384c066"
+  },
+  "known_current_source_files": 679,
+  "archive_purpose": "Historical byte-preserved snapshots, not current implementations or new test results.",
+  "exclusions": [
+    "API keys and credential stores",
+    "billing/account screenshots",
+    "temporary virtual environments and caches",
+    "unrelated projects",
+    "unavailable unsaved files in other sessions"
+  ],
+  "archives": [
+    {
+      "name": "newsverify-harness-v0.1.0.zip",
+      "size_bytes": 34998,
+      "sha256": "00b428d472e2c295d0bcce65412667cc36d5d2f1a9f9734419fa8553d46bf78f",
+      "git_blob_sha1": "9233432a21e56668c2019eb9c26721c894dbf0e1"
+    },
+    {
+      "name": "accuracy-tracing-v0.2.0.zip",
+      "size_bytes": 128220,
+      "sha256": "0cc3a1f0dbd198969b5ebfc69eafa9c14a8185f7a79a871cab548f90c606f9c5",
+      "git_blob_sha1": "c4c9e4c2f21c7f40d0914b06d41e08de95416dbf"
+    },
+    {
+      "name": "accuracy-tracing-benchmark-review-20260905.zip",
+      "size_bytes": 24883,
+      "sha256": "e28f63378baf0529bcea1f36c282243977d0d62bb63784f3de473ebf1cdfe02f",
+      "git_blob_sha1": "8e15cb16f0e0723ece0e7f124c93a130bc4d9a83"
+    },
+    {
+      "name": "original-vs-accuracy-comparison.zip",
+      "size_bytes": 32399,
+      "sha256": "d66352a0985335af681e4b1cc9ab697fff90a45e8ea9c62ab85973ee428d22c8",
+      "git_blob_sha1": "742d3177705f4c449dfd42bbe28f2ac50eb72ffe"
+    },
+    {
+      "name": "direct-ab-comparison.zip",
+      "size_bytes": 16796,
+      "sha256": "2752c3f64b46ec7a4e7112cae916196d6b9d77b60fd7b3f74df7d67afd747061",
+      "git_blob_sha1": "c624cbbd413dba428de6d3e882b2022d7a98b614"
+    },
+    {
+      "name": "direct-ab-live-results.zip",
+      "size_bytes": 214730,
+      "sha256": "77a0d31c78287100375259a187232d67921f8bbb8b0ec3d622cde407cbb33384",
+      "git_blob_sha1": "a51b2e647390c01f62dd12ce09d8b414da8f61dc"
+    },
+    {
+      "name": "accuracy-regression-diagnosis.zip",
+      "size_bytes": 223661,
+      "sha256": "47f629fd779111956c6240f190977aa5e1edf6d311ffbdd3016a34aea0beb018",
+      "git_blob_sha1": "552aaced16a152d95ed537f3d4228b13b8b1c680"
+    }
+  ],
+  "validation": {
+    "members": 225,
+    "python": 43,
+    "json": 122
+  },
+  "credential_pattern_findings": [],
+  "new_model_calls": 0
+}
