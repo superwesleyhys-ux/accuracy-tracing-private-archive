@@ -72,16 +72,16 @@ referent relation 和聚合判定。atoms、lineage、critic 的保留请求必�
 ```bash
 python experiments/staged_run.py \
   --inputs experiments/proof_pilot/inputs.json \
-  --cases p04,p07,p08 --output reports/staged-v4-fixed-01 --rounds 2 \
+  --cases p04,p07,p08 --output reports/target-extension-v4-fixed-smoke-01 --rounds 2 \
   --workers 1 --target-extension --provider-mode fixed_reanalysis
 python experiments/staged_run.py \
   --inputs experiments/proof_pilot/inputs.json \
-  --cases p04,p07,p08 --output reports/staged-v4-routed-01 --rounds 2 \
+  --cases p04,p07,p08 --output reports/target-extension-v4-routed-smoke-01 --rounds 2 \
   --workers 1 --target-extension --provider-mode task_routed
 python experiments/staged_score.py \
-  --gold experiments/proof_pilot/gold.json --run reports/staged-v4-fixed-01
+  --gold experiments/proof_pilot/gold.json --run reports/target-extension-v4-fixed-smoke-01
 python experiments/staged_score.py \
-  --gold experiments/proof_pilot/gold.json --run reports/staged-v4-routed-01
+  --gold experiments/proof_pilot/gold.json --run reports/target-extension-v4-routed-smoke-01
 ```
 
 API 凭据通过运行环境配置；`--prompt-key` 仅在隐藏回显的交互终端使用。gate 会扫描冻结源码、输入、基线和运行产物中的常见 credential shape，且只报告文件与 detector 名称、不回显命中内容。输出目录必须是新目录。
