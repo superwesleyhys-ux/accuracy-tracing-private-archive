@@ -129,6 +129,37 @@ class ExtendedStagedIntegrationTests(unittest.TestCase):
         self.assertEqual(1, sum(item["status"] == "repair_requested" for item in verifier.history))
         self.assertEqual("accepted", verifier.history[-1]["status"])
 
+    def test_plan_aware_draft_grounding_gets_one_bounded_stage_repair(self):
+        target, material, context, plan, views = self.fixture()
+        invalid = {"atoms": [{"statement": "Issuer metadata names the publisher.",
+            "quote": "Synthetic exact archive.", "qualifier_quotes": []}], "notes": ""}
+        valid = {"atoms": [{"statement": material.content, "quote": material.content,
+            "qualifier_quotes": ["did not", "above the 2024 baseline"]}], "notes": ""}
+        no_lineage = {"citations": [], "origin": None, "notes": ""}
+        accept = {"decision": "accept", "stage": "none", "quote": "", "issue": ""}
+        client = SemanticClient([
+            ("atoms", invalid), ("atoms", valid),
+            ("lineage", no_lineage), ("critic", accept),
+        ])
+        decomposer = s.StagedDecomposer(client, target_plan=views, max_repairs=1)
+        analysis = decomposer.decompose(target, material, context)
+        self.assertTrue(analysis.fragments)
+        self.assertEqual(["atoms", "atoms", "lineage", "critic"],
+                         [call["stage"] for call in client.calls])
+        self.assertEqual("structure_repair_requested", decomposer.history[0]["status"])
+        repair = client.calls[1]["payload"]["repair"]
+        self.assertIn("source quote is absent or not unique", repair["issue"])
+        self.assertIn("material.content", repair["instruction"])
+        self.assertNotIn("Synthetic exact archive.", json.dumps(repair))
+
+        failing = SemanticClient([("atoms", invalid), ("atoms", invalid)])
+        exhausted = s.StagedDecomposer(failing, target_plan=views, max_repairs=1)
+        with self.assertRaisesRegex(s.StagedSemanticError,
+                                    "source quote is absent or not unique"):
+            exhausted.decompose(target, material, context)
+        self.assertEqual(["atoms", "atoms"], [call["stage"] for call in failing.calls])
+        self.assertEqual("structure_repair_exhausted", exhausted.history[-1]["status"])
+
     def test_evidence_repair_basis_cannot_escape_evidence_scope(self):
         target, material, context, plan, views = self.fixture()
         other = p.MaterialVersion("b", "https://example.org/b",
