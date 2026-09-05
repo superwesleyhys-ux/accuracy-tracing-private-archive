@@ -28,6 +28,7 @@ from model_io import Budget, BudgetClient, write
 from newsverify import provenance as p
 from newsverify.decisions import present_decision, round_decisions
 from staged_semantic import StagedDecomposer, StagedVerifier
+from extended_semantic import TargetPlanner, project_plan
 
 
 class DevelopmentProvider:
@@ -65,12 +66,17 @@ def run(args):
                     per_call_output_tokens=args.per_call_tokens, seconds=args.seconds)
     trace_config = p.TraceConfig(max_rounds=args.rounds, max_documents=24,
         max_decomposition_calls=24, experimental_force_rounds=True)
-    used_experiments = ["staged_run.py", "staged_semantic.py", "model_io.py",
+    used_experiments = ["staged_run.py", "staged_semantic.py", "extended_semantic.py", "model_io.py",
                         "loop_compare.py", "semantic_adapter.py"]
     source_files = list((ROOT / "newsverify").glob("*.py")) + [ROOT / "experiments" / n for n in used_experiments]
-    config = {"experiment": "staged_psi_development_v1", "model": args.model,
+    extension_enabled = bool(getattr(args, "target_extension", False))
+    config = {"experiment": ("target_extended_psi_development_v1" if extension_enabled
+                              else "staged_psi_development_v1"), "model": args.model,
         "reasoning_effort": args.reasoning_effort, "budget_per_case": asdict(budget),
         "trace_config": asdict(trace_config), "max_inner_repairs": args.max_repairs,
+        "target_extension": extension_enabled,
+        "target_extension_contract": ("one immutable target contract and decision-probe extension per case; "
+            "bounded target and judgement repair; plan never counts as evidence" if extension_enabled else None),
         "workers": args.workers, "ordering_seed": 20260906,
         "case_ids": [c["target"]["id"] for c in data["cases"]],
         "scheduled_cases": len(data["cases"]), "gold_read_during_inference": False,
@@ -115,7 +121,7 @@ def run(args):
                         write(output / f"{identifier}-calls.json", self.records)
                         print(json.dumps({"case": identifier, "calls": self.calls}), flush=True)
 
-        client = psi = verifier = provider = None
+        client = planner = plan = psi = verifier = provider = None
         row = {"id": identifier, "assessment_mode": case["target"]["assessment_mode"],
             "status": "error", "prediction": None, "checkpoints": []}
         hashes = []
@@ -128,12 +134,21 @@ def run(args):
 
         try:
             client = RecordedClient()
-            psi = StagedDecomposer(client, max_repairs=args.max_repairs)
-            verifier = StagedVerifier(client)
             target = p.Target(**{**case["target"], "evidence_scope": tuple(case["target"]["evidence_scope"])})
             materials = [p.MaterialVersion(**m) for m in case["materials"]]
             cutoff = p._time(target.as_of, "as_of")
             eligible = [m for m in materials if not p._material_eligibility(m, cutoff)]
+            target_plan = None
+            if extension_enabled:
+                planner = TargetPlanner(client, max_repairs=args.max_repairs)
+                plan = planner.prepare(target)
+                target_plan = {stage: project_plan(plan, stage).to_payload()
+                               for stage in ("atoms", "lineage", "critic", "evidence", "world")}
+                write(output / f"{identifier}-target-plan.json",
+                      {**plan.to_payload(), "sha256": plan.sha256, "projections": target_plan})
+                row["target_plan_sha256"] = plan.sha256
+            psi = StagedDecomposer(client, max_repairs=args.max_repairs, target_plan=target_plan)
+            verifier = StagedVerifier(client, target_plan=target_plan, max_repairs=args.max_repairs)
             provider = DevelopmentProvider(eligible)
             report = p.run_provenance(target, provider, psi, verifier, trace_config,
                                       checkpoint_callback=capture)
@@ -160,6 +175,7 @@ def run(args):
             row["returned_responses"] = sum(bool(r.get("response_id")) for r in records)
             write(output / f"{identifier}-psi-history.json", getattr(psi, "history", []))
             write(output / f"{identifier}-verification-history.json", getattr(verifier, "history", []))
+            write(output / f"{identifier}-target-planner-history.json", getattr(planner, "history", []))
             write(output / f"{identifier}-retrieval.json", getattr(provider, "history", []))
             write(output / f"{identifier}-result.json", row)
             print(json.dumps({"case": identifier, "status": row["status"]}), flush=True)
@@ -194,6 +210,8 @@ def main():
     parser.add_argument("--seconds", type=float, default=900)
     parser.add_argument("--rounds", type=int, default=2)
     parser.add_argument("--max-repairs", type=int, default=1)
+    parser.add_argument("--target-extension", action="store_true",
+                        help="Plan immutable target clauses and decision probes before material analysis")
     parser.add_argument("--workers", type=int, default=2)
     parser.add_argument("--prompt-key", action="store_true")
     args = parser.parse_args()

@@ -45,6 +45,10 @@ CRITIC_SCHEMA = _object(
     decision=_string(values=["accept", "repair", "reject"]),
     stage=_string(values=["none", "atoms", "lineage"]),
     quote=_string(2400, 0), issue=_string(1200, 0))
+JUDGMENT_CRITIC_SCHEMA = _object(
+    decision=_string(values=["accept", "repair", "reject"]),
+    stage=_string(values=["none", "evidence", "world"]),
+    probe_id=_string(500, 0), issue=_string(1200, 0), basis=_array(REF, 2))
 LAYER_SCHEMA = _object(
     verdict=_string(values=["supported", "contradicted", "conflicting", "unresolved"]),
     basis=_array(REF, 4), rationale=_string(1800),
@@ -121,6 +125,24 @@ Gaps must concern world verification only and name concrete tasks whose possible
 could change this judgement. A blocking gap needs a source quote. Do not invent routine
 authentication gaps with no specific source-backed lead or add gaps merely for a new round.
 Resolve only named registered world verification gaps, using fresh exact basis.
+"""
+PLAN_USE_RULE = """\nA target_plan is supplied as an untrusted verification checklist, never as evidence.
+Use only probes routed to this stage. Address their possible ambiguity or failure condition
+against exact source text. A plan statement, probe, or expected evidence cannot be cited as
+basis. Do not change the target, and do not infer that a probe's suggested risk is real.
+If repair is supplied, correct the named omitted or inconsistent probe check and return the
+complete stage output again.
+"""
+JUDGMENT_CRITIC_PROMPT = DATA_RULE + """Stage: judgement critic.
+Review the evidence and world drafts against the immutable target plan and supplied materials.
+The plan is a checklist, not evidence. Check that every routed probe is substantively addressed,
+including subject identity, numbers and units, time status, baseline and scope, negation and
+conditions, attribution, lineage and source independence. Check that the verdict is consistent
+with its quoted basis and does not turn an unresolved probe into certainty.
+accept requires stage=none, probe_id='', issue='' and basis=[]. For repair, name exactly one
+evidence or world stage and one existing probe_id with a concrete omission or contradiction.
+basis may contain exact source passages that expose the problem; it may be empty when the issue
+is precisely missing evidence. reject is terminal. After a repair, review both complete drafts.
 """
 
 
@@ -213,6 +235,39 @@ def _feedback(context, target, material):
                 ("evidence_verdict", "world_verdict", "rationale", "world_rationale")} for item in last]}
 
 
+def _target_plan_view(target_plan, stage):
+    """Accept either one plan view or bounded per-stage views from TargetPlanner."""
+    if target_plan is None:
+        return None
+    if isinstance(target_plan, dict) and stage in target_plan and isinstance(target_plan[stage], dict):
+        view = target_plan[stage]
+    else:
+        view = target_plan
+    if isinstance(view, dict) and "stage" in view and view["stage"] != stage:
+        raise ValueError("target plan projection is routed to the wrong stage")
+    return view
+
+
+def _validate_target_plan(target_plan, target):
+    if target_plan is None:
+        return
+    payload = asdict(target)
+    if isinstance(payload.get("evidence_scope"), tuple):
+        payload["evidence_scope"] = list(payload["evidence_scope"])
+    signature = hashlib.sha256(json.dumps(payload, sort_keys=True, ensure_ascii=False,
+        separators=(",", ":")).encode()).hexdigest()
+    stage_keys = ("atoms", "lineage", "critic", "evidence", "world")
+    routed = isinstance(target_plan, dict) and any(key in target_plan for key in stage_keys)
+    if routed and set(target_plan) != set(stage_keys):
+        raise ValueError("target plan must provide every bounded stage projection")
+    views = [target_plan[key] for key in stage_keys] if routed else [target_plan]
+    if not views or any(not isinstance(view, dict) or view.get("target_signature") != signature for view in views):
+        raise ValueError("target plan does not match the immutable target")
+    hashes = {view.get("plan_sha256") for view in views}
+    if None in hashes or len(hashes) != 1:
+        raise ValueError("target plan projections do not share one plan checksum")
+
+
 class _StageClient:
     def __init__(self, client):
         self.client = client
@@ -235,13 +290,18 @@ class _StageClient:
 
 
 class StagedDecomposer(_StageClient):
-    def __init__(self, client, max_repairs=1):
+    def __init__(self, client, max_repairs=1, target_plan=None):
         super().__init__(client)
         if type(max_repairs) is not int or max_repairs not in (0, 1):
             raise ValueError("max_repairs must be 0 or 1")
         self.max_repairs = max_repairs
+        self.target_plan = target_plan
 
     def decompose(self, target, material, context):
+        try:
+            _validate_target_plan(self.target_plan, target)
+        except ValueError as exc:
+            raise StagedSemanticError("target_plan", str(exc)) from None
         source = asdict(material)
         visible = {item["version_id"]: item for item in context.get("materials", [])}
         visible[material.version_id] = source
@@ -253,7 +313,13 @@ class StagedDecomposer(_StageClient):
 
         def run(stage, repair=None, number=0):
             prompt, spec = (ATOMS_PROMPT, ATOMS_SCHEMA) if stage == "atoms" else (LINEAGE_PROMPT, LINEAGE_SCHEMA)
-            raw = self._call(stage, prompt, {**base, "repair": repair}, spec, material.version_id, context, number)
+            plan_view = _target_plan_view(self.target_plan, stage)
+            if plan_view is not None:
+                prompt += PLAN_USE_RULE
+            payload = {**base, "repair": repair}
+            if plan_view is not None:
+                payload["target_plan"] = plan_view
+            raw = self._call(stage, prompt, payload, spec, material.version_id, context, number)
             try:
                 self._check_draft(stage, raw, source, visible)
             except ValueError as exc:
@@ -264,8 +330,14 @@ class StagedDecomposer(_StageClient):
         run("atoms")
         run("lineage")
         for repair_count in range(self.max_repairs + 1):
-            critic = self._call("critic", CRITIC_PROMPT,
-                {**base, "drafts": drafts, "verifier_feedback": _feedback(context, target, material)},
+            plan_view = _target_plan_view(self.target_plan, "critic")
+            critic_prompt = CRITIC_PROMPT + (PLAN_USE_RULE if plan_view is not None else "")
+            critic_payload = {**base, "drafts": drafts,
+                              "verifier_feedback": _feedback(context, target, material)}
+            if plan_view is not None:
+                critic_payload["target_plan"] = plan_view
+            critic = self._call("critic", critic_prompt,
+                critic_payload,
                 CRITIC_SCHEMA, material.version_id, context, repair_count)
             if critic["decision"] == "accept":
                 if critic["stage"] != "none" or critic["quote"] or critic["issue"]:
@@ -380,11 +452,24 @@ class StagedDecomposer(_StageClient):
 
 
 class StagedVerifier(_StageClient):
+    def __init__(self, client, target_plan=None, max_repairs=1):
+        super().__init__(client)
+        if type(max_repairs) is not int or max_repairs not in (0, 1):
+            raise ValueError("max_repairs must be 0 or 1")
+        self.target_plan = target_plan
+        self.max_repairs = max_repairs
+
     def verify(self, target, context):
+        try:
+            _validate_target_plan(self.target_plan, target)
+        except ValueError as exc:
+            raise StagedSemanticError("target_plan", str(exc)) from None
         visible = {m["version_id"]: m for m in context.get("materials", [])}
         registry = _registry(context, target)
         layers = {}
-        for dimension, prompt in (("evidence", EVIDENCE_PROMPT), ("world", WORLD_PROMPT)):
+
+        def run_layer(dimension, repair=None, number=0):
+            prompt = EVIDENCE_PROMPT if dimension == "evidence" else WORLD_PROMPT
             allowed = {key: material for key, material in visible.items()
                        if dimension == "world" or not target.evidence_scope or key in target.evidence_scope}
             registered = {key: gap for key, gap in registry.items()
@@ -395,6 +480,10 @@ class StagedVerifier(_StageClient):
                 "registered_gaps": list(registered.values())}
             if dimension == "world":
                 payload.update(relations=context.get("relations", []), origins=context.get("origins", []))
+            plan_view = _target_plan_view(self.target_plan, dimension)
+            if plan_view is not None:
+                payload.update(target_plan=plan_view, repair=repair)
+                prompt += PLAN_USE_RULE
             raw = self._call(dimension, prompt, payload, LAYER_SCHEMA, None, context)
             try:
                 layers[dimension] = self._assemble_layer(target, dimension, raw, allowed, registered, payload["missing_scope"])
@@ -402,6 +491,50 @@ class StagedVerifier(_StageClient):
                 self.history[-1]["status"] = "failed"
                 raise StagedSemanticError(dimension, str(exc)) from None
             self.history[-1]["status"] = "accepted"
+
+        run_layer("evidence")
+        run_layer("world")
+        if self.target_plan is not None:
+            critic_plan = _target_plan_view(self.target_plan, "critic")
+            probes = {item["id"]: item for item in critic_plan.get("probes", [])}
+            if not probes:
+                raise StagedSemanticError("judgement_critic", "target plan has no registered probes")
+            for repair_count in range(self.max_repairs + 1):
+                critic = self._call("judgement_critic", JUDGMENT_CRITIC_PROMPT,
+                    {"target": asdict(target), "target_plan": critic_plan,
+                     "drafts": {key: {name: ([asdict(x) for x in value] if isinstance(value, tuple) else value)
+                         for name, value in layer.items()} for key, layer in layers.items()},
+                     "materials": list(visible.values())}, JUDGMENT_CRITIC_SCHEMA, None, context, repair_count)
+                try:
+                    basis = []
+                    for ref in critic["basis"]:
+                        if ref["version_id"] not in visible:
+                            raise ValueError("critic basis names an unavailable material")
+                        basis.append(_span(visible[ref["version_id"]], ref["quote"]))
+                    if len(set(basis)) != len(basis):
+                        raise ValueError("duplicate critic basis")
+                    if critic["decision"] == "accept":
+                        if critic["stage"] != "none" or critic["probe_id"] or critic["issue"] or basis:
+                            raise ValueError("critic accept must contain no repair instruction")
+                    elif critic["stage"] == "none" or critic["probe_id"] not in probes or not critic["issue"].strip():
+                        raise ValueError("critic repair needs a stage, registered probe and issue")
+                    elif critic["stage"] not in probes[critic["probe_id"]].get("routes", []):
+                        raise ValueError("critic repair routes a probe to an unrelated stage")
+                except ValueError as exc:
+                    self.history[-1]["status"] = "failed"
+                    raise StagedSemanticError("judgement_critic", str(exc)) from None
+                if critic["decision"] == "accept":
+                    self.history[-1]["status"] = "accepted"
+                    break
+                if critic["decision"] == "reject" or repair_count >= self.max_repairs:
+                    self.history[-1]["status"] = ("rejected" if critic["decision"] == "reject"
+                                                     else "repair_exhausted")
+                    raise StagedSemanticError("judgement_critic", "draft rejected" if critic["decision"] == "reject"
+                                              else "repair budget exhausted")
+                self.history[-1]["status"] = "repair_requested"
+                run_layer(critic["stage"], {"probe_id": critic["probe_id"],
+                                             "issue": critic["issue"], "basis": critic["basis"]},
+                          repair_count + 1)
         evidence, world = layers["evidence"], layers["world"]
         return p.VerificationResult(verdict=evidence["verdict"], basis=evidence["basis"],
             rationale=evidence["rationale"], evidence_verdict=evidence["verdict"], world_verdict=world["verdict"],

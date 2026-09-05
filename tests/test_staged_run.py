@@ -23,23 +23,28 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "experiments"))
 runner = importlib.import_module("staged_run")
 stages = importlib.import_module("staged_semantic")
+extension = importlib.import_module("extended_semantic")
 
 
 class StagedRunMockTests(unittest.TestCase):
     def run_mock(self, *, include_failure=False, constructor_failure=False,
-                 model_mismatch=False):
+                 model_mismatch=False, target_extension=False):
         calls = []
         call_lock = threading.Lock()
         evidence_rounds = Counter()
-        prompt_stages = {getattr(stages, name.upper() + "_PROMPT"): name
-                         for name in ("atoms", "lineage", "critic", "evidence", "world")}
+        prompt_stages = [(getattr(stages, name.upper() + "_PROMPT"), name)
+                         for name in ("atoms", "lineage", "critic", "evidence", "world")]
+        prompt_stages += [(stages.JUDGMENT_CRITIC_PROMPT, "judgement_critic"),
+                          (extension.CLAIM_CONTRACT_PROMPT, "claim_contract"),
+                          (extension.EXTENSION_PROMPT, "extension")]
         claim_quote = "The bridge remains closed until 8 September 2026."
         origin_quote = "This is the original bridge closure record."
         citation_quote = "Source: https://example.org/a."
 
         def transport(**kwargs):
             # An unknown prompt fails immediately, including any LLM extractor.
-            stage = prompt_stages[kwargs["messages"][0]["content"]]
+            prompt = kwargs["messages"][0]["content"]
+            stage = next(name for base, name in prompt_stages if prompt.startswith(base))
             payload = json.loads(kwargs["messages"][1]["content"])
             case_id = payload["target"]["id"]
             with call_lock:
@@ -51,7 +56,20 @@ class StagedRunMockTests(unittest.TestCase):
                 evidence_round = evidence_rounds[case_id]
             if case_id == "failed-case" and stage == "evidence" and evidence_round == 2:
                 raise RuntimeError("MOCK_SECRET transport detail must not be persisted")
-            if stage == "atoms":
+            if stage == "claim_contract":
+                text = payload["target"]["text"]
+                answer = {"claims": [{"statement": text, "quote": text, "role": "main",
+                    "dimensions": [{"kind": "subject", "quote": "bridge"},
+                        {"kind": "predicate", "quote": "was open"},
+                        {"kind": "time", "quote": "4 September 2026"}]}],
+                    "logic": "single", "notes": ""}
+            elif stage == "extension":
+                claim = payload["claim_contract"]["claims"][0]
+                answer = {"decision": "accept", "repair_quote": "", "repair_issue": "", "notes": "",
+                    "probes": [{"claim_id": claim["id"], "kind": kind,
+                        "question": "Check " + kind + ".", "decision_impact": "This can change the decision."}
+                        for kind in ("semantic_core", "time_boundary", "source_lineage")]}
+            elif stage == "atoms":
                 answer = {"atoms": [{"statement": claim_quote, "quote": claim_quote,
                                      "qualifier_quotes": ["until 8 September 2026"]}], "notes": ""}
             elif stage == "lineage":
@@ -69,7 +87,7 @@ class StagedRunMockTests(unittest.TestCase):
                 answer = ({"decision": "repair", "stage": "lineage", "quote": citation_quote,
                            "issue": "The explicit source citation is missing from the lineage draft."}
                           if missing else {"decision": "accept", "stage": "none", "quote": "", "issue": ""})
-            else:
+            elif stage in ("evidence", "world"):
                 basis = [{"version_id": "b", "quote": claim_quote}]
                 answer = {"verdict": "unresolved", "basis": basis,
                           "rationale": "This fixture does not authenticate real world events.",
@@ -85,6 +103,9 @@ class StagedRunMockTests(unittest.TestCase):
                     answer["resolutions"] = [{"gap_id": gap["id"], "basis": basis,
                         "rationale": "The quoted closure date includes the target date."}
                         for gap in payload["registered_gaps"]]
+            else:
+                answer = {"decision": "accept", "stage": "none", "probe_id": "",
+                          "issue": "", "basis": []}
             return SimpleNamespace(id="mock-staged-response-" + str(sequence),
                 model="unexpected-mock-model" if model_mismatch else kwargs["model"],
                 usage=SimpleNamespace(prompt_tokens=10, completion_tokens=20),
@@ -120,7 +141,7 @@ class StagedRunMockTests(unittest.TestCase):
             args = SimpleNamespace(inputs=str(inputs), output=str(output), cases=None,
                 model="mock-model", reasoning_effort="medium", per_call_tokens=4000,
                 output_tokens=64000, max_calls=64, seconds=900, rounds=2,
-                max_repairs=1, workers=2)
+                max_repairs=1, workers=2, target_extension=target_extension)
             stdout = io.StringIO()
             # The dummy environment value only passes preflight. Every client
             # is constructed above with an explicit transport; no API is used.
@@ -233,6 +254,30 @@ class StagedRunMockTests(unittest.TestCase):
         self.assertEqual(1, row["returned_responses"])
         self.assertEqual(1, len(calls))
         self.assertEqual("unexpected_model", files["success-case-calls.json"][0]["error_code"])
+
+    def test_target_extension_plans_once_routes_views_and_reviews_both_rounds(self):
+        status, files, calls, checkpoint_hashes, copied_hashes, input_hash = self.run_mock(
+            target_extension=True)
+        self.assertEqual(0, status)
+        self.assertEqual(["claim_contract", "extension"], [call["stage"] for call in calls[:2]])
+        self.assertEqual(1, sum(call["stage"] == "claim_contract" for call in calls))
+        self.assertEqual(1, sum(call["stage"] == "extension" for call in calls))
+        self.assertEqual(2, sum(call["stage"] == "judgement_critic" for call in calls))
+        self.assertEqual(22, len(calls))
+        row, = files["results.json"]
+        self.assertEqual("completed", row["status"])
+        self.assertEqual(22, row["new_api_attempts"])
+        self.assertEqual(files["success-case-target-plan.json"]["sha256"], row["target_plan_sha256"])
+        self.assertEqual(["claim_contract", "extension"],
+                         [item["stage"] for item in files["success-case-target-planner-history.json"]])
+        self.assertTrue(files["config.json"]["target_extension"])
+        self.assertIn("experiments/extended_semantic.py", copied_hashes)
+        projections = files["success-case-target-plan.json"]["projections"]
+        self.assertEqual({"atoms", "lineage", "critic", "evidence", "world"}, set(projections))
+        self.assertEqual(1, len({view["plan_sha256"] for view in projections.values()}))
+        for call in calls:
+            if call["stage"] in projections:
+                self.assertEqual(projections[call["stage"]], call["payload"]["target_plan"])
 
 
 if __name__ == "__main__":
