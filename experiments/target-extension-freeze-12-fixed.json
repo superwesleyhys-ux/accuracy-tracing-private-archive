@@ -53,7 +53,7 @@
     "docs/PROOF_EXPERIMENT.md": "a3d554dd3c0ab8c06311ad5cd4da4e93dad7dd075f418546f1f54a52a3dd85b8",
     "docs/REPAIR_V0.3.md": "c5a2a6e6e01d89df71b8c47e69d481959d9b9de452e676705b610e4e2fa010b7",
     "docs/ROADMAP.md": "e191e6d7ee0ac2b3fbf061427def6d0c6ef9b93c5738a776b57cf816fb48cd32",
-    "docs/STAGED_PSI.md": "a37d02e4931e31866f8fac829b16611753027c3cc532c8865a68a32acd0b9f35",
+    "docs/STAGED_PSI.md": "3e1ff90446752f1e0e51ec9b7e4e8ca4536c81b7c43cdccc3817b9585a0e82c3",
     "docs/TARGET_EXTENSION.md": "99f0959794ff875102bad3ee15d9909a2cb188f05a0f40108e21bdb6bdd30612",
     "docs/TARGET_EXTENSION_SCORING.md": "d1c3a5102151060035240bd28ae4c01adfb9a56a07d3bb3f24147c3b574c6f9f",
     "docs/TARGET_EXTENSION_V4_PROTOCOL.md": "780f5665fcb9c12ca20e51cb09c010089b8e2605be3e9e36bde853a66647ada7",
@@ -368,11 +368,23 @@
     "reports/target-extension-v2-smoke-gate-06.json": "d87ddb0ae2cb78bf444ee1098900ed7d8dba06df5b958ce4eb082584ad25d80d",
     "reports/target-extension-v2-comparison-02.json": "691fb9a095a764b99d7c327253cdef6b54b79ae6cad01141c10c32fa917dd976",
     "reports/TARGET_EXTENSION_V2_RESULTS.md": "5e0c52e5f05f947816763045b35f70c426bcebaf09c5412a61f48c117250e01b",
-    "reports/V4_FOLLOWUP_SYNC_20260905.json": "f5fdcf16f3d8bef927e2bbe5522cae0403aa8d91defc8ff04a17346a4b5b36e3"
+    "reports/V4_FOLLOWUP_SYNC_20260905.json": "f5fdcf16f3d8bef927e2bbe5522cae0403aa8d91defc8ff04a17346a4b5b36e3",
+    "experiments/target-extension-freeze-11.json": "045109fef7278ec73c4dac7ae7bd5c8a7b4dacfdb7198b8535aed2bc29d4bc66"
   },
   "preserved_runs": {
-    "reports/target-extension-v2-dev-02": "Completed retained v2 eight-case run; round two made no label changes and p08 origin precision was 0.75.",
-    "reports/target-extension-v2-smoke-06": "Completed retained v2 smoke and historical gate."
+    "reports/target-extension-smoke-01": "Preserved v1 structural-failure smoke.",
+    "reports/target-extension-smoke-02": "Preserved v1 repair smoke.",
+    "reports/target-extension-smoke-03": "Preserved v1 targeted smoke.",
+    "reports/target-extension-smoke-04": "Preserved v1 final smoke checkpoint.",
+    "reports/target-extension-dev-01": "V1 completed 8/8 but agreed on only 7/8; p08 regressed from true to unverifiable.",
+    "reports/target-extension-v2-smoke-01": "Missing optional client; zero API attempts.",
+    "reports/target-extension-v2-smoke-02": "Preserved illegal optional relation-probe failure.",
+    "reports/target-extension-v2-smoke-03": "Completed pre-designation-relation v2 smoke.",
+    "reports/target-extension-v2-smoke-04": "Operator stopped after five attempts when preregistration audit found shared repair accounting.",
+    "reports/target-extension-v2-smoke-05": "p02 and p08 completed; p07 failed closed on status/detail protocol mismatch.",
+    "reports/target-extension-v2-smoke-06": "Completed 3/3 with 73 returned calls and the historical 40/40 gate.",
+    "reports/target-extension-v2-dev-01": "Preserved failed full attempt with seven HTTP 429 errors and one validator failure.",
+    "reports/target-extension-v2-dev-02": "Completed 8/8; round two made zero fixes/breaks; p08 exported m14 and m15, leaving origin precision 0.75."
   },
   "loop_receipt_contract": "Each strict return freezes loop-receipt-v1 with immutable target, exact ordered issued-task snapshots, exact task/probe attribution, independently replayed active-at-decomposition state, and the prior accepted per-probe result. The same receipt must reach retained atoms/lineage/critic requests; evidence/world receive only their layer projection. Routing metadata is not evidence.",
   "adaptive_driver_contract": "A routed verification after round one requires a previously unseen eligible version returned through an active frozen verification probe's fetch/search task. Provenance-only, duplicate and reanalyse returns may update semantic or graph state but cannot trigger a second accuracy verification.",
