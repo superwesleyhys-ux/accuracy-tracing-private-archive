@@ -1,0 +1,442 @@
+{
+  "actual_new_api_usage_after": {
+    "input_tokens": 227510,
+    "model_calls": 156,
+    "output_tokens": 130236
+  },
+  "actual_new_api_usage_before": {
+    "input_tokens": 227510,
+    "model_calls": 156,
+    "output_tokens": 130236
+  },
+  "adjustment_kind": "inherit_failed_single_prefix_logical_usage_v1",
+  "already_adjusted_rows": [],
+  "changed_row_count": 21,
+  "changed_rows": [
+    {
+      "arm": "loop_psi",
+      "id": "p03",
+      "source_arm": "single",
+      "source_id": "p03",
+      "usage_after": {
+        "input_tokens": 4044,
+        "model_calls": 2,
+        "output_tokens": 4673,
+        "seconds": 76.56296976299927
+      },
+      "usage_before": {
+        "input_tokens": 0,
+        "model_calls": 0,
+        "output_tokens": 0,
+        "seconds": 0
+      }
+    },
+    {
+      "arm": "loop_frozen",
+      "id": "p03",
+      "source_arm": "single",
+      "source_id": "p03",
+      "usage_after": {
+        "input_tokens": 4044,
+        "model_calls": 2,
+        "output_tokens": 4673,
+        "seconds": 76.56296976299927
+      },
+      "usage_before": {
+        "input_tokens": 0,
+        "model_calls": 0,
+        "output_tokens": 0,
+        "seconds": 0
+      }
+    },
+    {
+      "arm": "independent",
+      "id": "p03",
+      "source_arm": "single",
+      "source_id": "p03",
+      "usage_after": {
+        "input_tokens": 4044,
+        "model_calls": 2,
+        "output_tokens": 4673,
+        "seconds": 76.56296976299927
+      },
+      "usage_before": {
+        "input_tokens": 0,
+        "model_calls": 0,
+        "output_tokens": 0,
+        "seconds": 0
+      }
+    },
+    {
+      "arm": "loop_psi",
+      "id": "p07",
+      "source_arm": "single",
+      "source_id": "p07",
+      "usage_after": {
+        "input_tokens": 3921,
+        "model_calls": 2,
+        "output_tokens": 4633,
+        "seconds": 71.07353061199683
+      },
+      "usage_before": {
+        "input_tokens": 0,
+        "model_calls": 0,
+        "output_tokens": 0,
+        "seconds": 0
+      }
+    },
+    {
+      "arm": "loop_frozen",
+      "id": "p07",
+      "source_arm": "single",
+      "source_id": "p07",
+      "usage_after": {
+        "input_tokens": 3921,
+        "model_calls": 2,
+        "output_tokens": 4633,
+        "seconds": 71.07353061199683
+      },
+      "usage_before": {
+        "input_tokens": 0,
+        "model_calls": 0,
+        "output_tokens": 0,
+        "seconds": 0
+      }
+    },
+    {
+      "arm": "independent",
+      "id": "p07",
+      "source_arm": "single",
+      "source_id": "p07",
+      "usage_after": {
+        "input_tokens": 3921,
+        "model_calls": 2,
+        "output_tokens": 4633,
+        "seconds": 71.07353061199683
+      },
+      "usage_before": {
+        "input_tokens": 0,
+        "model_calls": 0,
+        "output_tokens": 0,
+        "seconds": 0
+      }
+    },
+    {
+      "arm": "loop_psi",
+      "id": "p02",
+      "source_arm": "single",
+      "source_id": "p02",
+      "usage_after": {
+        "input_tokens": 1787,
+        "model_calls": 1,
+        "output_tokens": 2500,
+        "seconds": 40.67189407200203
+      },
+      "usage_before": {
+        "input_tokens": 0,
+        "model_calls": 0,
+        "output_tokens": 0,
+        "seconds": 0
+      }
+    },
+    {
+      "arm": "loop_frozen",
+      "id": "p02",
+      "source_arm": "single",
+      "source_id": "p02",
+      "usage_after": {
+        "input_tokens": 1787,
+        "model_calls": 1,
+        "output_tokens": 2500,
+        "seconds": 40.67189407200203
+      },
+      "usage_before": {
+        "input_tokens": 0,
+        "model_calls": 0,
+        "output_tokens": 0,
+        "seconds": 0
+      }
+    },
+    {
+      "arm": "independent",
+      "id": "p02",
+      "source_arm": "single",
+      "source_id": "p02",
+      "usage_after": {
+        "input_tokens": 1787,
+        "model_calls": 1,
+        "output_tokens": 2500,
+        "seconds": 40.67189407200203
+      },
+      "usage_before": {
+        "input_tokens": 0,
+        "model_calls": 0,
+        "output_tokens": 0,
+        "seconds": 0
+      }
+    },
+    {
+      "arm": "loop_psi",
+      "id": "p01",
+      "source_arm": "single",
+      "source_id": "p01",
+      "usage_after": {
+        "input_tokens": 1783,
+        "model_calls": 1,
+        "output_tokens": 2500,
+        "seconds": 38.86004653300188
+      },
+      "usage_before": {
+        "input_tokens": 0,
+        "model_calls": 0,
+        "output_tokens": 0,
+        "seconds": 0
+      }
+    },
+    {
+      "arm": "loop_frozen",
+      "id": "p01",
+      "source_arm": "single",
+      "source_id": "p01",
+      "usage_after": {
+        "input_tokens": 1783,
+        "model_calls": 1,
+        "output_tokens": 2500,
+        "seconds": 38.86004653300188
+      },
+      "usage_before": {
+        "input_tokens": 0,
+        "model_calls": 0,
+        "output_tokens": 0,
+        "seconds": 0
+      }
+    },
+    {
+      "arm": "independent",
+      "id": "p01",
+      "source_arm": "single",
+      "source_id": "p01",
+      "usage_after": {
+        "input_tokens": 1783,
+        "model_calls": 1,
+        "output_tokens": 2500,
+        "seconds": 38.86004653300188
+      },
+      "usage_before": {
+        "input_tokens": 0,
+        "model_calls": 0,
+        "output_tokens": 0,
+        "seconds": 0
+      }
+    },
+    {
+      "arm": "loop_psi",
+      "id": "p06",
+      "source_arm": "single",
+      "source_id": "p06",
+      "usage_after": {
+        "input_tokens": 1668,
+        "model_calls": 1,
+        "output_tokens": 2500,
+        "seconds": 40.199622423999244
+      },
+      "usage_before": {
+        "input_tokens": 0,
+        "model_calls": 0,
+        "output_tokens": 0,
+        "seconds": 0
+      }
+    },
+    {
+      "arm": "loop_frozen",
+      "id": "p06",
+      "source_arm": "single",
+      "source_id": "p06",
+      "usage_after": {
+        "input_tokens": 1668,
+        "model_calls": 1,
+        "output_tokens": 2500,
+        "seconds": 40.199622423999244
+      },
+      "usage_before": {
+        "input_tokens": 0,
+        "model_calls": 0,
+        "output_tokens": 0,
+        "seconds": 0
+      }
+    },
+    {
+      "arm": "independent",
+      "id": "p06",
+      "source_arm": "single",
+      "source_id": "p06",
+      "usage_after": {
+        "input_tokens": 1668,
+        "model_calls": 1,
+        "output_tokens": 2500,
+        "seconds": 40.199622423999244
+      },
+      "usage_before": {
+        "input_tokens": 0,
+        "model_calls": 0,
+        "output_tokens": 0,
+        "seconds": 0
+      }
+    },
+    {
+      "arm": "loop_psi",
+      "id": "p08",
+      "source_arm": "single",
+      "source_id": "p08",
+      "usage_after": {
+        "input_tokens": 4022,
+        "model_calls": 2,
+        "output_tokens": 4652,
+        "seconds": 66.53987373700511
+      },
+      "usage_before": {
+        "input_tokens": 0,
+        "model_calls": 0,
+        "output_tokens": 0,
+        "seconds": 0
+      }
+    },
+    {
+      "arm": "loop_frozen",
+      "id": "p08",
+      "source_arm": "single",
+      "source_id": "p08",
+      "usage_after": {
+        "input_tokens": 4022,
+        "model_calls": 2,
+        "output_tokens": 4652,
+        "seconds": 66.53987373700511
+      },
+      "usage_before": {
+        "input_tokens": 0,
+        "model_calls": 0,
+        "output_tokens": 0,
+        "seconds": 0
+      }
+    },
+    {
+      "arm": "independent",
+      "id": "p08",
+      "source_arm": "single",
+      "source_id": "p08",
+      "usage_after": {
+        "input_tokens": 4022,
+        "model_calls": 2,
+        "output_tokens": 4652,
+        "seconds": 66.53987373700511
+      },
+      "usage_before": {
+        "input_tokens": 0,
+        "model_calls": 0,
+        "output_tokens": 0,
+        "seconds": 0
+      }
+    },
+    {
+      "arm": "loop_psi",
+      "id": "p05",
+      "source_arm": "single",
+      "source_id": "p05",
+      "usage_after": {
+        "input_tokens": 1734,
+        "model_calls": 1,
+        "output_tokens": 2500,
+        "seconds": 39.13466652599891
+      },
+      "usage_before": {
+        "input_tokens": 0,
+        "model_calls": 0,
+        "output_tokens": 0,
+        "seconds": 0
+      }
+    },
+    {
+      "arm": "loop_frozen",
+      "id": "p05",
+      "source_arm": "single",
+      "source_id": "p05",
+      "usage_after": {
+        "input_tokens": 1734,
+        "model_calls": 1,
+        "output_tokens": 2500,
+        "seconds": 39.13466652599891
+      },
+      "usage_before": {
+        "input_tokens": 0,
+        "model_calls": 0,
+        "output_tokens": 0,
+        "seconds": 0
+      }
+    },
+    {
+      "arm": "independent",
+      "id": "p05",
+      "source_arm": "single",
+      "source_id": "p05",
+      "usage_after": {
+        "input_tokens": 1734,
+        "model_calls": 1,
+        "output_tokens": 2500,
+        "seconds": 39.13466652599891
+      },
+      "usage_before": {
+        "input_tokens": 0,
+        "model_calls": 0,
+        "output_tokens": 0,
+        "seconds": 0
+      }
+    }
+  ],
+  "files": {
+    "corrected_results": {
+      "path": "reports/proof-pilot-01/results-cost-corrected.json",
+      "sha256": "89265980a58ba113736d5bf1c2731dc31e967e00ae038ccf60d24c1c260f39cd"
+    },
+    "corrected_scores": {
+      "path": "reports/proof-pilot-01/scores-cost-corrected.json",
+      "sha256": "53ef77fc44493f41ea6ab8bd6524367c87df111de4b157d3c4e9b78218ce6bf7"
+    },
+    "gold": {
+      "path": "reports/proof-pilot-01/gold.json",
+      "sha256": "4cd818aecf0693559c2b877a7067a7b765159abc4b6b832535fb6a14add13ce5"
+    },
+    "raw_results": {
+      "path": "reports/proof-pilot-01/results.json",
+      "sha256": "4f5a3fab19065356e339d2ac08426968e8e3f62611bb63a7feb2f4dac68776f6"
+    },
+    "raw_scores": {
+      "path": "reports/proof-pilot-01/scores.json",
+      "sha256": "9a23c7a2f13c48f6260e7150f91c5f8937af56a6c29336415f3e0d5f0fbf32e5"
+    },
+    "reconciliation_code": {
+      "path": "/workspace/scratch/2e116a7450bf/accuracy-fix-v03/experiments/proof_reconcile_costs.py",
+      "sha256": "49a6bf1c38b2e9d36c4e2a38b8c623f16293dab6a5ee54f00834cf858a917a13"
+    },
+    "scoring_code": {
+      "path": "/workspace/scratch/2e116a7450bf/accuracy-fix-v03/experiments/proof_score.py",
+      "sha256": "a13b583ab169ddb39c7bc5cff8e760831fdabdbd2da788c32bd093b78763b3e5"
+    }
+  },
+  "logical_usage_after": {
+    "input_tokens": 300821,
+    "model_calls": 195,
+    "output_tokens": 220686,
+    "seconds": 3495.519445422011
+  },
+  "logical_usage_before": {
+    "input_tokens": 243944,
+    "model_calls": 165,
+    "output_tokens": 148812,
+    "seconds": 2376.391634421001
+  },
+  "note": "Each invalid shared-prefix candidate inherits its matching failed single run's logical cost. This allocates existing prefix work and does not represent additional API calls.",
+  "outcomes_unchanged": true,
+  "schema_version": "proof-cost-reconciliation-v1",
+  "score_comparison": "all_non_usage_fields_identical",
+  "seconds_definition": "logical charged time summed across arms, not elapsed experiment runtime"
+}

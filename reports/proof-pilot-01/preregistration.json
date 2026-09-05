@@ -1,0 +1,6 @@
+{
+  "commit": "8dbca73c5b0a1497139ce9ac701ae7de968f3896",
+  "published_before_first_model_request": true,
+  "branch": "codex/fix-layered-provenance-v03",
+  "gold_review": "execution-team AI only; human adjudication pending"
+}

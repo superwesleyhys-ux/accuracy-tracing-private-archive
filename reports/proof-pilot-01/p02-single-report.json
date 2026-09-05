@@ -1,0 +1,134 @@
+{
+  "schema_version": "0.3",
+  "scope": "plugin-supplied semantic analyses; no built-in truth oracle",
+  "target": {
+    "id": "p02",
+    "text": "NASA's February 15, 2024 bulk-sample announcement reported that the final total mass of the Bennu sample returned by OSIRIS-REx was 70.3 grams.",
+    "as_of": "2026-09-05T09:34:36Z",
+    "source_version_id": "m03",
+    "assessment_mode": "evidence",
+    "evidence_scope": [
+      "m03"
+    ]
+  },
+  "config": {
+    "max_rounds": 1,
+    "max_documents": 24,
+    "max_decomposition_calls": 36,
+    "experimental_force_rounds": false
+  },
+  "provenance_status": "unresolved",
+  "fact_status": "unresolved",
+  "stop_reason": "decomposer_error",
+  "usage": {
+    "rounds": 1,
+    "documents": 1,
+    "unique_versions": 1,
+    "decomposition_calls": 1,
+    "verification_calls": 0
+  },
+  "decision_status": "unresolved",
+  "assessments": null,
+  "assessment_valid": false,
+  "materials": [
+    {
+      "version_id": "m03",
+      "url": "https://science.nasa.gov/blogs/osiris-rex/2024/02/15/nasa-announces-osiris-rex-bulk-sample-mass/",
+      "content": "NASA Announces OSIRIS-REx Bulk Sample Mass\nPublication date: 2024-02-15\n\nNASA’s OSIRIS-REx spacecraft delivered 4.29 ounces (121.6 grams) of material from asteroid Bennu when it returned to Earth on Sep. 24, 2023; the largest asteroid sample ever collected in space and over twice the mission’s requirement.\n\nAfter designing, producing, and testing new tools, the ARES curation engineers successfully removed the fasteners in January and completed disassembly of the TAGSAM head. The remaining Bennu sample was revealed and carefully poured into wedge-shaped containers. 1.81 ounces (51.2 grams) were collected from this pour.\n\nCombined with the previously measured 2.48 ounces (70.3 grams) and additional particles collected outside of the pour, the bulk Bennu sample mass totals 4.29 ounces (121.6 grams). NASA will preserve at least 70% of the sample at Johnson for further research by scientists worldwide, including future generations.",
+      "retrieved_at": "2026-09-05T09:34:36Z",
+      "published_at": null,
+      "available_at": "2026-09-05T09:34:36Z",
+      "availability_basis": "Current web-tool collection completed at retrieved_at on 2026-09-05. The supplied material is a selected, whitespace-normalized excerpt, not a full page or historical exact-version capture. Availability is asserted only at collection completion. The source's displayed publication date is preserved in content; no exact timezone-qualified publication instant is known.",
+      "issuer": "NASA"
+    }
+  ],
+  "eligible_version_ids": [],
+  "observations": [
+    {
+      "version_id": "m03",
+      "retrieved_at": "2026-09-05T09:34:36Z",
+      "duplicate": false,
+      "eligible": true,
+      "reasons": []
+    }
+  ],
+  "analyses": {},
+  "analysis_history": [],
+  "fragments": [],
+  "relations": [],
+  "origins": [],
+  "gaps": [
+    {
+      "id": "origin:p02",
+      "question": "Find the producing record and evidenced lineage for: NASA's February 15, 2024 bulk-sample announcement reported that the final total mass of the Bennu sample returned by OSIRIS-REx was 70.3 grams.",
+      "stage": "provenance",
+      "dimension": "auto",
+      "blocking": true,
+      "target_id": null,
+      "basis": [],
+      "decision_impact": "",
+      "action": "search",
+      "locator": null
+    }
+  ],
+  "resolutions": [],
+  "verification_history": [],
+  "operations": [
+    {
+      "sequence": 1,
+      "round": 1,
+      "action": "search",
+      "tasks": [
+        {
+          "id": "origin:p02",
+          "question": "Find the producing record and evidenced lineage for: NASA's February 15, 2024 bulk-sample announcement reported that the final total mass of the Bennu sample returned by OSIRIS-REx was 70.3 grams.",
+          "stage": "provenance",
+          "dimension": "auto",
+          "blocking": true,
+          "target_id": null,
+          "basis": [],
+          "decision_impact": "",
+          "action": "search",
+          "locator": null
+        }
+      ],
+      "limit": 24
+    },
+    {
+      "sequence": 2,
+      "round": 1,
+      "action": "snapshot_saved",
+      "version_id": "m03",
+      "sha256": "5598fe7fe24b1eb584810f98d99552f3eaa3ea4378bfd3330fec72a05f68328e",
+      "eligible": true
+    },
+    {
+      "sequence": 3,
+      "round": 1,
+      "action": "decompose_started",
+      "version_id": "m03",
+      "duplicate": false,
+      "revisit": false
+    },
+    {
+      "sequence": 4,
+      "round": 1,
+      "action": "error",
+      "stage": "decomposer",
+      "message": "Model call failed: RuntimeError"
+    },
+    {
+      "sequence": 5,
+      "round": 1,
+      "action": "stopped",
+      "reason": "decomposer_error"
+    }
+  ],
+  "errors": [
+    {
+      "stage": "decomposer",
+      "type": "RuntimeError",
+      "message": "Model call failed: RuntimeError"
+    }
+  ]
+}

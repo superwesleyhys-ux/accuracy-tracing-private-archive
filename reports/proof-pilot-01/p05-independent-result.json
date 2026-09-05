@@ -1,0 +1,19 @@
+{
+  "id": "p05",
+  "arm": "independent",
+  "assessment_mode": "evidence",
+  "status": "error",
+  "prediction": null,
+  "usage": {
+    "model_calls": 0,
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "seconds": 0
+  },
+  "error_type": "InvalidSharedPrefix",
+  "actual_new_api_usage": {
+    "model_calls": 0,
+    "input_tokens": 0,
+    "output_tokens": 0
+  }
+}

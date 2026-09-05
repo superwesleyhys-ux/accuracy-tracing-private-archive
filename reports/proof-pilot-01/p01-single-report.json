@@ -1,0 +1,134 @@
+{
+  "schema_version": "0.3",
+  "scope": "plugin-supplied semantic analyses; no built-in truth oracle",
+  "target": {
+    "id": "p01",
+    "text": "NASA's October 11, 2022 announcement reported that DART shortened Dimorphos' orbital period around Didymos by 32 minutes, with an uncertainty of approximately plus or minus 2 minutes.",
+    "as_of": "2026-09-05T09:34:36Z",
+    "source_version_id": "m01",
+    "assessment_mode": "evidence",
+    "evidence_scope": [
+      "m02"
+    ]
+  },
+  "config": {
+    "max_rounds": 1,
+    "max_documents": 24,
+    "max_decomposition_calls": 36,
+    "experimental_force_rounds": false
+  },
+  "provenance_status": "unresolved",
+  "fact_status": "unresolved",
+  "stop_reason": "decomposer_error",
+  "usage": {
+    "rounds": 1,
+    "documents": 1,
+    "unique_versions": 1,
+    "decomposition_calls": 1,
+    "verification_calls": 0
+  },
+  "decision_status": "unresolved",
+  "assessments": null,
+  "assessment_valid": false,
+  "materials": [
+    {
+      "version_id": "m01",
+      "url": "https://www.nasa.gov/science-research/planetary-science/from-impact-to-innovation-a-year-of-science-and-triumph-for-historic-dart-mission/",
+      "content": "From Impact to Innovation: A Year of Science and Triumph for Historic DART Mission\nPublication date: 2023-09-26\n\nOctober 2022\n\n[NASA Confirms DART Mission Impact Changed Asteroid’s Motion in Space (Oct. 11, 2022)](https://www.nasa.gov/press-release/nasa-confirms-dart-mission-impact-changed-asteroid-s-motion-in-space)\n\nIt didn’t take long to learn just how much of an impact DART had made. Just a little over two weeks since it intentionally crashed head-on into Dimorphos, the science investigation team’s early data analysis confirmed the collision had significantly altered the asteroid’s orbit by 32 minutes, with an uncertainty of plus or minus 2 minutes (later revised to 33 minutes after more observation). Prior to DART’s impact, it took Dimorphos 11 hours and 55 minutes to orbit its larger parent asteroid, Didymos.",
+      "retrieved_at": "2026-09-05T09:34:36Z",
+      "published_at": null,
+      "available_at": "2026-09-05T09:34:36Z",
+      "availability_basis": "Current web-tool collection completed at retrieved_at on 2026-09-05. The supplied material is a selected, whitespace-normalized excerpt, not a full page or historical exact-version capture. Availability is asserted only at collection completion. The source's displayed publication date is preserved in content; no exact timezone-qualified publication instant is known.",
+      "issuer": "NASA"
+    }
+  ],
+  "eligible_version_ids": [],
+  "observations": [
+    {
+      "version_id": "m01",
+      "retrieved_at": "2026-09-05T09:34:36Z",
+      "duplicate": false,
+      "eligible": true,
+      "reasons": []
+    }
+  ],
+  "analyses": {},
+  "analysis_history": [],
+  "fragments": [],
+  "relations": [],
+  "origins": [],
+  "gaps": [
+    {
+      "id": "origin:p01",
+      "question": "Find the producing record and evidenced lineage for: NASA's October 11, 2022 announcement reported that DART shortened Dimorphos' orbital period around Didymos by 32 minutes, with an uncertainty of approximately plus or minus 2 minutes.",
+      "stage": "provenance",
+      "dimension": "auto",
+      "blocking": true,
+      "target_id": null,
+      "basis": [],
+      "decision_impact": "",
+      "action": "search",
+      "locator": null
+    }
+  ],
+  "resolutions": [],
+  "verification_history": [],
+  "operations": [
+    {
+      "sequence": 1,
+      "round": 1,
+      "action": "search",
+      "tasks": [
+        {
+          "id": "origin:p01",
+          "question": "Find the producing record and evidenced lineage for: NASA's October 11, 2022 announcement reported that DART shortened Dimorphos' orbital period around Didymos by 32 minutes, with an uncertainty of approximately plus or minus 2 minutes.",
+          "stage": "provenance",
+          "dimension": "auto",
+          "blocking": true,
+          "target_id": null,
+          "basis": [],
+          "decision_impact": "",
+          "action": "search",
+          "locator": null
+        }
+      ],
+      "limit": 24
+    },
+    {
+      "sequence": 2,
+      "round": 1,
+      "action": "snapshot_saved",
+      "version_id": "m01",
+      "sha256": "6bd7f8c09bb32a362aa8d0b52292160fa41a214aa4ab68b84b9e100a079f3c9f",
+      "eligible": true
+    },
+    {
+      "sequence": 3,
+      "round": 1,
+      "action": "decompose_started",
+      "version_id": "m01",
+      "duplicate": false,
+      "revisit": false
+    },
+    {
+      "sequence": 4,
+      "round": 1,
+      "action": "error",
+      "stage": "decomposer",
+      "message": "Model call failed: RuntimeError"
+    },
+    {
+      "sequence": 5,
+      "round": 1,
+      "action": "stopped",
+      "reason": "decomposer_error"
+    }
+  ],
+  "errors": [
+    {
+      "stage": "decomposer",
+      "type": "RuntimeError",
+      "message": "Model call failed: RuntimeError"
+    }
+  ]
+}

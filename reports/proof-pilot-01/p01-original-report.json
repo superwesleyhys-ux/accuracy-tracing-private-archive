@@ -1,0 +1,283 @@
+{
+  "event": {
+    "title": "所提供的m02快照支持目标声明：NASA于2022年10月11日宣布，DART撞击使Dimorphos绕Didymos的轨道周期缩短32分钟，测量不确定度约为正负2分钟。",
+    "date": "2022-10-11",
+    "summary": "m02标示的公告发布日期为2022年10月11日。\n公告称，DART于9月26日主动撞击Dimorphos。\n公告称，Dimorphos绕Didymos的轨道周期从11小时55分钟缩短至11小时23分钟，即缩短32分钟。\n公告明确给出该测量的不确定度约为正负2分钟。",
+    "sources": [],
+    "relation": "",
+    "causes": [
+      {
+        "title": "DART主动撞击Dimorphos",
+        "date": "2022-09-26",
+        "summary": "m02公告称，DART于9月26日主动撞击Dimorphos，并明确将其轨道周期变化归因于此次撞击。这是公告所述轨道改变的直接前因；此处评估的是快照的陈述，不是对现实结果的独立验证。",
+        "sources": [
+          {
+            "url": "https://www.nasa.gov/press-release/nasa-confirms-dart-mission-impact-changed-asteroid-s-motion-in-space",
+            "title": "NASA Confirms DART Mission Impact Changed Asteroid’s Motion in Space（m02）"
+          }
+        ],
+        "relation": "直接导致公告所述的轨道周期变化",
+        "causes": [],
+        "confidence": 1.0,
+        "grounded": true
+      },
+      {
+        "title": "撞击后的地面望远镜测量确认轨道周期缩短",
+        "date": "2022-09-26至2022-10-11",
+        "summary": "m02称，撞击后天文学家持续使用地面望远镜测量轨道周期变化，调查团队确认周期由11小时55分钟缩短至11小时23分钟。该快照标示公告日期为2022年10月11日，并明确报告缩短32分钟、测量不确定度约为正负2分钟，因此支持目标声明。",
+        "sources": [
+          {
+            "url": "https://www.nasa.gov/press-release/nasa-confirms-dart-mission-impact-changed-asteroid-s-motion-in-space",
+            "title": "NASA Confirms DART Mission Impact Changed Asteroid’s Motion in Space（m02，同一来源）"
+          }
+        ],
+        "relation": "为NASA发布量化结果提供直接观测依据",
+        "causes": [],
+        "confidence": 1.0,
+        "grounded": true
+      }
+    ],
+    "confidence": 0.0,
+    "grounded": true
+  },
+  "direct_response": "m02支持原说法：NASA公告日期为2022年10月11日，报告DART使Dimorphos绕Didymos的周期缩短32分钟，不确定度约±2分钟。无需纠偏；m01记载的后续33分钟修订不否定当时报告。公告记述9月26日撞击、随后地面望远镜测量、10月11日公布结果，将周期变化归因于撞击。两篇快照无分歧，但均出自NASA，非独立互证；仅m02用于本次判定，现实验证仍未知。（基于2份快照、1个信源 | 覆盖1类媒体 | 3条同源一致 | 0条存在分歧 | 因果锚定2/2）",
+  "credibility": {
+    "source_count": 2,
+    "source_types": [
+      "官方媒体"
+    ],
+    "consistent_count": 3,
+    "disputed_count": 0,
+    "grounding_rate": 1.0,
+    "grounded_count": 2,
+    "total_causal_nodes": 2
+  },
+  "event_timeline": [
+    {
+      "date": "2022-09-26",
+      "title": "DART主动撞击Dimorphos",
+      "description": "NASA公告记载，DART于2022年9月26日主动撞击Dimorphos，并将随后测得的轨道周期变化归因于此次撞击。周年回顾也提及此次撞击，但两篇材料均来自NASA，不构成独立交叉验证。",
+      "significance": "重大",
+      "sources": [
+        {
+          "url": "https://www.nasa.gov/press-release/nasa-confirms-dart-mission-impact-changed-asteroid-s-motion-in-space",
+          "title": "NASA Confirms DART Mission Impact Changed Asteroid’s Motion in Space"
+        },
+        {
+          "url": "https://www.nasa.gov/science-research/planetary-science/from-impact-to-innovation-a-year-of-science-and-triumph-for-historic-dart-mission/",
+          "title": "From Impact to Innovation: A Year of Science and Triumph for Historic DART Mission"
+        }
+      ],
+      "perspectives": [],
+      "verified": true,
+      "causal_links": [
+        "天文学家利用地面望远镜测量撞击后的轨道周期"
+      ]
+    },
+    {
+      "date": "2022-09-26之后至2022-10-11",
+      "title": "天文学家利用地面望远镜测量撞击后的轨道周期",
+      "description": "据NASA公告，撞击后天文学家持续使用地面望远镜测量Dimorphos轨道周期的变化。调查团队据此获得早期分析结果，为10月11日公布周期缩短幅度提供依据。",
+      "significance": "重要",
+      "sources": [
+        {
+          "url": "https://www.nasa.gov/press-release/nasa-confirms-dart-mission-impact-changed-asteroid-s-motion-in-space",
+          "title": "NASA Confirms DART Mission Impact Changed Asteroid’s Motion in Space"
+        }
+      ],
+      "perspectives": [],
+      "verified": false,
+      "causal_links": [
+        "NASA宣布轨道周期缩短32分钟，不确定度约为正负2分钟"
+      ]
+    },
+    {
+      "date": "2022-10-11",
+      "title": "NASA宣布轨道周期缩短32分钟，不确定度约为正负2分钟",
+      "description": "NASA公告报告，DART撞击使Dimorphos绕Didymos运行的周期从11小时55分钟缩短至11小时23分钟，即缩短32分钟，测量不确定度约为正负2分钟。m02快照直接支持目标所述公告内容；周年回顾重复记载了该结果，但不构成对现实结果的独立验证。",
+      "significance": "重大",
+      "sources": [
+        {
+          "url": "https://www.nasa.gov/press-release/nasa-confirms-dart-mission-impact-changed-asteroid-s-motion-in-space",
+          "title": "NASA Confirms DART Mission Impact Changed Asteroid’s Motion in Space"
+        },
+        {
+          "url": "https://www.nasa.gov/science-research/planetary-science/from-impact-to-innovation-a-year-of-science-and-triumph-for-historic-dart-mission/",
+          "title": "From Impact to Innovation: A Year of Science and Triumph for Historic DART Mission"
+        }
+      ],
+      "perspectives": [],
+      "verified": true,
+      "causal_links": []
+    },
+    {
+      "date": "2022-10-11之后、2023-09-26周年回顾发布前或当日（具体日期不详）",
+      "title": "更多观测使轨道周期缩短值修订为33分钟",
+      "description": "NASA周年回顾称，经过更多观测，早期报告的32分钟后来修订为33分钟，但摘录未给出修订的具体日期或新的不确定度。该后续修订不改变2022年10月11日公告曾报告32分钟及约正负2分钟不确定度这一历史陈述。",
+      "significance": "重要",
+      "sources": [
+        {
+          "url": "https://www.nasa.gov/science-research/planetary-science/from-impact-to-innovation-a-year-of-science-and-triumph-for-historic-dart-mission/",
+          "title": "From Impact to Innovation: A Year of Science and Triumph for Historic DART Mission"
+        }
+      ],
+      "perspectives": [],
+      "verified": false,
+      "causal_links": []
+    }
+  ],
+  "sources": [
+    {
+      "outlet": "NASA（美国国家航空航天局）",
+      "url": "https://www.nasa.gov/press-release/nasa-confirms-dart-mission-impact-changed-asteroid-s-motion-in-space",
+      "publish_time": "2022-10-11",
+      "source_type": "官方媒体",
+      "is_original": true,
+      "key_facts": [
+        {
+          "claim": "NASA于2022年10月11日宣布，DART撞击使Dimorphos绕Didymos运行的轨道周期缩短32分钟，从11小时55分钟变为11小时23分钟。",
+          "source_urls": [
+            "https://www.nasa.gov/press-release/nasa-confirms-dart-mission-impact-changed-asteroid-s-motion-in-space"
+          ],
+          "agreed": true
+        },
+        {
+          "claim": "NASA在该公告中报告，这项轨道周期变化测量的不确定度约为正负2分钟。",
+          "source_urls": [
+            "https://www.nasa.gov/press-release/nasa-confirms-dart-mission-impact-changed-asteroid-s-motion-in-space"
+          ],
+          "agreed": true
+        },
+        {
+          "claim": "该公告记载，DART于9月26日有意撞击Dimorphos，此后天文学家使用地面望远镜测量其轨道周期变化。",
+          "source_urls": [
+            "https://www.nasa.gov/press-release/nasa-confirms-dart-mission-impact-changed-asteroid-s-motion-in-space"
+          ],
+          "agreed": true
+        }
+      ]
+    },
+    {
+      "outlet": "NASA",
+      "url": "https://www.nasa.gov/science-research/planetary-science/from-impact-to-innovation-a-year-of-science-and-triumph-for-historic-dart-mission/",
+      "publish_time": "2023-09-26",
+      "source_type": "官方媒体",
+      "is_original": false,
+      "key_facts": [
+        {
+          "claim": "NASA周年回顾文章将2022年10月11日公告列入时间线，并记述早期分析得到轨道周期改变32分钟、不确定度正负2分钟的结果。",
+          "source_urls": [
+            "https://www.nasa.gov/science-research/planetary-science/from-impact-to-innovation-a-year-of-science-and-triumph-for-historic-dart-mission/"
+          ],
+          "agreed": true
+        },
+        {
+          "claim": "该回顾文章称，经过更多观测，周期变化值后来修订为33分钟，但所提供摘录未注明修订日期。",
+          "source_urls": [
+            "https://www.nasa.gov/science-research/planetary-science/from-impact-to-innovation-a-year-of-science-and-triumph-for-historic-dart-mission/"
+          ],
+          "agreed": true
+        }
+      ]
+    }
+  ],
+  "source_timeline": [
+    {
+      "outlet": "NASA（美国国家航空航天局）",
+      "url": "https://www.nasa.gov/press-release/nasa-confirms-dart-mission-impact-changed-asteroid-s-motion-in-space",
+      "publish_time": "2022-10-11",
+      "source_type": "官方媒体",
+      "is_original": true,
+      "key_facts": [
+        {
+          "claim": "NASA于2022年10月11日宣布，DART撞击使Dimorphos绕Didymos运行的轨道周期缩短32分钟，从11小时55分钟变为11小时23分钟。",
+          "source_urls": [
+            "https://www.nasa.gov/press-release/nasa-confirms-dart-mission-impact-changed-asteroid-s-motion-in-space"
+          ],
+          "agreed": true
+        },
+        {
+          "claim": "NASA在该公告中报告，这项轨道周期变化测量的不确定度约为正负2分钟。",
+          "source_urls": [
+            "https://www.nasa.gov/press-release/nasa-confirms-dart-mission-impact-changed-asteroid-s-motion-in-space"
+          ],
+          "agreed": true
+        },
+        {
+          "claim": "该公告记载，DART于9月26日有意撞击Dimorphos，此后天文学家使用地面望远镜测量其轨道周期变化。",
+          "source_urls": [
+            "https://www.nasa.gov/press-release/nasa-confirms-dart-mission-impact-changed-asteroid-s-motion-in-space"
+          ],
+          "agreed": true
+        }
+      ]
+    },
+    {
+      "outlet": "NASA",
+      "url": "https://www.nasa.gov/science-research/planetary-science/from-impact-to-innovation-a-year-of-science-and-triumph-for-historic-dart-mission/",
+      "publish_time": "2023-09-26",
+      "source_type": "官方媒体",
+      "is_original": false,
+      "key_facts": [
+        {
+          "claim": "NASA周年回顾文章将2022年10月11日公告列入时间线，并记述早期分析得到轨道周期改变32分钟、不确定度正负2分钟的结果。",
+          "source_urls": [
+            "https://www.nasa.gov/science-research/planetary-science/from-impact-to-innovation-a-year-of-science-and-triumph-for-historic-dart-mission/"
+          ],
+          "agreed": true
+        },
+        {
+          "claim": "该回顾文章称，经过更多观测，周期变化值后来修订为33分钟，但所提供摘录未注明修订日期。",
+          "source_urls": [
+            "https://www.nasa.gov/science-research/planetary-science/from-impact-to-innovation-a-year-of-science-and-triumph-for-historic-dart-mission/"
+          ],
+          "agreed": true
+        }
+      ]
+    }
+  ],
+  "key_findings": [
+    "【文档证据】限定证据范围m02直接支持目标声明：标示发布日期为2022年10月11日的NASA公告报告，Dimorphos绕Didymos的轨道周期缩短32分钟，测量不确定度约为正负2分钟。",
+    "【时间线】m02记述9月26日主动撞击、随后开展地面望远镜测量，再公布早期分析结果；公告所列周期由11小时55分钟降至11小时23分钟，与缩短32分钟一致。",
+    "【信源】两份材料均由NASA发布，内容一致但不是独立交叉验证。m01周年回顾仅作背景材料，不作为限定范围内目标判断的依据。",
+    "【因果】公告将周期变化归因于撞击，将撞击后的望远镜测量作为量化结果的观测依据。因果节点2/2获得文档锚定，表示这些陈述有材料支持，而非现实因果已被独立验证。",
+    "【后续变化】m01称更多观测后缩短值修订为33分钟；这不否定2022年10月11日公告曾报告32分钟及约正负2分钟不确定度的历史陈述。"
+  ],
+  "information_gaps": [
+    "现实核验状态：未知。材料未提供原始观测数据、测量方法细节或独立来源，无法独立复核轨道变化及其因果归属；这不影响文档层面对目标声明的支持。",
+    "33分钟修订值的具体公布日期及新不确定度未提供。",
+    "两份快照均为2026年9月5日采集的选摘，并非完整页面或发布当日的精确历史版本；显示发布日期不能证明当日页面的全部内容与当前摘录完全相同。"
+  ],
+  "consistent_facts": [
+    {
+      "claim": "两篇摘录均记述：2022年10月11日公告对应的早期分析结果为，DART撞击使Dimorphos绕Didymos运行的轨道周期缩短32分钟。",
+      "source_urls": [
+        "https://www.nasa.gov/press-release/nasa-confirms-dart-mission-impact-changed-asteroid-s-motion-in-space",
+        "https://www.nasa.gov/science-research/planetary-science/from-impact-to-innovation-a-year-of-science-and-triumph-for-historic-dart-mission/"
+      ],
+      "agreed": true
+    },
+    {
+      "claim": "上述早期轨道周期变化测量的不确定度约为正负2分钟。",
+      "source_urls": [
+        "https://www.nasa.gov/press-release/nasa-confirms-dart-mission-impact-changed-asteroid-s-motion-in-space",
+        "https://www.nasa.gov/science-research/planetary-science/from-impact-to-innovation-a-year-of-science-and-triumph-for-historic-dart-mission/"
+      ],
+      "agreed": true
+    },
+    {
+      "claim": "DART撞击前，Dimorphos绕Didymos运行的轨道周期为11小时55分钟。",
+      "source_urls": [
+        "https://www.nasa.gov/press-release/nasa-confirms-dart-mission-impact-changed-asteroid-s-motion-in-space",
+        "https://www.nasa.gov/science-research/planetary-science/from-impact-to-innovation-a-year-of-science-and-triumph-for-historic-dart-mission/"
+      ],
+      "agreed": true
+    }
+  ],
+  "disputed_facts": [],
+  "causal_summary": "据m02公告，DART于2022年9月26日主动撞击Dimorphos，随后天文学家利用地面望远镜测量其绕Didymos的轨道周期。NASA在标示为10月11日的公告中将周期缩短归因于撞击，并报告早期结果为缩短32分钟、不确定度约正负2分钟。m01周年回顾补充称，更多观测后该值修订为33分钟。由此可判断，目标关于公告内容的陈述获得直接文档支持；不能据此进一步推断现实结果已获独立确认。",
+  "bias_notes": [
+    "信源全部来自任务发布机构NASA，缺少外部视角；周年回顾标题带有明显的成就庆祝色彩，但仅凭这些摘录不能认定数值报道存在失实。",
+    "两份材料未见实质冲突，但同一机构的回顾性重复不能提升为独立确认。"
+  ]
+}

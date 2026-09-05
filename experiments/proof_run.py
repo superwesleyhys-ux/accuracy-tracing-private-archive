@@ -250,7 +250,11 @@ def run(args):
         finally: finish(result, client)
         if result['status'] != 'completed':
             for arm in ARMS[2:]:
-                failed = row(arm); failed['error_type'] = 'InvalidSharedPrefix'; finish(failed, None)
+                failed = row(arm)
+                failed['error_type'] = 'InvalidSharedPrefix'
+                failed['usage'] = deepcopy(prefix_usage if prefix_usage is not None else result['usage'])
+                failed['inherited_failed_prefix'] = True
+                finish(failed, None)
             return rows
 
         cp = captures[-1]; base_hash = p.checkpoint_sha256(cp)

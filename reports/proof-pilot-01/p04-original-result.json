@@ -1,0 +1,35 @@
+{
+  "id": "p04",
+  "arm": "original",
+  "assessment_mode": "evidence",
+  "status": "completed",
+  "prediction": {
+    "decision": "false",
+    "origins": [
+      "m07",
+      "m08"
+    ],
+    "edges": [],
+    "provenance_evaluable": true,
+    "origin_evaluable": true,
+    "edges_evaluable": false,
+    "edge_export_limit": "No native source-to-source edge representation"
+  },
+  "usage": {
+    "model_calls": 17,
+    "input_tokens": 23685,
+    "output_tokens": 12579,
+    "seconds": 201.97979575200588
+  },
+  "extractor_answer_text": "仅据m07，NOAA摘要标示2025年1月10日，涉及2024年及1.29°C，但该值对应20世纪均值；相对1850—1900年为1.46°C，故声明与快照矛盾。2024年比2023年高0.10°C，刷新纪录，随后发布年度摘要。矛盾源于基准错配，错配成因不明；现实真实性未独立核验。范围外NASA报约1.47°C，与NOAA差0.01°C，非实质矛盾，不参与判定。（基于2个信源 | 覆盖1类媒体 | 2条事实多源一致 | 1条存在分歧 | 因果锚定1/1）",
+  "extraction": {
+    "decision": "false",
+    "extractable": true,
+    "basis_quote": "仅据m07，NOAA摘要标示2025年1月10日，涉及2024年及1.29°C，但该值对应20世纪均值；相对1850—1900年为1.46°C，故声明与快照矛盾。"
+  },
+  "actual_new_api_usage": {
+    "model_calls": 17,
+    "input_tokens": 23685,
+    "output_tokens": 12579
+  }
+}

@@ -1,0 +1,211 @@
+{
+  "event": {
+    "title": "NASA 摘录介绍欧罗巴快船任务对木卫二宜居条件的研究，但不足以判定其冰下海洋是否存在活生物，现实核验结果为未知。",
+    "date": "未知",
+    "summary": "m10 称，欧罗巴快船的主要目标是确定木卫二是否具备支持生命的条件。\nm10 称，伽利略任务提供了木卫二冰下存在巨大咸水海洋的强有力证据。\nm10 称，有证据表明木卫二地下可能存在有机化合物和能源。\nm11 明确表示，欧罗巴快船不以寻找生命为任务，即使木卫二存在生命，该探测器也不具备发现它的能力。\n两份摘录均未确认木卫二存在活生物；仅凭所供材料，目标声明无法判定为真或假。",
+    "sources": [],
+    "relation": "",
+    "causes": [
+      {
+        "title": "早期观测提供冰下海洋及潜在生命支持条件的线索",
+        "date": "1990年代及其后，部分时间未知",
+        "summary": "m10称，伽利略任务在1990年代提供了木卫二冰下存在巨大咸水海洋的强有力证据，科学家还发现地下可能存在有机化合物和能源的证据。这些线索可解释研究宜居条件的科学动机，但摘录没有明确证明它们促成任务的决策过程，也未确认活生物存在。",
+        "sources": [
+          {
+            "url": "https://www.nasa.gov/news-release/liftoff-nasas-europa-clipper-sails-toward-ocean-moon-of-jupiter/",
+            "title": "NASA：Liftoff! NASA’s Europa Clipper Sails Toward Ocean Moon of Jupiter（m10）"
+          }
+        ],
+        "relation": "间接推动宜居性研究（基于推理）",
+        "causes": [],
+        "confidence": 0.75,
+        "grounded": true
+      },
+      {
+        "title": "任务目标及探测能力限定为宜居性研究，而非寻找生命",
+        "date": "2024年10月1日至14日的摘录说明",
+        "summary": "m10将任务主要目标表述为确定木卫二是否具备支持生命的条件。m11明确说明该任务不寻找生命，即使木卫二存在生命，探测器也不具备发现它的能力；因此这些任务介绍不能作为活生物存在的确认。",
+        "sources": [
+          {
+            "url": "https://www.nasa.gov/news-release/liftoff-nasas-europa-clipper-sails-toward-ocean-moon-of-jupiter/",
+            "title": "NASA：欧罗巴快船任务发射介绍（m10）"
+          },
+          {
+            "url": "https://www.nasa.gov/podcasts/curious-universe/europa-clippers-voyage-to-jupiters-ocean-moon/",
+            "title": "NASA Curious Universe：Europa Clipper's Voyage to Jupiter's Ocean Moon（m11）"
+          }
+        ],
+        "relation": "直接解释所供材料为何不足以判定生命存在",
+        "causes": [],
+        "confidence": 0.99,
+        "grounded": true
+      }
+    ],
+    "confidence": 0.0,
+    "grounded": true
+  },
+  "direct_response": "“木卫二冰下海洋存在活生物”的确认，在2个信源中未找到；现实核验为未知，并非判假。实际是有潜在宜居线索，而非已发现生命。m10称1990年代伽利略观测支持冰下咸水海洋存在，2024年10月任务介绍将目标定为研究宜居条件；同期m11称探测器不寻找生命，也无发现生命的能力。因此，宜居线索不能证明生命存在，任务介绍亦不足以确认。两份NASA材料无分歧，但同源不构成独立确认。（基于2个信源 | 覆盖1类媒体 | 0条事实多源一致 | 0条存在分歧 | 因果锚定2/2）",
+  "credibility": {
+    "source_count": 2,
+    "source_types": [
+      "官方媒体"
+    ],
+    "consistent_count": 0,
+    "disputed_count": 0,
+    "grounding_rate": 1.0,
+    "grounded_count": 2,
+    "total_causal_nodes": 2
+  },
+  "event_timeline": [
+    {
+      "date": "1990年代及其后（部分时间未知）",
+      "title": "伽利略任务及后续研究提供木卫二冰下海洋与潜在宜居条件的线索",
+      "description": "据NASA介绍，1990年代伽利略任务的信息提供了强有力的证据，表明木卫二冰下存在巨大咸水海洋，水量超过地球所有海洋总和。科学家还发现了其地下可能存在有机化合物和能量来源的证据，但摘录未注明这些发现的具体时间。这些线索涉及潜在生命支持条件，并未确认活生物存在，也未明确证明其直接促成任务决策。",
+      "significance": "重要",
+      "sources": [
+        {
+          "url": "https://www.nasa.gov/news-release/liftoff-nasas-europa-clipper-sails-toward-ocean-moon-of-jupiter/",
+          "title": "NASA：Liftoff! NASA’s Europa Clipper Sails Toward Ocean Moon of Jupiter"
+        }
+      ],
+      "perspectives": [],
+      "verified": false,
+      "causal_links": []
+    },
+    {
+      "date": "2024年10月1日至14日（任务介绍发布日期）",
+      "title": "NASA说明欧罗巴快船研究宜居条件，而非直接寻找生命",
+      "description": "10月1日的NASA播客说明，欧罗巴快船不以寻找生命为任务，即使木卫二存在生命，该航天器也没有发现它的设备能力。10月14日的NASA任务介绍将主要目标界定为确定木卫二是否具备支持生命的条件。两份材料同属NASA，不能视为独立确认；它们均未确认木卫二冰下海洋存在活生物，仅凭所供材料，该声明的现实核验结果为未知。",
+      "significance": "重要",
+      "sources": [
+        {
+          "url": "https://www.nasa.gov/podcasts/curious-universe/europa-clippers-voyage-to-jupiters-ocean-moon/",
+          "title": "NASA Curious Universe：Europa Clipper's Voyage to Jupiter's Ocean Moon"
+        },
+        {
+          "url": "https://www.nasa.gov/news-release/liftoff-nasas-europa-clipper-sails-toward-ocean-moon-of-jupiter/",
+          "title": "NASA：Liftoff! NASA’s Europa Clipper Sails Toward Ocean Moon of Jupiter"
+        }
+      ],
+      "perspectives": [],
+      "verified": true,
+      "causal_links": []
+    }
+  ],
+  "sources": [
+    {
+      "outlet": "NASA 总部",
+      "url": "https://www.nasa.gov/news-release/liftoff-nasas-europa-clipper-sails-toward-ocean-moon-of-jupiter/",
+      "publish_time": "2024-10-14",
+      "source_type": "官方媒体",
+      "is_original": true,
+      "key_facts": [
+        {
+          "claim": "NASA 表示，欧罗巴快船任务的主要目标是确定木卫二是否具备能够支持生命的条件。",
+          "source_urls": [
+            "https://www.nasa.gov/news-release/liftoff-nasas-europa-clipper-sails-toward-ocean-moon-of-jupiter/"
+          ],
+          "agreed": true
+        },
+        {
+          "claim": "NASA 称，20世纪90年代伽利略任务的信息提供了强有力的证据，表明木卫二冰层下存在巨大的咸水海洋，其水量超过地球所有海洋的总和。",
+          "source_urls": [
+            "https://www.nasa.gov/news-release/liftoff-nasas-europa-clipper-sails-toward-ocean-moon-of-jupiter/"
+          ],
+          "agreed": true
+        },
+        {
+          "claim": "NASA 称，科学家还发现了木卫二表面以下可能存在有机化合物和能量来源的证据。",
+          "source_urls": [
+            "https://www.nasa.gov/news-release/liftoff-nasas-europa-clipper-sails-toward-ocean-moon-of-jupiter/"
+          ],
+          "agreed": true
+        }
+      ]
+    },
+    {
+      "outlet": "NASA Curious Universe 播客",
+      "url": "https://www.nasa.gov/podcasts/curious-universe/europa-clippers-voyage-to-jupiters-ocean-moon/",
+      "publish_time": "2024-10-01",
+      "source_type": "官方媒体",
+      "is_original": true,
+      "key_facts": [
+        {
+          "claim": "NASA 明确表示，欧罗巴快船不以寻找生命为任务；即使木卫二存在生命，该航天器也不具备发现生命的设备能力。",
+          "source_urls": [
+            "https://www.nasa.gov/podcasts/curious-universe/europa-clippers-voyage-to-jupiters-ocean-moon/"
+          ],
+          "agreed": true
+        }
+      ]
+    }
+  ],
+  "source_timeline": [
+    {
+      "outlet": "NASA Curious Universe 播客",
+      "url": "https://www.nasa.gov/podcasts/curious-universe/europa-clippers-voyage-to-jupiters-ocean-moon/",
+      "publish_time": "2024-10-01",
+      "source_type": "官方媒体",
+      "is_original": true,
+      "key_facts": [
+        {
+          "claim": "NASA 明确表示，欧罗巴快船不以寻找生命为任务；即使木卫二存在生命，该航天器也不具备发现生命的设备能力。",
+          "source_urls": [
+            "https://www.nasa.gov/podcasts/curious-universe/europa-clippers-voyage-to-jupiters-ocean-moon/"
+          ],
+          "agreed": true
+        }
+      ]
+    },
+    {
+      "outlet": "NASA 总部",
+      "url": "https://www.nasa.gov/news-release/liftoff-nasas-europa-clipper-sails-toward-ocean-moon-of-jupiter/",
+      "publish_time": "2024-10-14",
+      "source_type": "官方媒体",
+      "is_original": true,
+      "key_facts": [
+        {
+          "claim": "NASA 表示，欧罗巴快船任务的主要目标是确定木卫二是否具备能够支持生命的条件。",
+          "source_urls": [
+            "https://www.nasa.gov/news-release/liftoff-nasas-europa-clipper-sails-toward-ocean-moon-of-jupiter/"
+          ],
+          "agreed": true
+        },
+        {
+          "claim": "NASA 称，20世纪90年代伽利略任务的信息提供了强有力的证据，表明木卫二冰层下存在巨大的咸水海洋，其水量超过地球所有海洋的总和。",
+          "source_urls": [
+            "https://www.nasa.gov/news-release/liftoff-nasas-europa-clipper-sails-toward-ocean-moon-of-jupiter/"
+          ],
+          "agreed": true
+        },
+        {
+          "claim": "NASA 称，科学家还发现了木卫二表面以下可能存在有机化合物和能量来源的证据。",
+          "source_urls": [
+            "https://www.nasa.gov/news-release/liftoff-nasas-europa-clipper-sails-toward-ocean-moon-of-jupiter/"
+          ],
+          "agreed": true
+        }
+      ]
+    }
+  ],
+  "key_findings": [
+    "【文献有据】m10称，1990年代伽利略任务提供了木卫二冰下存在巨大咸水海洋的强有力证据，并提及地下可能存在有机化合物与能量来源；后两类线索的发现时间未注明。这些是潜在宜居条件的线索，不是活生物存在的确认。",
+    "【时间线与任务定位】标示发布日期为2024年10月1日的m11明确表示，欧罗巴快船不寻找生命，也不具备发现生命的设备能力；10月14日的m10将主要目标界定为研究木卫二是否具备支持生命的条件。",
+    "【信源判断】两份摘录均来自NASA，任务表述相容，但不能算作独立交叉确认。两者均未断言目标命题“木卫二冰下海洋存在活生物”为真，也未断言其为假。",
+    "【因果判断】早期海洋及潜在生命支持条件的线索，可合理解释宜居性研究的科学动机；这是基于材料的推理，摘录没有记录这些线索直接促成任务决策的过程。",
+    "【核验边界】证据层面可确定的是：所供文献没有确认生命存在。现实层面对目标命题的核验结果仍为未知，不能把未确认解释为不存在。"
+  ],
+  "information_gaps": [
+    "没有提供直接探测活生物的观测、实验或其他可判定目标命题真假的证据。",
+    "缺少NASA之外的独立来源、原始观测数据，以及有机化合物和能量来源线索的具体时间与研究细节。",
+    "缺少任务立项与决策记录，无法验证早期发现对任务形成的具体因果作用。",
+    "材料仅为选摘并经空白规范化的文本，非完整页面或历史精确版本；只能确认其于2026年9月5日采集完成时可用，不能据此补足2024年后至核验时点的研究进展。"
+  ],
+  "consistent_facts": [],
+  "disputed_facts": [],
+  "causal_summary": "据NASA摘录，1990年代伽利略任务带来了木卫二冰下咸水海洋的强证据，其他研究还提示地下可能有有机化合物和能量来源。这些线索使研究木卫二能否支持生命具有科学动机，但其直接推动任务决策的过程并未被材料证实。2024年10月的任务说明明确区分了“研究宜居条件”和“寻找生命”：欧罗巴快船以此前者为目标，且据播客说明不具备发现生命的能力。因此，这些文献说明了为何研究木卫二，却没有回答那里是否已有活生物；该现实问题在所供证据下仍属未知。",
+  "bias_notes": [
+    "两份材料都是NASA自身的任务传播内容，来源集中，可能侧重任务科学价值；没有独立材料可用于评估其选择性呈现。",
+    "摘录使用了“可能”“支持生命的条件”等限定，并明确说明探测能力边界，未见将宜居性直接等同于生命存在的表述。"
+  ]
+}

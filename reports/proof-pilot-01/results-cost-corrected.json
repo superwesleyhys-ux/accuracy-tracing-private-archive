@@ -1,0 +1,1380 @@
+[
+  {
+    "actual_new_api_usage": {
+      "input_tokens": 23131,
+      "model_calls": 17,
+      "output_tokens": 9549
+    },
+    "arm": "original",
+    "assessment_mode": "evidence",
+    "extraction": {
+      "basis_quote": "m06\u660e\u786e\u652f\u6301\u539f\u8bf4\u6cd5\uff1aNIST\u7684FIPS 203\u89c4\u5b9a\u4e09\u7ec4\u53c2\u6570\uff0c\u540d\u79f0\u9010\u4e00\u4e3aML-KEM-512\u3001ML-KEM-768\u3001ML-KEM-1024\uff0c\u65e0\u987b\u7ea0\u504f\u3002",
+      "decision": "true",
+      "extractable": true
+    },
+    "extractor_answer_text": "m06\u660e\u786e\u652f\u6301\u539f\u8bf4\u6cd5\uff1aNIST\u7684FIPS 203\u89c4\u5b9a\u4e09\u7ec4\u53c2\u6570\uff0c\u540d\u79f0\u9010\u4e00\u4e3aML-KEM-512\u3001ML-KEM-768\u3001ML-KEM-1024\uff0c\u65e0\u987b\u7ea0\u504f\u3002\u6587\u6863\u6807\u793a2024-08-13\u53d1\u5e03\uff0c\u5feb\u7167\u4e8e2026-09-05\u91c7\u96c6\uff1b\u4e09\u7ec4\u6309\u5b89\u5168\u9012\u589e\u3001\u6027\u80fd\u9012\u51cf\u6392\u5217\u3002\u5224\u65ad\u4f9d\u636e\u662f\u539f\u6587\u660e\u5217\uff0c\u4e16\u754c\u771f\u5b9e\u6027\u4ecd\u672a\u77e5\u3002\u672a\u89c1\u6765\u6e90\u51b2\u7a81\uff1bm05\u672a\u5217\u53c2\u6570\u4e14\u4e0d\u5728\u8bc4\u4f30\u8303\u56f4\uff0c\u4e0d\u80fd\u7b97\u72ec\u7acb\u4f50\u8bc1\u3002\uff08\u57fa\u4e8e2\u4e2a\u4fe1\u6e90\u3001\u8bc4\u4f30\u96501\u4e2a | \u8986\u76d61\u7c7b\u5a92\u4f53 | 0\u6761\u4e8b\u5b9e\u591a\u6e90\u4e00\u81f4 | 0\u6761\u5b58\u5728\u5206\u6b67 | \u56e0\u679c\u951a\u5b9a1/1\uff09",
+    "id": "p03",
+    "prediction": {
+      "decision": "true",
+      "edge_export_limit": "No native source-to-source edge representation",
+      "edges": [],
+      "edges_evaluable": false,
+      "origin_evaluable": true,
+      "origins": [
+        "m05",
+        "m06"
+      ],
+      "provenance_evaluable": true
+    },
+    "status": "completed",
+    "usage": {
+      "input_tokens": 23131,
+      "model_calls": 17,
+      "output_tokens": 9549,
+      "seconds": 160.9892551219964
+    }
+  },
+  {
+    "actual_new_api_usage": {
+      "input_tokens": 4044,
+      "model_calls": 2,
+      "output_tokens": 4673
+    },
+    "arm": "single",
+    "assessment_mode": "evidence",
+    "error_type": "ValueError",
+    "id": "p03",
+    "prediction": null,
+    "status": "error",
+    "usage": {
+      "input_tokens": 4044,
+      "model_calls": 2,
+      "output_tokens": 4673,
+      "seconds": 76.56296976299927
+    }
+  },
+  {
+    "accounting_adjustment": {
+      "inherited_usage": {
+        "input_tokens": 4044,
+        "model_calls": 2,
+        "output_tokens": 4673,
+        "seconds": 76.56296976299927
+      },
+      "kind": "inherit_failed_single_prefix_logical_usage_v1",
+      "source_arm": "single",
+      "source_id": "p03"
+    },
+    "actual_new_api_usage": {
+      "input_tokens": 0,
+      "model_calls": 0,
+      "output_tokens": 0
+    },
+    "arm": "loop_psi",
+    "assessment_mode": "evidence",
+    "error_type": "InvalidSharedPrefix",
+    "id": "p03",
+    "prediction": null,
+    "status": "error",
+    "usage": {
+      "input_tokens": 4044,
+      "model_calls": 2,
+      "output_tokens": 4673,
+      "seconds": 76.56296976299927
+    }
+  },
+  {
+    "accounting_adjustment": {
+      "inherited_usage": {
+        "input_tokens": 4044,
+        "model_calls": 2,
+        "output_tokens": 4673,
+        "seconds": 76.56296976299927
+      },
+      "kind": "inherit_failed_single_prefix_logical_usage_v1",
+      "source_arm": "single",
+      "source_id": "p03"
+    },
+    "actual_new_api_usage": {
+      "input_tokens": 0,
+      "model_calls": 0,
+      "output_tokens": 0
+    },
+    "arm": "loop_frozen",
+    "assessment_mode": "evidence",
+    "error_type": "InvalidSharedPrefix",
+    "id": "p03",
+    "prediction": null,
+    "status": "error",
+    "usage": {
+      "input_tokens": 4044,
+      "model_calls": 2,
+      "output_tokens": 4673,
+      "seconds": 76.56296976299927
+    }
+  },
+  {
+    "accounting_adjustment": {
+      "inherited_usage": {
+        "input_tokens": 4044,
+        "model_calls": 2,
+        "output_tokens": 4673,
+        "seconds": 76.56296976299927
+      },
+      "kind": "inherit_failed_single_prefix_logical_usage_v1",
+      "source_arm": "single",
+      "source_id": "p03"
+    },
+    "actual_new_api_usage": {
+      "input_tokens": 0,
+      "model_calls": 0,
+      "output_tokens": 0
+    },
+    "arm": "independent",
+    "assessment_mode": "evidence",
+    "error_type": "InvalidSharedPrefix",
+    "id": "p03",
+    "prediction": null,
+    "status": "error",
+    "usage": {
+      "input_tokens": 4044,
+      "model_calls": 2,
+      "output_tokens": 4673,
+      "seconds": 76.56296976299927
+    }
+  },
+  {
+    "actual_new_api_usage": {
+      "input_tokens": 23586,
+      "model_calls": 17,
+      "output_tokens": 10373
+    },
+    "arm": "original",
+    "assessment_mode": "evidence",
+    "extraction": {
+      "basis_quote": "\u4ec5\u6309m13\u8bc4\u4f30\uff0cNOAA\u7684GOES-U\u66f4\u540dGOES-19\u6709\u636e\uff0c\u4f46\u201c2024\u5e746\u670825\u65e5\u66f4\u540d\u201d\u57281\u4e2a\u4fe1\u6e90\u4e2d\u672a\u627e\u5230\uff0c\u4e14\u88ab7\u67087\u65e5\u7684\u8bb0\u8f7d\u53cd\u9a73\u3002",
+      "decision": "false",
+      "extractable": true
+    },
+    "extractor_answer_text": "\u4ec5\u6309m13\u8bc4\u4f30\uff0cNOAA\u7684GOES-U\u66f4\u540dGOES-19\u6709\u636e\uff0c\u4f46\u201c2024\u5e746\u670825\u65e5\u66f4\u540d\u201d\u57281\u4e2a\u4fe1\u6e90\u4e2d\u672a\u627e\u5230\uff0c\u4e14\u88ab7\u67087\u65e5\u7684\u8bb0\u8f7d\u53cd\u9a73\u3002m12\u5c066\u670825\u65e5\u8bb0\u4e3a\u53d1\u5c04\u65e5\uff0c\u4ec5\u4f5c\u80cc\u666f\uff1bm13\u79f07\u67087\u65e5\u5b8c\u6210\u6700\u540e\u70b9\u706b\u3001\u62b5\u8fbe\u5730\u7403\u9759\u6b62\u8f68\u9053\u5e76\u66f4\u540d\uff0c\u539f\u56e0\u662f\u5165\u8f68\u540e\u6309\u89c4\u5219\u7531\u5b57\u6bcd\u6539\u7528\u6570\u5b57\u3002\u4e24\u6587\u65e0\u5206\u6b67\uff0c\u4f46\u540c\u5c5eNOAA\u4e14\u5b58\u5728\u5f15\u7528\u5173\u7cfb\uff0c\u5e76\u975e\u72ec\u7acb\u786e\u8ba4\uff1b\u771f\u5b9e\u4e16\u754c\u672a\u72ec\u7acb\u6838\u5b9e\u3002\uff08\u57fa\u4e8e2\u4e2a\u4fe1\u6e90 | \u8986\u76d61\u7c7b\u5a92\u4f53 | 2\u6761\u4e8b\u5b9e\u591a\u6e90\u4e00\u81f4 | 0\u6761\u5b58\u5728\u5206\u6b67 | \u56e0\u679c\u951a\u5b9a2/2\uff09",
+    "id": "p07",
+    "prediction": {
+      "decision": "false",
+      "edge_export_limit": "No native source-to-source edge representation",
+      "edges": [],
+      "edges_evaluable": false,
+      "origin_evaluable": true,
+      "origins": [
+        "m13"
+      ],
+      "provenance_evaluable": true
+    },
+    "status": "completed",
+    "usage": {
+      "input_tokens": 23586,
+      "model_calls": 17,
+      "output_tokens": 10373,
+      "seconds": 168.38651102100266
+    }
+  },
+  {
+    "actual_new_api_usage": {
+      "input_tokens": 3921,
+      "model_calls": 2,
+      "output_tokens": 4633
+    },
+    "arm": "single",
+    "assessment_mode": "evidence",
+    "error_type": "ValueError",
+    "id": "p07",
+    "prediction": null,
+    "status": "error",
+    "usage": {
+      "input_tokens": 3921,
+      "model_calls": 2,
+      "output_tokens": 4633,
+      "seconds": 71.07353061199683
+    }
+  },
+  {
+    "accounting_adjustment": {
+      "inherited_usage": {
+        "input_tokens": 3921,
+        "model_calls": 2,
+        "output_tokens": 4633,
+        "seconds": 71.07353061199683
+      },
+      "kind": "inherit_failed_single_prefix_logical_usage_v1",
+      "source_arm": "single",
+      "source_id": "p07"
+    },
+    "actual_new_api_usage": {
+      "input_tokens": 0,
+      "model_calls": 0,
+      "output_tokens": 0
+    },
+    "arm": "loop_psi",
+    "assessment_mode": "evidence",
+    "error_type": "InvalidSharedPrefix",
+    "id": "p07",
+    "prediction": null,
+    "status": "error",
+    "usage": {
+      "input_tokens": 3921,
+      "model_calls": 2,
+      "output_tokens": 4633,
+      "seconds": 71.07353061199683
+    }
+  },
+  {
+    "accounting_adjustment": {
+      "inherited_usage": {
+        "input_tokens": 3921,
+        "model_calls": 2,
+        "output_tokens": 4633,
+        "seconds": 71.07353061199683
+      },
+      "kind": "inherit_failed_single_prefix_logical_usage_v1",
+      "source_arm": "single",
+      "source_id": "p07"
+    },
+    "actual_new_api_usage": {
+      "input_tokens": 0,
+      "model_calls": 0,
+      "output_tokens": 0
+    },
+    "arm": "loop_frozen",
+    "assessment_mode": "evidence",
+    "error_type": "InvalidSharedPrefix",
+    "id": "p07",
+    "prediction": null,
+    "status": "error",
+    "usage": {
+      "input_tokens": 3921,
+      "model_calls": 2,
+      "output_tokens": 4633,
+      "seconds": 71.07353061199683
+    }
+  },
+  {
+    "accounting_adjustment": {
+      "inherited_usage": {
+        "input_tokens": 3921,
+        "model_calls": 2,
+        "output_tokens": 4633,
+        "seconds": 71.07353061199683
+      },
+      "kind": "inherit_failed_single_prefix_logical_usage_v1",
+      "source_arm": "single",
+      "source_id": "p07"
+    },
+    "actual_new_api_usage": {
+      "input_tokens": 0,
+      "model_calls": 0,
+      "output_tokens": 0
+    },
+    "arm": "independent",
+    "assessment_mode": "evidence",
+    "error_type": "InvalidSharedPrefix",
+    "id": "p07",
+    "prediction": null,
+    "status": "error",
+    "usage": {
+      "input_tokens": 3921,
+      "model_calls": 2,
+      "output_tokens": 4633,
+      "seconds": 71.07353061199683
+    }
+  },
+  {
+    "actual_new_api_usage": {
+      "input_tokens": 28066,
+      "model_calls": 18,
+      "output_tokens": 12722
+    },
+    "arm": "original",
+    "assessment_mode": "evidence",
+    "extraction": {
+      "basis_quote": "\u516c\u544a\u660e\u786e\u4e3a121.6\u514b\uff0c\u6545\u58f0\u660e\u4e0e\u8bc1\u636e\u77db\u76fe\u3002",
+      "decision": "false",
+      "extractable": true
+    },
+    "extractor_answer_text": "m03\u8bc1\u5b9eNASA\u516c\u544a\u65e5\u671f\u4e3a2024\u5e742\u670815\u65e5\u3001\u5bf9\u8c61\u4e3aOSIRIS-REx\u8fd4\u56de\u7684\u8d1d\u52aa\u6837\u672c\uff1b\u57281\u4e2a\u8303\u56f4\u5185\u4fe1\u6e90\u4e2d\u672a\u627e\u5230\u201c\u6700\u7ec8\u603b\u8d28\u91cf70.3\u514b\u201d\u7684\u8868\u8ff0\uff0c\u516c\u544a\u660e\u786e\u4e3a121.6\u514b\uff0c\u6545\u58f0\u660e\u4e0e\u8bc1\u636e\u77db\u76fe\u300270.3\u514b\u662f\u6b64\u524d\u6d4b\u91cf\u503c\uff1a\u6837\u672c\u4e8e2023\u5e749\u6708\u8fd4\u56de\uff0c2024\u5e741\u6708\u91c7\u6837\u5934\u62c6\u89e3\u540e\u53c8\u5012\u51fa51.2\u514b\uff0c\u52a0\u4e0a\u989d\u5916\u9897\u7c92\u5f62\u6210\u603b\u91cf\u3002\u5dee\u5f02\u6e90\u4e8e\u628a\u9636\u6bb5\u503c\u8bef\u4f5c\u603b\u91cf\u3002\u8303\u56f4\u5185\u65e0\u6765\u6e90\u5206\u6b67\uff1b\u73b0\u5b9e\u8d28\u91cf\u672a\u72ec\u7acb\u6838\u9a8c\uff0c\u53e6\u4e00NASA\u5feb\u7167\u4e0d\u4f5c\u72ec\u7acb\u786e\u8ba4\u3002\uff08\u57fa\u4e8e1\u4e2a\u4fe1\u6e90 | \u8986\u76d61\u7c7b\u5a92\u4f53 | 0\u6761\u4e8b\u5b9e\u591a\u6e90\u4e00\u81f4 | 0\u6761\u5b58\u5728\u5206\u6b67 | \u56e0\u679c\u951a\u5b9a2/2\uff09",
+    "id": "p02",
+    "prediction": {
+      "decision": "false",
+      "edge_export_limit": "No native source-to-source edge representation",
+      "edges": [],
+      "edges_evaluable": false,
+      "origin_evaluable": true,
+      "origins": [
+        "m03",
+        "m04"
+      ],
+      "provenance_evaluable": true
+    },
+    "status": "completed",
+    "usage": {
+      "input_tokens": 28066,
+      "model_calls": 18,
+      "output_tokens": 12722,
+      "seconds": 202.50457914700382
+    }
+  },
+  {
+    "actual_new_api_usage": {
+      "input_tokens": 1787,
+      "model_calls": 1,
+      "output_tokens": 2500
+    },
+    "arm": "single",
+    "assessment_mode": "evidence",
+    "error_type": "ValueError",
+    "id": "p02",
+    "prediction": null,
+    "status": "error",
+    "usage": {
+      "input_tokens": 1787,
+      "model_calls": 1,
+      "output_tokens": 2500,
+      "seconds": 40.67189407200203
+    }
+  },
+  {
+    "accounting_adjustment": {
+      "inherited_usage": {
+        "input_tokens": 1787,
+        "model_calls": 1,
+        "output_tokens": 2500,
+        "seconds": 40.67189407200203
+      },
+      "kind": "inherit_failed_single_prefix_logical_usage_v1",
+      "source_arm": "single",
+      "source_id": "p02"
+    },
+    "actual_new_api_usage": {
+      "input_tokens": 0,
+      "model_calls": 0,
+      "output_tokens": 0
+    },
+    "arm": "loop_psi",
+    "assessment_mode": "evidence",
+    "error_type": "InvalidSharedPrefix",
+    "id": "p02",
+    "prediction": null,
+    "status": "error",
+    "usage": {
+      "input_tokens": 1787,
+      "model_calls": 1,
+      "output_tokens": 2500,
+      "seconds": 40.67189407200203
+    }
+  },
+  {
+    "accounting_adjustment": {
+      "inherited_usage": {
+        "input_tokens": 1787,
+        "model_calls": 1,
+        "output_tokens": 2500,
+        "seconds": 40.67189407200203
+      },
+      "kind": "inherit_failed_single_prefix_logical_usage_v1",
+      "source_arm": "single",
+      "source_id": "p02"
+    },
+    "actual_new_api_usage": {
+      "input_tokens": 0,
+      "model_calls": 0,
+      "output_tokens": 0
+    },
+    "arm": "loop_frozen",
+    "assessment_mode": "evidence",
+    "error_type": "InvalidSharedPrefix",
+    "id": "p02",
+    "prediction": null,
+    "status": "error",
+    "usage": {
+      "input_tokens": 1787,
+      "model_calls": 1,
+      "output_tokens": 2500,
+      "seconds": 40.67189407200203
+    }
+  },
+  {
+    "accounting_adjustment": {
+      "inherited_usage": {
+        "input_tokens": 1787,
+        "model_calls": 1,
+        "output_tokens": 2500,
+        "seconds": 40.67189407200203
+      },
+      "kind": "inherit_failed_single_prefix_logical_usage_v1",
+      "source_arm": "single",
+      "source_id": "p02"
+    },
+    "actual_new_api_usage": {
+      "input_tokens": 0,
+      "model_calls": 0,
+      "output_tokens": 0
+    },
+    "arm": "independent",
+    "assessment_mode": "evidence",
+    "error_type": "InvalidSharedPrefix",
+    "id": "p02",
+    "prediction": null,
+    "status": "error",
+    "usage": {
+      "input_tokens": 1787,
+      "model_calls": 1,
+      "output_tokens": 2500,
+      "seconds": 40.67189407200203
+    }
+  },
+  {
+    "actual_new_api_usage": {
+      "input_tokens": 25189,
+      "model_calls": 17,
+      "output_tokens": 9908
+    },
+    "arm": "original",
+    "assessment_mode": "evidence",
+    "extraction": {
+      "basis_quote": "m02\u652f\u6301\u539f\u8bf4\u6cd5\uff1aNASA\u516c\u544a\u65e5\u671f\u4e3a2022\u5e7410\u670811\u65e5\uff0c\u62a5\u544aDART\u4f7fDimorphos\u7ed5Didymos\u7684\u5468\u671f\u7f29\u77ed32\u5206\u949f\uff0c\u4e0d\u786e\u5b9a\u5ea6\u7ea6\u00b12\u5206\u949f\u3002\u65e0\u9700\u7ea0\u504f\uff1bm01\u8bb0\u8f7d\u7684\u540e\u7eed33\u5206\u949f\u4fee\u8ba2\u4e0d\u5426\u5b9a\u5f53\u65f6\u62a5\u544a\u3002",
+      "decision": "true",
+      "extractable": true
+    },
+    "extractor_answer_text": "m02\u652f\u6301\u539f\u8bf4\u6cd5\uff1aNASA\u516c\u544a\u65e5\u671f\u4e3a2022\u5e7410\u670811\u65e5\uff0c\u62a5\u544aDART\u4f7fDimorphos\u7ed5Didymos\u7684\u5468\u671f\u7f29\u77ed32\u5206\u949f\uff0c\u4e0d\u786e\u5b9a\u5ea6\u7ea6\u00b12\u5206\u949f\u3002\u65e0\u9700\u7ea0\u504f\uff1bm01\u8bb0\u8f7d\u7684\u540e\u7eed33\u5206\u949f\u4fee\u8ba2\u4e0d\u5426\u5b9a\u5f53\u65f6\u62a5\u544a\u3002\u516c\u544a\u8bb0\u8ff09\u670826\u65e5\u649e\u51fb\u3001\u968f\u540e\u5730\u9762\u671b\u8fdc\u955c\u6d4b\u91cf\u300110\u670811\u65e5\u516c\u5e03\u7ed3\u679c\uff0c\u5c06\u5468\u671f\u53d8\u5316\u5f52\u56e0\u4e8e\u649e\u51fb\u3002\u4e24\u7bc7\u5feb\u7167\u65e0\u5206\u6b67\uff0c\u4f46\u5747\u51fa\u81eaNASA\uff0c\u975e\u72ec\u7acb\u4e92\u8bc1\uff1b\u4ec5m02\u7528\u4e8e\u672c\u6b21\u5224\u5b9a\uff0c\u73b0\u5b9e\u9a8c\u8bc1\u4ecd\u672a\u77e5\u3002\uff08\u57fa\u4e8e2\u4efd\u5feb\u7167\u30011\u4e2a\u4fe1\u6e90 | \u8986\u76d61\u7c7b\u5a92\u4f53 | 3\u6761\u540c\u6e90\u4e00\u81f4 | 0\u6761\u5b58\u5728\u5206\u6b67 | \u56e0\u679c\u951a\u5b9a2/2\uff09",
+    "id": "p01",
+    "prediction": {
+      "decision": "true",
+      "edge_export_limit": "No native source-to-source edge representation",
+      "edges": [],
+      "edges_evaluable": false,
+      "origin_evaluable": true,
+      "origins": [
+        "m02"
+      ],
+      "provenance_evaluable": true
+    },
+    "status": "completed",
+    "usage": {
+      "input_tokens": 25189,
+      "model_calls": 17,
+      "output_tokens": 9908,
+      "seconds": 161.80229537899868
+    }
+  },
+  {
+    "actual_new_api_usage": {
+      "input_tokens": 1783,
+      "model_calls": 1,
+      "output_tokens": 2500
+    },
+    "arm": "single",
+    "assessment_mode": "evidence",
+    "error_type": "ValueError",
+    "id": "p01",
+    "prediction": null,
+    "status": "error",
+    "usage": {
+      "input_tokens": 1783,
+      "model_calls": 1,
+      "output_tokens": 2500,
+      "seconds": 38.86004653300188
+    }
+  },
+  {
+    "accounting_adjustment": {
+      "inherited_usage": {
+        "input_tokens": 1783,
+        "model_calls": 1,
+        "output_tokens": 2500,
+        "seconds": 38.86004653300188
+      },
+      "kind": "inherit_failed_single_prefix_logical_usage_v1",
+      "source_arm": "single",
+      "source_id": "p01"
+    },
+    "actual_new_api_usage": {
+      "input_tokens": 0,
+      "model_calls": 0,
+      "output_tokens": 0
+    },
+    "arm": "loop_psi",
+    "assessment_mode": "evidence",
+    "error_type": "InvalidSharedPrefix",
+    "id": "p01",
+    "prediction": null,
+    "status": "error",
+    "usage": {
+      "input_tokens": 1783,
+      "model_calls": 1,
+      "output_tokens": 2500,
+      "seconds": 38.86004653300188
+    }
+  },
+  {
+    "accounting_adjustment": {
+      "inherited_usage": {
+        "input_tokens": 1783,
+        "model_calls": 1,
+        "output_tokens": 2500,
+        "seconds": 38.86004653300188
+      },
+      "kind": "inherit_failed_single_prefix_logical_usage_v1",
+      "source_arm": "single",
+      "source_id": "p01"
+    },
+    "actual_new_api_usage": {
+      "input_tokens": 0,
+      "model_calls": 0,
+      "output_tokens": 0
+    },
+    "arm": "loop_frozen",
+    "assessment_mode": "evidence",
+    "error_type": "InvalidSharedPrefix",
+    "id": "p01",
+    "prediction": null,
+    "status": "error",
+    "usage": {
+      "input_tokens": 1783,
+      "model_calls": 1,
+      "output_tokens": 2500,
+      "seconds": 38.86004653300188
+    }
+  },
+  {
+    "accounting_adjustment": {
+      "inherited_usage": {
+        "input_tokens": 1783,
+        "model_calls": 1,
+        "output_tokens": 2500,
+        "seconds": 38.86004653300188
+      },
+      "kind": "inherit_failed_single_prefix_logical_usage_v1",
+      "source_arm": "single",
+      "source_id": "p01"
+    },
+    "actual_new_api_usage": {
+      "input_tokens": 0,
+      "model_calls": 0,
+      "output_tokens": 0
+    },
+    "arm": "independent",
+    "assessment_mode": "evidence",
+    "error_type": "InvalidSharedPrefix",
+    "id": "p01",
+    "prediction": null,
+    "status": "error",
+    "usage": {
+      "input_tokens": 1783,
+      "model_calls": 1,
+      "output_tokens": 2500,
+      "seconds": 38.86004653300188
+    }
+  },
+  {
+    "actual_new_api_usage": {
+      "input_tokens": 20040,
+      "model_calls": 16,
+      "output_tokens": 10601
+    },
+    "arm": "original",
+    "assessment_mode": "world",
+    "extraction": {
+      "basis_quote": "\u201c\u6728\u536b\u4e8c\u51b0\u4e0b\u6d77\u6d0b\u5b58\u5728\u6d3b\u751f\u7269\u201d\u7684\u786e\u8ba4\uff0c\u57282\u4e2a\u4fe1\u6e90\u4e2d\u672a\u627e\u5230\uff1b\u73b0\u5b9e\u6838\u9a8c\u4e3a\u672a\u77e5\uff0c\u5e76\u975e\u5224\u5047\u3002",
+      "decision": "unverifiable",
+      "extractable": true
+    },
+    "extractor_answer_text": "\u201c\u6728\u536b\u4e8c\u51b0\u4e0b\u6d77\u6d0b\u5b58\u5728\u6d3b\u751f\u7269\u201d\u7684\u786e\u8ba4\uff0c\u57282\u4e2a\u4fe1\u6e90\u4e2d\u672a\u627e\u5230\uff1b\u73b0\u5b9e\u6838\u9a8c\u4e3a\u672a\u77e5\uff0c\u5e76\u975e\u5224\u5047\u3002\u5b9e\u9645\u662f\u6709\u6f5c\u5728\u5b9c\u5c45\u7ebf\u7d22\uff0c\u800c\u975e\u5df2\u53d1\u73b0\u751f\u547d\u3002m10\u79f01990\u5e74\u4ee3\u4f3d\u5229\u7565\u89c2\u6d4b\u652f\u6301\u51b0\u4e0b\u54b8\u6c34\u6d77\u6d0b\u5b58\u5728\uff0c2024\u5e7410\u6708\u4efb\u52a1\u4ecb\u7ecd\u5c06\u76ee\u6807\u5b9a\u4e3a\u7814\u7a76\u5b9c\u5c45\u6761\u4ef6\uff1b\u540c\u671fm11\u79f0\u63a2\u6d4b\u5668\u4e0d\u5bfb\u627e\u751f\u547d\uff0c\u4e5f\u65e0\u53d1\u73b0\u751f\u547d\u7684\u80fd\u529b\u3002\u56e0\u6b64\uff0c\u5b9c\u5c45\u7ebf\u7d22\u4e0d\u80fd\u8bc1\u660e\u751f\u547d\u5b58\u5728\uff0c\u4efb\u52a1\u4ecb\u7ecd\u4ea6\u4e0d\u8db3\u4ee5\u786e\u8ba4\u3002\u4e24\u4efdNASA\u6750\u6599\u65e0\u5206\u6b67\uff0c\u4f46\u540c\u6e90\u4e0d\u6784\u6210\u72ec\u7acb\u786e\u8ba4\u3002\uff08\u57fa\u4e8e2\u4e2a\u4fe1\u6e90 | \u8986\u76d61\u7c7b\u5a92\u4f53 | 0\u6761\u4e8b\u5b9e\u591a\u6e90\u4e00\u81f4 | 0\u6761\u5b58\u5728\u5206\u6b67 | \u56e0\u679c\u951a\u5b9a2/2\uff09",
+    "id": "p06",
+    "prediction": {
+      "decision": "unverifiable",
+      "edge_export_limit": "No native source-to-source edge representation",
+      "edges": [],
+      "edges_evaluable": false,
+      "origin_evaluable": true,
+      "origins": [
+        "m10",
+        "m11"
+      ],
+      "provenance_evaluable": true
+    },
+    "status": "completed",
+    "usage": {
+      "input_tokens": 20040,
+      "model_calls": 16,
+      "output_tokens": 10601,
+      "seconds": 175.51830312299717
+    }
+  },
+  {
+    "actual_new_api_usage": {
+      "input_tokens": 1668,
+      "model_calls": 1,
+      "output_tokens": 2500
+    },
+    "arm": "single",
+    "assessment_mode": "world",
+    "error_type": "ValueError",
+    "id": "p06",
+    "prediction": null,
+    "status": "error",
+    "usage": {
+      "input_tokens": 1668,
+      "model_calls": 1,
+      "output_tokens": 2500,
+      "seconds": 40.199622423999244
+    }
+  },
+  {
+    "accounting_adjustment": {
+      "inherited_usage": {
+        "input_tokens": 1668,
+        "model_calls": 1,
+        "output_tokens": 2500,
+        "seconds": 40.199622423999244
+      },
+      "kind": "inherit_failed_single_prefix_logical_usage_v1",
+      "source_arm": "single",
+      "source_id": "p06"
+    },
+    "actual_new_api_usage": {
+      "input_tokens": 0,
+      "model_calls": 0,
+      "output_tokens": 0
+    },
+    "arm": "loop_psi",
+    "assessment_mode": "world",
+    "error_type": "InvalidSharedPrefix",
+    "id": "p06",
+    "prediction": null,
+    "status": "error",
+    "usage": {
+      "input_tokens": 1668,
+      "model_calls": 1,
+      "output_tokens": 2500,
+      "seconds": 40.199622423999244
+    }
+  },
+  {
+    "accounting_adjustment": {
+      "inherited_usage": {
+        "input_tokens": 1668,
+        "model_calls": 1,
+        "output_tokens": 2500,
+        "seconds": 40.199622423999244
+      },
+      "kind": "inherit_failed_single_prefix_logical_usage_v1",
+      "source_arm": "single",
+      "source_id": "p06"
+    },
+    "actual_new_api_usage": {
+      "input_tokens": 0,
+      "model_calls": 0,
+      "output_tokens": 0
+    },
+    "arm": "loop_frozen",
+    "assessment_mode": "world",
+    "error_type": "InvalidSharedPrefix",
+    "id": "p06",
+    "prediction": null,
+    "status": "error",
+    "usage": {
+      "input_tokens": 1668,
+      "model_calls": 1,
+      "output_tokens": 2500,
+      "seconds": 40.199622423999244
+    }
+  },
+  {
+    "accounting_adjustment": {
+      "inherited_usage": {
+        "input_tokens": 1668,
+        "model_calls": 1,
+        "output_tokens": 2500,
+        "seconds": 40.199622423999244
+      },
+      "kind": "inherit_failed_single_prefix_logical_usage_v1",
+      "source_arm": "single",
+      "source_id": "p06"
+    },
+    "actual_new_api_usage": {
+      "input_tokens": 0,
+      "model_calls": 0,
+      "output_tokens": 0
+    },
+    "arm": "independent",
+    "assessment_mode": "world",
+    "error_type": "InvalidSharedPrefix",
+    "id": "p06",
+    "prediction": null,
+    "status": "error",
+    "usage": {
+      "input_tokens": 1668,
+      "model_calls": 1,
+      "output_tokens": 2500,
+      "seconds": 40.199622423999244
+    }
+  },
+  {
+    "actual_new_api_usage": {
+      "input_tokens": 23260,
+      "model_calls": 17,
+      "output_tokens": 11969
+    },
+    "arm": "original",
+    "assessment_mode": "evidence",
+    "extraction": {
+      "basis_quote": "\u9650\u5b9a\u8bc1\u636em15\u652f\u6301\u6838\u5fc3\u8bf4\u6cd5\uff1aUSGS\u4e8e2020\u5e74\u53d1\u5e03\u65b0\u56fe\uff0c\u6574\u5408\u516d\u5e45\u963f\u6ce2\u7f57\u65f6\u4ee3\u533a\u57df\u56fe\u4e0e\u8f83\u65b0\u6708\u7403\u4efb\u52a1\u8d44\u6599\uff1b\u6b63\u5f0f\u540d\u79f0\u201c\u7edf\u4e00\u6708\u7403\u5730\u8d28\u56fe\u201d\u57281\u4e2a\u4fe1\u6e90\u4e2d\u672a\u627e\u5230\u3002",
+      "decision": "true",
+      "extractable": true
+    },
+    "extractor_answer_text": "\u9650\u5b9a\u8bc1\u636em15\u652f\u6301\u6838\u5fc3\u8bf4\u6cd5\uff1aUSGS\u4e8e2020\u5e74\u53d1\u5e03\u65b0\u56fe\uff0c\u6574\u5408\u516d\u5e45\u963f\u6ce2\u7f57\u65f6\u4ee3\u533a\u57df\u56fe\u4e0e\u8f83\u65b0\u6708\u7403\u4efb\u52a1\u8d44\u6599\uff1b\u6b63\u5f0f\u540d\u79f0\u201c\u7edf\u4e00\u6708\u7403\u5730\u8d28\u56fe\u201d\u57281\u4e2a\u4fe1\u6e90\u4e2d\u672a\u627e\u5230\u3002\u5e94\u533a\u5206\u6838\u5fc3\u5185\u5bb9\u83b7\u652f\u6301\u4e0e\u5168\u79f0\u83b7\u8bc1\u5b9e\u3002\u6750\u6599\u6807\u793a4\u670820\u65e5\u53d1\u5e03\uff0c\u6b64\u524d\u5148\u91cd\u7ed8\u65e7\u56fe\u5bf9\u9f50\u73b0\u4ee3\u6570\u636e\uff0c\u518d\u7edf\u4e00\u5730\u5c42\u63cf\u8ff0\uff0c\u4ee5\u89e3\u51b3\u5ca9\u77f3\u540d\u79f0\u3001\u63cf\u8ff0\u53ca\u5e74\u4ee3\u4e0d\u4e00\u81f4\u3002\u6240\u4f9b\u4e24\u6587\u65e0\u5206\u6b67\uff0c\u4f46\u540c\u5c5eUSGS\uff0c\u4e0d\u80fd\u89c6\u4e3a\u72ec\u7acb\u786e\u8ba4\uff1b\u73b0\u5b9e\u771f\u5b9e\u6027\u4ecd\u672a\u77e5\u3002\uff08\u57fa\u4e8e2\u4e2a\u4fe1\u6e90\uff0c\u8bc4\u4f30\u9650m15 | \u8986\u76d61\u7c7b\u5a92\u4f53 | 3\u6761\u4e8b\u5b9e\u591a\u6e90\u4e00\u81f4 | 0\u6761\u5b58\u5728\u5206\u6b67 | \u56e0\u679c\u951a\u5b9a2/2\uff09",
+    "id": "p08",
+    "prediction": {
+      "decision": "true",
+      "edge_export_limit": "No native source-to-source edge representation",
+      "edges": [],
+      "edges_evaluable": false,
+      "origin_evaluable": true,
+      "origins": [
+        "m15"
+      ],
+      "provenance_evaluable": true
+    },
+    "status": "completed",
+    "usage": {
+      "input_tokens": 23260,
+      "model_calls": 17,
+      "output_tokens": 11969,
+      "seconds": 199.65422445800505
+    }
+  },
+  {
+    "actual_new_api_usage": {
+      "input_tokens": 4022,
+      "model_calls": 2,
+      "output_tokens": 4652
+    },
+    "arm": "single",
+    "assessment_mode": "evidence",
+    "error_type": "ValueError",
+    "id": "p08",
+    "prediction": null,
+    "status": "error",
+    "usage": {
+      "input_tokens": 4022,
+      "model_calls": 2,
+      "output_tokens": 4652,
+      "seconds": 66.53987373700511
+    }
+  },
+  {
+    "accounting_adjustment": {
+      "inherited_usage": {
+        "input_tokens": 4022,
+        "model_calls": 2,
+        "output_tokens": 4652,
+        "seconds": 66.53987373700511
+      },
+      "kind": "inherit_failed_single_prefix_logical_usage_v1",
+      "source_arm": "single",
+      "source_id": "p08"
+    },
+    "actual_new_api_usage": {
+      "input_tokens": 0,
+      "model_calls": 0,
+      "output_tokens": 0
+    },
+    "arm": "loop_psi",
+    "assessment_mode": "evidence",
+    "error_type": "InvalidSharedPrefix",
+    "id": "p08",
+    "prediction": null,
+    "status": "error",
+    "usage": {
+      "input_tokens": 4022,
+      "model_calls": 2,
+      "output_tokens": 4652,
+      "seconds": 66.53987373700511
+    }
+  },
+  {
+    "accounting_adjustment": {
+      "inherited_usage": {
+        "input_tokens": 4022,
+        "model_calls": 2,
+        "output_tokens": 4652,
+        "seconds": 66.53987373700511
+      },
+      "kind": "inherit_failed_single_prefix_logical_usage_v1",
+      "source_arm": "single",
+      "source_id": "p08"
+    },
+    "actual_new_api_usage": {
+      "input_tokens": 0,
+      "model_calls": 0,
+      "output_tokens": 0
+    },
+    "arm": "loop_frozen",
+    "assessment_mode": "evidence",
+    "error_type": "InvalidSharedPrefix",
+    "id": "p08",
+    "prediction": null,
+    "status": "error",
+    "usage": {
+      "input_tokens": 4022,
+      "model_calls": 2,
+      "output_tokens": 4652,
+      "seconds": 66.53987373700511
+    }
+  },
+  {
+    "accounting_adjustment": {
+      "inherited_usage": {
+        "input_tokens": 4022,
+        "model_calls": 2,
+        "output_tokens": 4652,
+        "seconds": 66.53987373700511
+      },
+      "kind": "inherit_failed_single_prefix_logical_usage_v1",
+      "source_arm": "single",
+      "source_id": "p08"
+    },
+    "actual_new_api_usage": {
+      "input_tokens": 0,
+      "model_calls": 0,
+      "output_tokens": 0
+    },
+    "arm": "independent",
+    "assessment_mode": "evidence",
+    "error_type": "InvalidSharedPrefix",
+    "id": "p08",
+    "prediction": null,
+    "status": "error",
+    "usage": {
+      "input_tokens": 4022,
+      "model_calls": 2,
+      "output_tokens": 4652,
+      "seconds": 66.53987373700511
+    }
+  },
+  {
+    "actual_new_api_usage": {
+      "input_tokens": 23685,
+      "model_calls": 17,
+      "output_tokens": 12579
+    },
+    "arm": "original",
+    "assessment_mode": "evidence",
+    "extraction": {
+      "basis_quote": "\u4ec5\u636em07\uff0cNOAA\u6458\u8981\u6807\u793a2025\u5e741\u670810\u65e5\uff0c\u6d89\u53ca2024\u5e74\u53ca1.29\u00b0C\uff0c\u4f46\u8be5\u503c\u5bf9\u5e9420\u4e16\u7eaa\u5747\u503c\uff1b\u76f8\u5bf91850\u20141900\u5e74\u4e3a1.46\u00b0C\uff0c\u6545\u58f0\u660e\u4e0e\u5feb\u7167\u77db\u76fe\u3002",
+      "decision": "false",
+      "extractable": true
+    },
+    "extractor_answer_text": "\u4ec5\u636em07\uff0cNOAA\u6458\u8981\u6807\u793a2025\u5e741\u670810\u65e5\uff0c\u6d89\u53ca2024\u5e74\u53ca1.29\u00b0C\uff0c\u4f46\u8be5\u503c\u5bf9\u5e9420\u4e16\u7eaa\u5747\u503c\uff1b\u76f8\u5bf91850\u20141900\u5e74\u4e3a1.46\u00b0C\uff0c\u6545\u58f0\u660e\u4e0e\u5feb\u7167\u77db\u76fe\u30022024\u5e74\u6bd42023\u5e74\u9ad80.10\u00b0C\uff0c\u5237\u65b0\u7eaa\u5f55\uff0c\u968f\u540e\u53d1\u5e03\u5e74\u5ea6\u6458\u8981\u3002\u77db\u76fe\u6e90\u4e8e\u57fa\u51c6\u9519\u914d\uff0c\u9519\u914d\u6210\u56e0\u4e0d\u660e\uff1b\u73b0\u5b9e\u771f\u5b9e\u6027\u672a\u72ec\u7acb\u6838\u9a8c\u3002\u8303\u56f4\u5916NASA\u62a5\u7ea61.47\u00b0C\uff0c\u4e0eNOAA\u5dee0.01\u00b0C\uff0c\u975e\u5b9e\u8d28\u77db\u76fe\uff0c\u4e0d\u53c2\u4e0e\u5224\u5b9a\u3002\uff08\u57fa\u4e8e2\u4e2a\u4fe1\u6e90 | \u8986\u76d61\u7c7b\u5a92\u4f53 | 2\u6761\u4e8b\u5b9e\u591a\u6e90\u4e00\u81f4 | 1\u6761\u5b58\u5728\u5206\u6b67 | \u56e0\u679c\u951a\u5b9a1/1\uff09",
+    "id": "p04",
+    "prediction": {
+      "decision": "false",
+      "edge_export_limit": "No native source-to-source edge representation",
+      "edges": [],
+      "edges_evaluable": false,
+      "origin_evaluable": true,
+      "origins": [
+        "m07",
+        "m08"
+      ],
+      "provenance_evaluable": true
+    },
+    "status": "completed",
+    "usage": {
+      "input_tokens": 23685,
+      "model_calls": 17,
+      "output_tokens": 12579,
+      "seconds": 201.97979575200588
+    }
+  },
+  {
+    "actual_new_api_usage": {
+      "input_tokens": 5909,
+      "model_calls": 4,
+      "output_tokens": 6218
+    },
+    "arm": "single",
+    "assessment_mode": "evidence",
+    "checkpoints": [
+      {
+        "assessment_mode": "evidence",
+        "assessments": {
+          "evidence": {
+            "blocking_gap_ids": [],
+            "decision": "contradicted",
+            "raw_verdict": "contradicted"
+          },
+          "world": {
+            "blocking_gap_ids": [],
+            "decision": "contradicted",
+            "raw_verdict": "contradicted"
+          }
+        },
+        "decision": "false",
+        "id": "p04",
+        "provenance_status": "original_material_located",
+        "round": 1
+      }
+    ],
+    "extraction": {
+      "basis_quote": "\"decision\": \"false\"",
+      "decision": "false",
+      "extractable": true
+    },
+    "extractor_answer_text": "{\"id\": \"p04\", \"assessment_mode\": \"evidence\", \"as_of\": \"2026-09-05T09:34:36Z\", \"decision\": \"false\", \"assessments\": {\"evidence\": {\"raw_verdict\": \"contradicted\", \"decision\": \"contradicted\", \"blocking_gap_ids\": []}, \"world\": {\"raw_verdict\": \"contradicted\", \"decision\": \"contradicted\", \"blocking_gap_ids\": []}}, \"provenance_status\": \"original_material_located\", \"assessment_valid\": true, \"stop_reason\": \"complete\"}",
+    "id": "p04",
+    "native_prediction": {
+      "as_of": "2026-09-05T09:34:36Z",
+      "assessment_mode": "evidence",
+      "assessment_valid": true,
+      "assessments": {
+        "evidence": {
+          "blocking_gap_ids": [],
+          "decision": "contradicted",
+          "raw_verdict": "contradicted"
+        },
+        "world": {
+          "blocking_gap_ids": [],
+          "decision": "contradicted",
+          "raw_verdict": "contradicted"
+        }
+      },
+      "decision": "false",
+      "id": "p04",
+      "provenance_status": "original_material_located",
+      "stop_reason": "complete"
+    },
+    "prediction": {
+      "assessment_valid": true,
+      "decision": "false",
+      "edges": [],
+      "edges_evaluable": true,
+      "origin_evaluable": true,
+      "origins": [
+        "m07"
+      ],
+      "provenance_evaluable": true,
+      "provenance_status": "original_material_located"
+    },
+    "prefix_usage": {
+      "input_tokens": 5478,
+      "model_calls": 3,
+      "output_tokens": 6192,
+      "seconds": 94.8158274219968
+    },
+    "state_sha256": "955a2f0425ef9cdb2d60f7a6dc9a013e05f9e398b01e8183712a0a53dc6c3f78",
+    "status": "completed",
+    "usage": {
+      "input_tokens": 5909,
+      "model_calls": 4,
+      "output_tokens": 6218,
+      "seconds": 96.17442510100227
+    }
+  },
+  {
+    "actual_new_api_usage": {
+      "input_tokens": 4733,
+      "model_calls": 3,
+      "output_tokens": 2160
+    },
+    "arm": "loop_frozen",
+    "assessment_mode": "evidence",
+    "checkpoints": [
+      {
+        "assessment_mode": "evidence",
+        "assessments": {
+          "evidence": {
+            "blocking_gap_ids": [],
+            "decision": "contradicted",
+            "raw_verdict": "contradicted"
+          },
+          "world": {
+            "blocking_gap_ids": [],
+            "decision": "contradicted",
+            "raw_verdict": "contradicted"
+          }
+        },
+        "decision": "false",
+        "id": "p04",
+        "provenance_status": "original_material_located",
+        "round": 1
+      },
+      {
+        "assessment_mode": "evidence",
+        "assessments": {
+          "evidence": {
+            "blocking_gap_ids": [],
+            "decision": "contradicted",
+            "raw_verdict": "contradicted"
+          },
+          "world": {
+            "blocking_gap_ids": [],
+            "decision": "contradicted",
+            "raw_verdict": "contradicted"
+          }
+        },
+        "decision": "false",
+        "id": "p04",
+        "provenance_status": "original_material_located",
+        "round": 2
+      },
+      {
+        "assessment_mode": "evidence",
+        "assessments": {
+          "evidence": {
+            "blocking_gap_ids": [],
+            "decision": "contradicted",
+            "raw_verdict": "contradicted"
+          },
+          "world": {
+            "blocking_gap_ids": [],
+            "decision": "contradicted",
+            "raw_verdict": "contradicted"
+          }
+        },
+        "decision": "false",
+        "id": "p04",
+        "provenance_status": "original_material_located",
+        "round": 3
+      }
+    ],
+    "extraction": {
+      "basis_quote": "\"decision\": \"false\"",
+      "decision": "false",
+      "extractable": true
+    },
+    "extractor_answer_text": "{\"id\": \"p04\", \"assessment_mode\": \"evidence\", \"as_of\": \"2026-09-05T09:34:36Z\", \"decision\": \"false\", \"assessments\": {\"evidence\": {\"raw_verdict\": \"contradicted\", \"decision\": \"contradicted\", \"blocking_gap_ids\": []}, \"world\": {\"raw_verdict\": \"contradicted\", \"decision\": \"contradicted\", \"blocking_gap_ids\": []}}, \"provenance_status\": \"original_material_located\", \"assessment_valid\": true, \"stop_reason\": \"round_budget\"}",
+    "frozen_psi_adapter_returns": 4,
+    "id": "p04",
+    "native_prediction": {
+      "as_of": "2026-09-05T09:34:36Z",
+      "assessment_mode": "evidence",
+      "assessment_valid": true,
+      "assessments": {
+        "evidence": {
+          "blocking_gap_ids": [],
+          "decision": "contradicted",
+          "raw_verdict": "contradicted"
+        },
+        "world": {
+          "blocking_gap_ids": [],
+          "decision": "contradicted",
+          "raw_verdict": "contradicted"
+        }
+      },
+      "decision": "false",
+      "id": "p04",
+      "provenance_status": "original_material_located",
+      "stop_reason": "round_budget"
+    },
+    "prediction": {
+      "assessment_valid": true,
+      "decision": "false",
+      "edges": [],
+      "edges_evaluable": true,
+      "origin_evaluable": true,
+      "origins": [
+        "m07"
+      ],
+      "provenance_evaluable": true,
+      "provenance_status": "original_material_located"
+    },
+    "prefix_usage": {
+      "input_tokens": 5478,
+      "model_calls": 3,
+      "output_tokens": 6192,
+      "seconds": 94.8158274219968
+    },
+    "shared_state_sha256": "955a2f0425ef9cdb2d60f7a6dc9a013e05f9e398b01e8183712a0a53dc6c3f78",
+    "status": "completed",
+    "usage": {
+      "input_tokens": 10211,
+      "model_calls": 6,
+      "output_tokens": 8352,
+      "seconds": 136.78391443899454
+    }
+  },
+  {
+    "actual_new_api_usage": {
+      "input_tokens": 18855,
+      "model_calls": 7,
+      "output_tokens": 9167
+    },
+    "arm": "loop_psi",
+    "assessment_mode": "evidence",
+    "checkpoints": [
+      {
+        "assessment_mode": "evidence",
+        "assessments": {
+          "evidence": {
+            "blocking_gap_ids": [],
+            "decision": "contradicted",
+            "raw_verdict": "contradicted"
+          },
+          "world": {
+            "blocking_gap_ids": [],
+            "decision": "contradicted",
+            "raw_verdict": "contradicted"
+          }
+        },
+        "decision": "false",
+        "id": "p04",
+        "provenance_status": "original_material_located",
+        "round": 1
+      },
+      {
+        "assessment_mode": "evidence",
+        "assessments": {
+          "evidence": {
+            "blocking_gap_ids": [],
+            "decision": "contradicted",
+            "raw_verdict": "contradicted"
+          },
+          "world": {
+            "blocking_gap_ids": [],
+            "decision": "contradicted",
+            "raw_verdict": "contradicted"
+          }
+        },
+        "decision": "false",
+        "id": "p04",
+        "provenance_status": "partial",
+        "round": 2
+      },
+      {
+        "assessment_mode": "evidence",
+        "assessments": {
+          "evidence": {
+            "blocking_gap_ids": [],
+            "decision": "contradicted",
+            "raw_verdict": "contradicted"
+          },
+          "world": {
+            "blocking_gap_ids": [],
+            "decision": "contradicted",
+            "raw_verdict": "contradicted"
+          }
+        },
+        "decision": "false",
+        "id": "p04",
+        "provenance_status": "partial",
+        "round": 3
+      }
+    ],
+    "extraction": {
+      "basis_quote": "\"decision\": \"false\"",
+      "decision": "false",
+      "extractable": true
+    },
+    "extractor_answer_text": "{\"id\": \"p04\", \"assessment_mode\": \"evidence\", \"as_of\": \"2026-09-05T09:34:36Z\", \"decision\": \"false\", \"assessments\": {\"evidence\": {\"raw_verdict\": \"contradicted\", \"decision\": \"contradicted\", \"blocking_gap_ids\": []}, \"world\": {\"raw_verdict\": \"contradicted\", \"decision\": \"contradicted\", \"blocking_gap_ids\": []}}, \"provenance_status\": \"partial\", \"assessment_valid\": true, \"stop_reason\": \"round_budget\"}",
+    "frozen_psi_adapter_returns": 0,
+    "id": "p04",
+    "native_prediction": {
+      "as_of": "2026-09-05T09:34:36Z",
+      "assessment_mode": "evidence",
+      "assessment_valid": true,
+      "assessments": {
+        "evidence": {
+          "blocking_gap_ids": [],
+          "decision": "contradicted",
+          "raw_verdict": "contradicted"
+        },
+        "world": {
+          "blocking_gap_ids": [],
+          "decision": "contradicted",
+          "raw_verdict": "contradicted"
+        }
+      },
+      "decision": "false",
+      "id": "p04",
+      "provenance_status": "partial",
+      "stop_reason": "round_budget"
+    },
+    "prediction": {
+      "assessment_valid": true,
+      "decision": "false",
+      "edges": [],
+      "edges_evaluable": true,
+      "origin_evaluable": true,
+      "origins": [],
+      "provenance_evaluable": true,
+      "provenance_status": "partial"
+    },
+    "prefix_usage": {
+      "input_tokens": 5478,
+      "model_calls": 3,
+      "output_tokens": 6192,
+      "seconds": 94.8158274219968
+    },
+    "shared_state_sha256": "955a2f0425ef9cdb2d60f7a6dc9a013e05f9e398b01e8183712a0a53dc6c3f78",
+    "status": "completed",
+    "usage": {
+      "input_tokens": 24333,
+      "model_calls": 10,
+      "output_tokens": 15359,
+      "seconds": 235.3092521459912
+    }
+  },
+  {
+    "actual_new_api_usage": {
+      "input_tokens": 3749,
+      "model_calls": 2,
+      "output_tokens": 4840
+    },
+    "arm": "independent",
+    "assessment_mode": "evidence",
+    "error_type": "ValueError",
+    "id": "p04",
+    "prediction": null,
+    "prefix_usage": {
+      "input_tokens": 5478,
+      "model_calls": 3,
+      "output_tokens": 6192,
+      "seconds": 94.8158274219968
+    },
+    "shared_state_sha256": "955a2f0425ef9cdb2d60f7a6dc9a013e05f9e398b01e8183712a0a53dc6c3f78",
+    "status": "error",
+    "usage": {
+      "input_tokens": 9227,
+      "model_calls": 5,
+      "output_tokens": 11032,
+      "seconds": 161.25273803299933
+    }
+  },
+  {
+    "actual_new_api_usage": {
+      "input_tokens": 8348,
+      "model_calls": 11,
+      "output_tokens": 6192
+    },
+    "arm": "original",
+    "assessment_mode": "evidence",
+    "error_type": "RuntimeError",
+    "id": "p05",
+    "prediction": null,
+    "status": "error",
+    "usage": {
+      "input_tokens": 8348,
+      "model_calls": 11,
+      "output_tokens": 6192,
+      "seconds": 102.9937370330008
+    }
+  },
+  {
+    "actual_new_api_usage": {
+      "input_tokens": 1734,
+      "model_calls": 1,
+      "output_tokens": 2500
+    },
+    "arm": "single",
+    "assessment_mode": "evidence",
+    "error_type": "ValueError",
+    "id": "p05",
+    "prediction": null,
+    "status": "error",
+    "usage": {
+      "input_tokens": 1734,
+      "model_calls": 1,
+      "output_tokens": 2500,
+      "seconds": 39.13466652599891
+    }
+  },
+  {
+    "accounting_adjustment": {
+      "inherited_usage": {
+        "input_tokens": 1734,
+        "model_calls": 1,
+        "output_tokens": 2500,
+        "seconds": 39.13466652599891
+      },
+      "kind": "inherit_failed_single_prefix_logical_usage_v1",
+      "source_arm": "single",
+      "source_id": "p05"
+    },
+    "actual_new_api_usage": {
+      "input_tokens": 0,
+      "model_calls": 0,
+      "output_tokens": 0
+    },
+    "arm": "loop_psi",
+    "assessment_mode": "evidence",
+    "error_type": "InvalidSharedPrefix",
+    "id": "p05",
+    "prediction": null,
+    "status": "error",
+    "usage": {
+      "input_tokens": 1734,
+      "model_calls": 1,
+      "output_tokens": 2500,
+      "seconds": 39.13466652599891
+    }
+  },
+  {
+    "accounting_adjustment": {
+      "inherited_usage": {
+        "input_tokens": 1734,
+        "model_calls": 1,
+        "output_tokens": 2500,
+        "seconds": 39.13466652599891
+      },
+      "kind": "inherit_failed_single_prefix_logical_usage_v1",
+      "source_arm": "single",
+      "source_id": "p05"
+    },
+    "actual_new_api_usage": {
+      "input_tokens": 0,
+      "model_calls": 0,
+      "output_tokens": 0
+    },
+    "arm": "loop_frozen",
+    "assessment_mode": "evidence",
+    "error_type": "InvalidSharedPrefix",
+    "id": "p05",
+    "prediction": null,
+    "status": "error",
+    "usage": {
+      "input_tokens": 1734,
+      "model_calls": 1,
+      "output_tokens": 2500,
+      "seconds": 39.13466652599891
+    }
+  },
+  {
+    "accounting_adjustment": {
+      "inherited_usage": {
+        "input_tokens": 1734,
+        "model_calls": 1,
+        "output_tokens": 2500,
+        "seconds": 39.13466652599891
+      },
+      "kind": "inherit_failed_single_prefix_logical_usage_v1",
+      "source_arm": "single",
+      "source_id": "p05"
+    },
+    "actual_new_api_usage": {
+      "input_tokens": 0,
+      "model_calls": 0,
+      "output_tokens": 0
+    },
+    "arm": "independent",
+    "assessment_mode": "evidence",
+    "error_type": "InvalidSharedPrefix",
+    "id": "p05",
+    "prediction": null,
+    "status": "error",
+    "usage": {
+      "input_tokens": 1734,
+      "model_calls": 1,
+      "output_tokens": 2500,
+      "seconds": 39.13466652599891
+    }
+  }
+]

@@ -35,3 +35,15 @@ citations, dates, roots and uncertainty. Formal testing needs new event-disjoint
 cases and preregistered comparisons, metrics, minimum useful effect, budget and
 sample size. The scorer's assumption-based planning output helps scope that work;
 a perfect small pilot does not establish superiority.
+# Completed pilot and subsequent corrections
+
+Read [PROOF_PILOT_RESULTS.md](../reports/PROOF_PILOT_RESULTS.md) before running a
+larger experiment. Pilot 01 failed the practical execution gate: only one of
+eight Accuracy prefixes completed. The frozen inference code is retained under
+`reports/proof-pilot-01/executed-code/`; the preregistration commit and immutable
+file hashes identify the exact configuration used. Current code includes later
+scoring, cost-accounting, diagnostic and complete-replacement prompt corrections.
+Those changes have offline validation only; do not attribute them to pilot 01's
+live results. For any new run, create a new manifest and output directory rather
+than replacing the old protocol, gold, inputs or outputs. Treat these eight cases
+as development data and use new human-reviewed events for confirmatory claims.

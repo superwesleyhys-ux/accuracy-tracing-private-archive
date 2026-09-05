@@ -1,0 +1,134 @@
+{
+  "schema_version": "0.3",
+  "scope": "plugin-supplied semantic analyses; no built-in truth oracle",
+  "target": {
+    "id": "p05",
+    "text": "Ingenuity was upright at the moment it touched down during its January 18, 2024 flight.",
+    "as_of": "2026-09-05T09:34:36Z",
+    "source_version_id": "m09",
+    "assessment_mode": "evidence",
+    "evidence_scope": [
+      "m09"
+    ]
+  },
+  "config": {
+    "max_rounds": 1,
+    "max_documents": 24,
+    "max_decomposition_calls": 36,
+    "experimental_force_rounds": false
+  },
+  "provenance_status": "unresolved",
+  "fact_status": "unresolved",
+  "stop_reason": "decomposer_error",
+  "usage": {
+    "rounds": 1,
+    "documents": 1,
+    "unique_versions": 1,
+    "decomposition_calls": 1,
+    "verification_calls": 0
+  },
+  "decision_status": "unresolved",
+  "assessments": null,
+  "assessment_valid": false,
+  "materials": [
+    {
+      "version_id": "m09",
+      "url": "https://www.nasa.gov/news-release/after-three-years-on-mars-nasas-ingenuity-helicopter-mission-ends/",
+      "content": "After Three Years on Mars, NASA’s Ingenuity Helicopter Mission Ends\nPublication date: 2024-01-25\n\nNASA’s history-making Ingenuity Mars Helicopter has ended its mission at the Red Planet after surpassing expectations and making dozens more flights than planned. While the helicopter remains upright and in communication with ground controllers, imagery of its Jan. 18 flight sent to Earth this week indicates one or more of its rotor blades sustained damage during landing, and it is no longer capable of flight.\n\nHowever, about 3 feet (1 meter) above the surface, Ingenuity lost contact with the rover, which serves as a communications relay for the rotorcraft. The following day, communications were reestablished and more information about the flight was relayed to ground controllers at NASA JPL. Imagery revealing damage to the rotor blade arrived several days later. The cause of the communications dropout and the helicopter’s orientation at time of touchdown are still being investigated.",
+      "retrieved_at": "2026-09-05T09:34:36Z",
+      "published_at": null,
+      "available_at": "2026-09-05T09:34:36Z",
+      "availability_basis": "Current web-tool collection completed at retrieved_at on 2026-09-05. The supplied material is a selected, whitespace-normalized excerpt, not a full page or historical exact-version capture. Availability is asserted only at collection completion. The source's displayed publication date is preserved in content; no exact timezone-qualified publication instant is known.",
+      "issuer": "NASA Headquarters"
+    }
+  ],
+  "eligible_version_ids": [],
+  "observations": [
+    {
+      "version_id": "m09",
+      "retrieved_at": "2026-09-05T09:34:36Z",
+      "duplicate": false,
+      "eligible": true,
+      "reasons": []
+    }
+  ],
+  "analyses": {},
+  "analysis_history": [],
+  "fragments": [],
+  "relations": [],
+  "origins": [],
+  "gaps": [
+    {
+      "id": "origin:p05",
+      "question": "Find the producing record and evidenced lineage for: Ingenuity was upright at the moment it touched down during its January 18, 2024 flight.",
+      "stage": "provenance",
+      "dimension": "auto",
+      "blocking": true,
+      "target_id": null,
+      "basis": [],
+      "decision_impact": "",
+      "action": "search",
+      "locator": null
+    }
+  ],
+  "resolutions": [],
+  "verification_history": [],
+  "operations": [
+    {
+      "sequence": 1,
+      "round": 1,
+      "action": "search",
+      "tasks": [
+        {
+          "id": "origin:p05",
+          "question": "Find the producing record and evidenced lineage for: Ingenuity was upright at the moment it touched down during its January 18, 2024 flight.",
+          "stage": "provenance",
+          "dimension": "auto",
+          "blocking": true,
+          "target_id": null,
+          "basis": [],
+          "decision_impact": "",
+          "action": "search",
+          "locator": null
+        }
+      ],
+      "limit": 24
+    },
+    {
+      "sequence": 2,
+      "round": 1,
+      "action": "snapshot_saved",
+      "version_id": "m09",
+      "sha256": "88daa87858f24c87dbf3a67f2ac8fea6e63173214ca55721bf539d8fcf2c3e2a",
+      "eligible": true
+    },
+    {
+      "sequence": 3,
+      "round": 1,
+      "action": "decompose_started",
+      "version_id": "m09",
+      "duplicate": false,
+      "revisit": false
+    },
+    {
+      "sequence": 4,
+      "round": 1,
+      "action": "error",
+      "stage": "decomposer",
+      "message": "Model call failed: RuntimeError"
+    },
+    {
+      "sequence": 5,
+      "round": 1,
+      "action": "stopped",
+      "reason": "decomposer_error"
+    }
+  ],
+  "errors": [
+    {
+      "stage": "decomposer",
+      "type": "RuntimeError",
+      "message": "Model call failed: RuntimeError"
+    }
+  ]
+}

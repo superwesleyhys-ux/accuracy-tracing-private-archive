@@ -1,0 +1,655 @@
+{
+  "annotation_status_counts": {
+    "provisional_ai_review_required": 8
+  },
+  "arms": {
+    "independent": {
+      "completed": 0,
+      "completion_rate": 0.0,
+      "confusion_among_completed": [],
+      "correct": 0,
+      "edges": {
+        "evaluable_cases": 0,
+        "excluded_cases": 8,
+        "exclusions": {
+          "execution_error": 4,
+          "gold_not_evaluable_or_unknown": 4
+        },
+        "gold_edges": 0,
+        "matched_predictions": 0,
+        "precision": null,
+        "predicted_items": 0,
+        "recall": null,
+        "recall_definition": "micro recall over known exhaustive excerpt-level edge sets",
+        "recall_denominator": 0,
+        "scope": "corpus-relative, restricted to explicitly evaluable material"
+      },
+      "error_predictions_ignored": 0,
+      "error_types": {
+        "InvalidSharedPrefix": 7,
+        "ValueError": 1
+      },
+      "execution_errors": 8,
+      "label_accuracy_among_completed": null,
+      "label_accuracy_among_completed_denominator": 0,
+      "label_evaluable_cases": 8,
+      "label_gold_excluded": 0,
+      "nonabstaining_coverage_among_completed": null,
+      "nonabstaining_coverage_of_scheduled": 0.0,
+      "nonabstaining_predictions": 0,
+      "origins": {
+        "cases_with_acceptable_origin": 0,
+        "evaluable_cases": 0,
+        "excluded_cases": 8,
+        "exclusions": {
+          "execution_error": 3,
+          "gold_not_evaluable_or_unknown": 5
+        },
+        "matched_predictions": 0,
+        "metric": "corpus-relative documentary-root accuracy",
+        "precision": null,
+        "predicted_items": 0,
+        "recall": null,
+        "recall_definition": "fraction of evaluable cases with at least one acceptable origin; gold origins are alternatives",
+        "recall_denominator": 0,
+        "scope": "corpus-relative, restricted to explicitly evaluable material"
+      },
+      "overall_task_success": 0.0,
+      "overall_task_success_definition": "correct completed labels / all label-evaluable scheduled cases; execution errors are task failures",
+      "overall_task_success_denominator": 8,
+      "scheduled_cases": 8,
+      "semantic_errors_among_completed": 0,
+      "unverifiable_predictions": 0,
+      "unverifiable_rate_among_completed": null,
+      "usage_mean_per_scheduled_case": {
+        "input_tokens": 3523.25,
+        "model_calls": 1.875,
+        "output_tokens": 4373.75,
+        "seconds": 66.78691771250033
+      },
+      "usage_total": {
+        "input_tokens": 28186,
+        "model_calls": 15,
+        "output_tokens": 34990,
+        "seconds": 534.2953417000026
+      }
+    },
+    "loop_frozen": {
+      "completed": 1,
+      "completion_rate": 0.125,
+      "confusion_among_completed": [
+        {
+          "count": 1,
+          "gold": "false",
+          "prediction": "false"
+        }
+      ],
+      "correct": 1,
+      "edges": {
+        "evaluable_cases": 0,
+        "excluded_cases": 8,
+        "exclusions": {
+          "execution_error": 4,
+          "gold_not_evaluable_or_unknown": 4
+        },
+        "gold_edges": 0,
+        "matched_predictions": 0,
+        "precision": null,
+        "predicted_items": 0,
+        "recall": null,
+        "recall_definition": "micro recall over known exhaustive excerpt-level edge sets",
+        "recall_denominator": 0,
+        "scope": "corpus-relative, restricted to explicitly evaluable material"
+      },
+      "error_predictions_ignored": 0,
+      "error_types": {
+        "InvalidSharedPrefix": 7
+      },
+      "execution_errors": 7,
+      "label_accuracy_among_completed": 1.0,
+      "label_accuracy_among_completed_denominator": 1,
+      "label_evaluable_cases": 8,
+      "label_gold_excluded": 0,
+      "nonabstaining_coverage_among_completed": 1.0,
+      "nonabstaining_coverage_of_scheduled": 0.125,
+      "nonabstaining_predictions": 1,
+      "origins": {
+        "cases_with_acceptable_origin": 0,
+        "evaluable_cases": 0,
+        "excluded_cases": 8,
+        "exclusions": {
+          "execution_error": 3,
+          "gold_not_evaluable_or_unknown": 5
+        },
+        "matched_predictions": 0,
+        "metric": "corpus-relative documentary-root accuracy",
+        "precision": null,
+        "predicted_items": 0,
+        "recall": null,
+        "recall_definition": "fraction of evaluable cases with at least one acceptable origin; gold origins are alternatives",
+        "recall_denominator": 0,
+        "scope": "corpus-relative, restricted to explicitly evaluable material"
+      },
+      "overall_task_success": 0.125,
+      "overall_task_success_definition": "correct completed labels / all label-evaluable scheduled cases; execution errors are task failures",
+      "overall_task_success_denominator": 8,
+      "scheduled_cases": 8,
+      "semantic_errors_among_completed": 0,
+      "unverifiable_predictions": 0,
+      "unverifiable_rate_among_completed": 0.0,
+      "usage_mean_per_scheduled_case": {
+        "input_tokens": 3646.25,
+        "model_calls": 2.0,
+        "output_tokens": 4038.75,
+        "seconds": 63.72831476324973
+      },
+      "usage_total": {
+        "input_tokens": 29170,
+        "model_calls": 16,
+        "output_tokens": 32310,
+        "seconds": 509.8265181059978
+      }
+    },
+    "loop_psi": {
+      "completed": 1,
+      "completion_rate": 0.125,
+      "confusion_among_completed": [
+        {
+          "count": 1,
+          "gold": "false",
+          "prediction": "false"
+        }
+      ],
+      "correct": 1,
+      "edges": {
+        "evaluable_cases": 0,
+        "excluded_cases": 8,
+        "exclusions": {
+          "execution_error": 4,
+          "gold_not_evaluable_or_unknown": 4
+        },
+        "gold_edges": 0,
+        "matched_predictions": 0,
+        "precision": null,
+        "predicted_items": 0,
+        "recall": null,
+        "recall_definition": "micro recall over known exhaustive excerpt-level edge sets",
+        "recall_denominator": 0,
+        "scope": "corpus-relative, restricted to explicitly evaluable material"
+      },
+      "error_predictions_ignored": 0,
+      "error_types": {
+        "InvalidSharedPrefix": 7
+      },
+      "execution_errors": 7,
+      "label_accuracy_among_completed": 1.0,
+      "label_accuracy_among_completed_denominator": 1,
+      "label_evaluable_cases": 8,
+      "label_gold_excluded": 0,
+      "nonabstaining_coverage_among_completed": 1.0,
+      "nonabstaining_coverage_of_scheduled": 0.125,
+      "nonabstaining_predictions": 1,
+      "origins": {
+        "cases_with_acceptable_origin": 0,
+        "evaluable_cases": 0,
+        "excluded_cases": 8,
+        "exclusions": {
+          "execution_error": 3,
+          "gold_not_evaluable_or_unknown": 5
+        },
+        "matched_predictions": 0,
+        "metric": "corpus-relative documentary-root accuracy",
+        "precision": null,
+        "predicted_items": 0,
+        "recall": null,
+        "recall_definition": "fraction of evaluable cases with at least one acceptable origin; gold origins are alternatives",
+        "recall_denominator": 0,
+        "scope": "corpus-relative, restricted to explicitly evaluable material"
+      },
+      "overall_task_success": 0.125,
+      "overall_task_success_definition": "correct completed labels / all label-evaluable scheduled cases; execution errors are task failures",
+      "overall_task_success_denominator": 8,
+      "scheduled_cases": 8,
+      "semantic_errors_among_completed": 0,
+      "unverifiable_predictions": 0,
+      "unverifiable_rate_among_completed": 0.0,
+      "usage_mean_per_scheduled_case": {
+        "input_tokens": 5411.5,
+        "model_calls": 2.5,
+        "output_tokens": 4914.625,
+        "seconds": 76.04398197662431
+      },
+      "usage_total": {
+        "input_tokens": 43292,
+        "model_calls": 20,
+        "output_tokens": 39317,
+        "seconds": 608.3518558129945
+      }
+    },
+    "original": {
+      "completed": 7,
+      "completion_rate": 0.875,
+      "confusion_among_completed": [
+        {
+          "count": 3,
+          "gold": "false",
+          "prediction": "false"
+        },
+        {
+          "count": 3,
+          "gold": "true",
+          "prediction": "true"
+        },
+        {
+          "count": 1,
+          "gold": "unverifiable",
+          "prediction": "unverifiable"
+        }
+      ],
+      "correct": 7,
+      "edges": {
+        "evaluable_cases": 0,
+        "excluded_cases": 8,
+        "exclusions": {
+          "gold_not_evaluable_or_unknown": 4,
+          "prediction_dimension_not_evaluable": 4
+        },
+        "gold_edges": 0,
+        "matched_predictions": 0,
+        "precision": null,
+        "predicted_items": 0,
+        "recall": null,
+        "recall_definition": "micro recall over known exhaustive excerpt-level edge sets",
+        "recall_denominator": 0,
+        "scope": "corpus-relative, restricted to explicitly evaluable material"
+      },
+      "error_predictions_ignored": 0,
+      "error_types": {
+        "RuntimeError": 1
+      },
+      "execution_errors": 1,
+      "label_accuracy_among_completed": 1.0,
+      "label_accuracy_among_completed_denominator": 7,
+      "label_evaluable_cases": 8,
+      "label_gold_excluded": 0,
+      "nonabstaining_coverage_among_completed": 0.8571428571428571,
+      "nonabstaining_coverage_of_scheduled": 0.75,
+      "nonabstaining_predictions": 6,
+      "origins": {
+        "cases_with_acceptable_origin": 3,
+        "evaluable_cases": 3,
+        "excluded_cases": 5,
+        "exclusions": {
+          "gold_not_evaluable_or_unknown": 5
+        },
+        "matched_predictions": 3,
+        "metric": "corpus-relative documentary-root accuracy",
+        "precision": 0.75,
+        "predicted_items": 4,
+        "recall": 1.0,
+        "recall_definition": "fraction of evaluable cases with at least one acceptable origin; gold origins are alternatives",
+        "recall_denominator": 3,
+        "scope": "corpus-relative, restricted to explicitly evaluable material"
+      },
+      "overall_task_success": 0.875,
+      "overall_task_success_definition": "correct completed labels / all label-evaluable scheduled cases; execution errors are task failures",
+      "overall_task_success_denominator": 8,
+      "scheduled_cases": 8,
+      "semantic_errors_among_completed": 0,
+      "unverifiable_predictions": 1,
+      "unverifiable_rate_among_completed": 0.14285714285714285,
+      "usage_mean_per_scheduled_case": {
+        "input_tokens": 21913.125,
+        "model_calls": 16.25,
+        "output_tokens": 10486.625,
+        "seconds": 171.7285876293763
+      },
+      "usage_total": {
+        "input_tokens": 175305,
+        "model_calls": 130,
+        "output_tokens": 83893,
+        "seconds": 1373.8287010350105
+      }
+    },
+    "single": {
+      "completed": 1,
+      "completion_rate": 0.125,
+      "confusion_among_completed": [
+        {
+          "count": 1,
+          "gold": "false",
+          "prediction": "false"
+        }
+      ],
+      "correct": 1,
+      "edges": {
+        "evaluable_cases": 0,
+        "excluded_cases": 8,
+        "exclusions": {
+          "execution_error": 4,
+          "gold_not_evaluable_or_unknown": 4
+        },
+        "gold_edges": 0,
+        "matched_predictions": 0,
+        "precision": null,
+        "predicted_items": 0,
+        "recall": null,
+        "recall_definition": "micro recall over known exhaustive excerpt-level edge sets",
+        "recall_denominator": 0,
+        "scope": "corpus-relative, restricted to explicitly evaluable material"
+      },
+      "error_predictions_ignored": 0,
+      "error_types": {
+        "ValueError": 7
+      },
+      "execution_errors": 7,
+      "label_accuracy_among_completed": 1.0,
+      "label_accuracy_among_completed_denominator": 1,
+      "label_evaluable_cases": 8,
+      "label_gold_excluded": 0,
+      "nonabstaining_coverage_among_completed": 1.0,
+      "nonabstaining_coverage_of_scheduled": 0.125,
+      "nonabstaining_predictions": 1,
+      "origins": {
+        "cases_with_acceptable_origin": 0,
+        "evaluable_cases": 0,
+        "excluded_cases": 8,
+        "exclusions": {
+          "execution_error": 3,
+          "gold_not_evaluable_or_unknown": 5
+        },
+        "matched_predictions": 0,
+        "metric": "corpus-relative documentary-root accuracy",
+        "precision": null,
+        "predicted_items": 0,
+        "recall": null,
+        "recall_definition": "fraction of evaluable cases with at least one acceptable origin; gold origins are alternatives",
+        "recall_denominator": 0,
+        "scope": "corpus-relative, restricted to explicitly evaluable material"
+      },
+      "overall_task_success": 0.125,
+      "overall_task_success_definition": "correct completed labels / all label-evaluable scheduled cases; execution errors are task failures",
+      "overall_task_success_denominator": 8,
+      "scheduled_cases": 8,
+      "semantic_errors_among_completed": 0,
+      "unverifiable_predictions": 0,
+      "unverifiable_rate_among_completed": 0.0,
+      "usage_mean_per_scheduled_case": {
+        "input_tokens": 3108.5,
+        "model_calls": 1.75,
+        "output_tokens": 3772.0,
+        "seconds": 58.65212859600069
+      },
+      "usage_total": {
+        "input_tokens": 24868,
+        "model_calls": 14,
+        "output_tokens": 30176,
+        "seconds": 469.21702876800555
+      }
+    }
+  },
+  "assessment_mode": "mixed",
+  "assessment_mode_case_counts": {
+    "evidence": 7,
+    "world": 1
+  },
+  "conclusion": "pilot_only_no_proof_of_realworld_accuracy_improvement",
+  "contrasts": {
+    "loop_psi_vs_independent": {
+      "baseline": "independent",
+      "candidate": "loop_psi",
+      "case_pairs": 8,
+      "case_task_success_pairs": {
+        "both_successful": 0,
+        "both_unsuccessful": 7,
+        "breaks": 0,
+        "fixes": 1
+      },
+      "cautions": [
+        "Few independent events: bootstrap coverage and power are unreliable; this pilot cannot establish a small real-world improvement."
+      ],
+      "completion_recoveries": 1,
+      "completion_regressions": 0,
+      "event_binary_definition": "an event succeeds only when every label-evaluable case completes with its correct label",
+      "event_binary_pairs": {
+        "both_successful": 0,
+        "both_unsuccessful": 7,
+        "breaks": 0,
+        "fixes": 1
+      },
+      "event_task_success_delta": 0.125,
+      "exact_mcnemar": {
+        "alpha": 0.05,
+        "discordant_events": 1,
+        "independent_event_pairs": 8,
+        "multiplicity": "primary contrast fixed in advance; secondary p-values descriptive and unadjusted",
+        "null": "fix and break probabilities are equal",
+        "two_sided_p": 1.0,
+        "zero_discordance": false
+      },
+      "independent_events": 8,
+      "overall_task_success_delta": {
+        "bootstrap_samples": 10000,
+        "case_pairs": 8,
+        "ci95": [
+          0.0,
+          0.375
+        ],
+        "degenerate": false,
+        "delta": 0.125,
+        "independent_events": 8,
+        "method": "percentile bootstrap resampling whole event clusters",
+        "reason": null,
+        "seed": 2026
+      },
+      "paired_completed_label_accuracy_delta": {
+        "bootstrap_samples": 10000,
+        "case_pairs": 0,
+        "ci95": null,
+        "degenerate": true,
+        "delta": null,
+        "independent_events": 0,
+        "method": "percentile bootstrap resampling whole event clusters",
+        "reason": "fewer_than_two_independent_events",
+        "seed": 2026
+      },
+      "paired_completed_label_note": "Includes only cases completed by both arms; selection can differ from fixed-denominator task success.",
+      "paired_completed_semantic_pairs": {
+        "both_successful": 0,
+        "both_unsuccessful": 0,
+        "breaks": 0,
+        "fixes": 0
+      },
+      "role": "preregistered_exploratory_secondary"
+    },
+    "loop_psi_vs_loop_frozen": {
+      "baseline": "loop_frozen",
+      "candidate": "loop_psi",
+      "case_pairs": 8,
+      "case_task_success_pairs": {
+        "both_successful": 1,
+        "both_unsuccessful": 7,
+        "breaks": 0,
+        "fixes": 0
+      },
+      "cautions": [
+        "Zero discordant event outcomes: p=1 is not evidence of equivalence; no pilot-fitted sample-size estimate is available.",
+        "Few independent events: bootstrap coverage and power are unreliable; this pilot cannot establish a small real-world improvement."
+      ],
+      "completion_recoveries": 0,
+      "completion_regressions": 0,
+      "event_binary_definition": "an event succeeds only when every label-evaluable case completes with its correct label",
+      "event_binary_pairs": {
+        "both_successful": 1,
+        "both_unsuccessful": 7,
+        "breaks": 0,
+        "fixes": 0
+      },
+      "event_task_success_delta": 0.0,
+      "exact_mcnemar": {
+        "alpha": 0.05,
+        "discordant_events": 0,
+        "independent_event_pairs": 8,
+        "multiplicity": "primary contrast fixed in advance; secondary p-values descriptive and unadjusted",
+        "null": "fix and break probabilities are equal",
+        "two_sided_p": 1.0,
+        "zero_discordance": true
+      },
+      "independent_events": 8,
+      "overall_task_success_delta": {
+        "bootstrap_samples": 10000,
+        "case_pairs": 8,
+        "ci95": null,
+        "degenerate": true,
+        "delta": 0.0,
+        "independent_events": 8,
+        "method": "percentile bootstrap resampling whole event clusters",
+        "reason": "zero_discordant_case_pairs",
+        "seed": 2026
+      },
+      "paired_completed_label_accuracy_delta": {
+        "bootstrap_samples": 10000,
+        "case_pairs": 1,
+        "ci95": null,
+        "degenerate": true,
+        "delta": 0.0,
+        "independent_events": 1,
+        "method": "percentile bootstrap resampling whole event clusters",
+        "reason": "fewer_than_two_independent_events",
+        "seed": 2026
+      },
+      "paired_completed_label_note": "Includes only cases completed by both arms; selection can differ from fixed-denominator task success.",
+      "paired_completed_semantic_pairs": {
+        "both_successful": 1,
+        "both_unsuccessful": 0,
+        "breaks": 0,
+        "fixes": 0
+      },
+      "role": "preregistered_exploratory_secondary"
+    },
+    "loop_psi_vs_single": {
+      "baseline": "single",
+      "candidate": "loop_psi",
+      "case_pairs": 8,
+      "case_task_success_pairs": {
+        "both_successful": 1,
+        "both_unsuccessful": 7,
+        "breaks": 0,
+        "fixes": 0
+      },
+      "cautions": [
+        "Zero discordant event outcomes: p=1 is not evidence of equivalence; no pilot-fitted sample-size estimate is available.",
+        "Few independent events: bootstrap coverage and power are unreliable; this pilot cannot establish a small real-world improvement."
+      ],
+      "completion_recoveries": 0,
+      "completion_regressions": 0,
+      "event_binary_definition": "an event succeeds only when every label-evaluable case completes with its correct label",
+      "event_binary_pairs": {
+        "both_successful": 1,
+        "both_unsuccessful": 7,
+        "breaks": 0,
+        "fixes": 0
+      },
+      "event_task_success_delta": 0.0,
+      "exact_mcnemar": {
+        "alpha": 0.05,
+        "discordant_events": 0,
+        "independent_event_pairs": 8,
+        "multiplicity": "primary contrast fixed in advance; secondary p-values descriptive and unadjusted",
+        "null": "fix and break probabilities are equal",
+        "two_sided_p": 1.0,
+        "zero_discordance": true
+      },
+      "independent_events": 8,
+      "overall_task_success_delta": {
+        "bootstrap_samples": 10000,
+        "case_pairs": 8,
+        "ci95": null,
+        "degenerate": true,
+        "delta": 0.0,
+        "independent_events": 8,
+        "method": "percentile bootstrap resampling whole event clusters",
+        "reason": "zero_discordant_case_pairs",
+        "seed": 2026
+      },
+      "paired_completed_label_accuracy_delta": {
+        "bootstrap_samples": 10000,
+        "case_pairs": 1,
+        "ci95": null,
+        "degenerate": true,
+        "delta": 0.0,
+        "independent_events": 1,
+        "method": "percentile bootstrap resampling whole event clusters",
+        "reason": "fewer_than_two_independent_events",
+        "seed": 2026
+      },
+      "paired_completed_label_note": "Includes only cases completed by both arms; selection can differ from fixed-denominator task success.",
+      "paired_completed_semantic_pairs": {
+        "both_successful": 1,
+        "both_unsuccessful": 0,
+        "breaks": 0,
+        "fixes": 0
+      },
+      "role": "preregistered_primary"
+    }
+  },
+  "gold_status": "provisional_or_incomplete_requires_human_review",
+  "independent_events": 8,
+  "interpretation": [
+    "Assessment modes must agree within each case. Aggregate metrics combine the per-case modes shown in assessment_mode_case_counts.",
+    "Every arm has the same scheduled denominator; explicit execution errors never become false labels or unverifiable predictions.",
+    "Unknown or explicitly non-evaluable gold dimensions are excluded and counted; provenance omissions do not alter label scoring.",
+    "An unverifiable prediction is a completed abstention and can be correct when the gold label is unverifiable.",
+    "Origin recall accepts any listed documentary origin. This evaluates the supplied corpus, not the globally earliest publisher.",
+    "Primary comparison is loop_psi versus single; comparisons against loop_frozen and independent are exploratory. Do not select the best comparison and claim confirmatory significance.",
+    "Confidence intervals and p-values assume independent sampled events and valid gold. A small convenience sample with provisional AI gold cannot establish population accuracy.",
+    "Planning estimates use assumed discordance scenarios, not observed pilot effect sizes, and are not proof or a guaranteed sample size."
+  ],
+  "power_planning": {
+    "formula": "ceil((z_(1-alpha/2)*sqrt(q) + z_power*sqrt(q-delta^2))^2/delta^2)",
+    "minimum_worthwhile_delta": 0.03,
+    "notes": [
+      "q is an assumed probability of discordant paired event outcomes, not estimated from this pilot.",
+      "The estimates omit continuity correction, attrition, and multiplicity adjustments; validate with exact calculations or simulation before a confirmatory study.",
+      "Units are independent events. Repeated probes do not create new independent events; a clustered case-level design needs separate planning.",
+      "Zero observed discordance gives no empirical sample-size estimate and does not establish equivalence."
+    ],
+    "scenarios": [
+      {
+        "approximate_independent_events": 260,
+        "assumed_break_probability": 0.0,
+        "assumed_discordance": 0.03,
+        "assumed_fix_probability": 0.03
+      },
+      {
+        "approximate_independent_events": 434,
+        "assumed_break_probability": 0.010000000000000002,
+        "assumed_discordance": 0.05,
+        "assumed_fix_probability": 0.04
+      },
+      {
+        "approximate_independent_events": 870,
+        "assumed_break_probability": 0.035,
+        "assumed_discordance": 0.1,
+        "assumed_fix_probability": 0.065
+      },
+      {
+        "approximate_independent_events": 1742,
+        "assumed_break_probability": 0.085,
+        "assumed_discordance": 0.2,
+        "assumed_fix_probability": 0.115
+      },
+      {
+        "approximate_independent_events": 3487,
+        "assumed_break_probability": 0.185,
+        "assumed_discordance": 0.4,
+        "assumed_fix_probability": 0.21500000000000002
+      }
+    ],
+    "status": "planning_approximations_not_proof_or_a_pilot_fitted_sample_size",
+    "target_power": 0.8,
+    "two_sided_alpha": 0.05
+  },
+  "scheduled_cases_per_arm": 8,
+  "schema_version": "proof-score-v1"
+}

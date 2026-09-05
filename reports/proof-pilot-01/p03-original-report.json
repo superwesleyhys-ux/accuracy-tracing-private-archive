@@ -1,0 +1,187 @@
+{
+  "event": {
+    "title": "m06 明确支持目标声明：NIST 的 FIPS 203 规定了 ML-KEM-512、ML-KEM-768 和 ML-KEM-1024 三组参数；世界真实性未独立核验，仍为未知。",
+    "date": "2024-08-13（文档标示的发布日期）",
+    "summary": "m06 声明 FIPS 203 规定了一种名为 ML-KEM 的密钥封装机制。\nm06 明确列出三组 ML-KEM 参数：ML-KEM-512、ML-KEM-768 和 ML-KEM-1024。\nm06 声明上述参数组按安全强度递增、性能递减的顺序排列。",
+    "sources": [],
+    "relation": "",
+    "causes": [
+      {
+        "title": "m06 明确列出 FIPS 203 的三组 ML-KEM 参数",
+        "date": "2024-08-13（文档标示发布日期）",
+        "summary": "m06 声明该标准规定名为 ML-KEM 的密钥封装机制，并明确列出 ML-KEM-512、ML-KEM-768 和 ML-KEM-1024 三组参数。该原文是“m06 支持目标声明”这一判断的直接依据；其安全强度递增、性能递减的说明进一步明确了列举顺序。",
+        "sources": [
+          {
+            "url": "https://csrc.nist.gov/pubs/fips/203/final",
+            "title": "NIST — FIPS 203: Module-Lattice-Based Key-Encapsulation Mechanism Standard（m06 快照）"
+          }
+        ],
+        "relation": "直接形成证据判断的依据，而非标准制定的历史诱因",
+        "causes": [],
+        "confidence": 1.0,
+        "grounded": true
+      }
+    ],
+    "confidence": 0.0,
+    "grounded": true
+  },
+  "direct_response": "m06明确支持原说法：NIST的FIPS 203规定三组参数，名称逐一为ML-KEM-512、ML-KEM-768、ML-KEM-1024，无须纠偏。文档标示2024-08-13发布，快照于2026-09-05采集；三组按安全递增、性能递减排列。判断依据是原文明列，世界真实性仍未知。未见来源冲突；m05未列参数且不在评估范围，不能算独立佐证。（基于2个信源、评估限1个 | 覆盖1类媒体 | 0条事实多源一致 | 0条存在分歧 | 因果锚定1/1）",
+  "credibility": {
+    "source_count": 2,
+    "source_types": [
+      "官方媒体"
+    ],
+    "consistent_count": 0,
+    "disputed_count": 0,
+    "grounding_rate": 1.0,
+    "grounded_count": 1,
+    "total_causal_nodes": 1
+  },
+  "event_timeline": [
+    {
+      "date": "2024-08-13（页面标示发布日期）",
+      "title": "NIST 新闻稿宣布发布首批三项最终版后量子加密标准",
+      "description": "NIST 新闻稿宣布发布首批三项最终版后量子加密标准。其中，FIPS 203 基于 CRYSTALS-Kyber 算法，新闻稿称该算法已更名为 ML-KEM。",
+      "significance": "重大",
+      "sources": [
+        {
+          "url": "https://www.nist.gov/news-events/news/2024/08/nist-releases-first-3-finalized-post-quantum-encryption-standards",
+          "title": "NIST — NIST Releases First 3 Finalized Post-Quantum Encryption Standards（m05）"
+        }
+      ],
+      "perspectives": [],
+      "verified": false,
+      "causal_links": []
+    },
+    {
+      "date": "2024-08-13（文档标示发布日期）",
+      "title": "FIPS 203 明确规定三组 ML-KEM 参数",
+      "description": "FIPS 203 规定名为 ML-KEM 的密钥封装机制，并列出 ML-KEM-512、ML-KEM-768 和 ML-KEM-1024 三组参数。文档说明，这些参数按安全强度递增、性能递减的顺序排列。",
+      "significance": "重要",
+      "sources": [
+        {
+          "url": "https://csrc.nist.gov/pubs/fips/203/final",
+          "title": "NIST — FIPS 203: Module-Lattice-Based Key-Encapsulation Mechanism Standard（m06）"
+        }
+      ],
+      "perspectives": [],
+      "verified": false,
+      "causal_links": []
+    }
+  ],
+  "sources": [
+    {
+      "outlet": "美国国家标准与技术研究院（NIST）计算机安全资源中心",
+      "url": "https://csrc.nist.gov/pubs/fips/203/final",
+      "publish_time": "2024-08-13",
+      "source_type": "官方媒体",
+      "is_original": true,
+      "key_facts": [
+        {
+          "claim": "FIPS 203 规定了三组 ML-KEM 参数：ML-KEM-512、ML-KEM-768 和 ML-KEM-1024。",
+          "source_urls": [
+            "https://csrc.nist.gov/pubs/fips/203/final"
+          ],
+          "agreed": true
+        },
+        {
+          "claim": "标准按安全强度递增、性能递减的顺序列出 ML-KEM-512、ML-KEM-768 和 ML-KEM-1024。",
+          "source_urls": [
+            "https://csrc.nist.gov/pubs/fips/203/final"
+          ],
+          "agreed": true
+        }
+      ]
+    },
+    {
+      "outlet": "美国国家标准与技术研究院（NIST）新闻网站",
+      "url": "https://www.nist.gov/news-events/news/2024/08/nist-releases-first-3-finalized-post-quantum-encryption-standards",
+      "publish_time": "2024-08-13",
+      "source_type": "官方媒体",
+      "is_original": true,
+      "key_facts": [
+        {
+          "claim": "NIST 发布首批三项最终版后量子加密标准的新闻稿，页面标注发布日期为 2024 年 8 月 13 日。",
+          "source_urls": [
+            "https://www.nist.gov/news-events/news/2024/08/nist-releases-first-3-finalized-post-quantum-encryption-standards"
+          ],
+          "agreed": true
+        },
+        {
+          "claim": "新闻稿称 FIPS 203 基于 CRYSTALS-Kyber 算法，该算法已更名为 ML-KEM。",
+          "source_urls": [
+            "https://www.nist.gov/news-events/news/2024/08/nist-releases-first-3-finalized-post-quantum-encryption-standards"
+          ],
+          "agreed": true
+        }
+      ]
+    }
+  ],
+  "source_timeline": [
+    {
+      "outlet": "美国国家标准与技术研究院（NIST）计算机安全资源中心",
+      "url": "https://csrc.nist.gov/pubs/fips/203/final",
+      "publish_time": "2024-08-13",
+      "source_type": "官方媒体",
+      "is_original": true,
+      "key_facts": [
+        {
+          "claim": "FIPS 203 规定了三组 ML-KEM 参数：ML-KEM-512、ML-KEM-768 和 ML-KEM-1024。",
+          "source_urls": [
+            "https://csrc.nist.gov/pubs/fips/203/final"
+          ],
+          "agreed": true
+        },
+        {
+          "claim": "标准按安全强度递增、性能递减的顺序列出 ML-KEM-512、ML-KEM-768 和 ML-KEM-1024。",
+          "source_urls": [
+            "https://csrc.nist.gov/pubs/fips/203/final"
+          ],
+          "agreed": true
+        }
+      ]
+    },
+    {
+      "outlet": "美国国家标准与技术研究院（NIST）新闻网站",
+      "url": "https://www.nist.gov/news-events/news/2024/08/nist-releases-first-3-finalized-post-quantum-encryption-standards",
+      "publish_time": "2024-08-13",
+      "source_type": "官方媒体",
+      "is_original": true,
+      "key_facts": [
+        {
+          "claim": "NIST 发布首批三项最终版后量子加密标准的新闻稿，页面标注发布日期为 2024 年 8 月 13 日。",
+          "source_urls": [
+            "https://www.nist.gov/news-events/news/2024/08/nist-releases-first-3-finalized-post-quantum-encryption-standards"
+          ],
+          "agreed": true
+        },
+        {
+          "claim": "新闻稿称 FIPS 203 基于 CRYSTALS-Kyber 算法，该算法已更名为 ML-KEM。",
+          "source_urls": [
+            "https://www.nist.gov/news-events/news/2024/08/nist-releases-first-3-finalized-post-quantum-encryption-standards"
+          ],
+          "agreed": true
+        }
+      ]
+    }
+  ],
+  "key_findings": [
+    "【时间线】两份快照均标示发布日期为2024-08-13：m05 宣布首批三项最终版后量子加密标准，m06 描述 FIPS 203 的 ML-KEM 机制及参数；材料不能确定当天的先后顺序。",
+    "【证据判断】限定证据范围内的 m06 明确写明 FIPS 203 规定 ML-KEM-512、ML-KEM-768、ML-KEM-1024 三组参数，直接支持目标声明，无需以世界真实性核验作为支持条件。",
+    "【技术内容】m06 将三组参数按安全强度递增、性能递减排列，并将 ML-KEM 定义为用于建立共享密钥的密钥封装机制，而非直接加密消息的算法。",
+    "【信源】m05 与 m06 均由 NIST 发布，不构成独立信源互证。m05 提供 CRYSTALS-Kyber 与 ML-KEM 的命名背景，但未列出三组参数，不能作为参数声明的第二份直接证据。",
+    "【因果判断】现有树展示的是“文档明确列举参数，因此支持目标声明”的证据推导关系，不是标准制定的历史因果链；锚定检查通过也不等于独立核实世界真实性。"
+  ],
+  "information_gaps": [
+    "世界真实性：未知；仅有供应快照，没有独立核验。这不改变 m06 在证据评估中明确支持目标声明的结论。",
+    "两份材料均为选摘并经空白规范化的文本，不是完整文档或历史精确版本；只能确认其在2026-09-05T09:34:36Z采集完成时可用，无法据此确认2024年当日的完整内容。",
+    "缺少带时区的准确发布时间、标准制定过程、参数选择依据及独立性能或安全测试，无法重建历史诱因或量化参数间的权衡。"
+  ],
+  "consistent_facts": [],
+  "disputed_facts": [],
+  "causal_summary": "按页面标示日期，NIST 于2024年8月13日宣布首批三项最终版后量子加密标准；新闻稿将 FIPS 203 与基于 CRYSTALS-Kyber、改称 ML-KEM 的机制联系起来。同日标示发布的 m06 明确说明 ML-KEM 用于建立共享密钥，并列出三组参数及其安全强度与性能的排序。因此，可以直接得出“指定文档支持目标声明”的证据结论。这里的因果关系是原文到判断的推导，不能据此推断 NIST 为什么选择这些参数，也不能视为已独立验证标准的实际安全性。",
+  "bias_notes": [
+    "两个来源均属标准发布机构 NIST，体现机构自身的发布与技术说明视角；新闻稿强调优势，不代表独立评测。",
+    "m06 对抗量子安全使用“目前被认为安全”的限定措辞，应保留这一不确定性，不能改写为已证明绝对安全。"
+  ]
+}

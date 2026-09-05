@@ -27,8 +27,15 @@ Each gap names target_id, dimension, action, locator and decision_impact. Use fe
 search with query text in locator for other retrieval, reanalyse with a known version id for
 specific missed interpretation. Explicit blocking evidence/world gaps require source-side basis.
 Do not demand world authentication to resolve an evidence-only question. Provenance gaps use
-stage=provenance and dimension=provenance. Leave resolved gaps out; resolve only named existing
-gaps with a quote and rationale. Empty arrays are preferable to duplicating all prior findings.
+stage=provenance and dimension=provenance. Leave resolved gaps out of the gaps array.
+Your Analysis is a COMPLETE REPLACEMENT for this material, not a patch of new findings.
+Recheck previous_analysis against the visible source, then include every still-supported
+fragment, relation, origin and resolution owned by this material, even if unchanged.
+An omitted prior finding is removed by the engine. Preserve a still-valid prior resolution
+from previous_analysis even when its resolved gap is absent from context.gaps; create new
+resolutions only for named existing gaps. Do not copy other materials' findings, invent gap
+ids, or preserve unsupported findings merely to keep an earlier status. Explain withdrawals
+in notes. Empty arrays mean there are no current findings of that kind for this material.
 """
 
 VERIFY_PROMPT = DATA_RULE + """Return TWO distinct assessments of the unchanged target.

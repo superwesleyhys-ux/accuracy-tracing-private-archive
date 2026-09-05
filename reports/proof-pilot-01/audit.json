@@ -1,0 +1,70 @@
+{
+  "rows": 40,
+  "unique_rows": 40,
+  "source_snapshot_mismatches": [],
+  "data_mismatches": [],
+  "new_request_attempts": 156,
+  "returned_responses": 154,
+  "unique_new_response_ids": 154,
+  "overlap_with_previous_run_response_ids": [],
+  "response_models": {
+    "gpt-6-astra": 154
+  },
+  "shared_prefix_copies": 9,
+  "actual_tokens": {
+    "input_tokens": 227510,
+    "output_tokens": 130236
+  },
+  "logical_tokens": {
+    "input_tokens": 243944,
+    "output_tokens": 148812
+  },
+  "shared_prefix_consistency": [
+    {
+      "arm": "loop_psi",
+      "records_identical": true,
+      "state_hash_matches": true
+    },
+    {
+      "arm": "loop_frozen",
+      "records_identical": true,
+      "state_hash_matches": true
+    },
+    {
+      "arm": "independent",
+      "records_identical": true,
+      "state_hash_matches": true
+    }
+  ],
+  "p04_verification_rounds": {
+    "single": [
+      1
+    ],
+    "loop_psi": [
+      1,
+      2,
+      3
+    ],
+    "loop_frozen": [
+      1,
+      2,
+      3
+    ]
+  },
+  "p04_label_sequences": {
+    "single": [
+      "false"
+    ],
+    "loop_psi": [
+      "false",
+      "false",
+      "false"
+    ],
+    "loop_frozen": [
+      "false",
+      "false",
+      "false"
+    ]
+  },
+  "postprocessing_note": "Inference completed with all preregistered source and data hashes unchanged. A separate scoring-only mode-validation correction was applied afterwards; executed-code retains the original scorer. Later diagnostic instrumentation is not claimed as tested by this live run."
+}

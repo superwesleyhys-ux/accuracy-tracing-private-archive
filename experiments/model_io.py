@@ -117,20 +117,54 @@ class BudgetClient:
                 record["response_id"] = response.id
                 record["actual_model"] = response.model
                 usage = response.usage
-                if usage is None: raise RuntimeError("Missing actual token usage")
+                choices = getattr(response, "choices", ())
+                choice = choices[0] if choices else None
+                record["finish_reason"] = getattr(choice, "finish_reason", None)
+                record["has_refusal"] = bool(getattr(getattr(choice, "message", None), "refusal", None))
+                reasoning_tokens = getattr(getattr(usage, "completion_tokens_details", None),
+                                           "reasoning_tokens", None)
+                if type(reasoning_tokens) is int and reasoning_tokens >= 0:
+                    record["reasoning_tokens"] = reasoning_tokens
+                if usage is None:
+                    record["error_code"] = "missing_usage"
+                    raise RuntimeError("Missing actual token usage")
                 self.used_input += usage.prompt_tokens
                 self.used_output += usage.completion_tokens
                 record["usage"] = {"input_tokens": usage.prompt_tokens, "output_tokens": usage.completion_tokens}
                 message = response.choices[0].message
                 text = message.content or ""
                 record["output"] = text
-                if getattr(message, "refusal", None): raise RuntimeError("Model declined this request")
-                if response.choices[0].finish_reason != "stop": raise RuntimeError("Incomplete model output")
-                if self.used_output > self.budget.output_tokens or time.monotonic() - self.start > self.budget.seconds:
+                if getattr(message, "refusal", None):
+                    record["error_code"] = "model_refusal"
+                    raise RuntimeError("Model declined this request")
+                if response.choices[0].finish_reason != "stop":
+                    record["error_code"] = "incomplete_model_output"
+                    raise RuntimeError("Incomplete model output")
+                if self.used_output > self.budget.output_tokens:
+                    record["error_code"] = "output_budget_exceeded"
                     raise RuntimeError("Observed resource budget exceeded")
-                return json.loads(text) if json_schema or json_mode else text
+                if time.monotonic() - self.start > self.budget.seconds:
+                    record["error_code"] = "timeout_budget_exceeded"
+                    raise RuntimeError("Observed resource budget exceeded")
+                if json_schema or json_mode:
+                    try:
+                        return json.loads(text)
+                    except json.JSONDecodeError:
+                        record["error_code"] = "invalid_json"
+                        raise
+                return text
             except Exception as exc:
                 # Do not copy arbitrary remote errors or secrets into logs.
+                record.setdefault("error_code", "sdk_error")
+                remote_code = getattr(exc, "code", None)
+                if not isinstance(remote_code, str):
+                    body = getattr(exc, "body", None)
+                    if isinstance(body, dict):
+                        detail = body.get("error", body)
+                        if isinstance(detail, dict):
+                            remote_code = detail.get("code")
+                if type(remote_code) is str and remote_code in {"insufficient_quota", "rate_limit_exceeded"}:
+                    record["sdk_error_code"] = remote_code
                 record["error_type"] = type(exc).__name__
                 raise RuntimeError("Model call failed: " + type(exc).__name__) from None
 

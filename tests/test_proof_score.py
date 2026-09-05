@@ -177,7 +177,7 @@ class ProofScoreTests(unittest.TestCase):
         for key, value, message in (("arm", "best_after_selection", "unknown arm"),
                                     ("id", "missing", "unknown result case"),
                                     ("assessment_mode", "snapshot", "unknown assessment_mode"),
-                                    ("assessment_mode", "world", "mixed or missing assessment_mode")):
+                                    ("assessment_mode", "world", "assessment_mode mismatch or missing")):
             changed = deepcopy(rows)
             changed[0][key] = value
             with self.subTest(key=key, value=value), self.assertRaisesRegex(ValueError, message):
@@ -187,10 +187,44 @@ class ProofScoreTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "duplicate gold id"):
             score(changed_gold, rows, bootstrap_samples=20)
 
+    def test_heterogeneous_case_modes_match_per_case_and_preserve_event_clusters(self):
+        gold, rows = fixture(events=["a", "a", "b", "b"])
+        gold["cases"][0]["assessment_mode"] = "world"
+        for item in rows:
+            if item["id"] == "case-0":
+                item["assessment_mode"] = "world"
+        report = score(gold, rows, bootstrap_samples=20)
+        self.assertEqual(report["assessment_mode"], "mixed")
+        self.assertEqual(report["assessment_mode_case_counts"], {"evidence": 3, "world": 1})
+        self.assertEqual(report["independent_events"], 2)
+        self.assertEqual(report["arms"]["single"]["overall_task_success_denominator"], 4)
+        contrast = report["contrasts"]["loop_psi_vs_single"]
+        self.assertEqual(contrast["exact_mcnemar"]["independent_event_pairs"], 2)
+        self.assertEqual(contrast["overall_task_success_delta"]["independent_events"], 2)
+        row(rows, 0, "single")["assessment_mode"] = "evidence"
+        with self.assertRaisesRegex(ValueError, "assessment_mode mismatch or missing"):
+            score(gold, rows, bootstrap_samples=20)
+
+    def test_partial_mode_omission_rejected_but_all_omitted_remains_supported(self):
+        gold, rows = fixture()
+        del gold["cases"][0]["assessment_mode"]
+        for item in rows:
+            if item["id"] == "case-0":
+                del item["assessment_mode"]
+        with self.assertRaisesRegex(ValueError, "mixed or missing assessment_mode in gold"):
+            score(gold, rows, bootstrap_samples=20)
+        for case in gold["cases"]:
+            case.pop("assessment_mode", None)
+        for item in rows:
+            item.pop("assessment_mode", None)
+        report = score(gold, rows, bootstrap_samples=20)
+        self.assertIsNone(report["assessment_mode"])
+        self.assertEqual(report["assessment_mode_case_counts"], {"unspecified": 4})
+
     def test_missing_mode_and_invalid_prediction_rejected(self):
         gold, rows = fixture()
         del rows[0]["assessment_mode"]
-        with self.assertRaisesRegex(ValueError, "mixed or missing assessment_mode"):
+        with self.assertRaisesRegex(ValueError, "assessment_mode mismatch or missing"):
             score(gold, rows, bootstrap_samples=20)
         gold, rows = fixture()
         rows[0]["prediction"]["decision"] = "error"

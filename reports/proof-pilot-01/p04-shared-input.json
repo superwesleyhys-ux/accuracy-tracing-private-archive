@@ -1,0 +1,38 @@
+{
+  "target": {
+    "id": "p04",
+    "text": "NOAA's January 10, 2025 annual climate summary reported that the global surface temperature in 2024 was 1.29°C above the 1850–1900 average.",
+    "as_of": "2026-09-05T09:34:36Z",
+    "source_version_id": "m07",
+    "assessment_mode": "evidence",
+    "evidence_scope": [
+      "m07"
+    ]
+  },
+  "materials": [
+    {
+      "version_id": "m07",
+      "url": "https://www.ncei.noaa.gov/news/global-climate-202413",
+      "content": "Assessing the Global Climate in 2024\nPublication date: 2025-01-10\n\nIn 2024, global surface temperature was 2.32°F (1.29°C) above the 20th-century average. This ranks as the highest global temperature in the period of 1850–2024, beating the next warmest year (2023) by 0.18°F (0.10°C). The 10 warmest years since 1850 have all occurred in the past decade. In 2024, global temperature exceeded the pre-industrial (1850–1900) average by 2.63°F (1.46°C).",
+      "retrieved_at": "2026-09-05T09:34:36Z",
+      "published_at": null,
+      "available_at": "2026-09-05T09:34:36Z",
+      "availability_basis": "Current web-tool collection completed at retrieved_at on 2026-09-05. The supplied material is a selected, whitespace-normalized excerpt, not a full page or historical exact-version capture. Availability is asserted only at collection completion. The source's displayed publication date is preserved in content; no exact timezone-qualified publication instant is known.",
+      "issuer": "NOAA National Centers for Environmental Information"
+    },
+    {
+      "version_id": "m08",
+      "url": "https://www.nasa.gov/news-release/temperatures-rising-nasa-confirms-2024-warmest-year-on-record/",
+      "content": "Temperatures Rising: NASA Confirms 2024 Warmest Year on Record\nPublication date: 2025-01-10\n\nEarth’s average surface temperature in 2024 was the warmest on record, according to an analysis led by NASA scientists.\n\nGlobal temperatures in 2024 were 2.30 degrees Fahrenheit (1.28 degrees Celsius) above the agency’s 20th-century baseline (1951-1980), which tops the record set in 2023. The new record comes after 15 consecutive months (June 2023 through August 2024) of monthly temperature records — an unprecedented heat streak.\n\nNASA scientists further estimate Earth in 2024 was about 2.65 degrees Fahrenheit (1.47 degrees Celsius) warmer than the mid-19th century average (1850-1900).",
+      "retrieved_at": "2026-09-05T09:34:36Z",
+      "published_at": null,
+      "available_at": "2026-09-05T09:34:36Z",
+      "availability_basis": "Current web-tool collection completed at retrieved_at on 2026-09-05. The supplied material is a selected, whitespace-normalized excerpt, not a full page or historical exact-version capture. Availability is asserted only at collection completion. The source's displayed publication date is preserved in content; no exact timezone-qualified publication instant is known.",
+      "issuer": "NASA"
+    }
+  ],
+  "seed_ids": [
+    "m08"
+  ],
+  "full_evidence_control": true
+}

@@ -215,6 +215,11 @@ class ProofRunMockTests(unittest.TestCase):
         for arm in ("original", "single"):
             records = files["mock-case-" + arm + "-calls.json"]
             self.assertTrue(records[0].get("error_type"))
+        by_arm = {row["arm"]: row for row in rows}
+        for arm in ("loop_psi", "loop_frozen", "independent"):
+            self.assertEqual(by_arm["single"]["usage"], by_arm[arm]["usage"])
+            self.assertTrue(by_arm[arm]["inherited_failed_prefix"])
+            self.assertEqual(0, by_arm[arm]["actual_new_api_usage"]["model_calls"])
 
 
 if __name__ == "__main__":

@@ -1,0 +1,52 @@
+{
+  "phase": "exploratory_calibration_pilot",
+  "frozen_before_model_inference": true,
+  "gold_status": "provisional_ai_review_human_adjudication_pending",
+  "planned_cases": 8,
+  "planned_arms": 5,
+  "planned_new_runs": 1,
+  "primary_contrast": "loop_psi vs single",
+  "code_validation": {
+    "tests": 136,
+    "failures": 0,
+    "model_calls_in_tests": 0
+  },
+  "files": {
+    "experiments/proof_pilot/ANNOTATION.md": "96d3564170a85830fefb8066efa59f100873f2585a6da7b8d719a27359562777",
+    "experiments/proof_pilot/PROTOCOL.md": "ae221d2d53a966511339b7fc2b193db678648579a7f24624dd0c5bd07de72404",
+    "experiments/proof_pilot/REVIEW.md": "7e745a27c422d48b1ff5a7d7e312b31d02c87357827bcad1030b283080d17d43",
+    "experiments/proof_pilot/gold.json": "4cd818aecf0693559c2b877a7067a7b765159abc4b6b832535fb6a14add13ce5",
+    "experiments/proof_pilot/inputs.json": "4b1e1d3bbad7d72f77822aa8cf402e923db1af9d85df3b5c732a5279ac2fa825",
+    "experiments/proof_pilot/review.json": "5e8761573064670d14a596eddb8fa095213dce088fa9236741f303c7c084b88e",
+    "experiments/proof_pilot/sources.json": "2869b635d092d556edf35f0d57b2d150cca0728f80516614a8faaf74df8c989c"
+  },
+  "code": {
+    "newsverify/__init__.py": "0ac9f5e7253a49739180448259a9dfe2dc85ab7537f23074481d449136b77c96",
+    "newsverify/__main__.py": "935a1c1166b0c1ea35a82256345000bf2c73ded718d77773bc27a71ecce28f7d",
+    "newsverify/cli.py": "8c810053cae5b605d46d4004fd92e8920ca6fcc9a813d205f68ed96bb73a515b",
+    "newsverify/comparison.py": "b35ddbb2e82a5a763aac31982f28c984ca50a242ecb07a1245128e09199279c5",
+    "newsverify/core.py": "8f148c272de3be772581dc78644411fa2b56d1eb809045ef6423620ac7a41d88",
+    "newsverify/decisions.py": "fe93d618b0f122591b39def16e952a4076c4fc66d69d81198c28489e245b4b3e",
+    "newsverify/evaluation.py": "2c971584562232d979fa9523c610b94a53c6d76a74940dbc58a581773c336e4f",
+    "newsverify/provenance.py": "0066f2f54290745dd527a330d342197d489dad237aab78b45e0b772eba13211b",
+    "newsverify/providers.py": "7cb362d1f89270e82b1b34590eecac607a43896a6bbe763c3b88b0254970b568",
+    "newsverify/retrieval.py": "0fac14ff28e05bb9b0df4d070584a627b09d98b02d7d29141e297e5f128b2321",
+    "newsverify/trace_demo.py": "960c78e0fc2aa2bb428dd13db59c3c8314c7e7ffe533d2fe64d80267474b1251",
+    "experiments/loop_compare.py": "5f0f7f9349522f76e55fe18f1f27a3600ee85e8d0dc5db29b5e410c14508cbf0",
+    "experiments/model_io.py": "ca6a974d512f16068a928d87da9a19f4b05105f878ec95777cac331fa104e875",
+    "experiments/original_compare.py": "f51fa33b37d28045c1d0087b7acb73191b001fd19bfcb44612a1bee3caf883d9",
+    "experiments/proof_run.py": "a84dd081b96885df0c8bc994d4d9a496fa5a05e42e188c08442a7e92be9850ae",
+    "experiments/proof_score.py": "7be77659d3a89375450d2d87bcd2878b91e3d54e4580541a8c729df07260f591",
+    "experiments/secure_run.py": "3f869162b7ee60082f750d972f5b2afe0a61dac92344ee162f84534c05811cb5",
+    "experiments/semantic_adapter.py": "8fadca23659102447030d0bbfa0af4d3fc04e3677e4ecdbff0d7d20a34e4029f",
+    "tests/test_checkpoint.py": "87da7f551955041b2e02b4d6b4d28f26d693fbbced3fd9648d21046508cfd90d",
+    "tests/test_comparison.py": "983bab254a2abf2e66f2f7911f4ef3375277a0db82b7ddd710780128564742bf",
+    "tests/test_evaluation.py": "6cc4f9cbc470f9af0208ec7fdec9148aafc96442db9b5d0401c9bc756ac70fcb",
+    "tests/test_harness.py": "29b646b9a26bc30e98558792eddb8c8770772855e1bdb18f97e2fd568a2aa2a5",
+    "tests/test_proof_run.py": "8e3b094c0db6fe9e07f7701f2b17cd78fb511887dc49ae440fbd53cb9d12d108",
+    "tests/test_proof_score.py": "56563f901c2931ca7efcb52e297c99e7a934baa5d9edb2ed46529b3837fdd789",
+    "tests/test_provenance.py": "0eeb64e29f733b951fbce1bef3820bf60696f0769261b0cd974b50819c8ecb31",
+    "tests/test_repair.py": "3ab0b7183dc108f11d67304748b0064ea42b1633200c89d2cba81f59922efe73",
+    "tests/test_semantic_adapter.py": "cbb4d5c7d5d90deda71a86282be91b4eaba03b366ffb2f56c4b61654653cfefc"
+  }
+}

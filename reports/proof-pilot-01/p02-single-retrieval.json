@@ -1,0 +1,24 @@
+[
+  {
+    "round": 1,
+    "kind": "fixed_corpus_experimental_reanalysis",
+    "returned": [
+      "m03",
+      "m04"
+    ],
+    "tasks": [
+      {
+        "id": "origin:p02",
+        "question": "Find the producing record and evidenced lineage for: NASA's February 15, 2024 bulk-sample announcement reported that the final total mass of the Bennu sample returned by OSIRIS-REx was 70.3 grams.",
+        "stage": "provenance",
+        "dimension": "auto",
+        "blocking": true,
+        "target_id": null,
+        "basis": [],
+        "decision_impact": "",
+        "action": "search",
+        "locator": null
+      }
+    ]
+  }
+]
