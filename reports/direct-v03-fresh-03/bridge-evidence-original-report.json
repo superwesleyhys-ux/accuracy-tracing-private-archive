@@ -1,0 +1,173 @@
+{
+  "event": {
+    "title": "指定证据 bridge-notice 表示桥梁仍关闭，与“桥梁已经重新开放”的目标声明矛盾。",
+    "date": "未知",
+    "summary": "bridge-article 声称桥梁已经重新开放，并引用 bridge-notice。\nbridge-notice 明确表示桥梁仍然关闭。\nbridge-notice 表示计划于下个月重新开放，而非已经开放。\n截至 2026-09-04T20:00:00Z，指定证据与目标声明矛盾；现实中的开放状态未知，所提供快照未经外部认证。",
+    "sources": [],
+    "relation": "",
+    "causes": [
+      {
+        "title": "报道将“已经重开”归于明确写着“仍关闭”的通知",
+        "date": "2026-09-04T10:00:00Z（快照标注的发布时间）",
+        "summary": "bridge-article 声称桥梁已经重新开放，并引用 bridge-notice。但指定证据 bridge-notice 明确表示桥梁仍关闭，重新开放只是下个月的计划。因此，截至指定时点，该证据与“桥梁已经重新开放”的目标声明矛盾。",
+        "sources": [
+          {
+            "url": "https://example.org/bridge-notice",
+            "title": "bridge-notice：桥梁运营通知（所提供的合成快照）"
+          },
+          {
+            "url": "https://example.org/bridge-article",
+            "title": "bridge-article：目标声明及其引用（所提供的合成快照）"
+          }
+        ],
+        "relation": "直接构成证据与目标声明矛盾的依据",
+        "causes": [],
+        "confidence": 1.0,
+        "grounded": true
+      }
+    ],
+    "confidence": 0.0,
+    "grounded": true
+  },
+  "direct_response": "截至2026年9月4日20时（UTC），“桥梁已重开”虽见于报道，但在1个指定证据信源中未找到支持，且通知明确反驳该说法。应纠正为：通知称仍关闭，计划10月重开。关键脉络是报道宣称已开放并引用通知，而通知只列未来计划；矛盾源于报道对通知内容的错误归述。最大分歧是报道说“已开”、通知说“仍关”；两页同属一个发布者，不能独立互证。本次证据评估结论为矛盾，现实开放状态仍未知，快照未经外部认证。（基于2个信源 | 覆盖1类媒体 | 0条事实多源一致 | 1条存在分歧 | 因果锚定1/1）",
+  "credibility": {
+    "source_count": 2,
+    "source_types": [
+      "自媒体"
+    ],
+    "consistent_count": 0,
+    "disputed_count": 1,
+    "grounding_rate": 1.0,
+    "grounded_count": 1,
+    "total_causal_nodes": 1
+  },
+  "event_timeline": [
+    {
+      "date": "2026-09-04T10:00:00Z（快照标注的发布时间）",
+      "title": "报道声称桥梁已重新开放，但引用的通知明确称仍关闭",
+      "description": "报道页声称桥梁已经重新开放，并引用桥梁运营通知作为依据。通知却明确表示桥梁仍处于关闭状态，仅计划于下个月，即2026年10月重新开放，并未表示已经开放。两页属于同一发布者，不能作为桥梁已开放的独立交叉确认。",
+      "significance": "重要",
+      "sources": [
+        {
+          "url": "https://example.org/bridge-article",
+          "title": "Fictional publisher（报道页：目标声明及其引用）"
+        },
+        {
+          "url": "https://example.org/bridge-notice",
+          "title": "Fictional publisher（通知页：桥梁运营通知）"
+        }
+      ],
+      "perspectives": [],
+      "verified": true,
+      "causal_links": []
+    }
+  ],
+  "sources": [
+    {
+      "outlet": "Fictional publisher（报道页）",
+      "url": "https://example.org/bridge-article",
+      "publish_time": "2026-09-04T10:00:00Z",
+      "source_type": "自媒体",
+      "is_original": false,
+      "key_facts": [
+        {
+          "claim": "报道声称桥梁已经重新开放，并将 bridge-notice 页面列为依据。",
+          "source_urls": [
+            "https://example.org/bridge-article"
+          ],
+          "agreed": true
+        }
+      ]
+    },
+    {
+      "outlet": "Fictional publisher（通知页）",
+      "url": "https://example.org/bridge-notice",
+      "publish_time": "2026-09-04T10:00:00Z",
+      "source_type": "自媒体",
+      "is_original": true,
+      "key_facts": [
+        {
+          "claim": "通知明确写明桥梁仍处于关闭状态。",
+          "source_urls": [
+            "https://example.org/bridge-notice"
+          ],
+          "agreed": true
+        },
+        {
+          "claim": "通知称重新开放计划安排在下个月，即按其发布时间理解为2026年10月；并未称已经开放。",
+          "source_urls": [
+            "https://example.org/bridge-notice"
+          ],
+          "agreed": true
+        }
+      ]
+    }
+  ],
+  "source_timeline": [
+    {
+      "outlet": "Fictional publisher（报道页）",
+      "url": "https://example.org/bridge-article",
+      "publish_time": "2026-09-04T10:00:00Z",
+      "source_type": "自媒体",
+      "is_original": false,
+      "key_facts": [
+        {
+          "claim": "报道声称桥梁已经重新开放，并将 bridge-notice 页面列为依据。",
+          "source_urls": [
+            "https://example.org/bridge-article"
+          ],
+          "agreed": true
+        }
+      ]
+    },
+    {
+      "outlet": "Fictional publisher（通知页）",
+      "url": "https://example.org/bridge-notice",
+      "publish_time": "2026-09-04T10:00:00Z",
+      "source_type": "自媒体",
+      "is_original": true,
+      "key_facts": [
+        {
+          "claim": "通知明确写明桥梁仍处于关闭状态。",
+          "source_urls": [
+            "https://example.org/bridge-notice"
+          ],
+          "agreed": true
+        },
+        {
+          "claim": "通知称重新开放计划安排在下个月，即按其发布时间理解为2026年10月；并未称已经开放。",
+          "source_urls": [
+            "https://example.org/bridge-notice"
+          ],
+          "agreed": true
+        }
+      ]
+    }
+  ],
+  "key_findings": [
+    "【文本事实】两份快照均标注发表于2026年9月4日10:00 UTC。报道页称桥梁“已经重新开放”，但其引用的通知页明确写着“仍关闭”，重开仅计划在下个月，即2026年10月。",
+    "【证据研判】截至2026年9月4日20:00 UTC，固定证据范围内的 bridge-notice 与目标声明“桥梁已经重新开放”相矛盾；这不是单纯缺乏支持，也不要求先验证现实中的桥梁状态。",
+    "【信源事实】报道页与通知页来自同一发布者，且存在引用关系，不能作为两个独立来源的交叉确认。指定通知并不支持报道对它的归述。",
+    "【因果判断】可确认的是报道结论与所引通知之间的归述冲突，而非桥梁实际重开的因果过程。报道可能混淆了未来计划与已发生事实，但具体成因无法从快照确定。"
+  ],
+  "information_gaps": [
+    "现实状态核验：未知。材料为未经外部认证的合成版本快照，无法据此确认桥梁实际是否开放。",
+    "缺少桥梁身份、关闭原因、具体重开日期及后续更新；2026年10月只是通知中的计划月份。",
+    "无法确定报道与通知冲突源于误读、编辑错误还是其他原因；因果节点获文本锚定不等于现实事件获独立验证。"
+  ],
+  "consistent_facts": [],
+  "disputed_facts": [
+    {
+      "claim": "截至2026年9月4日，桥梁是否已经重新开放。",
+      "source_urls": [
+        "https://example.org/bridge-article",
+        "https://example.org/bridge-notice"
+      ],
+      "agreed": false
+    }
+  ],
+  "causal_summary": "所给快照显示，通知称桥梁仍关闭，并计划于下个月重开；同一发布者的报道却引用该通知，宣称桥梁已经重开。因此，有据可查的是报道对所引材料的归述与材料原文相冲突，指定证据应判为与目标声明矛盾。将未来计划误当成已完成事件是一种可能解释，而非已证实的错误成因；桥梁在现实中的开放状态仍未知。",
+  "bias_notes": [
+    "未发现足以判断政治、商业或其他立场偏差的材料。可识别的问题是引用失真及对完成状态的过度断言，不能据此推定发布者有意误导。"
+  ]
+}

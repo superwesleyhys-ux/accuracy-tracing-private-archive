@@ -1,0 +1,156 @@
+{
+  "event": {
+    "title": "所提供的图书馆公告称闭馆时间延长至晚上9点，但现实中的执行情况未知。",
+    "date": "2026-09-04（按公告发布日期理解“今天”）",
+    "summary": "library-notice 声称图书馆从当天起将闭馆时间延长至晚上9点。\nlibrary-article 引用该公告称图书馆现在晚上9点闭馆，不构成独立确认。\n所供快照为未经外部认证的合成版本；截至指定时间，现实核验结论为未知。",
+    "sources": [],
+    "relation": "",
+    "causes": [
+      {
+        "title": "图书馆公告宣布自当日起将闭馆时间延长至晚上9点",
+        "date": "2026-09-04",
+        "summary": "所供 library-notice 快照明确称，图书馆从公告发布当天起将闭馆时间延长至晚上9点。该公告是所述消息的直接信息来源，但未说明调整时间的动因，也不能证明现实中已执行。",
+        "sources": [
+          {
+            "url": "https://example.org/library-notice",
+            "title": "Library schedule bulletin（所供合成快照，未经外部认证）"
+          }
+        ],
+        "relation": "公告说法的直接来源，而非现实执行的已证实原因",
+        "causes": [],
+        "confidence": 1.0,
+        "grounded": true
+      }
+    ],
+    "confidence": 0.0,
+    "grounded": true
+  },
+  "direct_response": "“现于晚上9点闭馆”获指定范围内公告的文字支持，但现实执行证据在2个信源中未找到；本任务为现实核验，截至2026年9月4日20:00 UTC，结论未知，不能判为已证实。公告称9月4日起延长闭馆至21点，文章随后引用同一公告，并非独立确认。消息源于公告，调整动因在2个信源中未找到；未知源于快照未经外部认证且无执行证据。两份材料无文字分歧，关键是公告说法不等于现实落实。（基于2个信源 | 覆盖1类媒体 | 1条事实多源一致但非独立 | 0条存在分歧 | 因果锚定1/1仅指消息来源）",
+  "credibility": {
+    "source_count": 2,
+    "source_types": [
+      "自媒体"
+    ],
+    "consistent_count": 1,
+    "disputed_count": 0,
+    "grounding_rate": 1.0,
+    "grounded_count": 1,
+    "total_causal_nodes": 1
+  },
+  "event_timeline": [
+    {
+      "date": "2026-09-04",
+      "title": "图书馆公告宣布自当日起将闭馆时间延长至晚上9点",
+      "description": "所供公告快照称，图书馆从公告发布当天起将闭馆时间延长至晚上9点，未说明调整动因。另一篇文章引用该公告报道同一消息，两份文档不构成独立确认。快照为未经外部认证的合成版本，截至2026年9月4日20:00 UTC，现实执行情况未知。",
+      "significance": "重要",
+      "sources": [
+        {
+          "url": "https://example.org/library-notice",
+          "title": "Library schedule bulletin／Fictional publisher"
+        },
+        {
+          "url": "https://example.org/library-article",
+          "title": "Fictional publisher（引用公告的文章）"
+        }
+      ],
+      "perspectives": [],
+      "verified": true,
+      "causal_links": []
+    }
+  ],
+  "sources": [
+    {
+      "outlet": "Fictional publisher（图书馆公告）",
+      "url": "https://example.org/library-notice",
+      "publish_time": "2026-09-04T10:00:00Z",
+      "source_type": "自媒体",
+      "is_original": true,
+      "key_facts": [
+        {
+          "claim": "公告称，图书馆从当日起将闭馆时间延长至晚上9点。",
+          "source_urls": [
+            "https://example.org/library-notice"
+          ],
+          "agreed": true
+        }
+      ]
+    },
+    {
+      "outlet": "Fictional publisher（引用公告的文章）",
+      "url": "https://example.org/library-article",
+      "publish_time": "2026-09-04T10:00:00Z",
+      "source_type": "自媒体",
+      "is_original": false,
+      "key_facts": [
+        {
+          "claim": "文章引用图书馆公告，称图书馆现在于晚上9点闭馆。",
+          "source_urls": [
+            "https://example.org/library-article"
+          ],
+          "agreed": true
+        }
+      ]
+    }
+  ],
+  "source_timeline": [
+    {
+      "outlet": "Fictional publisher（图书馆公告）",
+      "url": "https://example.org/library-notice",
+      "publish_time": "2026-09-04T10:00:00Z",
+      "source_type": "自媒体",
+      "is_original": true,
+      "key_facts": [
+        {
+          "claim": "公告称，图书馆从当日起将闭馆时间延长至晚上9点。",
+          "source_urls": [
+            "https://example.org/library-notice"
+          ],
+          "agreed": true
+        }
+      ]
+    },
+    {
+      "outlet": "Fictional publisher（引用公告的文章）",
+      "url": "https://example.org/library-article",
+      "publish_time": "2026-09-04T10:00:00Z",
+      "source_type": "自媒体",
+      "is_original": false,
+      "key_facts": [
+        {
+          "claim": "文章引用图书馆公告，称图书馆现在于晚上9点闭馆。",
+          "source_urls": [
+            "https://example.org/library-article"
+          ],
+          "agreed": true
+        }
+      ]
+    }
+  ],
+  "key_findings": [
+    "【文档事实】所供公告快照明确称，图书馆从“今天”起将闭馆时间延长至晚上9点；按其发布日期，“今天”对应2026年9月4日。",
+    "【信源关系】另一篇文章引用该公告报道相同消息，形成“公告→引用文章”的传播链，而非两个独立来源的确认；两份材料未见内容分歧。",
+    "【证据与现实】公告文本直接支持“图书馆现于晚上9点闭馆”这一目标陈述，但仅限文档表述层面。快照未经外部认证，截至2026年9月4日20:00 UTC，现实执行情况仍未知。",
+    "【因果边界】现有材料只确立了消息的直接来源，没有说明延长闭馆时间的动因；公告发布不能被视为现实执行已经发生的证明。"
+  ],
+  "information_gaps": [
+    "缺少经认证的公告及独立执行记录，无法核验现实中的营业时间。",
+    "材料未提供图书馆具体身份、所在地时区、原闭馆时间、适用日期范围或例外安排。",
+    "调整动因及相关决策过程未被说明，无法建立实际政策变化的因果链。"
+  ],
+  "consistent_facts": [
+    {
+      "claim": "两份材料均称图书馆现于晚上9点闭馆；公告称新时间从当日起生效，文章引用该公告。",
+      "source_urls": [
+        "https://example.org/library-notice",
+        "https://example.org/library-article"
+      ],
+      "agreed": true
+    }
+  ],
+  "disputed_facts": [],
+  "causal_summary": "所供快照显示，2026年9月4日发布的图书馆公告宣布，从当日起将闭馆时间延长至晚上9点，另一篇文章引用公告转述了这一消息。有据可查的是这些文档的表述及引用关系，而不是图书馆现实中已经执行了新时间。现有材料呈现的是消息传播链，并未解释为何调整闭馆时间；任何关于读者需求、人员安排等动因的解释都将属于无材料支持的推测。",
+  "bias_notes": [
+    "未发现两份文本存在明显立场差异，但引用文章依赖同一公告，内容一致不应被当作独立交叉验证。",
+    "两份材料均标注为虚构发布者的合成快照，其主要局限是真实性与独立性不足，而非已识别的立场偏差。"
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "id": "chain-evidence",
+  "arm": "original",
+  "status": "completed",
+  "prediction": "true",
+  "assessment_mode": "evidence",
+  "extractor_answer_text": "“实验室上午8点开放”获指定证据bulletin-c支持；在3个信源中未找到现实开放时间的独立核实。文档支持不等于现实属实，后者未知。a指向b，b引用c；c于9月4日10时（UTC）发布，称当日起8点开放，早于20时截止。判断依据是c的明确表述，并非引用链证明了现实成因。来源间无已知冲突，但a、b未载开放时间，不构成独立确认；三份均为未经外部认证的合成快照。（基于3个信源 | 覆盖1类媒体 | 0条事实多源一致 | 0条存在分歧 | 因果锚定1/1）",
+  "extraction": {
+    "decision": "true",
+    "extractable": true,
+    "basis_quote": "“实验室上午8点开放”获指定证据bulletin-c支持"
+  },
+  "usage": {
+    "model_calls": 17,
+    "input_tokens": 16885,
+    "output_tokens": 7662,
+    "seconds": 152.5235323559973
+  }
+}

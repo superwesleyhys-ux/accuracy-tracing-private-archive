@@ -1,0 +1,11 @@
+{
+  "previous_successful_run": "direct-v03-fresh-01",
+  "preserved_quota_blocked_attempt": "direct-v03-fresh-02",
+  "comparison_code_commit": "d609909e17bf921ec832660fa74281ad0891b2cb",
+  "configuration_identical_to_previous_successful_run": true,
+  "source_and_gold_unchanged_before_inference": true,
+  "planned_repetitions_after_recharge": 1,
+  "response_cache": false,
+  "existing_executed_source_archive": "../direct-v03-fresh-01/executed-code",
+  "config_sha256": "f60398dd7a3c2d51da2b40eddff1f3c7c910c448a4ae87ca15126c9d2654a614"
+}

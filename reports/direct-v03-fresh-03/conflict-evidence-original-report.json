@@ -1,0 +1,171 @@
+{
+  "event": {
+    "title": "两份范围内快照对渡轮当日是否运营作出相反陈述，目标声明的证据存在冲突。",
+    "date": "2026-09-04",
+    "summary": "report-a 称渡轮当日运营，支持目标声明。\nreport-b 称渡轮当日不运营，反对目标声明。\n截至指定评估时间，两份快照均已可用；证据结论为冲突，现实中的运营状态仍未知。",
+    "sources": [],
+    "relation": "",
+    "causes": [
+      {
+        "title": "report-a 快照作出当日运营的肯定陈述",
+        "date": "2026-09-04T10:00:00Z",
+        "summary": "report-a 明确写道“The ferry is operating today.”，直接支持未改变的目标声明。按所供元数据，该版本在评估截止时间前已可用，与范围内的反向陈述共同形成证据冲突。",
+        "sources": [
+          {
+            "url": "https://example.org/report-a",
+            "title": "report-a（虚构发布者的合成快照，未经外部认证）"
+          }
+        ],
+        "relation": "直接构成冲突中的支持证据",
+        "causes": [],
+        "confidence": 1.0,
+        "grounded": true
+      },
+      {
+        "title": "report-b 快照作出当日不运营的否定陈述",
+        "date": "2026-09-04T10:00:00Z",
+        "summary": "report-b 明确写道“The ferry is not operating today.”，直接反对目标声明。该版本同样在评估截止时间前可用，因此范围内证据存在冲突；这并不确定现实中的运营状态，现实核验结果仍为未知。",
+        "sources": [
+          {
+            "url": "https://example.org/report-b",
+            "title": "report-b（虚构发布者的合成快照，未经外部认证）"
+          }
+        ],
+        "relation": "直接构成冲突中的反对证据",
+        "causes": [],
+        "confidence": 1.0,
+        "grounded": true
+      }
+    ],
+    "confidence": 0.0,
+    "grounded": true
+  },
+  "direct_response": "“渡轮今天运营”获report-a支持，但report-b明确否认，不能判为范围内证据一致支持；现实运营状态未知。这里“今天”指2026年9月4日：按元数据，两份快照均于10:00 UTC可用，截至20:00 UTC评估时同时在范围内。因两者对同一声明作相反陈述，证据结论为冲突。唯一分歧是当天是否运营：a称运营，b称未运营。两份均为同一虚构发布者的未认证合成快照，不构成独立确认。（基于2个信源 | 覆盖1类媒体 | 0条事实多源一致 | 1条存在分歧 | 因果锚定2/2）",
+  "credibility": {
+    "source_count": 2,
+    "source_types": [
+      "自媒体"
+    ],
+    "consistent_count": 0,
+    "disputed_count": 1,
+    "grounding_rate": 1.0,
+    "grounded_count": 2,
+    "total_causal_nodes": 2
+  },
+  "event_timeline": [
+    {
+      "date": "2026-09-04T10:00:00Z",
+      "title": "两份快照对渡轮当日是否运营作出相反陈述",
+      "description": "report-a 声称渡轮当天正在运营，支持目标声明；report-b 声称当天未运营，反对同一目标声明。按所供元数据，两份版本此时均已可用，截至当日20:00 UTC评估截止时间，范围内证据结论为冲突，现实运营状态仍未知。两份材料均为同一虚构发布者的合成快照，未经外部认证；来源数量为2不构成对运营状态的独立确认。",
+      "significance": "重要",
+      "sources": [
+        {
+          "url": "https://example.org/report-a",
+          "title": "report-a／Fictional publisher"
+        },
+        {
+          "url": "https://example.org/report-b",
+          "title": "report-b／Fictional publisher"
+        }
+      ],
+      "perspectives": [],
+      "verified": true,
+      "causal_links": []
+    }
+  ],
+  "sources": [
+    {
+      "outlet": "Fictional publisher",
+      "url": "https://example.org/report-a",
+      "publish_time": "2026-09-04T10:00:00Z",
+      "source_type": "自媒体",
+      "is_original": false,
+      "key_facts": [
+        {
+          "claim": "report-a 声称：渡轮当天正在运营。",
+          "source_urls": [
+            "https://example.org/report-a"
+          ],
+          "agreed": true
+        }
+      ]
+    },
+    {
+      "outlet": "Fictional publisher",
+      "url": "https://example.org/report-b",
+      "publish_time": "2026-09-04T10:00:00Z",
+      "source_type": "自媒体",
+      "is_original": false,
+      "key_facts": [
+        {
+          "claim": "report-b 声称：渡轮当天未运营。",
+          "source_urls": [
+            "https://example.org/report-b"
+          ],
+          "agreed": true
+        }
+      ]
+    }
+  ],
+  "source_timeline": [
+    {
+      "outlet": "Fictional publisher",
+      "url": "https://example.org/report-a",
+      "publish_time": "2026-09-04T10:00:00Z",
+      "source_type": "自媒体",
+      "is_original": false,
+      "key_facts": [
+        {
+          "claim": "report-a 声称：渡轮当天正在运营。",
+          "source_urls": [
+            "https://example.org/report-a"
+          ],
+          "agreed": true
+        }
+      ]
+    },
+    {
+      "outlet": "Fictional publisher",
+      "url": "https://example.org/report-b",
+      "publish_time": "2026-09-04T10:00:00Z",
+      "source_type": "自媒体",
+      "is_original": false,
+      "key_facts": [
+        {
+          "claim": "report-b 声称：渡轮当天未运营。",
+          "source_urls": [
+            "https://example.org/report-b"
+          ],
+          "agreed": true
+        }
+      ]
+    }
+  ],
+  "key_findings": [
+    "【文档事实】report-a 明确称渡轮当天正在运营，支持原目标声明；report-b 明确称当天未运营，反对同一声明。证据范围内的结论是冲突。",
+    "【时间线】按所供元数据，两份快照均于2026-09-04 10:00 UTC发布并可用，均在当日20:00 UTC评估截止时间内；没有材料表明其中一份是后续更正。",
+    "【信源】两份材料均来自同一虚构发布者，属于未经外部认证的合成快照。两个文档不等于两个独立信源。",
+    "【因果研判】相反陈述直接构成证据冲突；锚定2/2仅表示两项陈述可在所供快照中定位，不代表现实运营状态已获验证。现实核验结论仍为未知。"
+  ],
+  "information_gaps": [
+    "未提供渡轮身份、航线或现实运营记录，无法确定当天实际是否运营；这不影响对范围内文档作出“证据冲突”的判断。",
+    "缺少版本修订关系、采集依据及冲突原因说明，无法判断是否存在更正、笔误或时间口径差异。",
+    "发布时间与可用时间仅由所供合成元数据支持，未经外部认证。"
+  ],
+  "consistent_facts": [],
+  "disputed_facts": [
+    {
+      "claim": "渡轮在报道当天（2026-09-04）是否正在运营。",
+      "source_urls": [
+        "https://example.org/report-a",
+        "https://example.org/report-b"
+      ],
+      "agreed": false
+    }
+  ],
+  "causal_summary": "按所供元数据，同一虚构发布者的两份快照在评估截止前均已可用：report-a 肯定渡轮当天运营，report-b 则否定。这两项可查的文档陈述直接形成对原目标声明的证据冲突。现有材料不能解释矛盾为何出现，也不能据此推断渡轮曾停航、复航或发生其他运营变化；因此，文档层面的研判为冲突，现实运营状态为未知。",
+  "bias_notes": [
+    "未发现足以判断立场偏差的内容；陈述相反本身不证明任何一方有偏见或更可信。",
+    "不能因report-a是目标声明的来源版本而优先采信，也不能把同一发布者的两份快照视为独立交叉确认。"
+  ]
+}

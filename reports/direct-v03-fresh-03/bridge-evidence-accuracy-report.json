@@ -1,0 +1,1054 @@
+{
+  "schema_version": "0.3",
+  "scope": "plugin-supplied semantic analyses; no built-in truth oracle",
+  "target": {
+    "id": "bridge-evidence",
+    "text": "The bridge has already reopened.",
+    "as_of": "2026-09-04T20:00:00Z",
+    "source_version_id": "bridge-article",
+    "assessment_mode": "evidence",
+    "evidence_scope": [
+      "bridge-notice"
+    ]
+  },
+  "config": {
+    "max_rounds": 5,
+    "max_documents": 18,
+    "max_decomposition_calls": 18
+  },
+  "provenance_status": "original_material_located",
+  "fact_status": "unresolved",
+  "stop_reason": "complete",
+  "usage": {
+    "rounds": 1,
+    "documents": 2,
+    "unique_versions": 2,
+    "decomposition_calls": 3,
+    "verification_calls": 1
+  },
+  "decision_status": "contradicted",
+  "assessments": {
+    "evidence": {
+      "raw_verdict": "contradicted",
+      "decision": "contradicted",
+      "blocking_gap_ids": []
+    },
+    "world": {
+      "raw_verdict": "unresolved",
+      "decision": "unresolved",
+      "blocking_gap_ids": []
+    }
+  },
+  "assessment_valid": true,
+  "materials": [
+    {
+      "version_id": "bridge-article",
+      "url": "https://example.org/bridge-article",
+      "content": "The bridge has already reopened, according to https://example.org/bridge-notice.",
+      "retrieved_at": "2026-09-04T20:00:00Z",
+      "published_at": "2026-09-04T10:00:00Z",
+      "available_at": "2026-09-04T10:00:00Z",
+      "availability_basis": "Synthetic exact-version capture; no external authentication.",
+      "issuer": "Fictional publisher"
+    },
+    {
+      "version_id": "bridge-notice",
+      "url": "https://example.org/bridge-notice",
+      "content": "Bridge operations notice: The bridge remains closed. Reopening is planned for next month.",
+      "retrieved_at": "2026-09-04T20:00:00Z",
+      "published_at": "2026-09-04T10:00:00Z",
+      "available_at": "2026-09-04T10:00:00Z",
+      "availability_basis": "Synthetic exact-version capture; no external authentication.",
+      "issuer": "Fictional publisher"
+    }
+  ],
+  "eligible_version_ids": [
+    "bridge-article",
+    "bridge-notice"
+  ],
+  "observations": [
+    {
+      "version_id": "bridge-article",
+      "retrieved_at": "2026-09-04T20:00:00Z",
+      "duplicate": false,
+      "eligible": true,
+      "reasons": []
+    },
+    {
+      "version_id": "bridge-notice",
+      "retrieved_at": "2026-09-04T20:00:00Z",
+      "duplicate": false,
+      "eligible": true,
+      "reasons": []
+    }
+  ],
+  "analyses": {
+    "bridge-notice": {
+      "fragments": [
+        {
+          "id": "bridge-closed",
+          "text": "The bridge remains closed.",
+          "span": {
+            "version_id": "bridge-notice",
+            "start": 26,
+            "end": 52,
+            "quote": "The bridge remains closed."
+          },
+          "parent_id": "bridge-evidence",
+          "qualifiers": [
+            "Continued closure contradicts an already completed reopening."
+          ],
+          "qualifier_spans": [
+            {
+              "version_id": "bridge-notice",
+              "start": 37,
+              "end": 51,
+              "quote": "remains closed"
+            }
+          ]
+        },
+        {
+          "id": "bridge-planned-reopening",
+          "text": "Reopening is planned for next month.",
+          "span": {
+            "version_id": "bridge-notice",
+            "start": 53,
+            "end": 89,
+            "quote": "Reopening is planned for next month."
+          },
+          "parent_id": "bridge-evidence",
+          "qualifiers": [
+            "Reopening is a future plan, not a completed event.",
+            "The notice specifies next month, not an exact reopening date."
+          ],
+          "qualifier_spans": [
+            {
+              "version_id": "bridge-notice",
+              "start": 66,
+              "end": 73,
+              "quote": "planned"
+            },
+            {
+              "version_id": "bridge-notice",
+              "start": 78,
+              "end": 88,
+              "quote": "next month"
+            }
+          ]
+        }
+      ],
+      "relations": [
+        {
+          "id": "notice-contradicts-article",
+          "from_version": "bridge-notice",
+          "to_version": "bridge-article",
+          "kind": "contradicts",
+          "status": "direct",
+          "basis": [
+            {
+              "version_id": "bridge-notice",
+              "start": 26,
+              "end": 89,
+              "quote": "The bridge remains closed. Reopening is planned for next month."
+            }
+          ],
+          "rationale": "The cited notice contradicts the article's assertion that reopening has already occurred.",
+          "upstream_locator": null
+        }
+      ],
+      "gaps": [],
+      "resolutions": [
+        {
+          "gap_id": "fetch-bridge-notice",
+          "basis": [
+            {
+              "version_id": "bridge-notice",
+              "start": 26,
+              "end": 89,
+              "quote": "The bridge remains closed. Reopening is planned for next month."
+            }
+          ],
+          "rationale": "The requested snapshot is now supplied. The sole evidence-scope document contradicts the unchanged target; external authentication is unnecessary for this evidence assessment."
+        },
+        {
+          "gap_id": "origin:bridge-evidence",
+          "basis": [
+            {
+              "version_id": "bridge-article",
+              "start": 33,
+              "end": 79,
+              "quote": "according to https://example.org/bridge-notice"
+            },
+            {
+              "version_id": "bridge-notice",
+              "start": 0,
+              "end": 52,
+              "quote": "Bridge operations notice: The bridge remains closed."
+            }
+          ],
+          "rationale": "The article's declared source is now visible and identifies itself as an operations notice. This resolves the available source lineage, but does not establish a supporting origin for the reopening claim: the source says the opposite."
+        }
+      ],
+      "origins": [
+        {
+          "target_id": "bridge-evidence",
+          "version_id": "bridge-notice",
+          "basis": [
+            {
+              "version_id": "bridge-notice",
+              "start": 0,
+              "end": 25,
+              "quote": "Bridge operations notice:"
+            }
+          ],
+          "material_kind": "original_record",
+          "rationale": "The snapshot presents itself as the operational notice, rather than a report quoting one. This identifies its visible publishing role, not its authenticity or the truth of its statements."
+        }
+      ],
+      "notes": "Evidence assessment: contradicted. The article's visible citation is an attribution, not support or independent confirmation. World verification: unknown.",
+      "revisit_versions": [
+        "bridge-article"
+      ]
+    },
+    "bridge-article": {
+      "fragments": [
+        {
+          "id": "bridge-article-claim",
+          "text": "The bridge has already reopened",
+          "span": {
+            "version_id": "bridge-article",
+            "start": 0,
+            "end": 31,
+            "quote": "The bridge has already reopened"
+          },
+          "parent_id": "bridge-evidence",
+          "qualifiers": [
+            "Affirms completed reopening, without specifying an exact reopening time.",
+            "Attributes the claim to the notice; the now-visible notice instead says the bridge remains closed."
+          ],
+          "qualifier_spans": [
+            {
+              "version_id": "bridge-article",
+              "start": 15,
+              "end": 22,
+              "quote": "already"
+            },
+            {
+              "version_id": "bridge-article",
+              "start": 33,
+              "end": 79,
+              "quote": "according to https://example.org/bridge-notice"
+            }
+          ]
+        }
+      ],
+      "relations": [
+        {
+          "id": "article-cites-notice",
+          "from_version": "bridge-article",
+          "to_version": "bridge-notice",
+          "kind": "cites",
+          "status": "direct",
+          "basis": [
+            {
+              "version_id": "bridge-article",
+              "start": 33,
+              "end": 79,
+              "quote": "according to https://example.org/bridge-notice"
+            }
+          ],
+          "rationale": "The cited notice is now supplied. Citation does not establish support.",
+          "upstream_locator": "https://example.org/bridge-notice"
+        },
+        {
+          "id": "notice-contradicts-article",
+          "from_version": "bridge-notice",
+          "to_version": "bridge-article",
+          "kind": "contradicts",
+          "status": "direct",
+          "basis": [
+            {
+              "version_id": "bridge-notice",
+              "start": 26,
+              "end": 89,
+              "quote": "The bridge remains closed. Reopening is planned for next month."
+            }
+          ],
+          "rationale": "Continued closure contradicts completed reopening. Reopening is described only as planned for next month, not as an accomplished or guaranteed event.",
+          "upstream_locator": null
+        }
+      ],
+      "gaps": [],
+      "resolutions": [
+        {
+          "gap_id": "fetch-bridge-notice",
+          "basis": [
+            {
+              "version_id": "bridge-notice",
+              "start": 26,
+              "end": 89,
+              "quote": "The bridge remains closed. Reopening is planned for next month."
+            }
+          ],
+          "rationale": "The requested snapshot is present and directly answers the evidence-only question by contradicting the target."
+        },
+        {
+          "gap_id": "lineage:bridge-evidence",
+          "basis": [
+            {
+              "version_id": "bridge-article",
+              "start": 33,
+              "end": 79,
+              "quote": "according to https://example.org/bridge-notice"
+            },
+            {
+              "version_id": "bridge-notice",
+              "start": 0,
+              "end": 25,
+              "quote": "Bridge operations notice:"
+            }
+          ],
+          "rationale": "The source and cited snapshot are present. The notice identifies its operational publishing role, completing the visible citation path to the original record already identified in context; this does not establish authenticity or truth."
+        }
+      ],
+      "origins": [],
+      "notes": "Evidence assessment: contradicted by bridge-notice, the sole evidence-scope document. World verification: unknown; it is not required for this evidence-only assessment.",
+      "revisit_versions": []
+    }
+  },
+  "analysis_history": [
+    {
+      "revision": 1,
+      "round": 1,
+      "version_id": "bridge-article",
+      "duplicate": false,
+      "revisit": false,
+      "accepted": true,
+      "analysis": {
+        "fragments": [
+          {
+            "id": "bridge-article-claim",
+            "text": "The bridge has already reopened",
+            "span": {
+              "version_id": "bridge-article",
+              "start": 0,
+              "end": 31,
+              "quote": "The bridge has already reopened"
+            },
+            "parent_id": "bridge-evidence",
+            "qualifiers": [
+              "Affirmative completed reopening claim; no exact reopening time is stated.",
+              "The article attributes the claim to the notice, which is unavailable in the supplied snapshots."
+            ],
+            "qualifier_spans": [
+              {
+                "version_id": "bridge-article",
+                "start": 15,
+                "end": 22,
+                "quote": "already"
+              },
+              {
+                "version_id": "bridge-article",
+                "start": 33,
+                "end": 79,
+                "quote": "according to https://example.org/bridge-notice"
+              }
+            ]
+          }
+        ],
+        "relations": [
+          {
+            "id": "article-cites-notice",
+            "from_version": "bridge-article",
+            "to_version": null,
+            "kind": "cites",
+            "status": "declared",
+            "basis": [
+              {
+                "version_id": "bridge-article",
+                "start": 33,
+                "end": 79,
+                "quote": "according to https://example.org/bridge-notice"
+              }
+            ],
+            "rationale": "Visible attribution establishes a declared citation, not what the unavailable notice actually says.",
+            "upstream_locator": "https://example.org/bridge-notice"
+          }
+        ],
+        "gaps": [
+          {
+            "id": "fetch-bridge-notice",
+            "question": "What does the cited notice say about whether the bridge has already reopened?",
+            "stage": "provenance",
+            "dimension": "provenance",
+            "blocking": true,
+            "target_id": "bridge-evidence",
+            "basis": [
+              {
+                "version_id": "bridge-article",
+                "start": 33,
+                "end": 79,
+                "quote": "according to https://example.org/bridge-notice"
+              }
+            ],
+            "decision_impact": "The notice is the sole evidence-scope document. Its snapshot is needed to assess its statements about the unchanged target.",
+            "action": "fetch",
+            "locator": "https://example.org/bridge-notice"
+          }
+        ],
+        "resolutions": [],
+        "origins": [],
+        "notes": "Evidence assessment remains undetermined because bridge-notice is absent. The article's assertion is outside evidence_scope. World verification is unknown and is not required to resolve this evidence-only question.",
+        "revisit_versions": []
+      },
+      "exclusion_reasons": []
+    },
+    {
+      "revision": 2,
+      "round": 1,
+      "version_id": "bridge-notice",
+      "duplicate": false,
+      "revisit": false,
+      "accepted": true,
+      "analysis": {
+        "fragments": [
+          {
+            "id": "bridge-closed",
+            "text": "The bridge remains closed.",
+            "span": {
+              "version_id": "bridge-notice",
+              "start": 26,
+              "end": 52,
+              "quote": "The bridge remains closed."
+            },
+            "parent_id": "bridge-evidence",
+            "qualifiers": [
+              "Continued closure contradicts an already completed reopening."
+            ],
+            "qualifier_spans": [
+              {
+                "version_id": "bridge-notice",
+                "start": 37,
+                "end": 51,
+                "quote": "remains closed"
+              }
+            ]
+          },
+          {
+            "id": "bridge-planned-reopening",
+            "text": "Reopening is planned for next month.",
+            "span": {
+              "version_id": "bridge-notice",
+              "start": 53,
+              "end": 89,
+              "quote": "Reopening is planned for next month."
+            },
+            "parent_id": "bridge-evidence",
+            "qualifiers": [
+              "Reopening is a future plan, not a completed event.",
+              "The notice specifies next month, not an exact reopening date."
+            ],
+            "qualifier_spans": [
+              {
+                "version_id": "bridge-notice",
+                "start": 66,
+                "end": 73,
+                "quote": "planned"
+              },
+              {
+                "version_id": "bridge-notice",
+                "start": 78,
+                "end": 88,
+                "quote": "next month"
+              }
+            ]
+          }
+        ],
+        "relations": [
+          {
+            "id": "notice-contradicts-article",
+            "from_version": "bridge-notice",
+            "to_version": "bridge-article",
+            "kind": "contradicts",
+            "status": "direct",
+            "basis": [
+              {
+                "version_id": "bridge-notice",
+                "start": 26,
+                "end": 89,
+                "quote": "The bridge remains closed. Reopening is planned for next month."
+              }
+            ],
+            "rationale": "The cited notice contradicts the article's assertion that reopening has already occurred.",
+            "upstream_locator": null
+          }
+        ],
+        "gaps": [],
+        "resolutions": [
+          {
+            "gap_id": "fetch-bridge-notice",
+            "basis": [
+              {
+                "version_id": "bridge-notice",
+                "start": 26,
+                "end": 89,
+                "quote": "The bridge remains closed. Reopening is planned for next month."
+              }
+            ],
+            "rationale": "The requested snapshot is now supplied. The sole evidence-scope document contradicts the unchanged target; external authentication is unnecessary for this evidence assessment."
+          },
+          {
+            "gap_id": "origin:bridge-evidence",
+            "basis": [
+              {
+                "version_id": "bridge-article",
+                "start": 33,
+                "end": 79,
+                "quote": "according to https://example.org/bridge-notice"
+              },
+              {
+                "version_id": "bridge-notice",
+                "start": 0,
+                "end": 52,
+                "quote": "Bridge operations notice: The bridge remains closed."
+              }
+            ],
+            "rationale": "The article's declared source is now visible and identifies itself as an operations notice. This resolves the available source lineage, but does not establish a supporting origin for the reopening claim: the source says the opposite."
+          }
+        ],
+        "origins": [
+          {
+            "target_id": "bridge-evidence",
+            "version_id": "bridge-notice",
+            "basis": [
+              {
+                "version_id": "bridge-notice",
+                "start": 0,
+                "end": 25,
+                "quote": "Bridge operations notice:"
+              }
+            ],
+            "material_kind": "original_record",
+            "rationale": "The snapshot presents itself as the operational notice, rather than a report quoting one. This identifies its visible publishing role, not its authenticity or the truth of its statements."
+          }
+        ],
+        "notes": "Evidence assessment: contradicted. The article's visible citation is an attribution, not support or independent confirmation. World verification: unknown.",
+        "revisit_versions": [
+          "bridge-article"
+        ]
+      },
+      "exclusion_reasons": []
+    },
+    {
+      "revision": 3,
+      "round": 1,
+      "version_id": "bridge-article",
+      "duplicate": true,
+      "revisit": true,
+      "accepted": true,
+      "analysis": {
+        "fragments": [
+          {
+            "id": "bridge-article-claim",
+            "text": "The bridge has already reopened",
+            "span": {
+              "version_id": "bridge-article",
+              "start": 0,
+              "end": 31,
+              "quote": "The bridge has already reopened"
+            },
+            "parent_id": "bridge-evidence",
+            "qualifiers": [
+              "Affirms completed reopening, without specifying an exact reopening time.",
+              "Attributes the claim to the notice; the now-visible notice instead says the bridge remains closed."
+            ],
+            "qualifier_spans": [
+              {
+                "version_id": "bridge-article",
+                "start": 15,
+                "end": 22,
+                "quote": "already"
+              },
+              {
+                "version_id": "bridge-article",
+                "start": 33,
+                "end": 79,
+                "quote": "according to https://example.org/bridge-notice"
+              }
+            ]
+          }
+        ],
+        "relations": [
+          {
+            "id": "article-cites-notice",
+            "from_version": "bridge-article",
+            "to_version": "bridge-notice",
+            "kind": "cites",
+            "status": "direct",
+            "basis": [
+              {
+                "version_id": "bridge-article",
+                "start": 33,
+                "end": 79,
+                "quote": "according to https://example.org/bridge-notice"
+              }
+            ],
+            "rationale": "The cited notice is now supplied. Citation does not establish support.",
+            "upstream_locator": "https://example.org/bridge-notice"
+          },
+          {
+            "id": "notice-contradicts-article",
+            "from_version": "bridge-notice",
+            "to_version": "bridge-article",
+            "kind": "contradicts",
+            "status": "direct",
+            "basis": [
+              {
+                "version_id": "bridge-notice",
+                "start": 26,
+                "end": 89,
+                "quote": "The bridge remains closed. Reopening is planned for next month."
+              }
+            ],
+            "rationale": "Continued closure contradicts completed reopening. Reopening is described only as planned for next month, not as an accomplished or guaranteed event.",
+            "upstream_locator": null
+          }
+        ],
+        "gaps": [],
+        "resolutions": [
+          {
+            "gap_id": "fetch-bridge-notice",
+            "basis": [
+              {
+                "version_id": "bridge-notice",
+                "start": 26,
+                "end": 89,
+                "quote": "The bridge remains closed. Reopening is planned for next month."
+              }
+            ],
+            "rationale": "The requested snapshot is present and directly answers the evidence-only question by contradicting the target."
+          },
+          {
+            "gap_id": "lineage:bridge-evidence",
+            "basis": [
+              {
+                "version_id": "bridge-article",
+                "start": 33,
+                "end": 79,
+                "quote": "according to https://example.org/bridge-notice"
+              },
+              {
+                "version_id": "bridge-notice",
+                "start": 0,
+                "end": 25,
+                "quote": "Bridge operations notice:"
+              }
+            ],
+            "rationale": "The source and cited snapshot are present. The notice identifies its operational publishing role, completing the visible citation path to the original record already identified in context; this does not establish authenticity or truth."
+          }
+        ],
+        "origins": [],
+        "notes": "Evidence assessment: contradicted by bridge-notice, the sole evidence-scope document. World verification: unknown; it is not required for this evidence-only assessment.",
+        "revisit_versions": []
+      },
+      "exclusion_reasons": []
+    }
+  ],
+  "fragments": [
+    {
+      "id": "bridge-closed",
+      "text": "The bridge remains closed.",
+      "span": {
+        "version_id": "bridge-notice",
+        "start": 26,
+        "end": 52,
+        "quote": "The bridge remains closed."
+      },
+      "parent_id": "bridge-evidence",
+      "qualifiers": [
+        "Continued closure contradicts an already completed reopening."
+      ],
+      "qualifier_spans": [
+        {
+          "version_id": "bridge-notice",
+          "start": 37,
+          "end": 51,
+          "quote": "remains closed"
+        }
+      ]
+    },
+    {
+      "id": "bridge-planned-reopening",
+      "text": "Reopening is planned for next month.",
+      "span": {
+        "version_id": "bridge-notice",
+        "start": 53,
+        "end": 89,
+        "quote": "Reopening is planned for next month."
+      },
+      "parent_id": "bridge-evidence",
+      "qualifiers": [
+        "Reopening is a future plan, not a completed event.",
+        "The notice specifies next month, not an exact reopening date."
+      ],
+      "qualifier_spans": [
+        {
+          "version_id": "bridge-notice",
+          "start": 66,
+          "end": 73,
+          "quote": "planned"
+        },
+        {
+          "version_id": "bridge-notice",
+          "start": 78,
+          "end": 88,
+          "quote": "next month"
+        }
+      ]
+    },
+    {
+      "id": "bridge-article-claim",
+      "text": "The bridge has already reopened",
+      "span": {
+        "version_id": "bridge-article",
+        "start": 0,
+        "end": 31,
+        "quote": "The bridge has already reopened"
+      },
+      "parent_id": "bridge-evidence",
+      "qualifiers": [
+        "Affirms completed reopening, without specifying an exact reopening time.",
+        "Attributes the claim to the notice; the now-visible notice instead says the bridge remains closed."
+      ],
+      "qualifier_spans": [
+        {
+          "version_id": "bridge-article",
+          "start": 15,
+          "end": 22,
+          "quote": "already"
+        },
+        {
+          "version_id": "bridge-article",
+          "start": 33,
+          "end": 79,
+          "quote": "according to https://example.org/bridge-notice"
+        }
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "notice-contradicts-article",
+      "from_version": "bridge-notice",
+      "to_version": "bridge-article",
+      "kind": "contradicts",
+      "status": "direct",
+      "basis": [
+        {
+          "version_id": "bridge-notice",
+          "start": 26,
+          "end": 89,
+          "quote": "The bridge remains closed. Reopening is planned for next month."
+        }
+      ],
+      "rationale": "Continued closure contradicts completed reopening. Reopening is described only as planned for next month, not as an accomplished or guaranteed event.",
+      "upstream_locator": null
+    },
+    {
+      "id": "article-cites-notice",
+      "from_version": "bridge-article",
+      "to_version": "bridge-notice",
+      "kind": "cites",
+      "status": "direct",
+      "basis": [
+        {
+          "version_id": "bridge-article",
+          "start": 33,
+          "end": 79,
+          "quote": "according to https://example.org/bridge-notice"
+        }
+      ],
+      "rationale": "The cited notice is now supplied. Citation does not establish support.",
+      "upstream_locator": "https://example.org/bridge-notice"
+    }
+  ],
+  "origins": [
+    {
+      "target_id": "bridge-evidence",
+      "version_id": "bridge-notice",
+      "basis": [
+        {
+          "version_id": "bridge-notice",
+          "start": 0,
+          "end": 25,
+          "quote": "Bridge operations notice:"
+        }
+      ],
+      "material_kind": "original_record",
+      "rationale": "The snapshot presents itself as the operational notice, rather than a report quoting one. This identifies its visible publishing role, not its authenticity or the truth of its statements."
+    }
+  ],
+  "gaps": [],
+  "resolutions": [
+    {
+      "gap_id": "fetch-bridge-notice",
+      "basis": [
+        {
+          "version_id": "bridge-notice",
+          "start": 26,
+          "end": 89,
+          "quote": "The bridge remains closed. Reopening is planned for next month."
+        }
+      ],
+      "rationale": "The requested snapshot is present and directly answers the evidence-only question by contradicting the target."
+    },
+    {
+      "gap_id": "origin:bridge-evidence",
+      "basis": [
+        {
+          "version_id": "bridge-article",
+          "start": 33,
+          "end": 79,
+          "quote": "according to https://example.org/bridge-notice"
+        },
+        {
+          "version_id": "bridge-notice",
+          "start": 0,
+          "end": 52,
+          "quote": "Bridge operations notice: The bridge remains closed."
+        }
+      ],
+      "rationale": "The article's declared source is now visible and identifies itself as an operations notice. This resolves the available source lineage, but does not establish a supporting origin for the reopening claim: the source says the opposite."
+    },
+    {
+      "gap_id": "lineage:bridge-evidence",
+      "basis": [
+        {
+          "version_id": "bridge-article",
+          "start": 33,
+          "end": 79,
+          "quote": "according to https://example.org/bridge-notice"
+        },
+        {
+          "version_id": "bridge-notice",
+          "start": 0,
+          "end": 25,
+          "quote": "Bridge operations notice:"
+        }
+      ],
+      "rationale": "The source and cited snapshot are present. The notice identifies its operational publishing role, completing the visible citation path to the original record already identified in context; this does not establish authenticity or truth."
+    }
+  ],
+  "verification_history": [
+    {
+      "round": 1,
+      "verdict": "contradicted",
+      "basis": [
+        {
+          "version_id": "bridge-notice",
+          "start": 26,
+          "end": 52,
+          "quote": "The bridge remains closed."
+        }
+      ],
+      "rationale": "The scoped notice explicitly says the bridge remains closed, contradicting the target. The article's contrary paraphrase is outside the evidence scope and cannot override the notice.",
+      "gaps": [],
+      "resolutions": [],
+      "evidence_verdict": "contradicted",
+      "world_verdict": "unresolved",
+      "world_basis": [],
+      "world_rationale": "The supplied snapshots are unauthenticated fictional publisher assertions. Neither independently establishes whether the bridge had reopened as of 2026-09-04T20:00:00Z."
+    }
+  ],
+  "operations": [
+    {
+      "sequence": 1,
+      "round": 1,
+      "action": "search",
+      "tasks": [
+        {
+          "id": "origin:bridge-evidence",
+          "question": "Find the producing record and evidenced lineage for: The bridge has already reopened.",
+          "stage": "provenance",
+          "dimension": "auto",
+          "blocking": true,
+          "target_id": null,
+          "basis": [],
+          "decision_impact": "",
+          "action": "search",
+          "locator": null
+        }
+      ],
+      "limit": 18
+    },
+    {
+      "sequence": 2,
+      "round": 1,
+      "action": "snapshot_saved",
+      "version_id": "bridge-article",
+      "sha256": "39a2ef48738a7887076db55b76f362b019e2278a366c95c586c7c1c16a41bd1a",
+      "eligible": true
+    },
+    {
+      "sequence": 3,
+      "round": 1,
+      "action": "decompose_started",
+      "version_id": "bridge-article",
+      "duplicate": false,
+      "revisit": false
+    },
+    {
+      "sequence": 4,
+      "round": 1,
+      "action": "decompose_completed",
+      "version_id": "bridge-article",
+      "revision": 1
+    },
+    {
+      "sequence": 5,
+      "round": 1,
+      "action": "alignment_checked",
+      "version_id": "bridge-article",
+      "analysis_changed": true
+    },
+    {
+      "sequence": 6,
+      "round": 1,
+      "action": "graph_updated",
+      "version_id": "bridge-article",
+      "open_gaps": 2
+    },
+    {
+      "sequence": 7,
+      "round": 1,
+      "action": "snapshot_saved",
+      "version_id": "bridge-notice",
+      "sha256": "6747a90ae90810b06a315b67b2d253b21bca45c259af4480bf5accb24d2083eb",
+      "eligible": true
+    },
+    {
+      "sequence": 8,
+      "round": 1,
+      "action": "decompose_started",
+      "version_id": "bridge-notice",
+      "duplicate": false,
+      "revisit": false
+    },
+    {
+      "sequence": 9,
+      "round": 1,
+      "action": "decompose_completed",
+      "version_id": "bridge-notice",
+      "revision": 2
+    },
+    {
+      "sequence": 10,
+      "round": 1,
+      "action": "alignment_checked",
+      "version_id": "bridge-notice",
+      "analysis_changed": true
+    },
+    {
+      "sequence": 11,
+      "round": 1,
+      "action": "graph_updated",
+      "version_id": "bridge-notice",
+      "open_gaps": 1
+    },
+    {
+      "sequence": 12,
+      "round": 1,
+      "action": "revisit_requested",
+      "version_id": "bridge-article"
+    },
+    {
+      "sequence": 13,
+      "round": 1,
+      "action": "decompose_started",
+      "version_id": "bridge-article",
+      "duplicate": true,
+      "revisit": true
+    },
+    {
+      "sequence": 14,
+      "round": 1,
+      "action": "decompose_completed",
+      "version_id": "bridge-article",
+      "revision": 3
+    },
+    {
+      "sequence": 15,
+      "round": 1,
+      "action": "alignment_checked",
+      "version_id": "bridge-article",
+      "analysis_changed": true
+    },
+    {
+      "sequence": 16,
+      "round": 1,
+      "action": "graph_updated",
+      "version_id": "bridge-article",
+      "open_gaps": 0
+    },
+    {
+      "sequence": 17,
+      "round": 1,
+      "action": "verification_started"
+    },
+    {
+      "sequence": 18,
+      "round": 1,
+      "action": "verification_completed",
+      "verdict": "unresolved",
+      "decision": "contradicted",
+      "assessments": {
+        "evidence": {
+          "raw_verdict": "contradicted",
+          "decision": "contradicted",
+          "blocking_gap_ids": []
+        },
+        "world": {
+          "raw_verdict": "unresolved",
+          "decision": "unresolved",
+          "blocking_gap_ids": []
+        }
+      },
+      "followup_tasks": 0,
+      "provenance_status": "original_material_located"
+    },
+    {
+      "sequence": 19,
+      "round": 1,
+      "action": "assessment_changed",
+      "previous": null,
+      "current": {
+        "evidence": {
+          "raw_verdict": "contradicted",
+          "decision": "contradicted",
+          "blocking_gap_ids": []
+        },
+        "world": {
+          "raw_verdict": "unresolved",
+          "decision": "unresolved",
+          "blocking_gap_ids": []
+        }
+      },
+      "basis": [
+        {
+          "version_id": "bridge-notice",
+          "start": 26,
+          "end": 52,
+          "quote": "The bridge remains closed."
+        }
+      ],
+      "world_basis": []
+    },
+    {
+      "sequence": 20,
+      "round": 1,
+      "action": "stopped",
+      "reason": "complete"
+    }
+  ],
+  "errors": []
+}

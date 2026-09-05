@@ -1,0 +1,19 @@
+{
+  "id": "bridge-evidence",
+  "arm": "original",
+  "status": "completed",
+  "prediction": "false",
+  "assessment_mode": "evidence",
+  "extractor_answer_text": "截至2026年9月4日20时（UTC），“桥梁已重开”虽见于报道，但在1个指定证据信源中未找到支持，且通知明确反驳该说法。应纠正为：通知称仍关闭，计划10月重开。关键脉络是报道宣称已开放并引用通知，而通知只列未来计划；矛盾源于报道对通知内容的错误归述。最大分歧是报道说“已开”、通知说“仍关”；两页同属一个发布者，不能独立互证。本次证据评估结论为矛盾，现实开放状态仍未知，快照未经外部认证。（基于2个信源 | 覆盖1类媒体 | 0条事实多源一致 | 1条存在分歧 | 因果锚定1/1）",
+  "extraction": {
+    "decision": "false",
+    "extractable": true,
+    "basis_quote": "本次证据评估结论为矛盾"
+  },
+  "usage": {
+    "model_calls": 16,
+    "input_tokens": 14114,
+    "output_tokens": 8110,
+    "seconds": 154.9957838929986
+  }
+}

@@ -1,0 +1,262 @@
+{
+  "previous_successful_run": "direct-v03-fresh-01",
+  "current_run": "direct-v03-fresh-03",
+  "same_configuration": true,
+  "successful_response_count": 110,
+  "total_request_attempts": 110,
+  "response_ids_overlapping_previous": 0,
+  "actual_models": [
+    "gpt-6-astra"
+  ],
+  "failed_requests": 0,
+  "cases": [
+    {
+      "id": "bridge-evidence",
+      "arm": "accuracy",
+      "previous_prediction": "false",
+      "new_prediction": "false",
+      "new_status": "completed",
+      "same_label": true,
+      "old_usage": {
+        "model_calls": 5,
+        "input_tokens": 7271,
+        "output_tokens": 3665,
+        "seconds": 63.86318910800037
+      },
+      "new_usage": {
+        "model_calls": 5,
+        "input_tokens": 7283,
+        "output_tokens": 3779,
+        "seconds": 65.09507425600168
+      }
+    },
+    {
+      "id": "bridge-evidence",
+      "arm": "original",
+      "previous_prediction": "false",
+      "new_prediction": "false",
+      "new_status": "completed",
+      "same_label": true,
+      "old_usage": {
+        "model_calls": 16,
+        "input_tokens": 14250,
+        "output_tokens": 8566,
+        "seconds": 161.24854488599522
+      },
+      "new_usage": {
+        "model_calls": 16,
+        "input_tokens": 14114,
+        "output_tokens": 8110,
+        "seconds": 154.9957838929986
+      }
+    },
+    {
+      "id": "chain-evidence",
+      "arm": "accuracy",
+      "previous_prediction": "true",
+      "new_prediction": "true",
+      "new_status": "completed",
+      "same_label": true,
+      "old_usage": {
+        "model_calls": 7,
+        "input_tokens": 12064,
+        "output_tokens": 5984,
+        "seconds": 98.6198127509997
+      },
+      "new_usage": {
+        "model_calls": 7,
+        "input_tokens": 11970,
+        "output_tokens": 4982,
+        "seconds": 87.24194803499995
+      }
+    },
+    {
+      "id": "chain-evidence",
+      "arm": "original",
+      "previous_prediction": "true",
+      "new_prediction": "true",
+      "new_status": "completed",
+      "same_label": true,
+      "old_usage": {
+        "model_calls": 17,
+        "input_tokens": 16919,
+        "output_tokens": 7968,
+        "seconds": 156.371949968001
+      },
+      "new_usage": {
+        "model_calls": 17,
+        "input_tokens": 16885,
+        "output_tokens": 7662,
+        "seconds": 152.5235323559973
+      }
+    },
+    {
+      "id": "conflict-evidence",
+      "arm": "accuracy",
+      "previous_prediction": "disputed",
+      "new_prediction": "disputed",
+      "new_status": "completed",
+      "same_label": true,
+      "old_usage": {
+        "model_calls": 4,
+        "input_tokens": 4681,
+        "output_tokens": 1417,
+        "seconds": 30.711600404996716
+      },
+      "new_usage": {
+        "model_calls": 4,
+        "input_tokens": 4691,
+        "output_tokens": 1490,
+        "seconds": 33.8159117039977
+      }
+    },
+    {
+      "id": "conflict-evidence",
+      "arm": "original",
+      "previous_prediction": "disputed",
+      "new_prediction": "disputed",
+      "new_status": "completed",
+      "same_label": true,
+      "old_usage": {
+        "model_calls": 16,
+        "input_tokens": 14025,
+        "output_tokens": 8067,
+        "seconds": 152.70371886999783
+      },
+      "new_usage": {
+        "model_calls": 17,
+        "input_tokens": 14469,
+        "output_tokens": 8459,
+        "seconds": 153.8010115040015
+      }
+    },
+    {
+      "id": "library-evidence",
+      "arm": "accuracy",
+      "previous_prediction": "true",
+      "new_prediction": "true",
+      "new_status": "completed",
+      "same_label": true,
+      "old_usage": {
+        "model_calls": 5,
+        "input_tokens": 7297,
+        "output_tokens": 3743,
+        "seconds": 69.83717490799609
+      },
+      "new_usage": {
+        "model_calls": 5,
+        "input_tokens": 7352,
+        "output_tokens": 3773,
+        "seconds": 68.64413365200016
+      }
+    },
+    {
+      "id": "library-evidence",
+      "arm": "original",
+      "previous_prediction": "true",
+      "new_prediction": "true",
+      "new_status": "completed",
+      "same_label": true,
+      "old_usage": {
+        "model_calls": 16,
+        "input_tokens": 13633,
+        "output_tokens": 8547,
+        "seconds": 155.2600619720033
+      },
+      "new_usage": {
+        "model_calls": 17,
+        "input_tokens": 14773,
+        "output_tokens": 8372,
+        "seconds": 158.84214369099936
+      }
+    },
+    {
+      "id": "world-unknown",
+      "arm": "accuracy",
+      "previous_prediction": "unverifiable",
+      "new_prediction": "unverifiable",
+      "new_status": "completed",
+      "same_label": true,
+      "old_usage": {
+        "model_calls": 5,
+        "input_tokens": 7189,
+        "output_tokens": 3559,
+        "seconds": 63.57168012699549
+      },
+      "new_usage": {
+        "model_calls": 5,
+        "input_tokens": 7282,
+        "output_tokens": 4113,
+        "seconds": 76.323757938997
+      }
+    },
+    {
+      "id": "world-unknown",
+      "arm": "original",
+      "previous_prediction": "unverifiable",
+      "new_prediction": "unverifiable",
+      "new_status": "completed",
+      "same_label": true,
+      "old_usage": {
+        "model_calls": 16,
+        "input_tokens": 14014,
+        "output_tokens": 9004,
+        "seconds": 170.4194535839997
+      },
+      "new_usage": {
+        "model_calls": 17,
+        "input_tokens": 14507,
+        "output_tokens": 8490,
+        "seconds": 161.27352550799696
+      }
+    }
+  ],
+  "arms": {
+    "original": {
+      "cases": 5,
+      "completed": 5,
+      "same_label_count": 5,
+      "label_agreement": 1.0,
+      "usage": {
+        "old_usage": {
+          "model_calls": 81,
+          "input_tokens": 72841,
+          "output_tokens": 42152,
+          "seconds": 796.0037292799971
+        },
+        "new_usage": {
+          "model_calls": 84,
+          "input_tokens": 74748,
+          "output_tokens": 41093,
+          "seconds": 781.4359969519937
+        }
+      }
+    },
+    "accuracy": {
+      "cases": 5,
+      "completed": 5,
+      "same_label_count": 5,
+      "label_agreement": 1.0,
+      "usage": {
+        "old_usage": {
+          "model_calls": 26,
+          "input_tokens": 38502,
+          "output_tokens": 18368,
+          "seconds": 326.60345729898836
+        },
+        "new_usage": {
+          "model_calls": 26,
+          "input_tokens": 38578,
+          "output_tokens": 18137,
+          "seconds": 331.1208255859965
+        }
+      }
+    }
+  },
+  "limits": [
+    "Repeated measurements on the same five development examples; not ten independent new questions.",
+    "The ordering seed is fixed but model sampling is not seeded.",
+    "No source-lineage or real-news accuracy is measured.",
+    "Quota-blocked fresh-02 is preserved and excluded from semantic scoring because it produced no answers."
+  ]
+}
