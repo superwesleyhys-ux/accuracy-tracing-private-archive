@@ -1,0 +1,133 @@
+{
+  "schema_version": "0.3",
+  "scope": "plugin-supplied semantic analyses; no built-in truth oracle",
+  "target": {
+    "id": "library-evidence",
+    "text": "The library now closes at 9 pm.",
+    "as_of": "2026-09-04T20:00:00Z",
+    "source_version_id": "library-article",
+    "assessment_mode": "evidence",
+    "evidence_scope": [
+      "library-notice"
+    ]
+  },
+  "config": {
+    "max_rounds": 5,
+    "max_documents": 18,
+    "max_decomposition_calls": 18
+  },
+  "provenance_status": "unresolved",
+  "fact_status": "unresolved",
+  "stop_reason": "decomposer_error",
+  "usage": {
+    "rounds": 1,
+    "documents": 1,
+    "unique_versions": 1,
+    "decomposition_calls": 1,
+    "verification_calls": 0
+  },
+  "decision_status": "unresolved",
+  "assessments": null,
+  "assessment_valid": false,
+  "materials": [
+    {
+      "version_id": "library-article",
+      "url": "https://example.org/library-article",
+      "content": "The library now closes at 9 pm, quoting https://example.org/library-notice.",
+      "retrieved_at": "2026-09-04T20:00:00Z",
+      "published_at": "2026-09-04T10:00:00Z",
+      "available_at": "2026-09-04T10:00:00Z",
+      "availability_basis": "Synthetic exact-version capture; no external authentication.",
+      "issuer": "Fictional publisher"
+    }
+  ],
+  "eligible_version_ids": [],
+  "observations": [
+    {
+      "version_id": "library-article",
+      "retrieved_at": "2026-09-04T20:00:00Z",
+      "duplicate": false,
+      "eligible": true,
+      "reasons": []
+    }
+  ],
+  "analyses": {},
+  "analysis_history": [],
+  "fragments": [],
+  "relations": [],
+  "origins": [],
+  "gaps": [
+    {
+      "id": "origin:library-evidence",
+      "question": "Find the producing record and evidenced lineage for: The library now closes at 9 pm.",
+      "stage": "provenance",
+      "dimension": "auto",
+      "blocking": true,
+      "target_id": null,
+      "basis": [],
+      "decision_impact": "",
+      "action": "search",
+      "locator": null
+    }
+  ],
+  "resolutions": [],
+  "verification_history": [],
+  "operations": [
+    {
+      "sequence": 1,
+      "round": 1,
+      "action": "search",
+      "tasks": [
+        {
+          "id": "origin:library-evidence",
+          "question": "Find the producing record and evidenced lineage for: The library now closes at 9 pm.",
+          "stage": "provenance",
+          "dimension": "auto",
+          "blocking": true,
+          "target_id": null,
+          "basis": [],
+          "decision_impact": "",
+          "action": "search",
+          "locator": null
+        }
+      ],
+      "limit": 18
+    },
+    {
+      "sequence": 2,
+      "round": 1,
+      "action": "snapshot_saved",
+      "version_id": "library-article",
+      "sha256": "50f6923e93266d15b4925865e4e084f1f694ab72dfeb34663b733336bd62479f",
+      "eligible": true
+    },
+    {
+      "sequence": 3,
+      "round": 1,
+      "action": "decompose_started",
+      "version_id": "library-article",
+      "duplicate": false,
+      "revisit": false
+    },
+    {
+      "sequence": 4,
+      "round": 1,
+      "action": "error",
+      "stage": "decomposer",
+      "message": "Model call failed: RateLimitError"
+    },
+    {
+      "sequence": 5,
+      "round": 1,
+      "action": "stopped",
+      "reason": "decomposer_error"
+    }
+  ],
+  "errors": [
+    {
+      "stage": "decomposer",
+      "type": "RuntimeError",
+      "message": "Model call failed: RateLimitError"
+    }
+  ]
+}
