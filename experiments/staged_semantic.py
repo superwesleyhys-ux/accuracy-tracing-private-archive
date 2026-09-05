@@ -90,6 +90,13 @@ otherwise use the exact cited record name. Describe the propagation kind and why
 the cited record could change lineage. Do not invent a citation from topic similarity.
 origin is null unless a current-material quote establishes its producing/publishing role
 as an original record, interview, dataset or observation relevant to this target.
+A returned origin attaches the current material to the whole unchanged target. It is not a
+place to record who produced a related statistic, estimate or other child claim inside the
+material. Once target.source_version_id is supplied, any other origin also needs an evidenced
+citation/derivation path from that source through known_relations. An exact declared locator
+may identify a newly supplied upstream; before the target source arrives an origin is only a
+candidate and the graph withholds it until connected. Topic similarity and evidence_scope
+membership do not establish a path.
 A URL, institution name, downstream assertion, or title alone does not establish originality.
 Originality is not truth. Do not output edges, gaps, resolution IDs or atomic claims.
 If repair is supplied, correct that specific issue and return this stage in full.
@@ -316,7 +323,10 @@ class StagedDecomposer(_StageClient):
         base = {"target": asdict(target), "material": source,
                 "previous_analysis": context.get("analyses", {}).get(material.version_id),
                 "available_sources": [{"version_id": item["version_id"], "url": item["url"]}
-                                      for item in visible.values()]}
+                                      for item in visible.values()],
+                "known_relations": [{key: item.get(key) for key in
+                    ("from_version", "to_version", "kind", "status", "upstream_locator")}
+                    for item in context.get("relations", [])]}
         drafts = {}
 
         def run(stage, repair=None, number=0, structure_repairs=0):
@@ -329,7 +339,7 @@ class StagedDecomposer(_StageClient):
                 payload["target_plan"] = plan_view
             raw = self._call(stage, prompt, payload, spec, material.version_id, context, number)
             try:
-                self._check_draft(stage, raw, source, visible)
+                self._check_draft(stage, raw, source, visible, target, context)
             except ValueError as exc:
                 if plan_view is not None and structure_repairs < self.max_repairs:
                     self.history[-1]["status"] = "structure_repair_requested"
@@ -381,7 +391,7 @@ class StagedDecomposer(_StageClient):
             raise StagedSemanticError("assembly", str(exc)) from None
 
     @staticmethod
-    def _check_draft(stage, raw, source, visible):
+    def _check_draft(stage, raw, source, visible, target, context):
         seen = set()
         for item in raw["atoms" if stage == "atoms" else "citations"]:
             _span(source, item["quote"])
@@ -405,6 +415,14 @@ class StagedDecomposer(_StageClient):
             seen.add(key)
         if stage == "lineage" and raw["origin"] is not None:
             _span(source, raw["origin"]["quote"])
+            reachable = p._evidenced_lineage_versions(
+                target.source_version_id, visible.values(), context.get("relations", []),
+                include_declared_matches=True)
+            if (target.source_version_id in visible
+                    and source["version_id"] not in reachable):
+                raise ValueError(
+                    "target-level origin is disconnected from the target source's "
+                    "evidenced citation or derivation path")
 
     @staticmethod
     def _assemble(target, source, visible, context, drafts):

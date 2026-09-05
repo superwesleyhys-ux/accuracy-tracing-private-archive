@@ -415,6 +415,57 @@ def _combine_resolutions(items):
     return combined
 
 
+_LINEAGE_KINDS = {"quotes", "cites", "reprints", "translates", "derives"}
+
+
+def _record_value(record, name):
+    return record.get(name) if isinstance(record, dict) else getattr(record, name)
+
+
+def _evidenced_lineage_versions(source_version_id, materials, relations, *,
+                                 include_declared_matches=False):
+    """Return versions reachable from the target source through propagation edges.
+
+    A declared source-side locator may be used by a semantic stage to decide
+    whether a newly arrived material is a plausible target-level origin. It is
+    not promoted to a confirmed graph edge: final report roots still require a
+    validated direct relation.
+    """
+    by_version = {_record_value(item, "version_id"): item for item in materials}
+    if source_version_id not in by_version:
+        return frozenset()
+    adjacency = {}
+    for edge in relations:
+        if _record_value(edge, "kind") not in _LINEAGE_KINDS:
+            continue
+        origin = _record_value(edge, "from_version")
+        if origin not in by_version:
+            continue
+        destination = None
+        status = _record_value(edge, "status")
+        if status == "direct":
+            candidate = _record_value(edge, "to_version")
+            if candidate in by_version:
+                destination = candidate
+        elif (include_declared_matches and status == "declared"
+              and _record_value(edge, "to_version") is None):
+            locator = _record_value(edge, "upstream_locator")
+            matches = [version for version, material in by_version.items()
+                       if locator and locator in (version, _record_value(material, "url"))]
+            if len(matches) == 1:
+                destination = matches[0]
+        if destination is not None:
+            adjacency.setdefault(origin, set()).add(destination)
+    reached, pending = set(), [source_version_id]
+    while pending:
+        version = pending.pop()
+        if version in reached:
+            continue
+        reached.add(version)
+        pending.extend(adjacency.get(version, ()))
+    return frozenset(reached)
+
+
 def _validate_analysis(analysis, target, material, materials):
     if not isinstance(analysis, Analysis):
         raise ValueError("decomposer must return Analysis")
@@ -629,7 +680,7 @@ def run_provenance(target: Target | dict, provider: TraceProvider,
             (item for analysis in analyses.values() for item in analysis.fragments), "fragment")
         projected_relations = _index_findings(
             (item for analysis in analyses.values() for item in analysis.relations), "relation")
-        projected_origins = {}
+        candidate_origins = {}
         proposed_gaps = _index_findings(
             [initial, *runtime_gaps.values(),
              *(item for analysis in analyses.values() for item in analysis.gaps),
@@ -646,7 +697,7 @@ def run_provenance(target: Target | dict, provider: TraceProvider,
         for owner, analysis in analyses.items():
             _validate_resolution_references(analysis.resolutions, registry, "decomposition")
             for item in analysis.origins:
-                projected_origins[(item.target_id, item.version_id)] = item
+                candidate_origins[(item.target_id, item.version_id)] = item
             for item in analysis.resolutions:
                 if item.gap_id not in verify_gaps or analysis_rounds.get(owner, 0) > reopened_rounds.get(item.gap_id, 0):
                     resolution_items.append(item)
@@ -655,7 +706,11 @@ def run_provenance(target: Target | dict, provider: TraceProvider,
         resolution_items.extend(verify_resolved.values())
         proposed_resolved = _combine_resolutions(resolution_items)
         generated_gaps = list(runtime_gaps.values())
-        if projected_origins and not has_origin_path(available, projected_origins, projected_relations):
+        reachable_origins = _evidenced_lineage_versions(
+            target.source_version_id, available.values(), projected_relations.values())
+        projected_origins = {key: item for key, item in candidate_origins.items()
+                             if item.version_id in reachable_origins}
+        if candidate_origins and not projected_origins:
             lineage_gap = Gap("lineage:" + target.id,
                 "Provide the target source version and an evidenced citation/derivation path to an original material")
             generated_gaps.append(lineage_gap)

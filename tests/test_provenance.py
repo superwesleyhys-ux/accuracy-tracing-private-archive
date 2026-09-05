@@ -297,7 +297,26 @@ class ProvenanceContractTests(unittest.TestCase):
                 resolutions=(Resolution("origin:" + target.id, (full(b),), "Located record."),))
         report = run_provenance(target, ReplayTraceProvider(((a, b),)), FunctionDecomposer(decompose))
         self.assertNotEqual("original_material_located", report["provenance_status"])
+        self.assertEqual([], report["origins"])
         self.assertTrue(any(x["id"] == "lineage:" + target.id for x in report["gaps"]))
+
+    def test_connected_origin_outside_evidence_scope_is_retained(self):
+        a, b = material("a"), material("b")
+        target = replace(TARGET, source_version_id="a", assessment_mode="evidence",
+                         evidence_scope=("a",))
+
+        def decompose(target, value, context):
+            if value.version_id == "b":
+                return Analysis(origins=(OriginFinding(target.id, "b", (full(b),),
+                    "original_record", "Annotated connected producing record."),))
+            return Analysis(relations=(Relation("citation", "a", "b", "cites", "direct",
+                (full(a),), "The target source directly cites the producing record."),))
+
+        report = run_provenance(target, ReplayTraceProvider(((b, a),)), FunctionDecomposer(decompose))
+        self.assertEqual([], report["errors"])
+        self.assertEqual(["b"], [item["version_id"] for item in report["origins"]])
+        self.assertNotIn("b", target.evidence_scope)
+        self.assertEqual("partial", report["provenance_status"])
 
     def test_report_is_json_serializable(self):
         serialized = json.dumps(run_demo(), allow_nan=False)

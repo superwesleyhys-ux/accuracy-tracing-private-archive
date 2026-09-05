@@ -160,6 +160,61 @@ class ExtendedStagedIntegrationTests(unittest.TestCase):
         self.assertEqual(["atoms", "atoms"], [call["stage"] for call in failing.calls])
         self.assertEqual("structure_repair_exhausted", exhausted.history[-1]["status"])
 
+    def test_disconnected_related_origin_is_repaired_out_of_whole_target(self):
+        target, material, context, plan, views = self.fixture()
+        other = p.MaterialVersion("b", "https://example.org/b",
+            "Another agency produced a related estimate using a different baseline.",
+            "2026-09-04T20:00:00Z", "2026-09-03T00:00:00Z",
+            "2026-09-03T00:00:00Z", "Synthetic exact archive.")
+        context["materials"].append(asdict(other))
+        bad_origin = {"citations": [], "origin": {"kind": "original_record",
+            "quote": other.content,
+            "rationale": "This agency produced its different estimate, not the target report."},
+            "notes": "The material is related but does not source the target."}
+        no_lineage = {"citations": [], "origin": None,
+            "notes": "Removed the unrelated whole-target origin."}
+        accept = {"decision": "accept", "stage": "none", "quote": "", "issue": ""}
+        client = SemanticClient([
+            ("atoms", {"atoms": [{"statement": other.content, "quote": other.content,
+                                    "qualifier_quotes": []}], "notes": ""}),
+            ("lineage", bad_origin), ("lineage", no_lineage), ("critic", accept),
+        ])
+        decomposer = s.StagedDecomposer(client, target_plan=views, max_repairs=1)
+        analysis = decomposer.decompose(target, other, context)
+        self.assertEqual((), analysis.origins)
+        self.assertEqual(["atoms", "lineage", "lineage", "critic"],
+                         [call["stage"] for call in client.calls])
+        self.assertEqual("structure_repair_requested", decomposer.history[1]["status"])
+        repair = client.calls[2]["payload"]["repair"]
+        self.assertIn("disconnected", repair["issue"])
+        self.assertIn("complete replacement", repair["instruction"])
+
+    def test_connected_upstream_origin_may_be_outside_evidence_scope(self):
+        target, material, context, plan, views = self.fixture()
+        other = p.MaterialVersion("b", "https://example.org/b",
+            "This is the producing record for the target source's cited result.",
+            "2026-09-04T20:00:00Z", "2026-09-03T00:00:00Z",
+            "2026-09-03T00:00:00Z", "Synthetic exact archive.")
+        context["materials"].append(asdict(other))
+        context["relations"] = [asdict(p.Relation("a-to-b", "a", None, "cites", "declared",
+            (p.Span("a", 0, len(material.content), material.content),),
+            "The target source explicitly cites the producing record.", other.url))]
+        origin = {"citations": [], "origin": {"kind": "original_record",
+            "quote": other.content,
+            "rationale": "The connected upstream explicitly identifies its producing role."},
+            "notes": ""}
+        accept = {"decision": "accept", "stage": "none", "quote": "", "issue": ""}
+        client = SemanticClient([
+            ("atoms", {"atoms": [{"statement": other.content, "quote": other.content,
+                                    "qualifier_quotes": []}], "notes": ""}),
+            ("lineage", origin), ("critic", accept),
+        ])
+        analysis = s.StagedDecomposer(client, target_plan=views).decompose(target, other, context)
+        self.assertEqual(("b",), tuple(item.version_id for item in analysis.origins))
+        self.assertNotIn("b", target.evidence_scope)
+        self.assertEqual(["atoms", "lineage", "critic"],
+                         [call["stage"] for call in client.calls])
+
     def test_evidence_repair_basis_cannot_escape_evidence_scope(self):
         target, material, context, plan, views = self.fixture()
         other = p.MaterialVersion("b", "https://example.org/b",
