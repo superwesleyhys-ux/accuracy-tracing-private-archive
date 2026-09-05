@@ -1,0 +1,888 @@
+{
+  "schema_version": "target-extension-compare-score-v2",
+  "comparison": "target_extension_vs_staged_and_original_development",
+  "selected_case_ids": [
+    "p02",
+    "p07",
+    "p08"
+  ],
+  "scheduled_cases_per_arm": 3,
+  "model": "gpt-6-astra",
+  "reasoning_effort": "medium",
+  "arms": {
+    "original": {
+      "scheduled_cases": 3,
+      "completed": 3,
+      "completion_rate": 1.0,
+      "execution_errors": 0,
+      "error_types": {},
+      "error_predictions_ignored": 0,
+      "label_evaluable_cases": 3,
+      "label_gold_excluded": 0,
+      "correct": 3,
+      "semantic_errors_among_completed": 0,
+      "overall_task_success": 1.0,
+      "overall_task_success_denominator": 3,
+      "overall_task_success_definition": "correct completed labels / all label-evaluable scheduled cases; execution errors are task failures",
+      "label_accuracy_among_completed": 1.0,
+      "label_accuracy_among_completed_denominator": 3,
+      "unverifiable_predictions": 0,
+      "unverifiable_rate_among_completed": 0.0,
+      "nonabstaining_predictions": 3,
+      "nonabstaining_coverage_of_scheduled": 1.0,
+      "nonabstaining_coverage_among_completed": 1.0,
+      "confusion_among_completed": [
+        {
+          "gold": "false",
+          "prediction": "false",
+          "count": 2
+        },
+        {
+          "gold": "true",
+          "prediction": "true",
+          "count": 1
+        }
+      ],
+      "origins": {
+        "evaluable_cases": 1,
+        "excluded_cases": 2,
+        "exclusions": {
+          "gold_not_evaluable_or_unknown": 2
+        },
+        "matched_predictions": 1,
+        "predicted_items": 1,
+        "precision": 1.0,
+        "scope": "corpus-relative, restricted to explicitly evaluable material",
+        "metric": "corpus-relative documentary-root accuracy",
+        "recall": 1.0,
+        "cases_with_acceptable_origin": 1,
+        "recall_denominator": 1,
+        "recall_definition": "fraction of evaluable cases with at least one acceptable origin; gold origins are alternatives"
+      },
+      "edges": {
+        "evaluable_cases": 0,
+        "excluded_cases": 3,
+        "exclusions": {
+          "gold_not_evaluable_or_unknown": 1,
+          "prediction_dimension_not_evaluable": 2
+        },
+        "matched_predictions": 0,
+        "predicted_items": 0,
+        "precision": null,
+        "scope": "corpus-relative, restricted to explicitly evaluable material",
+        "recall": null,
+        "gold_edges": 0,
+        "recall_denominator": 0,
+        "recall_definition": "micro recall over known exhaustive excerpt-level edge sets",
+        "status": "unsupported_native_export",
+        "note": "The original agent has no native source-to-source edge representation."
+      },
+      "usage_total": {
+        "model_calls": 52,
+        "input_tokens": 74098,
+        "output_tokens": 34966,
+        "reasoning_tokens": 5562,
+        "visible_output_tokens": 29404,
+        "service_seconds": 594.7004665429995,
+        "reasoning_reporting_complete": true
+      },
+      "usage_mean_per_scheduled_case": {
+        "model_calls": 17.333333333333332,
+        "input_tokens": 24699.333333333332,
+        "output_tokens": 11655.333333333334,
+        "reasoning_tokens": 1854.0,
+        "visible_output_tokens": 9801.333333333334,
+        "service_seconds": 198.2334888476665,
+        "reasoning_reporting_complete": true
+      }
+    },
+    "staged": {
+      "scheduled_cases": 3,
+      "completed": 3,
+      "completion_rate": 1.0,
+      "execution_errors": 0,
+      "error_types": {},
+      "error_predictions_ignored": 0,
+      "label_evaluable_cases": 3,
+      "label_gold_excluded": 0,
+      "correct": 3,
+      "semantic_errors_among_completed": 0,
+      "overall_task_success": 1.0,
+      "overall_task_success_denominator": 3,
+      "overall_task_success_definition": "correct completed labels / all label-evaluable scheduled cases; execution errors are task failures",
+      "label_accuracy_among_completed": 1.0,
+      "label_accuracy_among_completed_denominator": 3,
+      "unverifiable_predictions": 0,
+      "unverifiable_rate_among_completed": 0.0,
+      "nonabstaining_predictions": 3,
+      "nonabstaining_coverage_of_scheduled": 1.0,
+      "nonabstaining_coverage_among_completed": 1.0,
+      "confusion_among_completed": [
+        {
+          "gold": "false",
+          "prediction": "false",
+          "count": 2
+        },
+        {
+          "gold": "true",
+          "prediction": "true",
+          "count": 1
+        }
+      ],
+      "origins": {
+        "evaluable_cases": 1,
+        "excluded_cases": 2,
+        "exclusions": {
+          "gold_not_evaluable_or_unknown": 2
+        },
+        "matched_predictions": 1,
+        "predicted_items": 2,
+        "precision": 0.5,
+        "scope": "corpus-relative, restricted to explicitly evaluable material",
+        "metric": "corpus-relative documentary-root accuracy",
+        "recall": 1.0,
+        "cases_with_acceptable_origin": 1,
+        "recall_denominator": 1,
+        "recall_definition": "fraction of evaluable cases with at least one acceptable origin; gold origins are alternatives"
+      },
+      "edges": {
+        "evaluable_cases": 2,
+        "excluded_cases": 1,
+        "exclusions": {
+          "gold_not_evaluable_or_unknown": 1
+        },
+        "matched_predictions": 2,
+        "predicted_items": 2,
+        "precision": 1.0,
+        "scope": "corpus-relative, restricted to explicitly evaluable material",
+        "recall": 1.0,
+        "gold_edges": 2,
+        "recall_denominator": 2,
+        "recall_definition": "micro recall over known exhaustive excerpt-level edge sets"
+      },
+      "usage_total": {
+        "model_calls": 58,
+        "input_tokens": 110540,
+        "output_tokens": 14482,
+        "reasoning_tokens": 2755,
+        "visible_output_tokens": 11727,
+        "service_seconds": 310.128342934986,
+        "reasoning_reporting_complete": true
+      },
+      "usage_mean_per_scheduled_case": {
+        "model_calls": 19.333333333333332,
+        "input_tokens": 36846.666666666664,
+        "output_tokens": 4827.333333333333,
+        "reasoning_tokens": 918.3333333333334,
+        "visible_output_tokens": 3909.0,
+        "service_seconds": 103.376114311662,
+        "reasoning_reporting_complete": true
+      }
+    },
+    "extension": {
+      "scheduled_cases": 3,
+      "completed": 3,
+      "completion_rate": 1.0,
+      "execution_errors": 0,
+      "error_types": {},
+      "error_predictions_ignored": 0,
+      "label_evaluable_cases": 3,
+      "label_gold_excluded": 0,
+      "correct": 3,
+      "semantic_errors_among_completed": 0,
+      "overall_task_success": 1.0,
+      "overall_task_success_denominator": 3,
+      "overall_task_success_definition": "correct completed labels / all label-evaluable scheduled cases; execution errors are task failures",
+      "label_accuracy_among_completed": 1.0,
+      "label_accuracy_among_completed_denominator": 3,
+      "unverifiable_predictions": 0,
+      "unverifiable_rate_among_completed": 0.0,
+      "nonabstaining_predictions": 3,
+      "nonabstaining_coverage_of_scheduled": 1.0,
+      "nonabstaining_coverage_among_completed": 1.0,
+      "confusion_among_completed": [
+        {
+          "gold": "false",
+          "prediction": "false",
+          "count": 2
+        },
+        {
+          "gold": "true",
+          "prediction": "true",
+          "count": 1
+        }
+      ],
+      "origins": {
+        "evaluable_cases": 1,
+        "excluded_cases": 2,
+        "exclusions": {
+          "gold_not_evaluable_or_unknown": 2
+        },
+        "matched_predictions": 1,
+        "predicted_items": 2,
+        "precision": 0.5,
+        "scope": "corpus-relative, restricted to explicitly evaluable material",
+        "metric": "corpus-relative documentary-root accuracy",
+        "recall": 1.0,
+        "cases_with_acceptable_origin": 1,
+        "recall_denominator": 1,
+        "recall_definition": "fraction of evaluable cases with at least one acceptable origin; gold origins are alternatives"
+      },
+      "edges": {
+        "evaluable_cases": 2,
+        "excluded_cases": 1,
+        "exclusions": {
+          "gold_not_evaluable_or_unknown": 1
+        },
+        "matched_predictions": 2,
+        "predicted_items": 2,
+        "precision": 1.0,
+        "scope": "corpus-relative, restricted to explicitly evaluable material",
+        "recall": 1.0,
+        "gold_edges": 2,
+        "recall_denominator": 2,
+        "recall_definition": "micro recall over known exhaustive excerpt-level edge sets"
+      },
+      "usage_total": {
+        "model_calls": 73,
+        "input_tokens": 300225,
+        "output_tokens": 33877,
+        "reasoning_tokens": 4417,
+        "visible_output_tokens": 29460,
+        "service_seconds": 595.2190428890026,
+        "reasoning_reporting_complete": true
+      },
+      "usage_mean_per_scheduled_case": {
+        "model_calls": 24.333333333333332,
+        "input_tokens": 100075.0,
+        "output_tokens": 11292.333333333334,
+        "reasoning_tokens": 1472.3333333333333,
+        "visible_output_tokens": 9820.0,
+        "service_seconds": 198.40634762966752,
+        "reasoning_reporting_complete": true
+      }
+    }
+  },
+  "label_comparisons": {
+    "staged_vs_original": {
+      "all_scheduled": {
+        "case_pairs": 3,
+        "case_ids": [
+          "p02",
+          "p07",
+          "p08"
+        ],
+        "baseline": "original",
+        "candidate": "staged",
+        "fixes": 0,
+        "breaks": 0,
+        "both_successful": 3,
+        "both_unsuccessful": 0,
+        "baseline_correct": 3,
+        "candidate_correct": 3,
+        "candidate_minus_baseline": 0.0,
+        "denominator": "all selected label-evaluable scheduled cases; errors are failures"
+      },
+      "shared_completed": {
+        "case_pairs": 3,
+        "case_ids": [
+          "p02",
+          "p07",
+          "p08"
+        ],
+        "baseline": "original",
+        "candidate": "staged",
+        "fixes": 0,
+        "breaks": 0,
+        "both_successful": 3,
+        "both_unsuccessful": 0,
+        "baseline_correct": 3,
+        "candidate_correct": 3,
+        "candidate_minus_baseline": 0.0,
+        "denominator": "shared completed label-evaluable cases"
+      }
+    },
+    "extension_vs_original": {
+      "all_scheduled": {
+        "case_pairs": 3,
+        "case_ids": [
+          "p02",
+          "p07",
+          "p08"
+        ],
+        "baseline": "original",
+        "candidate": "extension",
+        "fixes": 0,
+        "breaks": 0,
+        "both_successful": 3,
+        "both_unsuccessful": 0,
+        "baseline_correct": 3,
+        "candidate_correct": 3,
+        "candidate_minus_baseline": 0.0,
+        "denominator": "all selected label-evaluable scheduled cases; errors are failures"
+      },
+      "shared_completed": {
+        "case_pairs": 3,
+        "case_ids": [
+          "p02",
+          "p07",
+          "p08"
+        ],
+        "baseline": "original",
+        "candidate": "extension",
+        "fixes": 0,
+        "breaks": 0,
+        "both_successful": 3,
+        "both_unsuccessful": 0,
+        "baseline_correct": 3,
+        "candidate_correct": 3,
+        "candidate_minus_baseline": 0.0,
+        "denominator": "shared completed label-evaluable cases"
+      }
+    },
+    "extension_vs_staged": {
+      "all_scheduled": {
+        "case_pairs": 3,
+        "case_ids": [
+          "p02",
+          "p07",
+          "p08"
+        ],
+        "baseline": "staged",
+        "candidate": "extension",
+        "fixes": 0,
+        "breaks": 0,
+        "both_successful": 3,
+        "both_unsuccessful": 0,
+        "baseline_correct": 3,
+        "candidate_correct": 3,
+        "candidate_minus_baseline": 0.0,
+        "denominator": "all selected label-evaluable scheduled cases; errors are failures"
+      },
+      "shared_completed": {
+        "case_pairs": 3,
+        "case_ids": [
+          "p02",
+          "p07",
+          "p08"
+        ],
+        "baseline": "staged",
+        "candidate": "extension",
+        "fixes": 0,
+        "breaks": 0,
+        "both_successful": 3,
+        "both_unsuccessful": 0,
+        "baseline_correct": 3,
+        "candidate_correct": 3,
+        "candidate_minus_baseline": 0.0,
+        "denominator": "shared completed label-evaluable cases"
+      }
+    }
+  },
+  "round1_to_final": {
+    "staged": {
+      "label_evaluable_scheduled_cases": 3,
+      "paired_completed_cases_with_round1": 3,
+      "first_round_correct": 3,
+      "final_correct": 3,
+      "fixes": 0,
+      "breaks": 0,
+      "cases": [
+        {
+          "id": "p02",
+          "reference": "false",
+          "first_round": "false",
+          "final": "false",
+          "paired": true,
+          "first_correct": true,
+          "final_correct": true
+        },
+        {
+          "id": "p07",
+          "reference": "false",
+          "first_round": "false",
+          "final": "false",
+          "paired": true,
+          "first_correct": true,
+          "final_correct": true
+        },
+        {
+          "id": "p08",
+          "reference": "true",
+          "first_round": "true",
+          "final": "true",
+          "paired": true,
+          "first_correct": true,
+          "final_correct": true
+        }
+      ],
+      "denominator_note": "Fixes/breaks use completed cases with an observed round-1 decision; scheduled task success remains in arms."
+    },
+    "extension": {
+      "label_evaluable_scheduled_cases": 3,
+      "paired_completed_cases_with_round1": 3,
+      "first_round_correct": 3,
+      "final_correct": 3,
+      "fixes": 0,
+      "breaks": 0,
+      "cases": [
+        {
+          "id": "p02",
+          "reference": "false",
+          "first_round": "false",
+          "final": "false",
+          "paired": true,
+          "first_correct": true,
+          "final_correct": true
+        },
+        {
+          "id": "p07",
+          "reference": "false",
+          "first_round": "false",
+          "final": "false",
+          "paired": true,
+          "first_correct": true,
+          "final_correct": true
+        },
+        {
+          "id": "p08",
+          "reference": "true",
+          "first_round": "true",
+          "final": "true",
+          "paired": true,
+          "first_correct": true,
+          "final_correct": true
+        }
+      ],
+      "denominator_note": "Fixes/breaks use completed cases with an observed round-1 decision; scheduled task success remains in arms."
+    }
+  },
+  "usage_extension_minus_staged": {
+    "model_calls": 15,
+    "input_tokens": 189685,
+    "output_tokens": 19395,
+    "reasoning_tokens": 1662,
+    "visible_output_tokens": 17733,
+    "service_seconds": 285.0906999540166
+  },
+  "usage_extension_minus_original": {
+    "model_calls": 21,
+    "input_tokens": 226127,
+    "output_tokens": -1089,
+    "reasoning_tokens": -1145,
+    "visible_output_tokens": 56,
+    "service_seconds": 0.5185763460031012
+  },
+  "loop_audit": {
+    "staged": {
+      "totals": {
+        "target_planner_calls": 0,
+        "target_plan_repair_requests": 0,
+        "target_plan_repair_followup_calls": 0,
+        "target_structure_repair_requests": 0,
+        "target_structure_repair_followup_calls": 0,
+        "target_extension_repair_requests": 0,
+        "target_extension_repair_followup_calls": 0,
+        "target_extension_output_repair_requests": 0,
+        "target_extension_output_repair_followup_calls": 0,
+        "material_critic_calls": 16,
+        "material_critic_repair_requests": 2,
+        "material_stage_repair_attempts": 2,
+        "judgement_critic_calls": 0,
+        "judgement_critic_repair_requests": 0,
+        "judgement_layer_repair_attempts": 0
+      },
+      "cases": [
+        {
+          "id": "p02",
+          "target_planner_calls": 0,
+          "target_plan_repair_requests": 0,
+          "target_plan_repair_followup_calls": 0,
+          "target_structure_repair_requests": 0,
+          "target_structure_repair_followup_calls": 0,
+          "target_extension_repair_requests": 0,
+          "target_extension_repair_followup_calls": 0,
+          "target_extension_output_repair_requests": 0,
+          "target_extension_output_repair_followup_calls": 0,
+          "material_critic_calls": 5,
+          "material_critic_repair_requests": 1,
+          "material_stage_repair_attempts": 1,
+          "judgement_critic_calls": 0,
+          "judgement_critic_repair_requests": 0,
+          "judgement_layer_repair_attempts": 0
+        },
+        {
+          "id": "p07",
+          "target_planner_calls": 0,
+          "target_plan_repair_requests": 0,
+          "target_plan_repair_followup_calls": 0,
+          "target_structure_repair_requests": 0,
+          "target_structure_repair_followup_calls": 0,
+          "target_extension_repair_requests": 0,
+          "target_extension_repair_followup_calls": 0,
+          "target_extension_output_repair_requests": 0,
+          "target_extension_output_repair_followup_calls": 0,
+          "material_critic_calls": 5,
+          "material_critic_repair_requests": 0,
+          "material_stage_repair_attempts": 0,
+          "judgement_critic_calls": 0,
+          "judgement_critic_repair_requests": 0,
+          "judgement_layer_repair_attempts": 0
+        },
+        {
+          "id": "p08",
+          "target_planner_calls": 0,
+          "target_plan_repair_requests": 0,
+          "target_plan_repair_followup_calls": 0,
+          "target_structure_repair_requests": 0,
+          "target_structure_repair_followup_calls": 0,
+          "target_extension_repair_requests": 0,
+          "target_extension_repair_followup_calls": 0,
+          "target_extension_output_repair_requests": 0,
+          "target_extension_output_repair_followup_calls": 0,
+          "material_critic_calls": 6,
+          "material_critic_repair_requests": 1,
+          "material_stage_repair_attempts": 1,
+          "judgement_critic_calls": 0,
+          "judgement_critic_repair_requests": 0,
+          "judgement_layer_repair_attempts": 0
+        }
+      ]
+    },
+    "extension": {
+      "totals": {
+        "target_planner_calls": 9,
+        "target_plan_repair_requests": 2,
+        "target_plan_repair_followup_calls": 4,
+        "target_structure_repair_requests": 1,
+        "target_structure_repair_followup_calls": 2,
+        "target_extension_repair_requests": 1,
+        "target_extension_repair_followup_calls": 2,
+        "target_extension_output_repair_requests": 0,
+        "target_extension_output_repair_followup_calls": 0,
+        "material_critic_calls": 14,
+        "material_critic_repair_requests": 0,
+        "material_stage_repair_attempts": 0,
+        "judgement_critic_calls": 8,
+        "judgement_critic_repair_requests": 2,
+        "judgement_layer_repair_attempts": 2
+      },
+      "cases": [
+        {
+          "id": "p02",
+          "target_planner_calls": 2,
+          "target_plan_repair_requests": 0,
+          "target_plan_repair_followup_calls": 0,
+          "target_structure_repair_requests": 0,
+          "target_structure_repair_followup_calls": 0,
+          "target_extension_repair_requests": 0,
+          "target_extension_repair_followup_calls": 0,
+          "target_extension_output_repair_requests": 0,
+          "target_extension_output_repair_followup_calls": 0,
+          "material_critic_calls": 4,
+          "material_critic_repair_requests": 0,
+          "material_stage_repair_attempts": 0,
+          "judgement_critic_calls": 2,
+          "judgement_critic_repair_requests": 0,
+          "judgement_layer_repair_attempts": 0
+        },
+        {
+          "id": "p07",
+          "target_planner_calls": 3,
+          "target_plan_repair_requests": 1,
+          "target_plan_repair_followup_calls": 2,
+          "target_structure_repair_requests": 1,
+          "target_structure_repair_followup_calls": 2,
+          "target_extension_repair_requests": 0,
+          "target_extension_repair_followup_calls": 0,
+          "target_extension_output_repair_requests": 0,
+          "target_extension_output_repair_followup_calls": 0,
+          "material_critic_calls": 5,
+          "material_critic_repair_requests": 0,
+          "material_stage_repair_attempts": 0,
+          "judgement_critic_calls": 4,
+          "judgement_critic_repair_requests": 2,
+          "judgement_layer_repair_attempts": 2
+        },
+        {
+          "id": "p08",
+          "target_planner_calls": 4,
+          "target_plan_repair_requests": 1,
+          "target_plan_repair_followup_calls": 2,
+          "target_structure_repair_requests": 0,
+          "target_structure_repair_followup_calls": 0,
+          "target_extension_repair_requests": 1,
+          "target_extension_repair_followup_calls": 2,
+          "target_extension_output_repair_requests": 0,
+          "target_extension_output_repair_followup_calls": 0,
+          "material_critic_calls": 5,
+          "material_critic_repair_requests": 0,
+          "material_stage_repair_attempts": 0,
+          "judgement_critic_calls": 2,
+          "judgement_critic_repair_requests": 0,
+          "judgement_layer_repair_attempts": 0
+        }
+      ]
+    }
+  },
+  "target_plan_probe_coverage": {
+    "totals": {
+      "claims": 5,
+      "dimensions": 25,
+      "probes": 26,
+      "required_probe_slots": 26,
+      "required_probe_slots_covered": 26,
+      "projection_slots": 99,
+      "projection_slots_covered": 99,
+      "routed_stage_slots": 73,
+      "projected_slots_at_executed_stages": 73,
+      "projected_probes_atoms": 21,
+      "projected_probes_lineage": 5,
+      "projected_probes_critic": 26,
+      "projected_probes_evidence": 21,
+      "projected_probes_world": 26,
+      "plans_present": 3,
+      "plans_valid": 3,
+      "scheduled_cases": 3,
+      "required_probe_coverage": 1.0,
+      "projection_coverage": 1.0,
+      "executed_stage_projection_coverage": 1.0
+    },
+    "cases": [
+      {
+        "id": "p02",
+        "status": "completed",
+        "plan_present": true,
+        "plan_valid": true,
+        "plan_contract": "decision-probe-v2",
+        "claims": 2,
+        "dimensions": 10,
+        "probes": 10,
+        "required_probe_slots": 10,
+        "required_probe_slots_covered": 10,
+        "projection_slots": 38,
+        "projection_slots_covered": 38,
+        "routed_stage_slots": 28,
+        "projected_slots_at_executed_stages": 28,
+        "projected_probes_by_stage": {
+          "atoms": 8,
+          "lineage": 2,
+          "critic": 10,
+          "evidence": 8,
+          "world": 10
+        }
+      },
+      {
+        "id": "p07",
+        "status": "completed",
+        "plan_present": true,
+        "plan_valid": true,
+        "plan_contract": "decision-probe-v2",
+        "claims": 1,
+        "dimensions": 6,
+        "probes": 7,
+        "required_probe_slots": 7,
+        "required_probe_slots_covered": 7,
+        "projection_slots": 27,
+        "projection_slots_covered": 27,
+        "routed_stage_slots": 20,
+        "projected_slots_at_executed_stages": 20,
+        "projected_probes_by_stage": {
+          "atoms": 6,
+          "lineage": 1,
+          "critic": 7,
+          "evidence": 6,
+          "world": 7
+        }
+      },
+      {
+        "id": "p08",
+        "status": "completed",
+        "plan_present": true,
+        "plan_valid": true,
+        "plan_contract": "decision-probe-v2",
+        "claims": 2,
+        "dimensions": 9,
+        "probes": 9,
+        "required_probe_slots": 9,
+        "required_probe_slots_covered": 9,
+        "projection_slots": 34,
+        "projection_slots_covered": 34,
+        "routed_stage_slots": 25,
+        "projected_slots_at_executed_stages": 25,
+        "projected_probes_by_stage": {
+          "atoms": 7,
+          "lineage": 2,
+          "critic": 9,
+          "evidence": 7,
+          "world": 9
+        }
+      }
+    ],
+    "meaning": "Structural checklist, deterministic projection, and executed-stage presence only; it is not per-probe answer coverage or semantic correctness."
+  },
+  "target_probe_result_audit": {
+    "totals": {
+      "cases_with_results": 3,
+      "accepted_judgement_cycles": 6,
+      "audited_judgement_cycles": 6,
+      "expected_result_slots": 94,
+      "result_slots": 94,
+      "results_with_basis": 94,
+      "conclusive_results": 88,
+      "grounded_conclusive_results": 88,
+      "basis_spans": 134,
+      "scheduled_cases": 3,
+      "result_slot_coverage": 1.0,
+      "grounded_conclusive_rate": 1.0,
+      "status_counts": {
+        "conflicting": 0,
+        "contradicted": 24,
+        "supported": 64,
+        "unresolved": 6
+      },
+      "by_stage": {
+        "evidence": {
+          "expected_result_slots": 42,
+          "result_slots": 42,
+          "result_slot_coverage": 1.0
+        },
+        "world": {
+          "expected_result_slots": 52,
+          "result_slots": 52,
+          "result_slot_coverage": 1.0
+        }
+      }
+    },
+    "cases": [
+      {
+        "id": "p02",
+        "status": "completed",
+        "available": true,
+        "accepted_judgement_cycles": 2,
+        "audited_judgement_cycles": 2,
+        "expected_result_slots": 36,
+        "result_slots": 36,
+        "result_slot_coverage": 1.0,
+        "results_with_basis": 36,
+        "conclusive_results": 36,
+        "grounded_conclusive_results": 36,
+        "grounded_conclusive_rate": 1.0,
+        "basis_spans": 51,
+        "status_counts": {
+          "conflicting": 0,
+          "contradicted": 16,
+          "supported": 20,
+          "unresolved": 0
+        },
+        "by_stage": {
+          "evidence": {
+            "expected_result_slots": 16,
+            "result_slots": 16,
+            "result_slot_coverage": 1.0
+          },
+          "world": {
+            "expected_result_slots": 20,
+            "result_slots": 20,
+            "result_slot_coverage": 1.0
+          }
+        }
+      },
+      {
+        "id": "p07",
+        "status": "completed",
+        "available": true,
+        "accepted_judgement_cycles": 2,
+        "audited_judgement_cycles": 2,
+        "expected_result_slots": 26,
+        "result_slots": 26,
+        "result_slot_coverage": 1.0,
+        "results_with_basis": 26,
+        "conclusive_results": 20,
+        "grounded_conclusive_results": 20,
+        "grounded_conclusive_rate": 1.0,
+        "basis_spans": 32,
+        "status_counts": {
+          "conflicting": 0,
+          "contradicted": 8,
+          "supported": 12,
+          "unresolved": 6
+        },
+        "by_stage": {
+          "evidence": {
+            "expected_result_slots": 12,
+            "result_slots": 12,
+            "result_slot_coverage": 1.0
+          },
+          "world": {
+            "expected_result_slots": 14,
+            "result_slots": 14,
+            "result_slot_coverage": 1.0
+          }
+        }
+      },
+      {
+        "id": "p08",
+        "status": "completed",
+        "available": true,
+        "accepted_judgement_cycles": 2,
+        "audited_judgement_cycles": 2,
+        "expected_result_slots": 32,
+        "result_slots": 32,
+        "result_slot_coverage": 1.0,
+        "results_with_basis": 32,
+        "conclusive_results": 32,
+        "grounded_conclusive_results": 32,
+        "grounded_conclusive_rate": 1.0,
+        "basis_spans": 51,
+        "status_counts": {
+          "conflicting": 0,
+          "contradicted": 0,
+          "supported": 32,
+          "unresolved": 0
+        },
+        "by_stage": {
+          "evidence": {
+            "expected_result_slots": 14,
+            "result_slots": 14,
+            "result_slot_coverage": 1.0
+          },
+          "world": {
+            "expected_result_slots": 18,
+            "result_slots": 18,
+            "result_slot_coverage": 1.0
+          }
+        }
+      }
+    ],
+    "meaning": "Persisted evidence/world answers only. Coverage requires exactly one grounded, scope-valid result per projected probe in every accepted judgement cycle; grounded-conclusive is descriptive and is not accuracy."
+  },
+  "reference_sha256": "4cd818aecf0693559c2b877a7067a7b765159abc4b6b832535fb6a14add13ce5",
+  "artifacts_sha256": {
+    "original": {
+      "config.json": "6d251b79084c86980d7cf064b938187dbd20b0b031c359ec8023cab64516226c",
+      "inputs.json": "14eeadeb3f1b723f24ac311f516519401fe663c0265640dcf776f4b8f5fd6cc0",
+      "results.json": "d1351cb1f735e8da4286e67f15db6d42a0d1bcafccdafb74d00120ff77ac0b4e"
+    },
+    "staged": {
+      "config.json": "17d2486a2930262e0a86cb7fdbfebde7b4d8cf756e0e36b4365dfe7d2cfe70c2",
+      "inputs.json": "14eeadeb3f1b723f24ac311f516519401fe663c0265640dcf776f4b8f5fd6cc0",
+      "results.json": "c5eb022af39d7a1c7a4d22df53d2b38cac78cb84da04ac6a36aa710feff589c8"
+    },
+    "extension": {
+      "config.json": "7ef0898bb90e8a39295ff39ea3f1e781537bef031555d171b0a224170e648b5e",
+      "inputs.json": "4f84464959ed65cf9dac2f63baa9551f009039ff1fe42acd6b60fb416a0febd2",
+      "results.json": "82dd29f36a956dd0ddb9f369f5a41e749d56c663e26da7afe4203cdb76b0043c"
+    }
+  },
+  "conclusion": "development_diagnostic_only_no_proof_of_accuracy_improvement",
+  "limits": [
+    "Previously seen development cases and provisional AI-reviewed references; not an independently adjudicated held-out benchmark.",
+    "The extension run selects the denominator. Baseline totals are recalculated on exactly those cases, not copied from full-run summaries.",
+    "Equal configured caps do not imply equal actual spend. service_seconds is summed per-call/client elapsed service time, not wall-clock experiment duration.",
+    "Reasoning tokens are provider-reported token counts, not a quality measure. More or fewer reasoning tokens cannot by itself establish accuracy.",
+    "Target-plan coverage is structural checklist/projection coverage only. Persisted per-probe answers are audited separately and neither measure establishes label accuracy.",
+    "A grounded conclusive probe result means it has at least one scope-valid exact source span; it does not by itself establish source independence, correctness, or sufficient evidence.",
+    "Origins and edges are corpus-relative. The original agent has no native edge export, so its edge accuracy remains unsupported."
+  ]
+}

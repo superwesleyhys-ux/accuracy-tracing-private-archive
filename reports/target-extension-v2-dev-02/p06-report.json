@@ -1,0 +1,2105 @@
+{
+  "schema_version": "0.3",
+  "scope": "plugin-supplied semantic analyses; no built-in truth oracle",
+  "target": {
+    "id": "p06",
+    "text": "Living organisms exist in the ocean beneath Europa's ice.",
+    "as_of": "2026-09-05T09:34:36Z",
+    "source_version_id": "m10",
+    "assessment_mode": "world",
+    "evidence_scope": [
+      "m10",
+      "m11"
+    ]
+  },
+  "config": {
+    "max_rounds": 2,
+    "max_documents": 24,
+    "max_decomposition_calls": 24,
+    "experimental_force_rounds": true
+  },
+  "provenance_status": "partial",
+  "fact_status": "unresolved",
+  "stop_reason": "round_budget",
+  "usage": {
+    "rounds": 2,
+    "documents": 4,
+    "unique_versions": 2,
+    "decomposition_calls": 4,
+    "verification_calls": 2
+  },
+  "decision_status": "unresolved",
+  "assessments": {
+    "evidence": {
+      "raw_verdict": "unresolved",
+      "decision": "unresolved",
+      "blocking_gap_ids": []
+    },
+    "world": {
+      "raw_verdict": "unresolved",
+      "decision": "unresolved",
+      "blocking_gap_ids": []
+    }
+  },
+  "assessment_valid": true,
+  "materials": [
+    {
+      "version_id": "m10",
+      "url": "https://www.nasa.gov/news-release/liftoff-nasas-europa-clipper-sails-toward-ocean-moon-of-jupiter/",
+      "content": "Liftoff! NASA’s Europa Clipper Sails Toward Ocean Moon of Jupiter\nPublication date: 2024-10-14\n\nThe main goal of the mission is to determine whether Europa has conditions that could support life. Europa is about the size of our own Moon, but its interior is different. Information from NASA’s Galileo mission in the 1990s showed strong evidence that under Europa’s ice lies an enormous, salty ocean with more water than all of Earth’s oceans combined. Scientists also have found evidence that Europa may host organic compounds and energy sources under its surface.\n\nIf the mission determines Europa is habitable, it may mean there are more habitable worlds in our solar system and beyond than imagined.",
+      "retrieved_at": "2026-09-05T09:34:36Z",
+      "published_at": null,
+      "available_at": "2026-09-05T09:34:36Z",
+      "availability_basis": "Current web-tool collection completed at retrieved_at on 2026-09-05. The supplied material is a selected, whitespace-normalized excerpt, not a full page or historical exact-version capture. Availability is asserted only at collection completion. The source's displayed publication date is preserved in content; no exact timezone-qualified publication instant is known.",
+      "issuer": "NASA Headquarters"
+    },
+    {
+      "version_id": "m11",
+      "url": "https://www.nasa.gov/podcasts/curious-universe/europa-clippers-voyage-to-jupiters-ocean-moon/",
+      "content": "Europa Clipper's Voyage to Jupiter's Ocean Moon\nPublication date: 2024-10-01\n\nEuropa Clipper is not looking for life. Even if Europa does have life, this spacecraft is not equipped to find it.",
+      "retrieved_at": "2026-09-05T09:34:36Z",
+      "published_at": null,
+      "available_at": "2026-09-05T09:34:36Z",
+      "availability_basis": "Current web-tool collection completed at retrieved_at on 2026-09-05. The supplied material is a selected, whitespace-normalized excerpt, not a full page or historical exact-version capture. Availability is asserted only at collection completion. The source's displayed publication date is preserved in content; no exact timezone-qualified publication instant is known.",
+      "issuer": "NASA Curious Universe"
+    }
+  ],
+  "eligible_version_ids": [
+    "m10",
+    "m11"
+  ],
+  "observations": [
+    {
+      "version_id": "m10",
+      "retrieved_at": "2026-09-05T09:34:36Z",
+      "duplicate": false,
+      "eligible": true,
+      "reasons": []
+    },
+    {
+      "version_id": "m11",
+      "retrieved_at": "2026-09-05T09:34:36Z",
+      "duplicate": false,
+      "eligible": true,
+      "reasons": []
+    },
+    {
+      "version_id": "m10",
+      "retrieved_at": "2026-09-05T09:34:36Z",
+      "duplicate": true,
+      "eligible": true,
+      "reasons": []
+    },
+    {
+      "version_id": "m11",
+      "retrieved_at": "2026-09-05T09:34:36Z",
+      "duplicate": true,
+      "eligible": true,
+      "reasons": []
+    }
+  ],
+  "analyses": {
+    "m10": {
+      "fragments": [
+        {
+          "id": "m10:atom:1fbd0d70a5c55dfc0c63",
+          "text": "The mission's main goal is to determine whether Europa has conditions that could support life.",
+          "span": {
+            "version_id": "m10",
+            "start": 96,
+            "end": 195,
+            "quote": "The main goal of the mission is to determine whether Europa has conditions that could support life."
+          },
+          "parent_id": "p06",
+          "qualifiers": [
+            "main goal",
+            "to determine whether",
+            "could support life"
+          ],
+          "qualifier_spans": [
+            {
+              "version_id": "m10",
+              "start": 100,
+              "end": 109,
+              "quote": "main goal"
+            },
+            {
+              "version_id": "m10",
+              "start": 128,
+              "end": 148,
+              "quote": "to determine whether"
+            },
+            {
+              "version_id": "m10",
+              "start": 176,
+              "end": 194,
+              "quote": "could support life"
+            }
+          ]
+        },
+        {
+          "id": "m10:atom:32da7e77a4e3c37e09e9",
+          "text": "Scientists have found evidence that Europa may host organic compounds and energy sources under its surface.",
+          "span": {
+            "version_id": "m10",
+            "start": 452,
+            "end": 564,
+            "quote": "Scientists also have found evidence that Europa may host organic compounds and energy sources under its surface."
+          },
+          "parent_id": "p06",
+          "qualifiers": [
+            "have found evidence",
+            "may host",
+            "under its surface"
+          ],
+          "qualifier_spans": [
+            {
+              "version_id": "m10",
+              "start": 468,
+              "end": 487,
+              "quote": "have found evidence"
+            },
+            {
+              "version_id": "m10",
+              "start": 500,
+              "end": 508,
+              "quote": "may host"
+            },
+            {
+              "version_id": "m10",
+              "start": 546,
+              "end": 563,
+              "quote": "under its surface"
+            }
+          ]
+        },
+        {
+          "id": "m10:atom:448594346f596b921df5",
+          "text": "Information from NASA’s Galileo mission in the 1990s showed strong evidence of an enormous, salty ocean beneath Europa’s ice containing more water than all of Earth’s oceans combined.",
+          "span": {
+            "version_id": "m10",
+            "start": 269,
+            "end": 451,
+            "quote": "Information from NASA’s Galileo mission in the 1990s showed strong evidence that under Europa’s ice lies an enormous, salty ocean with more water than all of Earth’s oceans combined."
+          },
+          "parent_id": "p06",
+          "qualifiers": [
+            "from NASA’s Galileo mission in the 1990s",
+            "showed strong evidence",
+            "under Europa’s ice",
+            "more water than all of Earth’s oceans combined"
+          ],
+          "qualifier_spans": [
+            {
+              "version_id": "m10",
+              "start": 281,
+              "end": 321,
+              "quote": "from NASA’s Galileo mission in the 1990s"
+            },
+            {
+              "version_id": "m10",
+              "start": 322,
+              "end": 344,
+              "quote": "showed strong evidence"
+            },
+            {
+              "version_id": "m10",
+              "start": 350,
+              "end": 368,
+              "quote": "under Europa’s ice"
+            },
+            {
+              "version_id": "m10",
+              "start": 404,
+              "end": 450,
+              "quote": "more water than all of Earth’s oceans combined"
+            }
+          ]
+        },
+        {
+          "id": "m10:atom:f23cdebcd92c0b632996",
+          "text": "If the mission determines Europa is habitable, that may mean there are more habitable worlds in our solar system and beyond than imagined.",
+          "span": {
+            "version_id": "m10",
+            "start": 566,
+            "end": 702,
+            "quote": "If the mission determines Europa is habitable, it may mean there are more habitable worlds in our solar system and beyond than imagined."
+          },
+          "parent_id": "p06",
+          "qualifiers": [
+            "If the mission determines Europa is habitable",
+            "may mean",
+            "in our solar system and beyond",
+            "than imagined"
+          ],
+          "qualifier_spans": [
+            {
+              "version_id": "m10",
+              "start": 566,
+              "end": 611,
+              "quote": "If the mission determines Europa is habitable"
+            },
+            {
+              "version_id": "m10",
+              "start": 616,
+              "end": 624,
+              "quote": "may mean"
+            },
+            {
+              "version_id": "m10",
+              "start": 657,
+              "end": 687,
+              "quote": "in our solar system and beyond"
+            },
+            {
+              "version_id": "m10",
+              "start": 688,
+              "end": 701,
+              "quote": "than imagined"
+            }
+          ]
+        }
+      ],
+      "relations": [
+        {
+          "id": "m10:citation:da2dffbdc71a73a6a552",
+          "from_version": "m10",
+          "to_version": null,
+          "kind": "cites",
+          "status": "declared",
+          "basis": [
+            {
+              "version_id": "m10",
+              "start": 269,
+              "end": 451,
+              "quote": "Information from NASA’s Galileo mission in the 1990s showed strong evidence that under Europa’s ice lies an enormous, salty ocean with more water than all of Earth’s oceans combined."
+            }
+          ],
+          "rationale": "Explicit attribution of ocean evidence to Galileo mission information, without identifying a particular observation, dataset or report.",
+          "upstream_locator": "NASA’s Galileo mission"
+        }
+      ],
+      "gaps": [
+        {
+          "id": "m10:upstream:a5da232f71c6003464aa",
+          "question": "Locate the explicitly cited upstream: NASA’s Galileo mission",
+          "stage": "provenance",
+          "dimension": "provenance",
+          "blocking": true,
+          "target_id": "p06",
+          "basis": [
+            {
+              "version_id": "m10",
+              "start": 269,
+              "end": 451,
+              "quote": "Information from NASA’s Galileo mission in the 1990s showed strong evidence that under Europa’s ice lies an enormous, salty ocean with more water than all of Earth’s oceans combined."
+            }
+          ],
+          "decision_impact": "Locating the underlying records could establish the lineage of the ocean evidence and reveal shared dependence with other accounts. This citation does not establish the existence of organisms.",
+          "action": "search",
+          "locator": "NASA’s Galileo mission",
+          "probe_id": null
+        }
+      ],
+      "resolutions": [],
+      "origins": [],
+      "notes": "All four previous atomic findings remain supported and are re-emitted; none require withdrawal. The ocean description unambiguously refers to the target’s ocean beneath Europa’s ice. The excerpt describes potential life-supporting conditions, not actual living organisms, and therefore does not place organisms in that ocean. Possible organic compounds and energy sources are located only under Europa’s surface, not explicitly in its ocean. The conditional habitability statement does not assert that Europa is inhabited.\nThe previous Galileo citation remains supported; no lineage finding requires withdrawal. The excerpt establishes no original observation or record of organisms in Europa’s ocean. It discusses potential habitability and attributes ocean evidence upstream; the unnamed scientists supply no additional identifiable citation. Only m10's content is supplied, so independence or shared underlying evidence between m10 and m11 cannot be determined from their URLs or institutional association.",
+      "revisit_versions": []
+    },
+    "m11": {
+      "fragments": [
+        {
+          "id": "m11:atom:6212bae23f58a6eda6c9",
+          "text": "Europa Clipper is not looking for life.",
+          "span": {
+            "version_id": "m11",
+            "start": 78,
+            "end": 117,
+            "quote": "Europa Clipper is not looking for life."
+          },
+          "parent_id": "p06",
+          "qualifiers": [
+            "not looking for life"
+          ],
+          "qualifier_spans": [
+            {
+              "version_id": "m11",
+              "start": 96,
+              "end": 116,
+              "quote": "not looking for life"
+            }
+          ]
+        },
+        {
+          "id": "m11:atom:c8ec006bdb4bdd7211b4",
+          "text": "Even if Europa does have life, Europa Clipper is not equipped to find it.",
+          "span": {
+            "version_id": "m11",
+            "start": 78,
+            "end": 192,
+            "quote": "Europa Clipper is not looking for life. Even if Europa does have life, this spacecraft is not equipped to find it."
+          },
+          "parent_id": "p06",
+          "qualifiers": [
+            "Even if Europa does have life",
+            "not equipped to find it"
+          ],
+          "qualifier_spans": [
+            {
+              "version_id": "m11",
+              "start": 118,
+              "end": 147,
+              "quote": "Even if Europa does have life"
+            },
+            {
+              "version_id": "m11",
+              "start": 168,
+              "end": 191,
+              "quote": "not equipped to find it"
+            }
+          ]
+        }
+      ],
+      "relations": [],
+      "gaps": [],
+      "resolutions": [],
+      "origins": [],
+      "notes": "Both previous atoms remain supported; no withdrawals are required. The excerpt treats life's existence on Europa conditionally, without asserting either existence or absence. It does not place organisms beneath Europa's ice. The title describes Europa as an ocean moon, but the conditional reference to life specifies no ocean location or binding to a particular ocean. This is unspecified scope, not a competing ocean referent or a mismatch based on wording.\nThe current excerpt contains no explicit source-side citation and establishes no original observation, dataset, interview or record relevant to the target's existence assertion. “Even if Europa does have life, this spacecraft is not equipped to find it.” describes a mission limitation and treats life conditionally; it does not identify underlying evidence for existence or absence. Neither independent corroboration nor shared-source dependence between m10 and m11 is established. The known citation from m10 to NASA’s Galileo mission does not connect m11 to that source. The previous absence of lineage findings remains supported; no withdrawals are needed.",
+      "revisit_versions": []
+    }
+  },
+  "analysis_history": [
+    {
+      "revision": 1,
+      "round": 1,
+      "version_id": "m10",
+      "duplicate": false,
+      "revisit": false,
+      "accepted": true,
+      "analysis": {
+        "fragments": [
+          {
+            "id": "m10:atom:1fbd0d70a5c55dfc0c63",
+            "text": "The mission's main goal is to determine whether Europa has conditions that could support life.",
+            "span": {
+              "version_id": "m10",
+              "start": 96,
+              "end": 195,
+              "quote": "The main goal of the mission is to determine whether Europa has conditions that could support life."
+            },
+            "parent_id": "p06",
+            "qualifiers": [
+              "to determine whether",
+              "could support life"
+            ],
+            "qualifier_spans": [
+              {
+                "version_id": "m10",
+                "start": 128,
+                "end": 148,
+                "quote": "to determine whether"
+              },
+              {
+                "version_id": "m10",
+                "start": 176,
+                "end": 194,
+                "quote": "could support life"
+              }
+            ]
+          },
+          {
+            "id": "m10:atom:32da7e77a4e3c37e09e9",
+            "text": "Scientists have found evidence that Europa may host organic compounds and energy sources under its surface.",
+            "span": {
+              "version_id": "m10",
+              "start": 452,
+              "end": 564,
+              "quote": "Scientists also have found evidence that Europa may host organic compounds and energy sources under its surface."
+            },
+            "parent_id": "p06",
+            "qualifiers": [
+              "have found evidence",
+              "may host",
+              "under its surface"
+            ],
+            "qualifier_spans": [
+              {
+                "version_id": "m10",
+                "start": 468,
+                "end": 487,
+                "quote": "have found evidence"
+              },
+              {
+                "version_id": "m10",
+                "start": 500,
+                "end": 508,
+                "quote": "may host"
+              },
+              {
+                "version_id": "m10",
+                "start": 546,
+                "end": 563,
+                "quote": "under its surface"
+              }
+            ]
+          },
+          {
+            "id": "m10:atom:448594346f596b921df5",
+            "text": "Information from NASA’s Galileo mission in the 1990s showed strong evidence of an enormous, salty ocean beneath Europa’s ice containing more water than all of Earth’s oceans combined.",
+            "span": {
+              "version_id": "m10",
+              "start": 269,
+              "end": 451,
+              "quote": "Information from NASA’s Galileo mission in the 1990s showed strong evidence that under Europa’s ice lies an enormous, salty ocean with more water than all of Earth’s oceans combined."
+            },
+            "parent_id": "p06",
+            "qualifiers": [
+              "from NASA’s Galileo mission in the 1990s",
+              "showed strong evidence",
+              "under Europa’s ice",
+              "more water than all of Earth’s oceans combined"
+            ],
+            "qualifier_spans": [
+              {
+                "version_id": "m10",
+                "start": 281,
+                "end": 321,
+                "quote": "from NASA’s Galileo mission in the 1990s"
+              },
+              {
+                "version_id": "m10",
+                "start": 322,
+                "end": 344,
+                "quote": "showed strong evidence"
+              },
+              {
+                "version_id": "m10",
+                "start": 350,
+                "end": 368,
+                "quote": "under Europa’s ice"
+              },
+              {
+                "version_id": "m10",
+                "start": 404,
+                "end": 450,
+                "quote": "more water than all of Earth’s oceans combined"
+              }
+            ]
+          },
+          {
+            "id": "m10:atom:f23cdebcd92c0b632996",
+            "text": "If the mission determines Europa is habitable, that may mean there are more habitable worlds in our solar system and beyond than imagined.",
+            "span": {
+              "version_id": "m10",
+              "start": 566,
+              "end": 702,
+              "quote": "If the mission determines Europa is habitable, it may mean there are more habitable worlds in our solar system and beyond than imagined."
+            },
+            "parent_id": "p06",
+            "qualifiers": [
+              "If the mission determines Europa is habitable",
+              "may mean",
+              "in our solar system and beyond",
+              "than imagined"
+            ],
+            "qualifier_spans": [
+              {
+                "version_id": "m10",
+                "start": 566,
+                "end": 611,
+                "quote": "If the mission determines Europa is habitable"
+              },
+              {
+                "version_id": "m10",
+                "start": 616,
+                "end": 624,
+                "quote": "may mean"
+              },
+              {
+                "version_id": "m10",
+                "start": 657,
+                "end": 687,
+                "quote": "in our solar system and beyond"
+              },
+              {
+                "version_id": "m10",
+                "start": 688,
+                "end": 701,
+                "quote": "than imagined"
+              }
+            ]
+          }
+        ],
+        "relations": [
+          {
+            "id": "m10:citation:da2dffbdc71a73a6a552",
+            "from_version": "m10",
+            "to_version": null,
+            "kind": "cites",
+            "status": "declared",
+            "basis": [
+              {
+                "version_id": "m10",
+                "start": 269,
+                "end": 451,
+                "quote": "Information from NASA’s Galileo mission in the 1990s showed strong evidence that under Europa’s ice lies an enormous, salty ocean with more water than all of Earth’s oceans combined."
+              }
+            ],
+            "rationale": "The excerpt attributes evidence for the subsurface ocean to Galileo mission information, without identifying a particular observation, dataset or report.",
+            "upstream_locator": "NASA’s Galileo mission"
+          }
+        ],
+        "gaps": [
+          {
+            "id": "m10:upstream:a5da232f71c6003464aa",
+            "question": "Locate the explicitly cited upstream: NASA’s Galileo mission",
+            "stage": "provenance",
+            "dimension": "provenance",
+            "blocking": true,
+            "target_id": "p06",
+            "basis": [
+              {
+                "version_id": "m10",
+                "start": 269,
+                "end": 451,
+                "quote": "Information from NASA’s Galileo mission in the 1990s showed strong evidence that under Europa’s ice lies an enormous, salty ocean with more water than all of Earth’s oceans combined."
+              }
+            ],
+            "decision_impact": "Locating the underlying Galileo records could establish the provenance of the ocean evidence and reveal shared dependence with other accounts. This attribution does not establish that living organisms exist there.",
+            "action": "search",
+            "locator": "NASA’s Galileo mission",
+            "probe_id": null
+          }
+        ],
+        "resolutions": [],
+        "origins": [],
+        "notes": "The described ocean unambiguously refers to the ocean beneath Europa’s ice. The excerpt does not assert living organisms there: it describes evidence of an ocean, possible subsurface organic compounds and energy sources, and a mission to investigate potential life-supporting conditions. The subsurface compounds and energy sources are not explicitly located in the ocean. No previous findings were supplied.\nThe current excerpt does not establish a producing or publishing role for original evidence of organisms in Europa’s ocean. It describes potential habitability and cites upstream ocean evidence; the mention of scientists’ findings supplies no identifiable additional citation. Only m10 is visible, so independence or shared underlying sources between m10 and m11 cannot be assessed. No previous findings require withdrawal.",
+        "revisit_versions": []
+      },
+      "exclusion_reasons": []
+    },
+    {
+      "revision": 2,
+      "round": 1,
+      "version_id": "m11",
+      "duplicate": false,
+      "revisit": false,
+      "accepted": true,
+      "analysis": {
+        "fragments": [
+          {
+            "id": "m11:atom:6212bae23f58a6eda6c9",
+            "text": "Europa Clipper is not looking for life.",
+            "span": {
+              "version_id": "m11",
+              "start": 78,
+              "end": 117,
+              "quote": "Europa Clipper is not looking for life."
+            },
+            "parent_id": "p06",
+            "qualifiers": [
+              "not looking for life"
+            ],
+            "qualifier_spans": [
+              {
+                "version_id": "m11",
+                "start": 96,
+                "end": 116,
+                "quote": "not looking for life"
+              }
+            ]
+          },
+          {
+            "id": "m11:atom:f65051aab098d5483e7f",
+            "text": "Even if Europa has life, Europa Clipper is not equipped to find it.",
+            "span": {
+              "version_id": "m11",
+              "start": 78,
+              "end": 192,
+              "quote": "Europa Clipper is not looking for life. Even if Europa does have life, this spacecraft is not equipped to find it."
+            },
+            "parent_id": "p06",
+            "qualifiers": [
+              "Even if Europa does have life",
+              "not equipped to find it"
+            ],
+            "qualifier_spans": [
+              {
+                "version_id": "m11",
+                "start": 118,
+                "end": 147,
+                "quote": "Even if Europa does have life"
+              },
+              {
+                "version_id": "m11",
+                "start": 168,
+                "end": 191,
+                "quote": "not equipped to find it"
+              }
+            ]
+          }
+        ],
+        "relations": [],
+        "gaps": [],
+        "resolutions": [],
+        "origins": [],
+        "notes": "The excerpt treats life on Europa conditionally, not as established existence. It does not locate organisms in a subsurface ocean. Europa is explicitly identified, but no ocean is described or bound by anaphora to the target's ocean; this is unspecified location, not evidence of a competing referent. The spacecraft's stated limitations do not assert that life is absent.\nThe current excerpt contains no explicit source-side citations or identification of an originating observation, analysis, report, or interview. “Europa Clipper is not looking for life. Even if Europa does have life, this spacecraft is not equipped to find it.” states a mission limitation, not an observation establishing life's existence or absence. Neither independent evidence nor shared-source dependence between m10 and m11 can be established from this excerpt. The supplied relation from m10 to NASA’s Galileo mission does not connect m11 to the target source. No previous findings require withdrawal.",
+        "revisit_versions": []
+      },
+      "exclusion_reasons": []
+    },
+    {
+      "revision": 3,
+      "round": 2,
+      "version_id": "m10",
+      "duplicate": true,
+      "revisit": false,
+      "accepted": true,
+      "analysis": {
+        "fragments": [
+          {
+            "id": "m10:atom:1fbd0d70a5c55dfc0c63",
+            "text": "The mission's main goal is to determine whether Europa has conditions that could support life.",
+            "span": {
+              "version_id": "m10",
+              "start": 96,
+              "end": 195,
+              "quote": "The main goal of the mission is to determine whether Europa has conditions that could support life."
+            },
+            "parent_id": "p06",
+            "qualifiers": [
+              "main goal",
+              "to determine whether",
+              "could support life"
+            ],
+            "qualifier_spans": [
+              {
+                "version_id": "m10",
+                "start": 100,
+                "end": 109,
+                "quote": "main goal"
+              },
+              {
+                "version_id": "m10",
+                "start": 128,
+                "end": 148,
+                "quote": "to determine whether"
+              },
+              {
+                "version_id": "m10",
+                "start": 176,
+                "end": 194,
+                "quote": "could support life"
+              }
+            ]
+          },
+          {
+            "id": "m10:atom:32da7e77a4e3c37e09e9",
+            "text": "Scientists have found evidence that Europa may host organic compounds and energy sources under its surface.",
+            "span": {
+              "version_id": "m10",
+              "start": 452,
+              "end": 564,
+              "quote": "Scientists also have found evidence that Europa may host organic compounds and energy sources under its surface."
+            },
+            "parent_id": "p06",
+            "qualifiers": [
+              "have found evidence",
+              "may host",
+              "under its surface"
+            ],
+            "qualifier_spans": [
+              {
+                "version_id": "m10",
+                "start": 468,
+                "end": 487,
+                "quote": "have found evidence"
+              },
+              {
+                "version_id": "m10",
+                "start": 500,
+                "end": 508,
+                "quote": "may host"
+              },
+              {
+                "version_id": "m10",
+                "start": 546,
+                "end": 563,
+                "quote": "under its surface"
+              }
+            ]
+          },
+          {
+            "id": "m10:atom:448594346f596b921df5",
+            "text": "Information from NASA’s Galileo mission in the 1990s showed strong evidence of an enormous, salty ocean beneath Europa’s ice containing more water than all of Earth’s oceans combined.",
+            "span": {
+              "version_id": "m10",
+              "start": 269,
+              "end": 451,
+              "quote": "Information from NASA’s Galileo mission in the 1990s showed strong evidence that under Europa’s ice lies an enormous, salty ocean with more water than all of Earth’s oceans combined."
+            },
+            "parent_id": "p06",
+            "qualifiers": [
+              "from NASA’s Galileo mission in the 1990s",
+              "showed strong evidence",
+              "under Europa’s ice",
+              "more water than all of Earth’s oceans combined"
+            ],
+            "qualifier_spans": [
+              {
+                "version_id": "m10",
+                "start": 281,
+                "end": 321,
+                "quote": "from NASA’s Galileo mission in the 1990s"
+              },
+              {
+                "version_id": "m10",
+                "start": 322,
+                "end": 344,
+                "quote": "showed strong evidence"
+              },
+              {
+                "version_id": "m10",
+                "start": 350,
+                "end": 368,
+                "quote": "under Europa’s ice"
+              },
+              {
+                "version_id": "m10",
+                "start": 404,
+                "end": 450,
+                "quote": "more water than all of Earth’s oceans combined"
+              }
+            ]
+          },
+          {
+            "id": "m10:atom:f23cdebcd92c0b632996",
+            "text": "If the mission determines Europa is habitable, that may mean there are more habitable worlds in our solar system and beyond than imagined.",
+            "span": {
+              "version_id": "m10",
+              "start": 566,
+              "end": 702,
+              "quote": "If the mission determines Europa is habitable, it may mean there are more habitable worlds in our solar system and beyond than imagined."
+            },
+            "parent_id": "p06",
+            "qualifiers": [
+              "If the mission determines Europa is habitable",
+              "may mean",
+              "in our solar system and beyond",
+              "than imagined"
+            ],
+            "qualifier_spans": [
+              {
+                "version_id": "m10",
+                "start": 566,
+                "end": 611,
+                "quote": "If the mission determines Europa is habitable"
+              },
+              {
+                "version_id": "m10",
+                "start": 616,
+                "end": 624,
+                "quote": "may mean"
+              },
+              {
+                "version_id": "m10",
+                "start": 657,
+                "end": 687,
+                "quote": "in our solar system and beyond"
+              },
+              {
+                "version_id": "m10",
+                "start": 688,
+                "end": 701,
+                "quote": "than imagined"
+              }
+            ]
+          }
+        ],
+        "relations": [
+          {
+            "id": "m10:citation:da2dffbdc71a73a6a552",
+            "from_version": "m10",
+            "to_version": null,
+            "kind": "cites",
+            "status": "declared",
+            "basis": [
+              {
+                "version_id": "m10",
+                "start": 269,
+                "end": 451,
+                "quote": "Information from NASA’s Galileo mission in the 1990s showed strong evidence that under Europa’s ice lies an enormous, salty ocean with more water than all of Earth’s oceans combined."
+              }
+            ],
+            "rationale": "Explicit attribution of ocean evidence to Galileo mission information, without identifying a particular observation, dataset or report.",
+            "upstream_locator": "NASA’s Galileo mission"
+          }
+        ],
+        "gaps": [
+          {
+            "id": "m10:upstream:a5da232f71c6003464aa",
+            "question": "Locate the explicitly cited upstream: NASA’s Galileo mission",
+            "stage": "provenance",
+            "dimension": "provenance",
+            "blocking": true,
+            "target_id": "p06",
+            "basis": [
+              {
+                "version_id": "m10",
+                "start": 269,
+                "end": 451,
+                "quote": "Information from NASA’s Galileo mission in the 1990s showed strong evidence that under Europa’s ice lies an enormous, salty ocean with more water than all of Earth’s oceans combined."
+              }
+            ],
+            "decision_impact": "Locating the underlying records could establish the lineage of the ocean evidence and reveal shared dependence with other accounts. This citation does not establish the existence of organisms.",
+            "action": "search",
+            "locator": "NASA’s Galileo mission",
+            "probe_id": null
+          }
+        ],
+        "resolutions": [],
+        "origins": [],
+        "notes": "All four previous atomic findings remain supported and are re-emitted; none require withdrawal. The ocean description unambiguously refers to the target’s ocean beneath Europa’s ice. The excerpt describes potential life-supporting conditions, not actual living organisms, and therefore does not place organisms in that ocean. Possible organic compounds and energy sources are located only under Europa’s surface, not explicitly in its ocean. The conditional habitability statement does not assert that Europa is inhabited.\nThe previous Galileo citation remains supported; no lineage finding requires withdrawal. The excerpt establishes no original observation or record of organisms in Europa’s ocean. It discusses potential habitability and attributes ocean evidence upstream; the unnamed scientists supply no additional identifiable citation. Only m10's content is supplied, so independence or shared underlying evidence between m10 and m11 cannot be determined from their URLs or institutional association.",
+        "revisit_versions": []
+      },
+      "exclusion_reasons": []
+    },
+    {
+      "revision": 4,
+      "round": 2,
+      "version_id": "m11",
+      "duplicate": true,
+      "revisit": false,
+      "accepted": true,
+      "analysis": {
+        "fragments": [
+          {
+            "id": "m11:atom:6212bae23f58a6eda6c9",
+            "text": "Europa Clipper is not looking for life.",
+            "span": {
+              "version_id": "m11",
+              "start": 78,
+              "end": 117,
+              "quote": "Europa Clipper is not looking for life."
+            },
+            "parent_id": "p06",
+            "qualifiers": [
+              "not looking for life"
+            ],
+            "qualifier_spans": [
+              {
+                "version_id": "m11",
+                "start": 96,
+                "end": 116,
+                "quote": "not looking for life"
+              }
+            ]
+          },
+          {
+            "id": "m11:atom:c8ec006bdb4bdd7211b4",
+            "text": "Even if Europa does have life, Europa Clipper is not equipped to find it.",
+            "span": {
+              "version_id": "m11",
+              "start": 78,
+              "end": 192,
+              "quote": "Europa Clipper is not looking for life. Even if Europa does have life, this spacecraft is not equipped to find it."
+            },
+            "parent_id": "p06",
+            "qualifiers": [
+              "Even if Europa does have life",
+              "not equipped to find it"
+            ],
+            "qualifier_spans": [
+              {
+                "version_id": "m11",
+                "start": 118,
+                "end": 147,
+                "quote": "Even if Europa does have life"
+              },
+              {
+                "version_id": "m11",
+                "start": 168,
+                "end": 191,
+                "quote": "not equipped to find it"
+              }
+            ]
+          }
+        ],
+        "relations": [],
+        "gaps": [],
+        "resolutions": [],
+        "origins": [],
+        "notes": "Both previous atoms remain supported; no withdrawals are required. The excerpt treats life's existence on Europa conditionally, without asserting either existence or absence. It does not place organisms beneath Europa's ice. The title describes Europa as an ocean moon, but the conditional reference to life specifies no ocean location or binding to a particular ocean. This is unspecified scope, not a competing ocean referent or a mismatch based on wording.\nThe current excerpt contains no explicit source-side citation and establishes no original observation, dataset, interview or record relevant to the target's existence assertion. “Even if Europa does have life, this spacecraft is not equipped to find it.” describes a mission limitation and treats life conditionally; it does not identify underlying evidence for existence or absence. Neither independent corroboration nor shared-source dependence between m10 and m11 is established. The known citation from m10 to NASA’s Galileo mission does not connect m11 to that source. The previous absence of lineage findings remains supported; no withdrawals are needed.",
+        "revisit_versions": []
+      },
+      "exclusion_reasons": []
+    }
+  ],
+  "fragments": [
+    {
+      "id": "m10:atom:1fbd0d70a5c55dfc0c63",
+      "text": "The mission's main goal is to determine whether Europa has conditions that could support life.",
+      "span": {
+        "version_id": "m10",
+        "start": 96,
+        "end": 195,
+        "quote": "The main goal of the mission is to determine whether Europa has conditions that could support life."
+      },
+      "parent_id": "p06",
+      "qualifiers": [
+        "main goal",
+        "to determine whether",
+        "could support life"
+      ],
+      "qualifier_spans": [
+        {
+          "version_id": "m10",
+          "start": 100,
+          "end": 109,
+          "quote": "main goal"
+        },
+        {
+          "version_id": "m10",
+          "start": 128,
+          "end": 148,
+          "quote": "to determine whether"
+        },
+        {
+          "version_id": "m10",
+          "start": 176,
+          "end": 194,
+          "quote": "could support life"
+        }
+      ]
+    },
+    {
+      "id": "m10:atom:32da7e77a4e3c37e09e9",
+      "text": "Scientists have found evidence that Europa may host organic compounds and energy sources under its surface.",
+      "span": {
+        "version_id": "m10",
+        "start": 452,
+        "end": 564,
+        "quote": "Scientists also have found evidence that Europa may host organic compounds and energy sources under its surface."
+      },
+      "parent_id": "p06",
+      "qualifiers": [
+        "have found evidence",
+        "may host",
+        "under its surface"
+      ],
+      "qualifier_spans": [
+        {
+          "version_id": "m10",
+          "start": 468,
+          "end": 487,
+          "quote": "have found evidence"
+        },
+        {
+          "version_id": "m10",
+          "start": 500,
+          "end": 508,
+          "quote": "may host"
+        },
+        {
+          "version_id": "m10",
+          "start": 546,
+          "end": 563,
+          "quote": "under its surface"
+        }
+      ]
+    },
+    {
+      "id": "m10:atom:448594346f596b921df5",
+      "text": "Information from NASA’s Galileo mission in the 1990s showed strong evidence of an enormous, salty ocean beneath Europa’s ice containing more water than all of Earth’s oceans combined.",
+      "span": {
+        "version_id": "m10",
+        "start": 269,
+        "end": 451,
+        "quote": "Information from NASA’s Galileo mission in the 1990s showed strong evidence that under Europa’s ice lies an enormous, salty ocean with more water than all of Earth’s oceans combined."
+      },
+      "parent_id": "p06",
+      "qualifiers": [
+        "from NASA’s Galileo mission in the 1990s",
+        "showed strong evidence",
+        "under Europa’s ice",
+        "more water than all of Earth’s oceans combined"
+      ],
+      "qualifier_spans": [
+        {
+          "version_id": "m10",
+          "start": 281,
+          "end": 321,
+          "quote": "from NASA’s Galileo mission in the 1990s"
+        },
+        {
+          "version_id": "m10",
+          "start": 322,
+          "end": 344,
+          "quote": "showed strong evidence"
+        },
+        {
+          "version_id": "m10",
+          "start": 350,
+          "end": 368,
+          "quote": "under Europa’s ice"
+        },
+        {
+          "version_id": "m10",
+          "start": 404,
+          "end": 450,
+          "quote": "more water than all of Earth’s oceans combined"
+        }
+      ]
+    },
+    {
+      "id": "m10:atom:f23cdebcd92c0b632996",
+      "text": "If the mission determines Europa is habitable, that may mean there are more habitable worlds in our solar system and beyond than imagined.",
+      "span": {
+        "version_id": "m10",
+        "start": 566,
+        "end": 702,
+        "quote": "If the mission determines Europa is habitable, it may mean there are more habitable worlds in our solar system and beyond than imagined."
+      },
+      "parent_id": "p06",
+      "qualifiers": [
+        "If the mission determines Europa is habitable",
+        "may mean",
+        "in our solar system and beyond",
+        "than imagined"
+      ],
+      "qualifier_spans": [
+        {
+          "version_id": "m10",
+          "start": 566,
+          "end": 611,
+          "quote": "If the mission determines Europa is habitable"
+        },
+        {
+          "version_id": "m10",
+          "start": 616,
+          "end": 624,
+          "quote": "may mean"
+        },
+        {
+          "version_id": "m10",
+          "start": 657,
+          "end": 687,
+          "quote": "in our solar system and beyond"
+        },
+        {
+          "version_id": "m10",
+          "start": 688,
+          "end": 701,
+          "quote": "than imagined"
+        }
+      ]
+    },
+    {
+      "id": "m11:atom:6212bae23f58a6eda6c9",
+      "text": "Europa Clipper is not looking for life.",
+      "span": {
+        "version_id": "m11",
+        "start": 78,
+        "end": 117,
+        "quote": "Europa Clipper is not looking for life."
+      },
+      "parent_id": "p06",
+      "qualifiers": [
+        "not looking for life"
+      ],
+      "qualifier_spans": [
+        {
+          "version_id": "m11",
+          "start": 96,
+          "end": 116,
+          "quote": "not looking for life"
+        }
+      ]
+    },
+    {
+      "id": "m11:atom:c8ec006bdb4bdd7211b4",
+      "text": "Even if Europa does have life, Europa Clipper is not equipped to find it.",
+      "span": {
+        "version_id": "m11",
+        "start": 78,
+        "end": 192,
+        "quote": "Europa Clipper is not looking for life. Even if Europa does have life, this spacecraft is not equipped to find it."
+      },
+      "parent_id": "p06",
+      "qualifiers": [
+        "Even if Europa does have life",
+        "not equipped to find it"
+      ],
+      "qualifier_spans": [
+        {
+          "version_id": "m11",
+          "start": 118,
+          "end": 147,
+          "quote": "Even if Europa does have life"
+        },
+        {
+          "version_id": "m11",
+          "start": 168,
+          "end": 191,
+          "quote": "not equipped to find it"
+        }
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "m10:citation:da2dffbdc71a73a6a552",
+      "from_version": "m10",
+      "to_version": null,
+      "kind": "cites",
+      "status": "declared",
+      "basis": [
+        {
+          "version_id": "m10",
+          "start": 269,
+          "end": 451,
+          "quote": "Information from NASA’s Galileo mission in the 1990s showed strong evidence that under Europa’s ice lies an enormous, salty ocean with more water than all of Earth’s oceans combined."
+        }
+      ],
+      "rationale": "Explicit attribution of ocean evidence to Galileo mission information, without identifying a particular observation, dataset or report.",
+      "upstream_locator": "NASA’s Galileo mission"
+    }
+  ],
+  "origins": [],
+  "gaps": [
+    {
+      "id": "origin:p06",
+      "question": "Find the producing record and evidenced lineage for: Living organisms exist in the ocean beneath Europa's ice.",
+      "stage": "provenance",
+      "dimension": "auto",
+      "blocking": true,
+      "target_id": null,
+      "basis": [],
+      "decision_impact": "",
+      "action": "search",
+      "locator": null,
+      "probe_id": null
+    },
+    {
+      "id": "m10:upstream:a5da232f71c6003464aa",
+      "question": "Locate the explicitly cited upstream: NASA’s Galileo mission",
+      "stage": "provenance",
+      "dimension": "provenance",
+      "blocking": true,
+      "target_id": "p06",
+      "basis": [
+        {
+          "version_id": "m10",
+          "start": 269,
+          "end": 451,
+          "quote": "Information from NASA’s Galileo mission in the 1990s showed strong evidence that under Europa’s ice lies an enormous, salty ocean with more water than all of Earth’s oceans combined."
+        }
+      ],
+      "decision_impact": "Locating the underlying records could establish the lineage of the ocean evidence and reveal shared dependence with other accounts. This citation does not establish the existence of organisms.",
+      "action": "search",
+      "locator": "NASA’s Galileo mission",
+      "probe_id": null
+    }
+  ],
+  "gap_registry": [
+    {
+      "id": "origin:p06",
+      "question": "Find the producing record and evidenced lineage for: Living organisms exist in the ocean beneath Europa's ice.",
+      "stage": "provenance",
+      "dimension": "auto",
+      "blocking": true,
+      "target_id": null,
+      "basis": [],
+      "decision_impact": "",
+      "action": "search",
+      "locator": null,
+      "probe_id": null
+    },
+    {
+      "id": "m10:upstream:a5da232f71c6003464aa",
+      "question": "Locate the explicitly cited upstream: NASA’s Galileo mission",
+      "stage": "provenance",
+      "dimension": "provenance",
+      "blocking": true,
+      "target_id": "p06",
+      "basis": [
+        {
+          "version_id": "m10",
+          "start": 269,
+          "end": 451,
+          "quote": "Information from NASA’s Galileo mission in the 1990s showed strong evidence that under Europa’s ice lies an enormous, salty ocean with more water than all of Earth’s oceans combined."
+        }
+      ],
+      "decision_impact": "Locating the underlying records could establish the lineage of the ocean evidence and reveal shared dependence with other accounts. This citation does not establish the existence of organisms.",
+      "action": "search",
+      "locator": "NASA’s Galileo mission",
+      "probe_id": null
+    }
+  ],
+  "resolutions": [],
+  "verification_history": [
+    {
+      "round": 1,
+      "verdict": "unresolved",
+      "basis": [
+        {
+          "version_id": "m10",
+          "start": 269,
+          "end": 451,
+          "quote": "Information from NASA’s Galileo mission in the 1990s showed strong evidence that under Europa’s ice lies an enormous, salty ocean with more water than all of Earth’s oceans combined."
+        },
+        {
+          "version_id": "m10",
+          "start": 96,
+          "end": 195,
+          "quote": "The main goal of the mission is to determine whether Europa has conditions that could support life."
+        },
+        {
+          "version_id": "m10",
+          "start": 452,
+          "end": 564,
+          "quote": "Scientists also have found evidence that Europa may host organic compounds and energy sources under its surface."
+        },
+        {
+          "version_id": "m11",
+          "start": 78,
+          "end": 192,
+          "quote": "Europa Clipper is not looking for life. Even if Europa does have life, this spacecraft is not equipped to find it."
+        }
+      ],
+      "rationale": "The ocean referent is supported, but neither actual organism existence nor their presence in that ocean is established or contradicted by the scoped snapshots.",
+      "gaps": [],
+      "resolutions": [],
+      "evidence_verdict": "unresolved",
+      "world_verdict": "unresolved",
+      "world_basis": [
+        {
+          "version_id": "m10",
+          "start": 269,
+          "end": 451,
+          "quote": "Information from NASA’s Galileo mission in the 1990s showed strong evidence that under Europa’s ice lies an enormous, salty ocean with more water than all of Earth’s oceans combined."
+        },
+        {
+          "version_id": "m10",
+          "start": 96,
+          "end": 195,
+          "quote": "The main goal of the mission is to determine whether Europa has conditions that could support life."
+        },
+        {
+          "version_id": "m10",
+          "start": 452,
+          "end": 564,
+          "quote": "Scientists also have found evidence that Europa may host organic compounds and energy sources under its surface."
+        },
+        {
+          "version_id": "m11",
+          "start": 78,
+          "end": 192,
+          "quote": "Europa Clipper is not looking for life. Even if Europa does have life, this spacecraft is not equipped to find it."
+        }
+      ],
+      "world_rationale": "The ocean referent is established, but the supplied snapshots provide no actual detection or exclusion of organisms in it. Habitability evidence and a mission’s inability to detect life cannot independently authenticate the existence claim as of the specified time.",
+      "evidence_probe_results": [
+        {
+          "probe_id": "p06:probe:3eca360105e7d155efbe",
+          "claim_id": "p06:claim:57c48c00a3fabc06f634",
+          "stage": "evidence",
+          "status": "unresolved",
+          "basis": [
+            {
+              "version_id": "m10",
+              "start": 269,
+              "end": 451,
+              "quote": "Information from NASA’s Galileo mission in the 1990s showed strong evidence that under Europa’s ice lies an enormous, salty ocean with more water than all of Earth’s oceans combined."
+            },
+            {
+              "version_id": "m10",
+              "start": 452,
+              "end": 564,
+              "quote": "Scientists also have found evidence that Europa may host organic compounds and energy sources under its surface."
+            }
+          ],
+          "rationale": "The source locates an ocean beneath Europa’s ice, but does not place living organisms there. Possible organic compounds and energy sources are not evidence of organisms.",
+          "referent_relation": "not_applicable"
+        },
+        {
+          "probe_id": "p06:probe:7033220f734506ea89fe",
+          "claim_id": "p06:claim:57c48c00a3fabc06f634",
+          "stage": "evidence",
+          "status": "unresolved",
+          "basis": [
+            {
+              "version_id": "m10",
+              "start": 96,
+              "end": 195,
+              "quote": "The main goal of the mission is to determine whether Europa has conditions that could support life."
+            },
+            {
+              "version_id": "m10",
+              "start": 452,
+              "end": 564,
+              "quote": "Scientists also have found evidence that Europa may host organic compounds and energy sources under its surface."
+            },
+            {
+              "version_id": "m11",
+              "start": 78,
+              "end": 192,
+              "quote": "Europa Clipper is not looking for life. Even if Europa does have life, this spacecraft is not equipped to find it."
+            }
+          ],
+          "rationale": "Potential habitability and possible organic compounds do not establish living organisms. The conditional discussion of life and the spacecraft’s inability to detect it neither assert nor deny its existence.",
+          "referent_relation": "not_applicable"
+        },
+        {
+          "probe_id": "p06:probe:c78cc60ea24c5bf815d7",
+          "claim_id": "p06:claim:57c48c00a3fabc06f634",
+          "stage": "evidence",
+          "status": "supported",
+          "basis": [
+            {
+              "version_id": "m10",
+              "start": 269,
+              "end": 451,
+              "quote": "Information from NASA’s Galileo mission in the 1990s showed strong evidence that under Europa’s ice lies an enormous, salty ocean with more water than all of Earth’s oceans combined."
+            }
+          ],
+          "rationale": "The description of an ocean under Europa’s ice unambiguously identifies the ocean in the target.",
+          "referent_relation": "description"
+        }
+      ],
+      "world_probe_results": [
+        {
+          "probe_id": "p06:probe:3eca360105e7d155efbe",
+          "claim_id": "p06:claim:57c48c00a3fabc06f634",
+          "stage": "world",
+          "status": "unresolved",
+          "basis": [
+            {
+              "version_id": "m10",
+              "start": 269,
+              "end": 451,
+              "quote": "Information from NASA’s Galileo mission in the 1990s showed strong evidence that under Europa’s ice lies an enormous, salty ocean with more water than all of Earth’s oceans combined."
+            },
+            {
+              "version_id": "m10",
+              "start": 452,
+              "end": 564,
+              "quote": "Scientists also have found evidence that Europa may host organic compounds and energy sources under its surface."
+            }
+          ],
+          "rationale": "The evidence locates an ocean beneath Europa’s ice and possible compounds and energy sources under its surface, but does not locate living organisms there.",
+          "referent_relation": "not_applicable"
+        },
+        {
+          "probe_id": "p06:probe:4b0670fae04e84ad962f",
+          "claim_id": "p06:claim:57c48c00a3fabc06f634",
+          "stage": "world",
+          "status": "unresolved",
+          "basis": [
+            {
+              "version_id": "m10",
+              "start": 269,
+              "end": 451,
+              "quote": "Information from NASA’s Galileo mission in the 1990s showed strong evidence that under Europa’s ice lies an enormous, salty ocean with more water than all of Earth’s oceans combined."
+            },
+            {
+              "version_id": "m10",
+              "start": 452,
+              "end": 564,
+              "quote": "Scientists also have found evidence that Europa may host organic compounds and energy sources under its surface."
+            },
+            {
+              "version_id": "m11",
+              "start": 78,
+              "end": 192,
+              "quote": "Europa Clipper is not looking for life. Even if Europa does have life, this spacecraft is not equipped to find it."
+            }
+          ],
+          "rationale": "m10 attributes ocean evidence to Galileo mission information, not evidence of organisms. Its possible-compound assertion identifies no particular originating study. Neither excerpt identifies observations or analyses establishing or excluding living organisms.",
+          "referent_relation": "not_applicable"
+        },
+        {
+          "probe_id": "p06:probe:7033220f734506ea89fe",
+          "claim_id": "p06:claim:57c48c00a3fabc06f634",
+          "stage": "world",
+          "status": "unresolved",
+          "basis": [
+            {
+              "version_id": "m10",
+              "start": 96,
+              "end": 195,
+              "quote": "The main goal of the mission is to determine whether Europa has conditions that could support life."
+            },
+            {
+              "version_id": "m10",
+              "start": 452,
+              "end": 564,
+              "quote": "Scientists also have found evidence that Europa may host organic compounds and energy sources under its surface."
+            },
+            {
+              "version_id": "m11",
+              "start": 78,
+              "end": 192,
+              "quote": "Europa Clipper is not looking for life. Even if Europa does have life, this spacecraft is not equipped to find it."
+            }
+          ],
+          "rationale": "Potential habitability and possible organic compounds do not establish living organisms. The conditional discussion of life and spacecraft limitations establishes neither presence nor absence.",
+          "referent_relation": "not_applicable"
+        },
+        {
+          "probe_id": "p06:probe:c6a44ed31842c3799787",
+          "claim_id": "p06:claim:57c48c00a3fabc06f634",
+          "stage": "world",
+          "status": "unresolved",
+          "basis": [
+            {
+              "version_id": "m10",
+              "start": 96,
+              "end": 195,
+              "quote": "The main goal of the mission is to determine whether Europa has conditions that could support life."
+            },
+            {
+              "version_id": "m11",
+              "start": 78,
+              "end": 192,
+              "quote": "Europa Clipper is not looking for life. Even if Europa does have life, this spacecraft is not equipped to find it."
+            }
+          ],
+          "rationale": "Neither excerpt supplies an observation of organisms. Their mission descriptions do not establish independent evidence for existence, and visible text does not establish copying or shared observational dependence for that claim.",
+          "referent_relation": "not_applicable"
+        },
+        {
+          "probe_id": "p06:probe:c78cc60ea24c5bf815d7",
+          "claim_id": "p06:claim:57c48c00a3fabc06f634",
+          "stage": "world",
+          "status": "supported",
+          "basis": [
+            {
+              "version_id": "m10",
+              "start": 269,
+              "end": 451,
+              "quote": "Information from NASA’s Galileo mission in the 1990s showed strong evidence that under Europa’s ice lies an enormous, salty ocean with more water than all of Earth’s oceans combined."
+            }
+          ],
+          "rationale": "The enormous, salty ocean explicitly described as lying under Europa’s ice unambiguously matches the target ocean.",
+          "referent_relation": "description"
+        }
+      ]
+    },
+    {
+      "round": 2,
+      "verdict": "unresolved",
+      "basis": [
+        {
+          "version_id": "m10",
+          "start": 269,
+          "end": 451,
+          "quote": "Information from NASA’s Galileo mission in the 1990s showed strong evidence that under Europa’s ice lies an enormous, salty ocean with more water than all of Earth’s oceans combined."
+        },
+        {
+          "version_id": "m10",
+          "start": 96,
+          "end": 195,
+          "quote": "The main goal of the mission is to determine whether Europa has conditions that could support life."
+        },
+        {
+          "version_id": "m10",
+          "start": 452,
+          "end": 564,
+          "quote": "Scientists also have found evidence that Europa may host organic compounds and energy sources under its surface."
+        },
+        {
+          "version_id": "m11",
+          "start": 78,
+          "end": 192,
+          "quote": "Europa Clipper is not looking for life. Even if Europa does have life, this spacecraft is not equipped to find it."
+        }
+      ],
+      "rationale": "The ocean referent is supported, but the scoped snapshots establish neither actual living organisms nor their presence in that ocean. They also do not deny the target.",
+      "gaps": [],
+      "resolutions": [],
+      "evidence_verdict": "unresolved",
+      "world_verdict": "unresolved",
+      "world_basis": [
+        {
+          "version_id": "m10",
+          "start": 269,
+          "end": 451,
+          "quote": "Information from NASA’s Galileo mission in the 1990s showed strong evidence that under Europa’s ice lies an enormous, salty ocean with more water than all of Earth’s oceans combined."
+        },
+        {
+          "version_id": "m10",
+          "start": 96,
+          "end": 195,
+          "quote": "The main goal of the mission is to determine whether Europa has conditions that could support life."
+        },
+        {
+          "version_id": "m10",
+          "start": 452,
+          "end": 564,
+          "quote": "Scientists also have found evidence that Europa may host organic compounds and energy sources under its surface."
+        },
+        {
+          "version_id": "m11",
+          "start": 78,
+          "end": 192,
+          "quote": "Europa Clipper is not looking for life. Even if Europa does have life, this spacecraft is not equipped to find it."
+        }
+      ],
+      "world_rationale": "The ocean’s referent is established, but the supplied snapshots do not independently establish organisms or their presence there as of the cutoff. Possible habitability and inability to detect life are not evidence of absence. No specific source-backed lead warrants a further world-verification gap.",
+      "evidence_probe_results": [
+        {
+          "probe_id": "p06:probe:3eca360105e7d155efbe",
+          "claim_id": "p06:claim:57c48c00a3fabc06f634",
+          "stage": "evidence",
+          "status": "unresolved",
+          "basis": [
+            {
+              "version_id": "m10",
+              "start": 269,
+              "end": 451,
+              "quote": "Information from NASA’s Galileo mission in the 1990s showed strong evidence that under Europa’s ice lies an enormous, salty ocean with more water than all of Earth’s oceans combined."
+            },
+            {
+              "version_id": "m10",
+              "start": 452,
+              "end": 564,
+              "quote": "Scientists also have found evidence that Europa may host organic compounds and energy sources under its surface."
+            },
+            {
+              "version_id": "m11",
+              "start": 78,
+              "end": 192,
+              "quote": "Europa Clipper is not looking for life. Even if Europa does have life, this spacecraft is not equipped to find it."
+            }
+          ],
+          "rationale": "The evidence identifies a subsurface ocean but does not place living organisms there. Possible organic compounds are not an assertion of organisms, and the spacecraft's detection limitation does not establish their presence or absence.",
+          "referent_relation": "not_applicable"
+        },
+        {
+          "probe_id": "p06:probe:7033220f734506ea89fe",
+          "claim_id": "p06:claim:57c48c00a3fabc06f634",
+          "stage": "evidence",
+          "status": "unresolved",
+          "basis": [
+            {
+              "version_id": "m10",
+              "start": 96,
+              "end": 195,
+              "quote": "The main goal of the mission is to determine whether Europa has conditions that could support life."
+            },
+            {
+              "version_id": "m10",
+              "start": 452,
+              "end": 564,
+              "quote": "Scientists also have found evidence that Europa may host organic compounds and energy sources under its surface."
+            },
+            {
+              "version_id": "m11",
+              "start": 78,
+              "end": 192,
+              "quote": "Europa Clipper is not looking for life. Even if Europa does have life, this spacecraft is not equipped to find it."
+            }
+          ],
+          "rationale": "Potential life-supporting conditions and possible organic compounds do not establish actual organisms. The conditional 'Even if Europa does have life' neither asserts nor denies their existence.",
+          "referent_relation": "not_applicable"
+        },
+        {
+          "probe_id": "p06:probe:c78cc60ea24c5bf815d7",
+          "claim_id": "p06:claim:57c48c00a3fabc06f634",
+          "stage": "evidence",
+          "status": "supported",
+          "basis": [
+            {
+              "version_id": "m10",
+              "start": 269,
+              "end": 451,
+              "quote": "Information from NASA’s Galileo mission in the 1990s showed strong evidence that under Europa’s ice lies an enormous, salty ocean with more water than all of Earth’s oceans combined."
+            }
+          ],
+          "rationale": "The enormous, salty ocean described as lying under Europa’s ice unambiguously refers to the target ocean.",
+          "referent_relation": "description"
+        }
+      ],
+      "world_probe_results": [
+        {
+          "probe_id": "p06:probe:3eca360105e7d155efbe",
+          "claim_id": "p06:claim:57c48c00a3fabc06f634",
+          "stage": "world",
+          "status": "unresolved",
+          "basis": [
+            {
+              "version_id": "m10",
+              "start": 269,
+              "end": 451,
+              "quote": "Information from NASA’s Galileo mission in the 1990s showed strong evidence that under Europa’s ice lies an enormous, salty ocean with more water than all of Earth’s oceans combined."
+            },
+            {
+              "version_id": "m10",
+              "start": 452,
+              "end": 564,
+              "quote": "Scientists also have found evidence that Europa may host organic compounds and energy sources under its surface."
+            },
+            {
+              "version_id": "m11",
+              "start": 78,
+              "end": 192,
+              "quote": "Europa Clipper is not looking for life. Even if Europa does have life, this spacecraft is not equipped to find it."
+            }
+          ],
+          "rationale": "The sources describe a subsurface ocean and possible ingredients for life, but do not locate actual living organisms in that ocean.",
+          "referent_relation": "not_applicable"
+        },
+        {
+          "probe_id": "p06:probe:4b0670fae04e84ad962f",
+          "claim_id": "p06:claim:57c48c00a3fabc06f634",
+          "stage": "world",
+          "status": "unresolved",
+          "basis": [
+            {
+              "version_id": "m10",
+              "start": 269,
+              "end": 451,
+              "quote": "Information from NASA’s Galileo mission in the 1990s showed strong evidence that under Europa’s ice lies an enormous, salty ocean with more water than all of Earth’s oceans combined."
+            },
+            {
+              "version_id": "m10",
+              "start": 452,
+              "end": 564,
+              "quote": "Scientists also have found evidence that Europa may host organic compounds and energy sources under its surface."
+            },
+            {
+              "version_id": "m11",
+              "start": 78,
+              "end": 192,
+              "quote": "Europa Clipper is not looking for life. Even if Europa does have life, this spacecraft is not equipped to find it."
+            }
+          ],
+          "rationale": "m10 attributes ocean evidence to Galileo mission information without identifying a specific dataset or report. Its possible-organic-compound evidence has no identifiable originating study here. m11 states a mission limitation, not an observation for or against organisms. No originating evidence of existence or absence is identified.",
+          "referent_relation": "not_applicable"
+        },
+        {
+          "probe_id": "p06:probe:7033220f734506ea89fe",
+          "claim_id": "p06:claim:57c48c00a3fabc06f634",
+          "stage": "world",
+          "status": "unresolved",
+          "basis": [
+            {
+              "version_id": "m10",
+              "start": 96,
+              "end": 195,
+              "quote": "The main goal of the mission is to determine whether Europa has conditions that could support life."
+            },
+            {
+              "version_id": "m10",
+              "start": 452,
+              "end": 564,
+              "quote": "Scientists also have found evidence that Europa may host organic compounds and energy sources under its surface."
+            },
+            {
+              "version_id": "m11",
+              "start": 78,
+              "end": 192,
+              "quote": "Europa Clipper is not looking for life. Even if Europa does have life, this spacecraft is not equipped to find it."
+            }
+          ],
+          "rationale": "Habitability is an investigative goal, organic compounds are only possible, and life is explicitly conditional. These passages establish neither the existence nor the absence of organisms.",
+          "referent_relation": "not_applicable"
+        },
+        {
+          "probe_id": "p06:probe:c6a44ed31842c3799787",
+          "claim_id": "p06:claim:57c48c00a3fabc06f634",
+          "stage": "world",
+          "status": "unresolved",
+          "basis": [
+            {
+              "version_id": "m10",
+              "start": 269,
+              "end": 451,
+              "quote": "Information from NASA’s Galileo mission in the 1990s showed strong evidence that under Europa’s ice lies an enormous, salty ocean with more water than all of Earth’s oceans combined."
+            },
+            {
+              "version_id": "m11",
+              "start": 78,
+              "end": 192,
+              "quote": "Europa Clipper is not looking for life. Even if Europa does have life, this spacecraft is not equipped to find it."
+            }
+          ],
+          "rationale": "Neither account supplies an observation of organisms. The excerpts do not establish independent life evidence or a shared underlying life-detection report; their common NASA affiliation alone establishes neither independence nor copying.",
+          "referent_relation": "not_applicable"
+        },
+        {
+          "probe_id": "p06:probe:c78cc60ea24c5bf815d7",
+          "claim_id": "p06:claim:57c48c00a3fabc06f634",
+          "stage": "world",
+          "status": "supported",
+          "basis": [
+            {
+              "version_id": "m10",
+              "start": 269,
+              "end": 451,
+              "quote": "Information from NASA’s Galileo mission in the 1990s showed strong evidence that under Europa’s ice lies an enormous, salty ocean with more water than all of Earth’s oceans combined."
+            }
+          ],
+          "rationale": "The enormous, salty ocean described as lying under Europa’s ice unambiguously identifies the target ocean.",
+          "referent_relation": "description"
+        }
+      ]
+    }
+  ],
+  "operations": [
+    {
+      "sequence": 1,
+      "round": 1,
+      "action": "search",
+      "tasks": [
+        {
+          "id": "origin:p06",
+          "question": "Find the producing record and evidenced lineage for: Living organisms exist in the ocean beneath Europa's ice.",
+          "stage": "provenance",
+          "dimension": "auto",
+          "blocking": true,
+          "target_id": null,
+          "basis": [],
+          "decision_impact": "",
+          "action": "search",
+          "locator": null,
+          "probe_id": null
+        }
+      ],
+      "limit": 24
+    },
+    {
+      "sequence": 2,
+      "round": 1,
+      "action": "snapshot_saved",
+      "version_id": "m10",
+      "sha256": "e48629264529179fe3b3e70af1fbf38ee18401008d4fbb2d080785dea3ae7976",
+      "eligible": true
+    },
+    {
+      "sequence": 3,
+      "round": 1,
+      "action": "decompose_started",
+      "version_id": "m10",
+      "duplicate": false,
+      "revisit": false
+    },
+    {
+      "sequence": 4,
+      "round": 1,
+      "action": "decompose_completed",
+      "version_id": "m10",
+      "revision": 1
+    },
+    {
+      "sequence": 5,
+      "round": 1,
+      "action": "alignment_checked",
+      "version_id": "m10",
+      "analysis_changed": true
+    },
+    {
+      "sequence": 6,
+      "round": 1,
+      "action": "graph_updated",
+      "version_id": "m10",
+      "open_gaps": 2
+    },
+    {
+      "sequence": 7,
+      "round": 1,
+      "action": "snapshot_saved",
+      "version_id": "m11",
+      "sha256": "fad6073a9d106b194501fa4ba0e27e94e7ec00a3c14358d31208c528e8a4ac43",
+      "eligible": true
+    },
+    {
+      "sequence": 8,
+      "round": 1,
+      "action": "decompose_started",
+      "version_id": "m11",
+      "duplicate": false,
+      "revisit": false
+    },
+    {
+      "sequence": 9,
+      "round": 1,
+      "action": "decompose_completed",
+      "version_id": "m11",
+      "revision": 2
+    },
+    {
+      "sequence": 10,
+      "round": 1,
+      "action": "alignment_checked",
+      "version_id": "m11",
+      "analysis_changed": true
+    },
+    {
+      "sequence": 11,
+      "round": 1,
+      "action": "graph_updated",
+      "version_id": "m11",
+      "open_gaps": 2
+    },
+    {
+      "sequence": 12,
+      "round": 1,
+      "action": "verification_started"
+    },
+    {
+      "sequence": 13,
+      "round": 1,
+      "action": "verification_completed",
+      "verdict": "unresolved",
+      "decision": "unresolved",
+      "assessments": {
+        "evidence": {
+          "raw_verdict": "unresolved",
+          "decision": "unresolved",
+          "blocking_gap_ids": []
+        },
+        "world": {
+          "raw_verdict": "unresolved",
+          "decision": "unresolved",
+          "blocking_gap_ids": []
+        }
+      },
+      "followup_tasks": 0,
+      "provenance_status": "partial"
+    },
+    {
+      "sequence": 14,
+      "round": 1,
+      "action": "assessment_changed",
+      "previous": null,
+      "current": {
+        "evidence": {
+          "raw_verdict": "unresolved",
+          "decision": "unresolved",
+          "blocking_gap_ids": []
+        },
+        "world": {
+          "raw_verdict": "unresolved",
+          "decision": "unresolved",
+          "blocking_gap_ids": []
+        }
+      },
+      "basis": [
+        {
+          "version_id": "m10",
+          "start": 269,
+          "end": 451,
+          "quote": "Information from NASA’s Galileo mission in the 1990s showed strong evidence that under Europa’s ice lies an enormous, salty ocean with more water than all of Earth’s oceans combined."
+        },
+        {
+          "version_id": "m10",
+          "start": 96,
+          "end": 195,
+          "quote": "The main goal of the mission is to determine whether Europa has conditions that could support life."
+        },
+        {
+          "version_id": "m10",
+          "start": 452,
+          "end": 564,
+          "quote": "Scientists also have found evidence that Europa may host organic compounds and energy sources under its surface."
+        },
+        {
+          "version_id": "m11",
+          "start": 78,
+          "end": 192,
+          "quote": "Europa Clipper is not looking for life. Even if Europa does have life, this spacecraft is not equipped to find it."
+        }
+      ],
+      "world_basis": [
+        {
+          "version_id": "m10",
+          "start": 269,
+          "end": 451,
+          "quote": "Information from NASA’s Galileo mission in the 1990s showed strong evidence that under Europa’s ice lies an enormous, salty ocean with more water than all of Earth’s oceans combined."
+        },
+        {
+          "version_id": "m10",
+          "start": 96,
+          "end": 195,
+          "quote": "The main goal of the mission is to determine whether Europa has conditions that could support life."
+        },
+        {
+          "version_id": "m10",
+          "start": 452,
+          "end": 564,
+          "quote": "Scientists also have found evidence that Europa may host organic compounds and energy sources under its surface."
+        },
+        {
+          "version_id": "m11",
+          "start": 78,
+          "end": 192,
+          "quote": "Europa Clipper is not looking for life. Even if Europa does have life, this spacecraft is not equipped to find it."
+        }
+      ]
+    },
+    {
+      "sequence": 15,
+      "round": 1,
+      "action": "progress_checked",
+      "new_eligible_versions": 2,
+      "new_structure": true
+    },
+    {
+      "sequence": 16,
+      "round": 2,
+      "action": "search",
+      "tasks": [
+        {
+          "id": "origin:p06",
+          "question": "Find the producing record and evidenced lineage for: Living organisms exist in the ocean beneath Europa's ice.",
+          "stage": "provenance",
+          "dimension": "auto",
+          "blocking": true,
+          "target_id": null,
+          "basis": [],
+          "decision_impact": "",
+          "action": "search",
+          "locator": null,
+          "probe_id": null
+        },
+        {
+          "id": "m10:upstream:a5da232f71c6003464aa",
+          "question": "Locate the explicitly cited upstream: NASA’s Galileo mission",
+          "stage": "provenance",
+          "dimension": "provenance",
+          "blocking": true,
+          "target_id": "p06",
+          "basis": [
+            {
+              "version_id": "m10",
+              "start": 269,
+              "end": 451,
+              "quote": "Information from NASA’s Galileo mission in the 1990s showed strong evidence that under Europa’s ice lies an enormous, salty ocean with more water than all of Earth’s oceans combined."
+            }
+          ],
+          "decision_impact": "Locating the underlying Galileo records could establish the provenance of the ocean evidence and reveal shared dependence with other accounts. This attribution does not establish that living organisms exist there.",
+          "action": "search",
+          "locator": "NASA’s Galileo mission",
+          "probe_id": null
+        }
+      ],
+      "limit": 22
+    },
+    {
+      "sequence": 17,
+      "round": 2,
+      "action": "duplicate_observed",
+      "version_id": "m10",
+      "sha256": "e48629264529179fe3b3e70af1fbf38ee18401008d4fbb2d080785dea3ae7976",
+      "eligible": true
+    },
+    {
+      "sequence": 18,
+      "round": 2,
+      "action": "decompose_started",
+      "version_id": "m10",
+      "duplicate": true,
+      "revisit": false
+    },
+    {
+      "sequence": 19,
+      "round": 2,
+      "action": "decompose_completed",
+      "version_id": "m10",
+      "revision": 3
+    },
+    {
+      "sequence": 20,
+      "round": 2,
+      "action": "alignment_checked",
+      "version_id": "m10",
+      "analysis_changed": true
+    },
+    {
+      "sequence": 21,
+      "round": 2,
+      "action": "graph_updated",
+      "version_id": "m10",
+      "open_gaps": 2
+    },
+    {
+      "sequence": 22,
+      "round": 2,
+      "action": "duplicate_observed",
+      "version_id": "m11",
+      "sha256": "fad6073a9d106b194501fa4ba0e27e94e7ec00a3c14358d31208c528e8a4ac43",
+      "eligible": true
+    },
+    {
+      "sequence": 23,
+      "round": 2,
+      "action": "decompose_started",
+      "version_id": "m11",
+      "duplicate": true,
+      "revisit": false
+    },
+    {
+      "sequence": 24,
+      "round": 2,
+      "action": "decompose_completed",
+      "version_id": "m11",
+      "revision": 4
+    },
+    {
+      "sequence": 25,
+      "round": 2,
+      "action": "alignment_checked",
+      "version_id": "m11",
+      "analysis_changed": true
+    },
+    {
+      "sequence": 26,
+      "round": 2,
+      "action": "graph_updated",
+      "version_id": "m11",
+      "open_gaps": 2
+    },
+    {
+      "sequence": 27,
+      "round": 2,
+      "action": "verification_started"
+    },
+    {
+      "sequence": 28,
+      "round": 2,
+      "action": "verification_completed",
+      "verdict": "unresolved",
+      "decision": "unresolved",
+      "assessments": {
+        "evidence": {
+          "raw_verdict": "unresolved",
+          "decision": "unresolved",
+          "blocking_gap_ids": []
+        },
+        "world": {
+          "raw_verdict": "unresolved",
+          "decision": "unresolved",
+          "blocking_gap_ids": []
+        }
+      },
+      "followup_tasks": 0,
+      "provenance_status": "partial"
+    },
+    {
+      "sequence": 29,
+      "round": 2,
+      "action": "progress_checked",
+      "new_eligible_versions": 0,
+      "new_structure": true
+    },
+    {
+      "sequence": 30,
+      "round": 2,
+      "action": "stopped",
+      "reason": "round_budget"
+    }
+  ],
+  "errors": []
+}

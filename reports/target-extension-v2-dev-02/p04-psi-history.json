@@ -1,0 +1,114 @@
+[
+  {
+    "sequence": 1,
+    "material": "m07",
+    "round": 1,
+    "stage": "atoms",
+    "repair": 0,
+    "status": "validated"
+  },
+  {
+    "sequence": 2,
+    "material": "m07",
+    "round": 1,
+    "stage": "lineage",
+    "repair": 0,
+    "status": "validated"
+  },
+  {
+    "sequence": 3,
+    "material": "m07",
+    "round": 1,
+    "stage": "critic",
+    "repair": 0,
+    "status": "accepted"
+  },
+  {
+    "sequence": 4,
+    "material": "m08",
+    "round": 1,
+    "stage": "atoms",
+    "repair": 0,
+    "status": "validated"
+  },
+  {
+    "sequence": 5,
+    "material": "m08",
+    "round": 1,
+    "stage": "lineage",
+    "repair": 0,
+    "status": "validated"
+  },
+  {
+    "sequence": 6,
+    "material": "m08",
+    "round": 1,
+    "stage": "critic",
+    "repair": 0,
+    "status": "accepted"
+  },
+  {
+    "sequence": 7,
+    "material": "m07",
+    "round": 2,
+    "stage": "atoms",
+    "repair": 0,
+    "status": "validated"
+  },
+  {
+    "sequence": 8,
+    "material": "m07",
+    "round": 2,
+    "stage": "lineage",
+    "repair": 0,
+    "status": "validated"
+  },
+  {
+    "sequence": 9,
+    "material": "m07",
+    "round": 2,
+    "stage": "critic",
+    "repair": 0,
+    "status": "repair_requested"
+  },
+  {
+    "sequence": 10,
+    "material": "m07",
+    "round": 2,
+    "stage": "lineage",
+    "repair": 1,
+    "status": "validated"
+  },
+  {
+    "sequence": 11,
+    "material": "m07",
+    "round": 2,
+    "stage": "critic",
+    "repair": 1,
+    "status": "accepted"
+  },
+  {
+    "sequence": 12,
+    "material": "m08",
+    "round": 2,
+    "stage": "atoms",
+    "repair": 0,
+    "status": "validated"
+  },
+  {
+    "sequence": 13,
+    "material": "m08",
+    "round": 2,
+    "stage": "lineage",
+    "repair": 0,
+    "status": "validated"
+  },
+  {
+    "sequence": 14,
+    "material": "m08",
+    "round": 2,
+    "stage": "critic",
+    "repair": 0,
+    "status": "accepted"
+  }
+]

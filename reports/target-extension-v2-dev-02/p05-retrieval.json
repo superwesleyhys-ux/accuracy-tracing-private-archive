@@ -1,0 +1,66 @@
+[
+  {
+    "round": 1,
+    "kind": "fixed_corpus_development_reanalysis",
+    "tasks": [
+      {
+        "id": "origin:p05",
+        "question": "Find the producing record and evidenced lineage for: Ingenuity was upright at the moment it touched down during its January 18, 2024 flight.",
+        "stage": "provenance",
+        "dimension": "auto",
+        "blocking": true,
+        "target_id": null,
+        "basis": [],
+        "decision_impact": "",
+        "action": "search",
+        "locator": null,
+        "probe_id": null
+      }
+    ],
+    "returned": [
+      "m09"
+    ]
+  },
+  {
+    "round": 2,
+    "kind": "fixed_corpus_development_reanalysis",
+    "tasks": [
+      {
+        "id": "origin:p05",
+        "question": "Find the producing record and evidenced lineage for: Ingenuity was upright at the moment it touched down during its January 18, 2024 flight.",
+        "stage": "provenance",
+        "dimension": "auto",
+        "blocking": true,
+        "target_id": null,
+        "basis": [],
+        "decision_impact": "",
+        "action": "search",
+        "locator": null,
+        "probe_id": null
+      },
+      {
+        "id": "p05:verification:world:ba5d52d6db58bb333ebe",
+        "question": "Did the identified investigation determine Ingenuity’s orientation at the instant of touchdown on January 18, 2024?",
+        "stage": "verification",
+        "dimension": "world",
+        "blocking": true,
+        "target_id": "p05",
+        "basis": [
+          {
+            "version_id": "m09",
+            "start": 872,
+            "end": 995,
+            "quote": "The cause of the communications dropout and the helicopter’s orientation at time of touchdown are still being investigated."
+          }
+        ],
+        "decision_impact": "An investigation finding that establishes orientation at touchdown could support or contradict the currently unresolved temporal assertion.",
+        "action": "search",
+        "locator": "NASA/JPL findings from the Ingenuity January 18, 2024 touchdown-orientation investigation, available by 2026-09-05T09:34:36Z",
+        "probe_id": "p05:probe:9ba0ec04cc276c712362"
+      }
+    ],
+    "returned": [
+      "m09"
+    ]
+  }
+]

@@ -1,0 +1,2059 @@
+{
+  "schema_version": "0.3",
+  "scope": "plugin-supplied semantic analyses; no built-in truth oracle",
+  "target": {
+    "id": "p03",
+    "text": "NIST's FIPS 203 specifies three ML-KEM parameter sets: ML-KEM-512, ML-KEM-768, and ML-KEM-1024.",
+    "as_of": "2026-09-05T09:34:36Z",
+    "source_version_id": "m05",
+    "assessment_mode": "evidence",
+    "evidence_scope": [
+      "m06"
+    ]
+  },
+  "config": {
+    "max_rounds": 2,
+    "max_documents": 24,
+    "max_decomposition_calls": 24,
+    "experimental_force_rounds": true
+  },
+  "provenance_status": "original_material_located",
+  "fact_status": "supported",
+  "stop_reason": "round_budget",
+  "usage": {
+    "rounds": 2,
+    "documents": 4,
+    "unique_versions": 2,
+    "decomposition_calls": 5,
+    "verification_calls": 2
+  },
+  "decision_status": "supported",
+  "assessments": {
+    "evidence": {
+      "raw_verdict": "supported",
+      "decision": "supported",
+      "blocking_gap_ids": []
+    },
+    "world": {
+      "raw_verdict": "supported",
+      "decision": "supported",
+      "blocking_gap_ids": []
+    }
+  },
+  "assessment_valid": true,
+  "materials": [
+    {
+      "version_id": "m05",
+      "url": "https://www.nist.gov/news-events/news/2024/08/nist-releases-first-3-finalized-post-quantum-encryption-standards",
+      "content": "NIST Releases First 3 Finalized Post-Quantum Encryption Standards\nPublication date: 2024-08-13\n\nThe new standards are designed for two essential tasks for which encryption is typically used: general encryption, used to protect information exchanged across a public network; and digital signatures, used for identity authentication.\n\n[Federal Information Processing Standard (FIPS) 203](https://csrc.nist.gov/pubs/fips/203/final), intended as the primary standard for general encryption. Among its advantages are comparatively small encryption keys that two parties can exchange easily, as well as its speed of operation. The standard is based on the CRYSTALS-Kyber algorithm, which has been renamed ML-KEM, short for Module-Lattice-Based Key-Encapsulation Mechanism.",
+      "retrieved_at": "2026-09-05T09:34:36Z",
+      "published_at": null,
+      "available_at": "2026-09-05T09:34:36Z",
+      "availability_basis": "Current web-tool collection completed at retrieved_at on 2026-09-05. The supplied material is a selected, whitespace-normalized excerpt, not a full page or historical exact-version capture. Availability is asserted only at collection completion. The source's displayed publication date is preserved in content; no exact timezone-qualified publication instant is known.",
+      "issuer": "NIST"
+    },
+    {
+      "version_id": "m06",
+      "url": "https://csrc.nist.gov/pubs/fips/203/final",
+      "content": "FIPS 203: Module-Lattice-Based Key-Encapsulation Mechanism Standard\nPublication date: 2024-08-13\n\nA key-encapsulation mechanism (KEM) is a set of algorithms that, under certain conditions, can be used by two parties to establish a shared secret key over a public channel. A shared secret key that is securely established using a KEM can then be used with symmetric-key cryptographic algorithms to perform basic tasks in secure communications, such as encryption and authentication. This standard specifies a key-encapsulation mechanism called ML-KEM.\n\nThe security of ML-KEM is related to the computational difficulty of the Module Learning with Errors problem. At present, ML-KEM is believed to be secure, even against adversaries who possess a quantum computer. This standard specifies three parameter sets for ML-KEM. In order of increasing security strength and decreasing performance, these are ML-KEM-512, ML-KEM-768, and ML-KEM-1024.",
+      "retrieved_at": "2026-09-05T09:34:36Z",
+      "published_at": null,
+      "available_at": "2026-09-05T09:34:36Z",
+      "availability_basis": "Current web-tool collection completed at retrieved_at on 2026-09-05. The supplied material is a selected, whitespace-normalized excerpt, not a full page or historical exact-version capture. Availability is asserted only at collection completion. The source's displayed publication date is preserved in content; no exact timezone-qualified publication instant is known.",
+      "issuer": "NIST"
+    }
+  ],
+  "eligible_version_ids": [
+    "m05",
+    "m06"
+  ],
+  "observations": [
+    {
+      "version_id": "m05",
+      "retrieved_at": "2026-09-05T09:34:36Z",
+      "duplicate": false,
+      "eligible": true,
+      "reasons": []
+    },
+    {
+      "version_id": "m06",
+      "retrieved_at": "2026-09-05T09:34:36Z",
+      "duplicate": false,
+      "eligible": true,
+      "reasons": []
+    },
+    {
+      "version_id": "m05",
+      "retrieved_at": "2026-09-05T09:34:36Z",
+      "duplicate": true,
+      "eligible": true,
+      "reasons": []
+    },
+    {
+      "version_id": "m06",
+      "retrieved_at": "2026-09-05T09:34:36Z",
+      "duplicate": true,
+      "eligible": true,
+      "reasons": []
+    }
+  ],
+  "analyses": {
+    "m05": {
+      "fragments": [
+        {
+          "id": "m05:atom:8e087945a60848c40358",
+          "text": "FIPS 203 is intended as the primary standard for general encryption.",
+          "span": {
+            "version_id": "m05",
+            "start": 333,
+            "end": 486,
+            "quote": "[Federal Information Processing Standard (FIPS) 203](https://csrc.nist.gov/pubs/fips/203/final), intended as the primary standard for general encryption."
+          },
+          "parent_id": "p03",
+          "qualifiers": [
+            "intended as",
+            "primary standard for general encryption"
+          ],
+          "qualifier_spans": [
+            {
+              "version_id": "m05",
+              "start": 430,
+              "end": 441,
+              "quote": "intended as"
+            },
+            {
+              "version_id": "m05",
+              "start": 446,
+              "end": 485,
+              "quote": "primary standard for general encryption"
+            }
+          ]
+        },
+        {
+          "id": "m05:atom:a32d74bbe424d116916d",
+          "text": "The CRYSTALS-Kyber algorithm has been renamed ML-KEM, short for Module-Lattice-Based Key-Encapsulation Mechanism; the passage does not identify the renaming actor.",
+          "span": {
+            "version_id": "m05",
+            "start": 621,
+            "end": 766,
+            "quote": "The standard is based on the CRYSTALS-Kyber algorithm, which has been renamed ML-KEM, short for Module-Lattice-Based Key-Encapsulation Mechanism."
+          },
+          "parent_id": "p03",
+          "qualifiers": [
+            "which has been renamed ML-KEM",
+            "short for Module-Lattice-Based Key-Encapsulation Mechanism"
+          ],
+          "qualifier_spans": [
+            {
+              "version_id": "m05",
+              "start": 676,
+              "end": 705,
+              "quote": "which has been renamed ML-KEM"
+            },
+            {
+              "version_id": "m05",
+              "start": 707,
+              "end": 765,
+              "quote": "short for Module-Lattice-Based Key-Encapsulation Mechanism"
+            }
+          ]
+        },
+        {
+          "id": "m05:atom:c33c08d42fdcdd1bf2fc",
+          "text": "FIPS 203 is based on the CRYSTALS-Kyber algorithm.",
+          "span": {
+            "version_id": "m05",
+            "start": 333,
+            "end": 766,
+            "quote": "[Federal Information Processing Standard (FIPS) 203](https://csrc.nist.gov/pubs/fips/203/final), intended as the primary standard for general encryption. Among its advantages are comparatively small encryption keys that two parties can exchange easily, as well as its speed of operation. The standard is based on the CRYSTALS-Kyber algorithm, which has been renamed ML-KEM, short for Module-Lattice-Based Key-Encapsulation Mechanism."
+          },
+          "parent_id": "p03",
+          "qualifiers": [],
+          "qualifier_spans": []
+        }
+      ],
+      "relations": [
+        {
+          "id": "m05:citation:9f11f20a0efac4be53a6",
+          "from_version": "m05",
+          "to_version": "m06",
+          "kind": "cites",
+          "status": "direct",
+          "basis": [
+            {
+              "version_id": "m05",
+              "start": 333,
+              "end": 486,
+              "quote": "[Federal Information Processing Standard (FIPS) 203](https://csrc.nist.gov/pubs/fips/203/final), intended as the primary standard for general encryption."
+            }
+          ],
+          "rationale": "The current material explicitly links the FIPS 203 record it discusses; this is a direct citation, not a connection inferred from topic similarity.",
+          "upstream_locator": "https://csrc.nist.gov/pubs/fips/203/final"
+        }
+      ],
+      "gaps": [],
+      "resolutions": [
+        {
+          "gap_id": "lineage:p03",
+          "basis": [
+            {
+              "version_id": "m05",
+              "start": 333,
+              "end": 486,
+              "quote": "[Federal Information Processing Standard (FIPS) 203](https://csrc.nist.gov/pubs/fips/203/final), intended as the primary standard for general encryption."
+            }
+          ],
+          "rationale": "Rechecked source findings establish the target source's path to an original material."
+        },
+        {
+          "gap_id": "m05:upstream:749ddad8cdf235ec95a5",
+          "basis": [
+            {
+              "version_id": "m05",
+              "start": 333,
+              "end": 486,
+              "quote": "[Federal Information Processing Standard (FIPS) 203](https://csrc.nist.gov/pubs/fips/203/final), intended as the primary standard for general encryption."
+            }
+          ],
+          "rationale": "The source-side citation now identifies a visible upstream version."
+        },
+        {
+          "gap_id": "origin:p03",
+          "basis": [
+            {
+              "version_id": "m05",
+              "start": 333,
+              "end": 486,
+              "quote": "[Federal Information Processing Standard (FIPS) 203](https://csrc.nist.gov/pubs/fips/203/final), intended as the primary standard for general encryption."
+            }
+          ],
+          "rationale": "Rechecked source findings establish the target source's path to an original material."
+        }
+      ],
+      "origins": [],
+      "notes": "All three previous atoms remain supported; none withdrawn. These are findings for m05, outside the fixed evidence scope of m06. The explicit FIPS 203 mention binds “The standard” to that document; NIST is identified in issuer metadata. The excerpt supplies no individual parameter-set mentions, aliases, descriptions or anaphora that bind to ML-KEM-512, ML-KEM-768 or ML-KEM-1024. It does not state a count of ML-KEM parameter sets or that FIPS 203 specifies the asserted enumeration. The title's “3” counts finalized standards, not parameter sets. These are excerpt limitations, not contradictions. No m06 content is supplied for inspection.\nRechecked and retained the prior explicit citation; no lineage findings require withdrawal. The current excerpt does not establish itself as an original record for the whole target. The routed probe asks about lineage within m06, but no m06 content is supplied, so that check remains unassessed. The known citation connects m05 to m06 without proving the count or enumeration. The current excerpt does not list parameter sets; the title's “3” counts finalized standards instead.",
+      "revisit_versions": []
+    },
+    "m06": {
+      "fragments": [
+        {
+          "id": "m06:atom:1e7869aae26c2822681c",
+          "text": "NIST's FIPS 203 specifies three ML-KEM parameter sets: ML-KEM-512, ML-KEM-768, and ML-KEM-1024, listed in order of increasing security strength and decreasing performance.",
+          "span": {
+            "version_id": "m06",
+            "start": 764,
+            "end": 940,
+            "quote": "This standard specifies three parameter sets for ML-KEM. In order of increasing security strength and decreasing performance, these are ML-KEM-512, ML-KEM-768, and ML-KEM-1024."
+          },
+          "parent_id": "p03",
+          "qualifiers": [
+            "three parameter sets for ML-KEM",
+            "In order of increasing security strength and decreasing performance"
+          ],
+          "qualifier_spans": [
+            {
+              "version_id": "m06",
+              "start": 788,
+              "end": 819,
+              "quote": "three parameter sets for ML-KEM"
+            },
+            {
+              "version_id": "m06",
+              "start": 821,
+              "end": 888,
+              "quote": "In order of increasing security strength and decreasing performance"
+            }
+          ]
+        }
+      ],
+      "relations": [],
+      "gaps": [],
+      "resolutions": [
+        {
+          "gap_id": "lineage:p03",
+          "basis": [
+            {
+              "version_id": "m06",
+              "start": 764,
+              "end": 940,
+              "quote": "This standard specifies three parameter sets for ML-KEM. In order of increasing security strength and decreasing performance, these are ML-KEM-512, ML-KEM-768, and ML-KEM-1024."
+            }
+          ],
+          "rationale": "Rechecked source findings establish the target source's path to an original material."
+        },
+        {
+          "gap_id": "origin:p03",
+          "basis": [
+            {
+              "version_id": "m06",
+              "start": 764,
+              "end": 940,
+              "quote": "This standard specifies three parameter sets for ML-KEM. In order of increasing security strength and decreasing performance, these are ML-KEM-512, ML-KEM-768, and ML-KEM-1024."
+            }
+          ],
+          "rationale": "Rechecked source findings establish the target source's path to an original material."
+        }
+      ],
+      "origins": [
+        {
+          "target_id": "p03",
+          "version_id": "m06",
+          "basis": [
+            {
+              "version_id": "m06",
+              "start": 764,
+              "end": 940,
+              "quote": "This standard specifies three parameter sets for ML-KEM. In order of increasing security strength and decreasing performance, these are ML-KEM-512, ML-KEM-768, and ML-KEM-1024."
+            }
+          ],
+          "material_kind": "original_record",
+          "rationale": "The content identifies FIPS 203 in its heading and describes what that standard itself specifies, establishing an original specification record for the whole target. Supplied issuer metadata identifies NIST. The known direct citation from m05 to m06 establishes the required path from the target source."
+        }
+      ],
+      "notes": "The previous atom remains supported. “This standard” refers to FIPS 203, identified by the content heading; NIST is identified by the issuer metadata. “Specifies” establishes the specification predicate, and “these” binds the three exact parameter-set mentions to the stated count and category. No competing referent appears. Previous lineage and originality findings are not re-emitted because they are outside this stage.\nRetained the previously supported origin. The lineage probe is satisfied: “This standard” refers to FIPS 203 identified in the heading, and “these” binds the count to the three enumerated parameter sets. No competing document or unattributed external assertion is identified. The excerpt contains no explicit outgoing source citations; its own heading is not an outgoing citation. No lineage findings require withdrawal.",
+      "revisit_versions": []
+    }
+  },
+  "analysis_history": [
+    {
+      "revision": 1,
+      "round": 1,
+      "version_id": "m05",
+      "duplicate": false,
+      "revisit": false,
+      "accepted": true,
+      "analysis": {
+        "fragments": [
+          {
+            "id": "m05:atom:8e087945a60848c40358",
+            "text": "FIPS 203 is intended as the primary standard for general encryption.",
+            "span": {
+              "version_id": "m05",
+              "start": 333,
+              "end": 486,
+              "quote": "[Federal Information Processing Standard (FIPS) 203](https://csrc.nist.gov/pubs/fips/203/final), intended as the primary standard for general encryption."
+            },
+            "parent_id": "p03",
+            "qualifiers": [
+              "intended as",
+              "primary standard for general encryption"
+            ],
+            "qualifier_spans": [
+              {
+                "version_id": "m05",
+                "start": 430,
+                "end": 441,
+                "quote": "intended as"
+              },
+              {
+                "version_id": "m05",
+                "start": 446,
+                "end": 485,
+                "quote": "primary standard for general encryption"
+              }
+            ]
+          },
+          {
+            "id": "m05:atom:a32d74bbe424d116916d",
+            "text": "The CRYSTALS-Kyber algorithm has been renamed ML-KEM, short for Module-Lattice-Based Key-Encapsulation Mechanism; the passage does not identify the renaming actor.",
+            "span": {
+              "version_id": "m05",
+              "start": 621,
+              "end": 766,
+              "quote": "The standard is based on the CRYSTALS-Kyber algorithm, which has been renamed ML-KEM, short for Module-Lattice-Based Key-Encapsulation Mechanism."
+            },
+            "parent_id": "p03",
+            "qualifiers": [
+              "which has been renamed ML-KEM",
+              "short for Module-Lattice-Based Key-Encapsulation Mechanism"
+            ],
+            "qualifier_spans": [
+              {
+                "version_id": "m05",
+                "start": 676,
+                "end": 705,
+                "quote": "which has been renamed ML-KEM"
+              },
+              {
+                "version_id": "m05",
+                "start": 707,
+                "end": 765,
+                "quote": "short for Module-Lattice-Based Key-Encapsulation Mechanism"
+              }
+            ]
+          },
+          {
+            "id": "m05:atom:c33c08d42fdcdd1bf2fc",
+            "text": "FIPS 203 is based on the CRYSTALS-Kyber algorithm.",
+            "span": {
+              "version_id": "m05",
+              "start": 333,
+              "end": 766,
+              "quote": "[Federal Information Processing Standard (FIPS) 203](https://csrc.nist.gov/pubs/fips/203/final), intended as the primary standard for general encryption. Among its advantages are comparatively small encryption keys that two parties can exchange easily, as well as its speed of operation. The standard is based on the CRYSTALS-Kyber algorithm, which has been renamed ML-KEM, short for Module-Lattice-Based Key-Encapsulation Mechanism."
+            },
+            "parent_id": "p03",
+            "qualifiers": [],
+            "qualifier_spans": []
+          }
+        ],
+        "relations": [
+          {
+            "id": "m05:citation:9f11f20a0efac4be53a6",
+            "from_version": "m05",
+            "to_version": null,
+            "kind": "cites",
+            "status": "declared",
+            "basis": [
+              {
+                "version_id": "m05",
+                "start": 333,
+                "end": 486,
+                "quote": "[Federal Information Processing Standard (FIPS) 203](https://csrc.nist.gov/pubs/fips/203/final), intended as the primary standard for general encryption."
+              }
+            ],
+            "rationale": "The current material explicitly links FIPS 203, providing a source-side path to the standard rather than merely mentioning a related topic.",
+            "upstream_locator": "https://csrc.nist.gov/pubs/fips/203/final"
+          }
+        ],
+        "gaps": [
+          {
+            "id": "m05:upstream:749ddad8cdf235ec95a5",
+            "question": "Locate the explicitly cited upstream: https://csrc.nist.gov/pubs/fips/203/final",
+            "stage": "provenance",
+            "dimension": "provenance",
+            "blocking": true,
+            "target_id": "p03",
+            "basis": [
+              {
+                "version_id": "m05",
+                "start": 333,
+                "end": 486,
+                "quote": "[Federal Information Processing Standard (FIPS) 203](https://csrc.nist.gov/pubs/fips/203/final), intended as the primary standard for general encryption."
+              }
+            ],
+            "decision_impact": "Locating the cited standard could establish whether the three parameter sets and their enumeration derive from FIPS 203. The current excerpt does not supply that count or enumeration.",
+            "action": "fetch",
+            "locator": "https://csrc.nist.gov/pubs/fips/203/final",
+            "probe_id": null
+          }
+        ],
+        "resolutions": [],
+        "origins": [],
+        "notes": "The current material is m05, outside the fixed evidence_scope of m06; these atoms describe only the supplied current source. Its explicit FIPS 203 mention binds the subsequent phrase “The standard” to that document, with NIST identified by issuer metadata. The excerpt discusses the algorithm, not individual parameter sets: it supplies no mentions, aliases, descriptions or anaphoric bindings for the three asserted parameter-set referents, no parameter-set count, and no assertion that FIPS 203 specifies that enumeration. The title's “3” counts finalized standards, not parameter sets. These observations do not establish a contradiction. No previous findings were supplied.\nThe excerpt does not establish itself as the original record for the target specification claim. The lineage probe concerns m06, but no m06 content or connecting relation is supplied; its basis for the count and enumeration cannot be checked here. No previous findings were supplied.",
+        "revisit_versions": []
+      },
+      "exclusion_reasons": []
+    },
+    {
+      "revision": 2,
+      "round": 1,
+      "version_id": "m06",
+      "duplicate": false,
+      "revisit": false,
+      "accepted": true,
+      "analysis": {
+        "fragments": [
+          {
+            "id": "m06:atom:1e7869aae26c2822681c",
+            "text": "NIST's FIPS 203 specifies three ML-KEM parameter sets: ML-KEM-512, ML-KEM-768, and ML-KEM-1024, listed in order of increasing security strength and decreasing performance.",
+            "span": {
+              "version_id": "m06",
+              "start": 764,
+              "end": 940,
+              "quote": "This standard specifies three parameter sets for ML-KEM. In order of increasing security strength and decreasing performance, these are ML-KEM-512, ML-KEM-768, and ML-KEM-1024."
+            },
+            "parent_id": "p03",
+            "qualifiers": [
+              "three parameter sets for ML-KEM",
+              "In order of increasing security strength and decreasing performance"
+            ],
+            "qualifier_spans": [
+              {
+                "version_id": "m06",
+                "start": 788,
+                "end": 819,
+                "quote": "three parameter sets for ML-KEM"
+              },
+              {
+                "version_id": "m06",
+                "start": 821,
+                "end": 888,
+                "quote": "In order of increasing security strength and decreasing performance"
+              }
+            ]
+          }
+        ],
+        "relations": [],
+        "gaps": [],
+        "resolutions": [],
+        "origins": [
+          {
+            "target_id": "p03",
+            "version_id": "m06",
+            "basis": [
+              {
+                "version_id": "m06",
+                "start": 764,
+                "end": 940,
+                "quote": "This standard specifies three parameter sets for ML-KEM. In order of increasing security strength and decreasing performance, these are ML-KEM-512, ML-KEM-768, and ML-KEM-1024."
+              }
+            ],
+            "material_kind": "original_record",
+            "rationale": "The current material is NIST's publication record for FIPS 203. Its heading identifies the standard, and its self-description explicitly supplies both the count and enumeration in the unchanged target. The declared citation from m05 names m06's exact URL, establishing the required lineage path."
+          }
+        ],
+        "notes": "“This standard” refers to the document identified by the content heading as FIPS 203; NIST is identified by the supplied issuer metadata. “These” binds all three explicitly named sets to the specified count, rather than merely mentioning them. No previous findings were supplied.\nThe lineage probe is satisfied: 'This standard' refers to the FIPS 203 identified in the heading, and 'these' binds the three parameter sets to the following enumeration. No competing document is identified. The excerpt contains no explicit outgoing source citation; its own heading is not treated as one.",
+        "revisit_versions": []
+      },
+      "exclusion_reasons": []
+    },
+    {
+      "revision": 3,
+      "round": 1,
+      "version_id": "m05",
+      "duplicate": true,
+      "revisit": true,
+      "accepted": true,
+      "analysis": {
+        "fragments": [
+          {
+            "id": "m05:atom:8e087945a60848c40358",
+            "text": "FIPS 203 is intended as the primary standard for general encryption.",
+            "span": {
+              "version_id": "m05",
+              "start": 333,
+              "end": 486,
+              "quote": "[Federal Information Processing Standard (FIPS) 203](https://csrc.nist.gov/pubs/fips/203/final), intended as the primary standard for general encryption."
+            },
+            "parent_id": "p03",
+            "qualifiers": [
+              "intended as",
+              "primary standard for general encryption"
+            ],
+            "qualifier_spans": [
+              {
+                "version_id": "m05",
+                "start": 430,
+                "end": 441,
+                "quote": "intended as"
+              },
+              {
+                "version_id": "m05",
+                "start": 446,
+                "end": 485,
+                "quote": "primary standard for general encryption"
+              }
+            ]
+          },
+          {
+            "id": "m05:atom:a32d74bbe424d116916d",
+            "text": "The CRYSTALS-Kyber algorithm has been renamed ML-KEM, short for Module-Lattice-Based Key-Encapsulation Mechanism; the passage does not identify the renaming actor.",
+            "span": {
+              "version_id": "m05",
+              "start": 621,
+              "end": 766,
+              "quote": "The standard is based on the CRYSTALS-Kyber algorithm, which has been renamed ML-KEM, short for Module-Lattice-Based Key-Encapsulation Mechanism."
+            },
+            "parent_id": "p03",
+            "qualifiers": [
+              "which has been renamed ML-KEM",
+              "short for Module-Lattice-Based Key-Encapsulation Mechanism"
+            ],
+            "qualifier_spans": [
+              {
+                "version_id": "m05",
+                "start": 676,
+                "end": 705,
+                "quote": "which has been renamed ML-KEM"
+              },
+              {
+                "version_id": "m05",
+                "start": 707,
+                "end": 765,
+                "quote": "short for Module-Lattice-Based Key-Encapsulation Mechanism"
+              }
+            ]
+          },
+          {
+            "id": "m05:atom:c33c08d42fdcdd1bf2fc",
+            "text": "FIPS 203 is based on the CRYSTALS-Kyber algorithm.",
+            "span": {
+              "version_id": "m05",
+              "start": 333,
+              "end": 766,
+              "quote": "[Federal Information Processing Standard (FIPS) 203](https://csrc.nist.gov/pubs/fips/203/final), intended as the primary standard for general encryption. Among its advantages are comparatively small encryption keys that two parties can exchange easily, as well as its speed of operation. The standard is based on the CRYSTALS-Kyber algorithm, which has been renamed ML-KEM, short for Module-Lattice-Based Key-Encapsulation Mechanism."
+            },
+            "parent_id": "p03",
+            "qualifiers": [],
+            "qualifier_spans": []
+          }
+        ],
+        "relations": [
+          {
+            "id": "m05:citation:9f11f20a0efac4be53a6",
+            "from_version": "m05",
+            "to_version": "m06",
+            "kind": "cites",
+            "status": "direct",
+            "basis": [
+              {
+                "version_id": "m05",
+                "start": 333,
+                "end": 486,
+                "quote": "[Federal Information Processing Standard (FIPS) 203](https://csrc.nist.gov/pubs/fips/203/final), intended as the primary standard for general encryption."
+              }
+            ],
+            "rationale": "The excerpt explicitly links FIPS 203 as the standard it discusses, establishing a source-side citation rather than a connection inferred from topic similarity.",
+            "upstream_locator": "https://csrc.nist.gov/pubs/fips/203/final"
+          }
+        ],
+        "gaps": [],
+        "resolutions": [
+          {
+            "gap_id": "m05:upstream:749ddad8cdf235ec95a5",
+            "basis": [
+              {
+                "version_id": "m05",
+                "start": 333,
+                "end": 486,
+                "quote": "[Federal Information Processing Standard (FIPS) 203](https://csrc.nist.gov/pubs/fips/203/final), intended as the primary standard for general encryption."
+              }
+            ],
+            "rationale": "The source-side citation now identifies a visible upstream version."
+          }
+        ],
+        "origins": [],
+        "notes": "All three previous atoms remain supported by the current excerpt; none withdrawn. These atoms describe m05, which is outside the fixed evidence scope of m06. The explicit FIPS 203 mention binds “The standard” to that document; NIST is identified by issuer metadata. The excerpt supplies no individual parameter-set referents, whether by name, alias, description or anaphora, to bind to ML-KEM-512, ML-KEM-768 or ML-KEM-1024. It states neither the parameter-set count nor that FIPS 203 specifies the asserted enumeration. The title's “3” counts standards, not parameter sets. These are limitations of the visible excerpt, not contradictions. No m06 content is supplied for inspection.\nRetained the previous explicit citation after checking the current text. No lineage findings require withdrawal. The excerpt does not establish itself as the original record for the whole target. The routed probe concerns lineage within m06, but only its URL, not its content, is supplied; that lineage cannot be assessed here. The citation provides a declared path to that record, not proof of its contents. The title's count concerns finalized standards, not ML-KEM parameter sets.",
+        "revisit_versions": []
+      },
+      "exclusion_reasons": []
+    },
+    {
+      "revision": 4,
+      "round": 2,
+      "version_id": "m05",
+      "duplicate": true,
+      "revisit": false,
+      "accepted": true,
+      "analysis": {
+        "fragments": [
+          {
+            "id": "m05:atom:8e087945a60848c40358",
+            "text": "FIPS 203 is intended as the primary standard for general encryption.",
+            "span": {
+              "version_id": "m05",
+              "start": 333,
+              "end": 486,
+              "quote": "[Federal Information Processing Standard (FIPS) 203](https://csrc.nist.gov/pubs/fips/203/final), intended as the primary standard for general encryption."
+            },
+            "parent_id": "p03",
+            "qualifiers": [
+              "intended as",
+              "primary standard for general encryption"
+            ],
+            "qualifier_spans": [
+              {
+                "version_id": "m05",
+                "start": 430,
+                "end": 441,
+                "quote": "intended as"
+              },
+              {
+                "version_id": "m05",
+                "start": 446,
+                "end": 485,
+                "quote": "primary standard for general encryption"
+              }
+            ]
+          },
+          {
+            "id": "m05:atom:a32d74bbe424d116916d",
+            "text": "The CRYSTALS-Kyber algorithm has been renamed ML-KEM, short for Module-Lattice-Based Key-Encapsulation Mechanism; the passage does not identify the renaming actor.",
+            "span": {
+              "version_id": "m05",
+              "start": 621,
+              "end": 766,
+              "quote": "The standard is based on the CRYSTALS-Kyber algorithm, which has been renamed ML-KEM, short for Module-Lattice-Based Key-Encapsulation Mechanism."
+            },
+            "parent_id": "p03",
+            "qualifiers": [
+              "which has been renamed ML-KEM",
+              "short for Module-Lattice-Based Key-Encapsulation Mechanism"
+            ],
+            "qualifier_spans": [
+              {
+                "version_id": "m05",
+                "start": 676,
+                "end": 705,
+                "quote": "which has been renamed ML-KEM"
+              },
+              {
+                "version_id": "m05",
+                "start": 707,
+                "end": 765,
+                "quote": "short for Module-Lattice-Based Key-Encapsulation Mechanism"
+              }
+            ]
+          },
+          {
+            "id": "m05:atom:c33c08d42fdcdd1bf2fc",
+            "text": "FIPS 203 is based on the CRYSTALS-Kyber algorithm.",
+            "span": {
+              "version_id": "m05",
+              "start": 333,
+              "end": 766,
+              "quote": "[Federal Information Processing Standard (FIPS) 203](https://csrc.nist.gov/pubs/fips/203/final), intended as the primary standard for general encryption. Among its advantages are comparatively small encryption keys that two parties can exchange easily, as well as its speed of operation. The standard is based on the CRYSTALS-Kyber algorithm, which has been renamed ML-KEM, short for Module-Lattice-Based Key-Encapsulation Mechanism."
+            },
+            "parent_id": "p03",
+            "qualifiers": [],
+            "qualifier_spans": []
+          }
+        ],
+        "relations": [
+          {
+            "id": "m05:citation:9f11f20a0efac4be53a6",
+            "from_version": "m05",
+            "to_version": "m06",
+            "kind": "cites",
+            "status": "direct",
+            "basis": [
+              {
+                "version_id": "m05",
+                "start": 333,
+                "end": 486,
+                "quote": "[Federal Information Processing Standard (FIPS) 203](https://csrc.nist.gov/pubs/fips/203/final), intended as the primary standard for general encryption."
+              }
+            ],
+            "rationale": "The current material explicitly links the FIPS 203 record it discusses; this is a direct citation, not a connection inferred from topic similarity.",
+            "upstream_locator": "https://csrc.nist.gov/pubs/fips/203/final"
+          }
+        ],
+        "gaps": [],
+        "resolutions": [
+          {
+            "gap_id": "lineage:p03",
+            "basis": [
+              {
+                "version_id": "m05",
+                "start": 333,
+                "end": 486,
+                "quote": "[Federal Information Processing Standard (FIPS) 203](https://csrc.nist.gov/pubs/fips/203/final), intended as the primary standard for general encryption."
+              }
+            ],
+            "rationale": "Rechecked source findings establish the target source's path to an original material."
+          },
+          {
+            "gap_id": "m05:upstream:749ddad8cdf235ec95a5",
+            "basis": [
+              {
+                "version_id": "m05",
+                "start": 333,
+                "end": 486,
+                "quote": "[Federal Information Processing Standard (FIPS) 203](https://csrc.nist.gov/pubs/fips/203/final), intended as the primary standard for general encryption."
+              }
+            ],
+            "rationale": "The source-side citation now identifies a visible upstream version."
+          },
+          {
+            "gap_id": "origin:p03",
+            "basis": [
+              {
+                "version_id": "m05",
+                "start": 333,
+                "end": 486,
+                "quote": "[Federal Information Processing Standard (FIPS) 203](https://csrc.nist.gov/pubs/fips/203/final), intended as the primary standard for general encryption."
+              }
+            ],
+            "rationale": "Rechecked source findings establish the target source's path to an original material."
+          }
+        ],
+        "origins": [],
+        "notes": "All three previous atoms remain supported; none withdrawn. These are findings for m05, outside the fixed evidence scope of m06. The explicit FIPS 203 mention binds “The standard” to that document; NIST is identified in issuer metadata. The excerpt supplies no individual parameter-set mentions, aliases, descriptions or anaphora that bind to ML-KEM-512, ML-KEM-768 or ML-KEM-1024. It does not state a count of ML-KEM parameter sets or that FIPS 203 specifies the asserted enumeration. The title's “3” counts finalized standards, not parameter sets. These are excerpt limitations, not contradictions. No m06 content is supplied for inspection.\nRechecked and retained the prior explicit citation; no lineage findings require withdrawal. The current excerpt does not establish itself as an original record for the whole target. The routed probe asks about lineage within m06, but no m06 content is supplied, so that check remains unassessed. The known citation connects m05 to m06 without proving the count or enumeration. The current excerpt does not list parameter sets; the title's “3” counts finalized standards instead.",
+        "revisit_versions": []
+      },
+      "exclusion_reasons": []
+    },
+    {
+      "revision": 5,
+      "round": 2,
+      "version_id": "m06",
+      "duplicate": true,
+      "revisit": false,
+      "accepted": true,
+      "analysis": {
+        "fragments": [
+          {
+            "id": "m06:atom:1e7869aae26c2822681c",
+            "text": "NIST's FIPS 203 specifies three ML-KEM parameter sets: ML-KEM-512, ML-KEM-768, and ML-KEM-1024, listed in order of increasing security strength and decreasing performance.",
+            "span": {
+              "version_id": "m06",
+              "start": 764,
+              "end": 940,
+              "quote": "This standard specifies three parameter sets for ML-KEM. In order of increasing security strength and decreasing performance, these are ML-KEM-512, ML-KEM-768, and ML-KEM-1024."
+            },
+            "parent_id": "p03",
+            "qualifiers": [
+              "three parameter sets for ML-KEM",
+              "In order of increasing security strength and decreasing performance"
+            ],
+            "qualifier_spans": [
+              {
+                "version_id": "m06",
+                "start": 788,
+                "end": 819,
+                "quote": "three parameter sets for ML-KEM"
+              },
+              {
+                "version_id": "m06",
+                "start": 821,
+                "end": 888,
+                "quote": "In order of increasing security strength and decreasing performance"
+              }
+            ]
+          }
+        ],
+        "relations": [],
+        "gaps": [],
+        "resolutions": [
+          {
+            "gap_id": "lineage:p03",
+            "basis": [
+              {
+                "version_id": "m06",
+                "start": 764,
+                "end": 940,
+                "quote": "This standard specifies three parameter sets for ML-KEM. In order of increasing security strength and decreasing performance, these are ML-KEM-512, ML-KEM-768, and ML-KEM-1024."
+              }
+            ],
+            "rationale": "Rechecked source findings establish the target source's path to an original material."
+          },
+          {
+            "gap_id": "origin:p03",
+            "basis": [
+              {
+                "version_id": "m06",
+                "start": 764,
+                "end": 940,
+                "quote": "This standard specifies three parameter sets for ML-KEM. In order of increasing security strength and decreasing performance, these are ML-KEM-512, ML-KEM-768, and ML-KEM-1024."
+              }
+            ],
+            "rationale": "Rechecked source findings establish the target source's path to an original material."
+          }
+        ],
+        "origins": [
+          {
+            "target_id": "p03",
+            "version_id": "m06",
+            "basis": [
+              {
+                "version_id": "m06",
+                "start": 764,
+                "end": 940,
+                "quote": "This standard specifies three parameter sets for ML-KEM. In order of increasing security strength and decreasing performance, these are ML-KEM-512, ML-KEM-768, and ML-KEM-1024."
+              }
+            ],
+            "material_kind": "original_record",
+            "rationale": "The content identifies FIPS 203 in its heading and describes what that standard itself specifies, establishing an original specification record for the whole target. Supplied issuer metadata identifies NIST. The known direct citation from m05 to m06 establishes the required path from the target source."
+          }
+        ],
+        "notes": "The previous atom remains supported. “This standard” refers to FIPS 203, identified by the content heading; NIST is identified by the issuer metadata. “Specifies” establishes the specification predicate, and “these” binds the three exact parameter-set mentions to the stated count and category. No competing referent appears. Previous lineage and originality findings are not re-emitted because they are outside this stage.\nRetained the previously supported origin. The lineage probe is satisfied: “This standard” refers to FIPS 203 identified in the heading, and “these” binds the count to the three enumerated parameter sets. No competing document or unattributed external assertion is identified. The excerpt contains no explicit outgoing source citations; its own heading is not an outgoing citation. No lineage findings require withdrawal.",
+        "revisit_versions": []
+      },
+      "exclusion_reasons": []
+    }
+  ],
+  "fragments": [
+    {
+      "id": "m05:atom:8e087945a60848c40358",
+      "text": "FIPS 203 is intended as the primary standard for general encryption.",
+      "span": {
+        "version_id": "m05",
+        "start": 333,
+        "end": 486,
+        "quote": "[Federal Information Processing Standard (FIPS) 203](https://csrc.nist.gov/pubs/fips/203/final), intended as the primary standard for general encryption."
+      },
+      "parent_id": "p03",
+      "qualifiers": [
+        "intended as",
+        "primary standard for general encryption"
+      ],
+      "qualifier_spans": [
+        {
+          "version_id": "m05",
+          "start": 430,
+          "end": 441,
+          "quote": "intended as"
+        },
+        {
+          "version_id": "m05",
+          "start": 446,
+          "end": 485,
+          "quote": "primary standard for general encryption"
+        }
+      ]
+    },
+    {
+      "id": "m05:atom:a32d74bbe424d116916d",
+      "text": "The CRYSTALS-Kyber algorithm has been renamed ML-KEM, short for Module-Lattice-Based Key-Encapsulation Mechanism; the passage does not identify the renaming actor.",
+      "span": {
+        "version_id": "m05",
+        "start": 621,
+        "end": 766,
+        "quote": "The standard is based on the CRYSTALS-Kyber algorithm, which has been renamed ML-KEM, short for Module-Lattice-Based Key-Encapsulation Mechanism."
+      },
+      "parent_id": "p03",
+      "qualifiers": [
+        "which has been renamed ML-KEM",
+        "short for Module-Lattice-Based Key-Encapsulation Mechanism"
+      ],
+      "qualifier_spans": [
+        {
+          "version_id": "m05",
+          "start": 676,
+          "end": 705,
+          "quote": "which has been renamed ML-KEM"
+        },
+        {
+          "version_id": "m05",
+          "start": 707,
+          "end": 765,
+          "quote": "short for Module-Lattice-Based Key-Encapsulation Mechanism"
+        }
+      ]
+    },
+    {
+      "id": "m05:atom:c33c08d42fdcdd1bf2fc",
+      "text": "FIPS 203 is based on the CRYSTALS-Kyber algorithm.",
+      "span": {
+        "version_id": "m05",
+        "start": 333,
+        "end": 766,
+        "quote": "[Federal Information Processing Standard (FIPS) 203](https://csrc.nist.gov/pubs/fips/203/final), intended as the primary standard for general encryption. Among its advantages are comparatively small encryption keys that two parties can exchange easily, as well as its speed of operation. The standard is based on the CRYSTALS-Kyber algorithm, which has been renamed ML-KEM, short for Module-Lattice-Based Key-Encapsulation Mechanism."
+      },
+      "parent_id": "p03",
+      "qualifiers": [],
+      "qualifier_spans": []
+    },
+    {
+      "id": "m06:atom:1e7869aae26c2822681c",
+      "text": "NIST's FIPS 203 specifies three ML-KEM parameter sets: ML-KEM-512, ML-KEM-768, and ML-KEM-1024, listed in order of increasing security strength and decreasing performance.",
+      "span": {
+        "version_id": "m06",
+        "start": 764,
+        "end": 940,
+        "quote": "This standard specifies three parameter sets for ML-KEM. In order of increasing security strength and decreasing performance, these are ML-KEM-512, ML-KEM-768, and ML-KEM-1024."
+      },
+      "parent_id": "p03",
+      "qualifiers": [
+        "three parameter sets for ML-KEM",
+        "In order of increasing security strength and decreasing performance"
+      ],
+      "qualifier_spans": [
+        {
+          "version_id": "m06",
+          "start": 788,
+          "end": 819,
+          "quote": "three parameter sets for ML-KEM"
+        },
+        {
+          "version_id": "m06",
+          "start": 821,
+          "end": 888,
+          "quote": "In order of increasing security strength and decreasing performance"
+        }
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "m05:citation:9f11f20a0efac4be53a6",
+      "from_version": "m05",
+      "to_version": "m06",
+      "kind": "cites",
+      "status": "direct",
+      "basis": [
+        {
+          "version_id": "m05",
+          "start": 333,
+          "end": 486,
+          "quote": "[Federal Information Processing Standard (FIPS) 203](https://csrc.nist.gov/pubs/fips/203/final), intended as the primary standard for general encryption."
+        }
+      ],
+      "rationale": "The current material explicitly links the FIPS 203 record it discusses; this is a direct citation, not a connection inferred from topic similarity.",
+      "upstream_locator": "https://csrc.nist.gov/pubs/fips/203/final"
+    }
+  ],
+  "origins": [
+    {
+      "target_id": "p03",
+      "version_id": "m06",
+      "basis": [
+        {
+          "version_id": "m06",
+          "start": 764,
+          "end": 940,
+          "quote": "This standard specifies three parameter sets for ML-KEM. In order of increasing security strength and decreasing performance, these are ML-KEM-512, ML-KEM-768, and ML-KEM-1024."
+        }
+      ],
+      "material_kind": "original_record",
+      "rationale": "The content identifies FIPS 203 in its heading and describes what that standard itself specifies, establishing an original specification record for the whole target. Supplied issuer metadata identifies NIST. The known direct citation from m05 to m06 establishes the required path from the target source."
+    }
+  ],
+  "gaps": [],
+  "gap_registry": [
+    {
+      "id": "origin:p03",
+      "question": "Find the producing record and evidenced lineage for: NIST's FIPS 203 specifies three ML-KEM parameter sets: ML-KEM-512, ML-KEM-768, and ML-KEM-1024.",
+      "stage": "provenance",
+      "dimension": "auto",
+      "blocking": true,
+      "target_id": null,
+      "basis": [],
+      "decision_impact": "",
+      "action": "search",
+      "locator": null,
+      "probe_id": null
+    },
+    {
+      "id": "m05:upstream:749ddad8cdf235ec95a5",
+      "question": "Locate the explicitly cited upstream: https://csrc.nist.gov/pubs/fips/203/final",
+      "stage": "provenance",
+      "dimension": "provenance",
+      "blocking": true,
+      "target_id": "p03",
+      "basis": [
+        {
+          "version_id": "m05",
+          "start": 333,
+          "end": 486,
+          "quote": "[Federal Information Processing Standard (FIPS) 203](https://csrc.nist.gov/pubs/fips/203/final), intended as the primary standard for general encryption."
+        }
+      ],
+      "decision_impact": "Locating the cited standard could establish whether the three parameter sets and their enumeration derive from FIPS 203. The current excerpt does not supply that count or enumeration.",
+      "action": "fetch",
+      "locator": "https://csrc.nist.gov/pubs/fips/203/final",
+      "probe_id": null
+    },
+    {
+      "id": "lineage:p03",
+      "question": "Provide the target source version and an evidenced citation/derivation path to an original material",
+      "stage": "provenance",
+      "dimension": "auto",
+      "blocking": true,
+      "target_id": null,
+      "basis": [],
+      "decision_impact": "",
+      "action": "search",
+      "locator": null,
+      "probe_id": null
+    }
+  ],
+  "resolutions": [
+    {
+      "gap_id": "lineage:p03",
+      "basis": [
+        {
+          "version_id": "m05",
+          "start": 333,
+          "end": 486,
+          "quote": "[Federal Information Processing Standard (FIPS) 203](https://csrc.nist.gov/pubs/fips/203/final), intended as the primary standard for general encryption."
+        },
+        {
+          "version_id": "m06",
+          "start": 764,
+          "end": 940,
+          "quote": "This standard specifies three parameter sets for ML-KEM. In order of increasing security strength and decreasing performance, these are ML-KEM-512, ML-KEM-768, and ML-KEM-1024."
+        }
+      ],
+      "rationale": "Rechecked source findings establish the target source's path to an original material."
+    },
+    {
+      "gap_id": "m05:upstream:749ddad8cdf235ec95a5",
+      "basis": [
+        {
+          "version_id": "m05",
+          "start": 333,
+          "end": 486,
+          "quote": "[Federal Information Processing Standard (FIPS) 203](https://csrc.nist.gov/pubs/fips/203/final), intended as the primary standard for general encryption."
+        }
+      ],
+      "rationale": "The source-side citation now identifies a visible upstream version."
+    },
+    {
+      "gap_id": "origin:p03",
+      "basis": [
+        {
+          "version_id": "m05",
+          "start": 333,
+          "end": 486,
+          "quote": "[Federal Information Processing Standard (FIPS) 203](https://csrc.nist.gov/pubs/fips/203/final), intended as the primary standard for general encryption."
+        },
+        {
+          "version_id": "m06",
+          "start": 764,
+          "end": 940,
+          "quote": "This standard specifies three parameter sets for ML-KEM. In order of increasing security strength and decreasing performance, these are ML-KEM-512, ML-KEM-768, and ML-KEM-1024."
+        }
+      ],
+      "rationale": "Rechecked source findings establish the target source's path to an original material."
+    }
+  ],
+  "verification_history": [
+    {
+      "round": 1,
+      "verdict": "supported",
+      "basis": [
+        {
+          "version_id": "m06",
+          "start": 0,
+          "end": 67,
+          "quote": "FIPS 203: Module-Lattice-Based Key-Encapsulation Mechanism Standard"
+        },
+        {
+          "version_id": "m06",
+          "start": 764,
+          "end": 940,
+          "quote": "This standard specifies three parameter sets for ML-KEM. In order of increasing security strength and decreasing performance, these are ML-KEM-512, ML-KEM-768, and ML-KEM-1024."
+        }
+      ],
+      "rationale": "The scoped snapshot supports the document binding, specification predicate, count of three, and all three enumerated referents. Its additional ordering statement does not qualify or negate those assertions.",
+      "gaps": [],
+      "resolutions": [],
+      "evidence_verdict": "supported",
+      "world_verdict": "supported",
+      "world_basis": [
+        {
+          "version_id": "m06",
+          "start": 0,
+          "end": 67,
+          "quote": "FIPS 203: Module-Lattice-Based Key-Encapsulation Mechanism Standard"
+        },
+        {
+          "version_id": "m06",
+          "start": 764,
+          "end": 940,
+          "quote": "This standard specifies three parameter sets for ML-KEM. In order of increasing security strength and decreasing performance, these are ML-KEM-512, ML-KEM-768, and ML-KEM-1024."
+        }
+      ],
+      "world_rationale": "All probes are supported by the scoped official NIST publication record, available at as_of. Its first-party role establishes the specification claim without treating the linked news account as independent confirmation.",
+      "evidence_probe_results": [
+        {
+          "probe_id": "p03:probe:0864f0bac8bf0ead3b69",
+          "claim_id": "p03:claim:e23b8631fd0a7effca07",
+          "stage": "evidence",
+          "status": "supported",
+          "basis": [
+            {
+              "version_id": "m06",
+              "start": 764,
+              "end": 940,
+              "quote": "This standard specifies three parameter sets for ML-KEM. In order of increasing security strength and decreasing performance, these are ML-KEM-512, ML-KEM-768, and ML-KEM-1024."
+            }
+          ],
+          "rationale": "ML-KEM-768 is explicitly included among the specified parameter sets.",
+          "referent_relation": "exact"
+        },
+        {
+          "probe_id": "p03:probe:48ad40db90cedfac33fb",
+          "claim_id": "p03:claim:e23b8631fd0a7effca07",
+          "stage": "evidence",
+          "status": "supported",
+          "basis": [
+            {
+              "version_id": "m06",
+              "start": 764,
+              "end": 940,
+              "quote": "This standard specifies three parameter sets for ML-KEM. In order of increasing security strength and decreasing performance, these are ML-KEM-512, ML-KEM-768, and ML-KEM-1024."
+            }
+          ],
+          "rationale": "ML-KEM-512 is explicitly included among the specified parameter sets.",
+          "referent_relation": "exact"
+        },
+        {
+          "probe_id": "p03:probe:8f691aa9000ecee063fa",
+          "claim_id": "p03:claim:e23b8631fd0a7effca07",
+          "stage": "evidence",
+          "status": "supported",
+          "basis": [
+            {
+              "version_id": "m06",
+              "start": 0,
+              "end": 67,
+              "quote": "FIPS 203: Module-Lattice-Based Key-Encapsulation Mechanism Standard"
+            },
+            {
+              "version_id": "m06",
+              "start": 764,
+              "end": 940,
+              "quote": "This standard specifies three parameter sets for ML-KEM. In order of increasing security strength and decreasing performance, these are ML-KEM-512, ML-KEM-768, and ML-KEM-1024."
+            }
+          ],
+          "rationale": "The source states three parameter sets for ML-KEM and identifies the complete enumeration through 'these are'.",
+          "referent_relation": "not_applicable"
+        },
+        {
+          "probe_id": "p03:probe:936eb5ac917a49bebb14",
+          "claim_id": "p03:claim:e23b8631fd0a7effca07",
+          "stage": "evidence",
+          "status": "supported",
+          "basis": [
+            {
+              "version_id": "m06",
+              "start": 0,
+              "end": 67,
+              "quote": "FIPS 203: Module-Lattice-Based Key-Encapsulation Mechanism Standard"
+            },
+            {
+              "version_id": "m06",
+              "start": 764,
+              "end": 940,
+              "quote": "This standard specifies three parameter sets for ML-KEM. In order of increasing security strength and decreasing performance, these are ML-KEM-512, ML-KEM-768, and ML-KEM-1024."
+            }
+          ],
+          "rationale": "The heading identifies FIPS 203, and 'This standard' binds the specification statement to that document. The supplied issuer metadata identifies NIST.",
+          "referent_relation": "anaphora"
+        },
+        {
+          "probe_id": "p03:probe:e169d303074ab9e3f850",
+          "claim_id": "p03:claim:e23b8631fd0a7effca07",
+          "stage": "evidence",
+          "status": "supported",
+          "basis": [
+            {
+              "version_id": "m06",
+              "start": 0,
+              "end": 67,
+              "quote": "FIPS 203: Module-Lattice-Based Key-Encapsulation Mechanism Standard"
+            },
+            {
+              "version_id": "m06",
+              "start": 764,
+              "end": 940,
+              "quote": "This standard specifies three parameter sets for ML-KEM. In order of increasing security strength and decreasing performance, these are ML-KEM-512, ML-KEM-768, and ML-KEM-1024."
+            }
+          ],
+          "rationale": "The source explicitly says the standard specifies the three sets; it does not merely mention them.",
+          "referent_relation": "not_applicable"
+        },
+        {
+          "probe_id": "p03:probe:e7082424a125c697c6cf",
+          "claim_id": "p03:claim:e23b8631fd0a7effca07",
+          "stage": "evidence",
+          "status": "supported",
+          "basis": [
+            {
+              "version_id": "m06",
+              "start": 764,
+              "end": 940,
+              "quote": "This standard specifies three parameter sets for ML-KEM. In order of increasing security strength and decreasing performance, these are ML-KEM-512, ML-KEM-768, and ML-KEM-1024."
+            }
+          ],
+          "rationale": "ML-KEM-1024 is explicitly included among the specified parameter sets.",
+          "referent_relation": "exact"
+        }
+      ],
+      "world_probe_results": [
+        {
+          "probe_id": "p03:probe:0864f0bac8bf0ead3b69",
+          "claim_id": "p03:claim:e23b8631fd0a7effca07",
+          "stage": "world",
+          "status": "supported",
+          "basis": [
+            {
+              "version_id": "m06",
+              "start": 764,
+              "end": 940,
+              "quote": "This standard specifies three parameter sets for ML-KEM. In order of increasing security strength and decreasing performance, these are ML-KEM-512, ML-KEM-768, and ML-KEM-1024."
+            }
+          ],
+          "rationale": "The official publication record explicitly includes ML-KEM-768 in the specified parameter sets.",
+          "referent_relation": "exact"
+        },
+        {
+          "probe_id": "p03:probe:29e185434f9ec6d19dc2",
+          "claim_id": "p03:claim:e23b8631fd0a7effca07",
+          "stage": "world",
+          "status": "supported",
+          "basis": [
+            {
+              "version_id": "m06",
+              "start": 0,
+              "end": 67,
+              "quote": "FIPS 203: Module-Lattice-Based Key-Encapsulation Mechanism Standard"
+            },
+            {
+              "version_id": "m06",
+              "start": 764,
+              "end": 940,
+              "quote": "This standard specifies three parameter sets for ML-KEM. In order of increasing security strength and decreasing performance, these are ML-KEM-512, ML-KEM-768, and ML-KEM-1024."
+            }
+          ],
+          "rationale": "m06 is NIST's official FIPS 203 publication record. Its heading and self-description directly supply the count and enumeration, rather than relying on an unattributed assertion or downstream paraphrase.",
+          "referent_relation": "not_applicable"
+        },
+        {
+          "probe_id": "p03:probe:48ad40db90cedfac33fb",
+          "claim_id": "p03:claim:e23b8631fd0a7effca07",
+          "stage": "world",
+          "status": "supported",
+          "basis": [
+            {
+              "version_id": "m06",
+              "start": 764,
+              "end": 940,
+              "quote": "This standard specifies three parameter sets for ML-KEM. In order of increasing security strength and decreasing performance, these are ML-KEM-512, ML-KEM-768, and ML-KEM-1024."
+            }
+          ],
+          "rationale": "The official publication record explicitly includes ML-KEM-512 in the specified parameter sets.",
+          "referent_relation": "exact"
+        },
+        {
+          "probe_id": "p03:probe:8f691aa9000ecee063fa",
+          "claim_id": "p03:claim:e23b8631fd0a7effca07",
+          "stage": "world",
+          "status": "supported",
+          "basis": [
+            {
+              "version_id": "m06",
+              "start": 0,
+              "end": 67,
+              "quote": "FIPS 203: Module-Lattice-Based Key-Encapsulation Mechanism Standard"
+            },
+            {
+              "version_id": "m06",
+              "start": 764,
+              "end": 940,
+              "quote": "This standard specifies three parameter sets for ML-KEM. In order of increasing security strength and decreasing performance, these are ML-KEM-512, ML-KEM-768, and ML-KEM-1024."
+            }
+          ],
+          "rationale": "The record states three ML-KEM parameter sets and enumerates those three as the complete stated count.",
+          "referent_relation": "not_applicable"
+        },
+        {
+          "probe_id": "p03:probe:936eb5ac917a49bebb14",
+          "claim_id": "p03:claim:e23b8631fd0a7effca07",
+          "stage": "world",
+          "status": "supported",
+          "basis": [
+            {
+              "version_id": "m06",
+              "start": 0,
+              "end": 67,
+              "quote": "FIPS 203: Module-Lattice-Based Key-Encapsulation Mechanism Standard"
+            },
+            {
+              "version_id": "m06",
+              "start": 764,
+              "end": 940,
+              "quote": "This standard specifies three parameter sets for ML-KEM. In order of increasing security strength and decreasing performance, these are ML-KEM-512, ML-KEM-768, and ML-KEM-1024."
+            }
+          ],
+          "rationale": "The heading identifies FIPS 203, and 'This standard' refers to that document. The supplied NIST issuer and official publication URL establish its institutional identity.",
+          "referent_relation": "anaphora"
+        },
+        {
+          "probe_id": "p03:probe:e169d303074ab9e3f850",
+          "claim_id": "p03:claim:e23b8631fd0a7effca07",
+          "stage": "world",
+          "status": "supported",
+          "basis": [
+            {
+              "version_id": "m06",
+              "start": 0,
+              "end": 67,
+              "quote": "FIPS 203: Module-Lattice-Based Key-Encapsulation Mechanism Standard"
+            },
+            {
+              "version_id": "m06",
+              "start": 764,
+              "end": 940,
+              "quote": "This standard specifies three parameter sets for ML-KEM. In order of increasing security strength and decreasing performance, these are ML-KEM-512, ML-KEM-768, and ML-KEM-1024."
+            }
+          ],
+          "rationale": "The explicit predicate 'specifies' connects FIPS 203 to the enumerated parameter sets; this is not merely a mention.",
+          "referent_relation": "not_applicable"
+        },
+        {
+          "probe_id": "p03:probe:e7082424a125c697c6cf",
+          "claim_id": "p03:claim:e23b8631fd0a7effca07",
+          "stage": "world",
+          "status": "supported",
+          "basis": [
+            {
+              "version_id": "m06",
+              "start": 764,
+              "end": 940,
+              "quote": "This standard specifies three parameter sets for ML-KEM. In order of increasing security strength and decreasing performance, these are ML-KEM-512, ML-KEM-768, and ML-KEM-1024."
+            }
+          ],
+          "rationale": "The official publication record explicitly includes ML-KEM-1024 in the specified parameter sets.",
+          "referent_relation": "exact"
+        }
+      ]
+    },
+    {
+      "round": 2,
+      "verdict": "supported",
+      "basis": [
+        {
+          "version_id": "m06",
+          "start": 0,
+          "end": 67,
+          "quote": "FIPS 203: Module-Lattice-Based Key-Encapsulation Mechanism Standard"
+        },
+        {
+          "version_id": "m06",
+          "start": 764,
+          "end": 940,
+          "quote": "This standard specifies three parameter sets for ML-KEM. In order of increasing security strength and decreasing performance, these are ML-KEM-512, ML-KEM-768, and ML-KEM-1024."
+        }
+      ],
+      "rationale": "The scoped snapshot establishes the document identity, specification predicate, count, and all three enumerated referents without a conflicting qualification.",
+      "gaps": [],
+      "resolutions": [],
+      "evidence_verdict": "supported",
+      "world_verdict": "supported",
+      "world_basis": [
+        {
+          "version_id": "m06",
+          "start": 0,
+          "end": 67,
+          "quote": "FIPS 203: Module-Lattice-Based Key-Encapsulation Mechanism Standard"
+        },
+        {
+          "version_id": "m06",
+          "start": 764,
+          "end": 940,
+          "quote": "This standard specifies three parameter sets for ML-KEM. In order of increasing security strength and decreasing performance, these are ML-KEM-512, ML-KEM-768, and ML-KEM-1024."
+        }
+      ],
+      "world_rationale": "All probes are supported by NIST's official FIPS 203 record, available at as_of. This primary institutional source directly establishes the document identity, specification predicate, count, and three referents; no independent corroboration is inferred from the downstream news article.",
+      "evidence_probe_results": [
+        {
+          "probe_id": "p03:probe:0864f0bac8bf0ead3b69",
+          "claim_id": "p03:claim:e23b8631fd0a7effca07",
+          "stage": "evidence",
+          "status": "supported",
+          "basis": [
+            {
+              "version_id": "m06",
+              "start": 764,
+              "end": 940,
+              "quote": "This standard specifies three parameter sets for ML-KEM. In order of increasing security strength and decreasing performance, these are ML-KEM-512, ML-KEM-768, and ML-KEM-1024."
+            }
+          ],
+          "rationale": "ML-KEM-768 is explicitly included among the specified parameter sets.",
+          "referent_relation": "exact"
+        },
+        {
+          "probe_id": "p03:probe:48ad40db90cedfac33fb",
+          "claim_id": "p03:claim:e23b8631fd0a7effca07",
+          "stage": "evidence",
+          "status": "supported",
+          "basis": [
+            {
+              "version_id": "m06",
+              "start": 764,
+              "end": 940,
+              "quote": "This standard specifies three parameter sets for ML-KEM. In order of increasing security strength and decreasing performance, these are ML-KEM-512, ML-KEM-768, and ML-KEM-1024."
+            }
+          ],
+          "rationale": "ML-KEM-512 is explicitly included among the specified parameter sets.",
+          "referent_relation": "exact"
+        },
+        {
+          "probe_id": "p03:probe:8f691aa9000ecee063fa",
+          "claim_id": "p03:claim:e23b8631fd0a7effca07",
+          "stage": "evidence",
+          "status": "supported",
+          "basis": [
+            {
+              "version_id": "m06",
+              "start": 0,
+              "end": 67,
+              "quote": "FIPS 203: Module-Lattice-Based Key-Encapsulation Mechanism Standard"
+            },
+            {
+              "version_id": "m06",
+              "start": 764,
+              "end": 940,
+              "quote": "This standard specifies three parameter sets for ML-KEM. In order of increasing security strength and decreasing performance, these are ML-KEM-512, ML-KEM-768, and ML-KEM-1024."
+            }
+          ],
+          "rationale": "The source states three ML-KEM parameter sets and exhaustively enumerates the three asserted sets. The ordering qualifier does not alter their count or membership.",
+          "referent_relation": "not_applicable"
+        },
+        {
+          "probe_id": "p03:probe:936eb5ac917a49bebb14",
+          "claim_id": "p03:claim:e23b8631fd0a7effca07",
+          "stage": "evidence",
+          "status": "supported",
+          "basis": [
+            {
+              "version_id": "m06",
+              "start": 0,
+              "end": 67,
+              "quote": "FIPS 203: Module-Lattice-Based Key-Encapsulation Mechanism Standard"
+            },
+            {
+              "version_id": "m06",
+              "start": 764,
+              "end": 940,
+              "quote": "This standard specifies three parameter sets for ML-KEM. In order of increasing security strength and decreasing performance, these are ML-KEM-512, ML-KEM-768, and ML-KEM-1024."
+            }
+          ],
+          "rationale": "The heading identifies FIPS 203, and 'This standard' refers to that document. The supplied issuer metadata identifies NIST.",
+          "referent_relation": "exact"
+        },
+        {
+          "probe_id": "p03:probe:e169d303074ab9e3f850",
+          "claim_id": "p03:claim:e23b8631fd0a7effca07",
+          "stage": "evidence",
+          "status": "supported",
+          "basis": [
+            {
+              "version_id": "m06",
+              "start": 0,
+              "end": 67,
+              "quote": "FIPS 203: Module-Lattice-Based Key-Encapsulation Mechanism Standard"
+            },
+            {
+              "version_id": "m06",
+              "start": 764,
+              "end": 940,
+              "quote": "This standard specifies three parameter sets for ML-KEM. In order of increasing security strength and decreasing performance, these are ML-KEM-512, ML-KEM-768, and ML-KEM-1024."
+            }
+          ],
+          "rationale": "The source expressly says the standard 'specifies' these parameter sets, rather than merely mentioning them.",
+          "referent_relation": "not_applicable"
+        },
+        {
+          "probe_id": "p03:probe:e7082424a125c697c6cf",
+          "claim_id": "p03:claim:e23b8631fd0a7effca07",
+          "stage": "evidence",
+          "status": "supported",
+          "basis": [
+            {
+              "version_id": "m06",
+              "start": 764,
+              "end": 940,
+              "quote": "This standard specifies three parameter sets for ML-KEM. In order of increasing security strength and decreasing performance, these are ML-KEM-512, ML-KEM-768, and ML-KEM-1024."
+            }
+          ],
+          "rationale": "ML-KEM-1024 is explicitly included among the specified parameter sets.",
+          "referent_relation": "exact"
+        }
+      ],
+      "world_probe_results": [
+        {
+          "probe_id": "p03:probe:0864f0bac8bf0ead3b69",
+          "claim_id": "p03:claim:e23b8631fd0a7effca07",
+          "stage": "world",
+          "status": "supported",
+          "basis": [
+            {
+              "version_id": "m06",
+              "start": 0,
+              "end": 67,
+              "quote": "FIPS 203: Module-Lattice-Based Key-Encapsulation Mechanism Standard"
+            },
+            {
+              "version_id": "m06",
+              "start": 764,
+              "end": 940,
+              "quote": "This standard specifies three parameter sets for ML-KEM. In order of increasing security strength and decreasing performance, these are ML-KEM-512, ML-KEM-768, and ML-KEM-1024."
+            }
+          ],
+          "rationale": "The official FIPS 203 record explicitly includes ML-KEM-768 in its enumeration of specified parameter sets.",
+          "referent_relation": "exact"
+        },
+        {
+          "probe_id": "p03:probe:29e185434f9ec6d19dc2",
+          "claim_id": "p03:claim:e23b8631fd0a7effca07",
+          "stage": "world",
+          "status": "supported",
+          "basis": [
+            {
+              "version_id": "m06",
+              "start": 0,
+              "end": 67,
+              "quote": "FIPS 203: Module-Lattice-Based Key-Encapsulation Mechanism Standard"
+            },
+            {
+              "version_id": "m06",
+              "start": 764,
+              "end": 940,
+              "quote": "This standard specifies three parameter sets for ML-KEM. In order of increasing security strength and decreasing performance, these are ML-KEM-512, ML-KEM-768, and ML-KEM-1024."
+            }
+          ],
+          "rationale": "m06 is NIST's own FIPS 203 publication record, identified by its heading and supplied issuer and URL metadata. Its direct statement supplies the count and enumeration without relying on a downstream paraphrase.",
+          "referent_relation": "not_applicable"
+        },
+        {
+          "probe_id": "p03:probe:48ad40db90cedfac33fb",
+          "claim_id": "p03:claim:e23b8631fd0a7effca07",
+          "stage": "world",
+          "status": "supported",
+          "basis": [
+            {
+              "version_id": "m06",
+              "start": 0,
+              "end": 67,
+              "quote": "FIPS 203: Module-Lattice-Based Key-Encapsulation Mechanism Standard"
+            },
+            {
+              "version_id": "m06",
+              "start": 764,
+              "end": 940,
+              "quote": "This standard specifies three parameter sets for ML-KEM. In order of increasing security strength and decreasing performance, these are ML-KEM-512, ML-KEM-768, and ML-KEM-1024."
+            }
+          ],
+          "rationale": "The official FIPS 203 record explicitly includes ML-KEM-512 in its enumeration of specified parameter sets.",
+          "referent_relation": "exact"
+        },
+        {
+          "probe_id": "p03:probe:8f691aa9000ecee063fa",
+          "claim_id": "p03:claim:e23b8631fd0a7effca07",
+          "stage": "world",
+          "status": "supported",
+          "basis": [
+            {
+              "version_id": "m06",
+              "start": 0,
+              "end": 67,
+              "quote": "FIPS 203: Module-Lattice-Based Key-Encapsulation Mechanism Standard"
+            },
+            {
+              "version_id": "m06",
+              "start": 764,
+              "end": 940,
+              "quote": "This standard specifies three parameter sets for ML-KEM. In order of increasing security strength and decreasing performance, these are ML-KEM-512, ML-KEM-768, and ML-KEM-1024."
+            }
+          ],
+          "rationale": "The record states three ML-KEM parameter sets and identifies those three through 'these are'; the enumeration constitutes the stated count.",
+          "referent_relation": "not_applicable"
+        },
+        {
+          "probe_id": "p03:probe:936eb5ac917a49bebb14",
+          "claim_id": "p03:claim:e23b8631fd0a7effca07",
+          "stage": "world",
+          "status": "supported",
+          "basis": [
+            {
+              "version_id": "m06",
+              "start": 0,
+              "end": 67,
+              "quote": "FIPS 203: Module-Lattice-Based Key-Encapsulation Mechanism Standard"
+            },
+            {
+              "version_id": "m06",
+              "start": 764,
+              "end": 940,
+              "quote": "This standard specifies three parameter sets for ML-KEM. In order of increasing security strength and decreasing performance, these are ML-KEM-512, ML-KEM-768, and ML-KEM-1024."
+            }
+          ],
+          "rationale": "The heading identifies FIPS 203, and 'This standard' binds the specification statement to it. Supplied issuer and official NIST URL metadata establish the institutional identity.",
+          "referent_relation": "exact"
+        },
+        {
+          "probe_id": "p03:probe:e169d303074ab9e3f850",
+          "claim_id": "p03:claim:e23b8631fd0a7effca07",
+          "stage": "world",
+          "status": "supported",
+          "basis": [
+            {
+              "version_id": "m06",
+              "start": 0,
+              "end": 67,
+              "quote": "FIPS 203: Module-Lattice-Based Key-Encapsulation Mechanism Standard"
+            },
+            {
+              "version_id": "m06",
+              "start": 764,
+              "end": 940,
+              "quote": "This standard specifies three parameter sets for ML-KEM. In order of increasing security strength and decreasing performance, these are ML-KEM-512, ML-KEM-768, and ML-KEM-1024."
+            }
+          ],
+          "rationale": "The statement expressly says the standard 'specifies' the parameter sets, rather than merely mentioning them.",
+          "referent_relation": "not_applicable"
+        },
+        {
+          "probe_id": "p03:probe:e7082424a125c697c6cf",
+          "claim_id": "p03:claim:e23b8631fd0a7effca07",
+          "stage": "world",
+          "status": "supported",
+          "basis": [
+            {
+              "version_id": "m06",
+              "start": 0,
+              "end": 67,
+              "quote": "FIPS 203: Module-Lattice-Based Key-Encapsulation Mechanism Standard"
+            },
+            {
+              "version_id": "m06",
+              "start": 764,
+              "end": 940,
+              "quote": "This standard specifies three parameter sets for ML-KEM. In order of increasing security strength and decreasing performance, these are ML-KEM-512, ML-KEM-768, and ML-KEM-1024."
+            }
+          ],
+          "rationale": "The official FIPS 203 record explicitly includes ML-KEM-1024 in its enumeration of specified parameter sets.",
+          "referent_relation": "exact"
+        }
+      ]
+    }
+  ],
+  "operations": [
+    {
+      "sequence": 1,
+      "round": 1,
+      "action": "search",
+      "tasks": [
+        {
+          "id": "origin:p03",
+          "question": "Find the producing record and evidenced lineage for: NIST's FIPS 203 specifies three ML-KEM parameter sets: ML-KEM-512, ML-KEM-768, and ML-KEM-1024.",
+          "stage": "provenance",
+          "dimension": "auto",
+          "blocking": true,
+          "target_id": null,
+          "basis": [],
+          "decision_impact": "",
+          "action": "search",
+          "locator": null,
+          "probe_id": null
+        }
+      ],
+      "limit": 24
+    },
+    {
+      "sequence": 2,
+      "round": 1,
+      "action": "snapshot_saved",
+      "version_id": "m05",
+      "sha256": "b8cb6eea2ad11d3d0eb1caedbd1365c9075244b00be5db62ff559e130a30b127",
+      "eligible": true
+    },
+    {
+      "sequence": 3,
+      "round": 1,
+      "action": "decompose_started",
+      "version_id": "m05",
+      "duplicate": false,
+      "revisit": false
+    },
+    {
+      "sequence": 4,
+      "round": 1,
+      "action": "decompose_completed",
+      "version_id": "m05",
+      "revision": 1
+    },
+    {
+      "sequence": 5,
+      "round": 1,
+      "action": "alignment_checked",
+      "version_id": "m05",
+      "analysis_changed": true
+    },
+    {
+      "sequence": 6,
+      "round": 1,
+      "action": "graph_updated",
+      "version_id": "m05",
+      "open_gaps": 2
+    },
+    {
+      "sequence": 7,
+      "round": 1,
+      "action": "snapshot_saved",
+      "version_id": "m06",
+      "sha256": "8aa70a804ece77c4aa44e32b88b14df5021495d2717869cd650d8c2078cdd785",
+      "eligible": true
+    },
+    {
+      "sequence": 8,
+      "round": 1,
+      "action": "decompose_started",
+      "version_id": "m06",
+      "duplicate": false,
+      "revisit": false
+    },
+    {
+      "sequence": 9,
+      "round": 1,
+      "action": "decompose_completed",
+      "version_id": "m06",
+      "revision": 2
+    },
+    {
+      "sequence": 10,
+      "round": 1,
+      "action": "alignment_checked",
+      "version_id": "m06",
+      "analysis_changed": true
+    },
+    {
+      "sequence": 11,
+      "round": 1,
+      "action": "graph_updated",
+      "version_id": "m06",
+      "open_gaps": 3
+    },
+    {
+      "sequence": 12,
+      "round": 1,
+      "action": "upstream_arrival_reanalysis",
+      "version_id": "m05",
+      "upstream_version": "m06",
+      "relation_id": "m05:citation:9f11f20a0efac4be53a6"
+    },
+    {
+      "sequence": 13,
+      "round": 1,
+      "action": "revisit_requested",
+      "version_id": "m05"
+    },
+    {
+      "sequence": 14,
+      "round": 1,
+      "action": "decompose_started",
+      "version_id": "m05",
+      "duplicate": true,
+      "revisit": true
+    },
+    {
+      "sequence": 15,
+      "round": 1,
+      "action": "decompose_completed",
+      "version_id": "m05",
+      "revision": 3
+    },
+    {
+      "sequence": 16,
+      "round": 1,
+      "action": "alignment_checked",
+      "version_id": "m05",
+      "analysis_changed": true
+    },
+    {
+      "sequence": 17,
+      "round": 1,
+      "action": "graph_updated",
+      "version_id": "m05",
+      "open_gaps": 1
+    },
+    {
+      "sequence": 18,
+      "round": 1,
+      "action": "verification_started"
+    },
+    {
+      "sequence": 19,
+      "round": 1,
+      "action": "verification_completed",
+      "verdict": "supported",
+      "decision": "supported",
+      "assessments": {
+        "evidence": {
+          "raw_verdict": "supported",
+          "decision": "supported",
+          "blocking_gap_ids": []
+        },
+        "world": {
+          "raw_verdict": "supported",
+          "decision": "supported",
+          "blocking_gap_ids": []
+        }
+      },
+      "followup_tasks": 0,
+      "provenance_status": "partial"
+    },
+    {
+      "sequence": 20,
+      "round": 1,
+      "action": "assessment_changed",
+      "previous": null,
+      "current": {
+        "evidence": {
+          "raw_verdict": "supported",
+          "decision": "supported",
+          "blocking_gap_ids": []
+        },
+        "world": {
+          "raw_verdict": "supported",
+          "decision": "supported",
+          "blocking_gap_ids": []
+        }
+      },
+      "basis": [
+        {
+          "version_id": "m06",
+          "start": 0,
+          "end": 67,
+          "quote": "FIPS 203: Module-Lattice-Based Key-Encapsulation Mechanism Standard"
+        },
+        {
+          "version_id": "m06",
+          "start": 764,
+          "end": 940,
+          "quote": "This standard specifies three parameter sets for ML-KEM. In order of increasing security strength and decreasing performance, these are ML-KEM-512, ML-KEM-768, and ML-KEM-1024."
+        }
+      ],
+      "world_basis": [
+        {
+          "version_id": "m06",
+          "start": 0,
+          "end": 67,
+          "quote": "FIPS 203: Module-Lattice-Based Key-Encapsulation Mechanism Standard"
+        },
+        {
+          "version_id": "m06",
+          "start": 764,
+          "end": 940,
+          "quote": "This standard specifies three parameter sets for ML-KEM. In order of increasing security strength and decreasing performance, these are ML-KEM-512, ML-KEM-768, and ML-KEM-1024."
+        }
+      ]
+    },
+    {
+      "sequence": 21,
+      "round": 1,
+      "action": "progress_checked",
+      "new_eligible_versions": 2,
+      "new_structure": true
+    },
+    {
+      "sequence": 22,
+      "round": 2,
+      "action": "search",
+      "tasks": [
+        {
+          "id": "origin:p03",
+          "question": "Find the producing record and evidenced lineage for: NIST's FIPS 203 specifies three ML-KEM parameter sets: ML-KEM-512, ML-KEM-768, and ML-KEM-1024.",
+          "stage": "provenance",
+          "dimension": "auto",
+          "blocking": true,
+          "target_id": null,
+          "basis": [],
+          "decision_impact": "",
+          "action": "search",
+          "locator": null,
+          "probe_id": null
+        }
+      ],
+      "limit": 21
+    },
+    {
+      "sequence": 23,
+      "round": 2,
+      "action": "duplicate_observed",
+      "version_id": "m05",
+      "sha256": "b8cb6eea2ad11d3d0eb1caedbd1365c9075244b00be5db62ff559e130a30b127",
+      "eligible": true
+    },
+    {
+      "sequence": 24,
+      "round": 2,
+      "action": "decompose_started",
+      "version_id": "m05",
+      "duplicate": true,
+      "revisit": false
+    },
+    {
+      "sequence": 25,
+      "round": 2,
+      "action": "decompose_completed",
+      "version_id": "m05",
+      "revision": 4
+    },
+    {
+      "sequence": 26,
+      "round": 2,
+      "action": "alignment_checked",
+      "version_id": "m05",
+      "analysis_changed": true
+    },
+    {
+      "sequence": 27,
+      "round": 2,
+      "action": "graph_updated",
+      "version_id": "m05",
+      "open_gaps": 0
+    },
+    {
+      "sequence": 28,
+      "round": 2,
+      "action": "duplicate_observed",
+      "version_id": "m06",
+      "sha256": "8aa70a804ece77c4aa44e32b88b14df5021495d2717869cd650d8c2078cdd785",
+      "eligible": true
+    },
+    {
+      "sequence": 29,
+      "round": 2,
+      "action": "decompose_started",
+      "version_id": "m06",
+      "duplicate": true,
+      "revisit": false
+    },
+    {
+      "sequence": 30,
+      "round": 2,
+      "action": "decompose_completed",
+      "version_id": "m06",
+      "revision": 5
+    },
+    {
+      "sequence": 31,
+      "round": 2,
+      "action": "alignment_checked",
+      "version_id": "m06",
+      "analysis_changed": true
+    },
+    {
+      "sequence": 32,
+      "round": 2,
+      "action": "graph_updated",
+      "version_id": "m06",
+      "open_gaps": 0
+    },
+    {
+      "sequence": 33,
+      "round": 2,
+      "action": "verification_started"
+    },
+    {
+      "sequence": 34,
+      "round": 2,
+      "action": "verification_completed",
+      "verdict": "supported",
+      "decision": "supported",
+      "assessments": {
+        "evidence": {
+          "raw_verdict": "supported",
+          "decision": "supported",
+          "blocking_gap_ids": []
+        },
+        "world": {
+          "raw_verdict": "supported",
+          "decision": "supported",
+          "blocking_gap_ids": []
+        }
+      },
+      "followup_tasks": 0,
+      "provenance_status": "original_material_located"
+    },
+    {
+      "sequence": 35,
+      "round": 2,
+      "action": "progress_checked",
+      "new_eligible_versions": 0,
+      "new_structure": true
+    },
+    {
+      "sequence": 36,
+      "round": 2,
+      "action": "stopped",
+      "reason": "round_budget"
+    }
+  ],
+  "errors": []
+}

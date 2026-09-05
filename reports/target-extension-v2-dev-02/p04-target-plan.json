@@ -1,0 +1,1432 @@
+{
+  "schema_version": "decision-probe-v2",
+  "target_signature": "40740f0a861dd7f6dd4d98ac45e84e1a348c9a12107f72a6dee99cbda9714733",
+  "logic": "attribution",
+  "claims": [
+    {
+      "id": "p04:claim:b7ac71fe2611a2025b9e",
+      "statement": "NOAA's January 10, 2025 annual climate summary made the reporting act stated in the target.",
+      "anchor": {
+        "start": 0,
+        "end": 60,
+        "quote": "NOAA's January 10, 2025 annual climate summary reported that"
+      },
+      "role": "attribution",
+      "dimensions": [
+        {
+          "id": "p04:dimension:685f3d3d4a8149c1d2d3",
+          "kind": "entity_identity",
+          "anchor": {
+            "start": 0,
+            "end": 4,
+            "quote": "NOAA"
+          }
+        },
+        {
+          "id": "p04:dimension:50556c48327394cee947",
+          "kind": "subject",
+          "anchor": {
+            "start": 0,
+            "end": 46,
+            "quote": "NOAA's January 10, 2025 annual climate summary"
+          }
+        },
+        {
+          "id": "p04:dimension:9f6e80460669caae68bf",
+          "kind": "time",
+          "anchor": {
+            "start": 7,
+            "end": 23,
+            "quote": "January 10, 2025"
+          }
+        },
+        {
+          "id": "p04:dimension:37018fdb15d947dd7445",
+          "kind": "predicate",
+          "anchor": {
+            "start": 47,
+            "end": 55,
+            "quote": "reported"
+          }
+        }
+      ],
+      "parent_claim_id": null
+    },
+    {
+      "id": "p04:claim:504feda0ef78714f1eb6",
+      "statement": "The global surface temperature in 2024 exceeded the 1850–1900 average by 1.29°C.",
+      "anchor": {
+        "start": 61,
+        "end": 138,
+        "quote": "the global surface temperature in 2024 was 1.29°C above the 1850–1900 average"
+      },
+      "role": "attributed_content",
+      "dimensions": [
+        {
+          "id": "p04:dimension:81e911f43d97a2aca594",
+          "kind": "subject",
+          "anchor": {
+            "start": 61,
+            "end": 91,
+            "quote": "the global surface temperature"
+          }
+        },
+        {
+          "id": "p04:dimension:cd3824007f570494cf09",
+          "kind": "time",
+          "anchor": {
+            "start": 95,
+            "end": 99,
+            "quote": "2024"
+          }
+        },
+        {
+          "id": "p04:dimension:7e94ca2bb6d6f66feb3c",
+          "kind": "predicate",
+          "anchor": {
+            "start": 100,
+            "end": 138,
+            "quote": "was 1.29°C above the 1850–1900 average"
+          }
+        },
+        {
+          "id": "p04:dimension:f1291f1a38c4d07637d1",
+          "kind": "quantity_unit",
+          "anchor": {
+            "start": 104,
+            "end": 110,
+            "quote": "1.29°C"
+          }
+        },
+        {
+          "id": "p04:dimension:521965858ad164777a12",
+          "kind": "baseline_scope",
+          "anchor": {
+            "start": 117,
+            "end": 138,
+            "quote": "the 1850–1900 average"
+          }
+        }
+      ],
+      "parent_claim_id": "p04:claim:b7ac71fe2611a2025b9e"
+    }
+  ],
+  "probes": [
+    {
+      "id": "p04:probe:3151df8b2d2394b27db0",
+      "claim_id": "p04:claim:504feda0ef78714f1eb6",
+      "kind": "baseline_scope",
+      "dimension_ids": [
+        "p04:dimension:521965858ad164777a12"
+      ],
+      "question": "Does m07 establish that the parent summary reported this anomaly relative to \"the 1850–1900 average\" for global surface temperature, rather than another reference period or measurement scope?",
+      "decision_impact": "Determines whether the baseline belongs to the attributed result.",
+      "match_policy": "semantic_constraint",
+      "routes": [
+        "atoms",
+        "evidence",
+        "world"
+      ],
+      "gate": "always"
+    },
+    {
+      "id": "p04:probe:190666875b5158282ffb",
+      "claim_id": "p04:claim:504feda0ef78714f1eb6",
+      "kind": "quantity_unit",
+      "dimension_ids": [
+        "p04:dimension:f1291f1a38c4d07637d1"
+      ],
+      "question": "Does m07 establish that the parent summary reported \"1.29°C\" as the amount above the stated baseline, rather than as an absolute temperature or a quantity using another unit?",
+      "decision_impact": "Determines whether the attributed magnitude and unit match.",
+      "match_policy": "semantic_constraint",
+      "routes": [
+        "atoms",
+        "evidence",
+        "world"
+      ],
+      "gate": "always"
+    },
+    {
+      "id": "p04:probe:379b545288bd9c64368f",
+      "claim_id": "p04:claim:504feda0ef78714f1eb6",
+      "kind": "semantic_core",
+      "dimension_ids": [
+        "p04:dimension:7e94ca2bb6d6f66feb3c",
+        "p04:dimension:81e911f43d97a2aca594"
+      ],
+      "question": "Does m07 establish that the summary identified in parent claim p04:claim:b7ac71fe2611a2025b9e reported that \"the global surface temperature\" \"was 1.29°C above the 1850–1900 average\", rather than merely supporting that proposition independently?",
+      "decision_impact": "Determines whether the complete temperature assertion is retained as attributed content.",
+      "match_policy": "semantic_constraint",
+      "routes": [
+        "atoms",
+        "evidence",
+        "world"
+      ],
+      "gate": "always"
+    },
+    {
+      "id": "p04:probe:61ffe4305e46e623e4a0",
+      "claim_id": "p04:claim:504feda0ef78714f1eb6",
+      "kind": "source_lineage",
+      "dimension_ids": [],
+      "question": "Does the source lineage within m07 connect this temperature content to the summary in parent claim p04:claim:b7ac71fe2611a2025b9e, rather than only to another source or an intermediary's calculation?",
+      "decision_impact": "Determines whether the content's provenance preserves its parent attribution.",
+      "match_policy": "semantic_constraint",
+      "routes": [
+        "lineage",
+        "world"
+      ],
+      "gate": "provenance"
+    },
+    {
+      "id": "p04:probe:49d9da07be5111988d4a",
+      "claim_id": "p04:claim:504feda0ef78714f1eb6",
+      "kind": "time_boundary",
+      "dimension_ids": [
+        "p04:dimension:cd3824007f570494cf09"
+      ],
+      "question": "Does m07 establish that the parent summary attributed this global surface temperature result to the year \"2024\", rather than a different year or a partial-year period?",
+      "decision_impact": "Determines whether the attributed result covers the asserted year.",
+      "match_policy": "semantic_constraint",
+      "routes": [
+        "atoms",
+        "evidence",
+        "world"
+      ],
+      "gate": "always"
+    },
+    {
+      "id": "p04:probe:e61febd185dbd5c0ab44",
+      "claim_id": "p04:claim:b7ac71fe2611a2025b9e",
+      "kind": "entity_identity",
+      "dimension_ids": [
+        "p04:dimension:685f3d3d4a8149c1d2d3"
+      ],
+      "question": "Does m07 identify the reporting organization as the referent of \"NOAA\", through an exact mention, alias, unambiguous description or anaphora rather than necessarily identical wording?",
+      "decision_impact": "Determines whether the attribution identifies the correct organization.",
+      "match_policy": "same_referent",
+      "routes": [
+        "atoms",
+        "evidence",
+        "world"
+      ],
+      "gate": "always"
+    },
+    {
+      "id": "p04:probe:709a6ca74f1480fc8381",
+      "claim_id": "p04:claim:b7ac71fe2611a2025b9e",
+      "kind": "semantic_core",
+      "dimension_ids": [
+        "p04:dimension:37018fdb15d947dd7445",
+        "p04:dimension:50556c48327394cee947"
+      ],
+      "question": "Does m07 establish that \"NOAA's January 10, 2025 annual climate summary\" performed the reporting act expressed by \"reported\"?",
+      "decision_impact": "Determines whether the asserted reporting act is supported.",
+      "match_policy": "semantic_constraint",
+      "routes": [
+        "atoms",
+        "evidence",
+        "world"
+      ],
+      "gate": "always"
+    },
+    {
+      "id": "p04:probe:ce6ac8cfb34bd5d15db2",
+      "claim_id": "p04:claim:b7ac71fe2611a2025b9e",
+      "kind": "source_lineage",
+      "dimension_ids": [],
+      "question": "What source lineage within m07 supports the attribution to the specified NOAA summary, and does it distinguish that summary's reporting from intermediary commentary?",
+      "decision_impact": "Determines whether the reporting attribution is traceable within the permitted evidence.",
+      "match_policy": "semantic_constraint",
+      "routes": [
+        "lineage",
+        "world"
+      ],
+      "gate": "provenance"
+    },
+    {
+      "id": "p04:probe:8ecaf99feea564cafdce",
+      "claim_id": "p04:claim:b7ac71fe2611a2025b9e",
+      "kind": "time_boundary",
+      "dimension_ids": [
+        "p04:dimension:9f6e80460669caae68bf"
+      ],
+      "question": "Does m07 establish \"January 10, 2025\" as the date of the attributed annual climate summary, rather than another event or document?",
+      "decision_impact": "Determines whether the reporting date is correctly bound.",
+      "match_policy": "semantic_constraint",
+      "routes": [
+        "atoms",
+        "evidence",
+        "world"
+      ],
+      "gate": "always"
+    }
+  ],
+  "notes": "The comparison is preserved within attributed_content. Attribution with an embedded comparison is unsupported by this version's flat logic schema.\nThe embedded comparison is retained in the attributed predicate, quantity and baseline. No comparison_relation probe is emitted because the contract logic is attribution.",
+  "sha256": "6c2afaada769731083273649e14fd155e9d1458b1fc8345b570eca0b0ac56d82",
+  "projections": {
+    "atoms": {
+      "schema_version": "decision-probe-v2",
+      "target_signature": "40740f0a861dd7f6dd4d98ac45e84e1a348c9a12107f72a6dee99cbda9714733",
+      "plan_sha256": "6c2afaada769731083273649e14fd155e9d1458b1fc8345b570eca0b0ac56d82",
+      "stage": "atoms",
+      "logic": "attribution",
+      "claims": [
+        {
+          "id": "p04:claim:b7ac71fe2611a2025b9e",
+          "statement": "NOAA's January 10, 2025 annual climate summary made the reporting act stated in the target.",
+          "anchor": {
+            "start": 0,
+            "end": 60,
+            "quote": "NOAA's January 10, 2025 annual climate summary reported that"
+          },
+          "role": "attribution",
+          "dimensions": [
+            {
+              "id": "p04:dimension:685f3d3d4a8149c1d2d3",
+              "kind": "entity_identity",
+              "anchor": {
+                "start": 0,
+                "end": 4,
+                "quote": "NOAA"
+              }
+            },
+            {
+              "id": "p04:dimension:50556c48327394cee947",
+              "kind": "subject",
+              "anchor": {
+                "start": 0,
+                "end": 46,
+                "quote": "NOAA's January 10, 2025 annual climate summary"
+              }
+            },
+            {
+              "id": "p04:dimension:9f6e80460669caae68bf",
+              "kind": "time",
+              "anchor": {
+                "start": 7,
+                "end": 23,
+                "quote": "January 10, 2025"
+              }
+            },
+            {
+              "id": "p04:dimension:37018fdb15d947dd7445",
+              "kind": "predicate",
+              "anchor": {
+                "start": 47,
+                "end": 55,
+                "quote": "reported"
+              }
+            }
+          ],
+          "parent_claim_id": null
+        },
+        {
+          "id": "p04:claim:504feda0ef78714f1eb6",
+          "statement": "The global surface temperature in 2024 exceeded the 1850–1900 average by 1.29°C.",
+          "anchor": {
+            "start": 61,
+            "end": 138,
+            "quote": "the global surface temperature in 2024 was 1.29°C above the 1850–1900 average"
+          },
+          "role": "attributed_content",
+          "dimensions": [
+            {
+              "id": "p04:dimension:81e911f43d97a2aca594",
+              "kind": "subject",
+              "anchor": {
+                "start": 61,
+                "end": 91,
+                "quote": "the global surface temperature"
+              }
+            },
+            {
+              "id": "p04:dimension:cd3824007f570494cf09",
+              "kind": "time",
+              "anchor": {
+                "start": 95,
+                "end": 99,
+                "quote": "2024"
+              }
+            },
+            {
+              "id": "p04:dimension:7e94ca2bb6d6f66feb3c",
+              "kind": "predicate",
+              "anchor": {
+                "start": 100,
+                "end": 138,
+                "quote": "was 1.29°C above the 1850–1900 average"
+              }
+            },
+            {
+              "id": "p04:dimension:f1291f1a38c4d07637d1",
+              "kind": "quantity_unit",
+              "anchor": {
+                "start": 104,
+                "end": 110,
+                "quote": "1.29°C"
+              }
+            },
+            {
+              "id": "p04:dimension:521965858ad164777a12",
+              "kind": "baseline_scope",
+              "anchor": {
+                "start": 117,
+                "end": 138,
+                "quote": "the 1850–1900 average"
+              }
+            }
+          ],
+          "parent_claim_id": "p04:claim:b7ac71fe2611a2025b9e"
+        }
+      ],
+      "probes": [
+        {
+          "id": "p04:probe:3151df8b2d2394b27db0",
+          "claim_id": "p04:claim:504feda0ef78714f1eb6",
+          "kind": "baseline_scope",
+          "dimension_ids": [
+            "p04:dimension:521965858ad164777a12"
+          ],
+          "question": "Does m07 establish that the parent summary reported this anomaly relative to \"the 1850–1900 average\" for global surface temperature, rather than another reference period or measurement scope?",
+          "decision_impact": "Determines whether the baseline belongs to the attributed result.",
+          "match_policy": "semantic_constraint",
+          "routes": [
+            "atoms",
+            "evidence",
+            "world"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p04:probe:190666875b5158282ffb",
+          "claim_id": "p04:claim:504feda0ef78714f1eb6",
+          "kind": "quantity_unit",
+          "dimension_ids": [
+            "p04:dimension:f1291f1a38c4d07637d1"
+          ],
+          "question": "Does m07 establish that the parent summary reported \"1.29°C\" as the amount above the stated baseline, rather than as an absolute temperature or a quantity using another unit?",
+          "decision_impact": "Determines whether the attributed magnitude and unit match.",
+          "match_policy": "semantic_constraint",
+          "routes": [
+            "atoms",
+            "evidence",
+            "world"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p04:probe:379b545288bd9c64368f",
+          "claim_id": "p04:claim:504feda0ef78714f1eb6",
+          "kind": "semantic_core",
+          "dimension_ids": [
+            "p04:dimension:7e94ca2bb6d6f66feb3c",
+            "p04:dimension:81e911f43d97a2aca594"
+          ],
+          "question": "Does m07 establish that the summary identified in parent claim p04:claim:b7ac71fe2611a2025b9e reported that \"the global surface temperature\" \"was 1.29°C above the 1850–1900 average\", rather than merely supporting that proposition independently?",
+          "decision_impact": "Determines whether the complete temperature assertion is retained as attributed content.",
+          "match_policy": "semantic_constraint",
+          "routes": [
+            "atoms",
+            "evidence",
+            "world"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p04:probe:49d9da07be5111988d4a",
+          "claim_id": "p04:claim:504feda0ef78714f1eb6",
+          "kind": "time_boundary",
+          "dimension_ids": [
+            "p04:dimension:cd3824007f570494cf09"
+          ],
+          "question": "Does m07 establish that the parent summary attributed this global surface temperature result to the year \"2024\", rather than a different year or a partial-year period?",
+          "decision_impact": "Determines whether the attributed result covers the asserted year.",
+          "match_policy": "semantic_constraint",
+          "routes": [
+            "atoms",
+            "evidence",
+            "world"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p04:probe:e61febd185dbd5c0ab44",
+          "claim_id": "p04:claim:b7ac71fe2611a2025b9e",
+          "kind": "entity_identity",
+          "dimension_ids": [
+            "p04:dimension:685f3d3d4a8149c1d2d3"
+          ],
+          "question": "Does m07 identify the reporting organization as the referent of \"NOAA\", through an exact mention, alias, unambiguous description or anaphora rather than necessarily identical wording?",
+          "decision_impact": "Determines whether the attribution identifies the correct organization.",
+          "match_policy": "same_referent",
+          "routes": [
+            "atoms",
+            "evidence",
+            "world"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p04:probe:709a6ca74f1480fc8381",
+          "claim_id": "p04:claim:b7ac71fe2611a2025b9e",
+          "kind": "semantic_core",
+          "dimension_ids": [
+            "p04:dimension:37018fdb15d947dd7445",
+            "p04:dimension:50556c48327394cee947"
+          ],
+          "question": "Does m07 establish that \"NOAA's January 10, 2025 annual climate summary\" performed the reporting act expressed by \"reported\"?",
+          "decision_impact": "Determines whether the asserted reporting act is supported.",
+          "match_policy": "semantic_constraint",
+          "routes": [
+            "atoms",
+            "evidence",
+            "world"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p04:probe:8ecaf99feea564cafdce",
+          "claim_id": "p04:claim:b7ac71fe2611a2025b9e",
+          "kind": "time_boundary",
+          "dimension_ids": [
+            "p04:dimension:9f6e80460669caae68bf"
+          ],
+          "question": "Does m07 establish \"January 10, 2025\" as the date of the attributed annual climate summary, rather than another event or document?",
+          "decision_impact": "Determines whether the reporting date is correctly bound.",
+          "match_policy": "semantic_constraint",
+          "routes": [
+            "atoms",
+            "evidence",
+            "world"
+          ],
+          "gate": "always"
+        }
+      ],
+      "notes": "The comparison is preserved within attributed_content. Attribution with an embedded comparison is unsupported by this version's flat logic schema.\nThe embedded comparison is retained in the attributed predicate, quantity and baseline. No comparison_relation probe is emitted because the contract logic is attribution."
+    },
+    "lineage": {
+      "schema_version": "decision-probe-v2",
+      "target_signature": "40740f0a861dd7f6dd4d98ac45e84e1a348c9a12107f72a6dee99cbda9714733",
+      "plan_sha256": "6c2afaada769731083273649e14fd155e9d1458b1fc8345b570eca0b0ac56d82",
+      "stage": "lineage",
+      "logic": "attribution",
+      "claims": [
+        {
+          "id": "p04:claim:b7ac71fe2611a2025b9e",
+          "statement": "NOAA's January 10, 2025 annual climate summary made the reporting act stated in the target.",
+          "anchor": {
+            "start": 0,
+            "end": 60,
+            "quote": "NOAA's January 10, 2025 annual climate summary reported that"
+          },
+          "role": "attribution",
+          "dimensions": [
+            {
+              "id": "p04:dimension:685f3d3d4a8149c1d2d3",
+              "kind": "entity_identity",
+              "anchor": {
+                "start": 0,
+                "end": 4,
+                "quote": "NOAA"
+              }
+            },
+            {
+              "id": "p04:dimension:50556c48327394cee947",
+              "kind": "subject",
+              "anchor": {
+                "start": 0,
+                "end": 46,
+                "quote": "NOAA's January 10, 2025 annual climate summary"
+              }
+            },
+            {
+              "id": "p04:dimension:9f6e80460669caae68bf",
+              "kind": "time",
+              "anchor": {
+                "start": 7,
+                "end": 23,
+                "quote": "January 10, 2025"
+              }
+            },
+            {
+              "id": "p04:dimension:37018fdb15d947dd7445",
+              "kind": "predicate",
+              "anchor": {
+                "start": 47,
+                "end": 55,
+                "quote": "reported"
+              }
+            }
+          ],
+          "parent_claim_id": null
+        },
+        {
+          "id": "p04:claim:504feda0ef78714f1eb6",
+          "statement": "The global surface temperature in 2024 exceeded the 1850–1900 average by 1.29°C.",
+          "anchor": {
+            "start": 61,
+            "end": 138,
+            "quote": "the global surface temperature in 2024 was 1.29°C above the 1850–1900 average"
+          },
+          "role": "attributed_content",
+          "dimensions": [
+            {
+              "id": "p04:dimension:81e911f43d97a2aca594",
+              "kind": "subject",
+              "anchor": {
+                "start": 61,
+                "end": 91,
+                "quote": "the global surface temperature"
+              }
+            },
+            {
+              "id": "p04:dimension:cd3824007f570494cf09",
+              "kind": "time",
+              "anchor": {
+                "start": 95,
+                "end": 99,
+                "quote": "2024"
+              }
+            },
+            {
+              "id": "p04:dimension:7e94ca2bb6d6f66feb3c",
+              "kind": "predicate",
+              "anchor": {
+                "start": 100,
+                "end": 138,
+                "quote": "was 1.29°C above the 1850–1900 average"
+              }
+            },
+            {
+              "id": "p04:dimension:f1291f1a38c4d07637d1",
+              "kind": "quantity_unit",
+              "anchor": {
+                "start": 104,
+                "end": 110,
+                "quote": "1.29°C"
+              }
+            },
+            {
+              "id": "p04:dimension:521965858ad164777a12",
+              "kind": "baseline_scope",
+              "anchor": {
+                "start": 117,
+                "end": 138,
+                "quote": "the 1850–1900 average"
+              }
+            }
+          ],
+          "parent_claim_id": "p04:claim:b7ac71fe2611a2025b9e"
+        }
+      ],
+      "probes": [
+        {
+          "id": "p04:probe:61ffe4305e46e623e4a0",
+          "claim_id": "p04:claim:504feda0ef78714f1eb6",
+          "kind": "source_lineage",
+          "dimension_ids": [],
+          "question": "Does the source lineage within m07 connect this temperature content to the summary in parent claim p04:claim:b7ac71fe2611a2025b9e, rather than only to another source or an intermediary's calculation?",
+          "decision_impact": "Determines whether the content's provenance preserves its parent attribution.",
+          "match_policy": "semantic_constraint",
+          "routes": [
+            "lineage",
+            "world"
+          ],
+          "gate": "provenance"
+        },
+        {
+          "id": "p04:probe:ce6ac8cfb34bd5d15db2",
+          "claim_id": "p04:claim:b7ac71fe2611a2025b9e",
+          "kind": "source_lineage",
+          "dimension_ids": [],
+          "question": "What source lineage within m07 supports the attribution to the specified NOAA summary, and does it distinguish that summary's reporting from intermediary commentary?",
+          "decision_impact": "Determines whether the reporting attribution is traceable within the permitted evidence.",
+          "match_policy": "semantic_constraint",
+          "routes": [
+            "lineage",
+            "world"
+          ],
+          "gate": "provenance"
+        }
+      ],
+      "notes": "The comparison is preserved within attributed_content. Attribution with an embedded comparison is unsupported by this version's flat logic schema.\nThe embedded comparison is retained in the attributed predicate, quantity and baseline. No comparison_relation probe is emitted because the contract logic is attribution."
+    },
+    "critic": {
+      "schema_version": "decision-probe-v2",
+      "target_signature": "40740f0a861dd7f6dd4d98ac45e84e1a348c9a12107f72a6dee99cbda9714733",
+      "plan_sha256": "6c2afaada769731083273649e14fd155e9d1458b1fc8345b570eca0b0ac56d82",
+      "stage": "critic",
+      "logic": "attribution",
+      "claims": [
+        {
+          "id": "p04:claim:b7ac71fe2611a2025b9e",
+          "statement": "NOAA's January 10, 2025 annual climate summary made the reporting act stated in the target.",
+          "anchor": {
+            "start": 0,
+            "end": 60,
+            "quote": "NOAA's January 10, 2025 annual climate summary reported that"
+          },
+          "role": "attribution",
+          "dimensions": [
+            {
+              "id": "p04:dimension:685f3d3d4a8149c1d2d3",
+              "kind": "entity_identity",
+              "anchor": {
+                "start": 0,
+                "end": 4,
+                "quote": "NOAA"
+              }
+            },
+            {
+              "id": "p04:dimension:50556c48327394cee947",
+              "kind": "subject",
+              "anchor": {
+                "start": 0,
+                "end": 46,
+                "quote": "NOAA's January 10, 2025 annual climate summary"
+              }
+            },
+            {
+              "id": "p04:dimension:9f6e80460669caae68bf",
+              "kind": "time",
+              "anchor": {
+                "start": 7,
+                "end": 23,
+                "quote": "January 10, 2025"
+              }
+            },
+            {
+              "id": "p04:dimension:37018fdb15d947dd7445",
+              "kind": "predicate",
+              "anchor": {
+                "start": 47,
+                "end": 55,
+                "quote": "reported"
+              }
+            }
+          ],
+          "parent_claim_id": null
+        },
+        {
+          "id": "p04:claim:504feda0ef78714f1eb6",
+          "statement": "The global surface temperature in 2024 exceeded the 1850–1900 average by 1.29°C.",
+          "anchor": {
+            "start": 61,
+            "end": 138,
+            "quote": "the global surface temperature in 2024 was 1.29°C above the 1850–1900 average"
+          },
+          "role": "attributed_content",
+          "dimensions": [
+            {
+              "id": "p04:dimension:81e911f43d97a2aca594",
+              "kind": "subject",
+              "anchor": {
+                "start": 61,
+                "end": 91,
+                "quote": "the global surface temperature"
+              }
+            },
+            {
+              "id": "p04:dimension:cd3824007f570494cf09",
+              "kind": "time",
+              "anchor": {
+                "start": 95,
+                "end": 99,
+                "quote": "2024"
+              }
+            },
+            {
+              "id": "p04:dimension:7e94ca2bb6d6f66feb3c",
+              "kind": "predicate",
+              "anchor": {
+                "start": 100,
+                "end": 138,
+                "quote": "was 1.29°C above the 1850–1900 average"
+              }
+            },
+            {
+              "id": "p04:dimension:f1291f1a38c4d07637d1",
+              "kind": "quantity_unit",
+              "anchor": {
+                "start": 104,
+                "end": 110,
+                "quote": "1.29°C"
+              }
+            },
+            {
+              "id": "p04:dimension:521965858ad164777a12",
+              "kind": "baseline_scope",
+              "anchor": {
+                "start": 117,
+                "end": 138,
+                "quote": "the 1850–1900 average"
+              }
+            }
+          ],
+          "parent_claim_id": "p04:claim:b7ac71fe2611a2025b9e"
+        }
+      ],
+      "probes": [
+        {
+          "id": "p04:probe:3151df8b2d2394b27db0",
+          "claim_id": "p04:claim:504feda0ef78714f1eb6",
+          "kind": "baseline_scope",
+          "dimension_ids": [
+            "p04:dimension:521965858ad164777a12"
+          ],
+          "question": "Does m07 establish that the parent summary reported this anomaly relative to \"the 1850–1900 average\" for global surface temperature, rather than another reference period or measurement scope?",
+          "decision_impact": "Determines whether the baseline belongs to the attributed result.",
+          "match_policy": "semantic_constraint",
+          "routes": [
+            "atoms",
+            "evidence",
+            "world"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p04:probe:190666875b5158282ffb",
+          "claim_id": "p04:claim:504feda0ef78714f1eb6",
+          "kind": "quantity_unit",
+          "dimension_ids": [
+            "p04:dimension:f1291f1a38c4d07637d1"
+          ],
+          "question": "Does m07 establish that the parent summary reported \"1.29°C\" as the amount above the stated baseline, rather than as an absolute temperature or a quantity using another unit?",
+          "decision_impact": "Determines whether the attributed magnitude and unit match.",
+          "match_policy": "semantic_constraint",
+          "routes": [
+            "atoms",
+            "evidence",
+            "world"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p04:probe:379b545288bd9c64368f",
+          "claim_id": "p04:claim:504feda0ef78714f1eb6",
+          "kind": "semantic_core",
+          "dimension_ids": [
+            "p04:dimension:7e94ca2bb6d6f66feb3c",
+            "p04:dimension:81e911f43d97a2aca594"
+          ],
+          "question": "Does m07 establish that the summary identified in parent claim p04:claim:b7ac71fe2611a2025b9e reported that \"the global surface temperature\" \"was 1.29°C above the 1850–1900 average\", rather than merely supporting that proposition independently?",
+          "decision_impact": "Determines whether the complete temperature assertion is retained as attributed content.",
+          "match_policy": "semantic_constraint",
+          "routes": [
+            "atoms",
+            "evidence",
+            "world"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p04:probe:61ffe4305e46e623e4a0",
+          "claim_id": "p04:claim:504feda0ef78714f1eb6",
+          "kind": "source_lineage",
+          "dimension_ids": [],
+          "question": "Does the source lineage within m07 connect this temperature content to the summary in parent claim p04:claim:b7ac71fe2611a2025b9e, rather than only to another source or an intermediary's calculation?",
+          "decision_impact": "Determines whether the content's provenance preserves its parent attribution.",
+          "match_policy": "semantic_constraint",
+          "routes": [
+            "lineage",
+            "world"
+          ],
+          "gate": "provenance"
+        },
+        {
+          "id": "p04:probe:49d9da07be5111988d4a",
+          "claim_id": "p04:claim:504feda0ef78714f1eb6",
+          "kind": "time_boundary",
+          "dimension_ids": [
+            "p04:dimension:cd3824007f570494cf09"
+          ],
+          "question": "Does m07 establish that the parent summary attributed this global surface temperature result to the year \"2024\", rather than a different year or a partial-year period?",
+          "decision_impact": "Determines whether the attributed result covers the asserted year.",
+          "match_policy": "semantic_constraint",
+          "routes": [
+            "atoms",
+            "evidence",
+            "world"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p04:probe:e61febd185dbd5c0ab44",
+          "claim_id": "p04:claim:b7ac71fe2611a2025b9e",
+          "kind": "entity_identity",
+          "dimension_ids": [
+            "p04:dimension:685f3d3d4a8149c1d2d3"
+          ],
+          "question": "Does m07 identify the reporting organization as the referent of \"NOAA\", through an exact mention, alias, unambiguous description or anaphora rather than necessarily identical wording?",
+          "decision_impact": "Determines whether the attribution identifies the correct organization.",
+          "match_policy": "same_referent",
+          "routes": [
+            "atoms",
+            "evidence",
+            "world"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p04:probe:709a6ca74f1480fc8381",
+          "claim_id": "p04:claim:b7ac71fe2611a2025b9e",
+          "kind": "semantic_core",
+          "dimension_ids": [
+            "p04:dimension:37018fdb15d947dd7445",
+            "p04:dimension:50556c48327394cee947"
+          ],
+          "question": "Does m07 establish that \"NOAA's January 10, 2025 annual climate summary\" performed the reporting act expressed by \"reported\"?",
+          "decision_impact": "Determines whether the asserted reporting act is supported.",
+          "match_policy": "semantic_constraint",
+          "routes": [
+            "atoms",
+            "evidence",
+            "world"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p04:probe:ce6ac8cfb34bd5d15db2",
+          "claim_id": "p04:claim:b7ac71fe2611a2025b9e",
+          "kind": "source_lineage",
+          "dimension_ids": [],
+          "question": "What source lineage within m07 supports the attribution to the specified NOAA summary, and does it distinguish that summary's reporting from intermediary commentary?",
+          "decision_impact": "Determines whether the reporting attribution is traceable within the permitted evidence.",
+          "match_policy": "semantic_constraint",
+          "routes": [
+            "lineage",
+            "world"
+          ],
+          "gate": "provenance"
+        },
+        {
+          "id": "p04:probe:8ecaf99feea564cafdce",
+          "claim_id": "p04:claim:b7ac71fe2611a2025b9e",
+          "kind": "time_boundary",
+          "dimension_ids": [
+            "p04:dimension:9f6e80460669caae68bf"
+          ],
+          "question": "Does m07 establish \"January 10, 2025\" as the date of the attributed annual climate summary, rather than another event or document?",
+          "decision_impact": "Determines whether the reporting date is correctly bound.",
+          "match_policy": "semantic_constraint",
+          "routes": [
+            "atoms",
+            "evidence",
+            "world"
+          ],
+          "gate": "always"
+        }
+      ],
+      "notes": "The comparison is preserved within attributed_content. Attribution with an embedded comparison is unsupported by this version's flat logic schema.\nThe embedded comparison is retained in the attributed predicate, quantity and baseline. No comparison_relation probe is emitted because the contract logic is attribution."
+    },
+    "evidence": {
+      "schema_version": "decision-probe-v2",
+      "target_signature": "40740f0a861dd7f6dd4d98ac45e84e1a348c9a12107f72a6dee99cbda9714733",
+      "plan_sha256": "6c2afaada769731083273649e14fd155e9d1458b1fc8345b570eca0b0ac56d82",
+      "stage": "evidence",
+      "logic": "attribution",
+      "claims": [
+        {
+          "id": "p04:claim:b7ac71fe2611a2025b9e",
+          "statement": "NOAA's January 10, 2025 annual climate summary made the reporting act stated in the target.",
+          "anchor": {
+            "start": 0,
+            "end": 60,
+            "quote": "NOAA's January 10, 2025 annual climate summary reported that"
+          },
+          "role": "attribution",
+          "dimensions": [
+            {
+              "id": "p04:dimension:685f3d3d4a8149c1d2d3",
+              "kind": "entity_identity",
+              "anchor": {
+                "start": 0,
+                "end": 4,
+                "quote": "NOAA"
+              }
+            },
+            {
+              "id": "p04:dimension:50556c48327394cee947",
+              "kind": "subject",
+              "anchor": {
+                "start": 0,
+                "end": 46,
+                "quote": "NOAA's January 10, 2025 annual climate summary"
+              }
+            },
+            {
+              "id": "p04:dimension:9f6e80460669caae68bf",
+              "kind": "time",
+              "anchor": {
+                "start": 7,
+                "end": 23,
+                "quote": "January 10, 2025"
+              }
+            },
+            {
+              "id": "p04:dimension:37018fdb15d947dd7445",
+              "kind": "predicate",
+              "anchor": {
+                "start": 47,
+                "end": 55,
+                "quote": "reported"
+              }
+            }
+          ],
+          "parent_claim_id": null
+        },
+        {
+          "id": "p04:claim:504feda0ef78714f1eb6",
+          "statement": "The global surface temperature in 2024 exceeded the 1850–1900 average by 1.29°C.",
+          "anchor": {
+            "start": 61,
+            "end": 138,
+            "quote": "the global surface temperature in 2024 was 1.29°C above the 1850–1900 average"
+          },
+          "role": "attributed_content",
+          "dimensions": [
+            {
+              "id": "p04:dimension:81e911f43d97a2aca594",
+              "kind": "subject",
+              "anchor": {
+                "start": 61,
+                "end": 91,
+                "quote": "the global surface temperature"
+              }
+            },
+            {
+              "id": "p04:dimension:cd3824007f570494cf09",
+              "kind": "time",
+              "anchor": {
+                "start": 95,
+                "end": 99,
+                "quote": "2024"
+              }
+            },
+            {
+              "id": "p04:dimension:7e94ca2bb6d6f66feb3c",
+              "kind": "predicate",
+              "anchor": {
+                "start": 100,
+                "end": 138,
+                "quote": "was 1.29°C above the 1850–1900 average"
+              }
+            },
+            {
+              "id": "p04:dimension:f1291f1a38c4d07637d1",
+              "kind": "quantity_unit",
+              "anchor": {
+                "start": 104,
+                "end": 110,
+                "quote": "1.29°C"
+              }
+            },
+            {
+              "id": "p04:dimension:521965858ad164777a12",
+              "kind": "baseline_scope",
+              "anchor": {
+                "start": 117,
+                "end": 138,
+                "quote": "the 1850–1900 average"
+              }
+            }
+          ],
+          "parent_claim_id": "p04:claim:b7ac71fe2611a2025b9e"
+        }
+      ],
+      "probes": [
+        {
+          "id": "p04:probe:3151df8b2d2394b27db0",
+          "claim_id": "p04:claim:504feda0ef78714f1eb6",
+          "kind": "baseline_scope",
+          "dimension_ids": [
+            "p04:dimension:521965858ad164777a12"
+          ],
+          "question": "Does m07 establish that the parent summary reported this anomaly relative to \"the 1850–1900 average\" for global surface temperature, rather than another reference period or measurement scope?",
+          "decision_impact": "Determines whether the baseline belongs to the attributed result.",
+          "match_policy": "semantic_constraint",
+          "routes": [
+            "atoms",
+            "evidence",
+            "world"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p04:probe:190666875b5158282ffb",
+          "claim_id": "p04:claim:504feda0ef78714f1eb6",
+          "kind": "quantity_unit",
+          "dimension_ids": [
+            "p04:dimension:f1291f1a38c4d07637d1"
+          ],
+          "question": "Does m07 establish that the parent summary reported \"1.29°C\" as the amount above the stated baseline, rather than as an absolute temperature or a quantity using another unit?",
+          "decision_impact": "Determines whether the attributed magnitude and unit match.",
+          "match_policy": "semantic_constraint",
+          "routes": [
+            "atoms",
+            "evidence",
+            "world"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p04:probe:379b545288bd9c64368f",
+          "claim_id": "p04:claim:504feda0ef78714f1eb6",
+          "kind": "semantic_core",
+          "dimension_ids": [
+            "p04:dimension:7e94ca2bb6d6f66feb3c",
+            "p04:dimension:81e911f43d97a2aca594"
+          ],
+          "question": "Does m07 establish that the summary identified in parent claim p04:claim:b7ac71fe2611a2025b9e reported that \"the global surface temperature\" \"was 1.29°C above the 1850–1900 average\", rather than merely supporting that proposition independently?",
+          "decision_impact": "Determines whether the complete temperature assertion is retained as attributed content.",
+          "match_policy": "semantic_constraint",
+          "routes": [
+            "atoms",
+            "evidence",
+            "world"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p04:probe:49d9da07be5111988d4a",
+          "claim_id": "p04:claim:504feda0ef78714f1eb6",
+          "kind": "time_boundary",
+          "dimension_ids": [
+            "p04:dimension:cd3824007f570494cf09"
+          ],
+          "question": "Does m07 establish that the parent summary attributed this global surface temperature result to the year \"2024\", rather than a different year or a partial-year period?",
+          "decision_impact": "Determines whether the attributed result covers the asserted year.",
+          "match_policy": "semantic_constraint",
+          "routes": [
+            "atoms",
+            "evidence",
+            "world"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p04:probe:e61febd185dbd5c0ab44",
+          "claim_id": "p04:claim:b7ac71fe2611a2025b9e",
+          "kind": "entity_identity",
+          "dimension_ids": [
+            "p04:dimension:685f3d3d4a8149c1d2d3"
+          ],
+          "question": "Does m07 identify the reporting organization as the referent of \"NOAA\", through an exact mention, alias, unambiguous description or anaphora rather than necessarily identical wording?",
+          "decision_impact": "Determines whether the attribution identifies the correct organization.",
+          "match_policy": "same_referent",
+          "routes": [
+            "atoms",
+            "evidence",
+            "world"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p04:probe:709a6ca74f1480fc8381",
+          "claim_id": "p04:claim:b7ac71fe2611a2025b9e",
+          "kind": "semantic_core",
+          "dimension_ids": [
+            "p04:dimension:37018fdb15d947dd7445",
+            "p04:dimension:50556c48327394cee947"
+          ],
+          "question": "Does m07 establish that \"NOAA's January 10, 2025 annual climate summary\" performed the reporting act expressed by \"reported\"?",
+          "decision_impact": "Determines whether the asserted reporting act is supported.",
+          "match_policy": "semantic_constraint",
+          "routes": [
+            "atoms",
+            "evidence",
+            "world"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p04:probe:8ecaf99feea564cafdce",
+          "claim_id": "p04:claim:b7ac71fe2611a2025b9e",
+          "kind": "time_boundary",
+          "dimension_ids": [
+            "p04:dimension:9f6e80460669caae68bf"
+          ],
+          "question": "Does m07 establish \"January 10, 2025\" as the date of the attributed annual climate summary, rather than another event or document?",
+          "decision_impact": "Determines whether the reporting date is correctly bound.",
+          "match_policy": "semantic_constraint",
+          "routes": [
+            "atoms",
+            "evidence",
+            "world"
+          ],
+          "gate": "always"
+        }
+      ],
+      "notes": "The comparison is preserved within attributed_content. Attribution with an embedded comparison is unsupported by this version's flat logic schema.\nThe embedded comparison is retained in the attributed predicate, quantity and baseline. No comparison_relation probe is emitted because the contract logic is attribution."
+    },
+    "world": {
+      "schema_version": "decision-probe-v2",
+      "target_signature": "40740f0a861dd7f6dd4d98ac45e84e1a348c9a12107f72a6dee99cbda9714733",
+      "plan_sha256": "6c2afaada769731083273649e14fd155e9d1458b1fc8345b570eca0b0ac56d82",
+      "stage": "world",
+      "logic": "attribution",
+      "claims": [
+        {
+          "id": "p04:claim:b7ac71fe2611a2025b9e",
+          "statement": "NOAA's January 10, 2025 annual climate summary made the reporting act stated in the target.",
+          "anchor": {
+            "start": 0,
+            "end": 60,
+            "quote": "NOAA's January 10, 2025 annual climate summary reported that"
+          },
+          "role": "attribution",
+          "dimensions": [
+            {
+              "id": "p04:dimension:685f3d3d4a8149c1d2d3",
+              "kind": "entity_identity",
+              "anchor": {
+                "start": 0,
+                "end": 4,
+                "quote": "NOAA"
+              }
+            },
+            {
+              "id": "p04:dimension:50556c48327394cee947",
+              "kind": "subject",
+              "anchor": {
+                "start": 0,
+                "end": 46,
+                "quote": "NOAA's January 10, 2025 annual climate summary"
+              }
+            },
+            {
+              "id": "p04:dimension:9f6e80460669caae68bf",
+              "kind": "time",
+              "anchor": {
+                "start": 7,
+                "end": 23,
+                "quote": "January 10, 2025"
+              }
+            },
+            {
+              "id": "p04:dimension:37018fdb15d947dd7445",
+              "kind": "predicate",
+              "anchor": {
+                "start": 47,
+                "end": 55,
+                "quote": "reported"
+              }
+            }
+          ],
+          "parent_claim_id": null
+        },
+        {
+          "id": "p04:claim:504feda0ef78714f1eb6",
+          "statement": "The global surface temperature in 2024 exceeded the 1850–1900 average by 1.29°C.",
+          "anchor": {
+            "start": 61,
+            "end": 138,
+            "quote": "the global surface temperature in 2024 was 1.29°C above the 1850–1900 average"
+          },
+          "role": "attributed_content",
+          "dimensions": [
+            {
+              "id": "p04:dimension:81e911f43d97a2aca594",
+              "kind": "subject",
+              "anchor": {
+                "start": 61,
+                "end": 91,
+                "quote": "the global surface temperature"
+              }
+            },
+            {
+              "id": "p04:dimension:cd3824007f570494cf09",
+              "kind": "time",
+              "anchor": {
+                "start": 95,
+                "end": 99,
+                "quote": "2024"
+              }
+            },
+            {
+              "id": "p04:dimension:7e94ca2bb6d6f66feb3c",
+              "kind": "predicate",
+              "anchor": {
+                "start": 100,
+                "end": 138,
+                "quote": "was 1.29°C above the 1850–1900 average"
+              }
+            },
+            {
+              "id": "p04:dimension:f1291f1a38c4d07637d1",
+              "kind": "quantity_unit",
+              "anchor": {
+                "start": 104,
+                "end": 110,
+                "quote": "1.29°C"
+              }
+            },
+            {
+              "id": "p04:dimension:521965858ad164777a12",
+              "kind": "baseline_scope",
+              "anchor": {
+                "start": 117,
+                "end": 138,
+                "quote": "the 1850–1900 average"
+              }
+            }
+          ],
+          "parent_claim_id": "p04:claim:b7ac71fe2611a2025b9e"
+        }
+      ],
+      "probes": [
+        {
+          "id": "p04:probe:3151df8b2d2394b27db0",
+          "claim_id": "p04:claim:504feda0ef78714f1eb6",
+          "kind": "baseline_scope",
+          "dimension_ids": [
+            "p04:dimension:521965858ad164777a12"
+          ],
+          "question": "Does m07 establish that the parent summary reported this anomaly relative to \"the 1850–1900 average\" for global surface temperature, rather than another reference period or measurement scope?",
+          "decision_impact": "Determines whether the baseline belongs to the attributed result.",
+          "match_policy": "semantic_constraint",
+          "routes": [
+            "atoms",
+            "evidence",
+            "world"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p04:probe:190666875b5158282ffb",
+          "claim_id": "p04:claim:504feda0ef78714f1eb6",
+          "kind": "quantity_unit",
+          "dimension_ids": [
+            "p04:dimension:f1291f1a38c4d07637d1"
+          ],
+          "question": "Does m07 establish that the parent summary reported \"1.29°C\" as the amount above the stated baseline, rather than as an absolute temperature or a quantity using another unit?",
+          "decision_impact": "Determines whether the attributed magnitude and unit match.",
+          "match_policy": "semantic_constraint",
+          "routes": [
+            "atoms",
+            "evidence",
+            "world"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p04:probe:379b545288bd9c64368f",
+          "claim_id": "p04:claim:504feda0ef78714f1eb6",
+          "kind": "semantic_core",
+          "dimension_ids": [
+            "p04:dimension:7e94ca2bb6d6f66feb3c",
+            "p04:dimension:81e911f43d97a2aca594"
+          ],
+          "question": "Does m07 establish that the summary identified in parent claim p04:claim:b7ac71fe2611a2025b9e reported that \"the global surface temperature\" \"was 1.29°C above the 1850–1900 average\", rather than merely supporting that proposition independently?",
+          "decision_impact": "Determines whether the complete temperature assertion is retained as attributed content.",
+          "match_policy": "semantic_constraint",
+          "routes": [
+            "atoms",
+            "evidence",
+            "world"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p04:probe:61ffe4305e46e623e4a0",
+          "claim_id": "p04:claim:504feda0ef78714f1eb6",
+          "kind": "source_lineage",
+          "dimension_ids": [],
+          "question": "Does the source lineage within m07 connect this temperature content to the summary in parent claim p04:claim:b7ac71fe2611a2025b9e, rather than only to another source or an intermediary's calculation?",
+          "decision_impact": "Determines whether the content's provenance preserves its parent attribution.",
+          "match_policy": "semantic_constraint",
+          "routes": [
+            "lineage",
+            "world"
+          ],
+          "gate": "provenance"
+        },
+        {
+          "id": "p04:probe:49d9da07be5111988d4a",
+          "claim_id": "p04:claim:504feda0ef78714f1eb6",
+          "kind": "time_boundary",
+          "dimension_ids": [
+            "p04:dimension:cd3824007f570494cf09"
+          ],
+          "question": "Does m07 establish that the parent summary attributed this global surface temperature result to the year \"2024\", rather than a different year or a partial-year period?",
+          "decision_impact": "Determines whether the attributed result covers the asserted year.",
+          "match_policy": "semantic_constraint",
+          "routes": [
+            "atoms",
+            "evidence",
+            "world"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p04:probe:e61febd185dbd5c0ab44",
+          "claim_id": "p04:claim:b7ac71fe2611a2025b9e",
+          "kind": "entity_identity",
+          "dimension_ids": [
+            "p04:dimension:685f3d3d4a8149c1d2d3"
+          ],
+          "question": "Does m07 identify the reporting organization as the referent of \"NOAA\", through an exact mention, alias, unambiguous description or anaphora rather than necessarily identical wording?",
+          "decision_impact": "Determines whether the attribution identifies the correct organization.",
+          "match_policy": "same_referent",
+          "routes": [
+            "atoms",
+            "evidence",
+            "world"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p04:probe:709a6ca74f1480fc8381",
+          "claim_id": "p04:claim:b7ac71fe2611a2025b9e",
+          "kind": "semantic_core",
+          "dimension_ids": [
+            "p04:dimension:37018fdb15d947dd7445",
+            "p04:dimension:50556c48327394cee947"
+          ],
+          "question": "Does m07 establish that \"NOAA's January 10, 2025 annual climate summary\" performed the reporting act expressed by \"reported\"?",
+          "decision_impact": "Determines whether the asserted reporting act is supported.",
+          "match_policy": "semantic_constraint",
+          "routes": [
+            "atoms",
+            "evidence",
+            "world"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p04:probe:ce6ac8cfb34bd5d15db2",
+          "claim_id": "p04:claim:b7ac71fe2611a2025b9e",
+          "kind": "source_lineage",
+          "dimension_ids": [],
+          "question": "What source lineage within m07 supports the attribution to the specified NOAA summary, and does it distinguish that summary's reporting from intermediary commentary?",
+          "decision_impact": "Determines whether the reporting attribution is traceable within the permitted evidence.",
+          "match_policy": "semantic_constraint",
+          "routes": [
+            "lineage",
+            "world"
+          ],
+          "gate": "provenance"
+        },
+        {
+          "id": "p04:probe:8ecaf99feea564cafdce",
+          "claim_id": "p04:claim:b7ac71fe2611a2025b9e",
+          "kind": "time_boundary",
+          "dimension_ids": [
+            "p04:dimension:9f6e80460669caae68bf"
+          ],
+          "question": "Does m07 establish \"January 10, 2025\" as the date of the attributed annual climate summary, rather than another event or document?",
+          "decision_impact": "Determines whether the reporting date is correctly bound.",
+          "match_policy": "semantic_constraint",
+          "routes": [
+            "atoms",
+            "evidence",
+            "world"
+          ],
+          "gate": "always"
+        }
+      ],
+      "notes": "The comparison is preserved within attributed_content. Attribution with an embedded comparison is unsupported by this version's flat logic schema.\nThe embedded comparison is retained in the attributed predicate, quantity and baseline. No comparison_relation probe is emitted because the contract logic is attribution."
+    }
+  }
+}

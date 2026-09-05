@@ -1,0 +1,68 @@
+[
+  {
+    "round": 1,
+    "kind": "fixed_corpus_development_reanalysis",
+    "tasks": [
+      {
+        "id": "origin:p06",
+        "question": "Find the producing record and evidenced lineage for: Living organisms exist in the ocean beneath Europa's ice.",
+        "stage": "provenance",
+        "dimension": "auto",
+        "blocking": true,
+        "target_id": null,
+        "basis": [],
+        "decision_impact": "",
+        "action": "search",
+        "locator": null,
+        "probe_id": null
+      }
+    ],
+    "returned": [
+      "m10",
+      "m11"
+    ]
+  },
+  {
+    "round": 2,
+    "kind": "fixed_corpus_development_reanalysis",
+    "tasks": [
+      {
+        "id": "origin:p06",
+        "question": "Find the producing record and evidenced lineage for: Living organisms exist in the ocean beneath Europa's ice.",
+        "stage": "provenance",
+        "dimension": "auto",
+        "blocking": true,
+        "target_id": null,
+        "basis": [],
+        "decision_impact": "",
+        "action": "search",
+        "locator": null,
+        "probe_id": null
+      },
+      {
+        "id": "m10:upstream:a5da232f71c6003464aa",
+        "question": "Locate the explicitly cited upstream: NASA’s Galileo mission",
+        "stage": "provenance",
+        "dimension": "provenance",
+        "blocking": true,
+        "target_id": "p06",
+        "basis": [
+          {
+            "version_id": "m10",
+            "start": 269,
+            "end": 451,
+            "quote": "Information from NASA’s Galileo mission in the 1990s showed strong evidence that under Europa’s ice lies an enormous, salty ocean with more water than all of Earth’s oceans combined."
+          }
+        ],
+        "decision_impact": "Locating the underlying Galileo records could establish the provenance of the ocean evidence and reveal shared dependence with other accounts. This attribution does not establish that living organisms exist there.",
+        "action": "search",
+        "locator": "NASA’s Galileo mission",
+        "probe_id": null
+      }
+    ],
+    "returned": [
+      "m10",
+      "m11"
+    ]
+  }
+]

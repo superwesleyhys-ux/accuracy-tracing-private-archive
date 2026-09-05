@@ -1,0 +1,2181 @@
+{
+  "schema_version": "decision-probe-v2",
+  "target_signature": "110ef8c839645123f23279ade1df2ffddb982e42584b8f5b3ca80b2e7ad1eb87",
+  "logic": "attribution",
+  "claims": [
+    {
+      "id": "p01:claim:b081f16c6e0c02d52946",
+      "statement": "NASA's October 11, 2022 announcement reported the attributed content.",
+      "anchor": {
+        "start": 0,
+        "end": 50,
+        "quote": "NASA's October 11, 2022 announcement reported that"
+      },
+      "role": "attribution",
+      "dimensions": [
+        {
+          "id": "p01:dimension:bdf13ce9618a887e1407",
+          "kind": "entity_identity",
+          "anchor": {
+            "start": 0,
+            "end": 4,
+            "quote": "NASA"
+          }
+        },
+        {
+          "id": "p01:dimension:87f64bd6d214aa5c0bee",
+          "kind": "subject",
+          "anchor": {
+            "start": 0,
+            "end": 36,
+            "quote": "NASA's October 11, 2022 announcement"
+          }
+        },
+        {
+          "id": "p01:dimension:e98e6d6357e256043dd2",
+          "kind": "time",
+          "anchor": {
+            "start": 7,
+            "end": 23,
+            "quote": "October 11, 2022"
+          }
+        },
+        {
+          "id": "p01:dimension:10f214252aac760f66d2",
+          "kind": "predicate",
+          "anchor": {
+            "start": 37,
+            "end": 45,
+            "quote": "reported"
+          }
+        }
+      ],
+      "parent_claim_id": null
+    },
+    {
+      "id": "p01:claim:ff07c7f8de47d16378fc",
+      "statement": "DART shortened Dimorphos' orbital period around Didymos by 32 minutes.",
+      "anchor": {
+        "start": 51,
+        "end": 120,
+        "quote": "DART shortened Dimorphos' orbital period around Didymos by 32 minutes"
+      },
+      "role": "attributed_content",
+      "dimensions": [
+        {
+          "id": "p01:dimension:0905773683e9015c91dd",
+          "kind": "entity_identity",
+          "anchor": {
+            "start": 51,
+            "end": 55,
+            "quote": "DART"
+          }
+        },
+        {
+          "id": "p01:dimension:3130de2b4926779904d6",
+          "kind": "subject",
+          "anchor": {
+            "start": 51,
+            "end": 55,
+            "quote": "DART"
+          }
+        },
+        {
+          "id": "p01:dimension:03c2066fdeae0f45e605",
+          "kind": "predicate",
+          "anchor": {
+            "start": 56,
+            "end": 65,
+            "quote": "shortened"
+          }
+        },
+        {
+          "id": "p01:dimension:f05d59ac0486ed75805b",
+          "kind": "entity_identity",
+          "anchor": {
+            "start": 66,
+            "end": 75,
+            "quote": "Dimorphos"
+          }
+        },
+        {
+          "id": "p01:dimension:2e2c50566dbaf301c55f",
+          "kind": "baseline_scope",
+          "anchor": {
+            "start": 66,
+            "end": 106,
+            "quote": "Dimorphos' orbital period around Didymos"
+          }
+        },
+        {
+          "id": "p01:dimension:b4a84c57dc634e3b8c42",
+          "kind": "entity_identity",
+          "anchor": {
+            "start": 99,
+            "end": 106,
+            "quote": "Didymos"
+          }
+        },
+        {
+          "id": "p01:dimension:d4a3f0e60aa5e9af2c40",
+          "kind": "quantity_unit",
+          "anchor": {
+            "start": 110,
+            "end": 120,
+            "quote": "32 minutes"
+          }
+        }
+      ],
+      "parent_claim_id": "p01:claim:b081f16c6e0c02d52946"
+    },
+    {
+      "id": "p01:claim:61303a12ec2eb2aa7a0e",
+      "statement": "The reported 32-minute shortening has an uncertainty of approximately plus or minus 2 minutes.",
+      "anchor": {
+        "start": 122,
+        "end": 182,
+        "quote": "with an uncertainty of approximately plus or minus 2 minutes"
+      },
+      "role": "attributed_content",
+      "dimensions": [
+        {
+          "id": "p01:dimension:238a440f252096807ac1",
+          "kind": "subject",
+          "anchor": {
+            "start": 127,
+            "end": 141,
+            "quote": "an uncertainty"
+          }
+        },
+        {
+          "id": "p01:dimension:1b3e537fa6054ec363ab",
+          "kind": "predicate",
+          "anchor": {
+            "start": 142,
+            "end": 182,
+            "quote": "of approximately plus or minus 2 minutes"
+          }
+        },
+        {
+          "id": "p01:dimension:06e72e0a6276c2510a38",
+          "kind": "quantity_unit",
+          "anchor": {
+            "start": 145,
+            "end": 182,
+            "quote": "approximately plus or minus 2 minutes"
+          }
+        }
+      ],
+      "parent_claim_id": "p01:claim:b081f16c6e0c02d52946"
+    }
+  ],
+  "probes": [
+    {
+      "id": "p01:probe:3956e30f36061f8d206b",
+      "claim_id": "p01:claim:61303a12ec2eb2aa7a0e",
+      "kind": "quantity_unit",
+      "dimension_ids": [
+        "p01:dimension:06e72e0a6276c2510a38"
+      ],
+      "question": "Did the parent announcement give the shortening's uncertainty as approximately plus or minus 2 minutes, preserving the approximation, both directions and minute unit?",
+      "decision_impact": "Required to establish the complete attributed uncertainty value.",
+      "match_policy": "semantic_constraint",
+      "routes": [
+        "atoms",
+        "evidence",
+        "world"
+      ],
+      "gate": "always"
+    },
+    {
+      "id": "p01:probe:4887c0600bef266b20d7",
+      "claim_id": "p01:claim:61303a12ec2eb2aa7a0e",
+      "kind": "semantic_core",
+      "dimension_ids": [
+        "p01:dimension:1b3e537fa6054ec363ab",
+        "p01:dimension:238a440f252096807ac1"
+      ],
+      "question": "Did the parent NASA announcement report that the 32-minute shortening had an uncertainty of approximately plus or minus 2 minutes?",
+      "decision_impact": "Required to bind the attributed uncertainty to the reported shortening.",
+      "match_policy": "semantic_constraint",
+      "routes": [
+        "atoms",
+        "evidence",
+        "world"
+      ],
+      "gate": "always"
+    },
+    {
+      "id": "p01:probe:324d04f70453e3344038",
+      "claim_id": "p01:claim:61303a12ec2eb2aa7a0e",
+      "kind": "source_lineage",
+      "dimension_ids": [],
+      "question": "Within m02, what source lineage connects this uncertainty to the parent NASA announcement's reported shortening, rather than to a separate estimate or later report?",
+      "decision_impact": "Required to establish the uncertainty's attribution and attachment.",
+      "match_policy": "semantic_constraint",
+      "routes": [
+        "lineage",
+        "world"
+      ],
+      "gate": "provenance"
+    },
+    {
+      "id": "p01:probe:38ee54b4cf5a0c3cf529",
+      "claim_id": "p01:claim:b081f16c6e0c02d52946",
+      "kind": "entity_identity",
+      "dimension_ids": [
+        "p01:dimension:bdf13ce9618a887e1407"
+      ],
+      "question": "Is the announcing entity NASA, through an exact mention, alias, unambiguous description or anaphora?",
+      "decision_impact": "A different announcing entity would not support this attribution.",
+      "match_policy": "same_referent",
+      "routes": [
+        "atoms",
+        "evidence",
+        "world"
+      ],
+      "gate": "always"
+    },
+    {
+      "id": "p01:probe:ae6b572c7be344f0a062",
+      "claim_id": "p01:claim:b081f16c6e0c02d52946",
+      "kind": "semantic_core",
+      "dimension_ids": [
+        "p01:dimension:10f214252aac760f66d2",
+        "p01:dimension:87f64bd6d214aa5c0bee"
+      ],
+      "question": "Does the scoped evidence establish that NASA's announcement reported the specified shortening and its uncertainty?",
+      "decision_impact": "Required to establish the parent attribution.",
+      "match_policy": "semantic_constraint",
+      "routes": [
+        "atoms",
+        "evidence",
+        "world"
+      ],
+      "gate": "always"
+    },
+    {
+      "id": "p01:probe:1afaefad36d018cc69c0",
+      "claim_id": "p01:claim:b081f16c6e0c02d52946",
+      "kind": "source_lineage",
+      "dimension_ids": [],
+      "question": "Within m02, what identifiable source lineage supports attribution of the specified content to NASA's October 11, 2022 announcement?",
+      "decision_impact": "Required to trace support for the attribution within the permitted evidence.",
+      "match_policy": "semantic_constraint",
+      "routes": [
+        "lineage",
+        "world"
+      ],
+      "gate": "provenance"
+    },
+    {
+      "id": "p01:probe:762378dcc4144a3dd17d",
+      "claim_id": "p01:claim:b081f16c6e0c02d52946",
+      "kind": "time_boundary",
+      "dimension_ids": [
+        "p01:dimension:e98e6d6357e256043dd2"
+      ],
+      "question": "Does October 11, 2022 identify the announcement's date, rather than merely the date of the shortening or another event?",
+      "decision_impact": "Required to establish the date in its reporting scope.",
+      "match_policy": "semantic_constraint",
+      "routes": [
+        "atoms",
+        "evidence",
+        "world"
+      ],
+      "gate": "always"
+    },
+    {
+      "id": "p01:probe:7344160edb428182a5f8",
+      "claim_id": "p01:claim:ff07c7f8de47d16378fc",
+      "kind": "baseline_scope",
+      "dimension_ids": [
+        "p01:dimension:2e2c50566dbaf301c55f"
+      ],
+      "question": "Did the parent announcement report a reduction from the prior value of Dimorphos' orbital period around Didymos, rather than a change in another period or orbital property?",
+      "decision_impact": "Required to establish the quantity's orbital scope and change baseline.",
+      "match_policy": "semantic_constraint",
+      "routes": [
+        "atoms",
+        "evidence",
+        "world"
+      ],
+      "gate": "always"
+    },
+    {
+      "id": "p01:probe:5ea4941d0f7be40afae8",
+      "claim_id": "p01:claim:ff07c7f8de47d16378fc",
+      "kind": "entity_identity",
+      "dimension_ids": [
+        "p01:dimension:0905773683e9015c91dd"
+      ],
+      "question": "In the content attributed to the parent announcement, is the shortening actor DART, through an exact mention, alias, unambiguous description or anaphora?",
+      "decision_impact": "A different actor would not support the attributed content.",
+      "match_policy": "same_referent",
+      "routes": [
+        "atoms",
+        "evidence",
+        "world"
+      ],
+      "gate": "always"
+    },
+    {
+      "id": "p01:probe:5dbd4a4cc1a9730a3b45",
+      "claim_id": "p01:claim:ff07c7f8de47d16378fc",
+      "kind": "entity_identity",
+      "dimension_ids": [
+        "p01:dimension:b4a84c57dc634e3b8c42"
+      ],
+      "question": "In the content attributed to the parent announcement, is the body orbited by Dimorphos Didymos, through an exact mention, alias, unambiguous description or anaphora?",
+      "decision_impact": "Required to identify the reported orbital referent.",
+      "match_policy": "same_referent",
+      "routes": [
+        "atoms",
+        "evidence",
+        "world"
+      ],
+      "gate": "always"
+    },
+    {
+      "id": "p01:probe:025b3f5f2c2cef54505f",
+      "claim_id": "p01:claim:ff07c7f8de47d16378fc",
+      "kind": "entity_identity",
+      "dimension_ids": [
+        "p01:dimension:f05d59ac0486ed75805b"
+      ],
+      "question": "In the content attributed to the parent announcement, is the body whose orbital period shortened Dimorphos, through an exact mention, alias, unambiguous description or anaphora?",
+      "decision_impact": "Required to identify the body whose period was reportedly changed.",
+      "match_policy": "same_referent",
+      "routes": [
+        "atoms",
+        "evidence",
+        "world"
+      ],
+      "gate": "always"
+    },
+    {
+      "id": "p01:probe:465cfaae7a1842d16439",
+      "claim_id": "p01:claim:ff07c7f8de47d16378fc",
+      "kind": "quantity_unit",
+      "dimension_ids": [
+        "p01:dimension:d4a3f0e60aa5e9af2c40"
+      ],
+      "question": "Did the parent announcement report 32 minutes as the amount of shortening, rather than the resulting orbital period or another measurement?",
+      "decision_impact": "Required to establish the attributed magnitude and unit.",
+      "match_policy": "semantic_constraint",
+      "routes": [
+        "atoms",
+        "evidence",
+        "world"
+      ],
+      "gate": "always"
+    },
+    {
+      "id": "p01:probe:c10a40d421d1eb7e8e9f",
+      "claim_id": "p01:claim:ff07c7f8de47d16378fc",
+      "kind": "semantic_core",
+      "dimension_ids": [
+        "p01:dimension:03c2066fdeae0f45e605",
+        "p01:dimension:3130de2b4926779904d6"
+      ],
+      "question": "Did the parent NASA announcement report that DART shortened Dimorphos' orbital period around Didymos, rather than lengthened it or merely observed a change?",
+      "decision_impact": "Required to establish the attributed actor, action and direction of change.",
+      "match_policy": "semantic_constraint",
+      "routes": [
+        "atoms",
+        "evidence",
+        "world"
+      ],
+      "gate": "always"
+    },
+    {
+      "id": "p01:probe:8a5c62dbd14a97cda32b",
+      "claim_id": "p01:claim:ff07c7f8de47d16378fc",
+      "kind": "source_lineage",
+      "dimension_ids": [],
+      "question": "Within m02, what source lineage connects this reported 32-minute shortening to the parent NASA announcement, rather than only supporting its independent truth?",
+      "decision_impact": "Required to retain the parent attribution scope.",
+      "match_policy": "semantic_constraint",
+      "routes": [
+        "lineage",
+        "world"
+      ],
+      "gate": "provenance"
+    }
+  ],
+  "notes": "The attributed content is a conjunction of the shortening and its uncertainty. The date qualifies the reporting announcement, not the shortening.\nThe contract retains the announcement date, attributed shortening and attached uncertainty. Attribution logic does not authorize a causal or comparison relation probe.",
+  "sha256": "d61f46d0075d93d13c9e15ed124867c0e6463433d97a0733764a569ea6e52b19",
+  "projections": {
+    "atoms": {
+      "schema_version": "decision-probe-v2",
+      "target_signature": "110ef8c839645123f23279ade1df2ffddb982e42584b8f5b3ca80b2e7ad1eb87",
+      "plan_sha256": "d61f46d0075d93d13c9e15ed124867c0e6463433d97a0733764a569ea6e52b19",
+      "stage": "atoms",
+      "logic": "attribution",
+      "claims": [
+        {
+          "id": "p01:claim:b081f16c6e0c02d52946",
+          "statement": "NASA's October 11, 2022 announcement reported the attributed content.",
+          "anchor": {
+            "start": 0,
+            "end": 50,
+            "quote": "NASA's October 11, 2022 announcement reported that"
+          },
+          "role": "attribution",
+          "dimensions": [
+            {
+              "id": "p01:dimension:bdf13ce9618a887e1407",
+              "kind": "entity_identity",
+              "anchor": {
+                "start": 0,
+                "end": 4,
+                "quote": "NASA"
+              }
+            },
+            {
+              "id": "p01:dimension:87f64bd6d214aa5c0bee",
+              "kind": "subject",
+              "anchor": {
+                "start": 0,
+                "end": 36,
+                "quote": "NASA's October 11, 2022 announcement"
+              }
+            },
+            {
+              "id": "p01:dimension:e98e6d6357e256043dd2",
+              "kind": "time",
+              "anchor": {
+                "start": 7,
+                "end": 23,
+                "quote": "October 11, 2022"
+              }
+            },
+            {
+              "id": "p01:dimension:10f214252aac760f66d2",
+              "kind": "predicate",
+              "anchor": {
+                "start": 37,
+                "end": 45,
+                "quote": "reported"
+              }
+            }
+          ],
+          "parent_claim_id": null
+        },
+        {
+          "id": "p01:claim:ff07c7f8de47d16378fc",
+          "statement": "DART shortened Dimorphos' orbital period around Didymos by 32 minutes.",
+          "anchor": {
+            "start": 51,
+            "end": 120,
+            "quote": "DART shortened Dimorphos' orbital period around Didymos by 32 minutes"
+          },
+          "role": "attributed_content",
+          "dimensions": [
+            {
+              "id": "p01:dimension:0905773683e9015c91dd",
+              "kind": "entity_identity",
+              "anchor": {
+                "start": 51,
+                "end": 55,
+                "quote": "DART"
+              }
+            },
+            {
+              "id": "p01:dimension:3130de2b4926779904d6",
+              "kind": "subject",
+              "anchor": {
+                "start": 51,
+                "end": 55,
+                "quote": "DART"
+              }
+            },
+            {
+              "id": "p01:dimension:03c2066fdeae0f45e605",
+              "kind": "predicate",
+              "anchor": {
+                "start": 56,
+                "end": 65,
+                "quote": "shortened"
+              }
+            },
+            {
+              "id": "p01:dimension:f05d59ac0486ed75805b",
+              "kind": "entity_identity",
+              "anchor": {
+                "start": 66,
+                "end": 75,
+                "quote": "Dimorphos"
+              }
+            },
+            {
+              "id": "p01:dimension:2e2c50566dbaf301c55f",
+              "kind": "baseline_scope",
+              "anchor": {
+                "start": 66,
+                "end": 106,
+                "quote": "Dimorphos' orbital period around Didymos"
+              }
+            },
+            {
+              "id": "p01:dimension:b4a84c57dc634e3b8c42",
+              "kind": "entity_identity",
+              "anchor": {
+                "start": 99,
+                "end": 106,
+                "quote": "Didymos"
+              }
+            },
+            {
+              "id": "p01:dimension:d4a3f0e60aa5e9af2c40",
+              "kind": "quantity_unit",
+              "anchor": {
+                "start": 110,
+                "end": 120,
+                "quote": "32 minutes"
+              }
+            }
+          ],
+          "parent_claim_id": "p01:claim:b081f16c6e0c02d52946"
+        },
+        {
+          "id": "p01:claim:61303a12ec2eb2aa7a0e",
+          "statement": "The reported 32-minute shortening has an uncertainty of approximately plus or minus 2 minutes.",
+          "anchor": {
+            "start": 122,
+            "end": 182,
+            "quote": "with an uncertainty of approximately plus or minus 2 minutes"
+          },
+          "role": "attributed_content",
+          "dimensions": [
+            {
+              "id": "p01:dimension:238a440f252096807ac1",
+              "kind": "subject",
+              "anchor": {
+                "start": 127,
+                "end": 141,
+                "quote": "an uncertainty"
+              }
+            },
+            {
+              "id": "p01:dimension:1b3e537fa6054ec363ab",
+              "kind": "predicate",
+              "anchor": {
+                "start": 142,
+                "end": 182,
+                "quote": "of approximately plus or minus 2 minutes"
+              }
+            },
+            {
+              "id": "p01:dimension:06e72e0a6276c2510a38",
+              "kind": "quantity_unit",
+              "anchor": {
+                "start": 145,
+                "end": 182,
+                "quote": "approximately plus or minus 2 minutes"
+              }
+            }
+          ],
+          "parent_claim_id": "p01:claim:b081f16c6e0c02d52946"
+        }
+      ],
+      "probes": [
+        {
+          "id": "p01:probe:3956e30f36061f8d206b",
+          "claim_id": "p01:claim:61303a12ec2eb2aa7a0e",
+          "kind": "quantity_unit",
+          "dimension_ids": [
+            "p01:dimension:06e72e0a6276c2510a38"
+          ],
+          "question": "Did the parent announcement give the shortening's uncertainty as approximately plus or minus 2 minutes, preserving the approximation, both directions and minute unit?",
+          "decision_impact": "Required to establish the complete attributed uncertainty value.",
+          "match_policy": "semantic_constraint",
+          "routes": [
+            "atoms",
+            "evidence",
+            "world"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p01:probe:4887c0600bef266b20d7",
+          "claim_id": "p01:claim:61303a12ec2eb2aa7a0e",
+          "kind": "semantic_core",
+          "dimension_ids": [
+            "p01:dimension:1b3e537fa6054ec363ab",
+            "p01:dimension:238a440f252096807ac1"
+          ],
+          "question": "Did the parent NASA announcement report that the 32-minute shortening had an uncertainty of approximately plus or minus 2 minutes?",
+          "decision_impact": "Required to bind the attributed uncertainty to the reported shortening.",
+          "match_policy": "semantic_constraint",
+          "routes": [
+            "atoms",
+            "evidence",
+            "world"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p01:probe:38ee54b4cf5a0c3cf529",
+          "claim_id": "p01:claim:b081f16c6e0c02d52946",
+          "kind": "entity_identity",
+          "dimension_ids": [
+            "p01:dimension:bdf13ce9618a887e1407"
+          ],
+          "question": "Is the announcing entity NASA, through an exact mention, alias, unambiguous description or anaphora?",
+          "decision_impact": "A different announcing entity would not support this attribution.",
+          "match_policy": "same_referent",
+          "routes": [
+            "atoms",
+            "evidence",
+            "world"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p01:probe:ae6b572c7be344f0a062",
+          "claim_id": "p01:claim:b081f16c6e0c02d52946",
+          "kind": "semantic_core",
+          "dimension_ids": [
+            "p01:dimension:10f214252aac760f66d2",
+            "p01:dimension:87f64bd6d214aa5c0bee"
+          ],
+          "question": "Does the scoped evidence establish that NASA's announcement reported the specified shortening and its uncertainty?",
+          "decision_impact": "Required to establish the parent attribution.",
+          "match_policy": "semantic_constraint",
+          "routes": [
+            "atoms",
+            "evidence",
+            "world"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p01:probe:762378dcc4144a3dd17d",
+          "claim_id": "p01:claim:b081f16c6e0c02d52946",
+          "kind": "time_boundary",
+          "dimension_ids": [
+            "p01:dimension:e98e6d6357e256043dd2"
+          ],
+          "question": "Does October 11, 2022 identify the announcement's date, rather than merely the date of the shortening or another event?",
+          "decision_impact": "Required to establish the date in its reporting scope.",
+          "match_policy": "semantic_constraint",
+          "routes": [
+            "atoms",
+            "evidence",
+            "world"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p01:probe:7344160edb428182a5f8",
+          "claim_id": "p01:claim:ff07c7f8de47d16378fc",
+          "kind": "baseline_scope",
+          "dimension_ids": [
+            "p01:dimension:2e2c50566dbaf301c55f"
+          ],
+          "question": "Did the parent announcement report a reduction from the prior value of Dimorphos' orbital period around Didymos, rather than a change in another period or orbital property?",
+          "decision_impact": "Required to establish the quantity's orbital scope and change baseline.",
+          "match_policy": "semantic_constraint",
+          "routes": [
+            "atoms",
+            "evidence",
+            "world"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p01:probe:5ea4941d0f7be40afae8",
+          "claim_id": "p01:claim:ff07c7f8de47d16378fc",
+          "kind": "entity_identity",
+          "dimension_ids": [
+            "p01:dimension:0905773683e9015c91dd"
+          ],
+          "question": "In the content attributed to the parent announcement, is the shortening actor DART, through an exact mention, alias, unambiguous description or anaphora?",
+          "decision_impact": "A different actor would not support the attributed content.",
+          "match_policy": "same_referent",
+          "routes": [
+            "atoms",
+            "evidence",
+            "world"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p01:probe:5dbd4a4cc1a9730a3b45",
+          "claim_id": "p01:claim:ff07c7f8de47d16378fc",
+          "kind": "entity_identity",
+          "dimension_ids": [
+            "p01:dimension:b4a84c57dc634e3b8c42"
+          ],
+          "question": "In the content attributed to the parent announcement, is the body orbited by Dimorphos Didymos, through an exact mention, alias, unambiguous description or anaphora?",
+          "decision_impact": "Required to identify the reported orbital referent.",
+          "match_policy": "same_referent",
+          "routes": [
+            "atoms",
+            "evidence",
+            "world"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p01:probe:025b3f5f2c2cef54505f",
+          "claim_id": "p01:claim:ff07c7f8de47d16378fc",
+          "kind": "entity_identity",
+          "dimension_ids": [
+            "p01:dimension:f05d59ac0486ed75805b"
+          ],
+          "question": "In the content attributed to the parent announcement, is the body whose orbital period shortened Dimorphos, through an exact mention, alias, unambiguous description or anaphora?",
+          "decision_impact": "Required to identify the body whose period was reportedly changed.",
+          "match_policy": "same_referent",
+          "routes": [
+            "atoms",
+            "evidence",
+            "world"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p01:probe:465cfaae7a1842d16439",
+          "claim_id": "p01:claim:ff07c7f8de47d16378fc",
+          "kind": "quantity_unit",
+          "dimension_ids": [
+            "p01:dimension:d4a3f0e60aa5e9af2c40"
+          ],
+          "question": "Did the parent announcement report 32 minutes as the amount of shortening, rather than the resulting orbital period or another measurement?",
+          "decision_impact": "Required to establish the attributed magnitude and unit.",
+          "match_policy": "semantic_constraint",
+          "routes": [
+            "atoms",
+            "evidence",
+            "world"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p01:probe:c10a40d421d1eb7e8e9f",
+          "claim_id": "p01:claim:ff07c7f8de47d16378fc",
+          "kind": "semantic_core",
+          "dimension_ids": [
+            "p01:dimension:03c2066fdeae0f45e605",
+            "p01:dimension:3130de2b4926779904d6"
+          ],
+          "question": "Did the parent NASA announcement report that DART shortened Dimorphos' orbital period around Didymos, rather than lengthened it or merely observed a change?",
+          "decision_impact": "Required to establish the attributed actor, action and direction of change.",
+          "match_policy": "semantic_constraint",
+          "routes": [
+            "atoms",
+            "evidence",
+            "world"
+          ],
+          "gate": "always"
+        }
+      ],
+      "notes": "The attributed content is a conjunction of the shortening and its uncertainty. The date qualifies the reporting announcement, not the shortening.\nThe contract retains the announcement date, attributed shortening and attached uncertainty. Attribution logic does not authorize a causal or comparison relation probe."
+    },
+    "lineage": {
+      "schema_version": "decision-probe-v2",
+      "target_signature": "110ef8c839645123f23279ade1df2ffddb982e42584b8f5b3ca80b2e7ad1eb87",
+      "plan_sha256": "d61f46d0075d93d13c9e15ed124867c0e6463433d97a0733764a569ea6e52b19",
+      "stage": "lineage",
+      "logic": "attribution",
+      "claims": [
+        {
+          "id": "p01:claim:b081f16c6e0c02d52946",
+          "statement": "NASA's October 11, 2022 announcement reported the attributed content.",
+          "anchor": {
+            "start": 0,
+            "end": 50,
+            "quote": "NASA's October 11, 2022 announcement reported that"
+          },
+          "role": "attribution",
+          "dimensions": [
+            {
+              "id": "p01:dimension:bdf13ce9618a887e1407",
+              "kind": "entity_identity",
+              "anchor": {
+                "start": 0,
+                "end": 4,
+                "quote": "NASA"
+              }
+            },
+            {
+              "id": "p01:dimension:87f64bd6d214aa5c0bee",
+              "kind": "subject",
+              "anchor": {
+                "start": 0,
+                "end": 36,
+                "quote": "NASA's October 11, 2022 announcement"
+              }
+            },
+            {
+              "id": "p01:dimension:e98e6d6357e256043dd2",
+              "kind": "time",
+              "anchor": {
+                "start": 7,
+                "end": 23,
+                "quote": "October 11, 2022"
+              }
+            },
+            {
+              "id": "p01:dimension:10f214252aac760f66d2",
+              "kind": "predicate",
+              "anchor": {
+                "start": 37,
+                "end": 45,
+                "quote": "reported"
+              }
+            }
+          ],
+          "parent_claim_id": null
+        },
+        {
+          "id": "p01:claim:ff07c7f8de47d16378fc",
+          "statement": "DART shortened Dimorphos' orbital period around Didymos by 32 minutes.",
+          "anchor": {
+            "start": 51,
+            "end": 120,
+            "quote": "DART shortened Dimorphos' orbital period around Didymos by 32 minutes"
+          },
+          "role": "attributed_content",
+          "dimensions": [
+            {
+              "id": "p01:dimension:0905773683e9015c91dd",
+              "kind": "entity_identity",
+              "anchor": {
+                "start": 51,
+                "end": 55,
+                "quote": "DART"
+              }
+            },
+            {
+              "id": "p01:dimension:3130de2b4926779904d6",
+              "kind": "subject",
+              "anchor": {
+                "start": 51,
+                "end": 55,
+                "quote": "DART"
+              }
+            },
+            {
+              "id": "p01:dimension:03c2066fdeae0f45e605",
+              "kind": "predicate",
+              "anchor": {
+                "start": 56,
+                "end": 65,
+                "quote": "shortened"
+              }
+            },
+            {
+              "id": "p01:dimension:f05d59ac0486ed75805b",
+              "kind": "entity_identity",
+              "anchor": {
+                "start": 66,
+                "end": 75,
+                "quote": "Dimorphos"
+              }
+            },
+            {
+              "id": "p01:dimension:2e2c50566dbaf301c55f",
+              "kind": "baseline_scope",
+              "anchor": {
+                "start": 66,
+                "end": 106,
+                "quote": "Dimorphos' orbital period around Didymos"
+              }
+            },
+            {
+              "id": "p01:dimension:b4a84c57dc634e3b8c42",
+              "kind": "entity_identity",
+              "anchor": {
+                "start": 99,
+                "end": 106,
+                "quote": "Didymos"
+              }
+            },
+            {
+              "id": "p01:dimension:d4a3f0e60aa5e9af2c40",
+              "kind": "quantity_unit",
+              "anchor": {
+                "start": 110,
+                "end": 120,
+                "quote": "32 minutes"
+              }
+            }
+          ],
+          "parent_claim_id": "p01:claim:b081f16c6e0c02d52946"
+        },
+        {
+          "id": "p01:claim:61303a12ec2eb2aa7a0e",
+          "statement": "The reported 32-minute shortening has an uncertainty of approximately plus or minus 2 minutes.",
+          "anchor": {
+            "start": 122,
+            "end": 182,
+            "quote": "with an uncertainty of approximately plus or minus 2 minutes"
+          },
+          "role": "attributed_content",
+          "dimensions": [
+            {
+              "id": "p01:dimension:238a440f252096807ac1",
+              "kind": "subject",
+              "anchor": {
+                "start": 127,
+                "end": 141,
+                "quote": "an uncertainty"
+              }
+            },
+            {
+              "id": "p01:dimension:1b3e537fa6054ec363ab",
+              "kind": "predicate",
+              "anchor": {
+                "start": 142,
+                "end": 182,
+                "quote": "of approximately plus or minus 2 minutes"
+              }
+            },
+            {
+              "id": "p01:dimension:06e72e0a6276c2510a38",
+              "kind": "quantity_unit",
+              "anchor": {
+                "start": 145,
+                "end": 182,
+                "quote": "approximately plus or minus 2 minutes"
+              }
+            }
+          ],
+          "parent_claim_id": "p01:claim:b081f16c6e0c02d52946"
+        }
+      ],
+      "probes": [
+        {
+          "id": "p01:probe:324d04f70453e3344038",
+          "claim_id": "p01:claim:61303a12ec2eb2aa7a0e",
+          "kind": "source_lineage",
+          "dimension_ids": [],
+          "question": "Within m02, what source lineage connects this uncertainty to the parent NASA announcement's reported shortening, rather than to a separate estimate or later report?",
+          "decision_impact": "Required to establish the uncertainty's attribution and attachment.",
+          "match_policy": "semantic_constraint",
+          "routes": [
+            "lineage",
+            "world"
+          ],
+          "gate": "provenance"
+        },
+        {
+          "id": "p01:probe:1afaefad36d018cc69c0",
+          "claim_id": "p01:claim:b081f16c6e0c02d52946",
+          "kind": "source_lineage",
+          "dimension_ids": [],
+          "question": "Within m02, what identifiable source lineage supports attribution of the specified content to NASA's October 11, 2022 announcement?",
+          "decision_impact": "Required to trace support for the attribution within the permitted evidence.",
+          "match_policy": "semantic_constraint",
+          "routes": [
+            "lineage",
+            "world"
+          ],
+          "gate": "provenance"
+        },
+        {
+          "id": "p01:probe:8a5c62dbd14a97cda32b",
+          "claim_id": "p01:claim:ff07c7f8de47d16378fc",
+          "kind": "source_lineage",
+          "dimension_ids": [],
+          "question": "Within m02, what source lineage connects this reported 32-minute shortening to the parent NASA announcement, rather than only supporting its independent truth?",
+          "decision_impact": "Required to retain the parent attribution scope.",
+          "match_policy": "semantic_constraint",
+          "routes": [
+            "lineage",
+            "world"
+          ],
+          "gate": "provenance"
+        }
+      ],
+      "notes": "The attributed content is a conjunction of the shortening and its uncertainty. The date qualifies the reporting announcement, not the shortening.\nThe contract retains the announcement date, attributed shortening and attached uncertainty. Attribution logic does not authorize a causal or comparison relation probe."
+    },
+    "critic": {
+      "schema_version": "decision-probe-v2",
+      "target_signature": "110ef8c839645123f23279ade1df2ffddb982e42584b8f5b3ca80b2e7ad1eb87",
+      "plan_sha256": "d61f46d0075d93d13c9e15ed124867c0e6463433d97a0733764a569ea6e52b19",
+      "stage": "critic",
+      "logic": "attribution",
+      "claims": [
+        {
+          "id": "p01:claim:b081f16c6e0c02d52946",
+          "statement": "NASA's October 11, 2022 announcement reported the attributed content.",
+          "anchor": {
+            "start": 0,
+            "end": 50,
+            "quote": "NASA's October 11, 2022 announcement reported that"
+          },
+          "role": "attribution",
+          "dimensions": [
+            {
+              "id": "p01:dimension:bdf13ce9618a887e1407",
+              "kind": "entity_identity",
+              "anchor": {
+                "start": 0,
+                "end": 4,
+                "quote": "NASA"
+              }
+            },
+            {
+              "id": "p01:dimension:87f64bd6d214aa5c0bee",
+              "kind": "subject",
+              "anchor": {
+                "start": 0,
+                "end": 36,
+                "quote": "NASA's October 11, 2022 announcement"
+              }
+            },
+            {
+              "id": "p01:dimension:e98e6d6357e256043dd2",
+              "kind": "time",
+              "anchor": {
+                "start": 7,
+                "end": 23,
+                "quote": "October 11, 2022"
+              }
+            },
+            {
+              "id": "p01:dimension:10f214252aac760f66d2",
+              "kind": "predicate",
+              "anchor": {
+                "start": 37,
+                "end": 45,
+                "quote": "reported"
+              }
+            }
+          ],
+          "parent_claim_id": null
+        },
+        {
+          "id": "p01:claim:ff07c7f8de47d16378fc",
+          "statement": "DART shortened Dimorphos' orbital period around Didymos by 32 minutes.",
+          "anchor": {
+            "start": 51,
+            "end": 120,
+            "quote": "DART shortened Dimorphos' orbital period around Didymos by 32 minutes"
+          },
+          "role": "attributed_content",
+          "dimensions": [
+            {
+              "id": "p01:dimension:0905773683e9015c91dd",
+              "kind": "entity_identity",
+              "anchor": {
+                "start": 51,
+                "end": 55,
+                "quote": "DART"
+              }
+            },
+            {
+              "id": "p01:dimension:3130de2b4926779904d6",
+              "kind": "subject",
+              "anchor": {
+                "start": 51,
+                "end": 55,
+                "quote": "DART"
+              }
+            },
+            {
+              "id": "p01:dimension:03c2066fdeae0f45e605",
+              "kind": "predicate",
+              "anchor": {
+                "start": 56,
+                "end": 65,
+                "quote": "shortened"
+              }
+            },
+            {
+              "id": "p01:dimension:f05d59ac0486ed75805b",
+              "kind": "entity_identity",
+              "anchor": {
+                "start": 66,
+                "end": 75,
+                "quote": "Dimorphos"
+              }
+            },
+            {
+              "id": "p01:dimension:2e2c50566dbaf301c55f",
+              "kind": "baseline_scope",
+              "anchor": {
+                "start": 66,
+                "end": 106,
+                "quote": "Dimorphos' orbital period around Didymos"
+              }
+            },
+            {
+              "id": "p01:dimension:b4a84c57dc634e3b8c42",
+              "kind": "entity_identity",
+              "anchor": {
+                "start": 99,
+                "end": 106,
+                "quote": "Didymos"
+              }
+            },
+            {
+              "id": "p01:dimension:d4a3f0e60aa5e9af2c40",
+              "kind": "quantity_unit",
+              "anchor": {
+                "start": 110,
+                "end": 120,
+                "quote": "32 minutes"
+              }
+            }
+          ],
+          "parent_claim_id": "p01:claim:b081f16c6e0c02d52946"
+        },
+        {
+          "id": "p01:claim:61303a12ec2eb2aa7a0e",
+          "statement": "The reported 32-minute shortening has an uncertainty of approximately plus or minus 2 minutes.",
+          "anchor": {
+            "start": 122,
+            "end": 182,
+            "quote": "with an uncertainty of approximately plus or minus 2 minutes"
+          },
+          "role": "attributed_content",
+          "dimensions": [
+            {
+              "id": "p01:dimension:238a440f252096807ac1",
+              "kind": "subject",
+              "anchor": {
+                "start": 127,
+                "end": 141,
+                "quote": "an uncertainty"
+              }
+            },
+            {
+              "id": "p01:dimension:1b3e537fa6054ec363ab",
+              "kind": "predicate",
+              "anchor": {
+                "start": 142,
+                "end": 182,
+                "quote": "of approximately plus or minus 2 minutes"
+              }
+            },
+            {
+              "id": "p01:dimension:06e72e0a6276c2510a38",
+              "kind": "quantity_unit",
+              "anchor": {
+                "start": 145,
+                "end": 182,
+                "quote": "approximately plus or minus 2 minutes"
+              }
+            }
+          ],
+          "parent_claim_id": "p01:claim:b081f16c6e0c02d52946"
+        }
+      ],
+      "probes": [
+        {
+          "id": "p01:probe:3956e30f36061f8d206b",
+          "claim_id": "p01:claim:61303a12ec2eb2aa7a0e",
+          "kind": "quantity_unit",
+          "dimension_ids": [
+            "p01:dimension:06e72e0a6276c2510a38"
+          ],
+          "question": "Did the parent announcement give the shortening's uncertainty as approximately plus or minus 2 minutes, preserving the approximation, both directions and minute unit?",
+          "decision_impact": "Required to establish the complete attributed uncertainty value.",
+          "match_policy": "semantic_constraint",
+          "routes": [
+            "atoms",
+            "evidence",
+            "world"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p01:probe:4887c0600bef266b20d7",
+          "claim_id": "p01:claim:61303a12ec2eb2aa7a0e",
+          "kind": "semantic_core",
+          "dimension_ids": [
+            "p01:dimension:1b3e537fa6054ec363ab",
+            "p01:dimension:238a440f252096807ac1"
+          ],
+          "question": "Did the parent NASA announcement report that the 32-minute shortening had an uncertainty of approximately plus or minus 2 minutes?",
+          "decision_impact": "Required to bind the attributed uncertainty to the reported shortening.",
+          "match_policy": "semantic_constraint",
+          "routes": [
+            "atoms",
+            "evidence",
+            "world"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p01:probe:324d04f70453e3344038",
+          "claim_id": "p01:claim:61303a12ec2eb2aa7a0e",
+          "kind": "source_lineage",
+          "dimension_ids": [],
+          "question": "Within m02, what source lineage connects this uncertainty to the parent NASA announcement's reported shortening, rather than to a separate estimate or later report?",
+          "decision_impact": "Required to establish the uncertainty's attribution and attachment.",
+          "match_policy": "semantic_constraint",
+          "routes": [
+            "lineage",
+            "world"
+          ],
+          "gate": "provenance"
+        },
+        {
+          "id": "p01:probe:38ee54b4cf5a0c3cf529",
+          "claim_id": "p01:claim:b081f16c6e0c02d52946",
+          "kind": "entity_identity",
+          "dimension_ids": [
+            "p01:dimension:bdf13ce9618a887e1407"
+          ],
+          "question": "Is the announcing entity NASA, through an exact mention, alias, unambiguous description or anaphora?",
+          "decision_impact": "A different announcing entity would not support this attribution.",
+          "match_policy": "same_referent",
+          "routes": [
+            "atoms",
+            "evidence",
+            "world"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p01:probe:ae6b572c7be344f0a062",
+          "claim_id": "p01:claim:b081f16c6e0c02d52946",
+          "kind": "semantic_core",
+          "dimension_ids": [
+            "p01:dimension:10f214252aac760f66d2",
+            "p01:dimension:87f64bd6d214aa5c0bee"
+          ],
+          "question": "Does the scoped evidence establish that NASA's announcement reported the specified shortening and its uncertainty?",
+          "decision_impact": "Required to establish the parent attribution.",
+          "match_policy": "semantic_constraint",
+          "routes": [
+            "atoms",
+            "evidence",
+            "world"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p01:probe:1afaefad36d018cc69c0",
+          "claim_id": "p01:claim:b081f16c6e0c02d52946",
+          "kind": "source_lineage",
+          "dimension_ids": [],
+          "question": "Within m02, what identifiable source lineage supports attribution of the specified content to NASA's October 11, 2022 announcement?",
+          "decision_impact": "Required to trace support for the attribution within the permitted evidence.",
+          "match_policy": "semantic_constraint",
+          "routes": [
+            "lineage",
+            "world"
+          ],
+          "gate": "provenance"
+        },
+        {
+          "id": "p01:probe:762378dcc4144a3dd17d",
+          "claim_id": "p01:claim:b081f16c6e0c02d52946",
+          "kind": "time_boundary",
+          "dimension_ids": [
+            "p01:dimension:e98e6d6357e256043dd2"
+          ],
+          "question": "Does October 11, 2022 identify the announcement's date, rather than merely the date of the shortening or another event?",
+          "decision_impact": "Required to establish the date in its reporting scope.",
+          "match_policy": "semantic_constraint",
+          "routes": [
+            "atoms",
+            "evidence",
+            "world"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p01:probe:7344160edb428182a5f8",
+          "claim_id": "p01:claim:ff07c7f8de47d16378fc",
+          "kind": "baseline_scope",
+          "dimension_ids": [
+            "p01:dimension:2e2c50566dbaf301c55f"
+          ],
+          "question": "Did the parent announcement report a reduction from the prior value of Dimorphos' orbital period around Didymos, rather than a change in another period or orbital property?",
+          "decision_impact": "Required to establish the quantity's orbital scope and change baseline.",
+          "match_policy": "semantic_constraint",
+          "routes": [
+            "atoms",
+            "evidence",
+            "world"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p01:probe:5ea4941d0f7be40afae8",
+          "claim_id": "p01:claim:ff07c7f8de47d16378fc",
+          "kind": "entity_identity",
+          "dimension_ids": [
+            "p01:dimension:0905773683e9015c91dd"
+          ],
+          "question": "In the content attributed to the parent announcement, is the shortening actor DART, through an exact mention, alias, unambiguous description or anaphora?",
+          "decision_impact": "A different actor would not support the attributed content.",
+          "match_policy": "same_referent",
+          "routes": [
+            "atoms",
+            "evidence",
+            "world"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p01:probe:5dbd4a4cc1a9730a3b45",
+          "claim_id": "p01:claim:ff07c7f8de47d16378fc",
+          "kind": "entity_identity",
+          "dimension_ids": [
+            "p01:dimension:b4a84c57dc634e3b8c42"
+          ],
+          "question": "In the content attributed to the parent announcement, is the body orbited by Dimorphos Didymos, through an exact mention, alias, unambiguous description or anaphora?",
+          "decision_impact": "Required to identify the reported orbital referent.",
+          "match_policy": "same_referent",
+          "routes": [
+            "atoms",
+            "evidence",
+            "world"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p01:probe:025b3f5f2c2cef54505f",
+          "claim_id": "p01:claim:ff07c7f8de47d16378fc",
+          "kind": "entity_identity",
+          "dimension_ids": [
+            "p01:dimension:f05d59ac0486ed75805b"
+          ],
+          "question": "In the content attributed to the parent announcement, is the body whose orbital period shortened Dimorphos, through an exact mention, alias, unambiguous description or anaphora?",
+          "decision_impact": "Required to identify the body whose period was reportedly changed.",
+          "match_policy": "same_referent",
+          "routes": [
+            "atoms",
+            "evidence",
+            "world"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p01:probe:465cfaae7a1842d16439",
+          "claim_id": "p01:claim:ff07c7f8de47d16378fc",
+          "kind": "quantity_unit",
+          "dimension_ids": [
+            "p01:dimension:d4a3f0e60aa5e9af2c40"
+          ],
+          "question": "Did the parent announcement report 32 minutes as the amount of shortening, rather than the resulting orbital period or another measurement?",
+          "decision_impact": "Required to establish the attributed magnitude and unit.",
+          "match_policy": "semantic_constraint",
+          "routes": [
+            "atoms",
+            "evidence",
+            "world"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p01:probe:c10a40d421d1eb7e8e9f",
+          "claim_id": "p01:claim:ff07c7f8de47d16378fc",
+          "kind": "semantic_core",
+          "dimension_ids": [
+            "p01:dimension:03c2066fdeae0f45e605",
+            "p01:dimension:3130de2b4926779904d6"
+          ],
+          "question": "Did the parent NASA announcement report that DART shortened Dimorphos' orbital period around Didymos, rather than lengthened it or merely observed a change?",
+          "decision_impact": "Required to establish the attributed actor, action and direction of change.",
+          "match_policy": "semantic_constraint",
+          "routes": [
+            "atoms",
+            "evidence",
+            "world"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p01:probe:8a5c62dbd14a97cda32b",
+          "claim_id": "p01:claim:ff07c7f8de47d16378fc",
+          "kind": "source_lineage",
+          "dimension_ids": [],
+          "question": "Within m02, what source lineage connects this reported 32-minute shortening to the parent NASA announcement, rather than only supporting its independent truth?",
+          "decision_impact": "Required to retain the parent attribution scope.",
+          "match_policy": "semantic_constraint",
+          "routes": [
+            "lineage",
+            "world"
+          ],
+          "gate": "provenance"
+        }
+      ],
+      "notes": "The attributed content is a conjunction of the shortening and its uncertainty. The date qualifies the reporting announcement, not the shortening.\nThe contract retains the announcement date, attributed shortening and attached uncertainty. Attribution logic does not authorize a causal or comparison relation probe."
+    },
+    "evidence": {
+      "schema_version": "decision-probe-v2",
+      "target_signature": "110ef8c839645123f23279ade1df2ffddb982e42584b8f5b3ca80b2e7ad1eb87",
+      "plan_sha256": "d61f46d0075d93d13c9e15ed124867c0e6463433d97a0733764a569ea6e52b19",
+      "stage": "evidence",
+      "logic": "attribution",
+      "claims": [
+        {
+          "id": "p01:claim:b081f16c6e0c02d52946",
+          "statement": "NASA's October 11, 2022 announcement reported the attributed content.",
+          "anchor": {
+            "start": 0,
+            "end": 50,
+            "quote": "NASA's October 11, 2022 announcement reported that"
+          },
+          "role": "attribution",
+          "dimensions": [
+            {
+              "id": "p01:dimension:bdf13ce9618a887e1407",
+              "kind": "entity_identity",
+              "anchor": {
+                "start": 0,
+                "end": 4,
+                "quote": "NASA"
+              }
+            },
+            {
+              "id": "p01:dimension:87f64bd6d214aa5c0bee",
+              "kind": "subject",
+              "anchor": {
+                "start": 0,
+                "end": 36,
+                "quote": "NASA's October 11, 2022 announcement"
+              }
+            },
+            {
+              "id": "p01:dimension:e98e6d6357e256043dd2",
+              "kind": "time",
+              "anchor": {
+                "start": 7,
+                "end": 23,
+                "quote": "October 11, 2022"
+              }
+            },
+            {
+              "id": "p01:dimension:10f214252aac760f66d2",
+              "kind": "predicate",
+              "anchor": {
+                "start": 37,
+                "end": 45,
+                "quote": "reported"
+              }
+            }
+          ],
+          "parent_claim_id": null
+        },
+        {
+          "id": "p01:claim:ff07c7f8de47d16378fc",
+          "statement": "DART shortened Dimorphos' orbital period around Didymos by 32 minutes.",
+          "anchor": {
+            "start": 51,
+            "end": 120,
+            "quote": "DART shortened Dimorphos' orbital period around Didymos by 32 minutes"
+          },
+          "role": "attributed_content",
+          "dimensions": [
+            {
+              "id": "p01:dimension:0905773683e9015c91dd",
+              "kind": "entity_identity",
+              "anchor": {
+                "start": 51,
+                "end": 55,
+                "quote": "DART"
+              }
+            },
+            {
+              "id": "p01:dimension:3130de2b4926779904d6",
+              "kind": "subject",
+              "anchor": {
+                "start": 51,
+                "end": 55,
+                "quote": "DART"
+              }
+            },
+            {
+              "id": "p01:dimension:03c2066fdeae0f45e605",
+              "kind": "predicate",
+              "anchor": {
+                "start": 56,
+                "end": 65,
+                "quote": "shortened"
+              }
+            },
+            {
+              "id": "p01:dimension:f05d59ac0486ed75805b",
+              "kind": "entity_identity",
+              "anchor": {
+                "start": 66,
+                "end": 75,
+                "quote": "Dimorphos"
+              }
+            },
+            {
+              "id": "p01:dimension:2e2c50566dbaf301c55f",
+              "kind": "baseline_scope",
+              "anchor": {
+                "start": 66,
+                "end": 106,
+                "quote": "Dimorphos' orbital period around Didymos"
+              }
+            },
+            {
+              "id": "p01:dimension:b4a84c57dc634e3b8c42",
+              "kind": "entity_identity",
+              "anchor": {
+                "start": 99,
+                "end": 106,
+                "quote": "Didymos"
+              }
+            },
+            {
+              "id": "p01:dimension:d4a3f0e60aa5e9af2c40",
+              "kind": "quantity_unit",
+              "anchor": {
+                "start": 110,
+                "end": 120,
+                "quote": "32 minutes"
+              }
+            }
+          ],
+          "parent_claim_id": "p01:claim:b081f16c6e0c02d52946"
+        },
+        {
+          "id": "p01:claim:61303a12ec2eb2aa7a0e",
+          "statement": "The reported 32-minute shortening has an uncertainty of approximately plus or minus 2 minutes.",
+          "anchor": {
+            "start": 122,
+            "end": 182,
+            "quote": "with an uncertainty of approximately plus or minus 2 minutes"
+          },
+          "role": "attributed_content",
+          "dimensions": [
+            {
+              "id": "p01:dimension:238a440f252096807ac1",
+              "kind": "subject",
+              "anchor": {
+                "start": 127,
+                "end": 141,
+                "quote": "an uncertainty"
+              }
+            },
+            {
+              "id": "p01:dimension:1b3e537fa6054ec363ab",
+              "kind": "predicate",
+              "anchor": {
+                "start": 142,
+                "end": 182,
+                "quote": "of approximately plus or minus 2 minutes"
+              }
+            },
+            {
+              "id": "p01:dimension:06e72e0a6276c2510a38",
+              "kind": "quantity_unit",
+              "anchor": {
+                "start": 145,
+                "end": 182,
+                "quote": "approximately plus or minus 2 minutes"
+              }
+            }
+          ],
+          "parent_claim_id": "p01:claim:b081f16c6e0c02d52946"
+        }
+      ],
+      "probes": [
+        {
+          "id": "p01:probe:3956e30f36061f8d206b",
+          "claim_id": "p01:claim:61303a12ec2eb2aa7a0e",
+          "kind": "quantity_unit",
+          "dimension_ids": [
+            "p01:dimension:06e72e0a6276c2510a38"
+          ],
+          "question": "Did the parent announcement give the shortening's uncertainty as approximately plus or minus 2 minutes, preserving the approximation, both directions and minute unit?",
+          "decision_impact": "Required to establish the complete attributed uncertainty value.",
+          "match_policy": "semantic_constraint",
+          "routes": [
+            "atoms",
+            "evidence",
+            "world"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p01:probe:4887c0600bef266b20d7",
+          "claim_id": "p01:claim:61303a12ec2eb2aa7a0e",
+          "kind": "semantic_core",
+          "dimension_ids": [
+            "p01:dimension:1b3e537fa6054ec363ab",
+            "p01:dimension:238a440f252096807ac1"
+          ],
+          "question": "Did the parent NASA announcement report that the 32-minute shortening had an uncertainty of approximately plus or minus 2 minutes?",
+          "decision_impact": "Required to bind the attributed uncertainty to the reported shortening.",
+          "match_policy": "semantic_constraint",
+          "routes": [
+            "atoms",
+            "evidence",
+            "world"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p01:probe:38ee54b4cf5a0c3cf529",
+          "claim_id": "p01:claim:b081f16c6e0c02d52946",
+          "kind": "entity_identity",
+          "dimension_ids": [
+            "p01:dimension:bdf13ce9618a887e1407"
+          ],
+          "question": "Is the announcing entity NASA, through an exact mention, alias, unambiguous description or anaphora?",
+          "decision_impact": "A different announcing entity would not support this attribution.",
+          "match_policy": "same_referent",
+          "routes": [
+            "atoms",
+            "evidence",
+            "world"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p01:probe:ae6b572c7be344f0a062",
+          "claim_id": "p01:claim:b081f16c6e0c02d52946",
+          "kind": "semantic_core",
+          "dimension_ids": [
+            "p01:dimension:10f214252aac760f66d2",
+            "p01:dimension:87f64bd6d214aa5c0bee"
+          ],
+          "question": "Does the scoped evidence establish that NASA's announcement reported the specified shortening and its uncertainty?",
+          "decision_impact": "Required to establish the parent attribution.",
+          "match_policy": "semantic_constraint",
+          "routes": [
+            "atoms",
+            "evidence",
+            "world"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p01:probe:762378dcc4144a3dd17d",
+          "claim_id": "p01:claim:b081f16c6e0c02d52946",
+          "kind": "time_boundary",
+          "dimension_ids": [
+            "p01:dimension:e98e6d6357e256043dd2"
+          ],
+          "question": "Does October 11, 2022 identify the announcement's date, rather than merely the date of the shortening or another event?",
+          "decision_impact": "Required to establish the date in its reporting scope.",
+          "match_policy": "semantic_constraint",
+          "routes": [
+            "atoms",
+            "evidence",
+            "world"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p01:probe:7344160edb428182a5f8",
+          "claim_id": "p01:claim:ff07c7f8de47d16378fc",
+          "kind": "baseline_scope",
+          "dimension_ids": [
+            "p01:dimension:2e2c50566dbaf301c55f"
+          ],
+          "question": "Did the parent announcement report a reduction from the prior value of Dimorphos' orbital period around Didymos, rather than a change in another period or orbital property?",
+          "decision_impact": "Required to establish the quantity's orbital scope and change baseline.",
+          "match_policy": "semantic_constraint",
+          "routes": [
+            "atoms",
+            "evidence",
+            "world"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p01:probe:5ea4941d0f7be40afae8",
+          "claim_id": "p01:claim:ff07c7f8de47d16378fc",
+          "kind": "entity_identity",
+          "dimension_ids": [
+            "p01:dimension:0905773683e9015c91dd"
+          ],
+          "question": "In the content attributed to the parent announcement, is the shortening actor DART, through an exact mention, alias, unambiguous description or anaphora?",
+          "decision_impact": "A different actor would not support the attributed content.",
+          "match_policy": "same_referent",
+          "routes": [
+            "atoms",
+            "evidence",
+            "world"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p01:probe:5dbd4a4cc1a9730a3b45",
+          "claim_id": "p01:claim:ff07c7f8de47d16378fc",
+          "kind": "entity_identity",
+          "dimension_ids": [
+            "p01:dimension:b4a84c57dc634e3b8c42"
+          ],
+          "question": "In the content attributed to the parent announcement, is the body orbited by Dimorphos Didymos, through an exact mention, alias, unambiguous description or anaphora?",
+          "decision_impact": "Required to identify the reported orbital referent.",
+          "match_policy": "same_referent",
+          "routes": [
+            "atoms",
+            "evidence",
+            "world"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p01:probe:025b3f5f2c2cef54505f",
+          "claim_id": "p01:claim:ff07c7f8de47d16378fc",
+          "kind": "entity_identity",
+          "dimension_ids": [
+            "p01:dimension:f05d59ac0486ed75805b"
+          ],
+          "question": "In the content attributed to the parent announcement, is the body whose orbital period shortened Dimorphos, through an exact mention, alias, unambiguous description or anaphora?",
+          "decision_impact": "Required to identify the body whose period was reportedly changed.",
+          "match_policy": "same_referent",
+          "routes": [
+            "atoms",
+            "evidence",
+            "world"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p01:probe:465cfaae7a1842d16439",
+          "claim_id": "p01:claim:ff07c7f8de47d16378fc",
+          "kind": "quantity_unit",
+          "dimension_ids": [
+            "p01:dimension:d4a3f0e60aa5e9af2c40"
+          ],
+          "question": "Did the parent announcement report 32 minutes as the amount of shortening, rather than the resulting orbital period or another measurement?",
+          "decision_impact": "Required to establish the attributed magnitude and unit.",
+          "match_policy": "semantic_constraint",
+          "routes": [
+            "atoms",
+            "evidence",
+            "world"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p01:probe:c10a40d421d1eb7e8e9f",
+          "claim_id": "p01:claim:ff07c7f8de47d16378fc",
+          "kind": "semantic_core",
+          "dimension_ids": [
+            "p01:dimension:03c2066fdeae0f45e605",
+            "p01:dimension:3130de2b4926779904d6"
+          ],
+          "question": "Did the parent NASA announcement report that DART shortened Dimorphos' orbital period around Didymos, rather than lengthened it or merely observed a change?",
+          "decision_impact": "Required to establish the attributed actor, action and direction of change.",
+          "match_policy": "semantic_constraint",
+          "routes": [
+            "atoms",
+            "evidence",
+            "world"
+          ],
+          "gate": "always"
+        }
+      ],
+      "notes": "The attributed content is a conjunction of the shortening and its uncertainty. The date qualifies the reporting announcement, not the shortening.\nThe contract retains the announcement date, attributed shortening and attached uncertainty. Attribution logic does not authorize a causal or comparison relation probe."
+    },
+    "world": {
+      "schema_version": "decision-probe-v2",
+      "target_signature": "110ef8c839645123f23279ade1df2ffddb982e42584b8f5b3ca80b2e7ad1eb87",
+      "plan_sha256": "d61f46d0075d93d13c9e15ed124867c0e6463433d97a0733764a569ea6e52b19",
+      "stage": "world",
+      "logic": "attribution",
+      "claims": [
+        {
+          "id": "p01:claim:b081f16c6e0c02d52946",
+          "statement": "NASA's October 11, 2022 announcement reported the attributed content.",
+          "anchor": {
+            "start": 0,
+            "end": 50,
+            "quote": "NASA's October 11, 2022 announcement reported that"
+          },
+          "role": "attribution",
+          "dimensions": [
+            {
+              "id": "p01:dimension:bdf13ce9618a887e1407",
+              "kind": "entity_identity",
+              "anchor": {
+                "start": 0,
+                "end": 4,
+                "quote": "NASA"
+              }
+            },
+            {
+              "id": "p01:dimension:87f64bd6d214aa5c0bee",
+              "kind": "subject",
+              "anchor": {
+                "start": 0,
+                "end": 36,
+                "quote": "NASA's October 11, 2022 announcement"
+              }
+            },
+            {
+              "id": "p01:dimension:e98e6d6357e256043dd2",
+              "kind": "time",
+              "anchor": {
+                "start": 7,
+                "end": 23,
+                "quote": "October 11, 2022"
+              }
+            },
+            {
+              "id": "p01:dimension:10f214252aac760f66d2",
+              "kind": "predicate",
+              "anchor": {
+                "start": 37,
+                "end": 45,
+                "quote": "reported"
+              }
+            }
+          ],
+          "parent_claim_id": null
+        },
+        {
+          "id": "p01:claim:ff07c7f8de47d16378fc",
+          "statement": "DART shortened Dimorphos' orbital period around Didymos by 32 minutes.",
+          "anchor": {
+            "start": 51,
+            "end": 120,
+            "quote": "DART shortened Dimorphos' orbital period around Didymos by 32 minutes"
+          },
+          "role": "attributed_content",
+          "dimensions": [
+            {
+              "id": "p01:dimension:0905773683e9015c91dd",
+              "kind": "entity_identity",
+              "anchor": {
+                "start": 51,
+                "end": 55,
+                "quote": "DART"
+              }
+            },
+            {
+              "id": "p01:dimension:3130de2b4926779904d6",
+              "kind": "subject",
+              "anchor": {
+                "start": 51,
+                "end": 55,
+                "quote": "DART"
+              }
+            },
+            {
+              "id": "p01:dimension:03c2066fdeae0f45e605",
+              "kind": "predicate",
+              "anchor": {
+                "start": 56,
+                "end": 65,
+                "quote": "shortened"
+              }
+            },
+            {
+              "id": "p01:dimension:f05d59ac0486ed75805b",
+              "kind": "entity_identity",
+              "anchor": {
+                "start": 66,
+                "end": 75,
+                "quote": "Dimorphos"
+              }
+            },
+            {
+              "id": "p01:dimension:2e2c50566dbaf301c55f",
+              "kind": "baseline_scope",
+              "anchor": {
+                "start": 66,
+                "end": 106,
+                "quote": "Dimorphos' orbital period around Didymos"
+              }
+            },
+            {
+              "id": "p01:dimension:b4a84c57dc634e3b8c42",
+              "kind": "entity_identity",
+              "anchor": {
+                "start": 99,
+                "end": 106,
+                "quote": "Didymos"
+              }
+            },
+            {
+              "id": "p01:dimension:d4a3f0e60aa5e9af2c40",
+              "kind": "quantity_unit",
+              "anchor": {
+                "start": 110,
+                "end": 120,
+                "quote": "32 minutes"
+              }
+            }
+          ],
+          "parent_claim_id": "p01:claim:b081f16c6e0c02d52946"
+        },
+        {
+          "id": "p01:claim:61303a12ec2eb2aa7a0e",
+          "statement": "The reported 32-minute shortening has an uncertainty of approximately plus or minus 2 minutes.",
+          "anchor": {
+            "start": 122,
+            "end": 182,
+            "quote": "with an uncertainty of approximately plus or minus 2 minutes"
+          },
+          "role": "attributed_content",
+          "dimensions": [
+            {
+              "id": "p01:dimension:238a440f252096807ac1",
+              "kind": "subject",
+              "anchor": {
+                "start": 127,
+                "end": 141,
+                "quote": "an uncertainty"
+              }
+            },
+            {
+              "id": "p01:dimension:1b3e537fa6054ec363ab",
+              "kind": "predicate",
+              "anchor": {
+                "start": 142,
+                "end": 182,
+                "quote": "of approximately plus or minus 2 minutes"
+              }
+            },
+            {
+              "id": "p01:dimension:06e72e0a6276c2510a38",
+              "kind": "quantity_unit",
+              "anchor": {
+                "start": 145,
+                "end": 182,
+                "quote": "approximately plus or minus 2 minutes"
+              }
+            }
+          ],
+          "parent_claim_id": "p01:claim:b081f16c6e0c02d52946"
+        }
+      ],
+      "probes": [
+        {
+          "id": "p01:probe:3956e30f36061f8d206b",
+          "claim_id": "p01:claim:61303a12ec2eb2aa7a0e",
+          "kind": "quantity_unit",
+          "dimension_ids": [
+            "p01:dimension:06e72e0a6276c2510a38"
+          ],
+          "question": "Did the parent announcement give the shortening's uncertainty as approximately plus or minus 2 minutes, preserving the approximation, both directions and minute unit?",
+          "decision_impact": "Required to establish the complete attributed uncertainty value.",
+          "match_policy": "semantic_constraint",
+          "routes": [
+            "atoms",
+            "evidence",
+            "world"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p01:probe:4887c0600bef266b20d7",
+          "claim_id": "p01:claim:61303a12ec2eb2aa7a0e",
+          "kind": "semantic_core",
+          "dimension_ids": [
+            "p01:dimension:1b3e537fa6054ec363ab",
+            "p01:dimension:238a440f252096807ac1"
+          ],
+          "question": "Did the parent NASA announcement report that the 32-minute shortening had an uncertainty of approximately plus or minus 2 minutes?",
+          "decision_impact": "Required to bind the attributed uncertainty to the reported shortening.",
+          "match_policy": "semantic_constraint",
+          "routes": [
+            "atoms",
+            "evidence",
+            "world"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p01:probe:324d04f70453e3344038",
+          "claim_id": "p01:claim:61303a12ec2eb2aa7a0e",
+          "kind": "source_lineage",
+          "dimension_ids": [],
+          "question": "Within m02, what source lineage connects this uncertainty to the parent NASA announcement's reported shortening, rather than to a separate estimate or later report?",
+          "decision_impact": "Required to establish the uncertainty's attribution and attachment.",
+          "match_policy": "semantic_constraint",
+          "routes": [
+            "lineage",
+            "world"
+          ],
+          "gate": "provenance"
+        },
+        {
+          "id": "p01:probe:38ee54b4cf5a0c3cf529",
+          "claim_id": "p01:claim:b081f16c6e0c02d52946",
+          "kind": "entity_identity",
+          "dimension_ids": [
+            "p01:dimension:bdf13ce9618a887e1407"
+          ],
+          "question": "Is the announcing entity NASA, through an exact mention, alias, unambiguous description or anaphora?",
+          "decision_impact": "A different announcing entity would not support this attribution.",
+          "match_policy": "same_referent",
+          "routes": [
+            "atoms",
+            "evidence",
+            "world"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p01:probe:ae6b572c7be344f0a062",
+          "claim_id": "p01:claim:b081f16c6e0c02d52946",
+          "kind": "semantic_core",
+          "dimension_ids": [
+            "p01:dimension:10f214252aac760f66d2",
+            "p01:dimension:87f64bd6d214aa5c0bee"
+          ],
+          "question": "Does the scoped evidence establish that NASA's announcement reported the specified shortening and its uncertainty?",
+          "decision_impact": "Required to establish the parent attribution.",
+          "match_policy": "semantic_constraint",
+          "routes": [
+            "atoms",
+            "evidence",
+            "world"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p01:probe:1afaefad36d018cc69c0",
+          "claim_id": "p01:claim:b081f16c6e0c02d52946",
+          "kind": "source_lineage",
+          "dimension_ids": [],
+          "question": "Within m02, what identifiable source lineage supports attribution of the specified content to NASA's October 11, 2022 announcement?",
+          "decision_impact": "Required to trace support for the attribution within the permitted evidence.",
+          "match_policy": "semantic_constraint",
+          "routes": [
+            "lineage",
+            "world"
+          ],
+          "gate": "provenance"
+        },
+        {
+          "id": "p01:probe:762378dcc4144a3dd17d",
+          "claim_id": "p01:claim:b081f16c6e0c02d52946",
+          "kind": "time_boundary",
+          "dimension_ids": [
+            "p01:dimension:e98e6d6357e256043dd2"
+          ],
+          "question": "Does October 11, 2022 identify the announcement's date, rather than merely the date of the shortening or another event?",
+          "decision_impact": "Required to establish the date in its reporting scope.",
+          "match_policy": "semantic_constraint",
+          "routes": [
+            "atoms",
+            "evidence",
+            "world"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p01:probe:7344160edb428182a5f8",
+          "claim_id": "p01:claim:ff07c7f8de47d16378fc",
+          "kind": "baseline_scope",
+          "dimension_ids": [
+            "p01:dimension:2e2c50566dbaf301c55f"
+          ],
+          "question": "Did the parent announcement report a reduction from the prior value of Dimorphos' orbital period around Didymos, rather than a change in another period or orbital property?",
+          "decision_impact": "Required to establish the quantity's orbital scope and change baseline.",
+          "match_policy": "semantic_constraint",
+          "routes": [
+            "atoms",
+            "evidence",
+            "world"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p01:probe:5ea4941d0f7be40afae8",
+          "claim_id": "p01:claim:ff07c7f8de47d16378fc",
+          "kind": "entity_identity",
+          "dimension_ids": [
+            "p01:dimension:0905773683e9015c91dd"
+          ],
+          "question": "In the content attributed to the parent announcement, is the shortening actor DART, through an exact mention, alias, unambiguous description or anaphora?",
+          "decision_impact": "A different actor would not support the attributed content.",
+          "match_policy": "same_referent",
+          "routes": [
+            "atoms",
+            "evidence",
+            "world"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p01:probe:5dbd4a4cc1a9730a3b45",
+          "claim_id": "p01:claim:ff07c7f8de47d16378fc",
+          "kind": "entity_identity",
+          "dimension_ids": [
+            "p01:dimension:b4a84c57dc634e3b8c42"
+          ],
+          "question": "In the content attributed to the parent announcement, is the body orbited by Dimorphos Didymos, through an exact mention, alias, unambiguous description or anaphora?",
+          "decision_impact": "Required to identify the reported orbital referent.",
+          "match_policy": "same_referent",
+          "routes": [
+            "atoms",
+            "evidence",
+            "world"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p01:probe:025b3f5f2c2cef54505f",
+          "claim_id": "p01:claim:ff07c7f8de47d16378fc",
+          "kind": "entity_identity",
+          "dimension_ids": [
+            "p01:dimension:f05d59ac0486ed75805b"
+          ],
+          "question": "In the content attributed to the parent announcement, is the body whose orbital period shortened Dimorphos, through an exact mention, alias, unambiguous description or anaphora?",
+          "decision_impact": "Required to identify the body whose period was reportedly changed.",
+          "match_policy": "same_referent",
+          "routes": [
+            "atoms",
+            "evidence",
+            "world"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p01:probe:465cfaae7a1842d16439",
+          "claim_id": "p01:claim:ff07c7f8de47d16378fc",
+          "kind": "quantity_unit",
+          "dimension_ids": [
+            "p01:dimension:d4a3f0e60aa5e9af2c40"
+          ],
+          "question": "Did the parent announcement report 32 minutes as the amount of shortening, rather than the resulting orbital period or another measurement?",
+          "decision_impact": "Required to establish the attributed magnitude and unit.",
+          "match_policy": "semantic_constraint",
+          "routes": [
+            "atoms",
+            "evidence",
+            "world"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p01:probe:c10a40d421d1eb7e8e9f",
+          "claim_id": "p01:claim:ff07c7f8de47d16378fc",
+          "kind": "semantic_core",
+          "dimension_ids": [
+            "p01:dimension:03c2066fdeae0f45e605",
+            "p01:dimension:3130de2b4926779904d6"
+          ],
+          "question": "Did the parent NASA announcement report that DART shortened Dimorphos' orbital period around Didymos, rather than lengthened it or merely observed a change?",
+          "decision_impact": "Required to establish the attributed actor, action and direction of change.",
+          "match_policy": "semantic_constraint",
+          "routes": [
+            "atoms",
+            "evidence",
+            "world"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p01:probe:8a5c62dbd14a97cda32b",
+          "claim_id": "p01:claim:ff07c7f8de47d16378fc",
+          "kind": "source_lineage",
+          "dimension_ids": [],
+          "question": "Within m02, what source lineage connects this reported 32-minute shortening to the parent NASA announcement, rather than only supporting its independent truth?",
+          "decision_impact": "Required to retain the parent attribution scope.",
+          "match_policy": "semantic_constraint",
+          "routes": [
+            "lineage",
+            "world"
+          ],
+          "gate": "provenance"
+        }
+      ],
+      "notes": "The attributed content is a conjunction of the shortening and its uncertainty. The date qualifies the reporting announcement, not the shortening.\nThe contract retains the announcement date, attributed shortening and attached uncertainty. Attribution logic does not authorize a causal or comparison relation probe."
+    }
+  }
+}
