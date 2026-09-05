@@ -63,6 +63,12 @@ referent relation 和聚合判定。atoms、lineage、critic 的保留请求必�
 
 这些 8 题已经用于发现问题，属于开发集，参考答案仍未获人工裁决。本次目标是把分解和反馈接口做成可运行、可检查的实现，不宣称已经证明真实新闻准确率提升。
 
+离线 `decisive` 归因采用保守账本规则：来源探针需要新材料对目标主路径或独立
+根组件具有移除反事实影响；其他 conclusive probe 要求本轮新增 basis 全部来自
+同一 exact probe 的 novel routed return。该规则能拒绝“普通返回已足够、专属新
+材料只陪跑”的借功，但仍不是语义级材料消融。若要证明新材料本身必要，下一阶段
+应在同一冻结 plan 和预算下，另存一份移除该材料后的 verifier ablation 结果。
+
 ```bash
 python experiments/staged_run.py \
   --inputs experiments/proof_pilot/inputs.json \

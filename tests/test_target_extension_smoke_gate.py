@@ -588,6 +588,27 @@ class TargetExtensionSmokeGateTests(unittest.TestCase):
                     "probe_owned_novel_second_pass_cases": multiplier,
                     "label_changes": 0,
                     "label_changes_with_decisive_delta": 0, "breaks": 0},
+                "live_artifact_receipts": {
+                    "available": multiplier,
+                    "retained_calls": 19 * multiplier,
+                    "request_digests_verified": 19 * multiplier,
+                    "psi_history_calls": 11 * multiplier,
+                    "psi_calls_joined": 11 * multiplier,
+                    "verification_history_calls": 6 * multiplier,
+                    "verification_calls_joined": 6 * multiplier,
+                    "accepted_material_transactions": 2 * multiplier,
+                    "direct_attributed_transactions": multiplier,
+                    "direct_stage_calls": 3 * multiplier,
+                    "direct_stage_calls_with_exact_receipt": 3 * multiplier,
+                    "provenance_only_direct_transactions": 0,
+                    "revisit_transactions": 0,
+                    "revisit_stage_calls_with_empty_receipt": 0,
+                    "layer_calls": 4 * multiplier,
+                    "layer_calls_with_exact_projection": 4 * multiplier,
+                    "layer_receipt_deliveries": multiplier,
+                    "second_pass_layer_calls": 2 * multiplier,
+                    "second_pass_receipt_deliveries": multiplier,
+                    "cross_layer_leaks": 0, "breaks": 0},
             }
         return {"target_plan_probe_coverage": {"v4_audit": {
             "applicable_cases": len(case_ids),
@@ -606,6 +627,9 @@ class TargetExtensionSmokeGateTests(unittest.TestCase):
             ("retrieval_attribution", "attributed_returns", 0),
             ("probe_delta_attribution", "breaks", 1),
             ("probe_delta_attribution", "traced_semantic_deltas", 1),
+            ("live_artifact_receipts", "request_digests_verified", 18),
+            ("live_artifact_receipts", "second_pass_receipt_deliveries", 0),
+            ("live_artifact_receipts", "cross_layer_leaks", 1),
         )
         for block, field, value in mutations:
             with self.subTest(block=block, field=field):

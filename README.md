@@ -3,9 +3,10 @@
 ## Current development snapshot — 2026-09-05
 
 The current development code is target-extension v4. The synchronized snapshot
-passes 428 offline regression tests and 22 synthetic policy cases; these are not
-model accuracy results. A matching v4 freeze and fresh live-model comparison are
-still pending. See [synchronization status](reports/WORKTREE_SYNC_20260905.md) and
+passes 433 offline regression tests after the latest scoring-audit sync; these are
+not model accuracy results. The earlier snapshot also passed 22 synthetic policy cases. A matching v4 freeze and fresh live-model comparison are
+still pending. See [latest synchronization status](reports/V4_FOLLOWUP_SYNC_20260905.json),
+[earlier snapshot](reports/WORKTREE_SYNC_20260905.md), and
 the [v4 protocol](docs/TARGET_EXTENSION_V4_PROTOCOL.md). Older pilot results below
 are retained historical records, not the current v4 score.
 

@@ -1287,9 +1287,9 @@ def _v4_audit_state(comparison: dict[str, Any], case_ids: list[str],
                     ) -> tuple[bool, dict[str, Any]]:
     """Fail closed over the scorer's independently reconstructed v4 ledgers.
 
-    The scorer derives this section from the frozen target plan, psi history,
-    final report and retrieval history.  The gate consumes only exact counts;
-    it does not trust a runner-authored pass flag.
+    The scorer derives this section from the frozen target plan, raw model-call
+    requests, psi history, final report and retrieval history.  The gate
+    consumes only exact counts; it does not trust a runner-authored pass flag.
     """
     coverage = comparison.get("target_plan_probe_coverage")
     audit = coverage.get("v4_audit") if isinstance(coverage, dict) else None
@@ -1303,7 +1303,7 @@ def _v4_audit_state(comparison: dict[str, Any], case_ids: list[str],
 
     fields = ("coverage_ledger", "material_probe_ledger",
               "strict_followups", "retrieval_attribution",
-              "probe_delta_attribution")
+              "probe_delta_attribution", "live_artifact_receipts")
 
     def integer(value: Any) -> bool:
         return type(value) is int and value >= 0
@@ -1338,6 +1338,7 @@ def _v4_audit_state(comparison: dict[str, Any], case_ids: list[str],
         followup_block = block["strict_followups"]
         retrieval_block = block["retrieval_attribution"]
         delta_block = block["probe_delta_attribution"]
+        receipt_block = block["live_artifact_receipts"]
         expected_keys = {
             "coverage_ledger": {"expected_segments", "ledger_entries",
                                 "required_dimensions", "covered_dimensions", "breaks"},
@@ -1356,12 +1357,24 @@ def _v4_audit_state(comparison: dict[str, Any], case_ids: list[str],
                 "graph_traced_semantic_deltas",
                 "probe_owned_novel_second_pass_cases", "label_changes",
                 "label_changes_with_decisive_delta", "breaks"},
+            "live_artifact_receipts": {
+                "available", "retained_calls", "request_digests_verified",
+                "psi_history_calls", "psi_calls_joined",
+                "verification_history_calls", "verification_calls_joined",
+                "accepted_material_transactions", "direct_attributed_transactions",
+                "direct_stage_calls", "direct_stage_calls_with_exact_receipt",
+                "provenance_only_direct_transactions", "revisit_transactions",
+                "revisit_stage_calls_with_empty_receipt", "layer_calls",
+                "layer_calls_with_exact_projection", "layer_receipt_deliveries",
+                "second_pass_layer_calls", "second_pass_receipt_deliveries",
+                "cross_layer_leaks", "breaks"},
         }
         for name, value in (("coverage_ledger", coverage_block),
                             ("material_probe_ledger", material_block),
                             ("strict_followups", followup_block),
                             ("retrieval_attribution", retrieval_block),
-                            ("probe_delta_attribution", delta_block)):
+                            ("probe_delta_attribution", delta_block),
+                            ("live_artifact_receipts", receipt_block)):
             if (not isinstance(value, dict) or set(value) != expected_keys[name] or
                     any(not integer(item) for item in value.values())):
                 return False
@@ -1417,6 +1430,42 @@ def _v4_audit_state(comparison: dict[str, Any], case_ids: list[str],
                 delta_ok &= delta_block["probe_owned_novel_second_pass_cases"] > 0
         else:
             delta_ok &= all(delta_block[key] == 0 for key in delta_block)
+        if provider_mode == "task_routed":
+            has_second_pass = (expected_verification_rounds >
+                               (0 if aggregate else 1))
+            receipt_ok = (
+                receipt_block["available"] > 0 and
+                receipt_block["retained_calls"] > 0 and
+                receipt_block["request_digests_verified"] ==
+                    receipt_block["retained_calls"] and
+                receipt_block["psi_history_calls"] > 0 and
+                receipt_block["psi_calls_joined"] ==
+                    receipt_block["psi_history_calls"] and
+                receipt_block["verification_history_calls"] > 0 and
+                receipt_block["verification_calls_joined"] ==
+                    receipt_block["verification_history_calls"] and
+                receipt_block["accepted_material_transactions"] >=
+                    receipt_block["direct_attributed_transactions"] ==
+                    retrieval_block["attributed_returns"] and
+                receipt_block["direct_stage_calls"] > 0 and
+                receipt_block["direct_stage_calls_with_exact_receipt"] ==
+                    receipt_block["direct_stage_calls"] and
+                receipt_block["revisit_stage_calls_with_empty_receipt"] >=
+                    3 * receipt_block["revisit_transactions"] and
+                receipt_block["layer_calls"] > 0 and
+                receipt_block["layer_calls_with_exact_projection"] ==
+                    receipt_block["layer_calls"] and
+                receipt_block["cross_layer_leaks"] == 0 and
+                receipt_block["breaks"] == 0 and
+                ((receipt_block["second_pass_layer_calls"] > 0 and
+                  receipt_block["second_pass_receipt_deliveries"] > 0)
+                 if has_second_pass else
+                 (receipt_block["second_pass_layer_calls"] == 0 and
+                  receipt_block["second_pass_receipt_deliveries"] == 0))
+            )
+        else:
+            receipt_ok = (provider_mode == "fixed_reanalysis" and
+                          all(value == 0 for value in receipt_block.values()))
         return (
             coverage_block["breaks"] == 0 and
             coverage_block["expected_segments"] > 0 and
@@ -1437,7 +1486,7 @@ def _v4_audit_state(comparison: dict[str, Any], case_ids: list[str],
             retrieval_block["search_rounds"] == expected_search_rounds and
             retrieval_block["issued_tasks"] > 0 and
             retrieval_block["provider_returns"] > 0 and
-            strict_retrieval_ok and delta_ok
+            strict_retrieval_ok and delta_ok and receipt_ok
         )
 
     case_ids_seen = [item.get("id") for item in cases if isinstance(item, dict)]

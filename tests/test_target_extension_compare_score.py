@@ -1338,6 +1338,28 @@ class TargetExtensionCompareTests(unittest.TestCase):
         self.assertEqual(1, metrics["probe_owned_novel_second_pass_cases"])
         self.assertEqual(1, metrics["label_changes_with_decisive_delta"])
 
+        mixed_basis_retrieval = deepcopy(retrieval)
+        mixed_basis_retrieval[1]["tasks"].append(
+            {"id": "provenance-decisive", "probe_id": None,
+             "action": "fetch", "dimension": "provenance"})
+        mixed_basis_retrieval[1]["returned"].append("m3")
+        mixed_basis_retrieval[1]["attribution"].append(
+            {"version_id": "m3", "task_ids": ["provenance-decisive"]})
+        mixed_basis_history = deepcopy(history)
+        mixed_basis_history[1]["world_probe_results"][0]["basis"].append(
+            {"version_id": "m3", "start": 0, "end": 1, "quote": "c"})
+        mixed_basis_report = deepcopy(report)
+        mixed_basis_report["analysis_history"].append(
+            {"round": 2, "version_id": "m3", "accepted": True,
+             "revisit": False, "analysis": empty,
+             "trigger_task_ids": ["provenance-decisive"],
+             "trigger_probe_ids": []})
+        with self.assertRaisesRegex(ValueError, "counterfactual"):
+            _audit_probe_delta_attribution(
+                plan, mixed_basis_history, mixed_basis_retrieval,
+                mixed_basis_report, target, row, strict=True, required=True,
+                psi=psi)
+
         no_trigger = deepcopy(retrieval)
         no_trigger[1]["tasks"][0]["probe_id"] = None
         with self.assertRaisesRegex(ValueError, "not attributable"):
@@ -1515,6 +1537,161 @@ class TargetExtensionCompareTests(unittest.TestCase):
                 plan, history, mixed_retrieval, mixed_report, target,
                 {"prediction": "unverifiable", "checkpoints": []},
                 strict=True, required=True, psi=mixed_psi)
+
+        # A probe-owned return may itself form a target path yet still be
+        # semantically redundant: the provenance-only m2 path already proves
+        # that some terminal lineage exists.  Removing m3 must therefore leave
+        # the source-lineage truth state unchanged and deny it delta credit.
+        redundant_report = deepcopy(mixed_report)
+        redundant_report["analysis_history"][2]["analysis"] = {
+            "relations": [
+                {"from_version": "m1", "to_version": "m3", "kind": "cites",
+                 "status": "direct"}],
+            "origins": [{"target_id": target["id"], "version_id": "m3"}],
+        }
+        with self.assertRaisesRegex(ValueError, "not attributable"):
+            _audit_probe_delta_attribution(
+                plan, history, mixed_retrieval, redundant_report, target,
+                {"prediction": "unverifiable", "checkpoints": []},
+                strict=True, required=True, psi=mixed_psi)
+
+    def test_v4_graph_probe_delta_accepts_exact_novel_intermediate_path(self):
+        target = {"id": "intermediate", "assessment_mode": "world",
+                  "source_version_id": "m1", "evidence_scope": []}
+        probe = {"id": "probe:lineage", "claim_id": "claim:one",
+                 "kind": "source_lineage", "routes": ["lineage", "world"],
+                 "gate": "always"}
+        plan = {"logic": "single", "claims": [{"id": "claim:one"}],
+                "probes": [probe]}
+
+        def result(status, basis=()):
+            return {"probe_id": probe["id"], "status": status,
+                    "basis": list(basis),
+                    "referent_relation": "not_applicable"}
+
+        history = [
+            {"round": 1, "verdict": "unresolved", "world_verdict": "unresolved",
+             "evidence_probe_results": [],
+             "world_probe_results": [result("unresolved")]},
+            {"round": 2, "verdict": "supported", "world_verdict": "supported",
+             "evidence_probe_results": [], "world_probe_results": [result(
+                 "supported", [{"version_id": "m3", "start": 0,
+                                "end": 1, "quote": "c"}])]},
+        ]
+        retrieval = [
+            {"round": 1,
+             "tasks": [{"id": "origin", "probe_id": None,
+                        "action": "search", "dimension": "provenance"}],
+             "returned": ["m1", "m2"],
+             "attribution": [
+                 {"version_id": "m1", "task_ids": ["origin"]},
+                 {"version_id": "m2", "task_ids": ["origin"]}]},
+            {"round": 2,
+             "tasks": [{"id": "bridge", "probe_id": probe["id"],
+                        "action": "fetch", "dimension": "world"}],
+             "returned": ["m3"],
+             "attribution": [{"version_id": "m3", "task_ids": ["bridge"]}]},
+        ]
+        report = {"analysis_history": [
+            {"round": 1, "version_id": "m1", "accepted": True,
+             "revisit": False, "analysis": {"relations": [], "origins": []}},
+            {"round": 1, "version_id": "m2", "accepted": True,
+             "revisit": False, "analysis": {"relations": [], "origins": [
+                 {"target_id": target["id"], "version_id": "m2"}]}},
+            {"round": 2, "version_id": "m3", "accepted": True,
+             "revisit": False, "analysis": {"relations": [
+                 {"from_version": "m1", "to_version": "m3", "kind": "cites",
+                  "status": "direct"},
+                 {"from_version": "m3", "to_version": "m2", "kind": "cites",
+                  "status": "direct"}], "origins": []}},
+        ]}
+        psi = [{"round": 2, "material": "m3", "stage": "lineage",
+                "status": "accepted", "probe_checks": [
+                    {"probe_id": probe["id"], "status": "addressed"}]}]
+        metrics = _audit_probe_delta_attribution(
+            plan, history, retrieval, report, target,
+            {"prediction": "true", "checkpoints": [
+                {"round": 1, "decision": "unverifiable"}]},
+            strict=True, required=True, psi=psi)
+        self.assertEqual(1, metrics["graph_traced_semantic_deltas"])
+        self.assertEqual(1, metrics["label_changes_with_decisive_delta"])
+
+    def test_v4_independence_delta_requires_novel_independent_component(self):
+        target = {"id": "independence-delta", "assessment_mode": "world",
+                  "source_version_id": "m1", "evidence_scope": []}
+        base_probe = {"id": "probe:base", "claim_id": "claim:one",
+                      "kind": "actor_role", "routes": ["atoms", "world"],
+                      "gate": "always"}
+        probe = {"id": "probe:independence", "claim_id": "claim:one",
+                 "kind": "source_independence", "routes": ["lineage", "world"],
+                 "gate": "positive_world_only"}
+        plan = {"logic": "single", "claims": [{"id": "claim:one"}],
+                "probes": [base_probe, probe]}
+        base = {"probe_id": base_probe["id"], "status": "supported",
+                "basis": [{"version_id": "m1", "start": 0,
+                           "end": 1, "quote": "a"}],
+                "referent_relation": "not_applicable"}
+        prior = {"probe_id": probe["id"], "status": "unresolved", "basis": [],
+                 "referent_relation": "not_applicable"}
+        final = {"probe_id": probe["id"], "status": "supported", "basis": [
+            {"version_id": "r1", "start": 0, "end": 1, "quote": "b"},
+            {"version_id": "r2", "start": 0, "end": 1, "quote": "c"}],
+                 "referent_relation": "not_applicable"}
+        history = [
+            {"round": 1, "verdict": "unresolved", "world_verdict": "unresolved",
+             "evidence_probe_results": [], "world_probe_results": [base, prior]},
+            {"round": 2, "verdict": "supported", "world_verdict": "supported",
+             "evidence_probe_results": [], "world_probe_results": [base, final]},
+        ]
+        retrieval = [
+            {"round": 1,
+             "tasks": [{"id": "origin", "probe_id": None,
+                        "action": "search", "dimension": "provenance"}],
+             "returned": ["m1"],
+             "attribution": [{"version_id": "m1", "task_ids": ["origin"]}]},
+            {"round": 2,
+             "tasks": [{"id": "independent-roots", "probe_id": probe["id"],
+                        "action": "search", "dimension": "world"}],
+             "returned": ["r1", "r2"],
+             "attribution": [
+                 {"version_id": "r1", "task_ids": ["independent-roots"]},
+                 {"version_id": "r2", "task_ids": ["independent-roots"]}]},
+        ]
+        report = {"analysis_history": [
+            {"round": 1, "version_id": "m1", "accepted": True,
+             "revisit": False, "analysis": {"relations": [], "origins": []}},
+            {"round": 2, "version_id": "r1", "accepted": True,
+             "revisit": False, "analysis": {"relations": [
+                 {"from_version": "m1", "to_version": "r1", "kind": "cites",
+                  "status": "direct"}], "origins": [
+                 {"target_id": target["id"], "version_id": "r1"}]}},
+            {"round": 2, "version_id": "r2", "accepted": True,
+             "revisit": False, "analysis": {"relations": [
+                 {"from_version": "m1", "to_version": "r2", "kind": "cites",
+                  "status": "direct"}], "origins": [
+                 {"target_id": target["id"], "version_id": "r2"}]}},
+        ]}
+        psi = [{"round": 2, "material": version_id, "stage": "lineage",
+                "status": "accepted", "probe_checks": [
+                    {"probe_id": probe["id"], "status": "addressed"}]}
+               for version_id in ("r1", "r2")]
+        row = {"prediction": "true", "checkpoints": [
+            {"round": 1, "decision": "unverifiable"}]}
+        metrics = _audit_probe_delta_attribution(
+            plan, history, retrieval, report, target, row,
+            strict=True, required=True, psi=psi)
+        self.assertEqual(1, metrics["graph_traced_semantic_deltas"])
+        self.assertEqual(1, metrics["label_changes_with_decisive_delta"])
+
+        dependent = deepcopy(report)
+        dependent["analysis_history"][2]["analysis"]["relations"].append(
+            {"from_version": "r2", "to_version": "r1", "kind": "derives",
+             "status": "direct"})
+        with self.assertRaisesRegex(ValueError, "not attributable"):
+            _audit_probe_delta_attribution(
+                plan, history, retrieval, dependent, target,
+                {"prediction": "unverifiable", "checkpoints": []},
+                strict=True, required=True, psi=psi)
 
     def test_v4_label_change_uses_frozen_and_or_novel_counterfactual(self):
         target = {"id": "counterfactual", "assessment_mode": "world",

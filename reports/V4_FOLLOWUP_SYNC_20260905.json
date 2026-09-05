@@ -1,0 +1,63 @@
+{
+  "schema": "v4-followup-sync-v1",
+  "base_commit": "f3f123a978f8d80853c43e27259c1d17adea9084",
+  "snapshot_utc": "2026-09-05T22:33:49.675813+00:00",
+  "files": [
+    {
+      "path": "experiments/loop_receipt_artifact_score.py",
+      "sha256": "54ca19ecc82bd0480a3aa9329c8768004a8207e8c4eec2df6e91d3beb4dccefe"
+    },
+    {
+      "path": "experiments/target_extension_compare_score.py",
+      "sha256": "979e414f5669f50b0b55bf5a355bd9a7b2f2b7bce7a91fe8ec2cdb44ced6f24c"
+    },
+    {
+      "path": "experiments/target_extension_smoke_gate.py",
+      "sha256": "c95f4aff56737a9a4e671b499ffa01c3836e8f65b682887e2c0dc42c061321e2"
+    },
+    {
+      "path": "tests/test_loop_receipt_artifact_score.py",
+      "sha256": "4085e32c334e5fae115886849a450006106cae0cf124f1772434622bb3f0316f"
+    },
+    {
+      "path": "tests/test_target_extension_compare_score.py",
+      "sha256": "2c5b8b4d71f6e91348019c09759a443b1d8f3307f099091b20d7007f19aaf146"
+    },
+    {
+      "path": "tests/test_target_extension_full_gate.py",
+      "sha256": "df54d15b13ad81bbec54dbf38b5de942f9e7869faff4b8a1cd598da3dfd618f8"
+    },
+    {
+      "path": "tests/test_target_extension_smoke_gate.py",
+      "sha256": "e7cd3e6f3948069769ed3e5ae275c0f5442510136bda96d137cfed9a4e84b3ea"
+    },
+    {
+      "path": "docs/STAGED_PSI.md",
+      "sha256": "a37d02e4931e31866f8fac829b16611753027c3cc532c8865a68a32acd0b9f35"
+    },
+    {
+      "path": "docs/TARGET_EXTENSION_V4_PROTOCOL.md",
+      "sha256": "780f5665fcb9c12ca20e51cb09c010089b8e2605be3e9e36bde853a66647ada7"
+    }
+  ],
+  "offline_validation": {
+    "command": "PYTHONDONTWRITEBYTECODE=1 python -m unittest discover -s tests -q",
+    "tests": 433,
+    "result": "passed"
+  },
+  "live_model_test": {
+    "status": "not_run",
+    "new_api_attempts": 0,
+    "blockers": [
+      "OPENAI_API_KEY is absent in the current process",
+      "Matching v4 Freeze-12 is not yet present"
+    ],
+    "accuracy": null
+  },
+  "notes": [
+    "Inference runtime unchanged; this synchronizes scorer, receipt audit, gates, tests and documentation changes captured after the earlier upload.",
+    "Historical original 8/8 and old two-case scores are not current v4 results.",
+    "Other windows may continue editing after this snapshot.",
+    "Fixed receipt-audit terminal-origin replay: cyclic or incomplete candidate chains retain or reopen the lineage gap; valid terminal chains still close it. Added two regression tests covering graph states and task replay."
+  ]
+}

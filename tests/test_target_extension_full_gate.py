@@ -431,6 +431,45 @@ class FullGateFixture:
                     "label_changes_with_decisive_delta":
                         label_changes if strict else 0,
                     "breaks": 0},
+                "live_artifact_receipts": ({
+                    "available": multiplier,
+                    "retained_calls": 19 * multiplier,
+                    "request_digests_verified": 19 * multiplier,
+                    "psi_history_calls": 11 * multiplier,
+                    "psi_calls_joined": 11 * multiplier,
+                    "verification_history_calls": 6 * multiplier,
+                    "verification_calls_joined": 6 * multiplier,
+                    "accepted_material_transactions": 2 * multiplier,
+                    "direct_attributed_transactions": multiplier,
+                    "direct_stage_calls": 3 * multiplier,
+                    "direct_stage_calls_with_exact_receipt": 3 * multiplier,
+                    "provenance_only_direct_transactions": 0,
+                    "revisit_transactions": 0,
+                    "revisit_stage_calls_with_empty_receipt": 0,
+                    "layer_calls": 4 * multiplier,
+                    "layer_calls_with_exact_projection": 4 * multiplier,
+                    "layer_receipt_deliveries": multiplier,
+                    "second_pass_layer_calls": 2 * multiplier,
+                    "second_pass_receipt_deliveries": multiplier,
+                    "cross_layer_leaks": 0, "breaks": 0,
+                } if strict else {
+                    "available": 0, "retained_calls": 0,
+                    "request_digests_verified": 0, "psi_history_calls": 0,
+                    "psi_calls_joined": 0, "verification_history_calls": 0,
+                    "verification_calls_joined": 0,
+                    "accepted_material_transactions": 0,
+                    "direct_attributed_transactions": 0,
+                    "direct_stage_calls": 0,
+                    "direct_stage_calls_with_exact_receipt": 0,
+                    "provenance_only_direct_transactions": 0,
+                    "revisit_transactions": 0,
+                    "revisit_stage_calls_with_empty_receipt": 0,
+                    "layer_calls": 0, "layer_calls_with_exact_projection": 0,
+                    "layer_receipt_deliveries": 0,
+                    "second_pass_layer_calls": 0,
+                    "second_pass_receipt_deliveries": 0,
+                    "cross_layer_leaks": 0, "breaks": 0,
+                }),
             }
 
         plan_audit["v4_audit"] = {
@@ -500,6 +539,13 @@ class FullGateFixture:
                               "probe_owned_novel_second_pass_cases"):
                     totals_delta[field] -= delta[field]
                     delta[field] = 0
+            receipt = audit_cases[case_id]["live_artifact_receipts"]
+            total_receipt = comparison["target_plan_probe_coverage"][
+                "v4_audit"]["totals"]["live_artifact_receipts"]
+            for field in ("second_pass_layer_calls",
+                          "second_pass_receipt_deliveries"):
+                total_receipt[field] -= receipt[field]
+                receipt[field] = 0
             self._write_json(report_path, report)
             self._write_json(retrieval_path, retrieval)
             rows[case_id]["engine_usage"] = report["usage"]
@@ -564,7 +610,9 @@ class TargetExtensionFullGateTests(unittest.TestCase):
                 ("coverage_ledger", "ledger_entries", 31),
                 ("material_probe_ledger", "probe_checks", 63),
                 ("strict_followups", "covered_slots", 7),
-                ("retrieval_attribution", "valid_task_links", 7)):
+                ("retrieval_attribution", "valid_task_links", 7),
+                ("live_artifact_receipts", "request_digests_verified", 151),
+                ("live_artifact_receipts", "cross_layer_leaks", 1)):
             with self.subTest(block=block, field=field):
                 changed = deepcopy(comparison)
                 changed["target_plan_probe_coverage"]["v4_audit"][

@@ -178,3 +178,11 @@ that the v4 contract ran, repaired the known defects and did not regress this
 fixed corpus. It cannot establish general news accuracy. A general accuracy
 claim additionally needs event-disjoint held-out cases, independently frozen
 adjudication, repeated runs, fixed budgets and paired uncertainty intervals.
+The current `decisive` ledger is a conservative structural attribution: graph
+probes use target-path or rooted-component removal checks, while other
+conclusive probes require every basis version newly introduced in that round to
+come from the same exact probe's novel routed return. This blocks co-occurring
+or redundant returns from borrowing credit, but is not a semantic material
+ablation. A stronger causal claim requires a retained counterfactual verifier
+run with the candidate novel material removed, under the same frozen plan and
+budget.

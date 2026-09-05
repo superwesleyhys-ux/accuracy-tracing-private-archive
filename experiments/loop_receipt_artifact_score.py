@@ -302,7 +302,133 @@ def _empty_receipt(target_id):
             "return_attribution": None, "tasks": [], "probe_results": []}
 
 
-def _validate_direct_receipt(payload, hit, report, target_id):
+def _analysis_gap_ids(analysis):
+    gaps = analysis.get("gaps", ()) if isinstance(analysis, dict) else ()
+    if not isinstance(gaps, list):
+        raise ValueError("accepted analysis has a malformed gap ledger")
+    result = set()
+    for gap in gaps:
+        if (not isinstance(gap, dict) or not isinstance(gap.get("id"), str) or
+                not gap["id"]):
+            raise ValueError("accepted analysis has a malformed gap")
+        result.add(gap["id"])
+    return result
+
+
+def _analysis_resolution_ids(analysis):
+    resolutions = analysis.get("resolutions", ()) if isinstance(analysis, dict) else ()
+    if not isinstance(resolutions, list):
+        raise ValueError("accepted analysis has a malformed resolution ledger")
+    result = set()
+    for resolution in resolutions:
+        if (not isinstance(resolution, dict) or
+                not isinstance(resolution.get("gap_id"), str) or
+                not resolution["gap_id"]):
+            raise ValueError("accepted analysis has a malformed resolution")
+        result.add(resolution["gap_id"])
+    return result
+
+
+def _terminal_origin_path_state(current, target):
+    """Independently rebuild terminal reachability and incomplete chains."""
+    source = target.get("source_version_id")
+    available = set(current)
+    adjacency = {}
+    origins = set()
+    direct_kinds = {"quotes", "cites", "reprints", "translates", "derives"}
+    for analysis in current.values():
+        relations = analysis.get("relations", ()) if isinstance(analysis, dict) else ()
+        origin_rows = analysis.get("origins", ()) if isinstance(analysis, dict) else ()
+        if not isinstance(relations, list) or not isinstance(origin_rows, list):
+            raise ValueError("accepted analysis has malformed graph findings")
+        for relation in relations:
+            if (isinstance(relation, dict) and relation.get("status") == "direct" and
+                    relation.get("kind") in direct_kinds and
+                    relation.get("from_version") in available and
+                    relation.get("to_version") in available):
+                adjacency.setdefault(relation["from_version"], set()).add(
+                    relation["to_version"])
+        for origin in origin_rows:
+            if (isinstance(origin, dict) and
+                    origin.get("target_id") == target.get("id") and
+                    origin.get("version_id") in available):
+                origins.add(origin["version_id"])
+    def reachable(start):
+        reached, pending = set(), [start] if start in available else []
+        while pending:
+            version_id = pending.pop()
+            if version_id in reached:
+                continue
+            reached.add(version_id)
+            pending.extend(adjacency.get(version_id, ()))
+        return reached
+
+    candidates = reachable(source) & origins
+    downstream = {version_id: reachable(version_id) for version_id in candidates}
+    terminal = {version_id for version_id in candidates
+                if not ((downstream[version_id] - {version_id}) & candidates)}
+    incomplete = (candidates != origins or
+                  any(not (path & terminal) for path in downstream.values()))
+    return bool(terminal), incomplete
+
+
+def _expected_active_annotations(report, retrieval, analysis_history, target_id):
+    """Replay active-at-decomposition for the exact round-start issued tasks.
+
+    Round-start membership comes from the provider ledger already joined to the
+    report by the main scorer.  Within a round, complete material replacements
+    and explicit source-backed resolutions are replayed before the next direct
+    return.  ``inspect-lineage`` is a registered no-gap fallback, not an active
+    gap, so its annotation is always false.
+    """
+    target = report.get("target")
+    if not isinstance(target, dict) or target.get("id") != target_id:
+        raise ValueError("strict report lacks the immutable target for active replay")
+    tasks_by_round = {record["round"]: _task_map(record) for record in retrieval}
+    current = {}
+    accepted = [item for item in analysis_history if isinstance(item, dict) and
+                item.get("accepted") is True]
+    annotations = []
+    for round_number in range(1, len(retrieval) + 1):
+        task_map = tasks_by_round[round_number]
+        round_start = set(task_map)
+        round_start.discard("inspect-lineage")
+        material_owned_before = set().union(
+            *(_analysis_gap_ids(analysis) for analysis in current.values())) if current else set()
+        persistent = round_start - material_owned_before
+        active = set(round_start)
+        for revision in (item for item in accepted
+                         if item.get("round") == round_number):
+            task_ids = revision.get("trigger_task_ids")
+            if task_ids is not None:
+                if (not isinstance(task_ids, list) or
+                        any(task_id not in task_map for task_id in task_ids)):
+                    raise ValueError("direct revision has tasks outside its retrieval round")
+                annotations.append([task_id in active for task_id in task_ids])
+            analysis = revision.get("analysis")
+            if not isinstance(analysis, dict):
+                raise ValueError("accepted revision lacks analysis for active replay")
+            current[revision.get("version_id")] = analysis
+            owned = set().union(
+                *(_analysis_gap_ids(value) for value in current.values())) if current else set()
+            resolved = set().union(
+                *(_analysis_resolution_ids(value) for value in current.values())) if current else set()
+            active = (persistent | owned) - resolved
+            active.discard("inspect-lineage")
+            terminal_path, incomplete_chain = _terminal_origin_path_state(current, target)
+            if incomplete_chain:
+                # The runtime reopens this runner-owned task even when an old
+                # or current material supplies an explicit closure.
+                active.add("lineage:" + target_id)
+            elif terminal_path:
+                active.discard("lineage:" + target_id)
+    direct_count = sum("trigger_task_ids" in item for item in accepted)
+    if len(annotations) != direct_count:
+        raise ValueError("active replay does not cover every direct revision")
+    return annotations
+
+
+def _validate_direct_receipt(payload, hit, report, target_id, expected_active):
     if payload.get("retrieval_attribution") != _base_attribution(hit):
         raise ValueError("model request retrieval_attribution differs from provider hit")
     receipt = payload.get("loop_receipt")
@@ -320,11 +446,14 @@ def _validate_direct_receipt(payload, hit, report, target_id):
     receipt_tasks = receipt.get("tasks")
     if not isinstance(receipt_tasks, list) or len(receipt_tasks) != len(hit["tasks"]):
         raise ValueError("model request loop receipt lacks exact task snapshots")
-    for position, (actual, snapshot) in enumerate(zip(receipt_tasks, hit["tasks"])):
+    if len(expected_active) != len(hit["tasks"]):
+        raise ValueError("active replay does not cover every attributed task")
+    for position, (actual, snapshot, is_active) in enumerate(zip(
+            receipt_tasks, hit["tasks"], expected_active)):
         if (not isinstance(actual, dict) or
                 {key: actual.get(key) for key in TASK_FIELDS} != snapshot or
                 set(actual) != TASK_FIELDS | {"active_at_decomposition", "issued_order"} or
-                type(actual.get("active_at_decomposition")) is not bool or
+                actual.get("active_at_decomposition") is not is_active or
                 actual.get("issued_order") != position):
             raise ValueError("model request loop receipt task snapshot is not exact")
     expected_results = _prior_probe_results(report, hit)
@@ -443,6 +572,9 @@ def audit_loop_receipt_artifacts(calls, psi_history, verification_call_history,
     hits = _retrieval_hits(retrieval, target_id)
     analysis_history, direct = _direct_revisions(report, hits)
     pairs = _transactions(psi_joined, analysis_history)
+    active_annotations = _expected_active_annotations(
+        report, retrieval, analysis_history, target_id)
+    direct_position = 0
     hits_by_identity = {}
     for hit in hits:
         identity = (hit["round"], hit["version_id"], tuple(hit["task_ids"]),
@@ -463,9 +595,11 @@ def audit_loop_receipt_artifacts(calls, psi_history, verification_call_history,
                 raise ValueError("accepted direct PSI transaction has no provider hit")
             hit = candidates.pop(0)
             canonical_receipt = None
+            expected_active = active_annotations[direct_position]
+            direct_position += 1
             for call in transaction:
                 receipt = _validate_direct_receipt(
-                    call["payload"], hit, report, target_id)
+                    call["payload"], hit, report, target_id, expected_active)
                 if canonical_receipt is None:
                     canonical_receipt = receipt
                 elif receipt != canonical_receipt:
@@ -491,6 +625,8 @@ def audit_loop_receipt_artifacts(calls, psi_history, verification_call_history,
         raise ValueError("provider hit lacks an accepted direct PSI transaction")
     if counters["direct_attributed_transactions"] != len(direct):
         raise ValueError("direct transaction count differs from report attribution")
+    if direct_position != len(active_annotations):
+        raise ValueError("direct transaction count differs from active replay")
 
     for call in verification_joined:
         stage, ledger, payload = call["stage"], call["ledger"], call["payload"]

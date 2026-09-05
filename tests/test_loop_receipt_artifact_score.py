@@ -4,13 +4,18 @@ import hashlib
 import json
 from pathlib import Path
 import sys
+from types import SimpleNamespace
 import unittest
 
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "experiments"))
 
-from loop_receipt_artifact_score import audit_loop_receipt_artifacts
+from loop_receipt_artifact_score import (
+    _expected_active_annotations, _terminal_origin_path_state,
+    audit_loop_receipt_artifacts,
+)
+from newsverify.provenance import _terminal_origin_candidates
 
 try:
     from tests import test_staged_run as _staged_run_tests
@@ -32,6 +37,67 @@ def replace_payload(record, value, *, rehash=True):
     record["user"] = json.dumps(value, ensure_ascii=False)
     if rehash:
         record["request_digest"] = request_digest(record)
+
+
+class TerminalOriginReceiptReplayTests(unittest.TestCase):
+    @staticmethod
+    def graph(edges, origins):
+        current = {version: {"relations": [], "origins": [], "gaps": [],
+                             "resolutions": []}
+                   for version in {"s", "a", "b", "c"}}
+        for source, destination in edges:
+            current[source]["relations"].append({
+                "from_version": source, "to_version": destination,
+                "kind": "cites", "status": "direct"})
+        for version in origins:
+            current[version]["origins"].append(
+                {"target_id": "t", "version_id": version})
+        return current
+
+    def test_terminal_path_replay_agrees_with_runtime_for_cycles_and_roots(self):
+        cases = [
+            ([("s", "a"), ("a", "b"), ("b", "a")], ["a", "b"], (False, True)),
+            ([("s", "a"), ("a", "b")], ["a", "b"], (True, False)),
+            ([("s", "a"), ("a", "b"), ("b", "a"), ("s", "c")],
+             ["a", "b", "c"], (True, True)),
+            ([("s", "a")], ["a", "b"], (True, True)),
+            ([("s", "a"), ("a", "b"), ("b", "a"), ("b", "c")],
+             ["a", "b", "c"], (True, False)),
+            ([("s", "a"), ("a", "a")], ["a"], (True, False)),
+        ]
+        for edges, origins, expected in cases:
+            with self.subTest(edges=edges, origins=origins):
+                current = self.graph(edges, origins)
+                candidates = {("t", version): SimpleNamespace(version_id=version)
+                              for version in origins}
+                roots, incomplete = _terminal_origin_candidates(
+                    "s", [{"version_id": version} for version in current],
+                    [edge for value in current.values() for edge in value["relations"]],
+                    candidates)
+                self.assertEqual(expected, (bool(roots), incomplete))
+                self.assertEqual(expected, _terminal_origin_path_state(
+                    current, {"id": "t", "source_version_id": "s"}))
+
+    def test_cycle_reopens_lineage_despite_closure_and_terminal_path_closes_it(self):
+        task = {"id": "lineage:t", "question": "Locate a terminal original",
+                "stage": "provenance", "dimension": "provenance", "blocking": True,
+                "target_id": "t", "basis": [], "decision_impact": "Find origin",
+                "action": "search", "locator": "origin", "probe_id": None}
+        for cycle, expected_active in ((True, True), (False, False)):
+            with self.subTest(cycle=cycle):
+                edges = [("s", "a"), ("a", "b")]
+                if cycle:
+                    edges.append(("b", "a"))
+                current = self.graph(edges, ["a", "b"])
+                current["b"]["resolutions"] = [{"gap_id": "lineage:t"}]
+                history = [{"round": 1, "accepted": True, "version_id": version,
+                            "analysis": current[version]} for version in ("s", "a", "b")]
+                history.append({"round": 1, "accepted": True, "version_id": "c",
+                                "analysis": current["c"], "trigger_task_ids": [task["id"]]})
+                actual = _expected_active_annotations(
+                    {"target": {"id": "t", "source_version_id": "s"}},
+                    [{"round": 1, "tasks": [task]}], history, "t")
+                self.assertEqual([[expected_active]], actual)
 
 
 class LoopReceiptArtifactScoreTests(unittest.TestCase):
@@ -126,6 +192,31 @@ class LoopReceiptArtifactScoreTests(unittest.TestCase):
         value = payload(record)
         value["loop_receipt"]["tasks"][0]["issued_order"] = 2
         replace_payload(record, value)
+        with self.assertRaisesRegex(ValueError, "task snapshot"):
+            self.audit()
+
+    def test_rehashed_all_call_active_flag_forgery_is_independently_replayed(self):
+        changed_direct = changed_layer = 0
+        for record in self.files["success-case-calls.json"]:
+            value = payload(record)
+            receipt = value.get("loop_receipt")
+            if (isinstance(receipt, dict) and
+                    value.get("material", {}).get("version_id") == "a"):
+                for task in receipt.get("tasks", []):
+                    if task.get("probe_id") is not None:
+                        self.assertTrue(task["active_at_decomposition"])
+                        task["active_at_decomposition"] = False
+                        changed_direct += 1
+            for projected in value.get("current_round_receipts", []):
+                for task in projected.get("tasks", []):
+                    if task.get("probe_id") is not None:
+                        self.assertTrue(task["active_at_decomposition"])
+                        task["active_at_decomposition"] = False
+                        changed_layer += 1
+            if value != payload(record):
+                replace_payload(record, value)
+        self.assertGreater(changed_direct, 0)
+        self.assertGreater(changed_layer, 0)
         with self.assertRaisesRegex(ValueError, "task snapshot"):
             self.audit()
 

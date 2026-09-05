@@ -2475,7 +2475,7 @@ def _audit_retrieval_attribution(plan, retrieval, report, decomposition_keys,
     return metrics
 
 
-def _graph_snapshot_at_round(report, target, round_number):
+def _graph_snapshot_at_round(report, target, round_number, excluded_versions=()):
     """Rebuild the target-connected lineage subgraph after one round.
 
     ``edges`` retains the complete eligible direct graph for diagnostics.  Causal
@@ -2483,11 +2483,13 @@ def _graph_snapshot_at_round(report, target, round_number):
     an unrelated side edge is a graph change, but it cannot resolve a frozen
     source probe about this target.
     """
+    excluded_versions = set(excluded_versions)
     current = {}
     for revision in report.get("analysis_history", ()):
         if (isinstance(revision, dict) and revision.get("accepted") is True and
                 type(revision.get("round")) is int and revision["round"] <= round_number and
                 isinstance(revision.get("version_id"), str) and
+                revision["version_id"] not in excluded_versions and
                 isinstance(revision.get("analysis"), dict)):
             current[revision["version_id"]] = revision["analysis"]
     eligible = set(current)
@@ -2525,8 +2527,26 @@ def _graph_snapshot_at_round(report, target, round_number):
                   if reachable(version_id) & roots}
     path_edges = {edge for edge in edges
                   if edge[0] in path_nodes and edge[1] in path_nodes}
+    root_components = {version_id: frozenset(reachable(version_id) & roots)
+                       for version_id in path_nodes}
     return {"edges": edges, "path_edges": path_edges,
-            "roots": roots, "path_nodes": path_nodes}
+            "roots": roots, "path_nodes": path_nodes,
+            "root_components": root_components}
+
+
+def _source_independence_state(graph, result):
+    """Classify the rooted components represented by an independence basis."""
+    supporting = {item.get("version_id") for item in result.get("basis", ())
+                  if isinstance(item, dict) and isinstance(item.get("version_id"), str)}
+    components = [graph["root_components"].get(version_id, frozenset())
+                  for version_id in sorted(supporting)]
+    components = [component for component in components if component]
+    if len(components) < 2:
+        return "insufficient"
+    if any(left.isdisjoint(right) for index, left in enumerate(components)
+           for right in components[index + 1:]):
+        return "independent"
+    return "dependent"
 
 
 def _aggregate_frozen_probe_statuses(plan, keyed_results, stage, target, visible_ids):
@@ -2711,13 +2731,13 @@ def _audit_probe_delta_attribution(plan, report_history, retrieval, report, targ
         changed_path_edges = (before_graph["path_edges"] ^
                               after_graph["path_edges"])
         target_delta_participants = (
-            before_graph["path_nodes"] ^ after_graph["path_nodes"] |
-            before_graph["roots"] ^ after_graph["roots"] |
+            (before_graph["path_nodes"] ^ after_graph["path_nodes"]) |
+            (before_graph["roots"] ^ after_graph["roots"]) |
             {version_id for edge in changed_path_edges
              for version_id in edge[:2]})
         newly_target_connected = (
-            after_graph["path_nodes"] - before_graph["path_nodes"] |
-            after_graph["roots"] - before_graph["roots"] |
+            (after_graph["path_nodes"] - before_graph["path_nodes"]) |
+            (after_graph["roots"] - before_graph["roots"]) |
             {version_id
              for edge in after_graph["path_edges"] - before_graph["path_edges"]
              for version_id in edge[:2]})
@@ -2737,6 +2757,8 @@ def _audit_probe_delta_attribution(plan, report_history, retrieval, report, targ
                 raise ValueError("v4 probe-delta references an unknown frozen probe")
             triggered_versions = triggered_by_round.get(round_number, {}).get(key, set())
             novel_triggered = novel_triggered_by_round.get(round_number, {}).get(key, set())
+            old_basis_versions = {item.get("version_id") for item in old.get("basis", ())
+                                  if isinstance(item, dict)}
             basis_versions = {item.get("version_id") for item in new.get("basis", ())
                               if isinstance(item, dict)}
             novel = novel_by_round.get(round_number, set())
@@ -2756,15 +2778,56 @@ def _audit_probe_delta_attribution(plan, report_history, retrieval, report, targ
             graph_trace = False
             novel_trace = False
             if probe["kind"] in {"source_lineage", "source_independence"}:
-                involved = (novel | reanalysed) & triggered_versions
-                delta_involved = involved & target_delta_participants
-                graph_trace = bool(target_graph_changed and delta_involved and
-                    any(psi_addressed(version_id)
-                        for version_id in delta_involved))
-                novel_involved = novel_triggered & newly_target_connected
-                novel_trace = bool(target_graph_changed and novel_involved and
-                                   any(psi_addressed(version_id)
-                                       for version_id in novel_involved))
+                before_lineage = bool(before_graph["roots"])
+                after_lineage = bool(after_graph["roots"])
+                relevant_graph_change = bool(
+                    target_graph_changed and before_lineage != after_lineage and
+                    (old.get("status") != "supported" or before_lineage) and
+                    (new.get("status") != "supported" or after_lineage))
+                before_independence = None
+                after_independence = None
+                if probe["kind"] == "source_independence":
+                    before_independence = _source_independence_state(
+                        before_graph, old)
+                    after_independence = _source_independence_state(
+                        after_graph, new)
+                    relevant_graph_change = bool(
+                        target_graph_changed and
+                        before_independence != after_independence and
+                        (old.get("status") != "supported" or
+                         before_independence == "independent") and
+                        (new.get("status") != "supported" or
+                         after_independence == "independent"))
+                exact_novel_participants = set()
+                for version_id in (novel_triggered & newly_target_connected &
+                                   (after_graph["path_nodes"] |
+                                    after_graph["roots"])):
+                    if not psi_addressed(version_id):
+                        continue
+                    without_version = _graph_snapshot_at_round(
+                        report, target, round_number,
+                        excluded_versions={version_id})
+                    if probe["kind"] == "source_lineage":
+                        # The returned material must be necessary for the
+                        # semantic lineage transition.  A redundant extra path
+                        # changes graph membership but cannot borrow credit for
+                        # a terminal path already established by another task.
+                        participates = (
+                            bool(without_version["roots"]) != after_lineage)
+                    else:
+                        participates = (
+                            _source_independence_state(without_version, new) !=
+                            after_independence)
+                    if participates:
+                        exact_novel_participants.add(version_id)
+                exact_reanalyses = (reanalysed & triggered_versions &
+                                    target_delta_participants)
+                exact_reanalyses = {version_id for version_id in exact_reanalyses
+                                    if psi_addressed(version_id)}
+                graph_trace = bool(relevant_graph_change and
+                                   (exact_novel_participants | exact_reanalyses))
+                novel_trace = bool(relevant_graph_change and
+                                   exact_novel_participants)
                 traced = graph_trace
             elif triggered_versions:
                 addressed = {version_id for version_id in triggered_versions
@@ -2774,7 +2837,16 @@ def _audit_probe_delta_attribution(plan, report_history, retrieval, report, targ
                     novel_trace = bool(addressed & novel_triggered)
                 else:
                     traced = bool(basis_versions & addressed & (novel | reanalysed))
-                    novel_trace = bool(basis_versions & addressed & novel_triggered)
+                    added_basis_versions = basis_versions - old_basis_versions
+                    exact_novel_basis = addressed & novel_triggered
+                    # A conclusive slot cannot borrow its decisive basis from a
+                    # provenance-only or different-probe return that happened
+                    # to arrive beside one redundant exact-slot hit.  Preserve
+                    # prior basis, but require every newly introduced basis
+                    # version to be an addressed exact-slot novel receipt.
+                    novel_trace = bool(
+                        added_basis_versions and
+                        added_basis_versions <= exact_novel_basis)
             if not traced:
                 raise ValueError(
                     "v4 semantic probe delta is not attributable to its routed material")
