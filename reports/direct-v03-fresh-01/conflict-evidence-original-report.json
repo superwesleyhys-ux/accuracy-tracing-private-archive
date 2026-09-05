@@ -1,0 +1,198 @@
+{
+  "event": {
+    "title": "两份材料对“渡轮今日运营”的目标声明给出相互矛盾的证据，现实运营状态未知。",
+    "date": "2026-09-04",
+    "summary": "report-a 声称渡轮今日运营，支持目标声明。\nreport-b 声称渡轮今日不运营，反驳目标声明。\n截至指定时间，证据范围内的材料存在直接冲突，不能给出一致结论。\n所提供快照未经外部认证，无法据此确定渡轮的现实运营状态。",
+    "sources": [],
+    "relation": "",
+    "causes": [
+      {
+        "title": "两份同日快照对渡轮运营作出相反陈述",
+        "date": "2026-09-04T10:00:00Z",
+        "summary": "report-a 明确声称“渡轮今日运营”，支持目标声明；report-b 明确声称“渡轮今日不运营”，反驳目标声明。截至指定时间，两份材料在证据范围内直接冲突，无法形成一致结论。",
+        "sources": [
+          {
+            "url": "https://example.org/report-a",
+            "title": "report-a（虚构发布者；所提供合成快照）"
+          },
+          {
+            "url": "https://example.org/report-b",
+            "title": "report-b（虚构发布者；所提供合成快照）"
+          }
+        ],
+        "relation": "直接导致证据评估出现冲突",
+        "causes": [],
+        "confidence": 1.0,
+        "grounded": true
+      },
+      {
+        "title": "所提供快照缺乏外部认证",
+        "date": "截至2026-09-04T20:00:00Z",
+        "summary": "两份材料的元数据均注明为未经外部认证的合成精确版本快照，完整语料未提供现实运营核验资料。因此，材料如何支持或反驳目标可以明确判断，但渡轮的现实运营状态仍为未知。",
+        "sources": [
+          {
+            "url": "https://example.org/report-a",
+            "title": "report-a 快照元数据：availability_basis"
+          },
+          {
+            "url": "https://example.org/report-b",
+            "title": "report-b 快照元数据：availability_basis"
+          }
+        ],
+        "relation": "直接限制现实运营状态的核验，不改变证据冲突结论",
+        "causes": [],
+        "confidence": 1.0,
+        "grounded": true
+      }
+    ],
+    "confidence": 0.0,
+    "grounded": true
+  },
+  "direct_response": "“渡轮今日运营”获report-a支持，却被report-b反驳，不能称为信源一致证实；在2个信源中未找到现实运营核验资料。这里评估的是材料表述，而非证明实际开航。2026年9月4日10时，两份快照发布相反说法；截至20时，证据仍冲突，现实状态未知（时间均为UTC）。原因是材料直接矛盾，且均未经外部认证。最大分歧即当日是否运营：a称运营，b称不运营；两者来自同一虚构发布者，不构成独立确认。（基于2个信源 | 覆盖1类媒体 | 0条事实多源一致 | 1条存在分歧 | 因果锚定2/2）",
+  "credibility": {
+    "source_count": 2,
+    "source_types": [
+      "门户网站"
+    ],
+    "consistent_count": 0,
+    "disputed_count": 1,
+    "grounding_rate": 1.0,
+    "grounded_count": 2,
+    "total_causal_nodes": 2
+  },
+  "event_timeline": [
+    {
+      "date": "2026-09-04T10:00:00Z",
+      "title": "两份同日材料对渡轮当日运营状态作出相反陈述",
+      "description": "report-a 声称渡轮当日运营，支持目标声明；report-b 声称渡轮当日不运营，反驳目标声明。证据范围内存在直接冲突，无法形成一致结论。两份材料来自同一虚构发布者，来源数量不代表独立确认，也不能将相互矛盾的陈述视为运营事实已获验证。",
+      "significance": "重要",
+      "sources": [
+        {
+          "url": "https://example.org/report-a",
+          "title": "report-a / Fictional publisher"
+        },
+        {
+          "url": "https://example.org/report-b",
+          "title": "report-b / Fictional publisher"
+        }
+      ],
+      "perspectives": [],
+      "verified": true,
+      "causal_links": []
+    },
+    {
+      "date": "截至2026-09-04T20:00:00Z",
+      "title": "快照缺乏外部认证，渡轮现实运营状态仍未知",
+      "description": "两份材料的元数据均注明其为未经外部认证的合成精确版本快照，所提供语料没有现实运营核验资料。这不影响判断两份材料分别支持和反驳目标声明，但现实运营状态须单独列为未知。",
+      "significance": "背景",
+      "sources": [
+        {
+          "url": "https://example.org/report-a",
+          "title": "report-a 快照元数据 / availability_basis"
+        },
+        {
+          "url": "https://example.org/report-b",
+          "title": "report-b 快照元数据 / availability_basis"
+        }
+      ],
+      "perspectives": [],
+      "verified": true,
+      "causal_links": []
+    }
+  ],
+  "sources": [
+    {
+      "outlet": "Fictional publisher",
+      "url": "https://example.org/report-a",
+      "publish_time": "2026-09-04T10:00:00Z",
+      "source_type": "门户网站",
+      "is_original": false,
+      "key_facts": [
+        {
+          "claim": "report-a 声称该渡轮于2026年9月4日正常运营。",
+          "source_urls": [
+            "https://example.org/report-a"
+          ],
+          "agreed": true
+        }
+      ]
+    },
+    {
+      "outlet": "Fictional publisher",
+      "url": "https://example.org/report-b",
+      "publish_time": "2026-09-04T10:00:00Z",
+      "source_type": "门户网站",
+      "is_original": false,
+      "key_facts": [
+        {
+          "claim": "report-b 声称该渡轮于2026年9月4日不运营。",
+          "source_urls": [
+            "https://example.org/report-b"
+          ],
+          "agreed": true
+        }
+      ]
+    }
+  ],
+  "source_timeline": [
+    {
+      "outlet": "Fictional publisher",
+      "url": "https://example.org/report-a",
+      "publish_time": "2026-09-04T10:00:00Z",
+      "source_type": "门户网站",
+      "is_original": false,
+      "key_facts": [
+        {
+          "claim": "report-a 声称该渡轮于2026年9月4日正常运营。",
+          "source_urls": [
+            "https://example.org/report-a"
+          ],
+          "agreed": true
+        }
+      ]
+    },
+    {
+      "outlet": "Fictional publisher",
+      "url": "https://example.org/report-b",
+      "publish_time": "2026-09-04T10:00:00Z",
+      "source_type": "门户网站",
+      "is_original": false,
+      "key_facts": [
+        {
+          "claim": "report-b 声称该渡轮于2026年9月4日不运营。",
+          "source_urls": [
+            "https://example.org/report-b"
+          ],
+          "agreed": true
+        }
+      ]
+    }
+  ],
+  "key_findings": [
+    "【材料事实】两份快照均标注于2026年9月4日10:00 UTC发布：report-a称“渡轮今日运营”，report-b称“渡轮今日不运营”，对同日运营状态作出相反陈述。",
+    "【证据评估】截至当日20:00 UTC，在指定证据范围内，report-a支持原目标声明，report-b反驳该声明；结论为证据直接冲突，而非一致支持或一致反驳。",
+    "【信源事实】两份材料均署名同一虚构发布者，且为未经外部认证的合成精确版本快照；两个网址不构成两个独立来源的确认。",
+    "【因果判断】相反陈述直接造成证据评估冲突；缺乏现实核验资料则使实际运营状态保持未知。这是两个不同层面的结论，不能相互替代。"
+  ],
+  "information_gaps": [
+    "现实核验结果：未知。语料未提供可核实渡轮实际运营状态的外部资料。",
+    "未提供渡轮名称、航线、运营方或具体班次，无法进一步定位运营对象。",
+    "无法判断两份同时间戳材料为何矛盾，亦无修订记录或优先级依据可据以采信其中一份。",
+    "因果节点获锚定仅表示所给材料能支撑相关分析，不代表渡轮现实运营状态获得独立验证。"
+  ],
+  "consistent_facts": [],
+  "disputed_facts": [
+    {
+      "claim": "该渡轮是否于2026年9月4日运营。",
+      "source_urls": [
+        "https://example.org/report-a",
+        "https://example.org/report-b"
+      ],
+      "agreed": false
+    }
+  ],
+  "causal_summary": "两份同日、同一发布者的快照分别声称渡轮运营与不运营，因此对“渡轮今日运营”这一不变目标形成直接冲突。这一结论依据材料内容即可作出，不以外部认证为前提。但所给语料没有现实运营核验资料，因此无法从材料冲突进一步判断渡轮究竟是否运营，也无法解释矛盾产生的原因。",
+  "bias_notes": [
+    "材料仅含简短的相反陈述，没有足够依据识别政治、商业或其他立场偏差；不能将内容冲突直接归因于偏见或故意误导。"
+  ]
+}

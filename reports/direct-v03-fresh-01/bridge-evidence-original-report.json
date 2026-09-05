@@ -1,0 +1,181 @@
+{
+  "event": {
+    "title": "截至2026年9月4日20:00 UTC，指定证据 bridge-notice 与“桥梁已经重新开放”的目标声明相矛盾。",
+    "date": "未知",
+    "summary": "bridge-article 声称桥梁已经重新开放，并援引 bridge-notice。\nbridge-notice 明确表示桥梁仍然关闭。\nbridge-notice 表示计划于下个月重新开放，而非已经开放。\n在限定的 evidence_scope 内，证据评估结果为反驳目标声明。\n现实中的桥梁状态未知；所提供快照未经外部认证。",
+    "sources": [],
+    "relation": "",
+    "causes": [
+      {
+        "title": "指定公告明确称桥梁仍关闭，重新开放仅为下月计划",
+        "date": "2026-09-04 10:00 UTC（快照标注的发布时间）",
+        "summary": "bridge-notice 明确表示桥梁仍然关闭，并称计划于下个月重新开放，而非已经开放。因此，截至指定时点，唯一纳入 evidence_scope 的文档反驳了“桥梁已经重新开放”的目标声明；此结论仅针对所供快照的内容，现实桥梁状态仍未知。",
+        "sources": [
+          {
+            "url": "https://example.org/bridge-notice",
+            "title": "bridge-notice｜桥梁运营公告（所供合成快照，未经外部认证）"
+          }
+        ],
+        "relation": "直接导致限定证据范围内的反驳结论",
+        "causes": [],
+        "confidence": 1.0,
+        "grounded": true
+      }
+    ],
+    "confidence": 0.0,
+    "grounded": true
+  },
+  "direct_response": "截至2026年9月4日20时UTC，“桥梁已重开”仅获文章声称，被唯一指定证据bridge-notice反驳。应纠正为：公告称仍关闭，拟于10月重开，并非已开放。当天10时公告标注发布，文章同样标注10时发布并援引公告称已重开。判断依据是“未来计划”不等于“已经完成”；最大分歧即文章与公告对开放状态的相反表述，引用不构成独立确认。此结论仅评估快照内容；快照未经外部认证，现实状态未知。（基于2个信源 | 覆盖1类媒体 | 0条事实多源一致 | 1条存在分歧 | 因果锚定1/1）",
+  "credibility": {
+    "source_count": 2,
+    "source_types": [
+      "自媒体"
+    ],
+    "consistent_count": 0,
+    "disputed_count": 1,
+    "grounding_rate": 1.0,
+    "grounded_count": 1,
+    "total_causal_nodes": 1
+  },
+  "event_timeline": [
+    {
+      "date": "2026-09-04 10:00 UTC",
+      "title": "桥梁运营公告称桥梁仍关闭，计划于2026年10月重新开放",
+      "description": "所供公告快照明确表示桥梁仍然关闭，重新开放仅为下个月的计划。按快照标注的发布时间推算，该计划指向2026年10月，并非已经完成开放。",
+      "significance": "重要",
+      "sources": [
+        {
+          "url": "https://example.org/bridge-notice",
+          "title": "桥梁运营公告｜Fictional publisher（未经外部认证的合成快照）"
+        }
+      ],
+      "perspectives": [],
+      "verified": false,
+      "causal_links": []
+    },
+    {
+      "date": "2026-09-04 10:00 UTC",
+      "title": "文章援引运营公告，声称桥梁已经重新开放",
+      "description": "所供文章快照声称桥梁已经重新开放，并将运营公告列为依据。该声明与所引公告的内容相矛盾，不能将文章的引用视为独立确认。",
+      "significance": "重要",
+      "sources": [
+        {
+          "url": "https://example.org/bridge-article",
+          "title": "桥梁重新开放相关文章｜Fictional publisher（未经外部认证的合成快照）"
+        }
+      ],
+      "perspectives": [],
+      "verified": false,
+      "causal_links": []
+    }
+  ],
+  "sources": [
+    {
+      "outlet": "Fictional publisher（虚构发布者）",
+      "url": "https://example.org/bridge-article",
+      "publish_time": "2026-09-04T10:00:00Z",
+      "source_type": "自媒体",
+      "is_original": false,
+      "key_facts": [
+        {
+          "claim": "文章声称桥梁已经重新开放，并将 bridge-notice 列为该声明的依据。",
+          "source_urls": [
+            "https://example.org/bridge-article"
+          ],
+          "agreed": true
+        }
+      ]
+    },
+    {
+      "outlet": "Fictional publisher（虚构发布者）",
+      "url": "https://example.org/bridge-notice",
+      "publish_time": "2026-09-04T10:00:00Z",
+      "source_type": "自媒体",
+      "is_original": true,
+      "key_facts": [
+        {
+          "claim": "桥梁运营通知明确表示桥梁仍然关闭。",
+          "source_urls": [
+            "https://example.org/bridge-notice"
+          ],
+          "agreed": true
+        },
+        {
+          "claim": "通知表示重新开放计划安排在下个月，即按发布时间推算的2026年10月，而非已经开放。",
+          "source_urls": [
+            "https://example.org/bridge-notice"
+          ],
+          "agreed": true
+        }
+      ]
+    }
+  ],
+  "source_timeline": [
+    {
+      "outlet": "Fictional publisher（虚构发布者）",
+      "url": "https://example.org/bridge-article",
+      "publish_time": "2026-09-04T10:00:00Z",
+      "source_type": "自媒体",
+      "is_original": false,
+      "key_facts": [
+        {
+          "claim": "文章声称桥梁已经重新开放，并将 bridge-notice 列为该声明的依据。",
+          "source_urls": [
+            "https://example.org/bridge-article"
+          ],
+          "agreed": true
+        }
+      ]
+    },
+    {
+      "outlet": "Fictional publisher（虚构发布者）",
+      "url": "https://example.org/bridge-notice",
+      "publish_time": "2026-09-04T10:00:00Z",
+      "source_type": "自媒体",
+      "is_original": true,
+      "key_facts": [
+        {
+          "claim": "桥梁运营通知明确表示桥梁仍然关闭。",
+          "source_urls": [
+            "https://example.org/bridge-notice"
+          ],
+          "agreed": true
+        },
+        {
+          "claim": "通知表示重新开放计划安排在下个月，即按发布时间推算的2026年10月，而非已经开放。",
+          "source_urls": [
+            "https://example.org/bridge-notice"
+          ],
+          "agreed": true
+        }
+      ]
+    }
+  ],
+  "key_findings": [
+    "【快照事实】两份文档均标注发布于2026年9月4日10:00 UTC；公告称桥梁仍关闭，文章却称已经重新开放。相同发布时间不能证明两者存在先后更新关系。",
+    "【证据结论】截至2026年9月4日20:00 UTC，唯一指定证据 bridge-notice 明确反驳目标声明“桥梁已经重新开放”；这是对文档内容的评估，不是对现实桥梁状态的认证。",
+    "【时间解读】按公告标注的发布时间，“下个月”指2026年10月。公告表达的是重新开放计划，既不表示已经开放，也不保证届时开放。",
+    "【信源与推理】bridge-article 引用 bridge-notice，但其结论与公告原文相反，不能构成独立确认。可确认的是引用与结论不符；将未来计划误写成已完成状态是可能解释，尚不能确定错误产生的具体过程。"
+  ],
+  "information_gaps": [
+    "现实中的桥梁状态未知：材料为虚构发布者的合成版本快照，未经外部认证。",
+    "缺少桥梁身份、关闭原因、工程进度及后续公告，无法判断重新开放计划的可行性或是否落实。",
+    "缺少文章编辑记录，无法确定矛盾源于误读、编辑错误还是其他原因。"
+  ],
+  "consistent_facts": [],
+  "disputed_facts": [
+    {
+      "claim": "截至2026年9月4日，桥梁是否已经重新开放。",
+      "source_urls": [
+        "https://example.org/bridge-article",
+        "https://example.org/bridge-notice"
+      ],
+      "agreed": false
+    }
+  ],
+  "causal_summary": "所供公告在2026年9月4日表示桥梁仍关闭，仅计划下个月重新开放；同日文章援引该公告，却写成桥梁已经重新开放。由于指定证据直接否定目标声明，在限定证据范围内应判为反驳。这里能够还原的是“引用内容与文章结论矛盾”的证据链，而不是桥梁关闭或开放的现实因果链；文章可能混淆了未来计划与已完成事件，但具体成因及现实状态仍未知。",
+  "bias_notes": [
+    "未发现足以判断政治、商业或其他立场偏差的材料。文章将计划写成既成事实，属于可识别的表述失真，但不能据此推定其动机。",
+    "两份材料均标注同一虚构发布者，且文章依赖公告，不应视为两个独立信源；公告标题也不能替代对其现实权威性的认证。"
+  ]
+}

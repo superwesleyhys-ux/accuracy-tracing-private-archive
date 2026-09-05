@@ -1,0 +1,68 @@
+{
+  "summary": {
+    "original": {
+      "n": 5,
+      "completed": 5,
+      "correct": 5,
+      "errors": 0,
+      "usage": {
+        "model_calls": 81,
+        "input_tokens": 72841,
+        "output_tokens": 42152,
+        "seconds": 796.0037292799971
+      }
+    },
+    "accuracy": {
+      "n": 5,
+      "completed": 5,
+      "correct": 5,
+      "errors": 0,
+      "usage": {
+        "model_calls": 26,
+        "input_tokens": 38502,
+        "output_tokens": 18368,
+        "seconds": 326.60345729898836
+      }
+    }
+  },
+  "cases": [
+    {
+      "id": "bridge-evidence",
+      "gold": "false",
+      "original": "false",
+      "accuracy": "false"
+    },
+    {
+      "id": "library-evidence",
+      "gold": "true",
+      "original": "true",
+      "accuracy": "true"
+    },
+    {
+      "id": "chain-evidence",
+      "gold": "true",
+      "original": "true",
+      "accuracy": "true"
+    },
+    {
+      "id": "conflict-evidence",
+      "gold": "disputed",
+      "original": "disputed",
+      "accuracy": "disputed"
+    },
+    {
+      "id": "world-unknown",
+      "gold": "unverifiable",
+      "original": "unverifiable",
+      "accuracy": "unverifiable"
+    }
+  ],
+  "gold_sha256": "a09220f0465dc0afa1f7504cad7370a805c8408b02631ba5dd983f84e023c850",
+  "accuracy_only_correct": 0,
+  "original_only_correct": 0,
+  "limits": [
+    "Five known synthetic cases, one fresh sample per arm; not real-news accuracy.",
+    "Shared report-only model extractor is still a measurement limitation; review quoted answers.",
+    "Equal resource caps, unequal actual spend; snapshot task only; no web collection benchmark."
+  ]
+}

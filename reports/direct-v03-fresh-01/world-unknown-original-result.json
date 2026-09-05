@@ -1,0 +1,19 @@
+{
+  "id": "world-unknown",
+  "arm": "original",
+  "status": "completed",
+  "prediction": "unverifiable",
+  "assessment_mode": "world",
+  "extractor_answer_text": "“现于21时闭馆”获范围内1份公告文本支持，但截至2026年9月4日20:00 UTC是否实际执行，在2个信源中未找到证明，世界核验为未知。公告称9月4日起延时至21时，报道引用复述；两页同属虚构发布者的合成快照，不构成独立确认。报道说法源于公告，调整的实际原因未交代。两页没有说法分歧，但文本一致不能证明现实已实施。（基于2个信源页面 | 覆盖1类媒体 | 1条事实多源一致〔非独立〕 | 0条存在分歧 | 因果锚定1/1）",
+  "extraction": {
+    "decision": "unverifiable",
+    "extractable": true,
+    "basis_quote": "但截至2026年9月4日20:00 UTC是否实际执行，在2个信源中未找到证明，世界核验为未知。"
+  },
+  "usage": {
+    "model_calls": 16,
+    "input_tokens": 14014,
+    "output_tokens": 9004,
+    "seconds": 170.4194535839997
+  }
+}

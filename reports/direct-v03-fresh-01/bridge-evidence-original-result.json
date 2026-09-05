@@ -1,0 +1,19 @@
+{
+  "id": "bridge-evidence",
+  "arm": "original",
+  "status": "completed",
+  "prediction": "false",
+  "assessment_mode": "evidence",
+  "extractor_answer_text": "截至2026年9月4日20时UTC，“桥梁已重开”仅获文章声称，被唯一指定证据bridge-notice反驳。应纠正为：公告称仍关闭，拟于10月重开，并非已开放。当天10时公告标注发布，文章同样标注10时发布并援引公告称已重开。判断依据是“未来计划”不等于“已经完成”；最大分歧即文章与公告对开放状态的相反表述，引用不构成独立确认。此结论仅评估快照内容；快照未经外部认证，现实状态未知。（基于2个信源 | 覆盖1类媒体 | 0条事实多源一致 | 1条存在分歧 | 因果锚定1/1）",
+  "extraction": {
+    "decision": "false",
+    "extractable": true,
+    "basis_quote": "截至2026年9月4日20时UTC，“桥梁已重开”仅获文章声称，被唯一指定证据bridge-notice反驳。应纠正为：公告称仍关闭，拟于10月重开，并非已开放。"
+  },
+  "usage": {
+    "model_calls": 16,
+    "input_tokens": 14250,
+    "output_tokens": 8566,
+    "seconds": 161.24854488599522
+  }
+}

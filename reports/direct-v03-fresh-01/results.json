@@ -1,0 +1,402 @@
+[
+  {
+    "id": "library-evidence",
+    "arm": "accuracy",
+    "status": "completed",
+    "prediction": "true",
+    "assessment_mode": "evidence",
+    "checkpoints": [
+      {
+        "round": 1,
+        "id": "library-evidence",
+        "decision": "true",
+        "assessment_mode": "evidence",
+        "assessments": {
+          "evidence": {
+            "raw_verdict": "supported",
+            "decision": "supported",
+            "blocking_gap_ids": []
+          },
+          "world": {
+            "raw_verdict": "unresolved",
+            "decision": "unresolved",
+            "blocking_gap_ids": []
+          }
+        },
+        "provenance_status": "original_material_located"
+      }
+    ],
+    "native_prediction": {
+      "id": "library-evidence",
+      "assessment_mode": "evidence",
+      "as_of": "2026-09-04T20:00:00Z",
+      "decision": "true",
+      "assessments": {
+        "evidence": {
+          "raw_verdict": "supported",
+          "decision": "supported",
+          "blocking_gap_ids": []
+        },
+        "world": {
+          "raw_verdict": "unresolved",
+          "decision": "unresolved",
+          "blocking_gap_ids": []
+        }
+      },
+      "provenance_status": "original_material_located",
+      "assessment_valid": true,
+      "stop_reason": "complete"
+    },
+    "extractor_answer_text": "{\"id\": \"library-evidence\", \"assessment_mode\": \"evidence\", \"as_of\": \"2026-09-04T20:00:00Z\", \"decision\": \"true\", \"assessments\": {\"evidence\": {\"raw_verdict\": \"supported\", \"decision\": \"supported\", \"blocking_gap_ids\": []}, \"world\": {\"raw_verdict\": \"unresolved\", \"decision\": \"unresolved\", \"blocking_gap_ids\": []}}, \"provenance_status\": \"original_material_located\", \"assessment_valid\": true, \"stop_reason\": \"complete\"}",
+    "extraction": {
+      "decision": "true",
+      "extractable": true,
+      "basis_quote": "\"decision\": \"true\""
+    },
+    "usage": {
+      "model_calls": 5,
+      "input_tokens": 7297,
+      "output_tokens": 3743,
+      "seconds": 69.83717490799609
+    }
+  },
+  {
+    "id": "conflict-evidence",
+    "arm": "accuracy",
+    "status": "completed",
+    "prediction": "disputed",
+    "assessment_mode": "evidence",
+    "checkpoints": [
+      {
+        "round": 1,
+        "id": "conflict-evidence",
+        "decision": "disputed",
+        "assessment_mode": "evidence",
+        "assessments": {
+          "evidence": {
+            "raw_verdict": "conflicting",
+            "decision": "conflicting",
+            "blocking_gap_ids": []
+          },
+          "world": {
+            "raw_verdict": "unresolved",
+            "decision": "unresolved",
+            "blocking_gap_ids": []
+          }
+        },
+        "provenance_status": "partial"
+      }
+    ],
+    "native_prediction": {
+      "id": "conflict-evidence",
+      "assessment_mode": "evidence",
+      "as_of": "2026-09-04T20:00:00Z",
+      "decision": "disputed",
+      "assessments": {
+        "evidence": {
+          "raw_verdict": "conflicting",
+          "decision": "conflicting",
+          "blocking_gap_ids": []
+        },
+        "world": {
+          "raw_verdict": "unresolved",
+          "decision": "unresolved",
+          "blocking_gap_ids": []
+        }
+      },
+      "provenance_status": "partial",
+      "assessment_valid": true,
+      "stop_reason": "provider_exhausted"
+    },
+    "extractor_answer_text": "{\"id\": \"conflict-evidence\", \"assessment_mode\": \"evidence\", \"as_of\": \"2026-09-04T20:00:00Z\", \"decision\": \"disputed\", \"assessments\": {\"evidence\": {\"raw_verdict\": \"conflicting\", \"decision\": \"conflicting\", \"blocking_gap_ids\": []}, \"world\": {\"raw_verdict\": \"unresolved\", \"decision\": \"unresolved\", \"blocking_gap_ids\": []}}, \"provenance_status\": \"partial\", \"assessment_valid\": true, \"stop_reason\": \"provider_exhausted\"}",
+    "extraction": {
+      "decision": "disputed",
+      "extractable": true,
+      "basis_quote": "\"decision\": \"disputed\""
+    },
+    "usage": {
+      "model_calls": 4,
+      "input_tokens": 4681,
+      "output_tokens": 1417,
+      "seconds": 30.711600404996716
+    }
+  },
+  {
+    "id": "bridge-evidence",
+    "arm": "original",
+    "status": "completed",
+    "prediction": "false",
+    "assessment_mode": "evidence",
+    "extractor_answer_text": "截至2026年9月4日20时UTC，“桥梁已重开”仅获文章声称，被唯一指定证据bridge-notice反驳。应纠正为：公告称仍关闭，拟于10月重开，并非已开放。当天10时公告标注发布，文章同样标注10时发布并援引公告称已重开。判断依据是“未来计划”不等于“已经完成”；最大分歧即文章与公告对开放状态的相反表述，引用不构成独立确认。此结论仅评估快照内容；快照未经外部认证，现实状态未知。（基于2个信源 | 覆盖1类媒体 | 0条事实多源一致 | 1条存在分歧 | 因果锚定1/1）",
+    "extraction": {
+      "decision": "false",
+      "extractable": true,
+      "basis_quote": "截至2026年9月4日20时UTC，“桥梁已重开”仅获文章声称，被唯一指定证据bridge-notice反驳。应纠正为：公告称仍关闭，拟于10月重开，并非已开放。"
+    },
+    "usage": {
+      "model_calls": 16,
+      "input_tokens": 14250,
+      "output_tokens": 8566,
+      "seconds": 161.24854488599522
+    }
+  },
+  {
+    "id": "library-evidence",
+    "arm": "original",
+    "status": "completed",
+    "prediction": "true",
+    "assessment_mode": "evidence",
+    "extractor_answer_text": "“图书馆现于晚上9点闭馆”获限定证据范围内的公告支持；截至2026年9月4日20:00Z，证据判定为支持，现实执行情况未知。需纠偏的是，两份材料同源，不能算独立确认。公告9月4日发布，称“今天”起延至21点闭馆；文章引用该公告。判定依据是公告明文表述，但在1个信源中未找到调整原因。材料无分歧，局限是快照未经外部认证，不能据此证明实际执行。（基于1个信源、2份材料 | 覆盖1类媒体 | 0条事实独立多源一致 | 0条存在分歧 | 因果锚定1/1，仅指文本依据）",
+    "extraction": {
+      "decision": "true",
+      "extractable": true,
+      "basis_quote": "截至2026年9月4日20:00Z，证据判定为支持，现实执行情况未知。"
+    },
+    "usage": {
+      "model_calls": 16,
+      "input_tokens": 13633,
+      "output_tokens": 8547,
+      "seconds": 155.2600619720033
+    }
+  },
+  {
+    "id": "conflict-evidence",
+    "arm": "original",
+    "status": "completed",
+    "prediction": "disputed",
+    "assessment_mode": "evidence",
+    "extractor_answer_text": "“渡轮今日运营”获report-a支持，却被report-b反驳，不能称为信源一致证实；在2个信源中未找到现实运营核验资料。这里评估的是材料表述，而非证明实际开航。2026年9月4日10时，两份快照发布相反说法；截至20时，证据仍冲突，现实状态未知（时间均为UTC）。原因是材料直接矛盾，且均未经外部认证。最大分歧即当日是否运营：a称运营，b称不运营；两者来自同一虚构发布者，不构成独立确认。（基于2个信源 | 覆盖1类媒体 | 0条事实多源一致 | 1条存在分歧 | 因果锚定2/2）",
+    "extraction": {
+      "decision": "disputed",
+      "extractable": true,
+      "basis_quote": "截至20时，证据仍冲突，现实状态未知（时间均为UTC）。"
+    },
+    "usage": {
+      "model_calls": 16,
+      "input_tokens": 14025,
+      "output_tokens": 8067,
+      "seconds": 152.70371886999783
+    }
+  },
+  {
+    "id": "chain-evidence",
+    "arm": "accuracy",
+    "status": "completed",
+    "prediction": "true",
+    "assessment_mode": "evidence",
+    "checkpoints": [
+      {
+        "round": 1,
+        "id": "chain-evidence",
+        "decision": "true",
+        "assessment_mode": "evidence",
+        "assessments": {
+          "evidence": {
+            "raw_verdict": "supported",
+            "decision": "supported",
+            "blocking_gap_ids": []
+          },
+          "world": {
+            "raw_verdict": "unresolved",
+            "decision": "unresolved",
+            "blocking_gap_ids": []
+          }
+        },
+        "provenance_status": "original_material_located"
+      }
+    ],
+    "native_prediction": {
+      "id": "chain-evidence",
+      "assessment_mode": "evidence",
+      "as_of": "2026-09-04T20:00:00Z",
+      "decision": "true",
+      "assessments": {
+        "evidence": {
+          "raw_verdict": "supported",
+          "decision": "supported",
+          "blocking_gap_ids": []
+        },
+        "world": {
+          "raw_verdict": "unresolved",
+          "decision": "unresolved",
+          "blocking_gap_ids": []
+        }
+      },
+      "provenance_status": "original_material_located",
+      "assessment_valid": true,
+      "stop_reason": "complete"
+    },
+    "extractor_answer_text": "{\"id\": \"chain-evidence\", \"assessment_mode\": \"evidence\", \"as_of\": \"2026-09-04T20:00:00Z\", \"decision\": \"true\", \"assessments\": {\"evidence\": {\"raw_verdict\": \"supported\", \"decision\": \"supported\", \"blocking_gap_ids\": []}, \"world\": {\"raw_verdict\": \"unresolved\", \"decision\": \"unresolved\", \"blocking_gap_ids\": []}}, \"provenance_status\": \"original_material_located\", \"assessment_valid\": true, \"stop_reason\": \"complete\"}",
+    "extraction": {
+      "decision": "true",
+      "extractable": true,
+      "basis_quote": "\"decision\": \"true\""
+    },
+    "usage": {
+      "model_calls": 7,
+      "input_tokens": 12064,
+      "output_tokens": 5984,
+      "seconds": 98.6198127509997
+    }
+  },
+  {
+    "id": "world-unknown",
+    "arm": "original",
+    "status": "completed",
+    "prediction": "unverifiable",
+    "assessment_mode": "world",
+    "extractor_answer_text": "“现于21时闭馆”获范围内1份公告文本支持，但截至2026年9月4日20:00 UTC是否实际执行，在2个信源中未找到证明，世界核验为未知。公告称9月4日起延时至21时，报道引用复述；两页同属虚构发布者的合成快照，不构成独立确认。报道说法源于公告，调整的实际原因未交代。两页没有说法分歧，但文本一致不能证明现实已实施。（基于2个信源页面 | 覆盖1类媒体 | 1条事实多源一致〔非独立〕 | 0条存在分歧 | 因果锚定1/1）",
+    "extraction": {
+      "decision": "unverifiable",
+      "extractable": true,
+      "basis_quote": "但截至2026年9月4日20:00 UTC是否实际执行，在2个信源中未找到证明，世界核验为未知。"
+    },
+    "usage": {
+      "model_calls": 16,
+      "input_tokens": 14014,
+      "output_tokens": 9004,
+      "seconds": 170.4194535839997
+    }
+  },
+  {
+    "id": "bridge-evidence",
+    "arm": "accuracy",
+    "status": "completed",
+    "prediction": "false",
+    "assessment_mode": "evidence",
+    "checkpoints": [
+      {
+        "round": 1,
+        "id": "bridge-evidence",
+        "decision": "false",
+        "assessment_mode": "evidence",
+        "assessments": {
+          "evidence": {
+            "raw_verdict": "contradicted",
+            "decision": "contradicted",
+            "blocking_gap_ids": []
+          },
+          "world": {
+            "raw_verdict": "unresolved",
+            "decision": "unresolved",
+            "blocking_gap_ids": []
+          }
+        },
+        "provenance_status": "original_material_located"
+      }
+    ],
+    "native_prediction": {
+      "id": "bridge-evidence",
+      "assessment_mode": "evidence",
+      "as_of": "2026-09-04T20:00:00Z",
+      "decision": "false",
+      "assessments": {
+        "evidence": {
+          "raw_verdict": "contradicted",
+          "decision": "contradicted",
+          "blocking_gap_ids": []
+        },
+        "world": {
+          "raw_verdict": "unresolved",
+          "decision": "unresolved",
+          "blocking_gap_ids": []
+        }
+      },
+      "provenance_status": "original_material_located",
+      "assessment_valid": true,
+      "stop_reason": "complete"
+    },
+    "extractor_answer_text": "{\"id\": \"bridge-evidence\", \"assessment_mode\": \"evidence\", \"as_of\": \"2026-09-04T20:00:00Z\", \"decision\": \"false\", \"assessments\": {\"evidence\": {\"raw_verdict\": \"contradicted\", \"decision\": \"contradicted\", \"blocking_gap_ids\": []}, \"world\": {\"raw_verdict\": \"unresolved\", \"decision\": \"unresolved\", \"blocking_gap_ids\": []}}, \"provenance_status\": \"original_material_located\", \"assessment_valid\": true, \"stop_reason\": \"complete\"}",
+    "extraction": {
+      "decision": "false",
+      "extractable": true,
+      "basis_quote": "\"decision\": \"false\""
+    },
+    "usage": {
+      "model_calls": 5,
+      "input_tokens": 7271,
+      "output_tokens": 3665,
+      "seconds": 63.86318910800037
+    }
+  },
+  {
+    "id": "world-unknown",
+    "arm": "accuracy",
+    "status": "completed",
+    "prediction": "unverifiable",
+    "assessment_mode": "world",
+    "checkpoints": [
+      {
+        "round": 1,
+        "id": "world-unknown",
+        "decision": "unverifiable",
+        "assessment_mode": "world",
+        "assessments": {
+          "evidence": {
+            "raw_verdict": "supported",
+            "decision": "supported",
+            "blocking_gap_ids": []
+          },
+          "world": {
+            "raw_verdict": "unresolved",
+            "decision": "unresolved",
+            "blocking_gap_ids": []
+          }
+        },
+        "provenance_status": "original_material_located"
+      }
+    ],
+    "native_prediction": {
+      "id": "world-unknown",
+      "assessment_mode": "world",
+      "as_of": "2026-09-04T20:00:00Z",
+      "decision": "unverifiable",
+      "assessments": {
+        "evidence": {
+          "raw_verdict": "supported",
+          "decision": "supported",
+          "blocking_gap_ids": []
+        },
+        "world": {
+          "raw_verdict": "unresolved",
+          "decision": "unresolved",
+          "blocking_gap_ids": []
+        }
+      },
+      "provenance_status": "original_material_located",
+      "assessment_valid": true,
+      "stop_reason": "provider_exhausted"
+    },
+    "extractor_answer_text": "{\"id\": \"world-unknown\", \"assessment_mode\": \"world\", \"as_of\": \"2026-09-04T20:00:00Z\", \"decision\": \"unverifiable\", \"assessments\": {\"evidence\": {\"raw_verdict\": \"supported\", \"decision\": \"supported\", \"blocking_gap_ids\": []}, \"world\": {\"raw_verdict\": \"unresolved\", \"decision\": \"unresolved\", \"blocking_gap_ids\": []}}, \"provenance_status\": \"original_material_located\", \"assessment_valid\": true, \"stop_reason\": \"provider_exhausted\"}",
+    "extraction": {
+      "decision": "unverifiable",
+      "extractable": true,
+      "basis_quote": "\"decision\": \"unverifiable\""
+    },
+    "usage": {
+      "model_calls": 5,
+      "input_tokens": 7189,
+      "output_tokens": 3559,
+      "seconds": 63.57168012699549
+    }
+  },
+  {
+    "id": "chain-evidence",
+    "arm": "original",
+    "status": "completed",
+    "prediction": "true",
+    "assessment_mode": "evidence",
+    "extractor_answer_text": "“实验室上午8点开放”获指定证据bulletin-c支持，“今天”对应2026年9月4日；现实核验未知。纠偏：摘要所加“每天”在3个信源中未找到。路径为a引向b、b引用c、c公告当日起8点开放；支持结论源于c的明文，而非引用链的独立互证，开放安排的原因未提供。公告间无分歧，但摘要“每天”超出原文；三份均为同源、未经外部认证的合成快照。（基于3个信源 | 覆盖1类媒体 | 0条事实多源一致 | 0条存在分歧 | 因果锚定1/1）",
+    "extraction": {
+      "decision": "true",
+      "extractable": true,
+      "basis_quote": "“实验室上午8点开放”获指定证据bulletin-c支持"
+    },
+    "usage": {
+      "model_calls": 17,
+      "input_tokens": 16919,
+      "output_tokens": 7968,
+      "seconds": 156.371949968001
+    }
+  }
+]
