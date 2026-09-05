@@ -1,5 +1,7 @@
 # Codex execution plan — accuracy tracing
 
+> v0.3 update: [REPAIR_V0.3.md](REPAIR_V0.3.md) supersedes conflicting implementation and adapter notes below.
+
 This file is the executable engineering handoff. The current Codex workspace has already started and implemented the v0.2 reference milestone; do not recreate it from scratch. Use `ACCURACY_TRACING_SPEC.md` as the product and evaluation contract.
 
 ## Ownership and location

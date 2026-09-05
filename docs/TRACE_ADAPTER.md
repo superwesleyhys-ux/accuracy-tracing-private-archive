@@ -1,5 +1,7 @@
 # Accuracy Tracing: provenance and verification adapter contract
 
+> v0.3 update: [REPAIR_V0.3.md](REPAIR_V0.3.md) supersedes conflicting implementation and adapter notes below.
+
 This is the v0.2 orchestration contract. The existing `newsverify.core` API remains
 separate. The import package remains `newsverify` for compatibility.
 
