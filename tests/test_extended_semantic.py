@@ -49,16 +49,27 @@ def accepted_extension(payload):
             ("source_lineage", []),
         ]
         for dimension, probe in (
-            ("negation", "polarity"), ("time", "time_boundary"),
+            ("negation", "polarity"),
             ("quantity_unit", "quantity_unit"), ("baseline_scope", "baseline_scope"),
         ):
             if dimension in dimensions:
                 bindings.append((probe, dimensions[dimension]))
+        bindings.extend(("time_boundary", [identifier])
+                        for identifier in dimensions.get("time", []))
         if set(dimensions) & {"condition", "modality"}:
             bindings.append(("condition_modality",
                              dimensions.get("condition", []) + dimensions.get("modality", [])))
         bindings.extend(("entity_identity", [identifier])
                         for identifier in dimensions.get("entity_identity", []))
+        bindings.extend(("exact_designation", [identifier])
+                        for identifier in dimensions.get("exact_designation", []))
+        if dimensions.get("exact_designation"):
+            bindings.append(("designation_relation", [item["id"]
+                for item in claim["dimensions"]]))
+        logic = payload["claim_contract"]["logic"]
+        if logic in {"conditional", "comparison", "causal"}:
+            bindings.append((logic + "_relation", [item["id"]
+                for item in claim["dimensions"]]))
         if payload["target"]["assessment_mode"] == "world":
             bindings.append(("source_independence", []))
         probes.extend({"claim_id": claim["id"], "kind": kind,
@@ -126,7 +137,11 @@ class TargetPlannerTests(unittest.TestCase):
         self.assertEqual({"source_lineage"}, {item.kind for item in lineage.probes})
         self.assertEqual({item.kind for item in atoms.probes},
                          {item.kind for item in evidence.probes})
-        self.assertEqual({"source_lineage"}, {item.kind for item in world.probes})
+        self.assertEqual({"semantic_core", "polarity", "time_boundary",
+                          "baseline_scope", "source_lineage"},
+                         {item.kind for item in world.probes})
+        self.assertEqual(e.PLAN_SCHEMA_VERSION, plan.to_payload()["schema_version"])
+        self.assertEqual(plan.logic, world.logic)
         with self.assertRaises(FrozenInstanceError):
             atoms.stage = "world"
         serialized = json.dumps(plan.to_payload(), sort_keys=True)
@@ -228,12 +243,316 @@ class TargetPlannerTests(unittest.TestCase):
         self.assertEqual(3, len({item.id for item in entity_probes}))
         self.assertEqual({(item.id,) for item in entities},
                          {item.dimension_ids for item in entity_probes})
+        self.assertEqual({"same_referent"}, {item.match_policy for item in entity_probes})
 
         reordered = deepcopy(response)
         reordered["claims"][0]["dimensions"].reverse()
         again = e.TargetPlanner(ScriptClient(reordered, accepted_extension)).prepare(target)
         self.assertEqual(plan.sha256, again.sha256)
         self.assertEqual([item.id for item in plan.probes], [item.id for item in again.probes])
+
+    def test_nested_entity_is_repaired_to_maximal_non_overlapping_referents(self):
+        target = {**TARGET,
+                  "text": "The Unified Geologic Map of the Moon was released by USGS."}
+        nested = {"claims": [{"statement": target["text"], "quote": target["text"],
+            "role": "main", "dimensions": [
+                {"kind": "subject", "quote": "The Unified Geologic Map of the Moon"},
+                {"kind": "predicate", "quote": "was released"},
+                {"kind": "entity_identity", "quote": "Unified Geologic Map of the Moon"},
+                {"kind": "entity_identity", "quote": "Moon"},
+                {"kind": "entity_identity", "quote": "USGS"},
+            ]}], "logic": "single", "notes": ""}
+        maximal = deepcopy(nested)
+        maximal["claims"][0]["dimensions"] = [item for item in
+            maximal["claims"][0]["dimensions"] if item["quote"] != "Moon"]
+        client = ScriptClient(nested, maximal, accepted_extension)
+        planner = e.TargetPlanner(client, max_structure_repairs=1)
+        plan = planner.prepare(target)
+
+        self.assertEqual(["claim_contract", "claim_contract", "extension"],
+                         [item["stage"] for item in client.calls])
+        self.assertEqual("structure_repair_requested", planner.history[0]["status"])
+        self.assertIn("maximal non-overlapping", client.calls[1]["payload"]["repair"]["issue"])
+        self.assertEqual({"Unified Geologic Map of the Moon", "USGS"},
+                         {item.anchor.quote for item in plan.claims[0].dimensions
+                          if item.kind == "entity_identity"})
+
+    def test_exact_designation_requires_explicit_naming_assertion(self):
+        ordinary_target = {**TARGET, "text": "The Artemis mission launched."}
+        invalid = {"claims": [{"statement": ordinary_target["text"],
+            "quote": ordinary_target["text"], "role": "main", "dimensions": [
+                {"kind": "subject", "quote": "The Artemis mission"},
+                {"kind": "predicate", "quote": "launched"},
+                {"kind": "exact_designation", "quote": "Artemis"},
+            ]}], "logic": "single", "notes": ""}
+        planner = e.TargetPlanner(ScriptClient(invalid), max_structure_repairs=0)
+        with self.assertRaisesRegex(e.TargetPlanningError, "exact_designation"):
+            planner.prepare(ordinary_target)
+
+        naming_target = {**TARGET, "text": "The mission was officially named Artemis II."}
+        valid = {"claims": [{"statement": naming_target["text"],
+            "quote": naming_target["text"], "role": "main", "dimensions": [
+                {"kind": "subject", "quote": "The mission"},
+                {"kind": "predicate", "quote": "was officially named"},
+                {"kind": "exact_designation", "quote": "Artemis II"},
+            ]}], "logic": "single", "notes": ""}
+        plan = e.TargetPlanner(ScriptClient(valid, accepted_extension)).prepare(naming_target)
+        probe = next(item for item in plan.probes if item.kind == "exact_designation")
+        self.assertEqual("exact_designation", probe.match_policy)
+        self.assertEqual(("atoms", "evidence", "world"), probe.routes)
+
+    def test_rename_morphology_and_p07_shape_require_full_designation_relation(self):
+        for predicate in (
+                "name", "named", "names", "naming",
+                "rename", "renamed", "renames", "renaming",
+                "call", "called", "calls", "calling",
+                "title", "titled", "titles", "titling",
+                "designate", "designated", "designates", "designating",
+                "label", "labeled", "labels", "labeling", "labelled", "labelling",
+                "term", "termed", "terms", "terming"):
+            with self.subTest(predicate=predicate):
+                self.assertIsNotNone(e._DESIGNATION_ASSERTION_CUE.fullmatch(predicate))
+        for non_cue in ("unnamed", "surname", "callback", "predesignated"):
+            with self.subTest(non_cue=non_cue):
+                self.assertIsNone(e._DESIGNATION_ASSERTION_CUE.search(non_cue))
+
+        target = {**TARGET, "text":
+            "NOAA renamed GOES-U to GOES-19 on June 25, 2024."}
+        renamed = {"claims": [{"statement": target["text"],
+            "quote": target["text"], "role": "main", "dimensions": [
+                {"kind": "subject", "quote": "NOAA"},
+                {"kind": "predicate", "quote": "renamed"},
+                {"kind": "entity_identity", "quote": "NOAA"},
+                {"kind": "entity_identity", "quote": "GOES-U"},
+                {"kind": "exact_designation", "quote": "GOES-19"},
+                {"kind": "time", "quote": "June 25, 2024"},
+            ]}], "logic": "single", "notes": ""}
+        client = ScriptClient(renamed, accepted_extension)
+        plan = e.TargetPlanner(client).prepare(target)
+
+        self.assertEqual(["claim_contract", "extension"],
+                         [item["stage"] for item in client.calls])
+        claim, = plan.claims
+        designation, = [item for item in claim.dimensions
+                        if item.kind == "exact_designation"]
+        self.assertEqual("GOES-19", designation.anchor.quote)
+        relation, = [item for item in plan.probes
+                     if item.kind == "designation_relation"]
+        self.assertEqual({item.id for item in claim.dimensions},
+                         set(relation.dimension_ids))
+        self.assertEqual("semantic_constraint", relation.match_policy)
+        self.assertEqual(("atoms", "evidence", "world"), relation.routes)
+
+        def disconnected(payload):
+            answer = accepted_extension(payload)
+            answer["probes"] = [item for item in answer["probes"]
+                                if item["kind"] != "designation_relation"]
+            return answer
+
+        def partial_relation(payload):
+            answer = accepted_extension(payload)
+            relation_probe = next(item for item in answer["probes"]
+                                  if item["kind"] == "designation_relation")
+            relation_probe["dimension_ids"].pop()
+            return answer
+
+        for label, response in (("disconnected", disconnected),
+                                ("partial", partial_relation)):
+            with self.subTest(invalid_relation=label), self.assertRaisesRegex(
+                    e.TargetPlanningError,
+                    "missing required dimension-bound probes|binding does not match"):
+                e.TargetPlanner(ScriptClient(renamed, response),
+                                max_repairs=0).prepare(target)
+
+    def test_p07_identity_questions_are_program_canonical_across_voice_variants(self):
+        active_target = {**TARGET, "text":
+            "NOAA renamed GOES-U to GOES-19 on June 25, 2024."}
+        passive_target = {**TARGET, "text":
+            "NOAA's GOES-U satellite was renamed GOES-19 on June 25, 2024."}
+
+        def claim_contract(target, subject, predicate):
+            return {"claims": [{"statement": target["text"],
+                "quote": target["text"], "role": "main", "dimensions": [
+                    {"kind": "subject", "quote": subject},
+                    {"kind": "predicate", "quote": predicate},
+                    {"kind": "entity_identity", "quote": "NOAA"},
+                    {"kind": "entity_identity", "quote": "GOES-U"},
+                    {"kind": "exact_designation", "quote": "GOES-19"},
+                    {"kind": "time", "quote": "June 25, 2024"},
+                ]}], "logic": "single", "notes": ""}
+
+        def contaminated_extension(wording):
+            def response(payload):
+                answer = accepted_extension(payload)
+                for probe in answer["probes"]:
+                    if probe["kind"] in {"entity_identity", "exact_designation"}:
+                        probe["question"] = wording
+                return answer
+            return response
+
+        active_contract = claim_contract(active_target, "NOAA", "renamed")
+        passive_contract = claim_contract(
+            passive_target, "NOAA's GOES-U satellite", "was renamed")
+        active = e.TargetPlanner(ScriptClient(active_contract,
+            contaminated_extension("Did NOAA perform the renaming action?"))).prepare(
+                active_target)
+        active_again = e.TargetPlanner(ScriptClient(active_contract,
+            contaminated_extension("Is the target subject also the actor?"))).prepare(
+                active_target)
+        passive = e.TargetPlanner(ScriptClient(passive_contract,
+            contaminated_extension("Does the possessive make NOAA the actor?"))).prepare(
+                passive_target)
+
+        def question(plan, kind, quote):
+            claim, = plan.claims
+            dimension = next(item for item in claim.dimensions
+                             if item.kind == kind and item.anchor.quote == quote)
+            return next(item.question for item in plan.probes
+                        if item.kind == kind and item.dimension_ids == (dimension.id,))
+
+        expected_identity = e._canonical_identity_question(
+            e.TextAnchor(0, 4, "NOAA"), "same_referent")
+        expected_designation = e._canonical_identity_question(
+            e.TextAnchor(0, 7, "GOES-19"), "exact_designation")
+        for plan in (active, active_again, passive):
+            self.assertEqual(expected_identity,
+                             question(plan, "entity_identity", "NOAA"))
+            self.assertEqual(expected_designation,
+                             question(plan, "exact_designation", "GOES-19"))
+            self.assertNotIn("actor", question(
+                plan, "entity_identity", "NOAA").casefold())
+            self.assertNotIn("renam", question(
+                plan, "entity_identity", "NOAA").casefold())
+        self.assertEqual([item.id for item in active.probes],
+                         [item.id for item in active_again.probes])
+        self.assertEqual(active.sha256, active_again.sha256)
+
+    def test_p08_multiple_times_require_one_single_dimension_probe_each(self):
+        target = {**TARGET, "text": ("The USGS Unified Geologic Map of the Moon released in "
+            "2020 combined six Apollo-era regional maps with newer lunar-mission data.")}
+        response = {"claims": [
+            {"statement": "The map was released in 2020.",
+             "quote": "The USGS Unified Geologic Map of the Moon released in 2020",
+             "role": "conjunct", "dimensions": [
+                 {"kind": "subject", "quote": "The USGS Unified Geologic Map of the Moon"},
+                 {"kind": "predicate", "quote": "released"},
+                 {"kind": "time", "quote": "in 2020"},
+             ]},
+            {"statement": ("The map combined six Apollo-era regional maps with newer "
+                           "lunar-mission data."),
+             "quote": target["text"], "role": "conjunct", "dimensions": [
+                 {"kind": "subject", "quote": "The USGS Unified Geologic Map of the Moon"},
+                 {"kind": "predicate", "quote": "combined"},
+                 {"kind": "quantity_unit", "quote": "six Apollo-era regional maps"},
+                 {"kind": "time", "quote": "Apollo-era regional maps"},
+                 {"kind": "time", "quote": "newer lunar-mission data"},
+             ]},
+        ], "logic": "and", "notes": ""}
+        plan = e.TargetPlanner(ScriptClient(response, accepted_extension)).prepare(target)
+
+        times = [dimension for claim in plan.claims for dimension in claim.dimensions
+                 if dimension.kind == "time"]
+        time_probes = [probe for probe in plan.probes
+                       if probe.kind == "time_boundary"]
+        self.assertEqual(3, len(times))
+        self.assertEqual({"in 2020", "Apollo-era regional maps",
+                          "newer lunar-mission data"},
+                         {item.anchor.quote for item in times})
+        self.assertEqual({(item.id,) for item in times},
+                         {item.dimension_ids for item in time_probes})
+        self.assertTrue(all(len(item.dimension_ids) == 1 for item in time_probes))
+
+        def merged_time_probe(payload):
+            answer = accepted_extension(payload)
+            combination = next(claim for claim in payload["claim_contract"]["claims"]
+                               if "combined" in claim["statement"])
+            time_ids = [item["id"] for item in combination["dimensions"]
+                        if item["kind"] == "time"]
+            answer["probes"] = [probe for probe in answer["probes"]
+                                if not (probe["claim_id"] == combination["id"] and
+                                        probe["kind"] == "time_boundary")]
+            answer["probes"].append({"claim_id": combination["id"],
+                "kind": "time_boundary", "dimension_ids": time_ids,
+                "question": "Check both time qualifiers together.",
+                "decision_impact": "A mismatch could change the decision."})
+            return answer
+
+        with self.assertRaisesRegex(e.TargetPlanningError,
+                                    "binding does not match claim dimensions"):
+            e.TargetPlanner(ScriptClient(response, merged_time_probe),
+                            max_repairs=0, max_output_repairs=0).prepare(target)
+
+        overlapping = deepcopy(response)
+        combination = overlapping["claims"][1]
+        combination["dimensions"][-2]["quote"] = (
+            "Apollo-era regional maps with newer lunar-mission data")
+        with self.assertRaisesRegex(e.TargetPlanningError, "overlap"):
+            e.TargetPlanner(ScriptClient(overlapping),
+                            max_structure_repairs=0).prepare(target)
+
+    def test_designation_cue_must_be_the_designation_claim_predicate(self):
+        target = {**TARGET, "text": "Mission A was named Artemis while Mission B launched."}
+        wrong = {"claims": [{"statement": "Mission B launched.",
+            "quote": target["text"], "role": "main", "dimensions": [
+                {"kind": "subject", "quote": "Mission B"},
+                {"kind": "predicate", "quote": "launched"},
+                {"kind": "exact_designation", "quote": "Mission B"},
+            ]}], "logic": "single", "notes": ""}
+        planner = e.TargetPlanner(ScriptClient(wrong), max_structure_repairs=0)
+        with self.assertRaisesRegex(e.TargetPlanningError, "predicate"):
+            planner.prepare(target)
+
+    def test_repeated_exact_designations_require_a_structure_repair(self):
+        target = {**TARGET, "text": "The mission was named Artemis, not Apollo."}
+        repeated = {"claims": [{"statement": target["text"], "quote": target["text"],
+            "role": "main", "dimensions": [
+                {"kind": "subject", "quote": "The mission"},
+                {"kind": "predicate", "quote": "was named"},
+                {"kind": "negation", "quote": "not"},
+                {"kind": "exact_designation", "quote": "Artemis"},
+                {"kind": "exact_designation", "quote": "Apollo"},
+            ]}], "logic": "single", "notes": ""}
+        planner = e.TargetPlanner(ScriptClient(repeated), max_structure_repairs=0)
+        with self.assertRaisesRegex(e.TargetPlanningError, "multiple exact_designation"):
+            planner.prepare(target)
+
+    def test_exact_designation_without_predicate_is_a_controlled_planning_error(self):
+        target = {**TARGET, "text": "The mission was named Artemis."}
+        malformed = {"claims": [{"statement": target["text"], "quote": target["text"],
+            "role": "main", "dimensions": [
+                {"kind": "subject", "quote": "The mission"},
+                {"kind": "exact_designation", "quote": "Artemis"},
+            ]}], "logic": "single", "notes": ""}
+        client = ScriptClient(malformed)
+        with self.assertRaisesRegex(e.TargetPlanningError, "subject and predicate"):
+            e.TargetPlanner(client, max_structure_repairs=0).prepare(target)
+        self.assertEqual(1, len(client.calls))
+
+    def test_attribution_predicate_crossing_that_boundary_is_repaired(self):
+        target = {**TARGET, "text": "NASA reported that samples weighed 70 grams."}
+        valid = {"claims": [
+            {"statement": "NASA reported the content.", "quote": "NASA reported",
+             "role": "attribution", "dimensions": [
+                 {"kind": "subject", "quote": "NASA"},
+                 {"kind": "predicate", "quote": "reported"}]},
+            {"statement": "samples weighed 70 grams.", "quote": "samples weighed 70 grams.",
+             "role": "attributed_content", "dimensions": [
+                 {"kind": "subject", "quote": "samples"},
+                 {"kind": "predicate", "quote": "weighed"},
+                 {"kind": "quantity_unit", "quote": "70 grams"}]},
+        ], "logic": "attribution", "notes": ""}
+        crossed = deepcopy(valid)
+        crossed["claims"][0]["quote"] = target["text"]
+        crossed["claims"][0]["dimensions"][1]["quote"] = "reported that samples weighed"
+        with self.assertRaises(e.TargetPlanningError):
+            e.TargetPlanner(ScriptClient(crossed), max_structure_repairs=0).prepare(target)
+        client = ScriptClient(crossed, valid, accepted_extension)
+        planner = e.TargetPlanner(client, max_structure_repairs=1)
+        plan = planner.prepare(target)
+        self.assertEqual("structure_repair_requested", planner.history[0]["status"])
+        parent = next(claim for claim in plan.claims if claim.role == "attribution")
+        self.assertEqual("reported", next(dim.anchor.quote for dim in parent.dimensions
+                                         if dim.kind == "predicate"))
 
     def test_explicit_reported_that_cannot_bypass_attribution_split(self):
         target = {**TARGET, "text": ("NASA's February 15, 2024 bulk-sample announcement "
@@ -286,6 +605,38 @@ class TargetPlannerTests(unittest.TestCase):
         self.assertEqual(attribution.id,
                          next(item for item in plan.to_payload()["claims"]
                               if item["role"] == "attributed_content")["parent_claim_id"])
+
+    def test_attribution_parent_cannot_absorb_child_entity_dimensions(self):
+        target = {**TARGET, "text": "NASA reported that Bennu samples weighed 70 grams."}
+        leaked = {"claims": [
+            {"statement": "NASA reported the content.", "quote": target["text"],
+             "role": "attribution", "dimensions": [
+                 {"kind": "subject", "quote": "NASA"},
+                 {"kind": "predicate", "quote": "reported"},
+                 {"kind": "entity_identity", "quote": "NASA"},
+                 {"kind": "entity_identity", "quote": "Bennu"},
+             ]},
+            {"statement": "Bennu samples weighed 70 grams.",
+             "quote": "Bennu samples weighed 70 grams.",
+             "role": "attributed_content", "dimensions": [
+                 {"kind": "subject", "quote": "Bennu samples"},
+                 {"kind": "predicate", "quote": "weighed"},
+                 {"kind": "quantity_unit", "quote": "70 grams"},
+                 {"kind": "entity_identity", "quote": "Bennu"},
+             ]},
+        ], "logic": "attribution", "notes": ""}
+        repaired = deepcopy(leaked)
+        repaired["claims"][0]["quote"] = "NASA reported"
+        repaired["claims"][0]["dimensions"] = [item for item in
+            repaired["claims"][0]["dimensions"] if item["quote"] != "Bennu"]
+        planner = e.TargetPlanner(
+            ScriptClient(leaked, repaired, accepted_extension),
+            max_structure_repairs=1)
+        plan = planner.prepare(target)
+        parent = next(item for item in plan.claims if item.role == "attribution")
+        self.assertEqual({"NASA"}, {item.anchor.quote for item in parent.dimensions
+                                    if item.kind == "entity_identity"})
+        self.assertEqual("structure_repair_requested", planner.history[0]["status"])
 
     def test_structure_repair_budget_exhaustion_never_reaches_extension(self):
         collapsed = contract()
@@ -340,7 +691,8 @@ class TargetPlannerTests(unittest.TestCase):
             ("missing", missing, "missing required dimension-bound probes"),
         ):
             with self.subTest(label=label):
-                planner = e.TargetPlanner(ScriptClient(contract(), response))
+                planner = e.TargetPlanner(
+                    ScriptClient(contract(), response), max_repairs=0)
                 with self.assertRaisesRegex(e.TargetPlanningError, message):
                     planner.prepare(TARGET)
 
@@ -355,10 +707,132 @@ class TargetPlannerTests(unittest.TestCase):
             time_probe["dimension_ids"] = [subject_id]
             return answer
 
-        planner = e.TargetPlanner(ScriptClient(contract(), wrong_binding))
+        planner = e.TargetPlanner(
+            ScriptClient(contract(), wrong_binding), max_repairs=0)
         with self.assertRaisesRegex(e.TargetPlanningError,
                                     "binding does not match claim dimensions"):
             planner.prepare(TARGET)
+
+    def test_invalid_probe_set_gets_one_local_complete_replacement(self):
+        def extra_relation(payload):
+            answer = accepted_extension(payload)
+            claim = payload["claim_contract"]["claims"][0]
+            answer["probes"].append({
+                "claim_id": claim["id"], "kind": "comparison_relation",
+                "dimension_ids": [item["id"] for item in claim["dimensions"]],
+                "question": "Incorrect optional comparison probe.",
+                "decision_impact": "This extra probe must not enter the plan.",
+            })
+            return answer
+
+        client = ScriptClient(contract(), extra_relation, accepted_extension)
+        planner = e.TargetPlanner(client, max_repairs=1)
+        plan = planner.prepare(TARGET)
+
+        self.assertEqual(["claim_contract", "extension", "extension"],
+                         [call["stage"] for call in client.calls])
+        self.assertIsNone(client.calls[1]["payload"]["repair"])
+        self.assertIn("binding does not match", client.calls[2]["payload"]["repair"]["issue"])
+        self.assertEqual(client.calls[1]["payload"]["claim_contract"],
+                         client.calls[2]["payload"]["claim_contract"])
+        self.assertEqual("output_repair_requested", planner.history[1]["status"])
+        self.assertEqual("accepted", planner.history[2]["status"])
+        self.assertNotIn("comparison_relation", {probe.kind for probe in plan.probes})
+
+    def test_contract_and_output_repairs_have_separate_budgets(self):
+        contract_repair = {
+            "decision": "repair",
+            "repair_quote": "above the 2024 baseline",
+            "repair_issue": "The comparison baseline is missing.",
+            "probes": [],
+            "notes": "",
+        }
+
+        def invalid_probe_set(payload):
+            answer = accepted_extension(payload)
+            claim = payload["claim_contract"]["claims"][0]
+            answer["probes"].append({
+                "claim_id": claim["id"],
+                "kind": "comparison_relation",
+                "dimension_ids": [item["id"] for item in claim["dimensions"]],
+                "question": "An illegal optional relation probe.",
+                "decision_impact": "The set must be replaced without changing claims.",
+            })
+            return answer
+
+        client = ScriptClient(
+            contract(include_baseline=False),
+            contract_repair,
+            contract(include_baseline=True),
+            invalid_probe_set,
+            accepted_extension,
+        )
+        planner = e.TargetPlanner(
+            client,
+            max_repairs=1,
+            max_structure_repairs=1,
+            max_output_repairs=1,
+        )
+        plan = planner.prepare(TARGET)
+
+        self.assertEqual(
+            ["claim_contract", "extension", "claim_contract", "extension", "extension"],
+            [call["stage"] for call in client.calls],
+        )
+        self.assertEqual(1, sum(item["status"] == "repair_requested"
+                                for item in planner.history))
+        self.assertEqual(1, sum(item["status"] == "output_repair_requested"
+                                for item in planner.history))
+        self.assertEqual("accepted", planner.history[-1]["status"])
+        self.assertIn("baseline_scope", {dimension.kind
+                                          for dimension in plan.claims[0].dimensions})
+
+    def test_output_repair_cannot_consume_later_contract_repair(self):
+        def invalid_probe_set(payload):
+            answer = accepted_extension(payload)
+            claim = payload["claim_contract"]["claims"][0]
+            answer["probes"].append({
+                "claim_id": claim["id"],
+                "kind": "comparison_relation",
+                "dimension_ids": [item["id"] for item in claim["dimensions"]],
+                "question": "An illegal optional relation probe.",
+                "decision_impact": "The set must be replaced without changing claims.",
+            })
+            return answer
+
+        contract_repair = {
+            "decision": "repair",
+            "repair_quote": "above the 2024 baseline",
+            "repair_issue": "The comparison baseline is missing.",
+            "probes": [],
+            "notes": "",
+        }
+        client = ScriptClient(
+            contract(include_baseline=False),
+            invalid_probe_set,
+            contract_repair,
+            contract(include_baseline=True),
+            accepted_extension,
+        )
+        planner = e.TargetPlanner(
+            client,
+            max_repairs=1,
+            max_structure_repairs=1,
+            max_output_repairs=1,
+        )
+        plan = planner.prepare(TARGET)
+
+        self.assertEqual(
+            ["claim_contract", "extension", "extension", "claim_contract", "extension"],
+            [call["stage"] for call in client.calls],
+        )
+        self.assertEqual(1, sum(item["status"] == "output_repair_requested"
+                                for item in planner.history))
+        self.assertEqual(1, sum(item["status"] == "repair_requested"
+                                for item in planner.history))
+        self.assertEqual("accepted", planner.history[-1]["status"])
+        self.assertIn("baseline_scope", {dimension.kind
+                                          for dimension in plan.claims[0].dimensions})
 
     def test_target_and_parent_relative_anchor_validation_fails_before_extension(self):
         absent = contract()
@@ -426,6 +900,46 @@ class TargetPlannerTests(unittest.TestCase):
         self.assertNotEqual(first.target_signature, second.target_signature)
         self.assertNotEqual(first.claims[0].id, second.claims[0].id)
         self.assertEqual(4, len(client.calls))
+
+    def test_relational_contract_requires_complete_matching_relation_probe(self):
+        examples = (
+            ("conditional", "Output rises if demand grows.", "Output", "rises",
+             "condition", "if demand grows"),
+            ("comparison", "Output exceeded the previous year's total.", "Output", "exceeded",
+             "baseline_scope", "the previous year's total"),
+            ("causal", "Rain caused the increase in river flow.", "Rain", "caused",
+             "baseline_scope", "the increase in river flow"),
+        )
+        for logic, text, subject, predicate, extra_kind, extra_quote in examples:
+            with self.subTest(logic=logic):
+                target = {**TARGET, "text": text}
+                raw = {"claims": [{"statement": text, "quote": text, "role": "main",
+                    "dimensions": [{"kind": "subject", "quote": subject},
+                        {"kind": "predicate", "quote": predicate},
+                        {"kind": extra_kind, "quote": extra_quote}]}],
+                    "logic": logic, "notes": ""}
+                plan = e.TargetPlanner(ScriptClient(raw, accepted_extension)).prepare(target)
+                relation = next(probe for probe in plan.probes
+                                if probe.kind == logic + "_relation")
+                self.assertEqual({dim.id for dim in plan.claims[0].dimensions},
+                                 set(relation.dimension_ids))
+                self.assertEqual(("atoms", "evidence", "world"), relation.routes)
+                for problem in ("missing", "partial_binding", "wrong_relation"):
+                    def malformed(payload, problem=problem):
+                        result = accepted_extension(payload)
+                        probe = next(item for item in result["probes"]
+                                     if item["kind"] == logic + "_relation")
+                        if problem == "missing":
+                            result["probes"].remove(probe)
+                        elif problem == "partial_binding":
+                            probe["dimension_ids"].pop()
+                        else:
+                            probe["kind"] = ("causal_relation" if logic != "causal"
+                                             else "comparison_relation")
+                        return result
+                    with self.subTest(problem=problem), self.assertRaises(e.TargetPlanningError):
+                        e.TargetPlanner(ScriptClient(raw, malformed),
+                            max_repairs=0).prepare(target)
 
     def test_projection_detects_tampered_frozen_plan_copy(self):
         plan = e.TargetPlanner(ScriptClient(contract(), accepted_extension)).prepare(TARGET)

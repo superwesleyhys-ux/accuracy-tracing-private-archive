@@ -79,6 +79,7 @@ class Gap:
     decision_impact: str = ""
     action: str = "search"
     locator: str | None = None
+    probe_id: str | None = None
 
 
 @dataclass(frozen=True)
@@ -109,6 +110,19 @@ class Analysis:
 
 
 @dataclass(frozen=True)
+class ProbeAssessment:
+    """One grounded answer to one immutable decision probe in one layer."""
+
+    probe_id: str
+    claim_id: str
+    stage: str
+    status: str
+    basis: tuple[Span, ...]
+    rationale: str
+    referent_relation: str = "not_applicable"
+
+
+@dataclass(frozen=True)
 class VerificationResult:
     verdict: str = "unresolved"
     basis: tuple[Span, ...] = ()
@@ -119,6 +133,8 @@ class VerificationResult:
     world_verdict: str | None = None
     world_basis: tuple[Span, ...] = ()
     world_rationale: str = ""
+    evidence_probe_results: tuple[ProbeAssessment, ...] = ()
+    world_probe_results: tuple[ProbeAssessment, ...] = ()
 
 
 @dataclass(frozen=True)
@@ -322,6 +338,8 @@ def _gap(gap, target=None, materials=None):
         raise ValueError("invalid gap action")
     if gap.action in {"fetch", "reanalyse"}:
         _nonempty(gap.locator, "gap.locator")
+    if gap.probe_id is not None:
+        _nonempty(gap.probe_id, "gap.probe_id")
     _tuple_of(gap.basis, Span, "gap.basis")
     if materials is not None:
         for span in gap.basis:
@@ -354,6 +372,28 @@ def _resolution(resolution, materials):
     _basis(resolution.basis, materials)
 
 
+def _probe_assessment(item, stage, materials):
+    if not isinstance(item, ProbeAssessment):
+        raise ValueError("invalid probe assessment type")
+    _nonempty(item.probe_id, "probe assessment probe_id")
+    _nonempty(item.claim_id, "probe assessment claim_id")
+    if item.stage != stage:
+        raise ValueError("probe assessment is stored in the wrong layer")
+    if item.status not in {"supported", "contradicted", "conflicting", "unresolved"}:
+        raise ValueError("invalid probe assessment status")
+    if item.referent_relation not in {"not_applicable", "exact", "alias", "description",
+                                      "anaphora", "ambiguous", "different", "unresolved"}:
+        raise ValueError("invalid probe referent relation")
+    _nonempty(item.rationale, "probe assessment rationale")
+    _tuple_of(item.basis, Span, "probe assessment basis")
+    for span in item.basis:
+        _span(span, materials)
+    if item.status != "unresolved" and not item.basis:
+        raise ValueError("conclusive probe assessment needs source basis")
+    if item.status == "conflicting" and len(item.basis) < 2:
+        raise ValueError("conflicting probe assessment needs at least two source passages")
+
+
 def _index_findings(items, kind):
     """Shared IDs denote exactly equal findings; conflicting definitions fail.
 
@@ -372,7 +412,7 @@ def _gap_identity(gap, target):
     # Description and source support may improve within an owner's revisions;
     # an ID must never silently become a task in another lifecycle or scope.
     return (gap.stage, gap_dimension(gap), gap.target_id or target.id,
-            gap.action, gap.locator)
+            gap.action, gap.locator, gap.probe_id)
 
 
 def _register_gaps(registry, owners, items, owner, target):
@@ -464,6 +504,34 @@ def _evidenced_lineage_versions(source_version_id, materials, relations, *,
         reached.add(version)
         pending.extend(adjacency.get(version, ()))
     return frozenset(reached)
+
+
+def _terminal_origin_candidates(source_version_id, materials, relations, candidates):
+    """Return confirmed terminal roots and whether any candidate chain is incomplete.
+
+    Candidate declarations remain part of their raw analyses. A candidate is
+    confirmed only when the target source reaches it through direct documentary
+    propagation. A reachable candidate is terminal only when it cannot reach a
+    different reachable candidate. This removes intermediate "original" records
+    while preserving independent parallel roots. Disconnected candidates and
+    reachable candidate cycles without a terminal root remain explicit gaps.
+    """
+    material_items, relation_items = tuple(materials), tuple(relations)
+    reached = _evidenced_lineage_versions(source_version_id, material_items,
+                                           relation_items)
+    reachable = {key: item for key, item in candidates.items()
+                 if item.version_id in reached}
+    candidate_versions = {item.version_id for item in reachable.values()}
+    downstream = {key: _evidenced_lineage_versions(
+        item.version_id, material_items, relation_items)
+        for key, item in reachable.items()}
+    terminal = {key: item for key, item in reachable.items()
+                if not ((downstream[key] - {item.version_id}) & candidate_versions)}
+    terminal_versions = {item.version_id for item in terminal.values()}
+    disconnected = len(reachable) != len(candidates)
+    nonterminating = any(not (versions & terminal_versions)
+                         for versions in downstream.values())
+    return terminal, disconnected or nonterminating
 
 
 def _validate_analysis(analysis, target, material, materials):
@@ -706,13 +774,17 @@ def run_provenance(target: Target | dict, provider: TraceProvider,
         resolution_items.extend(verify_resolved.values())
         proposed_resolved = _combine_resolutions(resolution_items)
         generated_gaps = list(runtime_gaps.values())
-        reachable_origins = _evidenced_lineage_versions(
-            target.source_version_id, available.values(), projected_relations.values())
-        projected_origins = {key: item for key, item in candidate_origins.items()
-                             if item.version_id in reachable_origins}
-        if candidate_origins and not projected_origins:
-            lineage_gap = Gap("lineage:" + target.id,
-                "Provide the target source version and an evidenced citation/derivation path to an original material")
+        projected_origins, incomplete_origin_chain = _terminal_origin_candidates(
+            target.source_version_id, available.values(), projected_relations.values(),
+            candidate_origins)
+        if incomplete_origin_chain:
+            lineage_id = "lineage:" + target.id
+            # Connectivity is recomputed from the current complete graph. A
+            # historical or model-supplied closure cannot suppress a newly
+            # observed disconnected chain or candidate cycle.
+            proposed_resolved.pop(lineage_id, None)
+            lineage_gap = Gap(lineage_id,
+                "Provide an evidenced direct citation/derivation path from the target source to a terminal original material")
             generated_gaps.append(lineage_gap)
             proposed_gaps = _index_findings([*proposed_gaps.values(), lineage_gap], "gap")
         registry, owners = _register_gaps(registry, owners, generated_gaps, "runner", target)
@@ -732,23 +804,10 @@ def run_provenance(target: Target | dict, provider: TraceProvider,
         available = eligible if available is None else available
         origin_findings = origins if origin_findings is None else origin_findings
         relation_findings = relations if relation_findings is None else relation_findings
-        if target.source_version_id is None or target.source_version_id not in available:
-            return False
         roots = {item.version_id for item in origin_findings.values()}
-        adjacency = {}
-        for edge in relation_findings.values():
-            if edge.status == "direct" and edge.kind in {"quotes", "cites", "reprints", "translates", "derives"}:
-                adjacency.setdefault(edge.from_version, set()).add(edge.to_version)
-        pending = [target.source_version_id]
-        visited = set()
-        while pending:
-            version = pending.pop()
-            if version in roots:
-                return True
-            if version not in visited:
-                visited.add(version)
-                pending.extend(adjacency.get(version, ()))
-        return False
+        reachable = _evidenced_lineage_versions(
+            target.source_version_id, available.values(), relation_findings.values())
+        return bool(roots & reachable)
 
     def structural_fingerprint():
         def records(values, excluded=()):
@@ -769,7 +828,11 @@ def run_provenance(target: Target | dict, provider: TraceProvider,
         fact_status = "unresolved" if verifier is not None else "not_checked"
         decision_status = fact_status
         stop_reason = "integrity_error" if stage == "integrity" else f"{stage}_error"
-        errors.append({"stage": stage, "type": type(exc).__name__, "message": str(exc)})
+        error = {"stage": stage, "type": type(exc).__name__, "message": str(exc)}
+        semantic_stage = getattr(exc, "stage", None)
+        if isinstance(semantic_stage, str) and semantic_stage:
+            error["semantic_stage"] = semantic_stage
+        errors.append(error)
         event("error", stage=stage, message=str(exc))
 
     def analyze(material, reasons, duplicate, revisit=False):
@@ -975,6 +1038,21 @@ def run_provenance(target: Target | dict, provider: TraceProvider,
                 if check.world_verdict not in {None, "unresolved"}:
                     _basis(check.world_basis, eligible)
                     _nonempty(check.world_rationale, "world_rationale")
+                for field_name, stage in (("evidence_probe_results", "evidence"),
+                                          ("world_probe_results", "world")):
+                    probe_results = getattr(check, field_name)
+                    _tuple_of(probe_results, ProbeAssessment, field_name)
+                    probe_ids = set()
+                    for item in probe_results:
+                        _probe_assessment(item, stage, eligible)
+                        if item.probe_id in probe_ids:
+                            raise ValueError("duplicate probe assessment in one layer")
+                        probe_ids.add(item.probe_id)
+                        if (stage == "evidence" and target.evidence_scope and
+                                not {span.version_id for span in item.basis} <=
+                                set(target.evidence_scope)):
+                            raise ValueError(
+                                "evidence probe assessment cites outside the frozen evidence_scope")
                 candidate_registry, candidate_owners = _register_gaps(
                     gap_registry, gap_owners, check.gaps, "verifier", target)
                 _validate_resolution_references(check.resolutions, candidate_registry, "verification")
@@ -986,6 +1064,61 @@ def run_provenance(target: Target | dict, provider: TraceProvider,
                 for item in check.resolutions:
                     candidate_verify_gaps.pop(item.gap_id, None)
                 candidate_verify_resolved.update(_combine_resolutions(check.resolutions))
+                # In the typed probe contract, whether an old task still blocks
+                # is recomputed from the current result instead of being frozen
+                # to the round in which it was opened.  A conclusive result
+                # closes that probe's old active tasks using its current basis.
+                # An unresolved branch of an already-decided OR/AND expression
+                # remains historically unresolved, but becomes nonblocking; it
+                # is never mislabeled as resolved merely because another branch
+                # now decides the aggregate.
+                current_probe_results = {
+                    (item.stage, item.probe_id): item
+                    for item in (*check.evidence_probe_results,
+                                 *check.world_probe_results)
+                }
+                layer_verdicts = {
+                    "evidence": check.evidence_verdict
+                        if check.evidence_verdict is not None else check.verdict,
+                    "world": check.world_verdict
+                        if check.world_verdict is not None else check.verdict,
+                }
+                new_gap_ids = {item.id for item in check.gaps}
+                explicit_resolution_ids = {item.gap_id for item in check.resolutions}
+                revised_active_gaps = []
+                automatic_resolutions = []
+                for gap_id, gap in list(candidate_verify_gaps.items()):
+                    if gap_id in new_gap_ids or gap.probe_id is None:
+                        continue
+                    dimension = gap_dimension(gap)
+                    result = current_probe_results.get((dimension, gap.probe_id))
+                    if result is None:
+                        continue
+                    if result.status != "unresolved":
+                        candidate_verify_gaps.pop(gap_id, None)
+                        if gap_id not in explicit_resolution_ids:
+                            automatic_resolutions.append(Resolution(
+                                gap_id, result.basis,
+                                "The current grounded probe assessment conclusively "
+                                "supersedes this earlier unresolved task."))
+                    elif layer_verdicts[dimension] != "unresolved" and gap.blocking:
+                        updated = replace(gap, blocking=False)
+                        candidate_verify_gaps[gap_id] = updated
+                        revised_active_gaps.append(updated)
+                    elif (layer_verdicts[dimension] == "unresolved" and
+                          not gap.blocking and gap.basis):
+                        updated = replace(gap, blocking=True)
+                        candidate_verify_gaps[gap_id] = updated
+                        revised_active_gaps.append(updated)
+                if revised_active_gaps:
+                    candidate_registry, candidate_owners = _register_gaps(
+                        candidate_registry, candidate_owners,
+                        tuple(revised_active_gaps), "verifier", target)
+                if automatic_resolutions:
+                    _validate_resolution_references(
+                        tuple(automatic_resolutions), candidate_registry, "verification")
+                    candidate_verify_resolved.update(
+                        _combine_resolutions(automatic_resolutions))
                 projection = project(current_analyses, eligible, candidate_registry, candidate_owners,
                     candidate_verify_gaps, candidate_verify_resolved, verification_update=check)
             except Exception as exc:

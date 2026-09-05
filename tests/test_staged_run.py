@@ -96,20 +96,42 @@ class StagedRunMockTests(unittest.TestCase):
                           if missing else {"decision": "accept", "stage": "none", "quote": "", "issue": ""})
             elif stage in ("evidence", "world"):
                 basis = [{"version_id": "b", "quote": claim_quote}]
-                answer = {"verdict": "unresolved", "basis": basis,
-                          "rationale": "This fixture does not authenticate real world events.",
-                          "gaps": [], "resolutions": []}
-                if stage == "evidence" and evidence_round == 1:
-                    answer["rationale"] = "Recheck the stated date condition before deciding entailment."
-                    answer["gaps"] = [{"question": "Does the closure date include 4 September?",
-                        "action": "reanalyse", "locator": "b", "blocking": True, "basis": basis,
-                        "decision_impact": "The date condition determines whether the target is contradicted."}]
-                elif stage == "evidence":
-                    answer["verdict"] = "contradicted"
-                    answer["rationale"] = "The source states the bridge is closed on the target date."
-                    answer["resolutions"] = [{"gap_id": gap["id"], "basis": basis,
-                        "rationale": "The quoted closure date includes the target date."}
-                        for gap in payload["registered_gaps"]]
+                if target_extension:
+                    status = ("unresolved" if stage == "world" or evidence_round == 1
+                              else "contradicted")
+                    answer = {"basis": basis, "rationale":
+                        ("Recheck the stated date condition before deciding entailment."
+                         if status == "unresolved" else
+                         "The source states the bridge is closed on the target date."),
+                        "probe_results": [{"probe_id": probe["id"], "status": status,
+                            "basis_indexes": [0], "rationale": "The passage answers this check.",
+                            "referent_relation": "not_applicable"}
+                            for probe in payload["target_plan"]["probes"]],
+                        "gaps": [], "resolutions": []}
+                    if stage == "evidence" and evidence_round == 1:
+                        answer["gaps"] = [{"probe_id": payload["target_plan"]["probes"][0]["id"],
+                            "question": "Does the closure date include 4 September?",
+                            "action": "reanalyse", "locator": "b", "basis": basis,
+                            "decision_impact": "The date condition determines whether the target is contradicted."}]
+                    elif stage == "evidence":
+                        answer["resolutions"] = [{"gap_id": gap["id"], "basis": basis,
+                            "rationale": "The quoted closure date includes the target date."}
+                            for gap in payload["registered_gaps"]]
+                else:
+                    answer = {"verdict": "unresolved", "basis": basis,
+                              "rationale": "This fixture does not authenticate real world events.",
+                              "gaps": [], "resolutions": []}
+                    if stage == "evidence" and evidence_round == 1:
+                        answer["rationale"] = "Recheck the stated date condition before deciding entailment."
+                        answer["gaps"] = [{"question": "Does the closure date include 4 September?",
+                            "action": "reanalyse", "locator": "b", "blocking": True, "basis": basis,
+                            "decision_impact": "The date condition determines whether the target is contradicted."}]
+                    elif stage == "evidence":
+                        answer["verdict"] = "contradicted"
+                        answer["rationale"] = "The source states the bridge is closed on the target date."
+                        answer["resolutions"] = [{"gap_id": gap["id"], "basis": basis,
+                            "rationale": "The quoted closure date includes the target date."}
+                            for gap in payload["registered_gaps"]]
             else:
                 answer = {"decision": "accept", "stage": "none", "probe_id": "",
                           "issue": "", "basis": []}
@@ -223,6 +245,9 @@ class StagedRunMockTests(unittest.TestCase):
         failed = rows["failed-case"]
         self.assertEqual("error", failed["status"])
         self.assertIsNone(failed["prediction"])
+        self.assertEqual("StagedSemanticError", failed["error_type"])
+        self.assertIn(failed["error_stage"], {"evidence", "world"})
+        self.assertEqual("sdk_error", failed["error_code"])
         self.assertEqual(17, failed["new_api_attempts"])
         self.assertEqual(16, failed["returned_responses"])
         self.assertEqual(17, failed["usage"]["model_calls"])
@@ -234,6 +259,8 @@ class StagedRunMockTests(unittest.TestCase):
         self.assertEqual("RuntimeError", files["failed-case-calls.json"][-1]["error_type"])
         self.assertEqual("failed", files["failed-case-verification-history.json"][-1]["status"])
         self.assertEqual("verifier", files["failed-case-report.json"]["errors"][-1]["stage"])
+        self.assertIn(files["failed-case-report.json"]["errors"][-1]["semantic_stage"],
+                      {"evidence", "world"})
         self.assertEqual("has_errors", files["status.json"]["status"])
         self.assertEqual(2, files["status.json"]["scheduled_cases"])
         self.assertEqual(1, files["status.json"]["completed"])
@@ -278,6 +305,12 @@ class StagedRunMockTests(unittest.TestCase):
         self.assertEqual(["claim_contract", "extension"],
                          [item["stage"] for item in files["success-case-target-planner-history.json"]])
         self.assertTrue(files["config.json"]["target_extension"])
+        self.assertEqual("target_extended_psi_development_v3",
+                         files["config.json"]["experiment"])
+        self.assertEqual(extension.PLAN_SCHEMA_VERSION,
+                         files["config.json"]["target_plan_schema"])
+        self.assertEqual(1, files["config.json"]["target_extension_output_repairs"])
+        self.assertEqual(1, files["config.json"]["probe_result_structure_repairs"])
         self.assertIn("experiments/extended_semantic.py", copied_hashes)
         projections = files["success-case-target-plan.json"]["projections"]
         self.assertEqual({"atoms", "lineage", "critic", "evidence", "world"}, set(projections))
@@ -285,6 +318,12 @@ class StagedRunMockTests(unittest.TestCase):
         for call in calls:
             if call["stage"] in projections:
                 self.assertEqual(projections[call["stage"]], call["payload"]["target_plan"])
+        report = files["success-case-report.json"]
+        final = report["verification_history"][-1]
+        self.assertEqual(len(projections["evidence"]["probes"]),
+                         len(final["evidence_probe_results"]))
+        self.assertEqual(len(projections["world"]["probes"]),
+                         len(final["world_probe_results"]))
 
 
 if __name__ == "__main__":

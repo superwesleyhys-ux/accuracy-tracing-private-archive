@@ -28,7 +28,7 @@ from model_io import Budget, BudgetClient, write
 from newsverify import provenance as p
 from newsverify.decisions import present_decision, round_decisions
 from staged_semantic import StagedDecomposer, StagedVerifier
-from extended_semantic import TargetPlanner, project_plan
+from extended_semantic import PLAN_SCHEMA_VERSION, TargetPlanner, project_plan
 
 
 class DevelopmentProvider:
@@ -70,17 +70,21 @@ def run(args):
                         "loop_compare.py", "semantic_adapter.py"]
     source_files = list((ROOT / "newsverify").glob("*.py")) + [ROOT / "experiments" / n for n in used_experiments]
     extension_enabled = bool(getattr(args, "target_extension", False))
-    config = {"experiment": ("target_extended_psi_development_v1" if extension_enabled
+    config = {"experiment": ("target_extended_psi_development_v3" if extension_enabled
                               else "staged_psi_development_v1"), "model": args.model,
         "reasoning_effort": args.reasoning_effort, "budget_per_case": asdict(budget),
         "trace_config": asdict(trace_config), "max_inner_repairs": args.max_repairs,
         "target_extension": extension_enabled,
+        "target_plan_schema": PLAN_SCHEMA_VERSION if extension_enabled else None,
         "target_structure_repairs": args.max_repairs if extension_enabled else None,
         "target_extension_repairs": args.max_repairs if extension_enabled else None,
+        "target_extension_output_repairs": args.max_repairs if extension_enabled else None,
         "material_stage_repairs": args.max_repairs,
         "judgement_repairs": args.max_repairs if extension_enabled else None,
+        "probe_result_structure_repairs": args.max_repairs if extension_enabled else None,
         "target_extension_contract": ("one immutable target contract and decision-probe extension per case; "
-            "bounded target and judgement repair; plan never counts as evidence" if extension_enabled else None),
+            "one grounded result per routed probe; Python aggregates target logic; bounded target, "
+            "result-structure and judgement repair; plan never counts as evidence" if extension_enabled else None),
         "workers": args.workers, "ordering_seed": 20260906,
         "case_ids": [c["target"]["id"] for c in data["cases"]],
         "scheduled_cases": len(data["cases"]), "gold_read_during_inference": False,
@@ -144,8 +148,12 @@ def run(args):
             eligible = [m for m in materials if not p._material_eligibility(m, cutoff)]
             target_plan = None
             if extension_enabled:
-                planner = TargetPlanner(client, max_repairs=args.max_repairs,
-                                        max_structure_repairs=args.max_repairs)
+                planner = TargetPlanner(
+                    client,
+                    max_repairs=args.max_repairs,
+                    max_structure_repairs=args.max_repairs,
+                    max_output_repairs=args.max_repairs,
+                )
                 plan = planner.prepare(target)
                 target_plan = {stage: project_plan(plan, stage).to_payload()
                                for stage in ("atoms", "lineage", "critic", "evidence", "world")}
@@ -153,7 +161,12 @@ def run(args):
                       {**plan.to_payload(), "sha256": plan.sha256, "projections": target_plan})
                 row["target_plan_sha256"] = plan.sha256
             psi = StagedDecomposer(client, max_repairs=args.max_repairs, target_plan=target_plan)
-            verifier = StagedVerifier(client, target_plan=target_plan, max_repairs=args.max_repairs)
+            verifier = StagedVerifier(
+                client,
+                target_plan=target_plan,
+                max_repairs=args.max_repairs,
+                max_structure_repairs=args.max_repairs,
+            )
             provider = DevelopmentProvider(eligible)
             report = p.run_provenance(target, provider, psi, verifier, trace_config,
                                       checkpoint_callback=capture)
@@ -162,6 +175,21 @@ def run(args):
             row["native_prediction"] = present_decision(report)
             row["engine_usage"] = report["usage"]
             if not row["native_prediction"]["assessment_valid"]:
+                engine_errors = report.get("errors", [])
+                if engine_errors:
+                    engine_error = engine_errors[-1]
+                    row["error_type"] = engine_error.get("type", "InvalidAssessment")
+                    row["error_stage"] = (engine_error.get("semantic_stage") or
+                                          engine_error.get("stage"))
+                call_error = next((record for record in reversed(client.records)
+                                   if record.get("error_type")), None)
+                if call_error:
+                    row["error_code"] = call_error.get("error_code", "model_call_failed")
+                elif verifier.history:
+                    row["error_code"] = verifier.history[-1].get(
+                        "status", "engine_assessment_invalid")
+                else:
+                    row["error_code"] = "engine_assessment_invalid"
                 raise ValueError("Engine did not accept a complete valid assessment")
             if report["usage"]["verification_calls"] != args.rounds:
                 raise ValueError("Required actual outer verification rounds were not completed")
@@ -170,9 +198,9 @@ def run(args):
             row["prediction"] = row["native_prediction"]["decision"]
             row["status"] = "completed"
         except Exception as exc:
-            row["error_type"] = type(exc).__name__
+            row.setdefault("error_type", type(exc).__name__)
             if getattr(exc, "stage", None):
-                row["error_stage"] = exc.stage
+                row.setdefault("error_stage", exc.stage)
         finally:
             row["usage"] = client.usage() if client else {k: 0 for k in
                 ("model_calls", "input_tokens", "output_tokens", "seconds")}
