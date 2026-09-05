@@ -571,18 +571,6 @@ def run_provenance(target: Target | dict, provider: TraceProvider,
             try:
                 # Nothing may enter the graph or verifier before this call.
                 pending = list(analyze(material, reasons, duplicate))
-                # New upstream snapshots can invalidate an old 'not yet seen'
-                # interpretation even if the semantic plugin forgot to request
-                # reanalysis. Schedule psi; never silently promote the edge.
-                if not reasons and not was_eligible:
-                    for edge in relations.values():
-                        if (edge.from_version != material.version_id and edge.from_version in eligible
-                                and edge.to_version is None
-                                and edge.upstream_locator in {material.url, material.version_id}
-                                and edge.from_version not in pending):
-                            pending.append(edge.from_version)
-                            event("upstream_arrival_reanalysis", version_id=edge.from_version,
-                                  upstream_version=material.version_id, relation_id=edge.id)
                 visited = {material.version_id}
                 while pending:
                     version_id = pending.pop(0)
