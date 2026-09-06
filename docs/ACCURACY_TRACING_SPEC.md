@@ -1,5 +1,7 @@
 # Accuracy Tracing：溯源双回环定稿与全指标验收规范
 
+> v0.3 update: [REPAIR_V0.3.md](REPAIR_V0.3.md) supersedes conflicting implementation and adapter notes below.
+
 版本：0.2.0 · 日期：2026-09-05 · 状态：架构定稿、离线参考实现已开始执行。
 
 ## 1. 定论及其边界
