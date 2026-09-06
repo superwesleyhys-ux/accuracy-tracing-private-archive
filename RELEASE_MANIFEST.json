@@ -969,6 +969,201 @@
       "sha256": "2f7fbc6ac793ff412be1ede6edd3671e4102b8ffec7ed5d730fad29d37194936"
     },
     {
+      "path": "reports/historical-2023-pilot2-v3-live-001/SUMMARY.md",
+      "bytes": 3938,
+      "sha256": "2becfde73ece4e00c67bf766c43c568514872dfbc0df0a98cab24ee47725bada"
+    },
+    {
+      "path": "reports/historical-2023-pilot2-v3-live-001/config.json",
+      "bytes": 4273,
+      "sha256": "884bc9efe5edba9a71ac43d453e3029f03a325102b1fb5b9d74362e72e34fd72"
+    },
+    {
+      "path": "reports/historical-2023-pilot2-v3-live-001/monolithic/config.json",
+      "bytes": 3219,
+      "sha256": "bf39d8f05dfea3e92bb1d24907b635e06b0180abe4abf11c895b60e1c5466b1a"
+    },
+    {
+      "path": "reports/historical-2023-pilot2-v3-live-001/monolithic/lucid-production-2023-full-calls.json",
+      "bytes": 26857,
+      "sha256": "c3e9eb729a5f2c72f27362a887294309f43a3dfdd9dfb057c1c8e14ac88e512a"
+    },
+    {
+      "path": "reports/historical-2023-pilot2-v3-live-001/monolithic/lucid-production-2023-full-result.json",
+      "bytes": 1420,
+      "sha256": "048b63e49d19d43062bddd752cb1fdabc3e4dbb2e08ea5361c72d75543f423d8"
+    },
+    {
+      "path": "reports/historical-2023-pilot2-v3-live-001/monolithic/lucid-production-2023-full-retrieval.json",
+      "bytes": 742,
+      "sha256": "399edb60e8d62a7a98d5fb797341739957ec4599a4888cb21c1118b6db879ae0"
+    },
+    {
+      "path": "reports/historical-2023-pilot2-v3-live-001/monolithic/lucid-production-2023-full-trace.json",
+      "bytes": 32809,
+      "sha256": "51db0a31450f397236d23006b85632089eb09feba9136e3f41b10fc102b3d0a2"
+    },
+    {
+      "path": "reports/historical-2023-pilot2-v3-live-001/monolithic/lucid-production-2023-loop-calls.json",
+      "bytes": 35491,
+      "sha256": "5b08eae357edae2d3c97f8450dbf53b7e7c12755d473bb870f557ac88eef12bc"
+    },
+    {
+      "path": "reports/historical-2023-pilot2-v3-live-001/monolithic/lucid-production-2023-loop-result.json",
+      "bytes": 1974,
+      "sha256": "5fe88c372644634db10fff86559d09120ae325b5bd00c9e099c8f3a5c9dda6c5"
+    },
+    {
+      "path": "reports/historical-2023-pilot2-v3-live-001/monolithic/lucid-production-2023-loop-retrieval.json",
+      "bytes": 2294,
+      "sha256": "fbd21d94b87cebacd40ff20640cb122a84ad299087b72572868d0243f17637c0"
+    },
+    {
+      "path": "reports/historical-2023-pilot2-v3-live-001/monolithic/lucid-production-2023-loop-trace.json",
+      "bytes": 39547,
+      "sha256": "8b022b2ff008501ca0b0915bf56722e3c03f59d3de3f0397b4dc381ab8322b1c"
+    },
+    {
+      "path": "reports/historical-2023-pilot2-v3-live-001/monolithic/results.json",
+      "bytes": 5259,
+      "sha256": "3724141c13121dcace4dfecbdae073e12ceae2a11f1372a0d0dc67cbb402fc41"
+    },
+    {
+      "path": "reports/historical-2023-pilot2-v3-live-001/monolithic/status.json",
+      "bytes": 112,
+      "sha256": "d0ae4564c31771b531152232ce3aff1603254e32685f6c23ba2f6be6ef8cf2bc"
+    },
+    {
+      "path": "reports/historical-2023-pilot2-v3-live-001/monolithic/virgin-galactic-commercial-service-2023-loop-calls.json",
+      "bytes": 14092,
+      "sha256": "441d99241cc8e48d2429b2717c22e4e101daddc0f8582bb379032dfab0bacb2f"
+    },
+    {
+      "path": "reports/historical-2023-pilot2-v3-live-001/monolithic/virgin-galactic-commercial-service-2023-loop-result.json",
+      "bytes": 1469,
+      "sha256": "65631136a35eb879ab63915f2f5ce72a9c2e5e46de0528d9c26fc6a4a8296d8a"
+    },
+    {
+      "path": "reports/historical-2023-pilot2-v3-live-001/monolithic/virgin-galactic-commercial-service-2023-loop-retrieval.json",
+      "bytes": 1814,
+      "sha256": "5668b64f5ae1d9bb212574ac7e4a373291d648deb22df58f40e241bfa295b661"
+    },
+    {
+      "path": "reports/historical-2023-pilot2-v3-live-001/monolithic/virgin-galactic-commercial-service-2023-loop-trace.json",
+      "bytes": 20822,
+      "sha256": "c7df8ce5db65171d0870f0eba10a95a9f43c5590d0b131060c88c8de01326550"
+    },
+    {
+      "path": "reports/historical-2023-pilot2-v3-live-001/raw-artifacts.json",
+      "bytes": 4175,
+      "sha256": "9987d28eb0cdb0dec61632cd4c535c78ebccecaf0dc2eebf44f26f746165f20a"
+    },
+    {
+      "path": "reports/historical-2023-pilot2-v3-live-001/results.json",
+      "bytes": 3517,
+      "sha256": "06cfc897d7015e4e0adf378675ef8a046173f3f00bc6e9e3a17cc1a895a3b7da"
+    },
+    {
+      "path": "reports/historical-2023-pilot2-v3-live-001/scores.json",
+      "bytes": 9229,
+      "sha256": "bdbc1b3cf42e499389c310dc8304cacdf6e977a097c24b5bafd3bf19334f28bc"
+    },
+    {
+      "path": "reports/historical-2023-pilot2-v3-live-001/staged/config.json",
+      "bytes": 4849,
+      "sha256": "8c40a4e9cdc1a06363e1ab2b6daf7af0f44858a9356c77ebcf316e30e1c0de59"
+    },
+    {
+      "path": "reports/historical-2023-pilot2-v3-live-001/staged/lucid-production-2023-full-calls.json",
+      "bytes": 62432,
+      "sha256": "5e786706d1d423a8d9b50940d8c5b95bacfa57115b0f8acc66fde05f77868834"
+    },
+    {
+      "path": "reports/historical-2023-pilot2-v3-live-001/staged/lucid-production-2023-full-result.json",
+      "bytes": 683,
+      "sha256": "70f04ccba4f539bb3f303c2ae6b94519f082e19cb721d094d8450689b666af83"
+    },
+    {
+      "path": "reports/historical-2023-pilot2-v3-live-001/staged/lucid-production-2023-full-retrieval.json",
+      "bytes": 742,
+      "sha256": "399edb60e8d62a7a98d5fb797341739957ec4599a4888cb21c1118b6db879ae0"
+    },
+    {
+      "path": "reports/historical-2023-pilot2-v3-live-001/staged/lucid-production-2023-full-semantic-stages.json",
+      "bytes": 13762,
+      "sha256": "99e98459bba19d7345dbde8b13f1d610789e96dfd35c5122cdb838d9582532b5"
+    },
+    {
+      "path": "reports/historical-2023-pilot2-v3-live-001/staged/lucid-production-2023-full-trace.json",
+      "bytes": 18769,
+      "sha256": "0368a3571d1401a0b24392a9d09f83cab35181434247aa89379880999f12c505"
+    },
+    {
+      "path": "reports/historical-2023-pilot2-v3-live-001/staged/lucid-production-2023-loop-calls.json",
+      "bytes": 113013,
+      "sha256": "3679d7589465a74930e4ed18b46983bc764a45aff14d8f7f99e9b61c75b15194"
+    },
+    {
+      "path": "reports/historical-2023-pilot2-v3-live-001/staged/lucid-production-2023-loop-result.json",
+      "bytes": 2356,
+      "sha256": "de511f783476e234e4f84f8f8fe9f70f05392f459aaca75ebd4cc19c33a40bf6"
+    },
+    {
+      "path": "reports/historical-2023-pilot2-v3-live-001/staged/lucid-production-2023-loop-retrieval.json",
+      "bytes": 3486,
+      "sha256": "bb93b08ebd37bd2caf05fbdc8dc47b1f5f519cb2a8cb90dd45569ea6a3a76c83"
+    },
+    {
+      "path": "reports/historical-2023-pilot2-v3-live-001/staged/lucid-production-2023-loop-semantic-stages.json",
+      "bytes": 22445,
+      "sha256": "d3070937874934a3809ca1363bed5761c33ac2cf09bff429042f8b18596bf842"
+    },
+    {
+      "path": "reports/historical-2023-pilot2-v3-live-001/staged/lucid-production-2023-loop-trace.json",
+      "bytes": 37410,
+      "sha256": "d7082ee55525671fb0d3720d593de8f63eb07f60a191e5855716017eafa35fb3"
+    },
+    {
+      "path": "reports/historical-2023-pilot2-v3-live-001/staged/results.json",
+      "bytes": 5893,
+      "sha256": "36bff7c765a21730cdd3af704bf6d670d7ab9c7e4e02dc63a0c8c68ee90d700d"
+    },
+    {
+      "path": "reports/historical-2023-pilot2-v3-live-001/staged/status.json",
+      "bytes": 115,
+      "sha256": "f91db85317b8cf37f923aec434d892560db958fd5e1d72f567593bb42518b0f2"
+    },
+    {
+      "path": "reports/historical-2023-pilot2-v3-live-001/staged/virgin-galactic-commercial-service-2023-loop-calls.json",
+      "bytes": 102926,
+      "sha256": "ff39812c70e18bb2958455590e132e1345eb2a72bcf3966152594adf1a59fa49"
+    },
+    {
+      "path": "reports/historical-2023-pilot2-v3-live-001/staged/virgin-galactic-commercial-service-2023-loop-result.json",
+      "bytes": 2408,
+      "sha256": "ea7f715eb6688148249d1fc520b37c22c7f37ccda53b793eefc4a3096f9a4907"
+    },
+    {
+      "path": "reports/historical-2023-pilot2-v3-live-001/staged/virgin-galactic-commercial-service-2023-loop-retrieval.json",
+      "bytes": 3742,
+      "sha256": "ff1a35094461129c79e44644ade87725bbb5189e1c50fec9408f295b79068fd5"
+    },
+    {
+      "path": "reports/historical-2023-pilot2-v3-live-001/staged/virgin-galactic-commercial-service-2023-loop-semantic-stages.json",
+      "bytes": 21847,
+      "sha256": "dea3ce82ea0f4fb76f257c048ce3f71977e55e8eac4d60e55b421dd5942d38e9"
+    },
+    {
+      "path": "reports/historical-2023-pilot2-v3-live-001/staged/virgin-galactic-commercial-service-2023-loop-trace.json",
+      "bytes": 38546,
+      "sha256": "5458dc262b3278f401ed275a436c0a508b157b3426e810a4f1a38a5934fe6a06"
+    },
+    {
+      "path": "reports/historical-2023-pilot2-v3-live-001/status.json",
+      "bytes": 100,
+      "sha256": "3b009e7fdd8e9c126cb296e08cc9c6aefbcef2367ddef7c6a6c38cf000052652"
+    },
+    {
       "path": "reports/live-v03-attempt-01/bridge-evidence-loop-calls.json",
       "bytes": 31602,
       "sha256": "8b39fec85407baf1d445fae3d187d75fa36941dcfb5aafd60d4a217ea17f2225"
