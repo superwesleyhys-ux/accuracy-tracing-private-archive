@@ -62,6 +62,9 @@ _GATE_REPAIR_ISSUES = {
     "dimension_basis_index": "Use unique in-range basis indices for the named dimension.",
     "dimension_basis_or_scope": "Keep the dimension unresolved unless exact basis and complete scope are present.",
     "dimension_grounding": "Use exact basis that grounds the named probe dimension.",
+    "stop_task_exclusivity": (
+        "Choose concrete non-program tasks with stop_reason=none, or an explicit "
+        "stop with no such tasks."),
     "structure_gate": "Correct the deterministic structure or grounding contract.",
 }
 
@@ -741,9 +744,10 @@ class StagedVerifier(_StageClient):
                         payload["retrieval_receipts"],
                         payload["retrieval_feedback"])
                 except ValueError as exc:
-                    self.history[-1]["status"] = "repair_requested"
                     if repairs_used >= self.max_repairs:
+                        self.history[-1]["status"] = "repair_exhausted"
                         raise StagedSemanticError(dimension, str(exc)) from None
+                    self.history[-1]["status"] = "repair_requested"
                     repairs_used += 1
                     repair = _gate_repair(exc, raw)
                     continue
@@ -832,6 +836,11 @@ class StagedVerifier(_StageClient):
                 raise ValueError("duplicate basis quotes")
             return tuple(result)
 
+        def is_program_scope_wrapper(item):
+            return (dimension == "evidence"
+                    and item["action"] == "fetch"
+                    and item["locator"] in missing_scope)
+
         probes = {item["number"]: item for item in plan["probes"]}
         results = raw["probe_results"]
         if len(results) != len(probes) or {item["probe_number"] for item in results} != set(probes):
@@ -884,8 +893,11 @@ class StagedVerifier(_StageClient):
             stop = result["stop_reason"]
             if verdict != "unresolved" and stop != "none":
                 raise ValueError("conclusive probe cannot carry a stop reason")
-            if verdict == "unresolved" and stop != "none" and result["gaps"]:
-                raise ValueError("unresolved probe must choose tasks or an explicit stop")
+            if (verdict == "unresolved" and stop != "none"
+                    and any(not is_program_scope_wrapper(item)
+                            for item in result["gaps"])):
+                raise ValueError(
+                    f"stop_task_exclusivity:{probe['number']}")
             if verdict == "unresolved" and stop == "scope_unavailable" and not missing_scope:
                 raise ValueError("scope_unavailable needs a missing scoped version")
             elif verdict == "unresolved" and stop == "no_source_lead":
@@ -918,8 +930,7 @@ class StagedVerifier(_StageClient):
                 if item["blocking"] and not support:
                     raise ValueError("blocking verification gap needs source basis")
                 locator, action = item["locator"], item["action"]
-                if (dimension == "evidence" and action == "fetch"
-                        and locator in missing_scope):
+                if is_program_scope_wrapper(item):
                     # Frozen-scope acquisition is a program-owned task with a
                     # canonical ID. Ignore the model's duplicate wrapper so it
                     # cannot steal the locator and evade automatic closure.

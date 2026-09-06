@@ -11,7 +11,8 @@ from unittest.mock import patch
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "experiments"))
 import loop_compare
 from model_io import Budget, BudgetClient, PriorResponseCache, digest, schema
-from semantic_adapter import Decomposer, Verifier, compact_context
+from semantic_adapter import (Decomposer, Verifier, compact_context,
+                              suppress_active_gap_restatements)
 from loop_compare import load_inputs, score
 from newsverify import provenance as p
 from newsverify.decisions import present_decision
@@ -43,6 +44,53 @@ def cache_record(system="s", user="u", output="{}", *, model="m",
 
 
 class AdapterTests(unittest.TestCase):
+    def test_monolithic_verifier_cannot_mutate_an_active_gap_by_restatement(self):
+        active = {
+            "id": "scope-gap", "question": "Find the frozen outcome.",
+            "stage": "verification", "dimension": "evidence",
+            "blocking": True, "target_id": "case", "basis": [],
+            "decision_impact": "The outcome can change the decision.",
+            "action": "search", "locator": "frozen outcome", "probe_id": None,
+        }
+        raw = asdict(p.VerificationResult(
+            verdict="unresolved", rationale="Outcome is not visible.",
+            evidence_verdict="unresolved", world_verdict="unresolved",
+            gaps=(p.Gap(
+                "scope-gap", "Fetch it instead.", stage="verification",
+                dimension="evidence", blocking=False, target_id="case",
+                decision_impact="Changed wording.", action="fetch",
+                locator="outcome-version"),)))
+        normalized = suppress_active_gap_restatements(raw, {"gaps": [active]})
+        self.assertEqual([], normalized["gaps"])
+        self.assertEqual("search", active["action"])
+        self.assertTrue(active["blocking"])
+
+    def test_monolithic_verifier_keeps_new_tasks_and_rejects_reopen_close(self):
+        active = {
+            "id": "scope-gap", "question": "Find the frozen outcome.",
+            "stage": "verification", "dimension": "evidence",
+            "blocking": False, "target_id": "case", "basis": [],
+            "decision_impact": "The outcome can change the decision.",
+            "action": "search", "locator": "frozen outcome", "probe_id": None,
+        }
+        fresh = asdict(p.Gap(
+            "new-gap", "Find another source.", stage="verification",
+            dimension="world", blocking=False, target_id="case",
+            decision_impact="It could establish the world claim.",
+            action="search", locator="another source"))
+        raw = asdict(p.VerificationResult(
+            verdict="unresolved", rationale="Outcome is not visible.",
+            evidence_verdict="unresolved", world_verdict="unresolved",
+            gaps=(p.Gap(**active), p.Gap(**fresh))))
+        normalized = suppress_active_gap_restatements(raw, {"gaps": [active]})
+        self.assertEqual(["new-gap"], [item["id"] for item in normalized["gaps"]])
+
+        raw["resolutions"] = [{
+            "gap_id": "scope-gap", "basis": [], "rationale": "Closed.",
+        }]
+        with self.assertRaisesRegex(ValueError, "restate and resolve"):
+            suppress_active_gap_restatements(raw, {"gaps": [active]})
+
     def test_scoring_rejects_mixed_question_modes(self):
         with tempfile.TemporaryDirectory() as folder:
             root = Path(folder)
@@ -221,7 +269,7 @@ class AdapterTests(unittest.TestCase):
             config = json.loads((output / "config.json").read_text())
             self.assertEqual("staged", config["semantic_mode"])
             self.assertEqual(1, config["max_inner_repairs"])
-            self.assertEqual("staged-validation-v2", config["prompt_manifest"]["version"])
+            self.assertEqual("staged-validation-v3", config["prompt_manifest"]["version"])
             self.assertEqual("blocked_missing_auth",
                              json.loads((output / "status.json").read_text())["status"])
 

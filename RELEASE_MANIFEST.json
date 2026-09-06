@@ -129,6 +129,31 @@
       "sha256": "a09220f0465dc0afa1f7504cad7370a805c8408b02631ba5dd983f84e023c850"
     },
     {
+      "path": "experiments/historical-2023-pilot2/README.md",
+      "bytes": 595,
+      "sha256": "a568fa4a695c94fffd55fbb60c9bc96b4778fcc2870e8e03a09fe17c29223e2d"
+    },
+    {
+      "path": "experiments/historical-2023-pilot2/freeze.json",
+      "bytes": 711,
+      "sha256": "9fb830a39ed2914912102bceff35c2b3ece294d7ead2c5fd30053c36664b02c5"
+    },
+    {
+      "path": "experiments/historical-2023-pilot2/gold.json",
+      "bytes": 1782,
+      "sha256": "2f17e5fdff01341956eab9695f2edf3c6fcf87414116ff0f766603ed8e04956d"
+    },
+    {
+      "path": "experiments/historical-2023-pilot2/inputs.json",
+      "bytes": 4006,
+      "sha256": "05509ee5dfceba9067d07ffc59bb60b3230fceaf9013f4a7dbca5ee9dfc400ab"
+    },
+    {
+      "path": "experiments/historical-2023-pilot2/sources.json",
+      "bytes": 5418,
+      "sha256": "92159de53b2e39080c48ce8b562b57608b8cb2158a46cc1b36c6d1938d1e324e"
+    },
+    {
       "path": "experiments/historical-2023/freeze.json",
       "bytes": 790,
       "sha256": "72639f70e2d95a5c3e0eb74452468635aad5a9301943686292fec7495f58808f"
@@ -170,8 +195,8 @@
     },
     {
       "path": "experiments/prompt_specs.py",
-      "bytes": 11400,
-      "sha256": "b43a66b6cb2834e530dbe193830f175625d72bb379c33d21280b5fa2ae4f2ea4"
+      "bytes": 11519,
+      "sha256": "33d2d39ab821a91b2532182eb5e322d25c2fa43362759e46c6c4383290de2e3f"
     },
     {
       "path": "experiments/secure_run.py",
@@ -180,18 +205,18 @@
     },
     {
       "path": "experiments/semantic_adapter.py",
-      "bytes": 6632,
-      "sha256": "e41ee7481e83b25c62cf4fe3986d974e7bb98bba12532d3a625f7386ef30e85a"
+      "bytes": 8318,
+      "sha256": "07d9ace4d83c96d0c06fbf682fe1732a583655a94e5389b3401da7400ef9c407"
     },
     {
       "path": "experiments/staged_semantic.py",
-      "bytes": 52648,
-      "sha256": "606740f7b8785256757168f7e03cdcb0c46e5b8747b2c1caed884840232d0ece"
+      "bytes": 53107,
+      "sha256": "2d92131a64a9dcbd13bb00851a1169960d63a2ed141fbfecf884f989ca52956f"
     },
     {
       "path": "experiments/target_plan.py",
-      "bytes": 20513,
-      "sha256": "0d9fe53f328d86578f70e50a89e8282bebff5def3949e9ec7972e3426bd4ae70"
+      "bytes": 22035,
+      "sha256": "bde07636f62a1961aafb2ee6797f05398b1345447cda362263e2ecd1cdd43603"
     },
     {
       "path": "newsverify/__init__.py",
@@ -312,6 +337,151 @@
       "path": "reports/historical-2023-audit-v0.3.json",
       "bytes": 1450,
       "sha256": "d67d1034ada8efaa0d983fe5ae5b9566f81eaeb87d5d0cf8427c01d543aa6ddc"
+    },
+    {
+      "path": "reports/historical-2023-pilot2-live-001/config.json",
+      "bytes": 4264,
+      "sha256": "7f48d9cde9cf257e64429a3c4b1c8b2928aac6d0c4bff844b198f6a66e7f4eee"
+    },
+    {
+      "path": "reports/historical-2023-pilot2-live-001/monolithic/boeing-starliner-cft-2023-loop-calls.json",
+      "bytes": 15609,
+      "sha256": "d260c0144c3ecb6986b7c5a58779a1be0104ea8d10feb94990d6c288a4e4ab35"
+    },
+    {
+      "path": "reports/historical-2023-pilot2-live-001/monolithic/boeing-starliner-cft-2023-loop-result.json",
+      "bytes": 663,
+      "sha256": "1fc0b5d918b73c76c4d239ce5c3ce5512d1b80d60956e1198e8aa431ef6fe377"
+    },
+    {
+      "path": "reports/historical-2023-pilot2-live-001/monolithic/boeing-starliner-cft-2023-loop-retrieval.json",
+      "bytes": 682,
+      "sha256": "15b5a1d19859d413aca409df3061df70190623dc2c110282c677016420e7f882"
+    },
+    {
+      "path": "reports/historical-2023-pilot2-live-001/monolithic/boeing-starliner-cft-2023-loop-trace.json",
+      "bytes": 17274,
+      "sha256": "b1b3e5120dc7676b89cacc33afbc89081a3206508ba3af527c576a24e8a7b9b8"
+    },
+    {
+      "path": "reports/historical-2023-pilot2-live-001/monolithic/config.json",
+      "bytes": 3219,
+      "sha256": "3158093208f491d92ab3ede7410f7131f4b55a043ace5a8490e67a1b8ec2ca7d"
+    },
+    {
+      "path": "reports/historical-2023-pilot2-live-001/monolithic/results.json",
+      "bytes": 1472,
+      "sha256": "fcfc8906b9c621a0e6dc424df605914dc80d18c9c32f669678b2768bb5c3b80a"
+    },
+    {
+      "path": "reports/historical-2023-pilot2-live-001/monolithic/status.json",
+      "bytes": 113,
+      "sha256": "b1689ec1856f9bc6c2793eba0730e09a93823b057b289dbe0ff730a5a66e4696"
+    },
+    {
+      "path": "reports/historical-2023-pilot2-live-001/monolithic/virgin-galactic-commercial-service-2023-loop-calls.json",
+      "bytes": 15824,
+      "sha256": "14db42e720cd116e2f9a98cf6fbf5712c22da16f10729b69a49c6d2e51ac8f55"
+    },
+    {
+      "path": "reports/historical-2023-pilot2-live-001/monolithic/virgin-galactic-commercial-service-2023-loop-result.json",
+      "bytes": 692,
+      "sha256": "84b0250fa12dd9254cbc802f7faa49112d7ae29e63210cc07bca2495bd371504"
+    },
+    {
+      "path": "reports/historical-2023-pilot2-live-001/monolithic/virgin-galactic-commercial-service-2023-loop-retrieval.json",
+      "bytes": 706,
+      "sha256": "80b6721d95664678b9dbec6add56899bd4ca7b5dbbc742e69d3f2d0ad96592bb"
+    },
+    {
+      "path": "reports/historical-2023-pilot2-live-001/monolithic/virgin-galactic-commercial-service-2023-loop-trace.json",
+      "bytes": 16980,
+      "sha256": "1fec50b4d70a2dfd3257a91ffb4861850f926e979b650f8ce05992bca08f21e8"
+    },
+    {
+      "path": "reports/historical-2023-pilot2-live-001/raw-artifacts.json",
+      "bytes": 3095,
+      "sha256": "a2b73f77c2d4382064b6b1b09578399ec064add700273868ab8595b5e2e70117"
+    },
+    {
+      "path": "reports/historical-2023-pilot2-live-001/results.json",
+      "bytes": 2583,
+      "sha256": "b083be719e8f3d30cceac22d9ba43024a62d7b8c0125065f2e3298b8025bf661"
+    },
+    {
+      "path": "reports/historical-2023-pilot2-live-001/scores.json",
+      "bytes": 7545,
+      "sha256": "ba02cdca442db86f6b1f2b8afe071e8ffc71579642f80e0b2e084ee29fe8ca59"
+    },
+    {
+      "path": "reports/historical-2023-pilot2-live-001/staged/boeing-starliner-cft-2023-loop-calls.json",
+      "bytes": 26975,
+      "sha256": "468fcec653c80dfd9f6c57f787fd88ef902e48ca3794900c7952a7ac2e7d3521"
+    },
+    {
+      "path": "reports/historical-2023-pilot2-live-001/staged/boeing-starliner-cft-2023-loop-result.json",
+      "bytes": 671,
+      "sha256": "20bd6133976dc612be8d60618f01a92f1db3282a7a95cc7542a593298e47e054"
+    },
+    {
+      "path": "reports/historical-2023-pilot2-live-001/staged/boeing-starliner-cft-2023-loop-retrieval.json",
+      "bytes": 682,
+      "sha256": "15b5a1d19859d413aca409df3061df70190623dc2c110282c677016420e7f882"
+    },
+    {
+      "path": "reports/historical-2023-pilot2-live-001/staged/boeing-starliner-cft-2023-loop-semantic-stages.json",
+      "bytes": 8154,
+      "sha256": "09eeb7e9dea7a239fd2c6f08c960420ede0ec1df5d26760e7c3b95c71d55b556"
+    },
+    {
+      "path": "reports/historical-2023-pilot2-live-001/staged/boeing-starliner-cft-2023-loop-trace.json",
+      "bytes": 10852,
+      "sha256": "235563bed0063da83097d915c0da2f11e5b7e263b2f647d3e547e1e1c159d1ef"
+    },
+    {
+      "path": "reports/historical-2023-pilot2-live-001/staged/config.json",
+      "bytes": 4849,
+      "sha256": "a4d7aef9465756b26ca959889ae6ec01aa037b34581b968ec083fcc3ea761984"
+    },
+    {
+      "path": "reports/historical-2023-pilot2-live-001/staged/results.json",
+      "bytes": 1486,
+      "sha256": "0e32df2e40f5b4f58a6e050dca0bed32073679c108d21af7bb7862af61408c16"
+    },
+    {
+      "path": "reports/historical-2023-pilot2-live-001/staged/status.json",
+      "bytes": 115,
+      "sha256": "31df172ec2bad846c2c278917187e90bd20deb62aa6ebc79190cd7b025c2f4d5"
+    },
+    {
+      "path": "reports/historical-2023-pilot2-live-001/staged/virgin-galactic-commercial-service-2023-loop-calls.json",
+      "bytes": 27645,
+      "sha256": "5cebc62532ef95a8437fc2601bbd845a6435ca61359012b434d5e1902befb1e0"
+    },
+    {
+      "path": "reports/historical-2023-pilot2-live-001/staged/virgin-galactic-commercial-service-2023-loop-result.json",
+      "bytes": 698,
+      "sha256": "6d912b33b52e4c2a87062eac19082e4fe88fc41c6a9571f1a471208cdbff2075"
+    },
+    {
+      "path": "reports/historical-2023-pilot2-live-001/staged/virgin-galactic-commercial-service-2023-loop-retrieval.json",
+      "bytes": 706,
+      "sha256": "80b6721d95664678b9dbec6add56899bd4ca7b5dbbc742e69d3f2d0ad96592bb"
+    },
+    {
+      "path": "reports/historical-2023-pilot2-live-001/staged/virgin-galactic-commercial-service-2023-loop-semantic-stages.json",
+      "bytes": 8316,
+      "sha256": "b15939e3f07ed96b748f620bb0e87d37e393ce5d9642b8e66cbe0e5a928c32e8"
+    },
+    {
+      "path": "reports/historical-2023-pilot2-live-001/staged/virgin-galactic-commercial-service-2023-loop-trace.json",
+      "bytes": 11110,
+      "sha256": "f0df313cf6458fb74fb747925650ca5ea989075b1b3770442e4f8bafb1cd195b"
+    },
+    {
+      "path": "reports/historical-2023-pilot2-live-001/status.json",
+      "bytes": 100,
+      "sha256": "e2b89ac568d915f0593ca40102d026469e2313228b9fefbb55a3df9d1bd7452a"
     },
     {
       "path": "reports/live-v03-attempt-01/bridge-evidence-loop-calls.json",
@@ -850,13 +1020,13 @@
     },
     {
       "path": "tests/test_semantic_adapter.py",
-      "bytes": 12967,
-      "sha256": "b056d8776fe92cd037940a80c1d94b0c856690a8223a54eee3e7822f55aaa7f9"
+      "bytes": 15591,
+      "sha256": "eced47ca612f0e3bfc8960c38945700747f27e322a212389788c174904353beb"
     },
     {
       "path": "tests/test_staged_semantic.py",
-      "bytes": 42892,
-      "sha256": "170b930eff834a9d55072ce181ca1b22fbe21915d8b8c3fb2640044ae4445ea5"
+      "bytes": 47057,
+      "sha256": "a5e41e4df0f7eeb1fce2dbbc3660aead38f10a33b38db658135a371449736d2e"
     }
   ]
 }

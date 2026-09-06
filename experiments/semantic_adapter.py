@@ -48,6 +48,9 @@ Gaps must use stage=verification and dimension=evidence or world, name target_id
 action/locator, and explain what possible result could change the affected assessment. Blocking
 gaps require a visible source quote. World-only gaps never block evidence entailment. Resolve only
 existing verification gaps. Do not invent a new gap merely because a new round is available.
+Every gap already present in context.gaps remains active and queued automatically. Do not copy,
+restate or rewrite an existing gap in gaps; close it only through resolutions. Use a fresh ID only
+for a genuinely distinct new task.
 Output both layered verdicts explicitly, never null. No probability or confidence inflation.
 """
 
@@ -81,6 +84,45 @@ def model_material(material):
     return value
 
 
+def suppress_active_gap_restatements(raw, context):
+    """Keep a verifier from mutating or redundantly owning active tasks.
+
+    The engine persists active gaps independently of each verifier response. A
+    monolithic model can therefore omit them safely. If it echoes an active ID,
+    discard that duplicate at the adapter boundary and leave the registered
+    task untouched. Reopening and resolving the same task in one response is
+    still rejected rather than normalized away.
+    """
+    if not isinstance(raw, dict):
+        return raw
+    active_ids = {
+        item.get("id") for item in context.get("gaps", [])
+        if isinstance(item, dict) and isinstance(item.get("id"), str)
+    }
+    gaps = raw.get("gaps")
+    resolutions = raw.get("resolutions")
+    if not active_ids or not isinstance(gaps, (list, tuple)):
+        return raw
+    repeated = {
+        item.get("id") for item in gaps
+        if isinstance(item, dict) and item.get("id") in active_ids
+    }
+    resolved = {
+        item.get("gap_id") for item in resolutions or ()
+        if isinstance(item, dict)
+    }
+    if repeated & resolved:
+        raise ValueError(
+            "Verifier cannot restate and resolve the same active gap")
+    return {
+        **raw,
+        "gaps": [
+            item for item in gaps
+            if not (isinstance(item, dict) and item.get("id") in active_ids)
+        ],
+    }
+
+
 class Decomposer:
     def __init__(self, client): self.client = client
 
@@ -99,6 +141,7 @@ class Verifier:
     def verify(self, target, context):
         payload = {"target": asdict(target), "context": compact_context(context)}
         raw = self.client.call(VERIFY_PROMPT, json.dumps(payload, ensure_ascii=False), schema(p.VerificationResult))
+        raw = suppress_active_gap_restatements(raw, context)
         result = decode(p.VerificationResult, align_spans(raw, context["materials"]))
         if result.verdict != result.evidence_verdict:
             raise ValueError("Legacy verdict must match the explicit evidence judgement")

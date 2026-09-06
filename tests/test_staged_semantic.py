@@ -288,6 +288,78 @@ class StagedSemanticTests(unittest.TestCase):
         self.assertEqual("evidence", task.dimension)
         self.assertFalse(task.blocking)
 
+    def test_missing_scope_stop_tolerates_only_its_program_owned_fetch_wrapper(self):
+        target, material = self.fixture()
+        target = p.Target(**{**asdict(target), "evidence_scope": ("m", "missing")})
+        wrapper = {
+            "question": "Retrieve the missing frozen scope.",
+            "action": "fetch", "locator": "missing", "blocking": False,
+            "basis": [], "decision_impact": "The record can change the verdict.",
+        }
+        raw = layer(gaps=(wrapper,))
+        raw["probe_results"][0]["stop_reason"] = "scope_unavailable"
+        client = ScriptClient(
+            ("evidence", raw), ("evidence_critic", LAYER_CRITIC_ACCEPT),
+            ("world", layer()), ("world_critic", LAYER_CRITIC_ACCEPT))
+
+        result = StagedVerifier(client).verify(
+            target, self.context(target, material))
+
+        task, = [gap for gap in result.gaps if gap.locator == "missing"]
+        self.assertEqual("fetch", task.action)
+        self.assertEqual("evidence", task.dimension)
+        self.assertIsNone(task.probe_id)
+        self.assertIn("set gaps=[] because the program schedules exact missing-scope retrieval",
+                      client.calls[0]["system"])
+
+    def test_explicit_stop_still_rejects_a_noncanonical_task(self):
+        target, material = self.fixture()
+        target = p.Target(**{**asdict(target), "evidence_scope": ("m", "missing")})
+        raw = layer(gaps=({
+            "question": "Search for another bridge report.",
+            "action": "search", "locator": "bridge report", "blocking": False,
+            "basis": [], "decision_impact": "Another report might change the verdict.",
+        },))
+        raw["probe_results"][0]["stop_reason"] = "scope_unavailable"
+        verifier = StagedVerifier(
+            ScriptClient(("evidence", raw), ("evidence", raw)),
+            max_repairs=1)
+
+        with self.assertRaisesRegex(
+                StagedSemanticError, "stop_task_exclusivity:1"):
+            verifier.verify(target, self.context(target, material))
+
+        evidence_statuses = [item["status"] for item in verifier.history
+                             if item["stage"] == "evidence"]
+        self.assertEqual(
+            ["repair_requested", "repair_exhausted"], evidence_statuses)
+
+    def test_task_stop_conflict_gets_a_precise_bounded_repair(self):
+        target, material = self.fixture()
+        target = p.Target(**{**asdict(target), "evidence_scope": ("m", "missing")})
+        invalid = layer(gaps=({
+            "question": "Search for another bridge report.",
+            "action": "search", "locator": "bridge report", "blocking": False,
+            "basis": [], "decision_impact": "Another report might change the verdict.",
+        },))
+        invalid["probe_results"][0]["stop_reason"] = "scope_unavailable"
+        repaired = layer()
+        repaired["probe_results"][0]["stop_reason"] = "scope_unavailable"
+        client = ScriptClient(
+            ("evidence", invalid), ("evidence", repaired),
+            ("evidence_critic", LAYER_CRITIC_ACCEPT),
+            ("world", layer()), ("world_critic", LAYER_CRITIC_ACCEPT))
+        verifier = StagedVerifier(client, max_repairs=1)
+
+        verifier.verify(target, self.context(target, material))
+
+        repair = client.calls[1]["payload"]["repair"]
+        self.assertEqual("stop_task_exclusivity", repair["error_code"])
+        self.assertEqual(1, repair["probe_number"])
+        evidence_statuses = [item["status"] for item in verifier.history
+                             if item["stage"] == "evidence"]
+        self.assertEqual(["repair_requested", "accepted"], evidence_statuses)
+
     def test_prompt_manifest_is_complete_and_hashes_each_distinct_contract(self):
         manifest = prompt_manifest()
         self.assertEqual(PROMPT_VERSION, manifest["version"])
@@ -296,7 +368,7 @@ class StagedSemanticTests(unittest.TestCase):
                          set(manifest["stages"]))
         hashes = {value["prompt_sha256"] for value in manifest["stages"].values()}
         self.assertEqual(7, len(hashes))
-        self.assertEqual("deterministic-target-plan-v2",
+        self.assertEqual("deterministic-target-plan-v3",
                          manifest["target_plan_version"])
 
     def test_gap_return_reenters_every_material_stage_before_second_verification(self):
@@ -707,6 +779,18 @@ class StagedSemanticTests(unittest.TestCase):
                 dimensions = plan["probes"][0]["required_dimensions"]
                 self.assertIn("time", dimensions)
                 self.assertNotIn("quantity_unit_denominator", dimensions)
+
+        plan = build_target_plan(replace(
+            target,
+            text="The service starts during the second quarter of 2023."))
+        dimensions = plan["probes"][0]["required_dimensions"]
+        self.assertIn("time", dimensions)
+        self.assertNotIn("quantity_unit_denominator", dimensions)
+        self.assertTrue(dimension_evidence_is_grounded(
+            "time",
+            "The service starts during the second quarter of 2023.",
+            "The service started in June 2023.",
+            "supported"))
 
     def test_shared_subject_cannot_ground_a_different_supported_branch(self):
         content = "The bridge reopened before Friday."

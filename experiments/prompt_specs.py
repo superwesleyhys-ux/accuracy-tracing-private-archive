@@ -9,7 +9,7 @@ import hashlib
 import json
 
 
-PROMPT_VERSION = "staged-validation-v2"
+PROMPT_VERSION = "staged-validation-v3"
 
 
 def _string(maximum=1200, minimum=1, values=None):
@@ -158,8 +158,10 @@ verdict requires exact basis quotes and every scoped version
 to be present. Otherwise return unresolved. Every gap must name
 one concrete fetch/search/reanalyse action, a nonempty locator and the possible decision impact.
 A blocking gap requires source basis. Resolve only registered evidence gaps with fresh basis.
-An unresolved probe must either emit a concrete task or explicitly use no_source_lead; it may use
-scope_unavailable only when missing_scope is nonempty. Conclusive probes use stop_reason=none.
+An unresolved probe must either emit concrete tasks with stop_reason=none or emit no tasks and use
+an explicit stop. It may use scope_unavailable only when missing_scope is nonempty; with that stop,
+set gaps=[] because the program schedules exact missing-scope retrieval. Conclusive probes use
+stop_reason=none.
 If repair is supplied, fix that issue and return the complete evidence layer again.
 Program-generated repair fields identify the exact error_code and, when known, probe_number and
 dimension; correct that named ledger entry while still returning the complete layer.

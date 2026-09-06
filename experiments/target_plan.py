@@ -12,7 +12,7 @@ import json
 import re
 
 
-TARGET_PLAN_VERSION = "deterministic-target-plan-v2"
+TARGET_PLAN_VERSION = "deterministic-target-plan-v3"
 MAX_PROBES = 8
 
 _SENTENCE_BREAK = re.compile(r"[;；。!?！？]+|(?<!\d)\.(?!\d)")
@@ -21,9 +21,15 @@ _CONDITIONAL = re.compile(r"\b(?:if|unless|provided that|when)\b|如果|若|除�
 _MONTHS = ("january|february|march|april|may|june|july|august|"
            "september|october|november|december")
 _WEEKDAYS = "monday|tuesday|wednesday|thursday|friday|saturday|sunday"
+_YEAR = r"(?:19|20)\d{2}"
+_QUARTER_PERIOD = (
+    rf"(?:(?:first|second|third|fourth|1st|2nd|3rd|4th)\s+quarter"
+    rf"(?:\s+of)?\s+{_YEAR}|q[1-4]\s+{_YEAR})"
+)
+_YEAR_PERIOD = rf"(?:in|during|by|through|throughout)\s+{_YEAR}"
 _TIME_SIGNAL = re.compile(
     rf"\b(?:before|after|until|since|today|tomorrow|yesterday|as of|"
-    rf"{_WEEKDAYS}|{_MONTHS})\b|"
+    rf"{_WEEKDAYS}|{_MONTHS}|{_QUARTER_PERIOD}|{_YEAR_PERIOD})\b|"
     r"\b\d{4}[-/]\d{1,2}(?:[-/]\d{1,2})?\b|"
     r"\b\d{1,2}:\d{2}(?:\s*[ap]m)?\b|\b\d{1,2}\s*[ap]m\b|"
     r"截至|之前|之后|直到|今天|明天|昨日|周[一二三四五六日天]|"
@@ -31,7 +37,8 @@ _TIME_SIGNAL = re.compile(
     re.IGNORECASE,
 )
 _TEMPORAL_VALUE = re.compile(
-    rf"\b(?:{_MONTHS})\s+\d{{1,2}}(?:,?\s+\d{{4}})?\b|"
+    rf"\b(?:{_QUARTER_PERIOD}|{_YEAR_PERIOD})\b|"
+    rf"\b(?:{_MONTHS})(?:\s+\d{{1,2}}(?:,?\s+\d{{4}})?|\s+{_YEAR})\b|"
     r"\b\d{4}[-/]\d{1,2}(?:[-/]\d{1,2})?\b|"
     r"\b\d{1,2}:\d{2}(?:\s*[ap]m)?\b|\b\d{1,2}\s*[ap]m\b|"
     r"\d{4}年(?:\d{1,2}月(?:\d{1,2}日)?)?",
@@ -345,11 +352,38 @@ def _temporal_markers(value):
     markers = set(re.findall(
         rf"\b(?:before|after|until|since|today|tomorrow|yesterday|"
         rf"{_WEEKDAYS}|{_MONTHS})\b", lowered))
-    markers.update(re.sub(r"\W+", "", match.group().lower())
-                   for match in _TEMPORAL_VALUE.finditer(value))
+    for match in _TEMPORAL_VALUE.finditer(value):
+        matched = match.group().lower()
+        # Quarter/year phrases are normalized below so equivalent calendar
+        # expressions such as "second quarter" and "June" can agree.
+        if re.fullmatch(
+                rf"(?:{_QUARTER_PERIOD}|{_YEAR_PERIOD})", matched,
+                re.IGNORECASE):
+            continue
+        markers.add(re.sub(r"\W+", "", matched))
     markers.update(re.findall(
         r"截至|之前|之后|直到|今天|明天|昨日|周[一二三四五六日天]|"
         r"\d{4}年(?:\d{1,2}月(?:\d{1,2}日)?)?", value))
+    if _TIME_SIGNAL.search(value):
+        markers.update("year:" + year for year in re.findall(
+            rf"\b({_YEAR})\b", lowered))
+    quarter_names = {
+        "first": "1", "1st": "1", "second": "2", "2nd": "2",
+        "third": "3", "3rd": "3", "fourth": "4", "4th": "4",
+    }
+    for match in re.finditer(
+            r"\b(?:(first|second|third|fourth|1st|2nd|3rd|4th)\s+quarter|"
+            r"q([1-4]))\b", lowered):
+        number = match.group(2) or quarter_names[match.group(1)]
+        markers.add("quarter:" + number)
+    month_quarters = {
+        "january": "1", "february": "1", "march": "1",
+        "april": "2", "may": "2", "june": "2",
+        "july": "3", "august": "3", "september": "3",
+        "october": "4", "november": "4", "december": "4",
+    }
+    for month in re.findall(rf"\b({_MONTHS})\b", lowered):
+        markers.add("quarter:" + month_quarters[month])
     return {marker for marker in markers if marker}
 
 
