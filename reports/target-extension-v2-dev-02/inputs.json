@@ -1,0 +1,301 @@
+{
+  "schema_version": 1,
+  "cases": [
+    {
+      "target": {
+        "id": "p01",
+        "text": "NASA's October 11, 2022 announcement reported that DART shortened Dimorphos' orbital period around Didymos by 32 minutes, with an uncertainty of approximately plus or minus 2 minutes.",
+        "as_of": "2026-09-05T09:34:36Z",
+        "source_version_id": "m01",
+        "assessment_mode": "evidence",
+        "evidence_scope": [
+          "m02"
+        ]
+      },
+      "materials": [
+        {
+          "version_id": "m01",
+          "url": "https://www.nasa.gov/science-research/planetary-science/from-impact-to-innovation-a-year-of-science-and-triumph-for-historic-dart-mission/",
+          "content": "From Impact to Innovation: A Year of Science and Triumph for Historic DART Mission\nPublication date: 2023-09-26\n\nOctober 2022\n\n[NASA Confirms DART Mission Impact Changed Asteroid’s Motion in Space (Oct. 11, 2022)](https://www.nasa.gov/press-release/nasa-confirms-dart-mission-impact-changed-asteroid-s-motion-in-space)\n\nIt didn’t take long to learn just how much of an impact DART had made. Just a little over two weeks since it intentionally crashed head-on into Dimorphos, the science investigation team’s early data analysis confirmed the collision had significantly altered the asteroid’s orbit by 32 minutes, with an uncertainty of plus or minus 2 minutes (later revised to 33 minutes after more observation). Prior to DART’s impact, it took Dimorphos 11 hours and 55 minutes to orbit its larger parent asteroid, Didymos.",
+          "retrieved_at": "2026-09-05T09:34:36Z",
+          "published_at": null,
+          "available_at": "2026-09-05T09:34:36Z",
+          "availability_basis": "Current web-tool collection completed at retrieved_at on 2026-09-05. The supplied material is a selected, whitespace-normalized excerpt, not a full page or historical exact-version capture. Availability is asserted only at collection completion. The source's displayed publication date is preserved in content; no exact timezone-qualified publication instant is known.",
+          "issuer": "NASA"
+        },
+        {
+          "version_id": "m02",
+          "url": "https://www.nasa.gov/press-release/nasa-confirms-dart-mission-impact-changed-asteroid-s-motion-in-space",
+          "content": "NASA Confirms DART Mission Impact Changed Asteroid’s Motion in Space\nPublication date: 2022-10-11\n\nPrior to DART’s impact, it took Dimorphos 11 hours and 55 minutes to orbit its larger parent asteroid, Didymos. Since DART’s intentional collision with Dimorphos on Sept. 26, astronomers have been using telescopes on Earth to measure how much that time has changed. Now, the investigation team has confirmed the spacecraft’s impact altered Dimorphos’ orbit around Didymos by 32 minutes, shortening the 11 hour and 55-minute orbit to 11 hours and 23 minutes.\n\nThis measurement has a margin of uncertainty of approximately plus or minus 2 minutes.",
+          "retrieved_at": "2026-09-05T09:34:36Z",
+          "published_at": null,
+          "available_at": "2026-09-05T09:34:36Z",
+          "availability_basis": "Current web-tool collection completed at retrieved_at on 2026-09-05. The supplied material is a selected, whitespace-normalized excerpt, not a full page or historical exact-version capture. Availability is asserted only at collection completion. The source's displayed publication date is preserved in content; no exact timezone-qualified publication instant is known.",
+          "issuer": "NASA"
+        }
+      ],
+      "seed_ids": [
+        "m01"
+      ],
+      "full_evidence_control": true
+    },
+    {
+      "target": {
+        "id": "p02",
+        "text": "NASA's February 15, 2024 bulk-sample announcement reported that the final total mass of the Bennu sample returned by OSIRIS-REx was 70.3 grams.",
+        "as_of": "2026-09-05T09:34:36Z",
+        "source_version_id": "m03",
+        "assessment_mode": "evidence",
+        "evidence_scope": [
+          "m03"
+        ]
+      },
+      "materials": [
+        {
+          "version_id": "m03",
+          "url": "https://science.nasa.gov/blogs/osiris-rex/2024/02/15/nasa-announces-osiris-rex-bulk-sample-mass/",
+          "content": "NASA Announces OSIRIS-REx Bulk Sample Mass\nPublication date: 2024-02-15\n\nNASA’s OSIRIS-REx spacecraft delivered 4.29 ounces (121.6 grams) of material from asteroid Bennu when it returned to Earth on Sep. 24, 2023; the largest asteroid sample ever collected in space and over twice the mission’s requirement.\n\nAfter designing, producing, and testing new tools, the ARES curation engineers successfully removed the fasteners in January and completed disassembly of the TAGSAM head. The remaining Bennu sample was revealed and carefully poured into wedge-shaped containers. 1.81 ounces (51.2 grams) were collected from this pour.\n\nCombined with the previously measured 2.48 ounces (70.3 grams) and additional particles collected outside of the pour, the bulk Bennu sample mass totals 4.29 ounces (121.6 grams). NASA will preserve at least 70% of the sample at Johnson for further research by scientists worldwide, including future generations.",
+          "retrieved_at": "2026-09-05T09:34:36Z",
+          "published_at": null,
+          "available_at": "2026-09-05T09:34:36Z",
+          "availability_basis": "Current web-tool collection completed at retrieved_at on 2026-09-05. The supplied material is a selected, whitespace-normalized excerpt, not a full page or historical exact-version capture. Availability is asserted only at collection completion. The source's displayed publication date is preserved in content; no exact timezone-qualified publication instant is known.",
+          "issuer": "NASA"
+        },
+        {
+          "version_id": "m04",
+          "url": "https://science.nasa.gov/blogs/osiris-rex/2023/10/20/nasas-osiris-rex-achieves-sample-mass-milestone/",
+          "content": "NASA’s OSIRIS-REx Achieves Sample Mass Milestone\nPublication date: 2023-10-20\n\nThe curation team processing NASA’s asteroid Bennu sample has removed and collected 2.48 ounces (70.3 grams) of rocks and dust from the sampler hardware – surpassing the agency’s goal of bringing at least 60 grams to Earth.\n\nAnd the good news is, there’s still more of NASA’s OSIRIS-REx (Origins, Spectral Interpretation, Resource Identification, and Security–Regolith Explorer) sample to collect.\n\nThe sample processed so far includes the rocks and dust found on the outside of the sampler head, as well as a portion of the bulk sample from inside the head, which was accessed through the head’s mylar flap. Additional material remaining inside the sampler head, called the Touch-and-Go Sample Acquisition Mechanism, or TAGSAM, is set for removal later, adding to the mass total.",
+          "retrieved_at": "2026-09-05T09:34:36Z",
+          "published_at": null,
+          "available_at": "2026-09-05T09:34:36Z",
+          "availability_basis": "Current web-tool collection completed at retrieved_at on 2026-09-05. The supplied material is a selected, whitespace-normalized excerpt, not a full page or historical exact-version capture. Availability is asserted only at collection completion. The source's displayed publication date is preserved in content; no exact timezone-qualified publication instant is known.",
+          "issuer": "NASA"
+        }
+      ],
+      "seed_ids": [
+        "m04"
+      ],
+      "full_evidence_control": true
+    },
+    {
+      "target": {
+        "id": "p03",
+        "text": "NIST's FIPS 203 specifies three ML-KEM parameter sets: ML-KEM-512, ML-KEM-768, and ML-KEM-1024.",
+        "as_of": "2026-09-05T09:34:36Z",
+        "source_version_id": "m05",
+        "assessment_mode": "evidence",
+        "evidence_scope": [
+          "m06"
+        ]
+      },
+      "materials": [
+        {
+          "version_id": "m05",
+          "url": "https://www.nist.gov/news-events/news/2024/08/nist-releases-first-3-finalized-post-quantum-encryption-standards",
+          "content": "NIST Releases First 3 Finalized Post-Quantum Encryption Standards\nPublication date: 2024-08-13\n\nThe new standards are designed for two essential tasks for which encryption is typically used: general encryption, used to protect information exchanged across a public network; and digital signatures, used for identity authentication.\n\n[Federal Information Processing Standard (FIPS) 203](https://csrc.nist.gov/pubs/fips/203/final), intended as the primary standard for general encryption. Among its advantages are comparatively small encryption keys that two parties can exchange easily, as well as its speed of operation. The standard is based on the CRYSTALS-Kyber algorithm, which has been renamed ML-KEM, short for Module-Lattice-Based Key-Encapsulation Mechanism.",
+          "retrieved_at": "2026-09-05T09:34:36Z",
+          "published_at": null,
+          "available_at": "2026-09-05T09:34:36Z",
+          "availability_basis": "Current web-tool collection completed at retrieved_at on 2026-09-05. The supplied material is a selected, whitespace-normalized excerpt, not a full page or historical exact-version capture. Availability is asserted only at collection completion. The source's displayed publication date is preserved in content; no exact timezone-qualified publication instant is known.",
+          "issuer": "NIST"
+        },
+        {
+          "version_id": "m06",
+          "url": "https://csrc.nist.gov/pubs/fips/203/final",
+          "content": "FIPS 203: Module-Lattice-Based Key-Encapsulation Mechanism Standard\nPublication date: 2024-08-13\n\nA key-encapsulation mechanism (KEM) is a set of algorithms that, under certain conditions, can be used by two parties to establish a shared secret key over a public channel. A shared secret key that is securely established using a KEM can then be used with symmetric-key cryptographic algorithms to perform basic tasks in secure communications, such as encryption and authentication. This standard specifies a key-encapsulation mechanism called ML-KEM.\n\nThe security of ML-KEM is related to the computational difficulty of the Module Learning with Errors problem. At present, ML-KEM is believed to be secure, even against adversaries who possess a quantum computer. This standard specifies three parameter sets for ML-KEM. In order of increasing security strength and decreasing performance, these are ML-KEM-512, ML-KEM-768, and ML-KEM-1024.",
+          "retrieved_at": "2026-09-05T09:34:36Z",
+          "published_at": null,
+          "available_at": "2026-09-05T09:34:36Z",
+          "availability_basis": "Current web-tool collection completed at retrieved_at on 2026-09-05. The supplied material is a selected, whitespace-normalized excerpt, not a full page or historical exact-version capture. Availability is asserted only at collection completion. The source's displayed publication date is preserved in content; no exact timezone-qualified publication instant is known.",
+          "issuer": "NIST"
+        }
+      ],
+      "seed_ids": [
+        "m05"
+      ],
+      "full_evidence_control": true
+    },
+    {
+      "target": {
+        "id": "p04",
+        "text": "NOAA's January 10, 2025 annual climate summary reported that the global surface temperature in 2024 was 1.29°C above the 1850–1900 average.",
+        "as_of": "2026-09-05T09:34:36Z",
+        "source_version_id": "m07",
+        "assessment_mode": "evidence",
+        "evidence_scope": [
+          "m07"
+        ]
+      },
+      "materials": [
+        {
+          "version_id": "m07",
+          "url": "https://www.ncei.noaa.gov/news/global-climate-202413",
+          "content": "Assessing the Global Climate in 2024\nPublication date: 2025-01-10\n\nIn 2024, global surface temperature was 2.32°F (1.29°C) above the 20th-century average. This ranks as the highest global temperature in the period of 1850–2024, beating the next warmest year (2023) by 0.18°F (0.10°C). The 10 warmest years since 1850 have all occurred in the past decade. In 2024, global temperature exceeded the pre-industrial (1850–1900) average by 2.63°F (1.46°C).",
+          "retrieved_at": "2026-09-05T09:34:36Z",
+          "published_at": null,
+          "available_at": "2026-09-05T09:34:36Z",
+          "availability_basis": "Current web-tool collection completed at retrieved_at on 2026-09-05. The supplied material is a selected, whitespace-normalized excerpt, not a full page or historical exact-version capture. Availability is asserted only at collection completion. The source's displayed publication date is preserved in content; no exact timezone-qualified publication instant is known.",
+          "issuer": "NOAA National Centers for Environmental Information"
+        },
+        {
+          "version_id": "m08",
+          "url": "https://www.nasa.gov/news-release/temperatures-rising-nasa-confirms-2024-warmest-year-on-record/",
+          "content": "Temperatures Rising: NASA Confirms 2024 Warmest Year on Record\nPublication date: 2025-01-10\n\nEarth’s average surface temperature in 2024 was the warmest on record, according to an analysis led by NASA scientists.\n\nGlobal temperatures in 2024 were 2.30 degrees Fahrenheit (1.28 degrees Celsius) above the agency’s 20th-century baseline (1951-1980), which tops the record set in 2023. The new record comes after 15 consecutive months (June 2023 through August 2024) of monthly temperature records — an unprecedented heat streak.\n\nNASA scientists further estimate Earth in 2024 was about 2.65 degrees Fahrenheit (1.47 degrees Celsius) warmer than the mid-19th century average (1850-1900).",
+          "retrieved_at": "2026-09-05T09:34:36Z",
+          "published_at": null,
+          "available_at": "2026-09-05T09:34:36Z",
+          "availability_basis": "Current web-tool collection completed at retrieved_at on 2026-09-05. The supplied material is a selected, whitespace-normalized excerpt, not a full page or historical exact-version capture. Availability is asserted only at collection completion. The source's displayed publication date is preserved in content; no exact timezone-qualified publication instant is known.",
+          "issuer": "NASA"
+        }
+      ],
+      "seed_ids": [
+        "m08"
+      ],
+      "full_evidence_control": true
+    },
+    {
+      "target": {
+        "id": "p05",
+        "text": "Ingenuity was upright at the moment it touched down during its January 18, 2024 flight.",
+        "as_of": "2026-09-05T09:34:36Z",
+        "source_version_id": "m09",
+        "assessment_mode": "evidence",
+        "evidence_scope": [
+          "m09"
+        ]
+      },
+      "materials": [
+        {
+          "version_id": "m09",
+          "url": "https://www.nasa.gov/news-release/after-three-years-on-mars-nasas-ingenuity-helicopter-mission-ends/",
+          "content": "After Three Years on Mars, NASA’s Ingenuity Helicopter Mission Ends\nPublication date: 2024-01-25\n\nNASA’s history-making Ingenuity Mars Helicopter has ended its mission at the Red Planet after surpassing expectations and making dozens more flights than planned. While the helicopter remains upright and in communication with ground controllers, imagery of its Jan. 18 flight sent to Earth this week indicates one or more of its rotor blades sustained damage during landing, and it is no longer capable of flight.\n\nHowever, about 3 feet (1 meter) above the surface, Ingenuity lost contact with the rover, which serves as a communications relay for the rotorcraft. The following day, communications were reestablished and more information about the flight was relayed to ground controllers at NASA JPL. Imagery revealing damage to the rotor blade arrived several days later. The cause of the communications dropout and the helicopter’s orientation at time of touchdown are still being investigated.",
+          "retrieved_at": "2026-09-05T09:34:36Z",
+          "published_at": null,
+          "available_at": "2026-09-05T09:34:36Z",
+          "availability_basis": "Current web-tool collection completed at retrieved_at on 2026-09-05. The supplied material is a selected, whitespace-normalized excerpt, not a full page or historical exact-version capture. Availability is asserted only at collection completion. The source's displayed publication date is preserved in content; no exact timezone-qualified publication instant is known.",
+          "issuer": "NASA Headquarters"
+        }
+      ],
+      "seed_ids": [
+        "m09"
+      ],
+      "full_evidence_control": false
+    },
+    {
+      "target": {
+        "id": "p06",
+        "text": "Living organisms exist in the ocean beneath Europa's ice.",
+        "as_of": "2026-09-05T09:34:36Z",
+        "source_version_id": "m10",
+        "assessment_mode": "world",
+        "evidence_scope": [
+          "m10",
+          "m11"
+        ]
+      },
+      "materials": [
+        {
+          "version_id": "m10",
+          "url": "https://www.nasa.gov/news-release/liftoff-nasas-europa-clipper-sails-toward-ocean-moon-of-jupiter/",
+          "content": "Liftoff! NASA’s Europa Clipper Sails Toward Ocean Moon of Jupiter\nPublication date: 2024-10-14\n\nThe main goal of the mission is to determine whether Europa has conditions that could support life. Europa is about the size of our own Moon, but its interior is different. Information from NASA’s Galileo mission in the 1990s showed strong evidence that under Europa’s ice lies an enormous, salty ocean with more water than all of Earth’s oceans combined. Scientists also have found evidence that Europa may host organic compounds and energy sources under its surface.\n\nIf the mission determines Europa is habitable, it may mean there are more habitable worlds in our solar system and beyond than imagined.",
+          "retrieved_at": "2026-09-05T09:34:36Z",
+          "published_at": null,
+          "available_at": "2026-09-05T09:34:36Z",
+          "availability_basis": "Current web-tool collection completed at retrieved_at on 2026-09-05. The supplied material is a selected, whitespace-normalized excerpt, not a full page or historical exact-version capture. Availability is asserted only at collection completion. The source's displayed publication date is preserved in content; no exact timezone-qualified publication instant is known.",
+          "issuer": "NASA Headquarters"
+        },
+        {
+          "version_id": "m11",
+          "url": "https://www.nasa.gov/podcasts/curious-universe/europa-clippers-voyage-to-jupiters-ocean-moon/",
+          "content": "Europa Clipper's Voyage to Jupiter's Ocean Moon\nPublication date: 2024-10-01\n\nEuropa Clipper is not looking for life. Even if Europa does have life, this spacecraft is not equipped to find it.",
+          "retrieved_at": "2026-09-05T09:34:36Z",
+          "published_at": null,
+          "available_at": "2026-09-05T09:34:36Z",
+          "availability_basis": "Current web-tool collection completed at retrieved_at on 2026-09-05. The supplied material is a selected, whitespace-normalized excerpt, not a full page or historical exact-version capture. Availability is asserted only at collection completion. The source's displayed publication date is preserved in content; no exact timezone-qualified publication instant is known.",
+          "issuer": "NASA Curious Universe"
+        }
+      ],
+      "seed_ids": [
+        "m10",
+        "m11"
+      ],
+      "full_evidence_control": true
+    },
+    {
+      "target": {
+        "id": "p07",
+        "text": "NOAA renamed GOES-U to GOES-19 on June 25, 2024.",
+        "as_of": "2026-09-05T09:34:36Z",
+        "source_version_id": "m12",
+        "assessment_mode": "evidence",
+        "evidence_scope": [
+          "m13"
+        ]
+      },
+      "materials": [
+        {
+          "version_id": "m12",
+          "url": "https://www.nesdis.noaa.gov/news/noaas-goes-u-satellite-one-year-later",
+          "content": "NOAA’s GOES-U Satellite: One Year Later\nPublication date: 2025-06-25\n\nOn June 25, 2024, GOES-U, the final satellite in NOAA’s GOES-R Series, launched from NASA’s Kennedy Space Center in Florida. Once GOES-U [reached geostationary orbit](https://www.nesdis.noaa.gov/news/noaas-goes-u-reaches-geostationary-orbit-now-designated-goes-19) on July 7, the satellite was renamed GOES-19. As NOAA marks the first anniversary of sending GOES-U into space, we check in with the newest satellite in NOAA’s fleet.",
+          "retrieved_at": "2026-09-05T09:34:36Z",
+          "published_at": null,
+          "available_at": "2026-09-05T09:34:36Z",
+          "availability_basis": "Current web-tool collection completed at retrieved_at on 2026-09-05. The supplied material is a selected, whitespace-normalized excerpt, not a full page or historical exact-version capture. Availability is asserted only at collection completion. The source's displayed publication date is preserved in content; no exact timezone-qualified publication instant is known.",
+          "issuer": "NOAA NESDIS"
+        },
+        {
+          "version_id": "m13",
+          "url": "https://www.nesdis.noaa.gov/news/noaas-goes-u-reaches-geostationary-orbit-now-designated-goes-19",
+          "content": "NOAA’s GOES-U Reaches Geostationary Orbit, Now Designated GOES-19\nPublication date: 2024-07-08\n\nOn July 7, 2024, NOAA's GOES-U satellite reached geostationary orbit above Earth's equator and was renamed GOES-19.\n\nOn July 7, 2024, NOAA’s GOES-U executed its final engine burn, placing the satellite in geostationary orbit 22,236 miles above Earth’s equator. Upon reaching this milestone, GOES-U was renamed GOES-19. GOES satellites are designated with a letter prior to launch and a number once they achieve geostationary orbit.",
+          "retrieved_at": "2026-09-05T09:34:36Z",
+          "published_at": null,
+          "available_at": "2026-09-05T09:34:36Z",
+          "availability_basis": "Current web-tool collection completed at retrieved_at on 2026-09-05. The supplied material is a selected, whitespace-normalized excerpt, not a full page or historical exact-version capture. Availability is asserted only at collection completion. The source's displayed publication date is preserved in content; no exact timezone-qualified publication instant is known.",
+          "issuer": "NOAA NESDIS"
+        }
+      ],
+      "seed_ids": [
+        "m12"
+      ],
+      "full_evidence_control": true
+    },
+    {
+      "target": {
+        "id": "p08",
+        "text": "The USGS Unified Geologic Map of the Moon released in 2020 combined six Apollo-era regional maps with newer lunar-mission data.",
+        "as_of": "2026-09-05T09:34:36Z",
+        "source_version_id": "m14",
+        "assessment_mode": "evidence",
+        "evidence_scope": [
+          "m15"
+        ]
+      },
+      "materials": [
+        {
+          "version_id": "m14",
+          "url": "https://www.usgs.gov/news/astrogeology-releases-new-map-moon",
+          "content": "Astrogeology releases a new map of the Moon\nPublication date: 2020-04-20\n\nThe USGS Astrogeology Science Center (ASC), in collaboration with NASA and the Lunar and Planetary Institute, has released a new definitive geologic map of the Moon!\n\nChallenges of the decade-long process included the fact that the Apollo-era lunar maps were only available in paper format and early digitized versions of the paper maps did not align with updated and more accurate images. The original six maps were digitally renovated and reconciled to the newer datasets.\n\nFind the press release here: https://www.usgs.gov/news/usgs-releases-first-ever-comprehensive-geologic-map-moon.",
+          "retrieved_at": "2026-09-05T09:34:36Z",
+          "published_at": null,
+          "available_at": "2026-09-05T09:34:36Z",
+          "availability_basis": "Current web-tool collection completed at retrieved_at on 2026-09-05. The supplied material is a selected, whitespace-normalized excerpt, not a full page or historical exact-version capture. Availability is asserted only at collection completion. The source's displayed publication date is preserved in content; no exact timezone-qualified publication instant is known.",
+          "issuer": "USGS Astrogeology Science Center"
+        },
+        {
+          "version_id": "m15",
+          "url": "https://www.usgs.gov/news/usgs-releases-first-ever-comprehensive-geologic-map-moon",
+          "content": "USGS Releases First-Ever Comprehensive Geologic Map of the Moon\nPublication date: 2020-04-20\n\nTo create the new digital map, scientists used information from six Apollo-era regional maps along with updated information from recent satellite missions to the moon. The existing historical maps were redrawn to align them with the modern data sets, thus preserving previous observations and interpretations. Along with merging new and old data, USGS researchers also developed a unified description of the stratigraphy, or rock layers, of the moon.\n\nThis resolved issues from previous maps where rock names, descriptions and ages were sometimes inconsistent.",
+          "retrieved_at": "2026-09-05T09:34:36Z",
+          "published_at": null,
+          "available_at": "2026-09-05T09:34:36Z",
+          "availability_basis": "Current web-tool collection completed at retrieved_at on 2026-09-05. The supplied material is a selected, whitespace-normalized excerpt, not a full page or historical exact-version capture. Availability is asserted only at collection completion. The source's displayed publication date is preserved in content; no exact timezone-qualified publication instant is known.",
+          "issuer": "USGS Communications and Publishing"
+        }
+      ],
+      "seed_ids": [
+        "m14"
+      ],
+      "full_evidence_control": true
+    }
+  ]
+}

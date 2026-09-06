@@ -1,0 +1,19 @@
+{
+  "id": "library-evidence",
+  "arm": "original",
+  "status": "completed",
+  "prediction": "true",
+  "assessment_mode": "evidence",
+  "extractor_answer_text": "“图书馆现于晚上9点闭馆”获限定证据范围内的公告支持；截至2026年9月4日20:00Z，证据判定为支持，现实执行情况未知。需纠偏的是，两份材料同源，不能算独立确认。公告9月4日发布，称“今天”起延至21点闭馆；文章引用该公告。判定依据是公告明文表述，但在1个信源中未找到调整原因。材料无分歧，局限是快照未经外部认证，不能据此证明实际执行。（基于1个信源、2份材料 | 覆盖1类媒体 | 0条事实独立多源一致 | 0条存在分歧 | 因果锚定1/1，仅指文本依据）",
+  "extraction": {
+    "decision": "true",
+    "extractable": true,
+    "basis_quote": "截至2026年9月4日20:00Z，证据判定为支持，现实执行情况未知。"
+  },
+  "usage": {
+    "model_calls": 16,
+    "input_tokens": 13633,
+    "output_tokens": 8547,
+    "seconds": 155.2600619720033
+  }
+}

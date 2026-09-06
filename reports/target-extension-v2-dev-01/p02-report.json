@@ -1,0 +1,2253 @@
+{
+  "schema_version": "0.3",
+  "scope": "plugin-supplied semantic analyses; no built-in truth oracle",
+  "target": {
+    "id": "p02",
+    "text": "NASA's February 15, 2024 bulk-sample announcement reported that the final total mass of the Bennu sample returned by OSIRIS-REx was 70.3 grams.",
+    "as_of": "2026-09-05T09:34:36Z",
+    "source_version_id": "m03",
+    "assessment_mode": "evidence",
+    "evidence_scope": [
+      "m03"
+    ]
+  },
+  "config": {
+    "max_rounds": 2,
+    "max_documents": 24,
+    "max_decomposition_calls": 24,
+    "experimental_force_rounds": true
+  },
+  "provenance_status": "unresolved",
+  "fact_status": "unresolved",
+  "stop_reason": "decomposer_error",
+  "usage": {
+    "rounds": 2,
+    "documents": 4,
+    "unique_versions": 2,
+    "decomposition_calls": 4,
+    "verification_calls": 1
+  },
+  "decision_status": "unresolved",
+  "assessments": {
+    "evidence": {
+      "raw_verdict": "contradicted",
+      "decision": "contradicted",
+      "blocking_gap_ids": []
+    },
+    "world": {
+      "raw_verdict": "contradicted",
+      "decision": "contradicted",
+      "blocking_gap_ids": []
+    }
+  },
+  "assessment_valid": false,
+  "materials": [
+    {
+      "version_id": "m03",
+      "url": "https://science.nasa.gov/blogs/osiris-rex/2024/02/15/nasa-announces-osiris-rex-bulk-sample-mass/",
+      "content": "NASA Announces OSIRIS-REx Bulk Sample Mass\nPublication date: 2024-02-15\n\nNASA’s OSIRIS-REx spacecraft delivered 4.29 ounces (121.6 grams) of material from asteroid Bennu when it returned to Earth on Sep. 24, 2023; the largest asteroid sample ever collected in space and over twice the mission’s requirement.\n\nAfter designing, producing, and testing new tools, the ARES curation engineers successfully removed the fasteners in January and completed disassembly of the TAGSAM head. The remaining Bennu sample was revealed and carefully poured into wedge-shaped containers. 1.81 ounces (51.2 grams) were collected from this pour.\n\nCombined with the previously measured 2.48 ounces (70.3 grams) and additional particles collected outside of the pour, the bulk Bennu sample mass totals 4.29 ounces (121.6 grams). NASA will preserve at least 70% of the sample at Johnson for further research by scientists worldwide, including future generations.",
+      "retrieved_at": "2026-09-05T09:34:36Z",
+      "published_at": null,
+      "available_at": "2026-09-05T09:34:36Z",
+      "availability_basis": "Current web-tool collection completed at retrieved_at on 2026-09-05. The supplied material is a selected, whitespace-normalized excerpt, not a full page or historical exact-version capture. Availability is asserted only at collection completion. The source's displayed publication date is preserved in content; no exact timezone-qualified publication instant is known.",
+      "issuer": "NASA"
+    },
+    {
+      "version_id": "m04",
+      "url": "https://science.nasa.gov/blogs/osiris-rex/2023/10/20/nasas-osiris-rex-achieves-sample-mass-milestone/",
+      "content": "NASA’s OSIRIS-REx Achieves Sample Mass Milestone\nPublication date: 2023-10-20\n\nThe curation team processing NASA’s asteroid Bennu sample has removed and collected 2.48 ounces (70.3 grams) of rocks and dust from the sampler hardware – surpassing the agency’s goal of bringing at least 60 grams to Earth.\n\nAnd the good news is, there’s still more of NASA’s OSIRIS-REx (Origins, Spectral Interpretation, Resource Identification, and Security–Regolith Explorer) sample to collect.\n\nThe sample processed so far includes the rocks and dust found on the outside of the sampler head, as well as a portion of the bulk sample from inside the head, which was accessed through the head’s mylar flap. Additional material remaining inside the sampler head, called the Touch-and-Go Sample Acquisition Mechanism, or TAGSAM, is set for removal later, adding to the mass total.",
+      "retrieved_at": "2026-09-05T09:34:36Z",
+      "published_at": null,
+      "available_at": "2026-09-05T09:34:36Z",
+      "availability_basis": "Current web-tool collection completed at retrieved_at on 2026-09-05. The supplied material is a selected, whitespace-normalized excerpt, not a full page or historical exact-version capture. Availability is asserted only at collection completion. The source's displayed publication date is preserved in content; no exact timezone-qualified publication instant is known.",
+      "issuer": "NASA"
+    }
+  ],
+  "eligible_version_ids": [
+    "m03",
+    "m04"
+  ],
+  "observations": [
+    {
+      "version_id": "m03",
+      "retrieved_at": "2026-09-05T09:34:36Z",
+      "duplicate": false,
+      "eligible": true,
+      "reasons": []
+    },
+    {
+      "version_id": "m04",
+      "retrieved_at": "2026-09-05T09:34:36Z",
+      "duplicate": false,
+      "eligible": true,
+      "reasons": []
+    },
+    {
+      "version_id": "m03",
+      "retrieved_at": "2026-09-05T09:34:36Z",
+      "duplicate": true,
+      "eligible": true,
+      "reasons": []
+    },
+    {
+      "version_id": "m04",
+      "retrieved_at": "2026-09-05T09:34:36Z",
+      "duplicate": true,
+      "eligible": true,
+      "reasons": []
+    }
+  ],
+  "analyses": {
+    "m03": {
+      "fragments": [
+        {
+          "id": "m03:atom:149d34dc2f317fd98bdd",
+          "text": "The announcement reports that NASA’s OSIRIS-REx spacecraft delivered 4.29 ounces (121.6 grams) of material from asteroid Bennu when it returned to Earth on September 24, 2023.",
+          "span": {
+            "version_id": "m03",
+            "start": 73,
+            "end": 213,
+            "quote": "NASA’s OSIRIS-REx spacecraft delivered 4.29 ounces (121.6 grams) of material from asteroid Bennu when it returned to Earth on Sep. 24, 2023;"
+          },
+          "parent_id": "p02",
+          "qualifiers": [
+            "NASA’s OSIRIS-REx spacecraft",
+            "4.29 ounces (121.6 grams)",
+            "from asteroid Bennu",
+            "when it returned to Earth on Sep. 24, 2023"
+          ],
+          "qualifier_spans": [
+            {
+              "version_id": "m03",
+              "start": 73,
+              "end": 101,
+              "quote": "NASA’s OSIRIS-REx spacecraft"
+            },
+            {
+              "version_id": "m03",
+              "start": 112,
+              "end": 137,
+              "quote": "4.29 ounces (121.6 grams)"
+            },
+            {
+              "version_id": "m03",
+              "start": 150,
+              "end": 169,
+              "quote": "from asteroid Bennu"
+            },
+            {
+              "version_id": "m03",
+              "start": 170,
+              "end": 212,
+              "quote": "when it returned to Earth on Sep. 24, 2023"
+            }
+          ]
+        },
+        {
+          "id": "m03:atom:27faf23d8aaf398c91f9",
+          "text": "The announcement reports that 1.81 ounces (51.2 grams) were collected from the pour of the remaining Bennu sample into wedge-shaped containers.",
+          "span": {
+            "version_id": "m03",
+            "start": 480,
+            "end": 626,
+            "quote": "The remaining Bennu sample was revealed and carefully poured into wedge-shaped containers. 1.81 ounces (51.2 grams) were collected from this pour."
+          },
+          "parent_id": "p02",
+          "qualifiers": [
+            "remaining Bennu sample",
+            "into wedge-shaped containers",
+            "1.81 ounces (51.2 grams)",
+            "from this pour"
+          ],
+          "qualifier_spans": [
+            {
+              "version_id": "m03",
+              "start": 484,
+              "end": 506,
+              "quote": "remaining Bennu sample"
+            },
+            {
+              "version_id": "m03",
+              "start": 541,
+              "end": 569,
+              "quote": "into wedge-shaped containers"
+            },
+            {
+              "version_id": "m03",
+              "start": 571,
+              "end": 595,
+              "quote": "1.81 ounces (51.2 grams)"
+            },
+            {
+              "version_id": "m03",
+              "start": 611,
+              "end": 625,
+              "quote": "from this pour"
+            }
+          ]
+        },
+        {
+          "id": "m03:atom:2dbfa988f34ccdba6803",
+          "text": "The announcement reports a bulk Bennu sample mass total of 4.29 ounces (121.6 grams), combining the pour with the previously measured 2.48 ounces (70.3 grams) and additional particles collected outside the pour.",
+          "span": {
+            "version_id": "m03",
+            "start": 480,
+            "end": 807,
+            "quote": "The remaining Bennu sample was revealed and carefully poured into wedge-shaped containers. 1.81 ounces (51.2 grams) were collected from this pour.\n\nCombined with the previously measured 2.48 ounces (70.3 grams) and additional particles collected outside of the pour, the bulk Bennu sample mass totals 4.29 ounces (121.6 grams)."
+          },
+          "parent_id": "p02",
+          "qualifiers": [
+            "1.81 ounces (51.2 grams) were collected from this pour",
+            "Combined with the previously measured 2.48 ounces (70.3 grams)",
+            "additional particles collected outside of the pour",
+            "bulk Bennu sample mass totals",
+            "4.29 ounces (121.6 grams)"
+          ],
+          "qualifier_spans": [
+            {
+              "version_id": "m03",
+              "start": 571,
+              "end": 625,
+              "quote": "1.81 ounces (51.2 grams) were collected from this pour"
+            },
+            {
+              "version_id": "m03",
+              "start": 628,
+              "end": 690,
+              "quote": "Combined with the previously measured 2.48 ounces (70.3 grams)"
+            },
+            {
+              "version_id": "m03",
+              "start": 695,
+              "end": 745,
+              "quote": "additional particles collected outside of the pour"
+            },
+            {
+              "version_id": "m03",
+              "start": 751,
+              "end": 780,
+              "quote": "bulk Bennu sample mass totals"
+            },
+            {
+              "version_id": "m03",
+              "start": 781,
+              "end": 806,
+              "quote": "4.29 ounces (121.6 grams)"
+            }
+          ]
+        },
+        {
+          "id": "m03:atom:9bb66d5aded9b758690b",
+          "text": "The announcement identifies 2.48 ounces (70.3 grams) as a previously measured amount included in the bulk Bennu sample total.",
+          "span": {
+            "version_id": "m03",
+            "start": 628,
+            "end": 807,
+            "quote": "Combined with the previously measured 2.48 ounces (70.3 grams) and additional particles collected outside of the pour, the bulk Bennu sample mass totals 4.29 ounces (121.6 grams)."
+          },
+          "parent_id": "p02",
+          "qualifiers": [
+            "previously measured",
+            "2.48 ounces (70.3 grams)",
+            "bulk Bennu sample mass totals"
+          ],
+          "qualifier_spans": [
+            {
+              "version_id": "m03",
+              "start": 646,
+              "end": 665,
+              "quote": "previously measured"
+            },
+            {
+              "version_id": "m03",
+              "start": 666,
+              "end": 690,
+              "quote": "2.48 ounces (70.3 grams)"
+            },
+            {
+              "version_id": "m03",
+              "start": 751,
+              "end": 780,
+              "quote": "bulk Bennu sample mass totals"
+            }
+          ]
+        },
+        {
+          "id": "m03:atom:da81a18005867c35c1da",
+          "text": "The announcement is titled “NASA Announces OSIRIS-REx Bulk Sample Mass” and displays a publication date of February 15, 2024.",
+          "span": {
+            "version_id": "m03",
+            "start": 0,
+            "end": 71,
+            "quote": "NASA Announces OSIRIS-REx Bulk Sample Mass\nPublication date: 2024-02-15"
+          },
+          "parent_id": "p02",
+          "qualifiers": [
+            "NASA Announces",
+            "OSIRIS-REx Bulk Sample Mass",
+            "Publication date: 2024-02-15"
+          ],
+          "qualifier_spans": [
+            {
+              "version_id": "m03",
+              "start": 0,
+              "end": 14,
+              "quote": "NASA Announces"
+            },
+            {
+              "version_id": "m03",
+              "start": 15,
+              "end": 42,
+              "quote": "OSIRIS-REx Bulk Sample Mass"
+            },
+            {
+              "version_id": "m03",
+              "start": 43,
+              "end": 71,
+              "quote": "Publication date: 2024-02-15"
+            }
+          ]
+        }
+      ],
+      "relations": [],
+      "gaps": [],
+      "resolutions": [
+        {
+          "gap_id": "origin:p02",
+          "basis": [
+            {
+              "version_id": "m03",
+              "start": 0,
+              "end": 307,
+              "quote": "NASA Announces OSIRIS-REx Bulk Sample Mass\nPublication date: 2024-02-15\n\nNASA’s OSIRIS-REx spacecraft delivered 4.29 ounces (121.6 grams) of material from asteroid Bennu when it returned to Earth on Sep. 24, 2023; the largest asteroid sample ever collected in space and over twice the mission’s requirement."
+            }
+          ],
+          "rationale": "Rechecked source findings establish the target source's path to an original material."
+        }
+      ],
+      "origins": [
+        {
+          "target_id": "p02",
+          "version_id": "m03",
+          "basis": [
+            {
+              "version_id": "m03",
+              "start": 0,
+              "end": 307,
+              "quote": "NASA Announces OSIRIS-REx Bulk Sample Mass\nPublication date: 2024-02-15\n\nNASA’s OSIRIS-REx spacecraft delivered 4.29 ounces (121.6 grams) of material from asteroid Bennu when it returned to Earth on Sep. 24, 2023; the largest asteroid sample ever collected in space and over twice the mission’s requirement."
+            }
+          ],
+          "material_kind": "original_record",
+          "rationale": "The heading, displayed date and direct institutional reporting of NASA’s mission results, together with the supplied NASA issuer metadata and account of curation operations, identify this as the original announcement named by the target. It is the declared target source itself, so no upstream derivation path is required. Originality does not establish the accuracy of the target’s attribution."
+        }
+      ],
+      "notes": "All five prior atomic findings remain supported; none withdrawn. The heading identifies NASA and the bulk-sample announcement, and the displayed publication date is distinct from the spacecraft’s return date. The body explicitly binds OSIRIS-REx to material from Bennu. Within this announcement’s reporting, 70.3 grams is a previously measured component, while 121.6 grams is the stated bulk total; the text does not describe 70.3 grams as the final total. Prior provenance and resolution findings are outside this stage and are not re-emitted.\nThe previous original-record finding remains supported; no lineage findings require withdrawal. No explicit source-side citations appear: the reference to a previously measured amount names no record or locator. For the parent-attribution probe, the heading, displayed date and institutional reporting identify NASA’s specified announcement rather than later commentary; the snapshot does not independently establish a historical exact version. For the attributed-content probe, the mass discussion appears directly in that announcement, but distinguishes the previously measured 70.3 grams from the bulk total of 121.6 grams. Thus the content is traceable to the parent source, while the target’s characterization of what it reported is not supported.",
+      "revisit_versions": []
+    },
+    "m04": {
+      "fragments": [
+        {
+          "id": "m04:atom:3ce0af656afb2731457a",
+          "text": "The milestone announcement reports that the curation team had removed and collected 2.48 ounces (70.3 grams) of Bennu rocks and dust from the sampler hardware, with more OSIRIS-REx sample still to collect.",
+          "span": {
+            "version_id": "m04",
+            "start": 79,
+            "end": 476,
+            "quote": "The curation team processing NASA’s asteroid Bennu sample has removed and collected 2.48 ounces (70.3 grams) of rocks and dust from the sampler hardware – surpassing the agency’s goal of bringing at least 60 grams to Earth.\n\nAnd the good news is, there’s still more of NASA’s OSIRIS-REx (Origins, Spectral Interpretation, Resource Identification, and Security–Regolith Explorer) sample to collect."
+          },
+          "parent_id": "p02",
+          "qualifiers": [
+            "2.48 ounces (70.3 grams)",
+            "from the sampler hardware",
+            "there’s still more of NASA’s OSIRIS-REx (Origins, Spectral Interpretation, Resource Identification, and Security–Regolith Explorer) sample to collect"
+          ],
+          "qualifier_spans": [
+            {
+              "version_id": "m04",
+              "start": 163,
+              "end": 187,
+              "quote": "2.48 ounces (70.3 grams)"
+            },
+            {
+              "version_id": "m04",
+              "start": 206,
+              "end": 231,
+              "quote": "from the sampler hardware"
+            },
+            {
+              "version_id": "m04",
+              "start": 326,
+              "end": 475,
+              "quote": "there’s still more of NASA’s OSIRIS-REx (Origins, Spectral Interpretation, Resource Identification, and Security–Regolith Explorer) sample to collect"
+            }
+          ]
+        },
+        {
+          "id": "m04:atom:4e6e82a0b71ac3530d4d",
+          "text": "The announcement says additional material remaining inside the TAGSAM sampler head was scheduled for later removal, which would add to the mass total.",
+          "span": {
+            "version_id": "m04",
+            "start": 688,
+            "end": 859,
+            "quote": "Additional material remaining inside the sampler head, called the Touch-and-Go Sample Acquisition Mechanism, or TAGSAM, is set for removal later, adding to the mass total."
+          },
+          "parent_id": "p02",
+          "qualifiers": [
+            "Additional material remaining inside the sampler head",
+            "is set for removal later",
+            "adding to the mass total"
+          ],
+          "qualifier_spans": [
+            {
+              "version_id": "m04",
+              "start": 688,
+              "end": 741,
+              "quote": "Additional material remaining inside the sampler head"
+            },
+            {
+              "version_id": "m04",
+              "start": 808,
+              "end": 832,
+              "quote": "is set for removal later"
+            },
+            {
+              "version_id": "m04",
+              "start": 834,
+              "end": 858,
+              "quote": "adding to the mass total"
+            }
+          ]
+        },
+        {
+          "id": "m04:atom:7b041147fc727fa76e08",
+          "text": "The announcement describes the sample processed so far as including rocks and dust outside the sampler head and a portion of the bulk sample inside it, accessed through the head’s mylar flap.",
+          "span": {
+            "version_id": "m04",
+            "start": 478,
+            "end": 687,
+            "quote": "The sample processed so far includes the rocks and dust found on the outside of the sampler head, as well as a portion of the bulk sample from inside the head, which was accessed through the head’s mylar flap."
+          },
+          "parent_id": "p02",
+          "qualifiers": [
+            "processed so far",
+            "on the outside of the sampler head",
+            "a portion of the bulk sample from inside the head",
+            "accessed through the head’s mylar flap"
+          ],
+          "qualifier_spans": [
+            {
+              "version_id": "m04",
+              "start": 489,
+              "end": 505,
+              "quote": "processed so far"
+            },
+            {
+              "version_id": "m04",
+              "start": 540,
+              "end": 574,
+              "quote": "on the outside of the sampler head"
+            },
+            {
+              "version_id": "m04",
+              "start": 587,
+              "end": 636,
+              "quote": "a portion of the bulk sample from inside the head"
+            },
+            {
+              "version_id": "m04",
+              "start": 648,
+              "end": 686,
+              "quote": "accessed through the head’s mylar flap"
+            }
+          ]
+        },
+        {
+          "id": "m04:atom:fccc2e5715bbb9065709",
+          "text": "The displayed publication date of “NASA’s OSIRIS-REx Achieves Sample Mass Milestone” is October 20, 2023.",
+          "span": {
+            "version_id": "m04",
+            "start": 0,
+            "end": 77,
+            "quote": "NASA’s OSIRIS-REx Achieves Sample Mass Milestone\nPublication date: 2023-10-20"
+          },
+          "parent_id": "p02",
+          "qualifiers": [
+            "Publication date: 2023-10-20"
+          ],
+          "qualifier_spans": [
+            {
+              "version_id": "m04",
+              "start": 49,
+              "end": 77,
+              "quote": "Publication date: 2023-10-20"
+            }
+          ]
+        }
+      ],
+      "relations": [],
+      "gaps": [],
+      "resolutions": [],
+      "origins": [],
+      "notes": "These atoms describe the supplied current material, m04, not the February 15, 2024 announcement. The fixed target evidence scope is m03, whose content is not supplied here; m04’s findings do not resolve the m03-specific attribution probes. No previous findings were supplied.\nThe current m04 excerpt contains no explicit source-side citations. It identifies itself with “Publication date: 2023-10-20” and describes an interim collection: “And the good news is, there’s still more of NASA’s OSIRIS-REx (Origins, Spectral Interpretation, Resource Identification, and Security–Regolith Explorer) sample to collect.” It therefore cannot establish provenance for the specified February 15, 2024 announcement or bind its 70.3-gram statement to that parent attribution. Both routed probes concern m03, whose content is not supplied here. No known relation connects m03 to m04; m04 is not established as an origin for the whole target. No previous findings require withdrawal.",
+      "revisit_versions": []
+    }
+  },
+  "analysis_history": [
+    {
+      "revision": 1,
+      "round": 1,
+      "version_id": "m03",
+      "duplicate": false,
+      "revisit": false,
+      "accepted": true,
+      "analysis": {
+        "fragments": [
+          {
+            "id": "m03:atom:27faf23d8aaf398c91f9",
+            "text": "The announcement reports that 1.81 ounces (51.2 grams) were collected from the pour of the remaining Bennu sample into wedge-shaped containers.",
+            "span": {
+              "version_id": "m03",
+              "start": 480,
+              "end": 626,
+              "quote": "The remaining Bennu sample was revealed and carefully poured into wedge-shaped containers. 1.81 ounces (51.2 grams) were collected from this pour."
+            },
+            "parent_id": "p02",
+            "qualifiers": [
+              "remaining Bennu sample",
+              "1.81 ounces (51.2 grams)",
+              "from this pour"
+            ],
+            "qualifier_spans": [
+              {
+                "version_id": "m03",
+                "start": 484,
+                "end": 506,
+                "quote": "remaining Bennu sample"
+              },
+              {
+                "version_id": "m03",
+                "start": 571,
+                "end": 595,
+                "quote": "1.81 ounces (51.2 grams)"
+              },
+              {
+                "version_id": "m03",
+                "start": 611,
+                "end": 625,
+                "quote": "from this pour"
+              }
+            ]
+          },
+          {
+            "id": "m03:atom:2e00ebcc3acadb627a1c",
+            "text": "The announcement reports that NASA’s OSIRIS-REx spacecraft delivered 4.29 ounces (121.6 grams) of material from asteroid Bennu upon returning to Earth on September 24, 2023.",
+            "span": {
+              "version_id": "m03",
+              "start": 73,
+              "end": 213,
+              "quote": "NASA’s OSIRIS-REx spacecraft delivered 4.29 ounces (121.6 grams) of material from asteroid Bennu when it returned to Earth on Sep. 24, 2023;"
+            },
+            "parent_id": "p02",
+            "qualifiers": [
+              "4.29 ounces (121.6 grams)",
+              "from asteroid Bennu",
+              "when it returned to Earth on Sep. 24, 2023"
+            ],
+            "qualifier_spans": [
+              {
+                "version_id": "m03",
+                "start": 112,
+                "end": 137,
+                "quote": "4.29 ounces (121.6 grams)"
+              },
+              {
+                "version_id": "m03",
+                "start": 150,
+                "end": 169,
+                "quote": "from asteroid Bennu"
+              },
+              {
+                "version_id": "m03",
+                "start": 170,
+                "end": 212,
+                "quote": "when it returned to Earth on Sep. 24, 2023"
+              }
+            ]
+          },
+          {
+            "id": "m03:atom:33ee88f006561b752644",
+            "text": "The announcement reports a bulk Bennu sample mass total of 4.29 ounces (121.6 grams), combining the pour with the previously measured amount and additional particles collected outside the pour.",
+            "span": {
+              "version_id": "m03",
+              "start": 628,
+              "end": 807,
+              "quote": "Combined with the previously measured 2.48 ounces (70.3 grams) and additional particles collected outside of the pour, the bulk Bennu sample mass totals 4.29 ounces (121.6 grams)."
+            },
+            "parent_id": "p02",
+            "qualifiers": [
+              "Combined with the previously measured 2.48 ounces (70.3 grams)",
+              "additional particles collected outside of the pour",
+              "bulk Bennu sample mass totals",
+              "4.29 ounces (121.6 grams)"
+            ],
+            "qualifier_spans": [
+              {
+                "version_id": "m03",
+                "start": 628,
+                "end": 690,
+                "quote": "Combined with the previously measured 2.48 ounces (70.3 grams)"
+              },
+              {
+                "version_id": "m03",
+                "start": 695,
+                "end": 745,
+                "quote": "additional particles collected outside of the pour"
+              },
+              {
+                "version_id": "m03",
+                "start": 751,
+                "end": 780,
+                "quote": "bulk Bennu sample mass totals"
+              },
+              {
+                "version_id": "m03",
+                "start": 781,
+                "end": 806,
+                "quote": "4.29 ounces (121.6 grams)"
+              }
+            ]
+          },
+          {
+            "id": "m03:atom:9bb66d5aded9b758690b",
+            "text": "The announcement identifies 2.48 ounces (70.3 grams) as a previously measured amount included in the bulk Bennu sample total.",
+            "span": {
+              "version_id": "m03",
+              "start": 628,
+              "end": 807,
+              "quote": "Combined with the previously measured 2.48 ounces (70.3 grams) and additional particles collected outside of the pour, the bulk Bennu sample mass totals 4.29 ounces (121.6 grams)."
+            },
+            "parent_id": "p02",
+            "qualifiers": [
+              "previously measured",
+              "2.48 ounces (70.3 grams)"
+            ],
+            "qualifier_spans": [
+              {
+                "version_id": "m03",
+                "start": 646,
+                "end": 665,
+                "quote": "previously measured"
+              },
+              {
+                "version_id": "m03",
+                "start": 666,
+                "end": 690,
+                "quote": "2.48 ounces (70.3 grams)"
+              }
+            ]
+          },
+          {
+            "id": "m03:atom:da81a18005867c35c1da",
+            "text": "The announcement is titled “NASA Announces OSIRIS-REx Bulk Sample Mass” and displays a publication date of February 15, 2024.",
+            "span": {
+              "version_id": "m03",
+              "start": 0,
+              "end": 71,
+              "quote": "NASA Announces OSIRIS-REx Bulk Sample Mass\nPublication date: 2024-02-15"
+            },
+            "parent_id": "p02",
+            "qualifiers": [
+              "Bulk Sample Mass",
+              "Publication date: 2024-02-15"
+            ],
+            "qualifier_spans": [
+              {
+                "version_id": "m03",
+                "start": 26,
+                "end": 42,
+                "quote": "Bulk Sample Mass"
+              },
+              {
+                "version_id": "m03",
+                "start": 43,
+                "end": 71,
+                "quote": "Publication date: 2024-02-15"
+              }
+            ]
+          }
+        ],
+        "relations": [],
+        "gaps": [],
+        "resolutions": [
+          {
+            "gap_id": "origin:p02",
+            "basis": [
+              {
+                "version_id": "m03",
+                "start": 0,
+                "end": 307,
+                "quote": "NASA Announces OSIRIS-REx Bulk Sample Mass\nPublication date: 2024-02-15\n\nNASA’s OSIRIS-REx spacecraft delivered 4.29 ounces (121.6 grams) of material from asteroid Bennu when it returned to Earth on Sep. 24, 2023; the largest asteroid sample ever collected in space and over twice the mission’s requirement."
+              }
+            ],
+            "rationale": "Rechecked source findings establish the target source's path to an original material."
+          }
+        ],
+        "origins": [
+          {
+            "target_id": "p02",
+            "version_id": "m03",
+            "basis": [
+              {
+                "version_id": "m03",
+                "start": 0,
+                "end": 307,
+                "quote": "NASA Announces OSIRIS-REx Bulk Sample Mass\nPublication date: 2024-02-15\n\nNASA’s OSIRIS-REx spacecraft delivered 4.29 ounces (121.6 grams) of material from asteroid Bennu when it returned to Earth on Sep. 24, 2023; the largest asteroid sample ever collected in space and over twice the mission’s requirement."
+              }
+            ],
+            "material_kind": "original_record",
+            "rationale": "The announcement heading, displayed date, and direct reporting of NASA’s mission results, together with the supplied NASA issuer metadata and account of curation operations, identify m03 as the institutional announcement named in the target. It is the declared target source itself, not an upstream source requiring a separate derivation path."
+          }
+        ],
+        "notes": "The displayed date concerns publication of the bulk-sample announcement; September 24, 2023 concerns the spacecraft’s return. The announcement explicitly binds NASA, OSIRIS-REx, and Bennu to the reported sample. Its wording distinguishes the previously measured 70.3 grams from the bulk total of 121.6 grams; it does not label 70.3 grams the final total. No previous findings were supplied.\nNo explicit citations to other records appear; “previously measured” supplies neither a record name nor a locator. Both provenance probes resolve within this same announcement: its heading and displayed date identify the parent attribution, and its body contains the mass statement. That connection does not validate the attributed content: the announcement calls 70.3 grams previously measured material and states that the bulk sample totals 121.6 grams. The supplied snapshot establishes the displayed publication date, not an independently verified historical version. No previous findings require withdrawal.",
+        "revisit_versions": []
+      },
+      "exclusion_reasons": []
+    },
+    {
+      "revision": 2,
+      "round": 1,
+      "version_id": "m04",
+      "duplicate": false,
+      "revisit": false,
+      "accepted": true,
+      "analysis": {
+        "fragments": [
+          {
+            "id": "m04:atom:3ce0af656afb2731457a",
+            "text": "The milestone announcement reports that the curation team had removed and collected 2.48 ounces (70.3 grams) of Bennu rocks and dust from the sampler hardware, with more OSIRIS-REx sample still to collect.",
+            "span": {
+              "version_id": "m04",
+              "start": 79,
+              "end": 476,
+              "quote": "The curation team processing NASA’s asteroid Bennu sample has removed and collected 2.48 ounces (70.3 grams) of rocks and dust from the sampler hardware – surpassing the agency’s goal of bringing at least 60 grams to Earth.\n\nAnd the good news is, there’s still more of NASA’s OSIRIS-REx (Origins, Spectral Interpretation, Resource Identification, and Security–Regolith Explorer) sample to collect."
+            },
+            "parent_id": "p02",
+            "qualifiers": [
+              "2.48 ounces (70.3 grams)",
+              "from the sampler hardware",
+              "there’s still more of NASA’s OSIRIS-REx (Origins, Spectral Interpretation, Resource Identification, and Security–Regolith Explorer) sample to collect"
+            ],
+            "qualifier_spans": [
+              {
+                "version_id": "m04",
+                "start": 163,
+                "end": 187,
+                "quote": "2.48 ounces (70.3 grams)"
+              },
+              {
+                "version_id": "m04",
+                "start": 206,
+                "end": 231,
+                "quote": "from the sampler hardware"
+              },
+              {
+                "version_id": "m04",
+                "start": 326,
+                "end": 475,
+                "quote": "there’s still more of NASA’s OSIRIS-REx (Origins, Spectral Interpretation, Resource Identification, and Security–Regolith Explorer) sample to collect"
+              }
+            ]
+          },
+          {
+            "id": "m04:atom:4e6e82a0b71ac3530d4d",
+            "text": "The announcement says additional material remaining inside the TAGSAM sampler head was scheduled for later removal, which would add to the mass total.",
+            "span": {
+              "version_id": "m04",
+              "start": 688,
+              "end": 859,
+              "quote": "Additional material remaining inside the sampler head, called the Touch-and-Go Sample Acquisition Mechanism, or TAGSAM, is set for removal later, adding to the mass total."
+            },
+            "parent_id": "p02",
+            "qualifiers": [
+              "Additional material remaining inside the sampler head",
+              "is set for removal later",
+              "adding to the mass total"
+            ],
+            "qualifier_spans": [
+              {
+                "version_id": "m04",
+                "start": 688,
+                "end": 741,
+                "quote": "Additional material remaining inside the sampler head"
+              },
+              {
+                "version_id": "m04",
+                "start": 808,
+                "end": 832,
+                "quote": "is set for removal later"
+              },
+              {
+                "version_id": "m04",
+                "start": 834,
+                "end": 858,
+                "quote": "adding to the mass total"
+              }
+            ]
+          },
+          {
+            "id": "m04:atom:7b041147fc727fa76e08",
+            "text": "The announcement describes the sample processed so far as including rocks and dust outside the sampler head and a portion of the bulk sample inside it, accessed through the head’s mylar flap.",
+            "span": {
+              "version_id": "m04",
+              "start": 478,
+              "end": 687,
+              "quote": "The sample processed so far includes the rocks and dust found on the outside of the sampler head, as well as a portion of the bulk sample from inside the head, which was accessed through the head’s mylar flap."
+            },
+            "parent_id": "p02",
+            "qualifiers": [
+              "processed so far",
+              "on the outside of the sampler head",
+              "a portion of the bulk sample from inside the head",
+              "accessed through the head’s mylar flap"
+            ],
+            "qualifier_spans": [
+              {
+                "version_id": "m04",
+                "start": 489,
+                "end": 505,
+                "quote": "processed so far"
+              },
+              {
+                "version_id": "m04",
+                "start": 540,
+                "end": 574,
+                "quote": "on the outside of the sampler head"
+              },
+              {
+                "version_id": "m04",
+                "start": 587,
+                "end": 636,
+                "quote": "a portion of the bulk sample from inside the head"
+              },
+              {
+                "version_id": "m04",
+                "start": 648,
+                "end": 686,
+                "quote": "accessed through the head’s mylar flap"
+              }
+            ]
+          },
+          {
+            "id": "m04:atom:fccc2e5715bbb9065709",
+            "text": "The displayed publication date of “NASA’s OSIRIS-REx Achieves Sample Mass Milestone” is October 20, 2023.",
+            "span": {
+              "version_id": "m04",
+              "start": 0,
+              "end": 77,
+              "quote": "NASA’s OSIRIS-REx Achieves Sample Mass Milestone\nPublication date: 2023-10-20"
+            },
+            "parent_id": "p02",
+            "qualifiers": [
+              "Publication date: 2023-10-20"
+            ],
+            "qualifier_spans": [
+              {
+                "version_id": "m04",
+                "start": 49,
+                "end": 77,
+                "quote": "Publication date: 2023-10-20"
+              }
+            ]
+          }
+        ],
+        "relations": [],
+        "gaps": [],
+        "resolutions": [],
+        "origins": [],
+        "notes": "These atoms describe the supplied current material, m04, not the February 15, 2024 announcement. The fixed target evidence scope is m03, whose content is not supplied here; m04’s findings do not resolve the m03-specific attribution probes. No previous findings were supplied.\nThe current m04 excerpt contains no explicit source-side citations. It identifies itself with “Publication date: 2023-10-20” and describes an interim collection: “And the good news is, there’s still more of NASA’s OSIRIS-REx (Origins, Spectral Interpretation, Resource Identification, and Security–Regolith Explorer) sample to collect.” It therefore cannot establish provenance for the specified February 15, 2024 announcement or bind its 70.3-gram statement to that parent attribution. Both routed probes concern m03, whose content is not supplied here. No known relation connects m03 to m04; m04 is not established as an origin for the whole target. No previous findings require withdrawal.",
+        "revisit_versions": []
+      },
+      "exclusion_reasons": []
+    },
+    {
+      "revision": 3,
+      "round": 2,
+      "version_id": "m03",
+      "duplicate": true,
+      "revisit": false,
+      "accepted": true,
+      "analysis": {
+        "fragments": [
+          {
+            "id": "m03:atom:149d34dc2f317fd98bdd",
+            "text": "The announcement reports that NASA’s OSIRIS-REx spacecraft delivered 4.29 ounces (121.6 grams) of material from asteroid Bennu when it returned to Earth on September 24, 2023.",
+            "span": {
+              "version_id": "m03",
+              "start": 73,
+              "end": 213,
+              "quote": "NASA’s OSIRIS-REx spacecraft delivered 4.29 ounces (121.6 grams) of material from asteroid Bennu when it returned to Earth on Sep. 24, 2023;"
+            },
+            "parent_id": "p02",
+            "qualifiers": [
+              "NASA’s OSIRIS-REx spacecraft",
+              "4.29 ounces (121.6 grams)",
+              "from asteroid Bennu",
+              "when it returned to Earth on Sep. 24, 2023"
+            ],
+            "qualifier_spans": [
+              {
+                "version_id": "m03",
+                "start": 73,
+                "end": 101,
+                "quote": "NASA’s OSIRIS-REx spacecraft"
+              },
+              {
+                "version_id": "m03",
+                "start": 112,
+                "end": 137,
+                "quote": "4.29 ounces (121.6 grams)"
+              },
+              {
+                "version_id": "m03",
+                "start": 150,
+                "end": 169,
+                "quote": "from asteroid Bennu"
+              },
+              {
+                "version_id": "m03",
+                "start": 170,
+                "end": 212,
+                "quote": "when it returned to Earth on Sep. 24, 2023"
+              }
+            ]
+          },
+          {
+            "id": "m03:atom:27faf23d8aaf398c91f9",
+            "text": "The announcement reports that 1.81 ounces (51.2 grams) were collected from the pour of the remaining Bennu sample into wedge-shaped containers.",
+            "span": {
+              "version_id": "m03",
+              "start": 480,
+              "end": 626,
+              "quote": "The remaining Bennu sample was revealed and carefully poured into wedge-shaped containers. 1.81 ounces (51.2 grams) were collected from this pour."
+            },
+            "parent_id": "p02",
+            "qualifiers": [
+              "remaining Bennu sample",
+              "into wedge-shaped containers",
+              "1.81 ounces (51.2 grams)",
+              "from this pour"
+            ],
+            "qualifier_spans": [
+              {
+                "version_id": "m03",
+                "start": 484,
+                "end": 506,
+                "quote": "remaining Bennu sample"
+              },
+              {
+                "version_id": "m03",
+                "start": 541,
+                "end": 569,
+                "quote": "into wedge-shaped containers"
+              },
+              {
+                "version_id": "m03",
+                "start": 571,
+                "end": 595,
+                "quote": "1.81 ounces (51.2 grams)"
+              },
+              {
+                "version_id": "m03",
+                "start": 611,
+                "end": 625,
+                "quote": "from this pour"
+              }
+            ]
+          },
+          {
+            "id": "m03:atom:2dbfa988f34ccdba6803",
+            "text": "The announcement reports a bulk Bennu sample mass total of 4.29 ounces (121.6 grams), combining the pour with the previously measured 2.48 ounces (70.3 grams) and additional particles collected outside the pour.",
+            "span": {
+              "version_id": "m03",
+              "start": 480,
+              "end": 807,
+              "quote": "The remaining Bennu sample was revealed and carefully poured into wedge-shaped containers. 1.81 ounces (51.2 grams) were collected from this pour.\n\nCombined with the previously measured 2.48 ounces (70.3 grams) and additional particles collected outside of the pour, the bulk Bennu sample mass totals 4.29 ounces (121.6 grams)."
+            },
+            "parent_id": "p02",
+            "qualifiers": [
+              "1.81 ounces (51.2 grams) were collected from this pour",
+              "Combined with the previously measured 2.48 ounces (70.3 grams)",
+              "additional particles collected outside of the pour",
+              "bulk Bennu sample mass totals",
+              "4.29 ounces (121.6 grams)"
+            ],
+            "qualifier_spans": [
+              {
+                "version_id": "m03",
+                "start": 571,
+                "end": 625,
+                "quote": "1.81 ounces (51.2 grams) were collected from this pour"
+              },
+              {
+                "version_id": "m03",
+                "start": 628,
+                "end": 690,
+                "quote": "Combined with the previously measured 2.48 ounces (70.3 grams)"
+              },
+              {
+                "version_id": "m03",
+                "start": 695,
+                "end": 745,
+                "quote": "additional particles collected outside of the pour"
+              },
+              {
+                "version_id": "m03",
+                "start": 751,
+                "end": 780,
+                "quote": "bulk Bennu sample mass totals"
+              },
+              {
+                "version_id": "m03",
+                "start": 781,
+                "end": 806,
+                "quote": "4.29 ounces (121.6 grams)"
+              }
+            ]
+          },
+          {
+            "id": "m03:atom:9bb66d5aded9b758690b",
+            "text": "The announcement identifies 2.48 ounces (70.3 grams) as a previously measured amount included in the bulk Bennu sample total.",
+            "span": {
+              "version_id": "m03",
+              "start": 628,
+              "end": 807,
+              "quote": "Combined with the previously measured 2.48 ounces (70.3 grams) and additional particles collected outside of the pour, the bulk Bennu sample mass totals 4.29 ounces (121.6 grams)."
+            },
+            "parent_id": "p02",
+            "qualifiers": [
+              "previously measured",
+              "2.48 ounces (70.3 grams)",
+              "bulk Bennu sample mass totals"
+            ],
+            "qualifier_spans": [
+              {
+                "version_id": "m03",
+                "start": 646,
+                "end": 665,
+                "quote": "previously measured"
+              },
+              {
+                "version_id": "m03",
+                "start": 666,
+                "end": 690,
+                "quote": "2.48 ounces (70.3 grams)"
+              },
+              {
+                "version_id": "m03",
+                "start": 751,
+                "end": 780,
+                "quote": "bulk Bennu sample mass totals"
+              }
+            ]
+          },
+          {
+            "id": "m03:atom:da81a18005867c35c1da",
+            "text": "The announcement is titled “NASA Announces OSIRIS-REx Bulk Sample Mass” and displays a publication date of February 15, 2024.",
+            "span": {
+              "version_id": "m03",
+              "start": 0,
+              "end": 71,
+              "quote": "NASA Announces OSIRIS-REx Bulk Sample Mass\nPublication date: 2024-02-15"
+            },
+            "parent_id": "p02",
+            "qualifiers": [
+              "NASA Announces",
+              "OSIRIS-REx Bulk Sample Mass",
+              "Publication date: 2024-02-15"
+            ],
+            "qualifier_spans": [
+              {
+                "version_id": "m03",
+                "start": 0,
+                "end": 14,
+                "quote": "NASA Announces"
+              },
+              {
+                "version_id": "m03",
+                "start": 15,
+                "end": 42,
+                "quote": "OSIRIS-REx Bulk Sample Mass"
+              },
+              {
+                "version_id": "m03",
+                "start": 43,
+                "end": 71,
+                "quote": "Publication date: 2024-02-15"
+              }
+            ]
+          }
+        ],
+        "relations": [],
+        "gaps": [],
+        "resolutions": [
+          {
+            "gap_id": "origin:p02",
+            "basis": [
+              {
+                "version_id": "m03",
+                "start": 0,
+                "end": 307,
+                "quote": "NASA Announces OSIRIS-REx Bulk Sample Mass\nPublication date: 2024-02-15\n\nNASA’s OSIRIS-REx spacecraft delivered 4.29 ounces (121.6 grams) of material from asteroid Bennu when it returned to Earth on Sep. 24, 2023; the largest asteroid sample ever collected in space and over twice the mission’s requirement."
+              }
+            ],
+            "rationale": "Rechecked source findings establish the target source's path to an original material."
+          }
+        ],
+        "origins": [
+          {
+            "target_id": "p02",
+            "version_id": "m03",
+            "basis": [
+              {
+                "version_id": "m03",
+                "start": 0,
+                "end": 307,
+                "quote": "NASA Announces OSIRIS-REx Bulk Sample Mass\nPublication date: 2024-02-15\n\nNASA’s OSIRIS-REx spacecraft delivered 4.29 ounces (121.6 grams) of material from asteroid Bennu when it returned to Earth on Sep. 24, 2023; the largest asteroid sample ever collected in space and over twice the mission’s requirement."
+              }
+            ],
+            "material_kind": "original_record",
+            "rationale": "The heading, displayed date and direct institutional reporting of NASA’s mission results, together with the supplied NASA issuer metadata and account of curation operations, identify this as the original announcement named by the target. It is the declared target source itself, so no upstream derivation path is required. Originality does not establish the accuracy of the target’s attribution."
+          }
+        ],
+        "notes": "All five prior atomic findings remain supported; none withdrawn. The heading identifies NASA and the bulk-sample announcement, and the displayed publication date is distinct from the spacecraft’s return date. The body explicitly binds OSIRIS-REx to material from Bennu. Within this announcement’s reporting, 70.3 grams is a previously measured component, while 121.6 grams is the stated bulk total; the text does not describe 70.3 grams as the final total. Prior provenance and resolution findings are outside this stage and are not re-emitted.\nThe previous original-record finding remains supported; no lineage findings require withdrawal. No explicit source-side citations appear: the reference to a previously measured amount names no record or locator. For the parent-attribution probe, the heading, displayed date and institutional reporting identify NASA’s specified announcement rather than later commentary; the snapshot does not independently establish a historical exact version. For the attributed-content probe, the mass discussion appears directly in that announcement, but distinguishes the previously measured 70.3 grams from the bulk total of 121.6 grams. Thus the content is traceable to the parent source, while the target’s characterization of what it reported is not supported.",
+        "revisit_versions": []
+      },
+      "exclusion_reasons": []
+    }
+  ],
+  "fragments": [
+    {
+      "id": "m03:atom:149d34dc2f317fd98bdd",
+      "text": "The announcement reports that NASA’s OSIRIS-REx spacecraft delivered 4.29 ounces (121.6 grams) of material from asteroid Bennu when it returned to Earth on September 24, 2023.",
+      "span": {
+        "version_id": "m03",
+        "start": 73,
+        "end": 213,
+        "quote": "NASA’s OSIRIS-REx spacecraft delivered 4.29 ounces (121.6 grams) of material from asteroid Bennu when it returned to Earth on Sep. 24, 2023;"
+      },
+      "parent_id": "p02",
+      "qualifiers": [
+        "NASA’s OSIRIS-REx spacecraft",
+        "4.29 ounces (121.6 grams)",
+        "from asteroid Bennu",
+        "when it returned to Earth on Sep. 24, 2023"
+      ],
+      "qualifier_spans": [
+        {
+          "version_id": "m03",
+          "start": 73,
+          "end": 101,
+          "quote": "NASA’s OSIRIS-REx spacecraft"
+        },
+        {
+          "version_id": "m03",
+          "start": 112,
+          "end": 137,
+          "quote": "4.29 ounces (121.6 grams)"
+        },
+        {
+          "version_id": "m03",
+          "start": 150,
+          "end": 169,
+          "quote": "from asteroid Bennu"
+        },
+        {
+          "version_id": "m03",
+          "start": 170,
+          "end": 212,
+          "quote": "when it returned to Earth on Sep. 24, 2023"
+        }
+      ]
+    },
+    {
+      "id": "m03:atom:27faf23d8aaf398c91f9",
+      "text": "The announcement reports that 1.81 ounces (51.2 grams) were collected from the pour of the remaining Bennu sample into wedge-shaped containers.",
+      "span": {
+        "version_id": "m03",
+        "start": 480,
+        "end": 626,
+        "quote": "The remaining Bennu sample was revealed and carefully poured into wedge-shaped containers. 1.81 ounces (51.2 grams) were collected from this pour."
+      },
+      "parent_id": "p02",
+      "qualifiers": [
+        "remaining Bennu sample",
+        "into wedge-shaped containers",
+        "1.81 ounces (51.2 grams)",
+        "from this pour"
+      ],
+      "qualifier_spans": [
+        {
+          "version_id": "m03",
+          "start": 484,
+          "end": 506,
+          "quote": "remaining Bennu sample"
+        },
+        {
+          "version_id": "m03",
+          "start": 541,
+          "end": 569,
+          "quote": "into wedge-shaped containers"
+        },
+        {
+          "version_id": "m03",
+          "start": 571,
+          "end": 595,
+          "quote": "1.81 ounces (51.2 grams)"
+        },
+        {
+          "version_id": "m03",
+          "start": 611,
+          "end": 625,
+          "quote": "from this pour"
+        }
+      ]
+    },
+    {
+      "id": "m03:atom:2dbfa988f34ccdba6803",
+      "text": "The announcement reports a bulk Bennu sample mass total of 4.29 ounces (121.6 grams), combining the pour with the previously measured 2.48 ounces (70.3 grams) and additional particles collected outside the pour.",
+      "span": {
+        "version_id": "m03",
+        "start": 480,
+        "end": 807,
+        "quote": "The remaining Bennu sample was revealed and carefully poured into wedge-shaped containers. 1.81 ounces (51.2 grams) were collected from this pour.\n\nCombined with the previously measured 2.48 ounces (70.3 grams) and additional particles collected outside of the pour, the bulk Bennu sample mass totals 4.29 ounces (121.6 grams)."
+      },
+      "parent_id": "p02",
+      "qualifiers": [
+        "1.81 ounces (51.2 grams) were collected from this pour",
+        "Combined with the previously measured 2.48 ounces (70.3 grams)",
+        "additional particles collected outside of the pour",
+        "bulk Bennu sample mass totals",
+        "4.29 ounces (121.6 grams)"
+      ],
+      "qualifier_spans": [
+        {
+          "version_id": "m03",
+          "start": 571,
+          "end": 625,
+          "quote": "1.81 ounces (51.2 grams) were collected from this pour"
+        },
+        {
+          "version_id": "m03",
+          "start": 628,
+          "end": 690,
+          "quote": "Combined with the previously measured 2.48 ounces (70.3 grams)"
+        },
+        {
+          "version_id": "m03",
+          "start": 695,
+          "end": 745,
+          "quote": "additional particles collected outside of the pour"
+        },
+        {
+          "version_id": "m03",
+          "start": 751,
+          "end": 780,
+          "quote": "bulk Bennu sample mass totals"
+        },
+        {
+          "version_id": "m03",
+          "start": 781,
+          "end": 806,
+          "quote": "4.29 ounces (121.6 grams)"
+        }
+      ]
+    },
+    {
+      "id": "m03:atom:9bb66d5aded9b758690b",
+      "text": "The announcement identifies 2.48 ounces (70.3 grams) as a previously measured amount included in the bulk Bennu sample total.",
+      "span": {
+        "version_id": "m03",
+        "start": 628,
+        "end": 807,
+        "quote": "Combined with the previously measured 2.48 ounces (70.3 grams) and additional particles collected outside of the pour, the bulk Bennu sample mass totals 4.29 ounces (121.6 grams)."
+      },
+      "parent_id": "p02",
+      "qualifiers": [
+        "previously measured",
+        "2.48 ounces (70.3 grams)",
+        "bulk Bennu sample mass totals"
+      ],
+      "qualifier_spans": [
+        {
+          "version_id": "m03",
+          "start": 646,
+          "end": 665,
+          "quote": "previously measured"
+        },
+        {
+          "version_id": "m03",
+          "start": 666,
+          "end": 690,
+          "quote": "2.48 ounces (70.3 grams)"
+        },
+        {
+          "version_id": "m03",
+          "start": 751,
+          "end": 780,
+          "quote": "bulk Bennu sample mass totals"
+        }
+      ]
+    },
+    {
+      "id": "m03:atom:da81a18005867c35c1da",
+      "text": "The announcement is titled “NASA Announces OSIRIS-REx Bulk Sample Mass” and displays a publication date of February 15, 2024.",
+      "span": {
+        "version_id": "m03",
+        "start": 0,
+        "end": 71,
+        "quote": "NASA Announces OSIRIS-REx Bulk Sample Mass\nPublication date: 2024-02-15"
+      },
+      "parent_id": "p02",
+      "qualifiers": [
+        "NASA Announces",
+        "OSIRIS-REx Bulk Sample Mass",
+        "Publication date: 2024-02-15"
+      ],
+      "qualifier_spans": [
+        {
+          "version_id": "m03",
+          "start": 0,
+          "end": 14,
+          "quote": "NASA Announces"
+        },
+        {
+          "version_id": "m03",
+          "start": 15,
+          "end": 42,
+          "quote": "OSIRIS-REx Bulk Sample Mass"
+        },
+        {
+          "version_id": "m03",
+          "start": 43,
+          "end": 71,
+          "quote": "Publication date: 2024-02-15"
+        }
+      ]
+    },
+    {
+      "id": "m04:atom:3ce0af656afb2731457a",
+      "text": "The milestone announcement reports that the curation team had removed and collected 2.48 ounces (70.3 grams) of Bennu rocks and dust from the sampler hardware, with more OSIRIS-REx sample still to collect.",
+      "span": {
+        "version_id": "m04",
+        "start": 79,
+        "end": 476,
+        "quote": "The curation team processing NASA’s asteroid Bennu sample has removed and collected 2.48 ounces (70.3 grams) of rocks and dust from the sampler hardware – surpassing the agency’s goal of bringing at least 60 grams to Earth.\n\nAnd the good news is, there’s still more of NASA’s OSIRIS-REx (Origins, Spectral Interpretation, Resource Identification, and Security–Regolith Explorer) sample to collect."
+      },
+      "parent_id": "p02",
+      "qualifiers": [
+        "2.48 ounces (70.3 grams)",
+        "from the sampler hardware",
+        "there’s still more of NASA’s OSIRIS-REx (Origins, Spectral Interpretation, Resource Identification, and Security–Regolith Explorer) sample to collect"
+      ],
+      "qualifier_spans": [
+        {
+          "version_id": "m04",
+          "start": 163,
+          "end": 187,
+          "quote": "2.48 ounces (70.3 grams)"
+        },
+        {
+          "version_id": "m04",
+          "start": 206,
+          "end": 231,
+          "quote": "from the sampler hardware"
+        },
+        {
+          "version_id": "m04",
+          "start": 326,
+          "end": 475,
+          "quote": "there’s still more of NASA’s OSIRIS-REx (Origins, Spectral Interpretation, Resource Identification, and Security–Regolith Explorer) sample to collect"
+        }
+      ]
+    },
+    {
+      "id": "m04:atom:4e6e82a0b71ac3530d4d",
+      "text": "The announcement says additional material remaining inside the TAGSAM sampler head was scheduled for later removal, which would add to the mass total.",
+      "span": {
+        "version_id": "m04",
+        "start": 688,
+        "end": 859,
+        "quote": "Additional material remaining inside the sampler head, called the Touch-and-Go Sample Acquisition Mechanism, or TAGSAM, is set for removal later, adding to the mass total."
+      },
+      "parent_id": "p02",
+      "qualifiers": [
+        "Additional material remaining inside the sampler head",
+        "is set for removal later",
+        "adding to the mass total"
+      ],
+      "qualifier_spans": [
+        {
+          "version_id": "m04",
+          "start": 688,
+          "end": 741,
+          "quote": "Additional material remaining inside the sampler head"
+        },
+        {
+          "version_id": "m04",
+          "start": 808,
+          "end": 832,
+          "quote": "is set for removal later"
+        },
+        {
+          "version_id": "m04",
+          "start": 834,
+          "end": 858,
+          "quote": "adding to the mass total"
+        }
+      ]
+    },
+    {
+      "id": "m04:atom:7b041147fc727fa76e08",
+      "text": "The announcement describes the sample processed so far as including rocks and dust outside the sampler head and a portion of the bulk sample inside it, accessed through the head’s mylar flap.",
+      "span": {
+        "version_id": "m04",
+        "start": 478,
+        "end": 687,
+        "quote": "The sample processed so far includes the rocks and dust found on the outside of the sampler head, as well as a portion of the bulk sample from inside the head, which was accessed through the head’s mylar flap."
+      },
+      "parent_id": "p02",
+      "qualifiers": [
+        "processed so far",
+        "on the outside of the sampler head",
+        "a portion of the bulk sample from inside the head",
+        "accessed through the head’s mylar flap"
+      ],
+      "qualifier_spans": [
+        {
+          "version_id": "m04",
+          "start": 489,
+          "end": 505,
+          "quote": "processed so far"
+        },
+        {
+          "version_id": "m04",
+          "start": 540,
+          "end": 574,
+          "quote": "on the outside of the sampler head"
+        },
+        {
+          "version_id": "m04",
+          "start": 587,
+          "end": 636,
+          "quote": "a portion of the bulk sample from inside the head"
+        },
+        {
+          "version_id": "m04",
+          "start": 648,
+          "end": 686,
+          "quote": "accessed through the head’s mylar flap"
+        }
+      ]
+    },
+    {
+      "id": "m04:atom:fccc2e5715bbb9065709",
+      "text": "The displayed publication date of “NASA’s OSIRIS-REx Achieves Sample Mass Milestone” is October 20, 2023.",
+      "span": {
+        "version_id": "m04",
+        "start": 0,
+        "end": 77,
+        "quote": "NASA’s OSIRIS-REx Achieves Sample Mass Milestone\nPublication date: 2023-10-20"
+      },
+      "parent_id": "p02",
+      "qualifiers": [
+        "Publication date: 2023-10-20"
+      ],
+      "qualifier_spans": [
+        {
+          "version_id": "m04",
+          "start": 49,
+          "end": 77,
+          "quote": "Publication date: 2023-10-20"
+        }
+      ]
+    }
+  ],
+  "relations": [],
+  "origins": [
+    {
+      "target_id": "p02",
+      "version_id": "m03",
+      "basis": [
+        {
+          "version_id": "m03",
+          "start": 0,
+          "end": 307,
+          "quote": "NASA Announces OSIRIS-REx Bulk Sample Mass\nPublication date: 2024-02-15\n\nNASA’s OSIRIS-REx spacecraft delivered 4.29 ounces (121.6 grams) of material from asteroid Bennu when it returned to Earth on Sep. 24, 2023; the largest asteroid sample ever collected in space and over twice the mission’s requirement."
+        }
+      ],
+      "material_kind": "original_record",
+      "rationale": "The heading, displayed date and direct institutional reporting of NASA’s mission results, together with the supplied NASA issuer metadata and account of curation operations, identify this as the original announcement named by the target. It is the declared target source itself, so no upstream derivation path is required. Originality does not establish the accuracy of the target’s attribution."
+    }
+  ],
+  "gaps": [],
+  "gap_registry": [
+    {
+      "id": "origin:p02",
+      "question": "Find the producing record and evidenced lineage for: NASA's February 15, 2024 bulk-sample announcement reported that the final total mass of the Bennu sample returned by OSIRIS-REx was 70.3 grams.",
+      "stage": "provenance",
+      "dimension": "auto",
+      "blocking": true,
+      "target_id": null,
+      "basis": [],
+      "decision_impact": "",
+      "action": "search",
+      "locator": null,
+      "probe_id": null
+    },
+    {
+      "id": "inspect-lineage",
+      "question": "Inspect unresolved upstream lineage",
+      "stage": "provenance",
+      "dimension": "auto",
+      "blocking": true,
+      "target_id": null,
+      "basis": [],
+      "decision_impact": "",
+      "action": "search",
+      "locator": null,
+      "probe_id": null
+    }
+  ],
+  "resolutions": [
+    {
+      "gap_id": "origin:p02",
+      "basis": [
+        {
+          "version_id": "m03",
+          "start": 0,
+          "end": 307,
+          "quote": "NASA Announces OSIRIS-REx Bulk Sample Mass\nPublication date: 2024-02-15\n\nNASA’s OSIRIS-REx spacecraft delivered 4.29 ounces (121.6 grams) of material from asteroid Bennu when it returned to Earth on Sep. 24, 2023; the largest asteroid sample ever collected in space and over twice the mission’s requirement."
+        }
+      ],
+      "rationale": "Rechecked source findings establish the target source's path to an original material."
+    }
+  ],
+  "verification_history": [
+    {
+      "round": 1,
+      "verdict": "contradicted",
+      "basis": [
+        {
+          "version_id": "m03",
+          "start": 0,
+          "end": 71,
+          "quote": "NASA Announces OSIRIS-REx Bulk Sample Mass\nPublication date: 2024-02-15"
+        },
+        {
+          "version_id": "m03",
+          "start": 73,
+          "end": 307,
+          "quote": "NASA’s OSIRIS-REx spacecraft delivered 4.29 ounces (121.6 grams) of material from asteroid Bennu when it returned to Earth on Sep. 24, 2023; the largest asteroid sample ever collected in space and over twice the mission’s requirement."
+        },
+        {
+          "version_id": "m03",
+          "start": 628,
+          "end": 807,
+          "quote": "Combined with the previously measured 2.48 ounces (70.3 grams) and additional particles collected outside of the pour, the bulk Bennu sample mass totals 4.29 ounces (121.6 grams)."
+        }
+      ],
+      "rationale": "The announcement's identity, date, bulk-sample subject, sample origin and return spacecraft are supported. Its explicit distinction between the previously measured 70.3 grams and the 121.6-gram total contradicts the asserted scope, quantity and attributed content.",
+      "gaps": [],
+      "resolutions": [],
+      "evidence_verdict": "contradicted",
+      "world_verdict": "contradicted",
+      "world_basis": [
+        {
+          "version_id": "m03",
+          "start": 0,
+          "end": 71,
+          "quote": "NASA Announces OSIRIS-REx Bulk Sample Mass\nPublication date: 2024-02-15"
+        },
+        {
+          "version_id": "m03",
+          "start": 73,
+          "end": 307,
+          "quote": "NASA’s OSIRIS-REx spacecraft delivered 4.29 ounces (121.6 grams) of material from asteroid Bennu when it returned to Earth on Sep. 24, 2023; the largest asteroid sample ever collected in space and over twice the mission’s requirement."
+        },
+        {
+          "version_id": "m03",
+          "start": 628,
+          "end": 807,
+          "quote": "Combined with the previously measured 2.48 ounces (70.3 grams) and additional particles collected outside of the pour, the bulk Bennu sample mass totals 4.29 ounces (121.6 grams)."
+        }
+      ],
+      "world_rationale": "The supplied primary NASA snapshot establishes the announcement's identity, date, provenance, and sample referents. Its actual reporting contradicts the attributed final-total quantity: 70.3 grams was previously measured, while the bulk total was 121.6 grams. This assessment concerns what NASA reported, not independent authentication of the physical sample's mass.",
+      "evidence_probe_results": [
+        {
+          "probe_id": "p02:probe:25f1d900a660a72631a3",
+          "claim_id": "p02:claim:88f64352b040032e23b6",
+          "stage": "evidence",
+          "status": "contradicted",
+          "basis": [
+            {
+              "version_id": "m03",
+              "start": 628,
+              "end": 807,
+              "quote": "Combined with the previously measured 2.48 ounces (70.3 grams) and additional particles collected outside of the pour, the bulk Bennu sample mass totals 4.29 ounces (121.6 grams)."
+            }
+          ],
+          "rationale": "For the asserted total mass, the announcement gives 121.6 grams. The value 70.3 grams appears only as a previously measured amount.",
+          "referent_relation": "not_applicable"
+        },
+        {
+          "probe_id": "p02:probe:3a8034865e61f391b06c",
+          "claim_id": "p02:claim:88f64352b040032e23b6",
+          "stage": "evidence",
+          "status": "contradicted",
+          "basis": [
+            {
+              "version_id": "m03",
+              "start": 0,
+              "end": 71,
+              "quote": "NASA Announces OSIRIS-REx Bulk Sample Mass\nPublication date: 2024-02-15"
+            },
+            {
+              "version_id": "m03",
+              "start": 73,
+              "end": 307,
+              "quote": "NASA’s OSIRIS-REx spacecraft delivered 4.29 ounces (121.6 grams) of material from asteroid Bennu when it returned to Earth on Sep. 24, 2023; the largest asteroid sample ever collected in space and over twice the mission’s requirement."
+            },
+            {
+              "version_id": "m03",
+              "start": 628,
+              "end": 807,
+              "quote": "Combined with the previously measured 2.48 ounces (70.3 grams) and additional particles collected outside of the pour, the bulk Bennu sample mass totals 4.29 ounces (121.6 grams)."
+            }
+          ],
+          "rationale": "Within the specified announcement, the returned Bennu sample totals 121.6 grams; 70.3 grams is a component of that total.",
+          "referent_relation": "not_applicable"
+        },
+        {
+          "probe_id": "p02:probe:8905b2515e6f5cdcd6a2",
+          "claim_id": "p02:claim:88f64352b040032e23b6",
+          "stage": "evidence",
+          "status": "contradicted",
+          "basis": [
+            {
+              "version_id": "m03",
+              "start": 628,
+              "end": 807,
+              "quote": "Combined with the previously measured 2.48 ounces (70.3 grams) and additional particles collected outside of the pour, the bulk Bennu sample mass totals 4.29 ounces (121.6 grams)."
+            }
+          ],
+          "rationale": "The announcement assigns 70.3 grams to a previously measured component, not the total.",
+          "referent_relation": "not_applicable"
+        },
+        {
+          "probe_id": "p02:probe:97035a237c24035d08ee",
+          "claim_id": "p02:claim:88f64352b040032e23b6",
+          "stage": "evidence",
+          "status": "supported",
+          "basis": [
+            {
+              "version_id": "m03",
+              "start": 73,
+              "end": 307,
+              "quote": "NASA’s OSIRIS-REx spacecraft delivered 4.29 ounces (121.6 grams) of material from asteroid Bennu when it returned to Earth on Sep. 24, 2023; the largest asteroid sample ever collected in space and over twice the mission’s requirement."
+            }
+          ],
+          "rationale": "The announcement explicitly identifies asteroid Bennu as the material's origin.",
+          "referent_relation": "exact"
+        },
+        {
+          "probe_id": "p02:probe:b18973b353af9fff66f2",
+          "claim_id": "p02:claim:828108a2f4d71d430834",
+          "stage": "evidence",
+          "status": "supported",
+          "basis": [
+            {
+              "version_id": "m03",
+              "start": 0,
+              "end": 71,
+              "quote": "NASA Announces OSIRIS-REx Bulk Sample Mass\nPublication date: 2024-02-15"
+            },
+            {
+              "version_id": "m03",
+              "start": 628,
+              "end": 807,
+              "quote": "Combined with the previously measured 2.48 ounces (70.3 grams) and additional particles collected outside of the pour, the bulk Bennu sample mass totals 4.29 ounces (121.6 grams)."
+            }
+          ],
+          "rationale": "The title and reported total explicitly concern the bulk sample.",
+          "referent_relation": "not_applicable"
+        },
+        {
+          "probe_id": "p02:probe:d8a72957bea2dbd3951a",
+          "claim_id": "p02:claim:828108a2f4d71d430834",
+          "stage": "evidence",
+          "status": "supported",
+          "basis": [
+            {
+              "version_id": "m03",
+              "start": 0,
+              "end": 71,
+              "quote": "NASA Announces OSIRIS-REx Bulk Sample Mass\nPublication date: 2024-02-15"
+            }
+          ],
+          "rationale": "The title explicitly identifies NASA as making the announcement.",
+          "referent_relation": "exact"
+        },
+        {
+          "probe_id": "p02:probe:db3626dc065b9bd5a41a",
+          "claim_id": "p02:claim:828108a2f4d71d430834",
+          "stage": "evidence",
+          "status": "contradicted",
+          "basis": [
+            {
+              "version_id": "m03",
+              "start": 0,
+              "end": 71,
+              "quote": "NASA Announces OSIRIS-REx Bulk Sample Mass\nPublication date: 2024-02-15"
+            },
+            {
+              "version_id": "m03",
+              "start": 628,
+              "end": 807,
+              "quote": "Combined with the previously measured 2.48 ounces (70.3 grams) and additional particles collected outside of the pour, the bulk Bennu sample mass totals 4.29 ounces (121.6 grams)."
+            }
+          ],
+          "rationale": "The identified announcement reports a total of 121.6 grams, not the child claim's 70.3 grams.",
+          "referent_relation": "not_applicable"
+        },
+        {
+          "probe_id": "p02:probe:e0d8033ebf9fb8cd8eac",
+          "claim_id": "p02:claim:828108a2f4d71d430834",
+          "stage": "evidence",
+          "status": "supported",
+          "basis": [
+            {
+              "version_id": "m03",
+              "start": 0,
+              "end": 71,
+              "quote": "NASA Announces OSIRIS-REx Bulk Sample Mass\nPublication date: 2024-02-15"
+            }
+          ],
+          "rationale": "The displayed publication date is February 15, 2024; it is not the spacecraft's return date.",
+          "referent_relation": "not_applicable"
+        },
+        {
+          "probe_id": "p02:probe:ed0494ef8be7ace4d865",
+          "claim_id": "p02:claim:88f64352b040032e23b6",
+          "stage": "evidence",
+          "status": "supported",
+          "basis": [
+            {
+              "version_id": "m03",
+              "start": 73,
+              "end": 307,
+              "quote": "NASA’s OSIRIS-REx spacecraft delivered 4.29 ounces (121.6 grams) of material from asteroid Bennu when it returned to Earth on Sep. 24, 2023; the largest asteroid sample ever collected in space and over twice the mission’s requirement."
+            }
+          ],
+          "rationale": "The announcement explicitly identifies OSIRIS-REx as the spacecraft that delivered the material to Earth.",
+          "referent_relation": "exact"
+        }
+      ],
+      "world_probe_results": [
+        {
+          "probe_id": "p02:probe:06dc80099c5667dbc035",
+          "claim_id": "p02:claim:828108a2f4d71d430834",
+          "stage": "world",
+          "status": "supported",
+          "basis": [
+            {
+              "version_id": "m03",
+              "start": 0,
+              "end": 71,
+              "quote": "NASA Announces OSIRIS-REx Bulk Sample Mass\nPublication date: 2024-02-15"
+            },
+            {
+              "version_id": "m03",
+              "start": 73,
+              "end": 307,
+              "quote": "NASA’s OSIRIS-REx spacecraft delivered 4.29 ounces (121.6 grams) of material from asteroid Bennu when it returned to Earth on Sep. 24, 2023; the largest asteroid sample ever collected in space and over twice the mission’s requirement."
+            }
+          ],
+          "rationale": "The dated announcement heading and direct mission reporting, together with the supplied NASA issuer and official URL, identify the primary announcement rather than downstream commentary. This establishes provenance, not the accuracy of the target's paraphrase.",
+          "referent_relation": "not_applicable"
+        },
+        {
+          "probe_id": "p02:probe:25f1d900a660a72631a3",
+          "claim_id": "p02:claim:88f64352b040032e23b6",
+          "stage": "world",
+          "status": "contradicted",
+          "basis": [
+            {
+              "version_id": "m03",
+              "start": 628,
+              "end": 807,
+              "quote": "Combined with the previously measured 2.48 ounces (70.3 grams) and additional particles collected outside of the pour, the bulk Bennu sample mass totals 4.29 ounces (121.6 grams)."
+            }
+          ],
+          "rationale": "Although 70.3 grams appears, the quantity assigned to the asserted total is 121.6 grams. The matching numeral and unit describe an earlier measurement.",
+          "referent_relation": "not_applicable"
+        },
+        {
+          "probe_id": "p02:probe:2bc6c606089ae836ed72",
+          "claim_id": "p02:claim:88f64352b040032e23b6",
+          "stage": "world",
+          "status": "supported",
+          "basis": [
+            {
+              "version_id": "m03",
+              "start": 0,
+              "end": 71,
+              "quote": "NASA Announces OSIRIS-REx Bulk Sample Mass\nPublication date: 2024-02-15"
+            },
+            {
+              "version_id": "m03",
+              "start": 628,
+              "end": 807,
+              "quote": "Combined with the previously measured 2.48 ounces (70.3 grams) and additional particles collected outside of the pour, the bulk Bennu sample mass totals 4.29 ounces (121.6 grams)."
+            }
+          ],
+          "rationale": "The mass passage is directly in the specified primary announcement, not another report. Its traceable content distinguishes the previous measurement from the total and does not support the target's formulation.",
+          "referent_relation": "not_applicable"
+        },
+        {
+          "probe_id": "p02:probe:3a8034865e61f391b06c",
+          "claim_id": "p02:claim:88f64352b040032e23b6",
+          "stage": "world",
+          "status": "contradicted",
+          "basis": [
+            {
+              "version_id": "m03",
+              "start": 73,
+              "end": 307,
+              "quote": "NASA’s OSIRIS-REx spacecraft delivered 4.29 ounces (121.6 grams) of material from asteroid Bennu when it returned to Earth on Sep. 24, 2023; the largest asteroid sample ever collected in space and over twice the mission’s requirement."
+            },
+            {
+              "version_id": "m03",
+              "start": 628,
+              "end": 807,
+              "quote": "Combined with the previously measured 2.48 ounces (70.3 grams) and additional particles collected outside of the pour, the bulk Bennu sample mass totals 4.29 ounces (121.6 grams)."
+            }
+          ],
+          "rationale": "Within the parent announcement, both the delivered mass and bulk total are 121.6 grams; 70.3 grams is a component previously measured.",
+          "referent_relation": "not_applicable"
+        },
+        {
+          "probe_id": "p02:probe:8905b2515e6f5cdcd6a2",
+          "claim_id": "p02:claim:88f64352b040032e23b6",
+          "stage": "world",
+          "status": "contradicted",
+          "basis": [
+            {
+              "version_id": "m03",
+              "start": 628,
+              "end": 807,
+              "quote": "Combined with the previously measured 2.48 ounces (70.3 grams) and additional particles collected outside of the pour, the bulk Bennu sample mass totals 4.29 ounces (121.6 grams)."
+            }
+          ],
+          "rationale": "The announcement labels 70.3 grams as previously measured material combined with further material, not the final total.",
+          "referent_relation": "not_applicable"
+        },
+        {
+          "probe_id": "p02:probe:97035a237c24035d08ee",
+          "claim_id": "p02:claim:88f64352b040032e23b6",
+          "stage": "world",
+          "status": "supported",
+          "basis": [
+            {
+              "version_id": "m03",
+              "start": 73,
+              "end": 307,
+              "quote": "NASA’s OSIRIS-REx spacecraft delivered 4.29 ounces (121.6 grams) of material from asteroid Bennu when it returned to Earth on Sep. 24, 2023; the largest asteroid sample ever collected in space and over twice the mission’s requirement."
+            },
+            {
+              "version_id": "m03",
+              "start": 628,
+              "end": 807,
+              "quote": "Combined with the previously measured 2.48 ounces (70.3 grams) and additional particles collected outside of the pour, the bulk Bennu sample mass totals 4.29 ounces (121.6 grams)."
+            }
+          ],
+          "rationale": "The announcement explicitly identifies Bennu as the material's asteroid of origin and binds it to the bulk sample total.",
+          "referent_relation": "exact"
+        },
+        {
+          "probe_id": "p02:probe:b18973b353af9fff66f2",
+          "claim_id": "p02:claim:828108a2f4d71d430834",
+          "stage": "world",
+          "status": "supported",
+          "basis": [
+            {
+              "version_id": "m03",
+              "start": 0,
+              "end": 71,
+              "quote": "NASA Announces OSIRIS-REx Bulk Sample Mass\nPublication date: 2024-02-15"
+            },
+            {
+              "version_id": "m03",
+              "start": 628,
+              "end": 807,
+              "quote": "Combined with the previously measured 2.48 ounces (70.3 grams) and additional particles collected outside of the pour, the bulk Bennu sample mass totals 4.29 ounces (121.6 grams)."
+            }
+          ],
+          "rationale": "The heading and reported total explicitly concern the bulk sample.",
+          "referent_relation": "not_applicable"
+        },
+        {
+          "probe_id": "p02:probe:d8a72957bea2dbd3951a",
+          "claim_id": "p02:claim:828108a2f4d71d430834",
+          "stage": "world",
+          "status": "supported",
+          "basis": [
+            {
+              "version_id": "m03",
+              "start": 0,
+              "end": 71,
+              "quote": "NASA Announces OSIRIS-REx Bulk Sample Mass\nPublication date: 2024-02-15"
+            }
+          ],
+          "rationale": "The heading names NASA as announcing the result, consistent with the supplied NASA issuer and official-site metadata.",
+          "referent_relation": "exact"
+        },
+        {
+          "probe_id": "p02:probe:db3626dc065b9bd5a41a",
+          "claim_id": "p02:claim:828108a2f4d71d430834",
+          "stage": "world",
+          "status": "contradicted",
+          "basis": [
+            {
+              "version_id": "m03",
+              "start": 0,
+              "end": 71,
+              "quote": "NASA Announces OSIRIS-REx Bulk Sample Mass\nPublication date: 2024-02-15"
+            },
+            {
+              "version_id": "m03",
+              "start": 628,
+              "end": 807,
+              "quote": "Combined with the previously measured 2.48 ounces (70.3 grams) and additional particles collected outside of the pour, the bulk Bennu sample mass totals 4.29 ounces (121.6 grams)."
+            }
+          ],
+          "rationale": "The specified announcement reports a total of 121.6 grams, not the child claim's 70.3 grams.",
+          "referent_relation": "not_applicable"
+        },
+        {
+          "probe_id": "p02:probe:e0d8033ebf9fb8cd8eac",
+          "claim_id": "p02:claim:828108a2f4d71d430834",
+          "stage": "world",
+          "status": "supported",
+          "basis": [
+            {
+              "version_id": "m03",
+              "start": 0,
+              "end": 71,
+              "quote": "NASA Announces OSIRIS-REx Bulk Sample Mass\nPublication date: 2024-02-15"
+            }
+          ],
+          "rationale": "February 15, 2024 is explicitly the publication date, not the spacecraft's return date. The snapshot is available by as_of.",
+          "referent_relation": "not_applicable"
+        },
+        {
+          "probe_id": "p02:probe:ed0494ef8be7ace4d865",
+          "claim_id": "p02:claim:88f64352b040032e23b6",
+          "stage": "world",
+          "status": "supported",
+          "basis": [
+            {
+              "version_id": "m03",
+              "start": 73,
+              "end": 307,
+              "quote": "NASA’s OSIRIS-REx spacecraft delivered 4.29 ounces (121.6 grams) of material from asteroid Bennu when it returned to Earth on Sep. 24, 2023; the largest asteroid sample ever collected in space and over twice the mission’s requirement."
+            }
+          ],
+          "rationale": "The announcement explicitly names OSIRIS-REx as the spacecraft that delivered the Bennu material to Earth.",
+          "referent_relation": "exact"
+        }
+      ]
+    }
+  ],
+  "operations": [
+    {
+      "sequence": 1,
+      "round": 1,
+      "action": "search",
+      "tasks": [
+        {
+          "id": "origin:p02",
+          "question": "Find the producing record and evidenced lineage for: NASA's February 15, 2024 bulk-sample announcement reported that the final total mass of the Bennu sample returned by OSIRIS-REx was 70.3 grams.",
+          "stage": "provenance",
+          "dimension": "auto",
+          "blocking": true,
+          "target_id": null,
+          "basis": [],
+          "decision_impact": "",
+          "action": "search",
+          "locator": null,
+          "probe_id": null
+        }
+      ],
+      "limit": 24
+    },
+    {
+      "sequence": 2,
+      "round": 1,
+      "action": "snapshot_saved",
+      "version_id": "m03",
+      "sha256": "5598fe7fe24b1eb584810f98d99552f3eaa3ea4378bfd3330fec72a05f68328e",
+      "eligible": true
+    },
+    {
+      "sequence": 3,
+      "round": 1,
+      "action": "decompose_started",
+      "version_id": "m03",
+      "duplicate": false,
+      "revisit": false
+    },
+    {
+      "sequence": 4,
+      "round": 1,
+      "action": "decompose_completed",
+      "version_id": "m03",
+      "revision": 1
+    },
+    {
+      "sequence": 5,
+      "round": 1,
+      "action": "alignment_checked",
+      "version_id": "m03",
+      "analysis_changed": true
+    },
+    {
+      "sequence": 6,
+      "round": 1,
+      "action": "graph_updated",
+      "version_id": "m03",
+      "open_gaps": 0
+    },
+    {
+      "sequence": 7,
+      "round": 1,
+      "action": "snapshot_saved",
+      "version_id": "m04",
+      "sha256": "57d5ccf8a8ca5b3f4cf5acb05689aeba5d9628ec588898a29cc2d58d914eb2b3",
+      "eligible": true
+    },
+    {
+      "sequence": 8,
+      "round": 1,
+      "action": "decompose_started",
+      "version_id": "m04",
+      "duplicate": false,
+      "revisit": false
+    },
+    {
+      "sequence": 9,
+      "round": 1,
+      "action": "decompose_completed",
+      "version_id": "m04",
+      "revision": 2
+    },
+    {
+      "sequence": 10,
+      "round": 1,
+      "action": "alignment_checked",
+      "version_id": "m04",
+      "analysis_changed": true
+    },
+    {
+      "sequence": 11,
+      "round": 1,
+      "action": "graph_updated",
+      "version_id": "m04",
+      "open_gaps": 0
+    },
+    {
+      "sequence": 12,
+      "round": 1,
+      "action": "verification_started"
+    },
+    {
+      "sequence": 13,
+      "round": 1,
+      "action": "verification_completed",
+      "verdict": "contradicted",
+      "decision": "contradicted",
+      "assessments": {
+        "evidence": {
+          "raw_verdict": "contradicted",
+          "decision": "contradicted",
+          "blocking_gap_ids": []
+        },
+        "world": {
+          "raw_verdict": "contradicted",
+          "decision": "contradicted",
+          "blocking_gap_ids": []
+        }
+      },
+      "followup_tasks": 0,
+      "provenance_status": "original_material_located"
+    },
+    {
+      "sequence": 14,
+      "round": 1,
+      "action": "assessment_changed",
+      "previous": null,
+      "current": {
+        "evidence": {
+          "raw_verdict": "contradicted",
+          "decision": "contradicted",
+          "blocking_gap_ids": []
+        },
+        "world": {
+          "raw_verdict": "contradicted",
+          "decision": "contradicted",
+          "blocking_gap_ids": []
+        }
+      },
+      "basis": [
+        {
+          "version_id": "m03",
+          "start": 0,
+          "end": 71,
+          "quote": "NASA Announces OSIRIS-REx Bulk Sample Mass\nPublication date: 2024-02-15"
+        },
+        {
+          "version_id": "m03",
+          "start": 73,
+          "end": 307,
+          "quote": "NASA’s OSIRIS-REx spacecraft delivered 4.29 ounces (121.6 grams) of material from asteroid Bennu when it returned to Earth on Sep. 24, 2023; the largest asteroid sample ever collected in space and over twice the mission’s requirement."
+        },
+        {
+          "version_id": "m03",
+          "start": 628,
+          "end": 807,
+          "quote": "Combined with the previously measured 2.48 ounces (70.3 grams) and additional particles collected outside of the pour, the bulk Bennu sample mass totals 4.29 ounces (121.6 grams)."
+        }
+      ],
+      "world_basis": [
+        {
+          "version_id": "m03",
+          "start": 0,
+          "end": 71,
+          "quote": "NASA Announces OSIRIS-REx Bulk Sample Mass\nPublication date: 2024-02-15"
+        },
+        {
+          "version_id": "m03",
+          "start": 73,
+          "end": 307,
+          "quote": "NASA’s OSIRIS-REx spacecraft delivered 4.29 ounces (121.6 grams) of material from asteroid Bennu when it returned to Earth on Sep. 24, 2023; the largest asteroid sample ever collected in space and over twice the mission’s requirement."
+        },
+        {
+          "version_id": "m03",
+          "start": 628,
+          "end": 807,
+          "quote": "Combined with the previously measured 2.48 ounces (70.3 grams) and additional particles collected outside of the pour, the bulk Bennu sample mass totals 4.29 ounces (121.6 grams)."
+        }
+      ]
+    },
+    {
+      "sequence": 15,
+      "round": 1,
+      "action": "progress_checked",
+      "new_eligible_versions": 2,
+      "new_structure": true
+    },
+    {
+      "sequence": 16,
+      "round": 2,
+      "action": "search",
+      "tasks": [
+        {
+          "id": "inspect-lineage",
+          "question": "Inspect unresolved upstream lineage",
+          "stage": "provenance",
+          "dimension": "auto",
+          "blocking": true,
+          "target_id": null,
+          "basis": [],
+          "decision_impact": "",
+          "action": "search",
+          "locator": null,
+          "probe_id": null
+        }
+      ],
+      "limit": 22
+    },
+    {
+      "sequence": 17,
+      "round": 2,
+      "action": "duplicate_observed",
+      "version_id": "m03",
+      "sha256": "5598fe7fe24b1eb584810f98d99552f3eaa3ea4378bfd3330fec72a05f68328e",
+      "eligible": true
+    },
+    {
+      "sequence": 18,
+      "round": 2,
+      "action": "decompose_started",
+      "version_id": "m03",
+      "duplicate": true,
+      "revisit": false
+    },
+    {
+      "sequence": 19,
+      "round": 2,
+      "action": "decompose_completed",
+      "version_id": "m03",
+      "revision": 3
+    },
+    {
+      "sequence": 20,
+      "round": 2,
+      "action": "alignment_checked",
+      "version_id": "m03",
+      "analysis_changed": true
+    },
+    {
+      "sequence": 21,
+      "round": 2,
+      "action": "graph_updated",
+      "version_id": "m03",
+      "open_gaps": 0
+    },
+    {
+      "sequence": 22,
+      "round": 2,
+      "action": "duplicate_observed",
+      "version_id": "m04",
+      "sha256": "57d5ccf8a8ca5b3f4cf5acb05689aeba5d9628ec588898a29cc2d58d914eb2b3",
+      "eligible": true
+    },
+    {
+      "sequence": 23,
+      "round": 2,
+      "action": "decompose_started",
+      "version_id": "m04",
+      "duplicate": true,
+      "revisit": false
+    },
+    {
+      "sequence": 24,
+      "round": 2,
+      "action": "error",
+      "stage": "decomposer",
+      "message": "staged semantic lineage: request or output validation failed (RuntimeError)"
+    },
+    {
+      "sequence": 25,
+      "round": 2,
+      "action": "stopped",
+      "reason": "decomposer_error"
+    }
+  ],
+  "errors": [
+    {
+      "stage": "decomposer",
+      "type": "StagedSemanticError",
+      "message": "staged semantic lineage: request or output validation failed (RuntimeError)"
+    }
+  ]
+}

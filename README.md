@@ -6,9 +6,31 @@
 > the current package, documentation, releases, and contributions. Historical
 > names below are intentionally retained as part of the archived record.
 
-Version 0.2.0: a bounded, auditable news provenance loop with **decomposition on every retrieval return**, a separate verification feedback stage, and a fixed-target evaluation toolkit.
+## Current development snapshot — 2026-09-05
 
-**Status: executable offline reference implementation.** Semantic judgments in the demo are hand-authored annotations. The default decomposer preserves original text and leaves source questions unresolved. No live news adapter, general-purpose model API, independently reviewed real-news benchmark or measured real-world accuracy improvement is included.
+The current development code is target-extension v4. The synchronized snapshot
+passes 433 offline regression tests after the latest scoring-audit sync; these are
+not model accuracy results. The earlier snapshot also passed 22 synthetic policy cases. A matching v4 freeze and fresh live-model comparison are
+still pending. See [latest synchronization status](reports/V4_FOLLOWUP_SYNC_20260905.json),
+[earlier snapshot](reports/WORKTREE_SYNC_20260905.md), and
+the [v4 protocol](docs/TARGET_EXTENSION_V4_PROTOCOL.md). Older pilot results below
+are retained historical records, not the current v4 score.
+
+An experimental [shared-checkpoint ablation pilot](docs/PROOF_EXPERIMENT.md) now
+separates three-round verification, psi reanalysis and independent resampling.
+Its real-source-derived reference labels are provisional pending human review;
+it does not establish real-news accuracy or general superiority.
+
+The [completed eight-event pilot](reports/PROOF_PILOT_RESULTS.md) exposed execution
+failures: original task success was 7/8; single and both loop arms were 1/8;
+independent resampling was 0/8. Seven Accuracy prefixes failed before verification.
+Only one case completed three rounds, with no label improvement. Raw failures,
+an independent audit and explicitly corrected logical costs are retained. Later
+diagnostic and prompt fixes pass offline tests but have not been evaluated live.
+
+Version 0.3.0: a bounded news provenance loop with **decomposition on every material return**, separate evidence/world assessments, task-directed snapshot retrieval, and a shared single-round/multi-round decision policy.
+
+**Status: model adapter and targeted regression experiments implemented.** The optional OpenAI adapter is in `experiments/`; the original demos remain hand-annotated. A searchable snapshot provider executes fetch/search/reanalysis tasks and reports missing coverage. It does not browse the open web. There is no independently reviewed real-news accuracy claim. See [v0.3 repair contract](docs/REPAIR_V0.3.md) and [observed results](reports/REPAIR_RESULTS_V0.3.md).
 
 Repository Discussions are enabled, and the repository includes a prepared **Accuracy decline** reporting form for reproducible metric regressions or weaker trace outcomes. Reports should identify the affected metric or behavior, include the run configuration, and avoid treating synthetic fixtures as real-world performance evidence.
 
@@ -41,7 +63,20 @@ The metric example is a deliberately imperfect set of four **handwritten predict
 - Round, material and decomposition budgets, plus explicit no-progress and error results.
 - Historical admission requires an exact version availability declaration and basis. There is no arbitrary age cutoff for old original records.
 
-Historical graph admission is not proof against all future-information leakage: a stateful adapter might retain excluded content, and a pretrained model may already know later events. Strict historical inference isolation, live timeouts and model token accounting remain adapter work.
+Historically excluded versions now receive isolated archival decomposition and are never passed to the stateful semantic plugin. This does not remove later knowledge already present in model pretraining. The optional model transport enforces call/output/time caps and records actual server token usage.
+
+## Fixed-contract model comparison
+
+Install optional model dependencies with `python -m pip install '.[model]'` and configure `OPENAI_API_KEY` in the execution environment. Keep credentials out of repository files. Then:
+
+```bash
+python experiments/loop_compare.py run --inputs experiments/inputs-v03.json --output reports/my-run --model gpt-6-astra --max-rounds 5
+python experiments/loop_compare.py score --gold experiments/gold-v03.json --run reports/my-run
+```
+
+The first-round checkpoint and continued loop share the actual first-round model output and the same deterministic final decision function. A flagged case also runs once with all snapshots supplied, to distinguish additional source access from repeated reasoning. These five author-written synthetic contract cases are not a hidden or independently reviewed benchmark, and their scores are not comparable with the earlier ambiguous two-case trial.
+
+`Target.assessment_mode` is `evidence` or `world`. `evidence_scope` fixes which snapshot texts are assessed for entailment. The engine preserves raw evidence findings while applying only relevant blocking gaps to the chosen assessment. `present_decision()` performs the same final mapping in every variant; it cannot resample an answer into a higher score.
 
 ## Evaluation
 
@@ -70,6 +105,8 @@ The trace engine and scorer have separate schemas. A production exporter and ind
 - [Trace adapter API](docs/TRACE_ADAPTER.md)
 - [Evaluation schema](docs/EVALUATION_SCHEMA.md)
 - [Observed validation report](reports/VALIDATION_V0.2.md)
+- [v0.3 repair and migration contract](docs/REPAIR_V0.3.md)
+- [v0.3 regression and actual API results](reports/REPAIR_RESULTS_V0.3.md)
 
 ## Legacy compatibility
 

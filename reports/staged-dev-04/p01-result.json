@@ -1,0 +1,92 @@
+{
+  "id": "p01",
+  "assessment_mode": "evidence",
+  "status": "completed",
+  "prediction": "true",
+  "checkpoints": [
+    {
+      "round": 1,
+      "id": "p01",
+      "decision": "true",
+      "assessment_mode": "evidence",
+      "assessments": {
+        "evidence": {
+          "raw_verdict": "supported",
+          "decision": "supported",
+          "blocking_gap_ids": []
+        },
+        "world": {
+          "raw_verdict": "supported",
+          "decision": "supported",
+          "blocking_gap_ids": []
+        }
+      },
+      "provenance_status": "partial"
+    },
+    {
+      "round": 2,
+      "id": "p01",
+      "decision": "true",
+      "assessment_mode": "evidence",
+      "assessments": {
+        "evidence": {
+          "raw_verdict": "supported",
+          "decision": "supported",
+          "blocking_gap_ids": []
+        },
+        "world": {
+          "raw_verdict": "supported",
+          "decision": "supported",
+          "blocking_gap_ids": []
+        }
+      },
+      "provenance_status": "original_material_located"
+    }
+  ],
+  "native_prediction": {
+    "id": "p01",
+    "assessment_mode": "evidence",
+    "as_of": "2026-09-05T09:34:36Z",
+    "decision": "true",
+    "assessments": {
+      "evidence": {
+        "raw_verdict": "supported",
+        "decision": "supported",
+        "blocking_gap_ids": []
+      },
+      "world": {
+        "raw_verdict": "supported",
+        "decision": "supported",
+        "blocking_gap_ids": []
+      }
+    },
+    "provenance_status": "original_material_located",
+    "assessment_valid": true,
+    "stop_reason": "round_budget"
+  },
+  "engine_usage": {
+    "rounds": 2,
+    "documents": 4,
+    "unique_versions": 2,
+    "decomposition_calls": 5,
+    "verification_calls": 2
+  },
+  "usage": {
+    "model_calls": 21,
+    "input_tokens": 44956,
+    "output_tokens": 6010,
+    "seconds": 117.67572572598874
+  },
+  "checkpoint_hashes": [
+    {
+      "round": 1,
+      "sha256": "9f08674e3c9fa0cb92c15266a968116cf60272028a6944c9aa1eeb58505a65f7"
+    },
+    {
+      "round": 2,
+      "sha256": "a7f0bf73a4b4a424b9c0aed694fe0e4e4e27668b87c82efdca6551268c7da209"
+    }
+  ],
+  "new_api_attempts": 21,
+  "returned_responses": 21
+}

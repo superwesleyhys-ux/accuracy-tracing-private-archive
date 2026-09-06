@@ -1,0 +1,81 @@
+{
+  "schema_version": 1,
+  "cases": [
+    {
+      "target": {
+        "id": "p02",
+        "text": "NASA's February 15, 2024 bulk-sample announcement reported that the final total mass of the Bennu sample returned by OSIRIS-REx was 70.3 grams.",
+        "as_of": "2026-09-05T09:34:36Z",
+        "source_version_id": "m03",
+        "assessment_mode": "evidence",
+        "evidence_scope": [
+          "m03"
+        ]
+      },
+      "materials": [
+        {
+          "version_id": "m03",
+          "url": "https://science.nasa.gov/blogs/osiris-rex/2024/02/15/nasa-announces-osiris-rex-bulk-sample-mass/",
+          "content": "NASA Announces OSIRIS-REx Bulk Sample Mass\nPublication date: 2024-02-15\n\nNASA’s OSIRIS-REx spacecraft delivered 4.29 ounces (121.6 grams) of material from asteroid Bennu when it returned to Earth on Sep. 24, 2023; the largest asteroid sample ever collected in space and over twice the mission’s requirement.\n\nAfter designing, producing, and testing new tools, the ARES curation engineers successfully removed the fasteners in January and completed disassembly of the TAGSAM head. The remaining Bennu sample was revealed and carefully poured into wedge-shaped containers. 1.81 ounces (51.2 grams) were collected from this pour.\n\nCombined with the previously measured 2.48 ounces (70.3 grams) and additional particles collected outside of the pour, the bulk Bennu sample mass totals 4.29 ounces (121.6 grams). NASA will preserve at least 70% of the sample at Johnson for further research by scientists worldwide, including future generations.",
+          "retrieved_at": "2026-09-05T09:34:36Z",
+          "published_at": null,
+          "available_at": "2026-09-05T09:34:36Z",
+          "availability_basis": "Current web-tool collection completed at retrieved_at on 2026-09-05. The supplied material is a selected, whitespace-normalized excerpt, not a full page or historical exact-version capture. Availability is asserted only at collection completion. The source's displayed publication date is preserved in content; no exact timezone-qualified publication instant is known.",
+          "issuer": "NASA"
+        },
+        {
+          "version_id": "m04",
+          "url": "https://science.nasa.gov/blogs/osiris-rex/2023/10/20/nasas-osiris-rex-achieves-sample-mass-milestone/",
+          "content": "NASA’s OSIRIS-REx Achieves Sample Mass Milestone\nPublication date: 2023-10-20\n\nThe curation team processing NASA’s asteroid Bennu sample has removed and collected 2.48 ounces (70.3 grams) of rocks and dust from the sampler hardware – surpassing the agency’s goal of bringing at least 60 grams to Earth.\n\nAnd the good news is, there’s still more of NASA’s OSIRIS-REx (Origins, Spectral Interpretation, Resource Identification, and Security–Regolith Explorer) sample to collect.\n\nThe sample processed so far includes the rocks and dust found on the outside of the sampler head, as well as a portion of the bulk sample from inside the head, which was accessed through the head’s mylar flap. Additional material remaining inside the sampler head, called the Touch-and-Go Sample Acquisition Mechanism, or TAGSAM, is set for removal later, adding to the mass total.",
+          "retrieved_at": "2026-09-05T09:34:36Z",
+          "published_at": null,
+          "available_at": "2026-09-05T09:34:36Z",
+          "availability_basis": "Current web-tool collection completed at retrieved_at on 2026-09-05. The supplied material is a selected, whitespace-normalized excerpt, not a full page or historical exact-version capture. Availability is asserted only at collection completion. The source's displayed publication date is preserved in content; no exact timezone-qualified publication instant is known.",
+          "issuer": "NASA"
+        }
+      ],
+      "seed_ids": [
+        "m04"
+      ],
+      "full_evidence_control": true
+    },
+    {
+      "target": {
+        "id": "p04",
+        "text": "NOAA's January 10, 2025 annual climate summary reported that the global surface temperature in 2024 was 1.29°C above the 1850–1900 average.",
+        "as_of": "2026-09-05T09:34:36Z",
+        "source_version_id": "m07",
+        "assessment_mode": "evidence",
+        "evidence_scope": [
+          "m07"
+        ]
+      },
+      "materials": [
+        {
+          "version_id": "m07",
+          "url": "https://www.ncei.noaa.gov/news/global-climate-202413",
+          "content": "Assessing the Global Climate in 2024\nPublication date: 2025-01-10\n\nIn 2024, global surface temperature was 2.32°F (1.29°C) above the 20th-century average. This ranks as the highest global temperature in the period of 1850–2024, beating the next warmest year (2023) by 0.18°F (0.10°C). The 10 warmest years since 1850 have all occurred in the past decade. In 2024, global temperature exceeded the pre-industrial (1850–1900) average by 2.63°F (1.46°C).",
+          "retrieved_at": "2026-09-05T09:34:36Z",
+          "published_at": null,
+          "available_at": "2026-09-05T09:34:36Z",
+          "availability_basis": "Current web-tool collection completed at retrieved_at on 2026-09-05. The supplied material is a selected, whitespace-normalized excerpt, not a full page or historical exact-version capture. Availability is asserted only at collection completion. The source's displayed publication date is preserved in content; no exact timezone-qualified publication instant is known.",
+          "issuer": "NOAA National Centers for Environmental Information"
+        },
+        {
+          "version_id": "m08",
+          "url": "https://www.nasa.gov/news-release/temperatures-rising-nasa-confirms-2024-warmest-year-on-record/",
+          "content": "Temperatures Rising: NASA Confirms 2024 Warmest Year on Record\nPublication date: 2025-01-10\n\nEarth’s average surface temperature in 2024 was the warmest on record, according to an analysis led by NASA scientists.\n\nGlobal temperatures in 2024 were 2.30 degrees Fahrenheit (1.28 degrees Celsius) above the agency’s 20th-century baseline (1951-1980), which tops the record set in 2023. The new record comes after 15 consecutive months (June 2023 through August 2024) of monthly temperature records — an unprecedented heat streak.\n\nNASA scientists further estimate Earth in 2024 was about 2.65 degrees Fahrenheit (1.47 degrees Celsius) warmer than the mid-19th century average (1850-1900).",
+          "retrieved_at": "2026-09-05T09:34:36Z",
+          "published_at": null,
+          "available_at": "2026-09-05T09:34:36Z",
+          "availability_basis": "Current web-tool collection completed at retrieved_at on 2026-09-05. The supplied material is a selected, whitespace-normalized excerpt, not a full page or historical exact-version capture. Availability is asserted only at collection completion. The source's displayed publication date is preserved in content; no exact timezone-qualified publication instant is known.",
+          "issuer": "NASA"
+        }
+      ],
+      "seed_ids": [
+        "m08"
+      ],
+      "full_evidence_control": true
+    }
+  ]
+}

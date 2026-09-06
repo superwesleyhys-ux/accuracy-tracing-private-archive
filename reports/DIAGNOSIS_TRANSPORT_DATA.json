@@ -1,0 +1,5136 @@
+{
+  "proof-pilot-01": {
+    "logged_records_including_shared": 165,
+    "shared_records": 9,
+    "actual_attempts": 156,
+    "returned_responses": 154,
+    "job_counts": {
+      "original/completed/none": 7,
+      "single/error/ValueError": 7,
+      "loop_psi/error/InvalidSharedPrefix": 7,
+      "loop_frozen/error/InvalidSharedPrefix": 7,
+      "independent/error/InvalidSharedPrefix": 7,
+      "single/completed/none": 1,
+      "loop_frozen/completed/none": 1,
+      "loop_psi/completed/none": 1,
+      "independent/error/ValueError": 1,
+      "original/error/RuntimeError": 1
+    },
+    "stats": {
+      "all": {
+        "calls": 156,
+        "successes": 146,
+        "failures": 10,
+        "empty_output": 10,
+        "cap_hits": 8,
+        "caps": {
+          "2500": 156
+        },
+        "input_tokens": {
+          "n": 154,
+          "min": 429,
+          "p25": 1148.0,
+          "median": 1293.0,
+          "p75": 1749.75,
+          "p95": 2485.2,
+          "max": 4089,
+          "mean": 1477.338,
+          "sum": 227510
+        },
+        "output_tokens": {
+          "n": 154,
+          "min": 26,
+          "p25": 467.0,
+          "median": 754.5,
+          "p75": 983.75,
+          "p95": 2472.05,
+          "max": 2500,
+          "mean": 845.688,
+          "sum": 130236
+        },
+        "visible_output_characters": {
+          "n": 156,
+          "min": 0,
+          "p25": 562.0,
+          "median": 1299.0,
+          "p75": 2057.25,
+          "p95": 3053.5,
+          "max": 5635,
+          "mean": 1384.872,
+          "sum": 216040
+        },
+        "user_characters": {
+          "n": 156,
+          "min": 440,
+          "p25": 2670.0,
+          "median": 3341.5,
+          "p75": 3922.0,
+          "p95": 5619.5,
+          "max": 10185,
+          "mean": 3401.788,
+          "sum": 530679
+        },
+        "seconds": {
+          "n": 154,
+          "min": 1.3023448210005881,
+          "p25": 8.363,
+          "median": 11.86915975949887,
+          "p75": 14.687,
+          "p95": 35.392,
+          "max": 41.2228708640032,
+          "mean": 13.571,
+          "sum": 2089.919
+        }
+      },
+      "original": {
+        "calls": 130,
+        "successes": 128,
+        "failures": 2,
+        "empty_output": 2,
+        "cap_hits": 0,
+        "caps": {
+          "2500": 130
+        },
+        "input_tokens": {
+          "n": 128,
+          "min": 454,
+          "p25": 1137.25,
+          "median": 1243.0,
+          "p75": 1519.5,
+          "p95": 2338.1,
+          "max": 2818,
+          "mean": 1369.57,
+          "sum": 175305
+        },
+        "output_tokens": {
+          "n": 128,
+          "min": 37,
+          "p25": 444.0,
+          "median": 674.0,
+          "p75": 886.5,
+          "p95": 1072.65,
+          "max": 1380,
+          "mean": 655.414,
+          "sum": 83893
+        },
+        "visible_output_characters": {
+          "n": 130,
+          "min": 0,
+          "p25": 675.5,
+          "median": 1299.0,
+          "p75": 2018.25,
+          "p95": 2367.15,
+          "max": 2989,
+          "mean": 1305.5,
+          "sum": 169715
+        },
+        "user_characters": {
+          "n": 130,
+          "min": 440,
+          "p25": 2796.5,
+          "median": 3341.5,
+          "p75": 3812.25,
+          "p95": 5062.35,
+          "max": 6440,
+          "mean": 3324.077,
+          "sum": 432130
+        },
+        "seconds": {
+          "n": 128,
+          "min": 1.3884453099963139,
+          "p25": 8.121,
+          "median": 11.483996734503307,
+          "p75": 13.497,
+          "p95": 16.97,
+          "max": 19.689928137995594,
+          "mean": 10.718,
+          "sum": 1371.903
+        }
+      },
+      "accuracy": {
+        "calls": 26,
+        "successes": 18,
+        "failures": 8,
+        "empty_output": 8,
+        "cap_hits": 8,
+        "caps": {
+          "2500": 26
+        },
+        "input_tokens": {
+          "n": 26,
+          "min": 429,
+          "p25": 1701.0,
+          "median": 1910.0,
+          "p75": 2232.5,
+          "p95": 3705.5,
+          "max": 4089,
+          "mean": 2007.885,
+          "sum": 52205
+        },
+        "output_tokens": {
+          "n": 26,
+          "min": 26,
+          "p25": 1226.25,
+          "median": 2162.5,
+          "p75": 2500.0,
+          "p95": 2500.0,
+          "max": 2500,
+          "mean": 1782.423,
+          "sum": 46343
+        },
+        "visible_output_characters": {
+          "n": 26,
+          "min": 0,
+          "p25": 0.0,
+          "median": 1301.0,
+          "p75": 3358.0,
+          "p95": 5289.5,
+          "max": 5635,
+          "mean": 1781.731,
+          "sum": 46325
+        },
+        "user_characters": {
+          "n": 26,
+          "min": 761,
+          "p25": 2091.75,
+          "median": 3336.5,
+          "p75": 4690.0,
+          "p95": 9205.25,
+          "max": 10185,
+          "mean": 3790.346,
+          "sum": 98549
+        },
+        "seconds": {
+          "n": 26,
+          "min": 1.3023448210005881,
+          "p25": 20.694,
+          "median": 32.37373451950043,
+          "p75": 36.107,
+          "p95": 40.638,
+          "max": 41.2228708640032,
+          "mean": 27.616,
+          "sum": 718.016
+        }
+      },
+      "original_native": {
+        "calls": 123,
+        "successes": 121,
+        "failures": 2,
+        "empty_output": 2,
+        "cap_hits": 0,
+        "caps": {
+          "2500": 123
+        },
+        "input_tokens": {
+          "n": 121,
+          "min": 878,
+          "p25": 1148.0,
+          "median": 1272,
+          "p75": 1554.0,
+          "p95": 2371.0,
+          "max": 2818,
+          "mean": 1421.545,
+          "sum": 172007
+        },
+        "output_tokens": {
+          "n": 121,
+          "min": 47,
+          "p25": 468.0,
+          "median": 691,
+          "p75": 914.0,
+          "p95": 1073.0,
+          "max": 1380,
+          "mean": 688.893,
+          "sum": 83356
+        },
+        "visible_output_characters": {
+          "n": 123,
+          "min": 0,
+          "p25": 754.5,
+          "median": 1394,
+          "p75": 2042.5,
+          "p95": 2371.7,
+          "max": 2989,
+          "mean": 1372.829,
+          "sum": 168858
+        },
+        "user_characters": {
+          "n": 123,
+          "min": 2025,
+          "p25": 2883.5,
+          "median": 3360,
+          "p75": 3860.0,
+          "p95": 5075.3,
+          "max": 6440,
+          "mean": 3483.675,
+          "sum": 428492
+        },
+        "seconds": {
+          "n": 121,
+          "min": 2.057104084000457,
+          "p25": 8.389,
+          "median": 11.659321572995395,
+          "p75": 13.519,
+          "p95": 17.152,
+          "max": 19.689928137995594,
+          "mean": 11.218,
+          "sum": 1357.352
+        }
+      },
+      "original_extraction": {
+        "calls": 7,
+        "successes": 7,
+        "failures": 0,
+        "empty_output": 0,
+        "cap_hits": 0,
+        "caps": {
+          "2500": 7
+        },
+        "input_tokens": {
+          "n": 7,
+          "min": 454,
+          "p25": 461.5,
+          "median": 469,
+          "p75": 478.5,
+          "p95": 491.1,
+          "max": 495,
+          "mean": 471.143,
+          "sum": 3298
+        },
+        "output_tokens": {
+          "n": 7,
+          "min": 37,
+          "p25": 61.0,
+          "median": 75,
+          "p75": 82.5,
+          "p95": 122.4,
+          "max": 138,
+          "mean": 76.714,
+          "sum": 537
+        },
+        "visible_output_characters": {
+          "n": 7,
+          "min": 77,
+          "p25": 114.0,
+          "median": 129,
+          "p75": 133.5,
+          "p95": 150.3,
+          "max": 156,
+          "mean": 122.429,
+          "sum": 857
+        },
+        "user_characters": {
+          "n": 7,
+          "min": 440,
+          "p25": 481.5,
+          "median": 532,
+          "p75": 554.0,
+          "p95": 586.0,
+          "max": 595,
+          "mean": 519.714,
+          "sum": 3638
+        },
+        "seconds": {
+          "n": 7,
+          "min": 1.3884453099963139,
+          "p25": 1.747,
+          "median": 1.896338692997233,
+          "p75": 2.218,
+          "p95": 3.096,
+          "max": 3.3360178020011517,
+          "mean": 2.079,
+          "sum": 14.552
+        }
+      },
+      "task/decomposition": {
+        "calls": 18,
+        "successes": 10,
+        "failures": 8,
+        "empty_output": 8,
+        "cap_hits": 8,
+        "caps": {
+          "2500": 18
+        },
+        "input_tokens": {
+          "n": 18,
+          "min": 1667,
+          "p25": 1707.25,
+          "median": 1916.0,
+          "p75": 2331.5,
+          "p95": 3813.6,
+          "max": 4089,
+          "mean": 2262.111,
+          "sum": 40718
+        },
+        "output_tokens": {
+          "n": 18,
+          "min": 1233,
+          "p25": 2157.25,
+          "median": 2433.5,
+          "p75": 2500.0,
+          "p95": 2500.0,
+          "max": 2500,
+          "mean": 2266.722,
+          "sum": 40801
+        },
+        "visible_output_characters": {
+          "n": 18,
+          "min": 0,
+          "p25": 0.0,
+          "median": 1857.5,
+          "p75": 4335.75,
+          "p95": 5514.3,
+          "max": 5635,
+          "mean": 2175.056,
+          "sum": 39151
+        },
+        "user_characters": {
+          "n": 18,
+          "min": 1814,
+          "p25": 2163.25,
+          "median": 2915.0,
+          "p75": 4794.0,
+          "p95": 9561.95,
+          "max": 10185,
+          "mean": 4129,
+          "sum": 74322
+        },
+        "seconds": {
+          "n": 18,
+          "min": 21.27250793499843,
+          "p25": 32.269,
+          "median": 35.2082258800001,
+          "p75": 39.062,
+          "p95": 40.751,
+          "max": 41.2228708640032,
+          "mean": 34.664,
+          "sum": 623.946
+        }
+      },
+      "task/extraction": {
+        "calls": 10,
+        "successes": 10,
+        "failures": 0,
+        "empty_output": 0,
+        "cap_hits": 0,
+        "caps": {
+          "2500": 10
+        },
+        "input_tokens": {
+          "n": 10,
+          "min": 429,
+          "p25": 437.5,
+          "median": 461.5,
+          "p75": 473.5,
+          "p95": 489.15,
+          "max": 495,
+          "mean": 459,
+          "sum": 4590
+        },
+        "output_tokens": {
+          "n": 10,
+          "min": 26,
+          "p25": 28.75,
+          "median": 61.0,
+          "p75": 78.0,
+          "p95": 114.6,
+          "max": 138,
+          "mean": 61.5,
+          "sum": 615
+        },
+        "visible_output_characters": {
+          "n": 10,
+          "min": 77,
+          "p25": 79.0,
+          "median": 114.0,
+          "p75": 129.75,
+          "p95": 147.45,
+          "max": 156,
+          "mean": 109.4,
+          "sum": 1094
+        },
+        "user_characters": {
+          "n": 10,
+          "min": 440,
+          "p25": 504.25,
+          "median": 554.0,
+          "p75": 719.5,
+          "p95": 777.2,
+          "max": 779,
+          "mean": 595.3,
+          "sum": 5953
+        },
+        "seconds": {
+          "n": 10,
+          "min": 1.3023448210005881,
+          "p25": 1.366,
+          "median": 1.7473703180003213,
+          "p75": 1.9,
+          "p95": 2.976,
+          "max": 3.3360178020011517,
+          "mean": 1.853,
+          "sum": 18.527
+        }
+      },
+      "task/original_assessment,sources,limitations": {
+        "calls": 6,
+        "successes": 6,
+        "failures": 0,
+        "empty_output": 0,
+        "cap_hits": 0,
+        "caps": {
+          "2500": 6
+        },
+        "input_tokens": {
+          "n": 6,
+          "min": 1180,
+          "p25": 1210.25,
+          "median": 1291.5,
+          "p75": 1296.25,
+          "p95": 1297.75,
+          "max": 1298,
+          "mean": 1257,
+          "sum": 7542
+        },
+        "output_tokens": {
+          "n": 6,
+          "min": 953,
+          "p25": 963.75,
+          "median": 1030.0,
+          "p75": 1073.0,
+          "p95": 1146.5,
+          "max": 1171,
+          "mean": 1035.5,
+          "sum": 6213
+        },
+        "visible_output_characters": {
+          "n": 6,
+          "min": 2108,
+          "p25": 2215.5,
+          "median": 2302.0,
+          "p75": 2412.5,
+          "p95": 2850.5,
+          "max": 2989,
+          "mean": 2389.5,
+          "sum": 14337
+        },
+        "user_characters": {
+          "n": 6,
+          "min": 2883,
+          "p25": 3049.75,
+          "median": 3552.0,
+          "p75": 3558.5,
+          "p95": 3595.75,
+          "max": 3608,
+          "mean": 3339.667,
+          "sum": 20038
+        },
+        "seconds": {
+          "n": 6,
+          "min": 12.446938125998713,
+          "p25": 14.099,
+          "median": 14.982378145497933,
+          "p75": 15.506,
+          "p95": 15.601,
+          "max": 15.623280764004448,
+          "mean": 14.587,
+          "sum": 87.52
+        }
+      },
+      "task/original_causes": {
+        "calls": 3,
+        "successes": 3,
+        "failures": 0,
+        "empty_output": 0,
+        "cap_hits": 0,
+        "caps": {
+          "2500": 3
+        },
+        "input_tokens": {
+          "n": 3,
+          "min": 1385,
+          "p25": 1407.5,
+          "median": 1430,
+          "p75": 1492.0,
+          "p95": 1541.6,
+          "max": 1554,
+          "mean": 1456.333,
+          "sum": 4369
+        },
+        "output_tokens": {
+          "n": 3,
+          "min": 514,
+          "p25": 546.5,
+          "median": 579,
+          "p75": 627.5,
+          "p95": 666.3,
+          "max": 676,
+          "mean": 589.667,
+          "sum": 1769
+        },
+        "visible_output_characters": {
+          "n": 3,
+          "min": 1163,
+          "p25": 1166.0,
+          "median": 1169,
+          "p75": 1183.0,
+          "p95": 1194.2,
+          "max": 1197,
+          "mean": 1176.333,
+          "sum": 3529
+        },
+        "user_characters": {
+          "n": 3,
+          "min": 2878,
+          "p25": 3182.5,
+          "median": 3487,
+          "p75": 3639.5,
+          "p95": 3761.5,
+          "max": 3792,
+          "mean": 3385.667,
+          "sum": 10157
+        },
+        "seconds": {
+          "n": 3,
+          "min": 7.415759237999737,
+          "p25": 7.848,
+          "median": 8.279332562997297,
+          "p75": 9.487,
+          "p95": 10.453,
+          "max": 10.694888306999928,
+          "mean": 8.797,
+          "sum": 26.39
+        }
+      },
+      "task/original_causes,evidence_assessment,world_verification": {
+        "calls": 1,
+        "successes": 1,
+        "failures": 0,
+        "empty_output": 0,
+        "cap_hits": 0,
+        "caps": {
+          "2500": 1
+        },
+        "input_tokens": {
+          "n": 1,
+          "min": 1359,
+          "p25": 1359,
+          "median": 1359,
+          "p75": 1359,
+          "p95": 1359,
+          "max": 1359,
+          "mean": 1359,
+          "sum": 1359
+        },
+        "output_tokens": {
+          "n": 1,
+          "min": 648,
+          "p25": 648,
+          "median": 648,
+          "p75": 648,
+          "p95": 648,
+          "max": 648,
+          "mean": 648,
+          "sum": 648
+        },
+        "visible_output_characters": {
+          "n": 1,
+          "min": 1297,
+          "p25": 1297,
+          "median": 1297,
+          "p75": 1297,
+          "p95": 1297,
+          "max": 1297,
+          "mean": 1297,
+          "sum": 1297
+        },
+        "user_characters": {
+          "n": 1,
+          "min": 3307,
+          "p25": 3307,
+          "median": 3307,
+          "p75": 3307,
+          "p95": 3307,
+          "max": 3307,
+          "mean": 3307,
+          "sum": 3307
+        },
+        "seconds": {
+          "n": 1,
+          "min": 10.548433969001053,
+          "p25": 10.548433969001053,
+          "median": 10.548433969001053,
+          "p75": 10.548433969001053,
+          "p95": 10.548433969001053,
+          "max": 10.548433969001053,
+          "mean": 10.548,
+          "sum": 10.548
+        }
+      },
+      "task/original_causes,world_verification": {
+        "calls": 3,
+        "successes": 3,
+        "failures": 0,
+        "empty_output": 0,
+        "cap_hits": 0,
+        "caps": {
+          "2500": 3
+        },
+        "input_tokens": {
+          "n": 3,
+          "min": 1293,
+          "p25": 1346.5,
+          "median": 1400,
+          "p75": 1410.5,
+          "p95": 1418.9,
+          "max": 1421,
+          "mean": 1371.333,
+          "sum": 4114
+        },
+        "output_tokens": {
+          "n": 3,
+          "min": 467,
+          "p25": 488.0,
+          "median": 509,
+          "p75": 687.0,
+          "p95": 829.4,
+          "max": 865,
+          "mean": 613.667,
+          "sum": 1841
+        },
+        "visible_output_characters": {
+          "n": 3,
+          "min": 713,
+          "p25": 716.5,
+          "median": 720,
+          "p75": 1152.5,
+          "p95": 1498.5,
+          "max": 1585,
+          "mean": 1006,
+          "sum": 3018
+        },
+        "user_characters": {
+          "n": 3,
+          "min": 2783,
+          "p25": 2935.0,
+          "median": 3087,
+          "p75": 3320.5,
+          "p95": 3507.3,
+          "max": 3554,
+          "mean": 3141.333,
+          "sum": 9424
+        },
+        "seconds": {
+          "n": 3,
+          "min": 7.595748069004912,
+          "p25": 8.77,
+          "median": 9.9439048810018,
+          "p75": 11.658,
+          "p95": 13.029,
+          "max": 13.371499993001635,
+          "mean": 10.304,
+          "sum": 30.911
+        }
+      },
+      "task/original_checks": {
+        "calls": 7,
+        "successes": 7,
+        "failures": 0,
+        "empty_output": 0,
+        "cap_hits": 0,
+        "caps": {
+          "2500": 7
+        },
+        "input_tokens": {
+          "n": 7,
+          "min": 1613,
+          "p25": 1642.0,
+          "median": 1704,
+          "p75": 1761.5,
+          "p95": 1916.4,
+          "max": 1980,
+          "mean": 1729.143,
+          "sum": 12104
+        },
+        "output_tokens": {
+          "n": 7,
+          "min": 309,
+          "p25": 358.0,
+          "median": 420,
+          "p75": 455.0,
+          "p95": 512.2,
+          "max": 532,
+          "mean": 412.429,
+          "sum": 2887
+        },
+        "visible_output_characters": {
+          "n": 7,
+          "min": 648,
+          "p25": 811.5,
+          "median": 995,
+          "p75": 1017.0,
+          "p95": 1173.0,
+          "max": 1236,
+          "mean": 933.714,
+          "sum": 6536
+        },
+        "user_characters": {
+          "n": 7,
+          "min": 3601,
+          "p25": 3777.0,
+          "median": 4148,
+          "p75": 4324.5,
+          "p95": 4610.5,
+          "max": 4696,
+          "mean": 4092.571,
+          "sum": 28648
+        },
+        "seconds": {
+          "n": 7,
+          "min": 4.726207134997821,
+          "p25": 5.228,
+          "median": 5.933955791995686,
+          "p75": 6.064,
+          "p95": 7.441,
+          "max": 8.022189848998096,
+          "mean": 5.895,
+          "sum": 41.267
+        }
+      },
+      "task/original_consistent_facts,disputed_facts,credibility_note": {
+        "calls": 5,
+        "successes": 5,
+        "failures": 0,
+        "empty_output": 0,
+        "cap_hits": 0,
+        "caps": {
+          "2500": 5
+        },
+        "input_tokens": {
+          "n": 5,
+          "min": 1344,
+          "p25": 1375.0,
+          "median": 1396,
+          "p75": 1400.0,
+          "p95": 1444.0,
+          "max": 1455,
+          "mean": 1394,
+          "sum": 6970
+        },
+        "output_tokens": {
+          "n": 5,
+          "min": 392,
+          "p25": 551.0,
+          "median": 634,
+          "p75": 668.0,
+          "p95": 764.8,
+          "max": 789,
+          "mean": 606.8,
+          "sum": 3034
+        },
+        "visible_output_characters": {
+          "n": 5,
+          "min": 387,
+          "p25": 952.0,
+          "median": 1098,
+          "p75": 1424.0,
+          "p95": 1452.8,
+          "max": 1460,
+          "mean": 1064.2,
+          "sum": 5321
+        },
+        "user_characters": {
+          "n": 5,
+          "min": 3139,
+          "p25": 3360.0,
+          "median": 3519,
+          "p75": 3791.0,
+          "p95": 3838.2,
+          "max": 3850,
+          "mean": 3531.8,
+          "sum": 17659
+        },
+        "seconds": {
+          "n": 5,
+          "min": 9.137615585001186,
+          "p25": 10.942,
+          "median": 11.242006248001417,
+          "p75": 11.554,
+          "p95": 12.859,
+          "max": 13.185667512996588,
+          "mean": 11.212,
+          "sum": 56.061
+        }
+      },
+      "task/original_consistent_facts,disputed_facts,credibility_note,world_verification": {
+        "calls": 1,
+        "successes": 1,
+        "failures": 0,
+        "empty_output": 0,
+        "cap_hits": 0,
+        "caps": {
+          "2500": 1
+        },
+        "input_tokens": {
+          "n": 1,
+          "min": 1229,
+          "p25": 1229,
+          "median": 1229,
+          "p75": 1229,
+          "p95": 1229,
+          "max": 1229,
+          "mean": 1229,
+          "sum": 1229
+        },
+        "output_tokens": {
+          "n": 1,
+          "min": 531,
+          "p25": 531,
+          "median": 531,
+          "p75": 531,
+          "p95": 531,
+          "max": 531,
+          "mean": 531,
+          "sum": 531
+        },
+        "visible_output_characters": {
+          "n": 1,
+          "min": 728,
+          "p25": 728,
+          "median": 728,
+          "p75": 728,
+          "p95": 728,
+          "max": 728,
+          "mean": 728,
+          "sum": 728
+        },
+        "user_characters": {
+          "n": 1,
+          "min": 3012,
+          "p25": 3012,
+          "median": 3012,
+          "p75": 3012,
+          "p95": 3012,
+          "max": 3012,
+          "mean": 3012,
+          "sum": 3012
+        },
+        "seconds": {
+          "n": 1,
+          "min": 10.141635160995065,
+          "p25": 10.141635160995065,
+          "median": 10.141635160995065,
+          "p75": 10.141635160995065,
+          "p95": 10.141635160995065,
+          "max": 10.141635160995065,
+          "mean": 10.142,
+          "sum": 10.142
+        }
+      },
+      "task/original_consistent_facts,disputed_facts,target_assessment,world_verification,credibility_note": {
+        "calls": 1,
+        "successes": 1,
+        "failures": 0,
+        "empty_output": 0,
+        "cap_hits": 0,
+        "caps": {
+          "2500": 1
+        },
+        "input_tokens": {
+          "n": 1,
+          "min": 1542,
+          "p25": 1542,
+          "median": 1542,
+          "p75": 1542,
+          "p95": 1542,
+          "max": 1542,
+          "mean": 1542,
+          "sum": 1542
+        },
+        "output_tokens": {
+          "n": 1,
+          "min": 762,
+          "p25": 762,
+          "median": 762,
+          "p75": 762,
+          "p95": 762,
+          "max": 762,
+          "mean": 762,
+          "sum": 762
+        },
+        "visible_output_characters": {
+          "n": 1,
+          "min": 1422,
+          "p25": 1422,
+          "median": 1422,
+          "p75": 1422,
+          "p95": 1422,
+          "max": 1422,
+          "mean": 1422,
+          "sum": 1422
+        },
+        "user_characters": {
+          "n": 1,
+          "min": 4034,
+          "p25": 4034,
+          "median": 4034,
+          "p75": 4034,
+          "p95": 4034,
+          "max": 4034,
+          "mean": 4034,
+          "sum": 4034
+        },
+        "seconds": {
+          "n": 1,
+          "min": 13.341714597998362,
+          "p25": 13.341714597998362,
+          "median": 13.341714597998362,
+          "p75": 13.341714597998362,
+          "p95": 13.341714597998362,
+          "max": 13.341714597998362,
+          "mean": 13.342,
+          "sum": 13.342
+        }
+      },
+      "task/original_core_event,date,entities,key_claims,causal_hints": {
+        "calls": 8,
+        "successes": 8,
+        "failures": 0,
+        "empty_output": 0,
+        "cap_hits": 0,
+        "caps": {
+          "2500": 8
+        },
+        "input_tokens": {
+          "n": 8,
+          "min": 920,
+          "p25": 1139.75,
+          "median": 1203.5,
+          "p75": 1276.5,
+          "p95": 1325.75,
+          "max": 1345,
+          "mean": 1183.875,
+          "sum": 9471
+        },
+        "output_tokens": {
+          "n": 8,
+          "min": 365,
+          "p25": 389.75,
+          "median": 405.5,
+          "p75": 467.25,
+          "p95": 473.2,
+          "max": 476,
+          "mean": 420.25,
+          "sum": 3362
+        },
+        "visible_output_characters": {
+          "n": 8,
+          "min": 430,
+          "p25": 462.75,
+          "median": 491.0,
+          "p75": 542.0,
+          "p95": 586.95,
+          "max": 595,
+          "mean": 504,
+          "sum": 4032
+        },
+        "user_characters": {
+          "n": 8,
+          "min": 2727,
+          "p25": 3298.25,
+          "median": 3708.0,
+          "p75": 4068.75,
+          "p95": 4226.55,
+          "max": 4299,
+          "mean": 3644.75,
+          "sum": 29158
+        },
+        "seconds": {
+          "n": 8,
+          "min": 12.615184376001707,
+          "p25": 14.059,
+          "median": 15.924557977999939,
+          "p75": 17.641,
+          "p95": 19.049,
+          "max": 19.689928137995594,
+          "mean": 15.915,
+          "sum": 127.322
+        }
+      },
+      "task/original_direct_response": {
+        "calls": 9,
+        "successes": 7,
+        "failures": 2,
+        "empty_output": 2,
+        "cap_hits": 0,
+        "caps": {
+          "2500": 9
+        },
+        "input_tokens": {
+          "n": 7,
+          "min": 2017,
+          "p25": 2238.0,
+          "median": 2467,
+          "p75": 2598.0,
+          "p95": 2775.7,
+          "max": 2818,
+          "mean": 2424.857,
+          "sum": 16974
+        },
+        "output_tokens": {
+          "n": 7,
+          "min": 344,
+          "p25": 403.0,
+          "median": 443,
+          "p75": 463.5,
+          "p95": 476.4,
+          "max": 480,
+          "mean": 428.571,
+          "sum": 3000
+        },
+        "visible_output_characters": {
+          "n": 9,
+          "min": 0,
+          "p25": 217.0,
+          "median": 229,
+          "p75": 232.0,
+          "p95": 243.0,
+          "max": 247,
+          "mean": 179.667,
+          "sum": 1617
+        },
+        "user_characters": {
+          "n": 9,
+          "min": 2097,
+          "p25": 4449.0,
+          "median": 4990,
+          "p75": 5795.0,
+          "p95": 6400.0,
+          "max": 6440,
+          "mean": 4786.778,
+          "sum": 43081
+        },
+        "seconds": {
+          "n": 7,
+          "min": 6.377882710999984,
+          "p25": 7.164,
+          "median": 7.741835551001714,
+          "p75": 8.255,
+          "p95": 8.469,
+          "max": 8.51703218500188,
+          "mean": 7.639,
+          "sum": 53.475
+        }
+      },
+      "task/original_events": {
+        "calls": 3,
+        "successes": 3,
+        "failures": 0,
+        "empty_output": 0,
+        "cap_hits": 0,
+        "caps": {
+          "2500": 3
+        },
+        "input_tokens": {
+          "n": 3,
+          "min": 1913,
+          "p25": 2005.5,
+          "median": 2098,
+          "p75": 2187.5,
+          "p95": 2259.1,
+          "max": 2277,
+          "mean": 2096,
+          "sum": 6288
+        },
+        "output_tokens": {
+          "n": 3,
+          "min": 779,
+          "p25": 925.5,
+          "median": 1072,
+          "p75": 1162.0,
+          "p95": 1234.0,
+          "max": 1252,
+          "mean": 1034.333,
+          "sum": 3103
+        },
+        "visible_output_characters": {
+          "n": 3,
+          "min": 1468,
+          "p25": 1861.5,
+          "median": 2255,
+          "p75": 2604.0,
+          "p95": 2883.2,
+          "max": 2953,
+          "mean": 2225.333,
+          "sum": 6676
+        },
+        "user_characters": {
+          "n": 3,
+          "min": 3973,
+          "p25": 4454.5,
+          "median": 4936,
+          "p75": 5007.5,
+          "p95": 5064.7,
+          "max": 5079,
+          "mean": 4662.667,
+          "sum": 13988
+        },
+        "seconds": {
+          "n": 3,
+          "min": 11.4140262370056,
+          "p25": 12.687,
+          "median": 13.959280358001706,
+          "p75": 15.577,
+          "p95": 16.87,
+          "max": 17.19374457700178,
+          "mean": 14.189,
+          "sum": 42.567
+        }
+      },
+      "task/original_events,evidence_assessment,world_verification": {
+        "calls": 3,
+        "successes": 3,
+        "failures": 0,
+        "empty_output": 0,
+        "cap_hits": 0,
+        "caps": {
+          "2500": 3
+        },
+        "input_tokens": {
+          "n": 3,
+          "min": 1905,
+          "p25": 1945.5,
+          "median": 1986,
+          "p75": 2021.0,
+          "p95": 2049.0,
+          "max": 2056,
+          "mean": 1982.333,
+          "sum": 5947
+        },
+        "output_tokens": {
+          "n": 3,
+          "min": 792,
+          "p25": 985.0,
+          "median": 1178,
+          "p75": 1279.0,
+          "p95": 1359.8,
+          "max": 1380,
+          "mean": 1116.667,
+          "sum": 3350
+        },
+        "visible_output_characters": {
+          "n": 3,
+          "min": 1376,
+          "p25": 1899.5,
+          "median": 2423,
+          "p75": 2660.0,
+          "p95": 2849.6,
+          "max": 2897,
+          "mean": 2232,
+          "sum": 6696
+        },
+        "user_characters": {
+          "n": 3,
+          "min": 4177,
+          "p25": 4350.0,
+          "median": 4523,
+          "p75": 4592.5,
+          "p95": 4648.1,
+          "max": 4662,
+          "mean": 4454,
+          "sum": 13362
+        },
+        "seconds": {
+          "n": 3,
+          "min": 13.237487830003374,
+          "p25": 15.576,
+          "median": 17.914374799001962,
+          "p75": 18.716,
+          "p95": 19.358,
+          "max": 19.518264145001012,
+          "mean": 16.89,
+          "sum": 50.67
+        }
+      },
+      "task/original_events,source_count_note,evidence_assessment,world_verification": {
+        "calls": 1,
+        "successes": 1,
+        "failures": 0,
+        "empty_output": 0,
+        "cap_hits": 0,
+        "caps": {
+          "2500": 1
+        },
+        "input_tokens": {
+          "n": 1,
+          "min": 2126,
+          "p25": 2126,
+          "median": 2126,
+          "p75": 2126,
+          "p95": 2126,
+          "max": 2126,
+          "mean": 2126,
+          "sum": 2126
+        },
+        "output_tokens": {
+          "n": 1,
+          "min": 1068,
+          "p25": 1068,
+          "median": 1068,
+          "p75": 1068,
+          "p95": 1068,
+          "max": 1068,
+          "mean": 1068,
+          "sum": 1068
+        },
+        "visible_output_characters": {
+          "n": 1,
+          "min": 2225,
+          "p25": 2225,
+          "median": 2225,
+          "p75": 2225,
+          "p95": 2225,
+          "max": 2225,
+          "mean": 2225,
+          "sum": 2225
+        },
+        "user_characters": {
+          "n": 1,
+          "min": 4213,
+          "p25": 4213,
+          "median": 4213,
+          "p75": 4213,
+          "p95": 4213,
+          "max": 4213,
+          "mean": 4213,
+          "sum": 4213
+        },
+        "seconds": {
+          "n": 1,
+          "min": 13.41808078699978,
+          "p25": 13.41808078699978,
+          "median": 13.41808078699978,
+          "p75": 13.41808078699978,
+          "p95": 13.41808078699978,
+          "max": 13.41808078699978,
+          "mean": 13.418,
+          "sum": 13.418
+        }
+      },
+      "task/original_key_findings,information_gaps,causal_summary,bias_notes": {
+        "calls": 7,
+        "successes": 7,
+        "failures": 0,
+        "empty_output": 0,
+        "cap_hits": 0,
+        "caps": {
+          "2500": 7
+        },
+        "input_tokens": {
+          "n": 7,
+          "min": 1780,
+          "p25": 2010.0,
+          "median": 2235,
+          "p75": 2343.5,
+          "p95": 2509.9,
+          "max": 2551,
+          "mean": 2181.857,
+          "sum": 15273
+        },
+        "output_tokens": {
+          "n": 7,
+          "min": 658,
+          "p25": 676.0,
+          "median": 702,
+          "p75": 704.5,
+          "p95": 737.5,
+          "max": 751,
+          "mean": 696,
+          "sum": 4872
+        },
+        "visible_output_characters": {
+          "n": 7,
+          "min": 959,
+          "p25": 1004.5,
+          "median": 1061,
+          "p75": 1091.0,
+          "p95": 1127.9,
+          "max": 1139,
+          "mean": 1050,
+          "sum": 7350
+        },
+        "user_characters": {
+          "n": 7,
+          "min": 3753,
+          "p25": 4302.5,
+          "median": 4879,
+          "p75": 5290.5,
+          "p95": 5588.7,
+          "max": 5610,
+          "mean": 4775.429,
+          "sum": 33428
+        },
+        "seconds": {
+          "n": 7,
+          "min": 11.37432566699863,
+          "p25": 11.588,
+          "median": 11.734126932002255,
+          "p75": 12.216,
+          "p95": 13.251,
+          "max": 13.598379492999811,
+          "mean": 12.045,
+          "sum": 84.314
+        }
+      },
+      "task/original_perspectives": {
+        "calls": 5,
+        "successes": 5,
+        "failures": 0,
+        "empty_output": 0,
+        "cap_hits": 0,
+        "caps": {
+          "2500": 5
+        },
+        "input_tokens": {
+          "n": 5,
+          "min": 1399,
+          "p25": 1439.0,
+          "median": 1512,
+          "p75": 1586.0,
+          "p95": 1665.2,
+          "max": 1685,
+          "mean": 1524.2,
+          "sum": 7621
+        },
+        "output_tokens": {
+          "n": 5,
+          "min": 47,
+          "p25": 50.0,
+          "median": 51,
+          "p75": 53.0,
+          "p95": 77.0,
+          "max": 83,
+          "mean": 56.8,
+          "sum": 284
+        },
+        "visible_output_characters": {
+          "n": 5,
+          "min": 20,
+          "p25": 20.0,
+          "median": 20,
+          "p75": 20.0,
+          "p95": 23.2,
+          "max": 24,
+          "mean": 20.8,
+          "sum": 104
+        },
+        "user_characters": {
+          "n": 5,
+          "min": 3197,
+          "p25": 3466.0,
+          "median": 3737,
+          "p75": 3870.0,
+          "p95": 4040.4,
+          "max": 4083,
+          "mean": 3670.6,
+          "sum": 18353
+        },
+        "seconds": {
+          "n": 5,
+          "min": 2.057104084000457,
+          "p25": 2.418,
+          "median": 2.4654439430014463,
+          "p75": 2.687,
+          "p95": 3.019,
+          "max": 3.1024102499941364,
+          "mean": 2.546,
+          "sum": 12.73
+        }
+      },
+      "task/original_queries": {
+        "calls": 8,
+        "successes": 8,
+        "failures": 0,
+        "empty_output": 0,
+        "cap_hits": 0,
+        "caps": {
+          "2500": 8
+        },
+        "input_tokens": {
+          "n": 8,
+          "min": 998,
+          "p25": 1219.5,
+          "median": 1276.5,
+          "p75": 1290.25,
+          "p95": 1396.1,
+          "max": 1443,
+          "mean": 1248.625,
+          "sum": 9989
+        },
+        "output_tokens": {
+          "n": 8,
+          "min": 298,
+          "p25": 317.75,
+          "median": 347.5,
+          "p75": 464.0,
+          "p95": 552.6,
+          "max": 568,
+          "mean": 395.25,
+          "sum": 3162
+        },
+        "visible_output_characters": {
+          "n": 8,
+          "min": 664,
+          "p25": 740.0,
+          "median": 781.0,
+          "p75": 847.75,
+          "p95": 922.85,
+          "max": 933,
+          "mean": 794,
+          "sum": 6352
+        },
+        "user_characters": {
+          "n": 8,
+          "min": 2286,
+          "p25": 2919.5,
+          "median": 3257.5,
+          "p75": 3563.25,
+          "p95": 3774.3,
+          "max": 3873,
+          "mean": 3200.375,
+          "sum": 25603
+        },
+        "seconds": {
+          "n": 8,
+          "min": 5.34656833599729,
+          "p25": 6.163,
+          "median": 6.62615781650311,
+          "p75": 8.619,
+          "p95": 9.971,
+          "max": 10.329751603996556,
+          "mean": 7.314,
+          "sum": 58.508
+        }
+      },
+      "task/original_sources,assessment,limitations": {
+        "calls": 24,
+        "successes": 24,
+        "failures": 0,
+        "empty_output": 0,
+        "cap_hits": 0,
+        "caps": {
+          "2500": 24
+        },
+        "input_tokens": {
+          "n": 24,
+          "min": 886,
+          "p25": 1116.5,
+          "median": 1147.5,
+          "p75": 1214.0,
+          "p95": 1247.25,
+          "max": 1293,
+          "mean": 1137.292,
+          "sum": 27295
+        },
+        "output_tokens": {
+          "n": 24,
+          "min": 501,
+          "p25": 679.5,
+          "median": 831.5,
+          "p75": 926.5,
+          "p95": 1029.75,
+          "max": 1063,
+          "mean": 806,
+          "sum": 19344
+        },
+        "visible_output_characters": {
+          "n": 24,
+          "min": 967,
+          "p25": 1452.0,
+          "median": 1924.0,
+          "p75": 2094.0,
+          "p95": 2327.25,
+          "max": 2360,
+          "mean": 1812.958,
+          "sum": 43511
+        },
+        "user_characters": {
+          "n": 24,
+          "min": 2030,
+          "p25": 2665.5,
+          "median": 2891.5,
+          "p75": 3310.75,
+          "p95": 3357.7,
+          "max": 3590,
+          "mean": 2894.333,
+          "sum": 69464
+        },
+        "seconds": {
+          "n": 24,
+          "min": 7.32365760999528,
+          "p25": 10.548,
+          "median": 11.487320367999928,
+          "p75": 13.77,
+          "p95": 16.3,
+          "max": 16.63223524199566,
+          "mean": 11.935,
+          "sum": 286.449
+        }
+      },
+      "task/original_sources,assessment,world_verification,coverage_note": {
+        "calls": 1,
+        "successes": 1,
+        "failures": 0,
+        "empty_output": 0,
+        "cap_hits": 0,
+        "caps": {
+          "2500": 1
+        },
+        "input_tokens": {
+          "n": 1,
+          "min": 1132,
+          "p25": 1132,
+          "median": 1132,
+          "p75": 1132,
+          "p95": 1132,
+          "max": 1132,
+          "mean": 1132,
+          "sum": 1132
+        },
+        "output_tokens": {
+          "n": 1,
+          "min": 647,
+          "p25": 647,
+          "median": 647,
+          "p75": 647,
+          "p95": 647,
+          "max": 647,
+          "mean": 647,
+          "sum": 647
+        },
+        "visible_output_characters": {
+          "n": 1,
+          "min": 1301,
+          "p25": 1301,
+          "median": 1301,
+          "p75": 1301,
+          "p95": 1301,
+          "max": 1301,
+          "mean": 1301,
+          "sum": 1301
+        },
+        "user_characters": {
+          "n": 1,
+          "min": 2690,
+          "p25": 2690,
+          "median": 2690,
+          "p75": 2690,
+          "p95": 2690,
+          "max": 2690,
+          "mean": 2690,
+          "sum": 2690
+        },
+        "seconds": {
+          "n": 1,
+          "min": 9.272953434003284,
+          "p25": 9.272953434003284,
+          "median": 9.272953434003284,
+          "p75": 9.272953434003284,
+          "p95": 9.272953434003284,
+          "max": 9.272953434003284,
+          "mean": 9.273,
+          "sum": 9.273
+        }
+      },
+      "task/original_sources,assessment,world_verification,limitations": {
+        "calls": 10,
+        "successes": 10,
+        "failures": 0,
+        "empty_output": 0,
+        "cap_hits": 0,
+        "caps": {
+          "2500": 10
+        },
+        "input_tokens": {
+          "n": 10,
+          "min": 883,
+          "p25": 1187.0,
+          "median": 1226.5,
+          "p75": 1280.5,
+          "p95": 1306.6,
+          "max": 1312,
+          "mean": 1203.3,
+          "sum": 12033
+        },
+        "output_tokens": {
+          "n": 10,
+          "min": 607,
+          "p25": 879.25,
+          "median": 970.0,
+          "p75": 1002.0,
+          "p95": 1091.6,
+          "max": 1133,
+          "mean": 927.7,
+          "sum": 9277
+        },
+        "visible_output_characters": {
+          "n": 10,
+          "min": 1222,
+          "p25": 1962.25,
+          "median": 2225.5,
+          "p75": 2321.5,
+          "p95": 2435.7,
+          "max": 2487,
+          "mean": 2094.8,
+          "sum": 20948
+        },
+        "user_characters": {
+          "n": 10,
+          "min": 2025,
+          "p25": 2890.75,
+          "median": 3308.5,
+          "p75": 3504.5,
+          "p95": 3566.0,
+          "max": 3575,
+          "mean": 3134.4,
+          "sum": 31344
+        },
+        "seconds": {
+          "n": 10,
+          "min": 9.863081339994096,
+          "p25": 12.881,
+          "median": 13.225020666999626,
+          "p75": 13.628,
+          "p95": 15.284,
+          "max": 15.89920871200593,
+          "mean": 13.137,
+          "sum": 131.37
+        }
+      },
+      "task/original_sources,evidence_assessment,limitations": {
+        "calls": 1,
+        "successes": 1,
+        "failures": 0,
+        "empty_output": 0,
+        "cap_hits": 0,
+        "caps": {
+          "2500": 1
+        },
+        "input_tokens": {
+          "n": 1,
+          "min": 1115,
+          "p25": 1115,
+          "median": 1115,
+          "p75": 1115,
+          "p95": 1115,
+          "max": 1115,
+          "mean": 1115,
+          "sum": 1115
+        },
+        "output_tokens": {
+          "n": 1,
+          "min": 983,
+          "p25": 983,
+          "median": 983,
+          "p75": 983,
+          "p95": 983,
+          "max": 983,
+          "mean": 983,
+          "sum": 983
+        },
+        "visible_output_characters": {
+          "n": 1,
+          "min": 1964,
+          "p25": 1964,
+          "median": 1964,
+          "p75": 1964,
+          "p95": 1964,
+          "max": 1964,
+          "mean": 1964,
+          "sum": 1964
+        },
+        "user_characters": {
+          "n": 1,
+          "min": 3077,
+          "p25": 3077,
+          "median": 3077,
+          "p75": 3077,
+          "p95": 3077,
+          "max": 3077,
+          "mean": 3077,
+          "sum": 3077
+        },
+        "seconds": {
+          "n": 1,
+          "min": 15.547285731998272,
+          "p25": 15.547285731998272,
+          "median": 15.547285731998272,
+          "p75": 15.547285731998272,
+          "p95": 15.547285731998272,
+          "max": 15.547285731998272,
+          "mean": 15.547,
+          "sum": 15.547
+        }
+      },
+      "task/original_sources,evidence_assessment,world_verification,limitations": {
+        "calls": 10,
+        "successes": 10,
+        "failures": 0,
+        "empty_output": 0,
+        "cap_hits": 0,
+        "caps": {
+          "2500": 10
+        },
+        "input_tokens": {
+          "n": 10,
+          "min": 878,
+          "p25": 1117.5,
+          "median": 1201.0,
+          "p75": 1225.25,
+          "p95": 1238.1,
+          "max": 1239,
+          "mean": 1133.6,
+          "sum": 11336
+        },
+        "output_tokens": {
+          "n": 10,
+          "min": 636,
+          "p25": 784.5,
+          "median": 879.0,
+          "p75": 952.0,
+          "p95": 995.2,
+          "max": 1006,
+          "mean": 849.5,
+          "sum": 8495
+        },
+        "visible_output_characters": {
+          "n": 10,
+          "min": 1439,
+          "p25": 1824.0,
+          "median": 2051.0,
+          "p75": 2154.0,
+          "p95": 2217.75,
+          "max": 2229,
+          "mean": 1940.1,
+          "sum": 19401
+        },
+        "user_characters": {
+          "n": 10,
+          "min": 2033,
+          "p25": 2941.25,
+          "median": 3183.5,
+          "p75": 3367.25,
+          "p95": 3375.4,
+          "max": 3379,
+          "mean": 2988.8,
+          "sum": 29888
+        },
+        "seconds": {
+          "n": 10,
+          "min": 8.383462769998005,
+          "p25": 10.966,
+          "median": 12.150924549499905,
+          "p75": 13.532,
+          "p95": 15.386,
+          "max": 15.495841527001176,
+          "mean": 12.298,
+          "sum": 122.975
+        }
+      },
+      "task/original_sources,scope_note,world_verification": {
+        "calls": 1,
+        "successes": 1,
+        "failures": 0,
+        "empty_output": 0,
+        "cap_hits": 0,
+        "caps": {
+          "2500": 1
+        },
+        "input_tokens": {
+          "n": 1,
+          "min": 1043,
+          "p25": 1043,
+          "median": 1043,
+          "p75": 1043,
+          "p95": 1043,
+          "max": 1043,
+          "mean": 1043,
+          "sum": 1043
+        },
+        "output_tokens": {
+          "n": 1,
+          "min": 837,
+          "p25": 837,
+          "median": 837,
+          "p75": 837,
+          "p95": 837,
+          "max": 837,
+          "mean": 837,
+          "sum": 837
+        },
+        "visible_output_characters": {
+          "n": 1,
+          "min": 1865,
+          "p25": 1865,
+          "median": 1865,
+          "p75": 1865,
+          "p95": 1865,
+          "max": 1865,
+          "mean": 1865,
+          "sum": 1865
+        },
+        "user_characters": {
+          "n": 1,
+          "min": 2572,
+          "p25": 2572,
+          "median": 2572,
+          "p75": 2572,
+          "p95": 2572,
+          "max": 2572,
+          "mean": 2572,
+          "sum": 2572
+        },
+        "seconds": {
+          "n": 1,
+          "min": 13.195378739001171,
+          "p25": 13.195378739001171,
+          "median": 13.195378739001171,
+          "p75": 13.195378739001171,
+          "p95": 13.195378739001171,
+          "max": 13.195378739001171,
+          "mean": 13.195,
+          "sum": 13.195
+        }
+      },
+      "task/original_sources,target_assessment,limitations": {
+        "calls": 1,
+        "successes": 1,
+        "failures": 0,
+        "empty_output": 0,
+        "cap_hits": 0,
+        "caps": {
+          "2500": 1
+        },
+        "input_tokens": {
+          "n": 1,
+          "min": 885,
+          "p25": 885,
+          "median": 885,
+          "p75": 885,
+          "p95": 885,
+          "max": 885,
+          "mean": 885,
+          "sum": 885
+        },
+        "output_tokens": {
+          "n": 1,
+          "min": 732,
+          "p25": 732,
+          "median": 732,
+          "p75": 732,
+          "p95": 732,
+          "max": 732,
+          "mean": 732,
+          "sum": 732
+        },
+        "visible_output_characters": {
+          "n": 1,
+          "min": 1689,
+          "p25": 1689,
+          "median": 1689,
+          "p75": 1689,
+          "p95": 1689,
+          "max": 1689,
+          "mean": 1689,
+          "sum": 1689
+        },
+        "user_characters": {
+          "n": 1,
+          "min": 2027,
+          "p25": 2027,
+          "median": 2027,
+          "p75": 2027,
+          "p95": 2027,
+          "max": 2027,
+          "mean": 2027,
+          "sum": 2027
+        },
+        "seconds": {
+          "n": 1,
+          "min": 10.547565091997967,
+          "p25": 10.547565091997967,
+          "median": 10.547565091997967,
+          "p75": 10.547565091997967,
+          "p95": 10.547565091997967,
+          "max": 10.547565091997967,
+          "mean": 10.548,
+          "sum": 10.548
+        }
+      },
+      "task/original_sources,world_assessment,scope_note": {
+        "calls": 1,
+        "successes": 1,
+        "failures": 0,
+        "empty_output": 0,
+        "cap_hits": 0,
+        "caps": {
+          "2500": 1
+        },
+        "input_tokens": {
+          "n": 1,
+          "min": 1043,
+          "p25": 1043,
+          "median": 1043,
+          "p75": 1043,
+          "p95": 1043,
+          "max": 1043,
+          "mean": 1043,
+          "sum": 1043
+        },
+        "output_tokens": {
+          "n": 1,
+          "min": 831,
+          "p25": 831,
+          "median": 831,
+          "p75": 831,
+          "p95": 831,
+          "max": 831,
+          "mean": 831,
+          "sum": 831
+        },
+        "visible_output_characters": {
+          "n": 1,
+          "min": 1914,
+          "p25": 1914,
+          "median": 1914,
+          "p75": 1914,
+          "p95": 1914,
+          "max": 1914,
+          "mean": 1914,
+          "sum": 1914
+        },
+        "user_characters": {
+          "n": 1,
+          "min": 2569,
+          "p25": 2569,
+          "median": 2569,
+          "p75": 2569,
+          "p95": 2569,
+          "max": 2569,
+          "mean": 2569,
+          "sum": 2569
+        },
+        "seconds": {
+          "n": 1,
+          "min": 12.746547410002677,
+          "p25": 12.746547410002677,
+          "median": 12.746547410002677,
+          "p75": 12.746547410002677,
+          "p95": 12.746547410002677,
+          "max": 12.746547410002677,
+          "mean": 12.747,
+          "sum": 12.747
+        }
+      },
+      "task/original_sources,world_verification,limitations": {
+        "calls": 2,
+        "successes": 2,
+        "failures": 0,
+        "empty_output": 0,
+        "cap_hits": 0,
+        "caps": {
+          "2500": 2
+        },
+        "input_tokens": {
+          "n": 2,
+          "min": 1035,
+          "p25": 1040.25,
+          "median": 1045.5,
+          "p75": 1050.75,
+          "p95": 1054.95,
+          "max": 1056,
+          "mean": 1045.5,
+          "sum": 2091
+        },
+        "output_tokens": {
+          "n": 2,
+          "min": 770,
+          "p25": 776.25,
+          "median": 782.5,
+          "p75": 788.75,
+          "p95": 793.75,
+          "max": 795,
+          "mean": 782.5,
+          "sum": 1565
+        },
+        "visible_output_characters": {
+          "n": 2,
+          "min": 1674,
+          "p25": 1730.5,
+          "median": 1787.0,
+          "p75": 1843.5,
+          "p95": 1888.7,
+          "max": 1900,
+          "mean": 1787,
+          "sum": 3574
+        },
+        "user_characters": {
+          "n": 2,
+          "min": 2580,
+          "p25": 2583.25,
+          "median": 2586.5,
+          "p75": 2589.75,
+          "p95": 2592.35,
+          "max": 2593,
+          "mean": 2586.5,
+          "sum": 5173
+        },
+        "seconds": {
+          "n": 2,
+          "min": 11.69476987500093,
+          "p25": 11.729,
+          "median": 11.762785262999387,
+          "p75": 11.797,
+          "p95": 11.824,
+          "max": 11.830800650997844,
+          "mean": 11.763,
+          "sum": 23.526
+        }
+      },
+      "task/original_target_assessment,causes": {
+        "calls": 1,
+        "successes": 1,
+        "failures": 0,
+        "empty_output": 0,
+        "cap_hits": 0,
+        "caps": {
+          "2500": 1
+        },
+        "input_tokens": {
+          "n": 1,
+          "min": 1116,
+          "p25": 1116,
+          "median": 1116,
+          "p75": 1116,
+          "p95": 1116,
+          "max": 1116,
+          "mean": 1116,
+          "sum": 1116
+        },
+        "output_tokens": {
+          "n": 1,
+          "min": 759,
+          "p25": 759,
+          "median": 759,
+          "p75": 759,
+          "p95": 759,
+          "max": 759,
+          "mean": 759,
+          "sum": 759
+        },
+        "visible_output_characters": {
+          "n": 1,
+          "min": 1451,
+          "p25": 1451,
+          "median": 1451,
+          "p75": 1451,
+          "p95": 1451,
+          "max": 1451,
+          "mean": 1451,
+          "sum": 1451
+        },
+        "user_characters": {
+          "n": 1,
+          "min": 2223,
+          "p25": 2223,
+          "median": 2223,
+          "p75": 2223,
+          "p95": 2223,
+          "max": 2223,
+          "mean": 2223,
+          "sum": 2223
+        },
+        "seconds": {
+          "n": 1,
+          "min": 12.535470406997774,
+          "p25": 12.535470406997774,
+          "median": 12.535470406997774,
+          "p75": 12.535470406997774,
+          "p95": 12.535470406997774,
+          "max": 12.535470406997774,
+          "mean": 12.535,
+          "sum": 12.535
+        }
+      },
+      "task/verification": {
+        "calls": 5,
+        "successes": 5,
+        "failures": 0,
+        "empty_output": 0,
+        "cap_hits": 0,
+        "caps": {
+          "2500": 5
+        },
+        "input_tokens": {
+          "n": 5,
+          "min": 1732,
+          "p25": 2033.0,
+          "median": 2129,
+          "p75": 2133.0,
+          "p95": 2161.0,
+          "max": 2168,
+          "mean": 2039,
+          "sum": 10195
+        },
+        "output_tokens": {
+          "n": 5,
+          "min": 758,
+          "p25": 910.0,
+          "median": 1010,
+          "p75": 1224.0,
+          "p95": 1494.4,
+          "max": 1562,
+          "mean": 1092.8,
+          "sum": 5464
+        },
+        "visible_output_characters": {
+          "n": 5,
+          "min": 1288,
+          "p25": 1314.0,
+          "median": 1389,
+          "p75": 1420.0,
+          "p95": 1504.8,
+          "max": 1526,
+          "mean": 1387.4,
+          "sum": 6937
+        },
+        "user_characters": {
+          "n": 5,
+          "min": 3317,
+          "p25": 4384.0,
+          "median": 4660,
+          "p75": 4700.0,
+          "p95": 4820.8,
+          "max": 4851,
+          "mean": 4382.4,
+          "sum": 21912
+        },
+        "seconds": {
+          "n": 5,
+          "min": 11.956958574002783,
+          "p25": 13.834,
+          "median": 20.13652987599926,
+          "p75": 20.501,
+          "p95": 23.033,
+          "max": 23.665490387000318,
+          "mean": 18.019,
+          "sum": 90.094
+        }
+      },
+      "decomposition_success": {
+        "calls": 10,
+        "successes": 10,
+        "failures": 0,
+        "empty_output": 0,
+        "cap_hits": 0,
+        "caps": {
+          "2500": 10
+        },
+        "input_tokens": {
+          "n": 10,
+          "min": 1667,
+          "p25": 1701.0,
+          "median": 1885.5,
+          "p75": 3366.0,
+          "p95": 3943.2,
+          "max": 4089,
+          "mean": 2479,
+          "sum": 24790
+        },
+        "output_tokens": {
+          "n": 10,
+          "min": 1233,
+          "p25": 1976.25,
+          "median": 2162.5,
+          "p75": 2298.25,
+          "p95": 2435.85,
+          "max": 2457,
+          "mean": 2080.1,
+          "sum": 20801
+        },
+        "visible_output_characters": {
+          "n": 10,
+          "min": 847,
+          "p25": 3284.0,
+          "median": 4302.5,
+          "p75": 4604.75,
+          "p95": 5571.1,
+          "max": 5635,
+          "mean": 3915.1,
+          "sum": 39151
+        },
+        "user_characters": {
+          "n": 10,
+          "min": 1814,
+          "p25": 2012.25,
+          "median": 2782.5,
+          "p75": 8006.25,
+          "p95": 9855.15,
+          "max": 10185,
+          "mean": 4819.3,
+          "sum": 48193
+        },
+        "seconds": {
+          "n": 10,
+          "min": 21.27250793499843,
+          "p25": 31.088,
+          "median": 34.51196557050207,
+          "p75": 35.397,
+          "p95": 40.919,
+          "max": 41.2228708640032,
+          "mean": 32.984,
+          "sum": 329.84
+        }
+      },
+      "decomposition_failure": {
+        "calls": 8,
+        "successes": 0,
+        "failures": 8,
+        "empty_output": 8,
+        "cap_hits": 8,
+        "caps": {
+          "2500": 8
+        },
+        "input_tokens": {
+          "n": 8,
+          "min": 1668,
+          "p25": 1770.75,
+          "median": 1917.5,
+          "p75": 2270.0,
+          "p95": 2329.7,
+          "max": 2336,
+          "mean": 1991,
+          "sum": 15928
+        },
+        "output_tokens": {
+          "n": 8,
+          "min": 2500,
+          "p25": 2500.0,
+          "median": 2500.0,
+          "p75": 2500.0,
+          "p95": 2500.0,
+          "max": 2500,
+          "mean": 2500,
+          "sum": 20000
+        },
+        "visible_output_characters": {
+          "n": 8,
+          "min": 0,
+          "p25": 0.0,
+          "median": 0.0,
+          "p75": 0.0,
+          "p95": 0.0,
+          "max": 0,
+          "mean": 0,
+          "sum": 0
+        },
+        "user_characters": {
+          "n": 8,
+          "min": 2073,
+          "p25": 2455.5,
+          "median": 2919.5,
+          "p75": 4065.0,
+          "p95": 4760.8,
+          "max": 4877,
+          "mean": 3266.125,
+          "sum": 26129
+        },
+        "seconds": {
+          "n": 8,
+          "min": 31.44855209099478,
+          "p25": 34.541,
+          "median": 37.58250073600357,
+          "p75": 39.397,
+          "p95": 40.503,
+          "max": 40.66827503700188,
+          "mean": 36.763,
+          "sum": 294.106
+        }
+      },
+      "initial_single_decomposition": {
+        "calls": 12,
+        "successes": 5,
+        "failures": 7,
+        "empty_output": 7,
+        "cap_hits": 7,
+        "caps": {
+          "2500": 12
+        },
+        "input_tokens": {
+          "n": 12,
+          "min": 1667,
+          "p25": 1697.25,
+          "median": 1758.5,
+          "p75": 2097.25,
+          "p95": 2326.1,
+          "max": 2336,
+          "mean": 1892.083,
+          "sum": 22705
+        },
+        "output_tokens": {
+          "n": 12,
+          "min": 2133,
+          "p25": 2173.0,
+          "median": 2500.0,
+          "p75": 2500.0,
+          "p95": 2500.0,
+          "max": 2500,
+          "mean": 2382.333,
+          "sum": 28588
+        },
+        "visible_output_characters": {
+          "n": 12,
+          "min": 0,
+          "p25": 0.0,
+          "median": 0.0,
+          "p75": 4372.25,
+          "p95": 5109.2,
+          "max": 5635,
+          "mean": 1941.75,
+          "sum": 23301
+        },
+        "user_characters": {
+          "n": 12,
+          "min": 1814,
+          "p25": 2129.25,
+          "median": 2445.0,
+          "p75": 3493.25,
+          "p95": 4694.4,
+          "max": 4877,
+          "mean": 2854.833,
+          "sum": 34258
+        },
+        "seconds": {
+          "n": 12,
+          "min": 30.58891770700575,
+          "p25": 35.002,
+          "median": 37.58250073600357,
+          "p75": 40.283,
+          "p95": 40.918,
+          "max": 41.2228708640032,
+          "mean": 37.012,
+          "sum": 444.141
+        }
+      }
+    },
+    "failures": [
+      {
+        "file": "reports/proof-pilot-01/p01-single-calls.json",
+        "sequence": 1,
+        "task": "decomposition",
+        "material": "m01",
+        "input_tokens": 1783,
+        "output_tokens": 2500,
+        "cap": 2500,
+        "visible_output_characters": 0,
+        "error_type": "RuntimeError",
+        "seconds": 38.8555405080042,
+        "elapsed_call_seconds_in_logical_arm": 38.8555405080042,
+        "output_tokens_in_logical_arm": 2500
+      },
+      {
+        "file": "reports/proof-pilot-01/p02-single-calls.json",
+        "sequence": 1,
+        "task": "decomposition",
+        "material": "m03",
+        "input_tokens": 1787,
+        "output_tokens": 2500,
+        "cap": 2500,
+        "visible_output_characters": 0,
+        "error_type": "RuntimeError",
+        "seconds": 40.66827503700188,
+        "elapsed_call_seconds_in_logical_arm": 40.66827503700188,
+        "output_tokens_in_logical_arm": 2500
+      },
+      {
+        "file": "reports/proof-pilot-01/p03-single-calls.json",
+        "sequence": 2,
+        "task": "decomposition",
+        "material": "m06",
+        "input_tokens": 2318,
+        "output_tokens": 2500,
+        "cap": 2500,
+        "visible_output_characters": 0,
+        "error_type": "RuntimeError",
+        "seconds": 35.33327393299987,
+        "elapsed_call_seconds_in_logical_arm": 76.55614479700307,
+        "output_tokens_in_logical_arm": 4673
+      },
+      {
+        "file": "reports/proof-pilot-01/p04-independent-calls.json",
+        "sequence": 5,
+        "task": "decomposition",
+        "material": "m08",
+        "input_tokens": 2048,
+        "output_tokens": 2500,
+        "cap": 2500,
+        "visible_output_characters": 0,
+        "error_type": "RuntimeError",
+        "seconds": 32.1638652890033,
+        "elapsed_call_seconds_in_logical_arm": 161.2310489740048,
+        "output_tokens_in_logical_arm": 11032
+      },
+      {
+        "file": "reports/proof-pilot-01/p05-original-calls.json",
+        "sequence": 10,
+        "task": "original_direct_response",
+        "material": null,
+        "input_tokens": null,
+        "output_tokens": null,
+        "cap": 2500,
+        "visible_output_characters": 0,
+        "error_type": "RateLimitError",
+        "seconds": null,
+        "elapsed_call_seconds_in_logical_arm": 102.37842146998446,
+        "output_tokens_in_logical_arm": 6192
+      },
+      {
+        "file": "reports/proof-pilot-01/p05-original-calls.json",
+        "sequence": 11,
+        "task": "original_direct_response",
+        "material": null,
+        "input_tokens": null,
+        "output_tokens": null,
+        "cap": 2500,
+        "visible_output_characters": 0,
+        "error_type": "RateLimitError",
+        "seconds": null,
+        "elapsed_call_seconds_in_logical_arm": 102.37842146998446,
+        "output_tokens_in_logical_arm": 6192
+      },
+      {
+        "file": "reports/proof-pilot-01/p05-single-calls.json",
+        "sequence": 1,
+        "task": "decomposition",
+        "material": "m09",
+        "input_tokens": 1734,
+        "output_tokens": 2500,
+        "cap": 2500,
+        "visible_output_characters": 0,
+        "error_type": "RuntimeError",
+        "seconds": 39.13113615399925,
+        "elapsed_call_seconds_in_logical_arm": 39.13113615399925,
+        "output_tokens_in_logical_arm": 2500
+      },
+      {
+        "file": "reports/proof-pilot-01/p06-single-calls.json",
+        "sequence": 1,
+        "task": "decomposition",
+        "material": "m10",
+        "input_tokens": 1668,
+        "output_tokens": 2500,
+        "cap": 2500,
+        "visible_output_characters": 0,
+        "error_type": "RuntimeError",
+        "seconds": 40.195809390999784,
+        "elapsed_call_seconds_in_logical_arm": 40.195809390999784,
+        "output_tokens_in_logical_arm": 2500
+      },
+      {
+        "file": "reports/proof-pilot-01/p07-single-calls.json",
+        "sequence": 2,
+        "task": "decomposition",
+        "material": "m13",
+        "input_tokens": 2254,
+        "output_tokens": 2500,
+        "cap": 2500,
+        "visible_output_characters": 0,
+        "error_type": "RuntimeError",
+        "seconds": 36.30946096400294,
+        "elapsed_call_seconds_in_logical_arm": 71.0671416220066,
+        "output_tokens_in_logical_arm": 4633
+      },
+      {
+        "file": "reports/proof-pilot-01/p08-single-calls.json",
+        "sequence": 2,
+        "task": "decomposition",
+        "material": "m15",
+        "input_tokens": 2336,
+        "output_tokens": 2500,
+        "cap": 2500,
+        "visible_output_characters": 0,
+        "error_type": "RuntimeError",
+        "seconds": 31.44855209099478,
+        "elapsed_call_seconds_in_logical_arm": 66.53172991799511,
+        "output_tokens_in_logical_arm": 4652
+      }
+    ],
+    "telemetry_missing": {
+      "finish_reason": 156,
+      "reasoning_tokens": 156,
+      "has_refusal": 156,
+      "error_code": 156
+    }
+  },
+  "direct-v03-fresh-03": {
+    "logged_records_including_shared": 110,
+    "shared_records": 0,
+    "actual_attempts": 110,
+    "returned_responses": 110,
+    "job_counts": {
+      "accuracy/completed/none": 5,
+      "original/completed/none": 5
+    },
+    "stats": {
+      "all": {
+        "calls": 110,
+        "successes": 110,
+        "failures": 0,
+        "empty_output": 0,
+        "cap_hits": 0,
+        "caps": {
+          "2500": 110
+        },
+        "input_tokens": {
+          "n": 110,
+          "min": 398,
+          "p25": 751.0,
+          "median": 874.0,
+          "p75": 1333.25,
+          "p95": 1847.85,
+          "max": 2568,
+          "mean": 1030.236,
+          "sum": 113326
+        },
+        "output_tokens": {
+          "n": 110,
+          "min": 26,
+          "p25": 302.5,
+          "median": 524.5,
+          "p75": 733.25,
+          "p95": 1053.7,
+          "max": 1746,
+          "mean": 538.455,
+          "sum": 59230
+        },
+        "visible_output_characters": {
+          "n": 110,
+          "min": 67,
+          "p25": 562.0,
+          "median": 872.5,
+          "p75": 1411.5,
+          "p95": 2918.2,
+          "max": 4490,
+          "mean": 1103.582,
+          "sum": 121394
+        },
+        "user_characters": {
+          "n": 110,
+          "min": 456,
+          "p25": 1167.5,
+          "median": 1366.0,
+          "p75": 1892.25,
+          "p95": 3165.25,
+          "max": 5272,
+          "mean": 1647.709,
+          "sum": 181248
+        },
+        "seconds": {
+          "n": 110,
+          "min": 1.177712472002895,
+          "p25": 6.06,
+          "median": 10.362687310000183,
+          "p75": 12.601,
+          "p95": 19.897,
+          "max": 27.56450830900576,
+          "mean": 10.107,
+          "sum": 1111.757
+        }
+      },
+      "original": {
+        "calls": 84,
+        "successes": 84,
+        "failures": 0,
+        "empty_output": 0,
+        "cap_hits": 0,
+        "caps": {
+          "2500": 84
+        },
+        "input_tokens": {
+          "n": 84,
+          "min": 450,
+          "p25": 750.75,
+          "median": 782.5,
+          "p75": 950.0,
+          "p95": 1477.0,
+          "max": 1661,
+          "mean": 889.857,
+          "sum": 74748
+        },
+        "output_tokens": {
+          "n": 84,
+          "min": 32,
+          "p25": 318.25,
+          "median": 513.5,
+          "p75": 669.25,
+          "p95": 803.4,
+          "max": 891,
+          "mean": 489.202,
+          "sum": 41093
+        },
+        "visible_output_characters": {
+          "n": 84,
+          "min": 67,
+          "p25": 530.5,
+          "median": 822.5,
+          "p75": 1283.25,
+          "p95": 1598.45,
+          "max": 1846,
+          "mean": 880.131,
+          "sum": 73931
+        },
+        "user_characters": {
+          "n": 84,
+          "min": 456,
+          "p25": 1172.75,
+          "median": 1335.0,
+          "p75": 1763.0,
+          "p95": 2736.2,
+          "max": 3334,
+          "mean": 1493.333,
+          "sum": 125440
+        },
+        "seconds": {
+          "n": 84,
+          "min": 1.4684125990024768,
+          "p25": 7.055,
+          "median": 10.239511118001246,
+          "p75": 11.873,
+          "p95": 14.239,
+          "max": 15.12638111999695,
+          "mean": 9.298,
+          "sum": 781.004
+        }
+      },
+      "accuracy": {
+        "calls": 26,
+        "successes": 26,
+        "failures": 0,
+        "empty_output": 0,
+        "cap_hits": 0,
+        "caps": {
+          "2500": 26
+        },
+        "input_tokens": {
+          "n": 26,
+          "min": 398,
+          "p25": 1350.25,
+          "median": 1422.5,
+          "p75": 1744.75,
+          "p95": 2425.75,
+          "max": 2568,
+          "mean": 1483.769,
+          "sum": 38578
+        },
+        "output_tokens": {
+          "n": 26,
+          "min": 26,
+          "p25": 206.25,
+          "median": 770.5,
+          "p75": 1000.25,
+          "p95": 1455.5,
+          "max": 1746,
+          "mean": 697.577,
+          "sum": 18137
+        },
+        "visible_output_characters": {
+          "n": 26,
+          "min": 77,
+          "p25": 690.0,
+          "median": 1997.0,
+          "p75": 2777.75,
+          "p95": 3916.0,
+          "max": 4490,
+          "mean": 1825.5,
+          "sum": 47463
+        },
+        "user_characters": {
+          "n": 26,
+          "min": 690,
+          "p25": 1059.0,
+          "median": 1913.5,
+          "p75": 2245.75,
+          "p95": 4766.5,
+          "max": 5272,
+          "mean": 2146.462,
+          "sum": 55808
+        },
+        "seconds": {
+          "n": 26,
+          "min": 1.177712472002895,
+          "p25": 4.184,
+          "median": 14.879687173499406,
+          "p75": 18.954,
+          "p95": 22.968,
+          "max": 27.56450830900576,
+          "mean": 12.721,
+          "sum": 330.753
+        }
+      },
+      "original_native": {
+        "calls": 79,
+        "successes": 79,
+        "failures": 0,
+        "empty_output": 0,
+        "cap_hits": 0,
+        "caps": {
+          "2500": 79
+        },
+        "input_tokens": {
+          "n": 79,
+          "min": 724,
+          "p25": 752.0,
+          "median": 787,
+          "p75": 967.5,
+          "p95": 1485.5,
+          "max": 1661,
+          "mean": 917.228,
+          "sum": 72461
+        },
+        "output_tokens": {
+          "n": 79,
+          "min": 198,
+          "p25": 336.0,
+          "median": 529,
+          "p75": 682.5,
+          "p95": 804.3,
+          "max": 891,
+          "mean": 517.392,
+          "sum": 40874
+        },
+        "visible_output_characters": {
+          "n": 79,
+          "min": 227,
+          "p25": 606.5,
+          "median": 867,
+          "p75": 1314.0,
+          "p95": 1615.6,
+          "max": 1846,
+          "mean": 930.278,
+          "sum": 73492
+        },
+        "user_characters": {
+          "n": 79,
+          "min": 1048,
+          "p25": 1175.0,
+          "median": 1354,
+          "p75": 1768.5,
+          "p95": 2753.1,
+          "max": 3334,
+          "mean": 1557.848,
+          "sum": 123070
+        },
+        "seconds": {
+          "n": 79,
+          "min": 3.758063240995398,
+          "p25": 7.881,
+          "median": 10.354049276000296,
+          "p75": 12.194,
+          "p95": 14.311,
+          "max": 15.12638111999695,
+          "mean": 9.777,
+          "sum": 772.389
+        }
+      },
+      "original_extraction": {
+        "calls": 5,
+        "successes": 5,
+        "failures": 0,
+        "empty_output": 0,
+        "cap_hits": 0,
+        "caps": {
+          "2500": 5
+        },
+        "input_tokens": {
+          "n": 5,
+          "min": 450,
+          "p25": 450.0,
+          "median": 460,
+          "p75": 462.0,
+          "p95": 464.4,
+          "max": 465,
+          "mean": 457.4,
+          "sum": 2287
+        },
+        "output_tokens": {
+          "n": 5,
+          "min": 32,
+          "p25": 36.0,
+          "median": 42,
+          "p75": 52.0,
+          "p95": 56.0,
+          "max": 57,
+          "mean": 43.8,
+          "sum": 219
+        },
+        "visible_output_characters": {
+          "n": 5,
+          "min": 67,
+          "p25": 81.0,
+          "median": 83,
+          "p75": 102.0,
+          "p95": 105.2,
+          "max": 106,
+          "mean": 87.8,
+          "sum": 439
+        },
+        "user_characters": {
+          "n": 5,
+          "min": 456,
+          "p25": 477.0,
+          "median": 477,
+          "p75": 478.0,
+          "p95": 481.2,
+          "max": 482,
+          "mean": 474,
+          "sum": 2370
+        },
+        "seconds": {
+          "n": 5,
+          "min": 1.4684125990024768,
+          "p25": 1.578,
+          "median": 1.8188837159977993,
+          "p75": 1.829,
+          "p95": 1.902,
+          "max": 1.9205928270021104,
+          "mean": 1.723,
+          "sum": 8.614
+        }
+      },
+      "task/decomposition": {
+        "calls": 16,
+        "successes": 16,
+        "failures": 0,
+        "empty_output": 0,
+        "cap_hits": 0,
+        "caps": {
+          "2500": 16
+        },
+        "input_tokens": {
+          "n": 16,
+          "min": 1406,
+          "p25": 1422.75,
+          "median": 1742.5,
+          "p75": 2367.5,
+          "p95": 2466.75,
+          "max": 2568,
+          "mean": 1859.938,
+          "sum": 29759
+        },
+        "output_tokens": {
+          "n": 16,
+          "min": 520,
+          "p25": 852.0,
+          "median": 984.0,
+          "p75": 1245.25,
+          "p95": 1533.75,
+          "max": 1746,
+          "mean": 1043.438,
+          "sum": 16695
+        },
+        "visible_output_characters": {
+          "n": 16,
+          "min": 1295,
+          "p25": 2165.25,
+          "median": 2458.0,
+          "p75": 3271.25,
+          "p95": 4072.25,
+          "max": 4490,
+          "mean": 2722.312,
+          "sum": 43557
+        },
+        "user_characters": {
+          "n": 16,
+          "min": 1003,
+          "p25": 1066.75,
+          "median": 2226.0,
+          "p75": 4576.75,
+          "p95": 4909.0,
+          "max": 5272,
+          "mean": 2671.188,
+          "sum": 42739
+        },
+        "seconds": {
+          "n": 16,
+          "min": 11.85338505999971,
+          "p25": 15.895,
+          "median": 18.07742115449946,
+          "p75": 20.785,
+          "p95": 24.351,
+          "max": 27.56450830900576,
+          "mean": 18.513,
+          "sum": 296.208
+        }
+      },
+      "task/extraction": {
+        "calls": 10,
+        "successes": 10,
+        "failures": 0,
+        "empty_output": 0,
+        "cap_hits": 0,
+        "caps": {
+          "2500": 10
+        },
+        "input_tokens": {
+          "n": 10,
+          "min": 398,
+          "p25": 400.5,
+          "median": 426.5,
+          "p75": 457.5,
+          "p95": 463.65,
+          "max": 465,
+          "mean": 428.9,
+          "sum": 4289
+        },
+        "output_tokens": {
+          "n": 10,
+          "min": 26,
+          "p25": 26.5,
+          "median": 31.0,
+          "p75": 40.5,
+          "p95": 54.75,
+          "max": 57,
+          "mean": 35.5,
+          "sum": 355
+        },
+        "visible_output_characters": {
+          "n": 10,
+          "min": 67,
+          "p25": 77.5,
+          "median": 82.0,
+          "p75": 91.0,
+          "p95": 104.2,
+          "max": 106,
+          "mean": 85,
+          "sum": 850
+        },
+        "user_characters": {
+          "n": 10,
+          "min": 456,
+          "p25": 477.25,
+          "median": 586.0,
+          "p75": 704.75,
+          "p95": 710.1,
+          "max": 711,
+          "mean": 588.9,
+          "sum": 5889
+        },
+        "seconds": {
+          "n": 10,
+          "min": 1.177712472002895,
+          "p25": 1.413,
+          "median": 1.56794964099754,
+          "p75": 1.826,
+          "p95": 2.262,
+          "max": 2.5417373329983093,
+          "mean": 1.665,
+          "sum": 16.649
+        }
+      },
+      "task/original_causes": {
+        "calls": 3,
+        "successes": 3,
+        "failures": 0,
+        "empty_output": 0,
+        "cap_hits": 0,
+        "caps": {
+          "2500": 3
+        },
+        "input_tokens": {
+          "n": 3,
+          "min": 874,
+          "p25": 899.5,
+          "median": 925,
+          "p75": 981.0,
+          "p95": 1025.8,
+          "max": 1037,
+          "mean": 945.333,
+          "sum": 2836
+        },
+        "output_tokens": {
+          "n": 3,
+          "min": 232,
+          "p25": 240.5,
+          "median": 249,
+          "p75": 395.0,
+          "p95": 511.8,
+          "max": 541,
+          "mean": 340.667,
+          "sum": 1022
+        },
+        "visible_output_characters": {
+          "n": 3,
+          "min": 560,
+          "p25": 564.0,
+          "median": 568,
+          "p75": 764.0,
+          "p95": 920.8,
+          "max": 960,
+          "mean": 696,
+          "sum": 2088
+        },
+        "user_characters": {
+          "n": 3,
+          "min": 1130,
+          "p25": 1221.0,
+          "median": 1312,
+          "p75": 1512.0,
+          "p95": 1672.0,
+          "max": 1712,
+          "mean": 1384.667,
+          "sum": 4154
+        },
+        "seconds": {
+          "n": 3,
+          "min": 4.196409821997804,
+          "p25": 4.248,
+          "median": 4.299505132003105,
+          "p75": 6.494,
+          "p95": 8.249,
+          "max": 8.688030936995347,
+          "mean": 5.728,
+          "sum": 17.184
+        }
+      },
+      "task/original_causes,world_verification": {
+        "calls": 2,
+        "successes": 2,
+        "failures": 0,
+        "empty_output": 0,
+        "cap_hits": 0,
+        "caps": {
+          "2500": 2
+        },
+        "input_tokens": {
+          "n": 2,
+          "min": 916,
+          "p25": 916.5,
+          "median": 917.0,
+          "p75": 917.5,
+          "p95": 917.9,
+          "max": 918,
+          "mean": 917,
+          "sum": 1834
+        },
+        "output_tokens": {
+          "n": 2,
+          "min": 428,
+          "p25": 436.75,
+          "median": 445.5,
+          "p75": 454.25,
+          "p95": 461.25,
+          "max": 463,
+          "mean": 445.5,
+          "sum": 891
+        },
+        "visible_output_characters": {
+          "n": 2,
+          "min": 674,
+          "p25": 698.5,
+          "median": 723.0,
+          "p75": 747.5,
+          "p95": 767.1,
+          "max": 772,
+          "mean": 723,
+          "sum": 1446
+        },
+        "user_characters": {
+          "n": 2,
+          "min": 1292,
+          "p25": 1303.5,
+          "median": 1315.0,
+          "p75": 1326.5,
+          "p95": 1335.7,
+          "max": 1338,
+          "mean": 1315,
+          "sum": 2630
+        },
+        "seconds": {
+          "n": 2,
+          "min": 7.654853407999326,
+          "p25": 7.793,
+          "median": 7.930932485996891,
+          "p75": 8.069,
+          "p95": 8.179,
+          "max": 8.207011563994456,
+          "mean": 7.931,
+          "sum": 15.862
+        }
+      },
+      "task/original_checks": {
+        "calls": 5,
+        "successes": 5,
+        "failures": 0,
+        "empty_output": 0,
+        "cap_hits": 0,
+        "caps": {
+          "2500": 5
+        },
+        "input_tokens": {
+          "n": 5,
+          "min": 946,
+          "p25": 973.0,
+          "median": 985,
+          "p75": 1001.0,
+          "p95": 1104.2,
+          "max": 1130,
+          "mean": 1007,
+          "sum": 5035
+        },
+        "output_tokens": {
+          "n": 5,
+          "min": 219,
+          "p25": 223.0,
+          "median": 231,
+          "p75": 252.0,
+          "p95": 311.2,
+          "max": 326,
+          "mean": 250.2,
+          "sum": 1251
+        },
+        "visible_output_characters": {
+          "n": 5,
+          "min": 490,
+          "p25": 493.0,
+          "median": 543,
+          "p75": 616.0,
+          "p95": 772.8,
+          "max": 812,
+          "mean": 590.8,
+          "sum": 2954
+        },
+        "user_characters": {
+          "n": 5,
+          "min": 1662,
+          "p25": 1664.0,
+          "median": 1762,
+          "p75": 1798.0,
+          "p95": 2196.4,
+          "max": 2296,
+          "mean": 1836.4,
+          "sum": 9182
+        },
+        "seconds": {
+          "n": 5,
+          "min": 3.758063240995398,
+          "p25": 4.129,
+          "median": 4.518164526998589,
+          "p75": 4.682,
+          "p95": 5.075,
+          "max": 5.173448746994836,
+          "mean": 4.452,
+          "sum": 22.261
+        }
+      },
+      "task/original_consistent_facts,disputed_facts,credibility_note": {
+        "calls": 5,
+        "successes": 5,
+        "failures": 0,
+        "empty_output": 0,
+        "cap_hits": 0,
+        "caps": {
+          "2500": 5
+        },
+        "input_tokens": {
+          "n": 5,
+          "min": 730,
+          "p25": 786.0,
+          "median": 787,
+          "p75": 805.0,
+          "p95": 930.6,
+          "max": 962,
+          "mean": 814,
+          "sum": 4070
+        },
+        "output_tokens": {
+          "n": 5,
+          "min": 198,
+          "p25": 204.0,
+          "median": 221,
+          "p75": 250.0,
+          "p95": 315.6,
+          "max": 332,
+          "mean": 241,
+          "sum": 1205
+        },
+        "visible_output_characters": {
+          "n": 5,
+          "min": 398,
+          "p25": 414.0,
+          "median": 445,
+          "p75": 597.0,
+          "p95": 731.4,
+          "max": 765,
+          "mean": 523.8,
+          "sum": 2619
+        },
+        "user_characters": {
+          "n": 5,
+          "min": 1174,
+          "p25": 1332.0,
+          "median": 1338,
+          "p75": 1384.0,
+          "p95": 1774.4,
+          "max": 1872,
+          "mean": 1420,
+          "sum": 7100
+        },
+        "seconds": {
+          "n": 5,
+          "min": 4.646133715999895,
+          "p25": 4.818,
+          "median": 4.961725712004409,
+          "p75": 5.213,
+          "p95": 6.039,
+          "max": 6.245897788998263,
+          "mean": 5.177,
+          "sum": 25.885
+        }
+      },
+      "task/original_core_event,date,entities,key_claims,causal_hints": {
+        "calls": 5,
+        "successes": 5,
+        "failures": 0,
+        "empty_output": 0,
+        "cap_hits": 0,
+        "caps": {
+          "2500": 5
+        },
+        "input_tokens": {
+          "n": 5,
+          "min": 753,
+          "p25": 774.0,
+          "median": 777,
+          "p75": 779.0,
+          "p95": 878.2,
+          "max": 903,
+          "mean": 797.2,
+          "sum": 3986
+        },
+        "output_tokens": {
+          "n": 5,
+          "min": 229,
+          "p25": 284.0,
+          "median": 302,
+          "p75": 304.0,
+          "p95": 323.2,
+          "max": 328,
+          "mean": 289.4,
+          "sum": 1447
+        },
+        "visible_output_characters": {
+          "n": 5,
+          "min": 341,
+          "p25": 391.0,
+          "median": 412,
+          "p75": 414.0,
+          "p95": 424.4,
+          "max": 427,
+          "mean": 397,
+          "sum": 1985
+        },
+        "user_characters": {
+          "n": 5,
+          "min": 1711,
+          "p25": 1829.0,
+          "median": 1840,
+          "p75": 1841.0,
+          "p95": 2142.6,
+          "max": 2218,
+          "mean": 1887.8,
+          "sum": 9439
+        },
+        "seconds": {
+          "n": 5,
+          "min": 11.084934539998358,
+          "p25": 12.325,
+          "median": 12.352410495994263,
+          "p75": 12.607,
+          "p95": 14.623,
+          "max": 15.12638111999695,
+          "mean": 12.699,
+          "sum": 63.496
+        }
+      },
+      "task/original_direct_response": {
+        "calls": 5,
+        "successes": 5,
+        "failures": 0,
+        "empty_output": 0,
+        "cap_hits": 0,
+        "caps": {
+          "2500": 5
+        },
+        "input_tokens": {
+          "n": 5,
+          "min": 1443,
+          "p25": 1508.0,
+          "median": 1547,
+          "p75": 1570.0,
+          "p95": 1642.8,
+          "max": 1661,
+          "mean": 1545.8,
+          "sum": 7729
+        },
+        "output_tokens": {
+          "n": 5,
+          "min": 236,
+          "p25": 283.0,
+          "median": 323,
+          "p75": 340.0,
+          "p95": 439.2,
+          "max": 464,
+          "mean": 329.2,
+          "sum": 1646
+        },
+        "visible_output_characters": {
+          "n": 5,
+          "min": 227,
+          "p25": 235.0,
+          "median": 238,
+          "p75": 241.0,
+          "p95": 241.8,
+          "max": 242,
+          "mean": 236.6,
+          "sum": 1183
+        },
+        "user_characters": {
+          "n": 5,
+          "min": 2641,
+          "p25": 2754.0,
+          "median": 2831,
+          "p75": 2959.0,
+          "p95": 3259.0,
+          "max": 3334,
+          "mean": 2903.8,
+          "sum": 14519
+        },
+        "seconds": {
+          "n": 5,
+          "min": 4.502078544006508,
+          "p25": 5.426,
+          "median": 5.997780526005954,
+          "p75": 7.082,
+          "p95": 8.311,
+          "max": 8.618127614994592,
+          "mean": 6.325,
+          "sum": 31.626
+        }
+      },
+      "task/original_events": {
+        "calls": 2,
+        "successes": 2,
+        "failures": 0,
+        "empty_output": 0,
+        "cap_hits": 0,
+        "caps": {
+          "2500": 2
+        },
+        "input_tokens": {
+          "n": 2,
+          "min": 1134,
+          "p25": 1143.75,
+          "median": 1153.5,
+          "p75": 1163.25,
+          "p95": 1171.05,
+          "max": 1173,
+          "mean": 1153.5,
+          "sum": 2307
+        },
+        "output_tokens": {
+          "n": 2,
+          "min": 367,
+          "p25": 377.0,
+          "median": 387.0,
+          "p75": 397.0,
+          "p95": 405.0,
+          "max": 407,
+          "mean": 387,
+          "sum": 774
+        },
+        "visible_output_characters": {
+          "n": 2,
+          "min": 617,
+          "p25": 622.0,
+          "median": 627.0,
+          "p75": 632.0,
+          "p95": 636.0,
+          "max": 637,
+          "mean": 627,
+          "sum": 1254
+        },
+        "user_characters": {
+          "n": 2,
+          "min": 1685,
+          "p25": 1686.0,
+          "median": 1687.0,
+          "p75": 1688.0,
+          "p95": 1688.8,
+          "max": 1689,
+          "mean": 1687,
+          "sum": 3374
+        },
+        "seconds": {
+          "n": 2,
+          "min": 6.974396524994518,
+          "p25": 7.064,
+          "median": 7.152636036997137,
+          "p75": 7.242,
+          "p95": 7.313,
+          "max": 7.330875548999757,
+          "mean": 7.153,
+          "sum": 14.305
+        }
+      },
+      "task/original_events,evidence_assessment,world_verification": {
+        "calls": 1,
+        "successes": 1,
+        "failures": 0,
+        "empty_output": 0,
+        "cap_hits": 0,
+        "caps": {
+          "2500": 1
+        },
+        "input_tokens": {
+          "n": 1,
+          "min": 1216,
+          "p25": 1216,
+          "median": 1216,
+          "p75": 1216,
+          "p95": 1216,
+          "max": 1216,
+          "mean": 1216,
+          "sum": 1216
+        },
+        "output_tokens": {
+          "n": 1,
+          "min": 612,
+          "p25": 612,
+          "median": 612,
+          "p75": 612,
+          "p95": 612,
+          "max": 612,
+          "mean": 612,
+          "sum": 612
+        },
+        "visible_output_characters": {
+          "n": 1,
+          "min": 931,
+          "p25": 931,
+          "median": 931,
+          "p75": 931,
+          "p95": 931,
+          "max": 931,
+          "mean": 931,
+          "sum": 931
+        },
+        "user_characters": {
+          "n": 1,
+          "min": 1918,
+          "p25": 1918,
+          "median": 1918,
+          "p75": 1918,
+          "p95": 1918,
+          "max": 1918,
+          "mean": 1918,
+          "sum": 1918
+        },
+        "seconds": {
+          "n": 1,
+          "min": 10.678157775000727,
+          "p25": 10.678157775000727,
+          "median": 10.678157775000727,
+          "p75": 10.678157775000727,
+          "p95": 10.678157775000727,
+          "max": 10.678157775000727,
+          "mean": 10.678,
+          "sum": 10.678
+        }
+      },
+      "task/original_events,world_verification": {
+        "calls": 2,
+        "successes": 2,
+        "failures": 0,
+        "empty_output": 0,
+        "cap_hits": 0,
+        "caps": {
+          "2500": 2
+        },
+        "input_tokens": {
+          "n": 2,
+          "min": 1181,
+          "p25": 1216.25,
+          "median": 1251.5,
+          "p75": 1286.75,
+          "p95": 1314.95,
+          "max": 1322,
+          "mean": 1251.5,
+          "sum": 2503
+        },
+        "output_tokens": {
+          "n": 2,
+          "min": 465,
+          "p25": 550.5,
+          "median": 636.0,
+          "p75": 721.5,
+          "p95": 789.9,
+          "max": 807,
+          "mean": 636,
+          "sum": 1272
+        },
+        "visible_output_characters": {
+          "n": 2,
+          "min": 704,
+          "p25": 909.75,
+          "median": 1115.5,
+          "p75": 1321.25,
+          "p95": 1485.85,
+          "max": 1527,
+          "mean": 1115.5,
+          "sum": 2231
+        },
+        "user_characters": {
+          "n": 2,
+          "min": 1771,
+          "p25": 1906.25,
+          "median": 2041.5,
+          "p75": 2176.75,
+          "p95": 2284.95,
+          "max": 2312,
+          "mean": 2041.5,
+          "sum": 4083
+        },
+        "seconds": {
+          "n": 2,
+          "min": 8.349372044998745,
+          "p25": 9.617,
+          "median": 10.885614480499498,
+          "p75": 12.154,
+          "p95": 13.168,
+          "max": 13.421856916000252,
+          "mean": 10.886,
+          "sum": 21.771
+        }
+      },
+      "task/original_key_findings,information_gaps,causal_summary,bias_notes": {
+        "calls": 5,
+        "successes": 5,
+        "failures": 0,
+        "empty_output": 0,
+        "cap_hits": 0,
+        "caps": {
+          "2500": 5
+        },
+        "input_tokens": {
+          "n": 5,
+          "min": 1235,
+          "p25": 1299.0,
+          "median": 1337,
+          "p75": 1349.0,
+          "p95": 1456.2,
+          "max": 1483,
+          "mean": 1340.6,
+          "sum": 6703
+        },
+        "output_tokens": {
+          "n": 5,
+          "min": 487,
+          "p25": 507.0,
+          "median": 529,
+          "p75": 529.0,
+          "p95": 531.4,
+          "max": 532,
+          "mean": 516.8,
+          "sum": 2584
+        },
+        "visible_output_characters": {
+          "n": 5,
+          "min": 781,
+          "p25": 798.0,
+          "median": 815,
+          "p75": 858.0,
+          "p95": 865.2,
+          "max": 867,
+          "mean": 823.8,
+          "sum": 4119
+        },
+        "user_characters": {
+          "n": 5,
+          "min": 1987,
+          "p25": 2094.0,
+          "median": 2157,
+          "p75": 2295.0,
+          "p95": 2661.4,
+          "max": 2753,
+          "mean": 2257.2,
+          "sum": 11286
+        },
+        "seconds": {
+          "n": 5,
+          "min": 9.830488872001297,
+          "p25": 10.178,
+          "median": 10.301007572001254,
+          "p75": 10.354,
+          "p95": 10.77,
+          "max": 10.87342701000307,
+          "mean": 10.307,
+          "sum": 51.537
+        }
+      },
+      "task/original_queries": {
+        "calls": 5,
+        "successes": 5,
+        "failures": 0,
+        "empty_output": 0,
+        "cap_hits": 0,
+        "caps": {
+          "2500": 5
+        },
+        "input_tokens": {
+          "n": 5,
+          "min": 741,
+          "p25": 786.0,
+          "median": 789,
+          "p75": 803.0,
+          "p95": 883.8,
+          "max": 904,
+          "mean": 804.6,
+          "sum": 4023
+        },
+        "output_tokens": {
+          "n": 5,
+          "min": 434,
+          "p25": 466.0,
+          "median": 540,
+          "p75": 554.0,
+          "p95": 582.0,
+          "max": 589,
+          "mean": 516.6,
+          "sum": 2583
+        },
+        "visible_output_characters": {
+          "n": 5,
+          "min": 878,
+          "p25": 896.0,
+          "median": 934,
+          "p75": 943.0,
+          "p95": 987.8,
+          "max": 999,
+          "mean": 930,
+          "sum": 4650
+        },
+        "user_characters": {
+          "n": 5,
+          "min": 1182,
+          "p25": 1354.0,
+          "median": 1378,
+          "p75": 1392.0,
+          "p95": 1691.2,
+          "max": 1766,
+          "mean": 1414.4,
+          "sum": 7072
+        },
+        "seconds": {
+          "n": 5,
+          "min": 8.106428949002293,
+          "p25": 8.897,
+          "median": 9.914702992995444,
+          "p75": 10.682,
+          "p95": 11.566,
+          "max": 11.786792327999137,
+          "mean": 9.877,
+          "sum": 49.387
+        }
+      },
+      "task/original_sources,assessment,limitations": {
+        "calls": 13,
+        "successes": 13,
+        "failures": 0,
+        "empty_output": 0,
+        "cap_hits": 0,
+        "caps": {
+          "2500": 13
+        },
+        "input_tokens": {
+          "n": 13,
+          "min": 724,
+          "p25": 747.0,
+          "median": 753,
+          "p75": 757.0,
+          "p95": 879.2,
+          "max": 884,
+          "mean": 767.538,
+          "sum": 9978
+        },
+        "output_tokens": {
+          "n": 13,
+          "min": 571,
+          "p25": 660.0,
+          "median": 702,
+          "p75": 746.0,
+          "p95": 849.0,
+          "max": 891,
+          "mean": 710.692,
+          "sum": 9239
+        },
+        "visible_output_characters": {
+          "n": 13,
+          "min": 1043,
+          "p25": 1296.0,
+          "median": 1344,
+          "p75": 1508.0,
+          "p95": 1823.2,
+          "max": 1846,
+          "mean": 1396.615,
+          "sum": 18156
+        },
+        "user_characters": {
+          "n": 13,
+          "min": 1048,
+          "p25": 1080.0,
+          "median": 1173,
+          "p75": 1188.0,
+          "p95": 1574.8,
+          "max": 1576,
+          "mean": 1205.462,
+          "sum": 15671
+        },
+        "seconds": {
+          "n": 13,
+          "min": 10.323485970999172,
+          "p25": 11.42,
+          "median": 11.755492588003108,
+          "p75": 13.752,
+          "p95": 14.407,
+          "max": 14.555605301000469,
+          "mean": 12.322,
+          "sum": 160.182
+        }
+      },
+      "task/original_sources,assessment,source_dependency,limitations": {
+        "calls": 1,
+        "successes": 1,
+        "failures": 0,
+        "empty_output": 0,
+        "cap_hits": 0,
+        "caps": {
+          "2500": 1
+        },
+        "input_tokens": {
+          "n": 1,
+          "min": 752,
+          "p25": 752,
+          "median": 752,
+          "p75": 752,
+          "p95": 752,
+          "max": 752,
+          "mean": 752,
+          "sum": 752
+        },
+        "output_tokens": {
+          "n": 1,
+          "min": 737,
+          "p25": 737,
+          "median": 737,
+          "p75": 737,
+          "p95": 737,
+          "max": 737,
+          "mean": 737,
+          "sum": 737
+        },
+        "visible_output_characters": {
+          "n": 1,
+          "min": 1550,
+          "p25": 1550,
+          "median": 1550,
+          "p75": 1550,
+          "p95": 1550,
+          "max": 1550,
+          "mean": 1550,
+          "sum": 1550
+        },
+        "user_characters": {
+          "n": 1,
+          "min": 1212,
+          "p25": 1212,
+          "median": 1212,
+          "p75": 1212,
+          "p95": 1212,
+          "max": 1212,
+          "mean": 1212,
+          "sum": 1212
+        },
+        "seconds": {
+          "n": 1,
+          "min": 11.371269727998879,
+          "p25": 11.371269727998879,
+          "median": 11.371269727998879,
+          "p75": 11.371269727998879,
+          "p95": 11.371269727998879,
+          "max": 11.371269727998879,
+          "mean": 11.371,
+          "sum": 11.371
+        }
+      },
+      "task/original_sources,assessment,source_relationship,limitations": {
+        "calls": 1,
+        "successes": 1,
+        "failures": 0,
+        "empty_output": 0,
+        "cap_hits": 0,
+        "caps": {
+          "2500": 1
+        },
+        "input_tokens": {
+          "n": 1,
+          "min": 735,
+          "p25": 735,
+          "median": 735,
+          "p75": 735,
+          "p95": 735,
+          "max": 735,
+          "mean": 735,
+          "sum": 735
+        },
+        "output_tokens": {
+          "n": 1,
+          "min": 689,
+          "p25": 689,
+          "median": 689,
+          "p75": 689,
+          "p95": 689,
+          "max": 689,
+          "mean": 689,
+          "sum": 689
+        },
+        "visible_output_characters": {
+          "n": 1,
+          "min": 1425,
+          "p25": 1425,
+          "median": 1425,
+          "p75": 1425,
+          "p95": 1425,
+          "max": 1425,
+          "mean": 1425,
+          "sum": 1425
+        },
+        "user_characters": {
+          "n": 1,
+          "min": 1072,
+          "p25": 1072,
+          "median": 1072,
+          "p75": 1072,
+          "p95": 1072,
+          "max": 1072,
+          "mean": 1072,
+          "sum": 1072
+        },
+        "seconds": {
+          "n": 1,
+          "min": 11.055888061004225,
+          "p25": 11.055888061004225,
+          "median": 11.055888061004225,
+          "p75": 11.055888061004225,
+          "p95": 11.055888061004225,
+          "max": 11.055888061004225,
+          "mean": 11.056,
+          "sum": 11.056
+        }
+      },
+      "task/original_sources,assessment,timeline,limitations": {
+        "calls": 1,
+        "successes": 1,
+        "failures": 0,
+        "empty_output": 0,
+        "cap_hits": 0,
+        "caps": {
+          "2500": 1
+        },
+        "input_tokens": {
+          "n": 1,
+          "min": 760,
+          "p25": 760,
+          "median": 760,
+          "p75": 760,
+          "p95": 760,
+          "max": 760,
+          "mean": 760,
+          "sum": 760
+        },
+        "output_tokens": {
+          "n": 1,
+          "min": 857,
+          "p25": 857,
+          "median": 857,
+          "p75": 857,
+          "p95": 857,
+          "max": 857,
+          "mean": 857,
+          "sum": 857
+        },
+        "visible_output_characters": {
+          "n": 1,
+          "min": 1784,
+          "p25": 1784,
+          "median": 1784,
+          "p75": 1784,
+          "p95": 1784,
+          "max": 1784,
+          "mean": 1784,
+          "sum": 1784
+        },
+        "user_characters": {
+          "n": 1,
+          "min": 1202,
+          "p25": 1202,
+          "median": 1202,
+          "p75": 1202,
+          "p95": 1202,
+          "max": 1202,
+          "mean": 1202,
+          "sum": 1202
+        },
+        "seconds": {
+          "n": 1,
+          "min": 14.34345603800466,
+          "p25": 14.34345603800466,
+          "median": 14.34345603800466,
+          "p75": 14.34345603800466,
+          "p95": 14.34345603800466,
+          "max": 14.34345603800466,
+          "mean": 14.343,
+          "sum": 14.343
+        }
+      },
+      "task/original_sources,assessment,world_verification,limitations": {
+        "calls": 3,
+        "successes": 3,
+        "failures": 0,
+        "empty_output": 0,
+        "cap_hits": 0,
+        "caps": {
+          "2500": 3
+        },
+        "input_tokens": {
+          "n": 3,
+          "min": 750,
+          "p25": 750.0,
+          "median": 750,
+          "p75": 812.5,
+          "p95": 862.5,
+          "max": 875,
+          "mean": 791.667,
+          "sum": 2375
+        },
+        "output_tokens": {
+          "n": 3,
+          "min": 547,
+          "p25": 568.0,
+          "median": 589,
+          "p75": 606.0,
+          "p95": 619.6,
+          "max": 623,
+          "mean": 586.333,
+          "sum": 1759
+        },
+        "visible_output_characters": {
+          "n": 3,
+          "min": 882,
+          "p25": 948.5,
+          "median": 1015,
+          "p75": 1053.0,
+          "p95": 1083.4,
+          "max": 1091,
+          "mean": 996,
+          "sum": 2988
+        },
+        "user_characters": {
+          "n": 3,
+          "min": 1177,
+          "p25": 1190.0,
+          "median": 1203,
+          "p75": 1387.0,
+          "p95": 1534.2,
+          "max": 1571,
+          "mean": 1317,
+          "sum": 3951
+        },
+        "seconds": {
+          "n": 3,
+          "min": 10.37132534400007,
+          "p25": 10.635,
+          "median": 10.89933540399943,
+          "p75": 10.946,
+          "p95": 10.984,
+          "max": 10.99313715599419,
+          "mean": 10.755,
+          "sum": 32.264
+        }
+      },
+      "task/original_sources,citation_chain,assessment,limitations": {
+        "calls": 1,
+        "successes": 1,
+        "failures": 0,
+        "empty_output": 0,
+        "cap_hits": 0,
+        "caps": {
+          "2500": 1
+        },
+        "input_tokens": {
+          "n": 1,
+          "min": 754,
+          "p25": 754,
+          "median": 754,
+          "p75": 754,
+          "p95": 754,
+          "max": 754,
+          "mean": 754,
+          "sum": 754
+        },
+        "output_tokens": {
+          "n": 1,
+          "min": 744,
+          "p25": 744,
+          "median": 744,
+          "p75": 744,
+          "p95": 744,
+          "max": 744,
+          "mean": 744,
+          "sum": 744
+        },
+        "visible_output_characters": {
+          "n": 1,
+          "min": 1512,
+          "p25": 1512,
+          "median": 1512,
+          "p75": 1512,
+          "p95": 1512,
+          "max": 1512,
+          "mean": 1512,
+          "sum": 1512
+        },
+        "user_characters": {
+          "n": 1,
+          "min": 1193,
+          "p25": 1193,
+          "median": 1193,
+          "p75": 1193,
+          "p95": 1193,
+          "max": 1193,
+          "mean": 1193,
+          "sum": 1193
+        },
+        "seconds": {
+          "n": 1,
+          "min": 11.607977564002795,
+          "p25": 11.607977564002795,
+          "median": 11.607977564002795,
+          "p75": 11.607977564002795,
+          "p95": 11.607977564002795,
+          "max": 11.607977564002795,
+          "mean": 11.608,
+          "sum": 11.608
+        }
+      },
+      "task/original_sources,evidence_assessment,limitations": {
+        "calls": 1,
+        "successes": 1,
+        "failures": 0,
+        "empty_output": 0,
+        "cap_hits": 0,
+        "caps": {
+          "2500": 1
+        },
+        "input_tokens": {
+          "n": 1,
+          "min": 731,
+          "p25": 731,
+          "median": 731,
+          "p75": 731,
+          "p95": 731,
+          "max": 731,
+          "mean": 731,
+          "sum": 731
+        },
+        "output_tokens": {
+          "n": 1,
+          "min": 710,
+          "p25": 710,
+          "median": 710,
+          "p75": 710,
+          "p95": 710,
+          "max": 710,
+          "mean": 710,
+          "sum": 710
+        },
+        "visible_output_characters": {
+          "n": 1,
+          "min": 1250,
+          "p25": 1250,
+          "median": 1250,
+          "p75": 1250,
+          "p95": 1250,
+          "max": 1250,
+          "mean": 1250,
+          "sum": 1250
+        },
+        "user_characters": {
+          "n": 1,
+          "min": 1055,
+          "p25": 1055,
+          "median": 1055,
+          "p75": 1055,
+          "p95": 1055,
+          "max": 1055,
+          "mean": 1055,
+          "sum": 1055
+        },
+        "seconds": {
+          "n": 1,
+          "min": 12.351040225999895,
+          "p25": 12.351040225999895,
+          "median": 12.351040225999895,
+          "p75": 12.351040225999895,
+          "p95": 12.351040225999895,
+          "max": 12.351040225999895,
+          "mean": 12.351,
+          "sum": 12.351
+        }
+      },
+      "task/original_sources,evidence_assessment,world_verification": {
+        "calls": 1,
+        "successes": 1,
+        "failures": 0,
+        "empty_output": 0,
+        "cap_hits": 0,
+        "caps": {
+          "2500": 1
+        },
+        "input_tokens": {
+          "n": 1,
+          "min": 726,
+          "p25": 726,
+          "median": 726,
+          "p75": 726,
+          "p95": 726,
+          "max": 726,
+          "mean": 726,
+          "sum": 726
+        },
+        "output_tokens": {
+          "n": 1,
+          "min": 498,
+          "p25": 498,
+          "median": 498,
+          "p75": 498,
+          "p95": 498,
+          "max": 498,
+          "mean": 498,
+          "sum": 498
+        },
+        "visible_output_characters": {
+          "n": 1,
+          "min": 784,
+          "p25": 784,
+          "median": 784,
+          "p75": 784,
+          "p95": 784,
+          "max": 784,
+          "mean": 784,
+          "sum": 784
+        },
+        "user_characters": {
+          "n": 1,
+          "min": 1049,
+          "p25": 1049,
+          "median": 1049,
+          "p75": 1049,
+          "p95": 1049,
+          "max": 1049,
+          "mean": 1049,
+          "sum": 1049
+        },
+        "seconds": {
+          "n": 1,
+          "min": 8.714808657001413,
+          "p25": 8.714808657001413,
+          "median": 8.714808657001413,
+          "p75": 8.714808657001413,
+          "p95": 8.714808657001413,
+          "max": 8.714808657001413,
+          "mean": 8.715,
+          "sum": 8.715
+        }
+      },
+      "task/original_sources,evidence_assessment,world_verification,limitations": {
+        "calls": 6,
+        "successes": 6,
+        "failures": 0,
+        "empty_output": 0,
+        "cap_hits": 0,
+        "caps": {
+          "2500": 6
+        },
+        "input_tokens": {
+          "n": 6,
+          "min": 726,
+          "p25": 750.75,
+          "median": 758.0,
+          "p75": 846.25,
+          "p95": 880.0,
+          "max": 882,
+          "mean": 791.333,
+          "sum": 4748
+        },
+        "output_tokens": {
+          "n": 6,
+          "min": 408,
+          "p25": 451.75,
+          "median": 631.5,
+          "p75": 753.5,
+          "p95": 793.25,
+          "max": 804,
+          "mean": 610.167,
+          "sum": 3661
+        },
+        "visible_output_characters": {
+          "n": 6,
+          "min": 805,
+          "p25": 846.75,
+          "median": 1170.5,
+          "p75": 1402.75,
+          "p95": 1557.0,
+          "max": 1607,
+          "mean": 1162,
+          "sum": 6972
+        },
+        "user_characters": {
+          "n": 6,
+          "min": 1080,
+          "p25": 1161.0,
+          "median": 1187.5,
+          "p75": 1483.25,
+          "p95": 1596.0,
+          "max": 1602,
+          "mean": 1298.5,
+          "sum": 7791
+        },
+        "seconds": {
+          "n": 6,
+          "min": 8.11148419699748,
+          "p25": 8.674,
+          "median": 11.167705855499662,
+          "p75": 12.561,
+          "p95": 13.945,
+          "max": 14.399373210995691,
+          "mean": 10.952,
+          "sum": 65.714
+        }
+      },
+      "task/original_sources,evidence_assessment,world_verification,note": {
+        "calls": 1,
+        "successes": 1,
+        "failures": 0,
+        "empty_output": 0,
+        "cap_hits": 0,
+        "caps": {
+          "2500": 1
+        },
+        "input_tokens": {
+          "n": 1,
+          "min": 752,
+          "p25": 752,
+          "median": 752,
+          "p75": 752,
+          "p95": 752,
+          "max": 752,
+          "mean": 752,
+          "sum": 752
+        },
+        "output_tokens": {
+          "n": 1,
+          "min": 388,
+          "p25": 388,
+          "median": 388,
+          "p75": 388,
+          "p95": 388,
+          "max": 388,
+          "mean": 388,
+          "sum": 388
+        },
+        "visible_output_characters": {
+          "n": 1,
+          "min": 464,
+          "p25": 464,
+          "median": 464,
+          "p75": 464,
+          "p95": 464,
+          "max": 464,
+          "mean": 464,
+          "sum": 464
+        },
+        "user_characters": {
+          "n": 1,
+          "min": 1172,
+          "p25": 1172,
+          "median": 1172,
+          "p75": 1172,
+          "p95": 1172,
+          "max": 1172,
+          "mean": 1172,
+          "sum": 1172
+        },
+        "seconds": {
+          "n": 1,
+          "min": 7.467510988004506,
+          "p25": 7.467510988004506,
+          "median": 7.467510988004506,
+          "p75": 7.467510988004506,
+          "p95": 7.467510988004506,
+          "max": 7.467510988004506,
+          "mean": 7.468,
+          "sum": 7.468
+        }
+      },
+      "task/original_sources,evidence_assessment,world_verification,notes": {
+        "calls": 2,
+        "successes": 2,
+        "failures": 0,
+        "empty_output": 0,
+        "cap_hits": 0,
+        "caps": {
+          "2500": 2
+        },
+        "input_tokens": {
+          "n": 2,
+          "min": 872,
+          "p25": 875.0,
+          "median": 878.0,
+          "p75": 881.0,
+          "p95": 883.4,
+          "max": 884,
+          "mean": 878,
+          "sum": 1756
+        },
+        "output_tokens": {
+          "n": 2,
+          "min": 503,
+          "p25": 506.25,
+          "median": 509.5,
+          "p75": 512.75,
+          "p95": 515.35,
+          "max": 516,
+          "mean": 509.5,
+          "sum": 1019
+        },
+        "visible_output_characters": {
+          "n": 2,
+          "min": 815,
+          "p25": 838.75,
+          "median": 862.5,
+          "p75": 886.25,
+          "p95": 905.25,
+          "max": 910,
+          "mean": 862.5,
+          "sum": 1725
+        },
+        "user_characters": {
+          "n": 2,
+          "min": 1551,
+          "p25": 1555.75,
+          "median": 1560.5,
+          "p75": 1565.25,
+          "p95": 1569.05,
+          "max": 1570,
+          "mean": 1560.5,
+          "sum": 3121
+        },
+        "seconds": {
+          "n": 2,
+          "min": 9.41019634300028,
+          "p25": 9.651,
+          "median": 9.892609997998079,
+          "p75": 10.134,
+          "p95": 10.327,
+          "max": 10.375023652995878,
+          "mean": 9.893,
+          "sum": 19.785
+        }
+      },
+      "task/original_sources,identity_findings,assessment,limitations": {
+        "calls": 1,
+        "successes": 1,
+        "failures": 0,
+        "empty_output": 0,
+        "cap_hits": 0,
+        "caps": {
+          "2500": 1
+        },
+        "input_tokens": {
+          "n": 1,
+          "min": 755,
+          "p25": 755,
+          "median": 755,
+          "p75": 755,
+          "p95": 755,
+          "max": 755,
+          "mean": 755,
+          "sum": 755
+        },
+        "output_tokens": {
+          "n": 1,
+          "min": 783,
+          "p25": 783,
+          "median": 783,
+          "p75": 783,
+          "p95": 783,
+          "max": 783,
+          "mean": 783,
+          "sum": 783
+        },
+        "visible_output_characters": {
+          "n": 1,
+          "min": 1693,
+          "p25": 1693,
+          "median": 1693,
+          "p75": 1693,
+          "p95": 1693,
+          "max": 1693,
+          "mean": 1693,
+          "sum": 1693
+        },
+        "user_characters": {
+          "n": 1,
+          "min": 1207,
+          "p25": 1207,
+          "median": 1207,
+          "p75": 1207,
+          "p95": 1207,
+          "max": 1207,
+          "mean": 1207,
+          "sum": 1207
+        },
+        "seconds": {
+          "n": 1,
+          "min": 12.2556564109982,
+          "p25": 12.2556564109982,
+          "median": 12.2556564109982,
+          "p75": 12.2556564109982,
+          "p95": 12.2556564109982,
+          "max": 12.2556564109982,
+          "mean": 12.256,
+          "sum": 12.256
+        }
+      },
+      "task/original_sources,international_reactions,evidence_assessment,world_verification": {
+        "calls": 1,
+        "successes": 1,
+        "failures": 0,
+        "empty_output": 0,
+        "cap_hits": 0,
+        "caps": {
+          "2500": 1
+        },
+        "input_tokens": {
+          "n": 1,
+          "min": 751,
+          "p25": 751,
+          "median": 751,
+          "p75": 751,
+          "p95": 751,
+          "max": 751,
+          "mean": 751,
+          "sum": 751
+        },
+        "output_tokens": {
+          "n": 1,
+          "min": 511,
+          "p25": 511,
+          "median": 511,
+          "p75": 511,
+          "p95": 511,
+          "max": 511,
+          "mean": 511,
+          "sum": 511
+        },
+        "visible_output_characters": {
+          "n": 1,
+          "min": 793,
+          "p25": 793,
+          "median": 793,
+          "p75": 793,
+          "p95": 793,
+          "max": 793,
+          "mean": 793,
+          "sum": 793
+        },
+        "user_characters": {
+          "n": 1,
+          "min": 1184,
+          "p25": 1184,
+          "median": 1184,
+          "p75": 1184,
+          "p95": 1184,
+          "max": 1184,
+          "mean": 1184,
+          "sum": 1184
+        },
+        "seconds": {
+          "n": 1,
+          "min": 9.687429297999188,
+          "p25": 9.687429297999188,
+          "median": 9.687429297999188,
+          "p75": 9.687429297999188,
+          "p95": 9.687429297999188,
+          "max": 9.687429297999188,
+          "mean": 9.687,
+          "sum": 9.687
+        }
+      },
+      "task/original_sources,international_response,evidence,evidence_assessment,world_verification,limitations": {
+        "calls": 1,
+        "successes": 1,
+        "failures": 0,
+        "empty_output": 0,
+        "cap_hits": 0,
+        "caps": {
+          "2500": 1
+        },
+        "input_tokens": {
+          "n": 1,
+          "min": 750,
+          "p25": 750,
+          "median": 750,
+          "p75": 750,
+          "p95": 750,
+          "max": 750,
+          "mean": 750,
+          "sum": 750
+        },
+        "output_tokens": {
+          "n": 1,
+          "min": 645,
+          "p25": 645,
+          "median": 645,
+          "p75": 645,
+          "p95": 645,
+          "max": 645,
+          "mean": 645,
+          "sum": 645
+        },
+        "visible_output_characters": {
+          "n": 1,
+          "min": 809,
+          "p25": 809,
+          "median": 809,
+          "p75": 809,
+          "p95": 809,
+          "max": 809,
+          "mean": 809,
+          "sum": 809
+        },
+        "user_characters": {
+          "n": 1,
+          "min": 1169,
+          "p25": 1169,
+          "median": 1169,
+          "p75": 1169,
+          "p95": 1169,
+          "max": 1169,
+          "mean": 1169,
+          "sum": 1169
+        },
+        "seconds": {
+          "n": 1,
+          "min": 12.879688720000559,
+          "p25": 12.879688720000559,
+          "median": 12.879688720000559,
+          "p75": 12.879688720000559,
+          "p95": 12.879688720000559,
+          "max": 12.879688720000559,
+          "mean": 12.88,
+          "sum": 12.88
+        }
+      },
+      "task/original_sources,reason,snapshot_evidence,assessment": {
+        "calls": 1,
+        "successes": 1,
+        "failures": 0,
+        "empty_output": 0,
+        "cap_hits": 0,
+        "caps": {
+          "2500": 1
+        },
+        "input_tokens": {
+          "n": 1,
+          "min": 747,
+          "p25": 747,
+          "median": 747,
+          "p75": 747,
+          "p95": 747,
+          "max": 747,
+          "mean": 747,
+          "sum": 747
+        },
+        "output_tokens": {
+          "n": 1,
+          "min": 737,
+          "p25": 737,
+          "median": 737,
+          "p75": 737,
+          "p95": 737,
+          "max": 737,
+          "mean": 737,
+          "sum": 737
+        },
+        "visible_output_characters": {
+          "n": 1,
+          "min": 1380,
+          "p25": 1380,
+          "median": 1380,
+          "p75": 1380,
+          "p95": 1380,
+          "max": 1380,
+          "mean": 1380,
+          "sum": 1380
+        },
+        "user_characters": {
+          "n": 1,
+          "min": 1181,
+          "p25": 1181,
+          "median": 1181,
+          "p75": 1181,
+          "p95": 1181,
+          "max": 1181,
+          "mean": 1181,
+          "sum": 1181
+        },
+        "seconds": {
+          "n": 1,
+          "min": 12.563554286003637,
+          "p25": 12.563554286003637,
+          "median": 12.563554286003637,
+          "p75": 12.563554286003637,
+          "p95": 12.563554286003637,
+          "max": 12.563554286003637,
+          "mean": 12.564,
+          "sum": 12.564
+        }
+      },
+      "task/original_sources,source_limitations,evidence_assessment,world_verification": {
+        "calls": 1,
+        "successes": 1,
+        "failures": 0,
+        "empty_output": 0,
+        "cap_hits": 0,
+        "caps": {
+          "2500": 1
+        },
+        "input_tokens": {
+          "n": 1,
+          "min": 886,
+          "p25": 886,
+          "median": 886,
+          "p75": 886,
+          "p95": 886,
+          "max": 886,
+          "mean": 886,
+          "sum": 886
+        },
+        "output_tokens": {
+          "n": 1,
+          "min": 518,
+          "p25": 518,
+          "median": 518,
+          "p75": 518,
+          "p95": 518,
+          "max": 518,
+          "mean": 518,
+          "sum": 518
+        },
+        "visible_output_characters": {
+          "n": 1,
+          "min": 830,
+          "p25": 830,
+          "median": 830,
+          "p75": 830,
+          "p95": 830,
+          "max": 830,
+          "mean": 830,
+          "sum": 830
+        },
+        "user_characters": {
+          "n": 1,
+          "min": 1576,
+          "p25": 1576,
+          "median": 1576,
+          "p75": 1576,
+          "p95": 1576,
+          "max": 1576,
+          "mean": 1576,
+          "sum": 1576
+        },
+        "seconds": {
+          "n": 1,
+          "min": 9.967649056998198,
+          "p25": 9.967649056998198,
+          "median": 9.967649056998198,
+          "p75": 9.967649056998198,
+          "p95": 9.967649056998198,
+          "max": 9.967649056998198,
+          "mean": 9.968,
+          "sum": 9.968
+        }
+      },
+      "task/original_sources,source_limitations,supplied_snapshots,assessment": {
+        "calls": 1,
+        "successes": 1,
+        "failures": 0,
+        "empty_output": 0,
+        "cap_hits": 0,
+        "caps": {
+          "2500": 1
+        },
+        "input_tokens": {
+          "n": 1,
+          "min": 755,
+          "p25": 755,
+          "median": 755,
+          "p75": 755,
+          "p95": 755,
+          "max": 755,
+          "mean": 755,
+          "sum": 755
+        },
+        "output_tokens": {
+          "n": 1,
+          "min": 707,
+          "p25": 707,
+          "median": 707,
+          "p75": 707,
+          "p95": 707,
+          "max": 707,
+          "mean": 707,
+          "sum": 707
+        },
+        "visible_output_characters": {
+          "n": 1,
+          "min": 1279,
+          "p25": 1279,
+          "median": 1279,
+          "p75": 1279,
+          "p95": 1279,
+          "max": 1279,
+          "mean": 1279,
+          "sum": 1279
+        },
+        "user_characters": {
+          "n": 1,
+          "min": 1166,
+          "p25": 1166,
+          "median": 1166,
+          "p75": 1166,
+          "p95": 1166,
+          "max": 1166,
+          "mean": 1166,
+          "sum": 1166
+        },
+        "seconds": {
+          "n": 1,
+          "min": 12.711059335000755,
+          "p25": 12.711059335000755,
+          "median": 12.711059335000755,
+          "p75": 12.711059335000755,
+          "p95": 12.711059335000755,
+          "max": 12.711059335000755,
+          "mean": 12.711,
+          "sum": 12.711
+        }
+      },
+      "task/original_sources,world_verification,limitations": {
+        "calls": 2,
+        "successes": 2,
+        "failures": 0,
+        "empty_output": 0,
+        "cap_hits": 0,
+        "caps": {
+          "2500": 2
+        },
+        "input_tokens": {
+          "n": 2,
+          "min": 750,
+          "p25": 752.0,
+          "median": 754.0,
+          "p75": 756.0,
+          "p95": 757.6,
+          "max": 758,
+          "mean": 754,
+          "sum": 1508
+        },
+        "output_tokens": {
+          "n": 2,
+          "min": 592,
+          "p25": 642.25,
+          "median": 692.5,
+          "p75": 742.75,
+          "p95": 782.95,
+          "max": 793,
+          "mean": 692.5,
+          "sum": 1385
+        },
+        "visible_output_characters": {
+          "n": 2,
+          "min": 1221,
+          "p25": 1270.0,
+          "median": 1319.0,
+          "p75": 1368.0,
+          "p95": 1407.2,
+          "max": 1417,
+          "mean": 1319,
+          "sum": 2638
+        },
+        "user_characters": {
+          "n": 2,
+          "min": 1167,
+          "p25": 1168.75,
+          "median": 1170.5,
+          "p75": 1172.25,
+          "p95": 1173.65,
+          "max": 1174,
+          "mean": 1170.5,
+          "sum": 2341
+        },
+        "seconds": {
+          "n": 2,
+          "min": 9.951627695001662,
+          "p25": 10.845,
+          "median": 11.73756758950185,
+          "p75": 12.631,
+          "p95": 13.345,
+          "max": 13.523507484002039,
+          "mean": 11.738,
+          "sum": 23.475
+        }
+      },
+      "task/verification": {
+        "calls": 5,
+        "successes": 5,
+        "failures": 0,
+        "empty_output": 0,
+        "cap_hits": 0,
+        "caps": {
+          "2500": 5
+        },
+        "input_tokens": {
+          "n": 5,
+          "min": 1254,
+          "p25": 1348.0,
+          "median": 1357,
+          "p75": 1387.0,
+          "p95": 1454.2,
+          "max": 1471,
+          "mean": 1363.4,
+          "sum": 6817
+        },
+        "output_tokens": {
+          "n": 5,
+          "min": 171,
+          "p25": 184.0,
+          "median": 273,
+          "p75": 309.0,
+          "p95": 357.0,
+          "max": 369,
+          "mean": 261.2,
+          "sum": 1306
+        },
+        "visible_output_characters": {
+          "n": 5,
+          "min": 630,
+          "p25": 687.0,
+          "median": 699,
+          "p75": 738.0,
+          "p95": 740.4,
+          "max": 741,
+          "mean": 699,
+          "sum": 3495
+        },
+        "user_characters": {
+          "n": 5,
+          "min": 1478,
+          "p25": 1899.0,
+          "median": 1928,
+          "p75": 2040.0,
+          "p95": 2172.0,
+          "max": 2205,
+          "mean": 1910,
+          "sum": 9550
+        },
+        "seconds": {
+          "n": 5,
+          "min": 3.429432828001154,
+          "p25": 3.737,
+          "median": 5.5255489030023455,
+          "p75": 5.646,
+          "p95": 7.667,
+          "max": 8.171925395996368,
+          "mean": 5.302,
+          "sum": 26.51
+        }
+      },
+      "decomposition_success": {
+        "calls": 16,
+        "successes": 16,
+        "failures": 0,
+        "empty_output": 0,
+        "cap_hits": 0,
+        "caps": {
+          "2500": 16
+        },
+        "input_tokens": {
+          "n": 16,
+          "min": 1406,
+          "p25": 1422.75,
+          "median": 1742.5,
+          "p75": 2367.5,
+          "p95": 2466.75,
+          "max": 2568,
+          "mean": 1859.938,
+          "sum": 29759
+        },
+        "output_tokens": {
+          "n": 16,
+          "min": 520,
+          "p25": 852.0,
+          "median": 984.0,
+          "p75": 1245.25,
+          "p95": 1533.75,
+          "max": 1746,
+          "mean": 1043.438,
+          "sum": 16695
+        },
+        "visible_output_characters": {
+          "n": 16,
+          "min": 1295,
+          "p25": 2165.25,
+          "median": 2458.0,
+          "p75": 3271.25,
+          "p95": 4072.25,
+          "max": 4490,
+          "mean": 2722.312,
+          "sum": 43557
+        },
+        "user_characters": {
+          "n": 16,
+          "min": 1003,
+          "p25": 1066.75,
+          "median": 2226.0,
+          "p75": 4576.75,
+          "p95": 4909.0,
+          "max": 5272,
+          "mean": 2671.188,
+          "sum": 42739
+        },
+        "seconds": {
+          "n": 16,
+          "min": 11.85338505999971,
+          "p25": 15.895,
+          "median": 18.07742115449946,
+          "p75": 20.785,
+          "p95": 24.351,
+          "max": 27.56450830900576,
+          "mean": 18.513,
+          "sum": 296.208
+        }
+      },
+      "decomposition_failure": {
+        "calls": 0,
+        "successes": 0,
+        "failures": 0,
+        "empty_output": 0,
+        "cap_hits": 0,
+        "caps": {},
+        "input_tokens": null,
+        "output_tokens": null,
+        "visible_output_characters": null,
+        "user_characters": null,
+        "seconds": null
+      },
+      "initial_single_decomposition": {
+        "calls": 0,
+        "successes": 0,
+        "failures": 0,
+        "empty_output": 0,
+        "cap_hits": 0,
+        "caps": {},
+        "input_tokens": null,
+        "output_tokens": null,
+        "visible_output_characters": null,
+        "user_characters": null,
+        "seconds": null
+      }
+    },
+    "failures": [],
+    "telemetry_missing": {
+      "finish_reason": 110,
+      "reasoning_tokens": 110,
+      "has_refusal": 110,
+      "error_code": 110
+    }
+  },
+  "schemas": {
+    "decomposition": {
+      "sha256": "7849605377783ba81974e866e34229c9a9f4cb3b8a336725f0e5d6eff786dbeb",
+      "json_characters": 4266,
+      "top_level_fields": [
+        "fragments",
+        "relations",
+        "gaps",
+        "resolutions",
+        "origins",
+        "notes",
+        "revisit_versions"
+      ],
+      "top_level_required": 7,
+      "property_occurrences": 63
+    },
+    "verification": {
+      "sha256": "91122292b5bdbd4ac9411fa70a63991a981686d5fe15e7f7f0b04de85c963a25",
+      "json_characters": 2605,
+      "top_level_fields": [
+        "verdict",
+        "basis",
+        "rationale",
+        "gaps",
+        "resolutions",
+        "evidence_verdict",
+        "world_verdict",
+        "world_basis",
+        "world_rationale"
+      ],
+      "top_level_required": 9,
+      "property_occurrences": 38
+    },
+    "extraction": {
+      "sha256": "1853448f3f06d535375c4f4e5602f8ddab9628584ce17a5a150a7370a6c8047c",
+      "json_characters": 279,
+      "top_level_fields": [
+        "decision",
+        "extractable",
+        "basis_quote"
+      ],
+      "top_level_required": 3,
+      "property_occurrences": 3
+    }
+  },
+  "interpretation": "Descriptive call counts include dependent calls from the same events. They are not independent accuracy samples; missing-response usage is not zero measured use. Only a controlled fresh-request experiment can establish the exact completion-budget cause."
+}

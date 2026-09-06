@@ -1,0 +1,63 @@
+[
+  {
+    "round": 1,
+    "kind": "fixed_corpus_development_reanalysis",
+    "tasks": [
+      {
+        "id": "origin:p05",
+        "question": "Find the producing record and evidenced lineage for: Ingenuity was upright at the moment it touched down during its January 18, 2024 flight.",
+        "stage": "provenance",
+        "dimension": "auto",
+        "blocking": true,
+        "target_id": null,
+        "basis": [],
+        "decision_impact": "",
+        "action": "search",
+        "locator": null
+      }
+    ],
+    "returned": [
+      "m09"
+    ]
+  },
+  {
+    "round": 2,
+    "kind": "fixed_corpus_development_reanalysis",
+    "tasks": [
+      {
+        "id": "origin:p05",
+        "question": "Find the producing record and evidenced lineage for: Ingenuity was upright at the moment it touched down during its January 18, 2024 flight.",
+        "stage": "provenance",
+        "dimension": "auto",
+        "blocking": true,
+        "target_id": null,
+        "basis": [],
+        "decision_impact": "",
+        "action": "search",
+        "locator": null
+      },
+      {
+        "id": "p05:verification:world:c0768b66668bc366e5db",
+        "question": "Did NASA or JPL’s investigation establish Ingenuity’s orientation at touchdown on January 18, 2024?",
+        "stage": "verification",
+        "dimension": "world",
+        "blocking": true,
+        "target_id": "p05",
+        "basis": [
+          {
+            "version_id": "m09",
+            "start": 872,
+            "end": 995,
+            "quote": "The cause of the communications dropout and the helicopter’s orientation at time of touchdown are still being investigated."
+          }
+        ],
+        "decision_impact": "Findings establishing the orientation at the instant of touchdown could support or contradict the target, unlike evidence of its later resting position.",
+        "action": "search",
+        "locator": "NASA/JPL follow-up findings on Ingenuity’s January 18, 2024 landing investigation, available by 2026-09-05T09:34:36Z"
+      }
+    ],
+    "returned": [
+      "m09"
+    ]
+  }
+]

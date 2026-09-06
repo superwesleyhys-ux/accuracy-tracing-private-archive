@@ -6,7 +6,7 @@ import unittest
 
 from newsverify.provenance import (
     Analysis, ConservativeDecomposer, Fragment, Gap, MaterialVersion, OriginFinding,
-    Relation, ReplayTraceProvider, Resolution, Span, Target, TraceConfig,
+    ProbeAssessment, Relation, ReplayTraceProvider, Resolution, Span, Target, TraceConfig,
     VerificationResult, run_provenance,
 )
 from newsverify.trace_demo import build_demo, run_demo
@@ -297,7 +297,156 @@ class ProvenanceContractTests(unittest.TestCase):
                 resolutions=(Resolution("origin:" + target.id, (full(b),), "Located record."),))
         report = run_provenance(target, ReplayTraceProvider(((a, b),)), FunctionDecomposer(decompose))
         self.assertNotEqual("original_material_located", report["provenance_status"])
+        self.assertEqual([], report["origins"])
         self.assertTrue(any(x["id"] == "lineage:" + target.id for x in report["gaps"]))
+
+    def test_connected_origin_outside_evidence_scope_is_retained(self):
+        a, b = material("a"), material("b")
+        target = replace(TARGET, source_version_id="a", assessment_mode="evidence",
+                         evidence_scope=("a",))
+
+        def decompose(target, value, context):
+            if value.version_id == "b":
+                return Analysis(origins=(OriginFinding(target.id, "b", (full(b),),
+                    "original_record", "Annotated connected producing record."),))
+            return Analysis(relations=(Relation("citation", "a", "b", "cites", "direct",
+                (full(a),), "The target source directly cites the producing record."),))
+
+        report = run_provenance(target, ReplayTraceProvider(((b, a),)), FunctionDecomposer(decompose))
+        self.assertEqual([], report["errors"])
+        self.assertEqual(["b"], [item["version_id"] for item in report["origins"]])
+        self.assertNotIn("b", target.evidence_scope)
+        self.assertEqual("partial", report["provenance_status"])
+
+    def test_probe_assessments_enforce_typed_stage_spans_and_evidence_scope(self):
+        a, b = material("a"), material("b")
+        target = replace(TARGET, assessment_mode="evidence", evidence_scope=("a",))
+        cases = (
+            ("wrong_stage", ProbeAssessment(
+                "probe", "claim", "world", "supported", (full(a),),
+                "Placed in the wrong result tuple."),
+             "stored in the wrong layer"),
+            ("invalid_span", ProbeAssessment(
+                "probe", "claim", "evidence", "supported",
+                (Span("a", 0, 8, "invented"),), "The quote does not match its offsets."),
+             "span quote must exactly match"),
+            ("outside_scope", ProbeAssessment(
+                "probe", "claim", "evidence", "supported", (full(b),),
+                "This source is visible but outside the frozen evidence scope."),
+             "outside the frozen evidence_scope"),
+            ("missing_conclusive_basis", ProbeAssessment(
+                "probe", "claim", "evidence", "supported", (),
+                "A conclusive result cannot be ungrounded."),
+             "needs source basis"),
+        )
+        for name, assessment, expected_error in cases:
+            with self.subTest(name=name):
+                check = VerificationResult(
+                    evidence_verdict="unresolved",
+                    evidence_probe_results=(assessment,),
+                )
+                report = run_provenance(
+                    target,
+                    ReplayTraceProvider(((a, b),)),
+                    verifier=FunctionVerifier(lambda *_: check),
+                )
+                self.assertEqual("verifier_error", report["stop_reason"])
+                self.assertIn(expected_error, report["errors"][-1]["message"])
+                self.assertEqual([], report["verification_history"])
+
+        valid = VerificationResult(
+            evidence_verdict="unresolved",
+            evidence_probe_results=(ProbeAssessment(
+                "probe", "claim", "evidence", "supported", (full(a),),
+                "The scoped passage grounds this probe."),),
+        )
+        accepted = run_provenance(
+            target,
+            ReplayTraceProvider(((a, b),)),
+            verifier=FunctionVerifier(lambda *_: valid),
+        )
+        self.assertFalse(accepted["errors"])
+        self.assertEqual("probe", accepted["verification_history"][0]
+                         ["evidence_probe_results"][0]["probe_id"])
+
+    def test_gap_lifecycle_identity_includes_probe_id(self):
+        a, b = material("a"), material("b")
+        calls = []
+
+        class TwoRoundProvider:
+            def search(self, target, tasks, round_number, limit):
+                if round_number == 1:
+                    yield a
+                elif round_number == 2:
+                    yield b
+
+        def verify(target, context):
+            calls.append(1)
+            probe_id = "probe-one" if len(calls) == 1 else "probe-two"
+            return VerificationResult(gaps=(Gap(
+                "stable-gap-id", "Resolve the registered probe.",
+                stage="verification", dimension="evidence", blocking=False,
+                target_id=target.id, action="search", probe_id=probe_id,
+            ),))
+
+        report = run_provenance(
+            TARGET, TwoRoundProvider(), verifier=FunctionVerifier(verify),
+            config=TraceConfig(max_rounds=3),
+        )
+        self.assertEqual(2, len(calls))
+        self.assertEqual("verifier_error", report["stop_reason"])
+        self.assertIn("conflicting gap lifecycle identity: stable-gap-id",
+                      report["errors"][-1]["message"])
+        self.assertEqual(1, len(report["verification_history"]))
+        self.assertEqual("probe-one", report["gap_registry"][-1]["probe_id"])
+
+    def test_old_probe_blocker_is_nonblocking_not_resolved_when_or_is_decided(self):
+        report = self._two_round_probe_gap_report("unresolved")
+        self.assertEqual([], report["errors"])
+        self.assertEqual(2, len(report["verification_history"]))
+        old_gap = next(item for item in report["gaps"] if item["id"] == "left-gap")
+        self.assertFalse(old_gap["blocking"])
+        self.assertNotIn("left-gap", {item["gap_id"] for item in report["resolutions"]})
+        self.assertEqual("supported", report["assessments"]["evidence"]["decision"])
+
+    def test_conclusive_probe_automatically_resolves_its_previous_task(self):
+        report = self._two_round_probe_gap_report("supported")
+        self.assertEqual([], report["errors"])
+        self.assertNotIn("left-gap", {item["id"] for item in report["gaps"]})
+        resolution = next(item for item in report["resolutions"]
+                          if item["gap_id"] == "left-gap")
+        self.assertEqual("a", resolution["basis"][0]["version_id"])
+        self.assertIn("current grounded probe assessment", resolution["rationale"])
+        self.assertEqual("supported", report["assessments"]["evidence"]["decision"])
+
+    def _two_round_probe_gap_report(self, final_left_status):
+        a, b = material("a"), material("b")
+        target = replace(TARGET, assessment_mode="evidence", evidence_scope=("a",))
+        calls = []
+
+        def verify(target, context):
+            calls.append(1)
+            second = len(calls) > 1
+            left_status = final_left_status if second else "unresolved"
+            right_status = "supported" if second else "unresolved"
+            basis = (full(a),)
+            return VerificationResult(
+                evidence_verdict="supported" if second else "unresolved",
+                basis=basis,
+                rationale="One branch establishes the OR on round two.",
+                evidence_probe_results=(
+                    ProbeAssessment("left", "left-claim", "evidence", left_status,
+                                    basis, "Left branch assessment."),
+                    ProbeAssessment("right", "right-claim", "evidence", right_status,
+                                    basis, "Right branch assessment.")),
+                gaps=() if second else (Gap("left-gap", "Resolve the left branch.",
+                    stage="verification", dimension="evidence", blocking=True,
+                    decision_impact="Either branch could establish the OR.",
+                    basis=basis, target_id=target.id, action="search", probe_id="left"),))
+
+        return run_provenance(target, ReplayTraceProvider(((a,), (b,))),
+            verifier=FunctionVerifier(verify),
+            config=TraceConfig(max_rounds=2, experimental_force_rounds=True))
 
     def test_report_is_json_serializable(self):
         serialized = json.dumps(run_demo(), allow_nan=False)

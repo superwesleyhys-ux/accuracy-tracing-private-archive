@@ -1,0 +1,27 @@
+{
+  "status": "frozen_before_live_calls",
+  "model": "gpt-6-astra",
+  "reasoning_effort": "medium",
+  "budget_per_case": {
+    "calls": 64,
+    "output_tokens": 64000,
+    "per_call_output_tokens": 4000,
+    "seconds": 900
+  },
+  "workers": 2,
+  "case_ids": [
+    "p01",
+    "p02",
+    "p03",
+    "p04",
+    "p05",
+    "p06",
+    "p07",
+    "p08"
+  ],
+  "original_commit": "789506115e7dfef1f2359c2e43bcae4234b8d3f2",
+  "files": {
+    "experiments/staged_baseline_run.py": "be82beadf662f65ab801fad9170b2700ac8a47169b206a5d79904a160aabf038",
+    "tests/test_staged_baseline_run.py": "48997affddc970727ce330f0fa17b68bfef984ad3dc8fa9e53492787101d293c"
+  }
+}

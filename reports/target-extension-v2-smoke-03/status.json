@@ -1,0 +1,12 @@
+{
+  "status": "completed",
+  "scheduled_cases": 2,
+  "completed": 2,
+  "new_api_attempts": 43,
+  "returned_responses": 43,
+  "recorded_usage": {
+    "model_calls": 43,
+    "input_tokens": 194810,
+    "output_tokens": 22348
+  }
+}

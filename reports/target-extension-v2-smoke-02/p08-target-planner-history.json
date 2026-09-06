@@ -1,0 +1,20 @@
+[
+  {
+    "sequence": 1,
+    "stage": "claim_contract",
+    "repair": {
+      "structure": 0,
+      "extension": 0
+    },
+    "status": "validated"
+  },
+  {
+    "sequence": 2,
+    "stage": "extension",
+    "repair": {
+      "structure": 0,
+      "extension": 0
+    },
+    "status": "failed"
+  }
+]

@@ -1,0 +1,1071 @@
+{
+  "schema_version": "decision-probe-v2",
+  "target_signature": "e8b44831f045d01d1d2a3c5c1ad9bbf45a3f28a60a58276557197ba2bfb934de",
+  "logic": "single",
+  "claims": [
+    {
+      "id": "p07:claim:ca48e93865ef528ae277",
+      "statement": "NOAA renamed GOES-U to GOES-19 on June 25, 2024.",
+      "anchor": {
+        "start": 0,
+        "end": 48,
+        "quote": "NOAA renamed GOES-U to GOES-19 on June 25, 2024."
+      },
+      "role": "main",
+      "dimensions": [
+        {
+          "id": "p07:dimension:14678ed378d725572a86",
+          "kind": "entity_identity",
+          "anchor": {
+            "start": 0,
+            "end": 4,
+            "quote": "NOAA"
+          }
+        },
+        {
+          "id": "p07:dimension:ecddd9d6e54c564b03dd",
+          "kind": "subject",
+          "anchor": {
+            "start": 0,
+            "end": 4,
+            "quote": "NOAA"
+          }
+        },
+        {
+          "id": "p07:dimension:ba8521d4b4e1b19dc73d",
+          "kind": "predicate",
+          "anchor": {
+            "start": 5,
+            "end": 12,
+            "quote": "renamed"
+          }
+        },
+        {
+          "id": "p07:dimension:67746ff18b2b11d2a99d",
+          "kind": "entity_identity",
+          "anchor": {
+            "start": 13,
+            "end": 19,
+            "quote": "GOES-U"
+          }
+        },
+        {
+          "id": "p07:dimension:8d3435a7afe261cd66ea",
+          "kind": "exact_designation",
+          "anchor": {
+            "start": 23,
+            "end": 30,
+            "quote": "GOES-19"
+          }
+        },
+        {
+          "id": "p07:dimension:abf413c224d169bf691a",
+          "kind": "time",
+          "anchor": {
+            "start": 34,
+            "end": 47,
+            "quote": "June 25, 2024"
+          }
+        }
+      ],
+      "parent_claim_id": null
+    }
+  ],
+  "probes": [
+    {
+      "id": "p07:probe:139f856c46e9f77e9778",
+      "claim_id": "p07:claim:ca48e93865ef528ae277",
+      "kind": "designation_relation",
+      "dimension_ids": [
+        "p07:dimension:14678ed378d725572a86",
+        "p07:dimension:67746ff18b2b11d2a99d",
+        "p07:dimension:8d3435a7afe261cd66ea",
+        "p07:dimension:abf413c224d169bf691a",
+        "p07:dimension:ba8521d4b4e1b19dc73d",
+        "p07:dimension:ecddd9d6e54c564b03dd"
+      ],
+      "question": "Does the scoped evidence establish together the complete directed relation that NOAA renamed the referent GOES-U to the designation GOES-19 on June 25, 2024, rather than assembling the actor, action, prior referent, new designation and date from separately true facts?",
+      "decision_impact": "Determines whether the complete asserted renaming relation is supported.",
+      "match_policy": "semantic_constraint",
+      "routes": [
+        "atoms",
+        "evidence",
+        "world"
+      ],
+      "gate": "always"
+    },
+    {
+      "id": "p07:probe:f4487773555bbae0625b",
+      "claim_id": "p07:claim:ca48e93865ef528ae277",
+      "kind": "entity_identity",
+      "dimension_ids": [
+        "p07:dimension:14678ed378d725572a86"
+      ],
+      "question": "Does the scoped evidence identify the actor as NOAA through an exact mention, alias, unambiguous description or anaphora?",
+      "decision_impact": "Determines actor identity without requiring identical surface wording.",
+      "match_policy": "same_referent",
+      "routes": [
+        "atoms",
+        "evidence",
+        "world"
+      ],
+      "gate": "always"
+    },
+    {
+      "id": "p07:probe:ae3d14a9ef5fd7eedcdc",
+      "claim_id": "p07:claim:ca48e93865ef528ae277",
+      "kind": "entity_identity",
+      "dimension_ids": [
+        "p07:dimension:67746ff18b2b11d2a99d"
+      ],
+      "question": "Does the scoped evidence identify the entity being renamed as the referent of GOES-U through an exact mention, alias, unambiguous description or anaphora?",
+      "decision_impact": "Determines whether the renaming concerns the asserted prior referent.",
+      "match_policy": "same_referent",
+      "routes": [
+        "atoms",
+        "evidence",
+        "world"
+      ],
+      "gate": "always"
+    },
+    {
+      "id": "p07:probe:0a4d57e7c0fde227b3df",
+      "claim_id": "p07:claim:ca48e93865ef528ae277",
+      "kind": "exact_designation",
+      "dimension_ids": [
+        "p07:dimension:8d3435a7afe261cd66ea"
+      ],
+      "question": "Does the scoped evidence establish the asserted new designation itself as exactly GOES-19?",
+      "decision_impact": "Determines whether the asserted name, rather than merely the entity's identity, is supported.",
+      "match_policy": "exact_designation",
+      "routes": [
+        "atoms",
+        "evidence",
+        "world"
+      ],
+      "gate": "always"
+    },
+    {
+      "id": "p07:probe:0dea7da87aa6baa994e2",
+      "claim_id": "p07:claim:ca48e93865ef528ae277",
+      "kind": "semantic_core",
+      "dimension_ids": [
+        "p07:dimension:ba8521d4b4e1b19dc73d",
+        "p07:dimension:ecddd9d6e54c564b03dd"
+      ],
+      "question": "Does the scoped evidence establish NOAA as the actor performing the asserted renaming?",
+      "decision_impact": "Determines whether the asserted actor-action core is supported.",
+      "match_policy": "semantic_constraint",
+      "routes": [
+        "atoms",
+        "evidence",
+        "world"
+      ],
+      "gate": "always"
+    },
+    {
+      "id": "p07:probe:37c270bcd6de2622519e",
+      "claim_id": "p07:claim:ca48e93865ef528ae277",
+      "kind": "source_lineage",
+      "dimension_ids": [],
+      "question": "Within evidence scope m13, what source lineage underlies support for this claim, and does it distinguish direct reporting from attributed or derivative material available by the target as_of?",
+      "decision_impact": "Determines the provenance and temporal eligibility of the scoped support.",
+      "match_policy": "semantic_constraint",
+      "routes": [
+        "lineage",
+        "world"
+      ],
+      "gate": "provenance"
+    },
+    {
+      "id": "p07:probe:d89d902009ccfa05abe8",
+      "claim_id": "p07:claim:ca48e93865ef528ae277",
+      "kind": "time_boundary",
+      "dimension_ids": [
+        "p07:dimension:abf413c224d169bf691a"
+      ],
+      "question": "Does the scoped evidence place the renaming itself on June 25, 2024, rather than attaching that date only to another event or publication?",
+      "decision_impact": "Determines whether the date is correctly bound to the renaming.",
+      "match_policy": "semantic_constraint",
+      "routes": [
+        "atoms",
+        "evidence",
+        "world"
+      ],
+      "gate": "always"
+    }
+  ],
+  "notes": "GOES-U is retained as a maximal entity span; GOES-19 is the asserted new designation.\nThe contract retains the actor, renaming action, prior referent, exact new designation and event date. Assessment is limited to evidence scope m13.",
+  "sha256": "950c78a8806c06c5a94863c366b515a6b00dc437dae2e59106a552a07058ce0e",
+  "projections": {
+    "atoms": {
+      "schema_version": "decision-probe-v2",
+      "target_signature": "e8b44831f045d01d1d2a3c5c1ad9bbf45a3f28a60a58276557197ba2bfb934de",
+      "plan_sha256": "950c78a8806c06c5a94863c366b515a6b00dc437dae2e59106a552a07058ce0e",
+      "stage": "atoms",
+      "logic": "single",
+      "claims": [
+        {
+          "id": "p07:claim:ca48e93865ef528ae277",
+          "statement": "NOAA renamed GOES-U to GOES-19 on June 25, 2024.",
+          "anchor": {
+            "start": 0,
+            "end": 48,
+            "quote": "NOAA renamed GOES-U to GOES-19 on June 25, 2024."
+          },
+          "role": "main",
+          "dimensions": [
+            {
+              "id": "p07:dimension:14678ed378d725572a86",
+              "kind": "entity_identity",
+              "anchor": {
+                "start": 0,
+                "end": 4,
+                "quote": "NOAA"
+              }
+            },
+            {
+              "id": "p07:dimension:ecddd9d6e54c564b03dd",
+              "kind": "subject",
+              "anchor": {
+                "start": 0,
+                "end": 4,
+                "quote": "NOAA"
+              }
+            },
+            {
+              "id": "p07:dimension:ba8521d4b4e1b19dc73d",
+              "kind": "predicate",
+              "anchor": {
+                "start": 5,
+                "end": 12,
+                "quote": "renamed"
+              }
+            },
+            {
+              "id": "p07:dimension:67746ff18b2b11d2a99d",
+              "kind": "entity_identity",
+              "anchor": {
+                "start": 13,
+                "end": 19,
+                "quote": "GOES-U"
+              }
+            },
+            {
+              "id": "p07:dimension:8d3435a7afe261cd66ea",
+              "kind": "exact_designation",
+              "anchor": {
+                "start": 23,
+                "end": 30,
+                "quote": "GOES-19"
+              }
+            },
+            {
+              "id": "p07:dimension:abf413c224d169bf691a",
+              "kind": "time",
+              "anchor": {
+                "start": 34,
+                "end": 47,
+                "quote": "June 25, 2024"
+              }
+            }
+          ],
+          "parent_claim_id": null
+        }
+      ],
+      "probes": [
+        {
+          "id": "p07:probe:139f856c46e9f77e9778",
+          "claim_id": "p07:claim:ca48e93865ef528ae277",
+          "kind": "designation_relation",
+          "dimension_ids": [
+            "p07:dimension:14678ed378d725572a86",
+            "p07:dimension:67746ff18b2b11d2a99d",
+            "p07:dimension:8d3435a7afe261cd66ea",
+            "p07:dimension:abf413c224d169bf691a",
+            "p07:dimension:ba8521d4b4e1b19dc73d",
+            "p07:dimension:ecddd9d6e54c564b03dd"
+          ],
+          "question": "Does the scoped evidence establish together the complete directed relation that NOAA renamed the referent GOES-U to the designation GOES-19 on June 25, 2024, rather than assembling the actor, action, prior referent, new designation and date from separately true facts?",
+          "decision_impact": "Determines whether the complete asserted renaming relation is supported.",
+          "match_policy": "semantic_constraint",
+          "routes": [
+            "atoms",
+            "evidence",
+            "world"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p07:probe:f4487773555bbae0625b",
+          "claim_id": "p07:claim:ca48e93865ef528ae277",
+          "kind": "entity_identity",
+          "dimension_ids": [
+            "p07:dimension:14678ed378d725572a86"
+          ],
+          "question": "Does the scoped evidence identify the actor as NOAA through an exact mention, alias, unambiguous description or anaphora?",
+          "decision_impact": "Determines actor identity without requiring identical surface wording.",
+          "match_policy": "same_referent",
+          "routes": [
+            "atoms",
+            "evidence",
+            "world"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p07:probe:ae3d14a9ef5fd7eedcdc",
+          "claim_id": "p07:claim:ca48e93865ef528ae277",
+          "kind": "entity_identity",
+          "dimension_ids": [
+            "p07:dimension:67746ff18b2b11d2a99d"
+          ],
+          "question": "Does the scoped evidence identify the entity being renamed as the referent of GOES-U through an exact mention, alias, unambiguous description or anaphora?",
+          "decision_impact": "Determines whether the renaming concerns the asserted prior referent.",
+          "match_policy": "same_referent",
+          "routes": [
+            "atoms",
+            "evidence",
+            "world"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p07:probe:0a4d57e7c0fde227b3df",
+          "claim_id": "p07:claim:ca48e93865ef528ae277",
+          "kind": "exact_designation",
+          "dimension_ids": [
+            "p07:dimension:8d3435a7afe261cd66ea"
+          ],
+          "question": "Does the scoped evidence establish the asserted new designation itself as exactly GOES-19?",
+          "decision_impact": "Determines whether the asserted name, rather than merely the entity's identity, is supported.",
+          "match_policy": "exact_designation",
+          "routes": [
+            "atoms",
+            "evidence",
+            "world"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p07:probe:0dea7da87aa6baa994e2",
+          "claim_id": "p07:claim:ca48e93865ef528ae277",
+          "kind": "semantic_core",
+          "dimension_ids": [
+            "p07:dimension:ba8521d4b4e1b19dc73d",
+            "p07:dimension:ecddd9d6e54c564b03dd"
+          ],
+          "question": "Does the scoped evidence establish NOAA as the actor performing the asserted renaming?",
+          "decision_impact": "Determines whether the asserted actor-action core is supported.",
+          "match_policy": "semantic_constraint",
+          "routes": [
+            "atoms",
+            "evidence",
+            "world"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p07:probe:d89d902009ccfa05abe8",
+          "claim_id": "p07:claim:ca48e93865ef528ae277",
+          "kind": "time_boundary",
+          "dimension_ids": [
+            "p07:dimension:abf413c224d169bf691a"
+          ],
+          "question": "Does the scoped evidence place the renaming itself on June 25, 2024, rather than attaching that date only to another event or publication?",
+          "decision_impact": "Determines whether the date is correctly bound to the renaming.",
+          "match_policy": "semantic_constraint",
+          "routes": [
+            "atoms",
+            "evidence",
+            "world"
+          ],
+          "gate": "always"
+        }
+      ],
+      "notes": "GOES-U is retained as a maximal entity span; GOES-19 is the asserted new designation.\nThe contract retains the actor, renaming action, prior referent, exact new designation and event date. Assessment is limited to evidence scope m13."
+    },
+    "lineage": {
+      "schema_version": "decision-probe-v2",
+      "target_signature": "e8b44831f045d01d1d2a3c5c1ad9bbf45a3f28a60a58276557197ba2bfb934de",
+      "plan_sha256": "950c78a8806c06c5a94863c366b515a6b00dc437dae2e59106a552a07058ce0e",
+      "stage": "lineage",
+      "logic": "single",
+      "claims": [
+        {
+          "id": "p07:claim:ca48e93865ef528ae277",
+          "statement": "NOAA renamed GOES-U to GOES-19 on June 25, 2024.",
+          "anchor": {
+            "start": 0,
+            "end": 48,
+            "quote": "NOAA renamed GOES-U to GOES-19 on June 25, 2024."
+          },
+          "role": "main",
+          "dimensions": [
+            {
+              "id": "p07:dimension:14678ed378d725572a86",
+              "kind": "entity_identity",
+              "anchor": {
+                "start": 0,
+                "end": 4,
+                "quote": "NOAA"
+              }
+            },
+            {
+              "id": "p07:dimension:ecddd9d6e54c564b03dd",
+              "kind": "subject",
+              "anchor": {
+                "start": 0,
+                "end": 4,
+                "quote": "NOAA"
+              }
+            },
+            {
+              "id": "p07:dimension:ba8521d4b4e1b19dc73d",
+              "kind": "predicate",
+              "anchor": {
+                "start": 5,
+                "end": 12,
+                "quote": "renamed"
+              }
+            },
+            {
+              "id": "p07:dimension:67746ff18b2b11d2a99d",
+              "kind": "entity_identity",
+              "anchor": {
+                "start": 13,
+                "end": 19,
+                "quote": "GOES-U"
+              }
+            },
+            {
+              "id": "p07:dimension:8d3435a7afe261cd66ea",
+              "kind": "exact_designation",
+              "anchor": {
+                "start": 23,
+                "end": 30,
+                "quote": "GOES-19"
+              }
+            },
+            {
+              "id": "p07:dimension:abf413c224d169bf691a",
+              "kind": "time",
+              "anchor": {
+                "start": 34,
+                "end": 47,
+                "quote": "June 25, 2024"
+              }
+            }
+          ],
+          "parent_claim_id": null
+        }
+      ],
+      "probes": [
+        {
+          "id": "p07:probe:37c270bcd6de2622519e",
+          "claim_id": "p07:claim:ca48e93865ef528ae277",
+          "kind": "source_lineage",
+          "dimension_ids": [],
+          "question": "Within evidence scope m13, what source lineage underlies support for this claim, and does it distinguish direct reporting from attributed or derivative material available by the target as_of?",
+          "decision_impact": "Determines the provenance and temporal eligibility of the scoped support.",
+          "match_policy": "semantic_constraint",
+          "routes": [
+            "lineage",
+            "world"
+          ],
+          "gate": "provenance"
+        }
+      ],
+      "notes": "GOES-U is retained as a maximal entity span; GOES-19 is the asserted new designation.\nThe contract retains the actor, renaming action, prior referent, exact new designation and event date. Assessment is limited to evidence scope m13."
+    },
+    "critic": {
+      "schema_version": "decision-probe-v2",
+      "target_signature": "e8b44831f045d01d1d2a3c5c1ad9bbf45a3f28a60a58276557197ba2bfb934de",
+      "plan_sha256": "950c78a8806c06c5a94863c366b515a6b00dc437dae2e59106a552a07058ce0e",
+      "stage": "critic",
+      "logic": "single",
+      "claims": [
+        {
+          "id": "p07:claim:ca48e93865ef528ae277",
+          "statement": "NOAA renamed GOES-U to GOES-19 on June 25, 2024.",
+          "anchor": {
+            "start": 0,
+            "end": 48,
+            "quote": "NOAA renamed GOES-U to GOES-19 on June 25, 2024."
+          },
+          "role": "main",
+          "dimensions": [
+            {
+              "id": "p07:dimension:14678ed378d725572a86",
+              "kind": "entity_identity",
+              "anchor": {
+                "start": 0,
+                "end": 4,
+                "quote": "NOAA"
+              }
+            },
+            {
+              "id": "p07:dimension:ecddd9d6e54c564b03dd",
+              "kind": "subject",
+              "anchor": {
+                "start": 0,
+                "end": 4,
+                "quote": "NOAA"
+              }
+            },
+            {
+              "id": "p07:dimension:ba8521d4b4e1b19dc73d",
+              "kind": "predicate",
+              "anchor": {
+                "start": 5,
+                "end": 12,
+                "quote": "renamed"
+              }
+            },
+            {
+              "id": "p07:dimension:67746ff18b2b11d2a99d",
+              "kind": "entity_identity",
+              "anchor": {
+                "start": 13,
+                "end": 19,
+                "quote": "GOES-U"
+              }
+            },
+            {
+              "id": "p07:dimension:8d3435a7afe261cd66ea",
+              "kind": "exact_designation",
+              "anchor": {
+                "start": 23,
+                "end": 30,
+                "quote": "GOES-19"
+              }
+            },
+            {
+              "id": "p07:dimension:abf413c224d169bf691a",
+              "kind": "time",
+              "anchor": {
+                "start": 34,
+                "end": 47,
+                "quote": "June 25, 2024"
+              }
+            }
+          ],
+          "parent_claim_id": null
+        }
+      ],
+      "probes": [
+        {
+          "id": "p07:probe:139f856c46e9f77e9778",
+          "claim_id": "p07:claim:ca48e93865ef528ae277",
+          "kind": "designation_relation",
+          "dimension_ids": [
+            "p07:dimension:14678ed378d725572a86",
+            "p07:dimension:67746ff18b2b11d2a99d",
+            "p07:dimension:8d3435a7afe261cd66ea",
+            "p07:dimension:abf413c224d169bf691a",
+            "p07:dimension:ba8521d4b4e1b19dc73d",
+            "p07:dimension:ecddd9d6e54c564b03dd"
+          ],
+          "question": "Does the scoped evidence establish together the complete directed relation that NOAA renamed the referent GOES-U to the designation GOES-19 on June 25, 2024, rather than assembling the actor, action, prior referent, new designation and date from separately true facts?",
+          "decision_impact": "Determines whether the complete asserted renaming relation is supported.",
+          "match_policy": "semantic_constraint",
+          "routes": [
+            "atoms",
+            "evidence",
+            "world"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p07:probe:f4487773555bbae0625b",
+          "claim_id": "p07:claim:ca48e93865ef528ae277",
+          "kind": "entity_identity",
+          "dimension_ids": [
+            "p07:dimension:14678ed378d725572a86"
+          ],
+          "question": "Does the scoped evidence identify the actor as NOAA through an exact mention, alias, unambiguous description or anaphora?",
+          "decision_impact": "Determines actor identity without requiring identical surface wording.",
+          "match_policy": "same_referent",
+          "routes": [
+            "atoms",
+            "evidence",
+            "world"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p07:probe:ae3d14a9ef5fd7eedcdc",
+          "claim_id": "p07:claim:ca48e93865ef528ae277",
+          "kind": "entity_identity",
+          "dimension_ids": [
+            "p07:dimension:67746ff18b2b11d2a99d"
+          ],
+          "question": "Does the scoped evidence identify the entity being renamed as the referent of GOES-U through an exact mention, alias, unambiguous description or anaphora?",
+          "decision_impact": "Determines whether the renaming concerns the asserted prior referent.",
+          "match_policy": "same_referent",
+          "routes": [
+            "atoms",
+            "evidence",
+            "world"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p07:probe:0a4d57e7c0fde227b3df",
+          "claim_id": "p07:claim:ca48e93865ef528ae277",
+          "kind": "exact_designation",
+          "dimension_ids": [
+            "p07:dimension:8d3435a7afe261cd66ea"
+          ],
+          "question": "Does the scoped evidence establish the asserted new designation itself as exactly GOES-19?",
+          "decision_impact": "Determines whether the asserted name, rather than merely the entity's identity, is supported.",
+          "match_policy": "exact_designation",
+          "routes": [
+            "atoms",
+            "evidence",
+            "world"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p07:probe:0dea7da87aa6baa994e2",
+          "claim_id": "p07:claim:ca48e93865ef528ae277",
+          "kind": "semantic_core",
+          "dimension_ids": [
+            "p07:dimension:ba8521d4b4e1b19dc73d",
+            "p07:dimension:ecddd9d6e54c564b03dd"
+          ],
+          "question": "Does the scoped evidence establish NOAA as the actor performing the asserted renaming?",
+          "decision_impact": "Determines whether the asserted actor-action core is supported.",
+          "match_policy": "semantic_constraint",
+          "routes": [
+            "atoms",
+            "evidence",
+            "world"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p07:probe:37c270bcd6de2622519e",
+          "claim_id": "p07:claim:ca48e93865ef528ae277",
+          "kind": "source_lineage",
+          "dimension_ids": [],
+          "question": "Within evidence scope m13, what source lineage underlies support for this claim, and does it distinguish direct reporting from attributed or derivative material available by the target as_of?",
+          "decision_impact": "Determines the provenance and temporal eligibility of the scoped support.",
+          "match_policy": "semantic_constraint",
+          "routes": [
+            "lineage",
+            "world"
+          ],
+          "gate": "provenance"
+        },
+        {
+          "id": "p07:probe:d89d902009ccfa05abe8",
+          "claim_id": "p07:claim:ca48e93865ef528ae277",
+          "kind": "time_boundary",
+          "dimension_ids": [
+            "p07:dimension:abf413c224d169bf691a"
+          ],
+          "question": "Does the scoped evidence place the renaming itself on June 25, 2024, rather than attaching that date only to another event or publication?",
+          "decision_impact": "Determines whether the date is correctly bound to the renaming.",
+          "match_policy": "semantic_constraint",
+          "routes": [
+            "atoms",
+            "evidence",
+            "world"
+          ],
+          "gate": "always"
+        }
+      ],
+      "notes": "GOES-U is retained as a maximal entity span; GOES-19 is the asserted new designation.\nThe contract retains the actor, renaming action, prior referent, exact new designation and event date. Assessment is limited to evidence scope m13."
+    },
+    "evidence": {
+      "schema_version": "decision-probe-v2",
+      "target_signature": "e8b44831f045d01d1d2a3c5c1ad9bbf45a3f28a60a58276557197ba2bfb934de",
+      "plan_sha256": "950c78a8806c06c5a94863c366b515a6b00dc437dae2e59106a552a07058ce0e",
+      "stage": "evidence",
+      "logic": "single",
+      "claims": [
+        {
+          "id": "p07:claim:ca48e93865ef528ae277",
+          "statement": "NOAA renamed GOES-U to GOES-19 on June 25, 2024.",
+          "anchor": {
+            "start": 0,
+            "end": 48,
+            "quote": "NOAA renamed GOES-U to GOES-19 on June 25, 2024."
+          },
+          "role": "main",
+          "dimensions": [
+            {
+              "id": "p07:dimension:14678ed378d725572a86",
+              "kind": "entity_identity",
+              "anchor": {
+                "start": 0,
+                "end": 4,
+                "quote": "NOAA"
+              }
+            },
+            {
+              "id": "p07:dimension:ecddd9d6e54c564b03dd",
+              "kind": "subject",
+              "anchor": {
+                "start": 0,
+                "end": 4,
+                "quote": "NOAA"
+              }
+            },
+            {
+              "id": "p07:dimension:ba8521d4b4e1b19dc73d",
+              "kind": "predicate",
+              "anchor": {
+                "start": 5,
+                "end": 12,
+                "quote": "renamed"
+              }
+            },
+            {
+              "id": "p07:dimension:67746ff18b2b11d2a99d",
+              "kind": "entity_identity",
+              "anchor": {
+                "start": 13,
+                "end": 19,
+                "quote": "GOES-U"
+              }
+            },
+            {
+              "id": "p07:dimension:8d3435a7afe261cd66ea",
+              "kind": "exact_designation",
+              "anchor": {
+                "start": 23,
+                "end": 30,
+                "quote": "GOES-19"
+              }
+            },
+            {
+              "id": "p07:dimension:abf413c224d169bf691a",
+              "kind": "time",
+              "anchor": {
+                "start": 34,
+                "end": 47,
+                "quote": "June 25, 2024"
+              }
+            }
+          ],
+          "parent_claim_id": null
+        }
+      ],
+      "probes": [
+        {
+          "id": "p07:probe:139f856c46e9f77e9778",
+          "claim_id": "p07:claim:ca48e93865ef528ae277",
+          "kind": "designation_relation",
+          "dimension_ids": [
+            "p07:dimension:14678ed378d725572a86",
+            "p07:dimension:67746ff18b2b11d2a99d",
+            "p07:dimension:8d3435a7afe261cd66ea",
+            "p07:dimension:abf413c224d169bf691a",
+            "p07:dimension:ba8521d4b4e1b19dc73d",
+            "p07:dimension:ecddd9d6e54c564b03dd"
+          ],
+          "question": "Does the scoped evidence establish together the complete directed relation that NOAA renamed the referent GOES-U to the designation GOES-19 on June 25, 2024, rather than assembling the actor, action, prior referent, new designation and date from separately true facts?",
+          "decision_impact": "Determines whether the complete asserted renaming relation is supported.",
+          "match_policy": "semantic_constraint",
+          "routes": [
+            "atoms",
+            "evidence",
+            "world"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p07:probe:f4487773555bbae0625b",
+          "claim_id": "p07:claim:ca48e93865ef528ae277",
+          "kind": "entity_identity",
+          "dimension_ids": [
+            "p07:dimension:14678ed378d725572a86"
+          ],
+          "question": "Does the scoped evidence identify the actor as NOAA through an exact mention, alias, unambiguous description or anaphora?",
+          "decision_impact": "Determines actor identity without requiring identical surface wording.",
+          "match_policy": "same_referent",
+          "routes": [
+            "atoms",
+            "evidence",
+            "world"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p07:probe:ae3d14a9ef5fd7eedcdc",
+          "claim_id": "p07:claim:ca48e93865ef528ae277",
+          "kind": "entity_identity",
+          "dimension_ids": [
+            "p07:dimension:67746ff18b2b11d2a99d"
+          ],
+          "question": "Does the scoped evidence identify the entity being renamed as the referent of GOES-U through an exact mention, alias, unambiguous description or anaphora?",
+          "decision_impact": "Determines whether the renaming concerns the asserted prior referent.",
+          "match_policy": "same_referent",
+          "routes": [
+            "atoms",
+            "evidence",
+            "world"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p07:probe:0a4d57e7c0fde227b3df",
+          "claim_id": "p07:claim:ca48e93865ef528ae277",
+          "kind": "exact_designation",
+          "dimension_ids": [
+            "p07:dimension:8d3435a7afe261cd66ea"
+          ],
+          "question": "Does the scoped evidence establish the asserted new designation itself as exactly GOES-19?",
+          "decision_impact": "Determines whether the asserted name, rather than merely the entity's identity, is supported.",
+          "match_policy": "exact_designation",
+          "routes": [
+            "atoms",
+            "evidence",
+            "world"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p07:probe:0dea7da87aa6baa994e2",
+          "claim_id": "p07:claim:ca48e93865ef528ae277",
+          "kind": "semantic_core",
+          "dimension_ids": [
+            "p07:dimension:ba8521d4b4e1b19dc73d",
+            "p07:dimension:ecddd9d6e54c564b03dd"
+          ],
+          "question": "Does the scoped evidence establish NOAA as the actor performing the asserted renaming?",
+          "decision_impact": "Determines whether the asserted actor-action core is supported.",
+          "match_policy": "semantic_constraint",
+          "routes": [
+            "atoms",
+            "evidence",
+            "world"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p07:probe:d89d902009ccfa05abe8",
+          "claim_id": "p07:claim:ca48e93865ef528ae277",
+          "kind": "time_boundary",
+          "dimension_ids": [
+            "p07:dimension:abf413c224d169bf691a"
+          ],
+          "question": "Does the scoped evidence place the renaming itself on June 25, 2024, rather than attaching that date only to another event or publication?",
+          "decision_impact": "Determines whether the date is correctly bound to the renaming.",
+          "match_policy": "semantic_constraint",
+          "routes": [
+            "atoms",
+            "evidence",
+            "world"
+          ],
+          "gate": "always"
+        }
+      ],
+      "notes": "GOES-U is retained as a maximal entity span; GOES-19 is the asserted new designation.\nThe contract retains the actor, renaming action, prior referent, exact new designation and event date. Assessment is limited to evidence scope m13."
+    },
+    "world": {
+      "schema_version": "decision-probe-v2",
+      "target_signature": "e8b44831f045d01d1d2a3c5c1ad9bbf45a3f28a60a58276557197ba2bfb934de",
+      "plan_sha256": "950c78a8806c06c5a94863c366b515a6b00dc437dae2e59106a552a07058ce0e",
+      "stage": "world",
+      "logic": "single",
+      "claims": [
+        {
+          "id": "p07:claim:ca48e93865ef528ae277",
+          "statement": "NOAA renamed GOES-U to GOES-19 on June 25, 2024.",
+          "anchor": {
+            "start": 0,
+            "end": 48,
+            "quote": "NOAA renamed GOES-U to GOES-19 on June 25, 2024."
+          },
+          "role": "main",
+          "dimensions": [
+            {
+              "id": "p07:dimension:14678ed378d725572a86",
+              "kind": "entity_identity",
+              "anchor": {
+                "start": 0,
+                "end": 4,
+                "quote": "NOAA"
+              }
+            },
+            {
+              "id": "p07:dimension:ecddd9d6e54c564b03dd",
+              "kind": "subject",
+              "anchor": {
+                "start": 0,
+                "end": 4,
+                "quote": "NOAA"
+              }
+            },
+            {
+              "id": "p07:dimension:ba8521d4b4e1b19dc73d",
+              "kind": "predicate",
+              "anchor": {
+                "start": 5,
+                "end": 12,
+                "quote": "renamed"
+              }
+            },
+            {
+              "id": "p07:dimension:67746ff18b2b11d2a99d",
+              "kind": "entity_identity",
+              "anchor": {
+                "start": 13,
+                "end": 19,
+                "quote": "GOES-U"
+              }
+            },
+            {
+              "id": "p07:dimension:8d3435a7afe261cd66ea",
+              "kind": "exact_designation",
+              "anchor": {
+                "start": 23,
+                "end": 30,
+                "quote": "GOES-19"
+              }
+            },
+            {
+              "id": "p07:dimension:abf413c224d169bf691a",
+              "kind": "time",
+              "anchor": {
+                "start": 34,
+                "end": 47,
+                "quote": "June 25, 2024"
+              }
+            }
+          ],
+          "parent_claim_id": null
+        }
+      ],
+      "probes": [
+        {
+          "id": "p07:probe:139f856c46e9f77e9778",
+          "claim_id": "p07:claim:ca48e93865ef528ae277",
+          "kind": "designation_relation",
+          "dimension_ids": [
+            "p07:dimension:14678ed378d725572a86",
+            "p07:dimension:67746ff18b2b11d2a99d",
+            "p07:dimension:8d3435a7afe261cd66ea",
+            "p07:dimension:abf413c224d169bf691a",
+            "p07:dimension:ba8521d4b4e1b19dc73d",
+            "p07:dimension:ecddd9d6e54c564b03dd"
+          ],
+          "question": "Does the scoped evidence establish together the complete directed relation that NOAA renamed the referent GOES-U to the designation GOES-19 on June 25, 2024, rather than assembling the actor, action, prior referent, new designation and date from separately true facts?",
+          "decision_impact": "Determines whether the complete asserted renaming relation is supported.",
+          "match_policy": "semantic_constraint",
+          "routes": [
+            "atoms",
+            "evidence",
+            "world"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p07:probe:f4487773555bbae0625b",
+          "claim_id": "p07:claim:ca48e93865ef528ae277",
+          "kind": "entity_identity",
+          "dimension_ids": [
+            "p07:dimension:14678ed378d725572a86"
+          ],
+          "question": "Does the scoped evidence identify the actor as NOAA through an exact mention, alias, unambiguous description or anaphora?",
+          "decision_impact": "Determines actor identity without requiring identical surface wording.",
+          "match_policy": "same_referent",
+          "routes": [
+            "atoms",
+            "evidence",
+            "world"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p07:probe:ae3d14a9ef5fd7eedcdc",
+          "claim_id": "p07:claim:ca48e93865ef528ae277",
+          "kind": "entity_identity",
+          "dimension_ids": [
+            "p07:dimension:67746ff18b2b11d2a99d"
+          ],
+          "question": "Does the scoped evidence identify the entity being renamed as the referent of GOES-U through an exact mention, alias, unambiguous description or anaphora?",
+          "decision_impact": "Determines whether the renaming concerns the asserted prior referent.",
+          "match_policy": "same_referent",
+          "routes": [
+            "atoms",
+            "evidence",
+            "world"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p07:probe:0a4d57e7c0fde227b3df",
+          "claim_id": "p07:claim:ca48e93865ef528ae277",
+          "kind": "exact_designation",
+          "dimension_ids": [
+            "p07:dimension:8d3435a7afe261cd66ea"
+          ],
+          "question": "Does the scoped evidence establish the asserted new designation itself as exactly GOES-19?",
+          "decision_impact": "Determines whether the asserted name, rather than merely the entity's identity, is supported.",
+          "match_policy": "exact_designation",
+          "routes": [
+            "atoms",
+            "evidence",
+            "world"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p07:probe:0dea7da87aa6baa994e2",
+          "claim_id": "p07:claim:ca48e93865ef528ae277",
+          "kind": "semantic_core",
+          "dimension_ids": [
+            "p07:dimension:ba8521d4b4e1b19dc73d",
+            "p07:dimension:ecddd9d6e54c564b03dd"
+          ],
+          "question": "Does the scoped evidence establish NOAA as the actor performing the asserted renaming?",
+          "decision_impact": "Determines whether the asserted actor-action core is supported.",
+          "match_policy": "semantic_constraint",
+          "routes": [
+            "atoms",
+            "evidence",
+            "world"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p07:probe:37c270bcd6de2622519e",
+          "claim_id": "p07:claim:ca48e93865ef528ae277",
+          "kind": "source_lineage",
+          "dimension_ids": [],
+          "question": "Within evidence scope m13, what source lineage underlies support for this claim, and does it distinguish direct reporting from attributed or derivative material available by the target as_of?",
+          "decision_impact": "Determines the provenance and temporal eligibility of the scoped support.",
+          "match_policy": "semantic_constraint",
+          "routes": [
+            "lineage",
+            "world"
+          ],
+          "gate": "provenance"
+        },
+        {
+          "id": "p07:probe:d89d902009ccfa05abe8",
+          "claim_id": "p07:claim:ca48e93865ef528ae277",
+          "kind": "time_boundary",
+          "dimension_ids": [
+            "p07:dimension:abf413c224d169bf691a"
+          ],
+          "question": "Does the scoped evidence place the renaming itself on June 25, 2024, rather than attaching that date only to another event or publication?",
+          "decision_impact": "Determines whether the date is correctly bound to the renaming.",
+          "match_policy": "semantic_constraint",
+          "routes": [
+            "atoms",
+            "evidence",
+            "world"
+          ],
+          "gate": "always"
+        }
+      ],
+      "notes": "GOES-U is retained as a maximal entity span; GOES-19 is the asserted new designation.\nThe contract retains the actor, renaming action, prior referent, exact new designation and event date. Assessment is limited to evidence scope m13."
+    }
+  }
+}

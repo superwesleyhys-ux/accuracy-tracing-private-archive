@@ -1,0 +1,1673 @@
+{
+  "target_signature": "3904f681cd1785c5cbbebea55c7a20adc7e7cb77ab5ef6854613150c72ca34e5",
+  "logic": "attribution",
+  "claims": [
+    {
+      "id": "p02:claim:942b6edafbe25a1e3633",
+      "statement": "NASA's February 15, 2024 bulk-sample announcement reported the stated final-total sample mass.",
+      "anchor": {
+        "start": 0,
+        "end": 143,
+        "quote": "NASA's February 15, 2024 bulk-sample announcement reported that the final total mass of the Bennu sample returned by OSIRIS-REx was 70.3 grams."
+      },
+      "role": "attribution",
+      "dimensions": [
+        {
+          "id": "p02:dimension:60aa9b921d4206ae1438",
+          "kind": "entity_identity",
+          "anchor": {
+            "start": 0,
+            "end": 4,
+            "quote": "NASA"
+          }
+        },
+        {
+          "id": "p02:dimension:7f564badce0493c7858c",
+          "kind": "subject",
+          "anchor": {
+            "start": 0,
+            "end": 49,
+            "quote": "NASA's February 15, 2024 bulk-sample announcement"
+          }
+        },
+        {
+          "id": "p02:dimension:f21d285927ef4ca80de9",
+          "kind": "time",
+          "anchor": {
+            "start": 7,
+            "end": 24,
+            "quote": "February 15, 2024"
+          }
+        },
+        {
+          "id": "p02:dimension:9b673305283a523655ee",
+          "kind": "predicate",
+          "anchor": {
+            "start": 50,
+            "end": 58,
+            "quote": "reported"
+          }
+        },
+        {
+          "id": "p02:dimension:a3aa7d30271db9a1cd7e",
+          "kind": "entity_identity",
+          "anchor": {
+            "start": 92,
+            "end": 97,
+            "quote": "Bennu"
+          }
+        },
+        {
+          "id": "p02:dimension:cdf0cc0305cfd1bdf902",
+          "kind": "entity_identity",
+          "anchor": {
+            "start": 117,
+            "end": 127,
+            "quote": "OSIRIS-REx"
+          }
+        }
+      ],
+      "parent_claim_id": null
+    },
+    {
+      "id": "p02:claim:88f64352b040032e23b6",
+      "statement": "The final total mass of the Bennu sample returned by OSIRIS-REx was 70.3 grams.",
+      "anchor": {
+        "start": 64,
+        "end": 142,
+        "quote": "the final total mass of the Bennu sample returned by OSIRIS-REx was 70.3 grams"
+      },
+      "role": "attributed_content",
+      "dimensions": [
+        {
+          "id": "p02:dimension:6ca4c8672c2861093be6",
+          "kind": "subject",
+          "anchor": {
+            "start": 64,
+            "end": 127,
+            "quote": "the final total mass of the Bennu sample returned by OSIRIS-REx"
+          }
+        },
+        {
+          "id": "p02:dimension:ae67b9e2ef028be5f46e",
+          "kind": "baseline_scope",
+          "anchor": {
+            "start": 68,
+            "end": 127,
+            "quote": "final total mass of the Bennu sample returned by OSIRIS-REx"
+          }
+        },
+        {
+          "id": "p02:dimension:1929c6b132d7393f1acc",
+          "kind": "entity_identity",
+          "anchor": {
+            "start": 92,
+            "end": 97,
+            "quote": "Bennu"
+          }
+        },
+        {
+          "id": "p02:dimension:d6bf42b0085c42e98808",
+          "kind": "entity_identity",
+          "anchor": {
+            "start": 117,
+            "end": 127,
+            "quote": "OSIRIS-REx"
+          }
+        },
+        {
+          "id": "p02:dimension:803be2ba248ff2dfe968",
+          "kind": "predicate",
+          "anchor": {
+            "start": 128,
+            "end": 131,
+            "quote": "was"
+          }
+        },
+        {
+          "id": "p02:dimension:681ce91de3d10ce6bcf0",
+          "kind": "quantity_unit",
+          "anchor": {
+            "start": 132,
+            "end": 142,
+            "quote": "70.3 grams"
+          }
+        }
+      ],
+      "parent_claim_id": "p02:claim:942b6edafbe25a1e3633"
+    }
+  ],
+  "probes": [
+    {
+      "id": "p02:probe:8905b2515e6f5cdcd6a2",
+      "claim_id": "p02:claim:88f64352b040032e23b6",
+      "kind": "baseline_scope",
+      "dimension_ids": [
+        "p02:dimension:ae67b9e2ef028be5f46e"
+      ],
+      "question": "Does m03 show that the parent announcement assigned the stated mass to the \"final total mass of the Bennu sample returned by OSIRIS-REx\", rather than a partial, interim, or separately collected portion?",
+      "decision_impact": "Checks that the attributed quantity has the target's final aggregate scope.",
+      "routes": [
+        "atoms",
+        "evidence"
+      ],
+      "gate": "always"
+    },
+    {
+      "id": "p02:probe:97035a237c24035d08ee",
+      "claim_id": "p02:claim:88f64352b040032e23b6",
+      "kind": "entity_identity",
+      "dimension_ids": [
+        "p02:dimension:1929c6b132d7393f1acc"
+      ],
+      "question": "Does m03 show that the parent announcement identified \"Bennu\" as the origin of the sample whose final total mass it reported?",
+      "decision_impact": "Checks the sample-origin identity in the attributed content.",
+      "routes": [
+        "atoms",
+        "evidence",
+        "world"
+      ],
+      "gate": "always"
+    },
+    {
+      "id": "p02:probe:ed0494ef8be7ace4d865",
+      "claim_id": "p02:claim:88f64352b040032e23b6",
+      "kind": "entity_identity",
+      "dimension_ids": [
+        "p02:dimension:d6bf42b0085c42e98808"
+      ],
+      "question": "Does m03 show that the parent announcement identified \"OSIRIS-REx\" as the mission that returned the sample whose final total mass it reported?",
+      "decision_impact": "Checks the returning mission's identity in the attributed content.",
+      "routes": [
+        "atoms",
+        "evidence",
+        "world"
+      ],
+      "gate": "always"
+    },
+    {
+      "id": "p02:probe:25f1d900a660a72631a3",
+      "claim_id": "p02:claim:88f64352b040032e23b6",
+      "kind": "quantity_unit",
+      "dimension_ids": [
+        "p02:dimension:681ce91de3d10ce6bcf0"
+      ],
+      "question": "Does m03 show that the parent announcement reported \"70.3 grams\" as the final total mass, with both that numerical value and unit?",
+      "decision_impact": "Checks the attributed numerical value and measurement unit.",
+      "routes": [
+        "atoms",
+        "evidence"
+      ],
+      "gate": "always"
+    },
+    {
+      "id": "p02:probe:3a8034865e61f391b06c",
+      "claim_id": "p02:claim:88f64352b040032e23b6",
+      "kind": "semantic_core",
+      "dimension_ids": [
+        "p02:dimension:6ca4c8672c2861093be6",
+        "p02:dimension:803be2ba248ff2dfe968"
+      ],
+      "question": "Does m03 show that the announcement identified in parent claim p02:claim:942b6edafbe25a1e3633 reported that \"the final total mass of the Bennu sample returned by OSIRIS-REx\" was the stated mass?",
+      "decision_impact": "Checks the content attributed to the parent announcement, not its independent truth.",
+      "routes": [
+        "atoms",
+        "evidence"
+      ],
+      "gate": "always"
+    },
+    {
+      "id": "p02:probe:2bc6c606089ae836ed72",
+      "claim_id": "p02:claim:88f64352b040032e23b6",
+      "kind": "source_lineage",
+      "dimension_ids": [],
+      "question": "Within m03, can the stated final-total mass content be traced to the announcement identified in parent claim p02:claim:942b6edafbe25a1e3633, rather than to another report or a derived calculation?",
+      "decision_impact": "Checks that the content retains its specified parent-attribution scope.",
+      "routes": [
+        "lineage",
+        "world"
+      ],
+      "gate": "provenance"
+    },
+    {
+      "id": "p02:probe:71fc0acb2b19914c7692",
+      "claim_id": "p02:claim:942b6edafbe25a1e3633",
+      "kind": "entity_identity",
+      "dimension_ids": [
+        "p02:dimension:60aa9b921d4206ae1438"
+      ],
+      "question": "Does m03 identify \"NASA\" as the organization responsible for the specified announcement?",
+      "decision_impact": "Checks the attributed reporting organization's identity.",
+      "routes": [
+        "atoms",
+        "evidence",
+        "world"
+      ],
+      "gate": "always"
+    },
+    {
+      "id": "p02:probe:d65383c1a43cd1c770cd",
+      "claim_id": "p02:claim:942b6edafbe25a1e3633",
+      "kind": "entity_identity",
+      "dimension_ids": [
+        "p02:dimension:a3aa7d30271db9a1cd7e"
+      ],
+      "question": "Does m03 connect the specified announcement's sample-mass report to \"Bennu\", rather than another sample origin?",
+      "decision_impact": "Checks the sample-origin identity within the attribution.",
+      "routes": [
+        "atoms",
+        "evidence",
+        "world"
+      ],
+      "gate": "always"
+    },
+    {
+      "id": "p02:probe:fa68142c935f5d9844c3",
+      "claim_id": "p02:claim:942b6edafbe25a1e3633",
+      "kind": "entity_identity",
+      "dimension_ids": [
+        "p02:dimension:cdf0cc0305cfd1bdf902"
+      ],
+      "question": "Does m03 connect the specified announcement's sample-mass report to the sample returned by \"OSIRIS-REx\"?",
+      "decision_impact": "Checks the mission identity within the attribution.",
+      "routes": [
+        "atoms",
+        "evidence",
+        "world"
+      ],
+      "gate": "always"
+    },
+    {
+      "id": "p02:probe:c55d5aa5bc847e04cb9b",
+      "claim_id": "p02:claim:942b6edafbe25a1e3633",
+      "kind": "semantic_core",
+      "dimension_ids": [
+        "p02:dimension:7f564badce0493c7858c",
+        "p02:dimension:9b673305283a523655ee"
+      ],
+      "question": "Does m03 establish that \"NASA's February 15, 2024 bulk-sample announcement\" reported the stated final-total sample mass?",
+      "decision_impact": "Checks the reporting attribution rather than the independent truth of the mass.",
+      "routes": [
+        "atoms",
+        "evidence"
+      ],
+      "gate": "always"
+    },
+    {
+      "id": "p02:probe:12f9447ca32937e0b070",
+      "claim_id": "p02:claim:942b6edafbe25a1e3633",
+      "kind": "source_lineage",
+      "dimension_ids": [],
+      "question": "Within m03, is the reporting attribution traceable to the specified NASA announcement, rather than solely to an unattributed paraphrase or a different announcement?",
+      "decision_impact": "Checks the provenance of the attribution within the permitted evidence.",
+      "routes": [
+        "lineage",
+        "world"
+      ],
+      "gate": "provenance"
+    },
+    {
+      "id": "p02:probe:27e8ea634a0a3d867fdd",
+      "claim_id": "p02:claim:942b6edafbe25a1e3633",
+      "kind": "time_boundary",
+      "dimension_ids": [
+        "p02:dimension:f21d285927ef4ca80de9"
+      ],
+      "question": "Does m03 identify \"February 15, 2024\" as the date of the announcement to which the target attributes the report?",
+      "decision_impact": "Checks that the attribution concerns the specified dated announcement.",
+      "routes": [
+        "atoms",
+        "evidence"
+      ],
+      "gate": "always"
+    }
+  ],
+  "notes": "The attributed content remains scoped to NASA's February 15, 2024 announcement. Its mass scope is the final aggregate for the returned Bennu sample, not a partial or interim mass.\nThe contract preserves the target's attribution, date, entities, final-total scope, and quantity. Probes are limited to m03; no independent-world assessment is requested.",
+  "sha256": "5b7e14c64f04a49a18555b7826fe182c51b3f7a1945ff0c4e8fcb6c4748c88f5",
+  "projections": {
+    "atoms": {
+      "target_signature": "3904f681cd1785c5cbbebea55c7a20adc7e7cb77ab5ef6854613150c72ca34e5",
+      "plan_sha256": "5b7e14c64f04a49a18555b7826fe182c51b3f7a1945ff0c4e8fcb6c4748c88f5",
+      "stage": "atoms",
+      "claims": [
+        {
+          "id": "p02:claim:942b6edafbe25a1e3633",
+          "statement": "NASA's February 15, 2024 bulk-sample announcement reported the stated final-total sample mass.",
+          "anchor": {
+            "start": 0,
+            "end": 143,
+            "quote": "NASA's February 15, 2024 bulk-sample announcement reported that the final total mass of the Bennu sample returned by OSIRIS-REx was 70.3 grams."
+          },
+          "role": "attribution",
+          "dimensions": [
+            {
+              "id": "p02:dimension:60aa9b921d4206ae1438",
+              "kind": "entity_identity",
+              "anchor": {
+                "start": 0,
+                "end": 4,
+                "quote": "NASA"
+              }
+            },
+            {
+              "id": "p02:dimension:7f564badce0493c7858c",
+              "kind": "subject",
+              "anchor": {
+                "start": 0,
+                "end": 49,
+                "quote": "NASA's February 15, 2024 bulk-sample announcement"
+              }
+            },
+            {
+              "id": "p02:dimension:f21d285927ef4ca80de9",
+              "kind": "time",
+              "anchor": {
+                "start": 7,
+                "end": 24,
+                "quote": "February 15, 2024"
+              }
+            },
+            {
+              "id": "p02:dimension:9b673305283a523655ee",
+              "kind": "predicate",
+              "anchor": {
+                "start": 50,
+                "end": 58,
+                "quote": "reported"
+              }
+            },
+            {
+              "id": "p02:dimension:a3aa7d30271db9a1cd7e",
+              "kind": "entity_identity",
+              "anchor": {
+                "start": 92,
+                "end": 97,
+                "quote": "Bennu"
+              }
+            },
+            {
+              "id": "p02:dimension:cdf0cc0305cfd1bdf902",
+              "kind": "entity_identity",
+              "anchor": {
+                "start": 117,
+                "end": 127,
+                "quote": "OSIRIS-REx"
+              }
+            }
+          ],
+          "parent_claim_id": null
+        },
+        {
+          "id": "p02:claim:88f64352b040032e23b6",
+          "statement": "The final total mass of the Bennu sample returned by OSIRIS-REx was 70.3 grams.",
+          "anchor": {
+            "start": 64,
+            "end": 142,
+            "quote": "the final total mass of the Bennu sample returned by OSIRIS-REx was 70.3 grams"
+          },
+          "role": "attributed_content",
+          "dimensions": [
+            {
+              "id": "p02:dimension:6ca4c8672c2861093be6",
+              "kind": "subject",
+              "anchor": {
+                "start": 64,
+                "end": 127,
+                "quote": "the final total mass of the Bennu sample returned by OSIRIS-REx"
+              }
+            },
+            {
+              "id": "p02:dimension:ae67b9e2ef028be5f46e",
+              "kind": "baseline_scope",
+              "anchor": {
+                "start": 68,
+                "end": 127,
+                "quote": "final total mass of the Bennu sample returned by OSIRIS-REx"
+              }
+            },
+            {
+              "id": "p02:dimension:1929c6b132d7393f1acc",
+              "kind": "entity_identity",
+              "anchor": {
+                "start": 92,
+                "end": 97,
+                "quote": "Bennu"
+              }
+            },
+            {
+              "id": "p02:dimension:d6bf42b0085c42e98808",
+              "kind": "entity_identity",
+              "anchor": {
+                "start": 117,
+                "end": 127,
+                "quote": "OSIRIS-REx"
+              }
+            },
+            {
+              "id": "p02:dimension:803be2ba248ff2dfe968",
+              "kind": "predicate",
+              "anchor": {
+                "start": 128,
+                "end": 131,
+                "quote": "was"
+              }
+            },
+            {
+              "id": "p02:dimension:681ce91de3d10ce6bcf0",
+              "kind": "quantity_unit",
+              "anchor": {
+                "start": 132,
+                "end": 142,
+                "quote": "70.3 grams"
+              }
+            }
+          ],
+          "parent_claim_id": "p02:claim:942b6edafbe25a1e3633"
+        }
+      ],
+      "probes": [
+        {
+          "id": "p02:probe:8905b2515e6f5cdcd6a2",
+          "claim_id": "p02:claim:88f64352b040032e23b6",
+          "kind": "baseline_scope",
+          "dimension_ids": [
+            "p02:dimension:ae67b9e2ef028be5f46e"
+          ],
+          "question": "Does m03 show that the parent announcement assigned the stated mass to the \"final total mass of the Bennu sample returned by OSIRIS-REx\", rather than a partial, interim, or separately collected portion?",
+          "decision_impact": "Checks that the attributed quantity has the target's final aggregate scope.",
+          "routes": [
+            "atoms",
+            "evidence"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p02:probe:97035a237c24035d08ee",
+          "claim_id": "p02:claim:88f64352b040032e23b6",
+          "kind": "entity_identity",
+          "dimension_ids": [
+            "p02:dimension:1929c6b132d7393f1acc"
+          ],
+          "question": "Does m03 show that the parent announcement identified \"Bennu\" as the origin of the sample whose final total mass it reported?",
+          "decision_impact": "Checks the sample-origin identity in the attributed content.",
+          "routes": [
+            "atoms",
+            "evidence",
+            "world"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p02:probe:ed0494ef8be7ace4d865",
+          "claim_id": "p02:claim:88f64352b040032e23b6",
+          "kind": "entity_identity",
+          "dimension_ids": [
+            "p02:dimension:d6bf42b0085c42e98808"
+          ],
+          "question": "Does m03 show that the parent announcement identified \"OSIRIS-REx\" as the mission that returned the sample whose final total mass it reported?",
+          "decision_impact": "Checks the returning mission's identity in the attributed content.",
+          "routes": [
+            "atoms",
+            "evidence",
+            "world"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p02:probe:25f1d900a660a72631a3",
+          "claim_id": "p02:claim:88f64352b040032e23b6",
+          "kind": "quantity_unit",
+          "dimension_ids": [
+            "p02:dimension:681ce91de3d10ce6bcf0"
+          ],
+          "question": "Does m03 show that the parent announcement reported \"70.3 grams\" as the final total mass, with both that numerical value and unit?",
+          "decision_impact": "Checks the attributed numerical value and measurement unit.",
+          "routes": [
+            "atoms",
+            "evidence"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p02:probe:3a8034865e61f391b06c",
+          "claim_id": "p02:claim:88f64352b040032e23b6",
+          "kind": "semantic_core",
+          "dimension_ids": [
+            "p02:dimension:6ca4c8672c2861093be6",
+            "p02:dimension:803be2ba248ff2dfe968"
+          ],
+          "question": "Does m03 show that the announcement identified in parent claim p02:claim:942b6edafbe25a1e3633 reported that \"the final total mass of the Bennu sample returned by OSIRIS-REx\" was the stated mass?",
+          "decision_impact": "Checks the content attributed to the parent announcement, not its independent truth.",
+          "routes": [
+            "atoms",
+            "evidence"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p02:probe:71fc0acb2b19914c7692",
+          "claim_id": "p02:claim:942b6edafbe25a1e3633",
+          "kind": "entity_identity",
+          "dimension_ids": [
+            "p02:dimension:60aa9b921d4206ae1438"
+          ],
+          "question": "Does m03 identify \"NASA\" as the organization responsible for the specified announcement?",
+          "decision_impact": "Checks the attributed reporting organization's identity.",
+          "routes": [
+            "atoms",
+            "evidence",
+            "world"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p02:probe:d65383c1a43cd1c770cd",
+          "claim_id": "p02:claim:942b6edafbe25a1e3633",
+          "kind": "entity_identity",
+          "dimension_ids": [
+            "p02:dimension:a3aa7d30271db9a1cd7e"
+          ],
+          "question": "Does m03 connect the specified announcement's sample-mass report to \"Bennu\", rather than another sample origin?",
+          "decision_impact": "Checks the sample-origin identity within the attribution.",
+          "routes": [
+            "atoms",
+            "evidence",
+            "world"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p02:probe:fa68142c935f5d9844c3",
+          "claim_id": "p02:claim:942b6edafbe25a1e3633",
+          "kind": "entity_identity",
+          "dimension_ids": [
+            "p02:dimension:cdf0cc0305cfd1bdf902"
+          ],
+          "question": "Does m03 connect the specified announcement's sample-mass report to the sample returned by \"OSIRIS-REx\"?",
+          "decision_impact": "Checks the mission identity within the attribution.",
+          "routes": [
+            "atoms",
+            "evidence",
+            "world"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p02:probe:c55d5aa5bc847e04cb9b",
+          "claim_id": "p02:claim:942b6edafbe25a1e3633",
+          "kind": "semantic_core",
+          "dimension_ids": [
+            "p02:dimension:7f564badce0493c7858c",
+            "p02:dimension:9b673305283a523655ee"
+          ],
+          "question": "Does m03 establish that \"NASA's February 15, 2024 bulk-sample announcement\" reported the stated final-total sample mass?",
+          "decision_impact": "Checks the reporting attribution rather than the independent truth of the mass.",
+          "routes": [
+            "atoms",
+            "evidence"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p02:probe:27e8ea634a0a3d867fdd",
+          "claim_id": "p02:claim:942b6edafbe25a1e3633",
+          "kind": "time_boundary",
+          "dimension_ids": [
+            "p02:dimension:f21d285927ef4ca80de9"
+          ],
+          "question": "Does m03 identify \"February 15, 2024\" as the date of the announcement to which the target attributes the report?",
+          "decision_impact": "Checks that the attribution concerns the specified dated announcement.",
+          "routes": [
+            "atoms",
+            "evidence"
+          ],
+          "gate": "always"
+        }
+      ]
+    },
+    "lineage": {
+      "target_signature": "3904f681cd1785c5cbbebea55c7a20adc7e7cb77ab5ef6854613150c72ca34e5",
+      "plan_sha256": "5b7e14c64f04a49a18555b7826fe182c51b3f7a1945ff0c4e8fcb6c4748c88f5",
+      "stage": "lineage",
+      "claims": [
+        {
+          "id": "p02:claim:942b6edafbe25a1e3633",
+          "statement": "NASA's February 15, 2024 bulk-sample announcement reported the stated final-total sample mass.",
+          "anchor": {
+            "start": 0,
+            "end": 143,
+            "quote": "NASA's February 15, 2024 bulk-sample announcement reported that the final total mass of the Bennu sample returned by OSIRIS-REx was 70.3 grams."
+          },
+          "role": "attribution",
+          "dimensions": [
+            {
+              "id": "p02:dimension:60aa9b921d4206ae1438",
+              "kind": "entity_identity",
+              "anchor": {
+                "start": 0,
+                "end": 4,
+                "quote": "NASA"
+              }
+            },
+            {
+              "id": "p02:dimension:7f564badce0493c7858c",
+              "kind": "subject",
+              "anchor": {
+                "start": 0,
+                "end": 49,
+                "quote": "NASA's February 15, 2024 bulk-sample announcement"
+              }
+            },
+            {
+              "id": "p02:dimension:f21d285927ef4ca80de9",
+              "kind": "time",
+              "anchor": {
+                "start": 7,
+                "end": 24,
+                "quote": "February 15, 2024"
+              }
+            },
+            {
+              "id": "p02:dimension:9b673305283a523655ee",
+              "kind": "predicate",
+              "anchor": {
+                "start": 50,
+                "end": 58,
+                "quote": "reported"
+              }
+            },
+            {
+              "id": "p02:dimension:a3aa7d30271db9a1cd7e",
+              "kind": "entity_identity",
+              "anchor": {
+                "start": 92,
+                "end": 97,
+                "quote": "Bennu"
+              }
+            },
+            {
+              "id": "p02:dimension:cdf0cc0305cfd1bdf902",
+              "kind": "entity_identity",
+              "anchor": {
+                "start": 117,
+                "end": 127,
+                "quote": "OSIRIS-REx"
+              }
+            }
+          ],
+          "parent_claim_id": null
+        },
+        {
+          "id": "p02:claim:88f64352b040032e23b6",
+          "statement": "The final total mass of the Bennu sample returned by OSIRIS-REx was 70.3 grams.",
+          "anchor": {
+            "start": 64,
+            "end": 142,
+            "quote": "the final total mass of the Bennu sample returned by OSIRIS-REx was 70.3 grams"
+          },
+          "role": "attributed_content",
+          "dimensions": [
+            {
+              "id": "p02:dimension:6ca4c8672c2861093be6",
+              "kind": "subject",
+              "anchor": {
+                "start": 64,
+                "end": 127,
+                "quote": "the final total mass of the Bennu sample returned by OSIRIS-REx"
+              }
+            },
+            {
+              "id": "p02:dimension:ae67b9e2ef028be5f46e",
+              "kind": "baseline_scope",
+              "anchor": {
+                "start": 68,
+                "end": 127,
+                "quote": "final total mass of the Bennu sample returned by OSIRIS-REx"
+              }
+            },
+            {
+              "id": "p02:dimension:1929c6b132d7393f1acc",
+              "kind": "entity_identity",
+              "anchor": {
+                "start": 92,
+                "end": 97,
+                "quote": "Bennu"
+              }
+            },
+            {
+              "id": "p02:dimension:d6bf42b0085c42e98808",
+              "kind": "entity_identity",
+              "anchor": {
+                "start": 117,
+                "end": 127,
+                "quote": "OSIRIS-REx"
+              }
+            },
+            {
+              "id": "p02:dimension:803be2ba248ff2dfe968",
+              "kind": "predicate",
+              "anchor": {
+                "start": 128,
+                "end": 131,
+                "quote": "was"
+              }
+            },
+            {
+              "id": "p02:dimension:681ce91de3d10ce6bcf0",
+              "kind": "quantity_unit",
+              "anchor": {
+                "start": 132,
+                "end": 142,
+                "quote": "70.3 grams"
+              }
+            }
+          ],
+          "parent_claim_id": "p02:claim:942b6edafbe25a1e3633"
+        }
+      ],
+      "probes": [
+        {
+          "id": "p02:probe:2bc6c606089ae836ed72",
+          "claim_id": "p02:claim:88f64352b040032e23b6",
+          "kind": "source_lineage",
+          "dimension_ids": [],
+          "question": "Within m03, can the stated final-total mass content be traced to the announcement identified in parent claim p02:claim:942b6edafbe25a1e3633, rather than to another report or a derived calculation?",
+          "decision_impact": "Checks that the content retains its specified parent-attribution scope.",
+          "routes": [
+            "lineage",
+            "world"
+          ],
+          "gate": "provenance"
+        },
+        {
+          "id": "p02:probe:12f9447ca32937e0b070",
+          "claim_id": "p02:claim:942b6edafbe25a1e3633",
+          "kind": "source_lineage",
+          "dimension_ids": [],
+          "question": "Within m03, is the reporting attribution traceable to the specified NASA announcement, rather than solely to an unattributed paraphrase or a different announcement?",
+          "decision_impact": "Checks the provenance of the attribution within the permitted evidence.",
+          "routes": [
+            "lineage",
+            "world"
+          ],
+          "gate": "provenance"
+        }
+      ]
+    },
+    "critic": {
+      "target_signature": "3904f681cd1785c5cbbebea55c7a20adc7e7cb77ab5ef6854613150c72ca34e5",
+      "plan_sha256": "5b7e14c64f04a49a18555b7826fe182c51b3f7a1945ff0c4e8fcb6c4748c88f5",
+      "stage": "critic",
+      "claims": [
+        {
+          "id": "p02:claim:942b6edafbe25a1e3633",
+          "statement": "NASA's February 15, 2024 bulk-sample announcement reported the stated final-total sample mass.",
+          "anchor": {
+            "start": 0,
+            "end": 143,
+            "quote": "NASA's February 15, 2024 bulk-sample announcement reported that the final total mass of the Bennu sample returned by OSIRIS-REx was 70.3 grams."
+          },
+          "role": "attribution",
+          "dimensions": [
+            {
+              "id": "p02:dimension:60aa9b921d4206ae1438",
+              "kind": "entity_identity",
+              "anchor": {
+                "start": 0,
+                "end": 4,
+                "quote": "NASA"
+              }
+            },
+            {
+              "id": "p02:dimension:7f564badce0493c7858c",
+              "kind": "subject",
+              "anchor": {
+                "start": 0,
+                "end": 49,
+                "quote": "NASA's February 15, 2024 bulk-sample announcement"
+              }
+            },
+            {
+              "id": "p02:dimension:f21d285927ef4ca80de9",
+              "kind": "time",
+              "anchor": {
+                "start": 7,
+                "end": 24,
+                "quote": "February 15, 2024"
+              }
+            },
+            {
+              "id": "p02:dimension:9b673305283a523655ee",
+              "kind": "predicate",
+              "anchor": {
+                "start": 50,
+                "end": 58,
+                "quote": "reported"
+              }
+            },
+            {
+              "id": "p02:dimension:a3aa7d30271db9a1cd7e",
+              "kind": "entity_identity",
+              "anchor": {
+                "start": 92,
+                "end": 97,
+                "quote": "Bennu"
+              }
+            },
+            {
+              "id": "p02:dimension:cdf0cc0305cfd1bdf902",
+              "kind": "entity_identity",
+              "anchor": {
+                "start": 117,
+                "end": 127,
+                "quote": "OSIRIS-REx"
+              }
+            }
+          ],
+          "parent_claim_id": null
+        },
+        {
+          "id": "p02:claim:88f64352b040032e23b6",
+          "statement": "The final total mass of the Bennu sample returned by OSIRIS-REx was 70.3 grams.",
+          "anchor": {
+            "start": 64,
+            "end": 142,
+            "quote": "the final total mass of the Bennu sample returned by OSIRIS-REx was 70.3 grams"
+          },
+          "role": "attributed_content",
+          "dimensions": [
+            {
+              "id": "p02:dimension:6ca4c8672c2861093be6",
+              "kind": "subject",
+              "anchor": {
+                "start": 64,
+                "end": 127,
+                "quote": "the final total mass of the Bennu sample returned by OSIRIS-REx"
+              }
+            },
+            {
+              "id": "p02:dimension:ae67b9e2ef028be5f46e",
+              "kind": "baseline_scope",
+              "anchor": {
+                "start": 68,
+                "end": 127,
+                "quote": "final total mass of the Bennu sample returned by OSIRIS-REx"
+              }
+            },
+            {
+              "id": "p02:dimension:1929c6b132d7393f1acc",
+              "kind": "entity_identity",
+              "anchor": {
+                "start": 92,
+                "end": 97,
+                "quote": "Bennu"
+              }
+            },
+            {
+              "id": "p02:dimension:d6bf42b0085c42e98808",
+              "kind": "entity_identity",
+              "anchor": {
+                "start": 117,
+                "end": 127,
+                "quote": "OSIRIS-REx"
+              }
+            },
+            {
+              "id": "p02:dimension:803be2ba248ff2dfe968",
+              "kind": "predicate",
+              "anchor": {
+                "start": 128,
+                "end": 131,
+                "quote": "was"
+              }
+            },
+            {
+              "id": "p02:dimension:681ce91de3d10ce6bcf0",
+              "kind": "quantity_unit",
+              "anchor": {
+                "start": 132,
+                "end": 142,
+                "quote": "70.3 grams"
+              }
+            }
+          ],
+          "parent_claim_id": "p02:claim:942b6edafbe25a1e3633"
+        }
+      ],
+      "probes": [
+        {
+          "id": "p02:probe:8905b2515e6f5cdcd6a2",
+          "claim_id": "p02:claim:88f64352b040032e23b6",
+          "kind": "baseline_scope",
+          "dimension_ids": [
+            "p02:dimension:ae67b9e2ef028be5f46e"
+          ],
+          "question": "Does m03 show that the parent announcement assigned the stated mass to the \"final total mass of the Bennu sample returned by OSIRIS-REx\", rather than a partial, interim, or separately collected portion?",
+          "decision_impact": "Checks that the attributed quantity has the target's final aggregate scope.",
+          "routes": [
+            "atoms",
+            "evidence"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p02:probe:97035a237c24035d08ee",
+          "claim_id": "p02:claim:88f64352b040032e23b6",
+          "kind": "entity_identity",
+          "dimension_ids": [
+            "p02:dimension:1929c6b132d7393f1acc"
+          ],
+          "question": "Does m03 show that the parent announcement identified \"Bennu\" as the origin of the sample whose final total mass it reported?",
+          "decision_impact": "Checks the sample-origin identity in the attributed content.",
+          "routes": [
+            "atoms",
+            "evidence",
+            "world"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p02:probe:ed0494ef8be7ace4d865",
+          "claim_id": "p02:claim:88f64352b040032e23b6",
+          "kind": "entity_identity",
+          "dimension_ids": [
+            "p02:dimension:d6bf42b0085c42e98808"
+          ],
+          "question": "Does m03 show that the parent announcement identified \"OSIRIS-REx\" as the mission that returned the sample whose final total mass it reported?",
+          "decision_impact": "Checks the returning mission's identity in the attributed content.",
+          "routes": [
+            "atoms",
+            "evidence",
+            "world"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p02:probe:25f1d900a660a72631a3",
+          "claim_id": "p02:claim:88f64352b040032e23b6",
+          "kind": "quantity_unit",
+          "dimension_ids": [
+            "p02:dimension:681ce91de3d10ce6bcf0"
+          ],
+          "question": "Does m03 show that the parent announcement reported \"70.3 grams\" as the final total mass, with both that numerical value and unit?",
+          "decision_impact": "Checks the attributed numerical value and measurement unit.",
+          "routes": [
+            "atoms",
+            "evidence"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p02:probe:3a8034865e61f391b06c",
+          "claim_id": "p02:claim:88f64352b040032e23b6",
+          "kind": "semantic_core",
+          "dimension_ids": [
+            "p02:dimension:6ca4c8672c2861093be6",
+            "p02:dimension:803be2ba248ff2dfe968"
+          ],
+          "question": "Does m03 show that the announcement identified in parent claim p02:claim:942b6edafbe25a1e3633 reported that \"the final total mass of the Bennu sample returned by OSIRIS-REx\" was the stated mass?",
+          "decision_impact": "Checks the content attributed to the parent announcement, not its independent truth.",
+          "routes": [
+            "atoms",
+            "evidence"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p02:probe:2bc6c606089ae836ed72",
+          "claim_id": "p02:claim:88f64352b040032e23b6",
+          "kind": "source_lineage",
+          "dimension_ids": [],
+          "question": "Within m03, can the stated final-total mass content be traced to the announcement identified in parent claim p02:claim:942b6edafbe25a1e3633, rather than to another report or a derived calculation?",
+          "decision_impact": "Checks that the content retains its specified parent-attribution scope.",
+          "routes": [
+            "lineage",
+            "world"
+          ],
+          "gate": "provenance"
+        },
+        {
+          "id": "p02:probe:71fc0acb2b19914c7692",
+          "claim_id": "p02:claim:942b6edafbe25a1e3633",
+          "kind": "entity_identity",
+          "dimension_ids": [
+            "p02:dimension:60aa9b921d4206ae1438"
+          ],
+          "question": "Does m03 identify \"NASA\" as the organization responsible for the specified announcement?",
+          "decision_impact": "Checks the attributed reporting organization's identity.",
+          "routes": [
+            "atoms",
+            "evidence",
+            "world"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p02:probe:d65383c1a43cd1c770cd",
+          "claim_id": "p02:claim:942b6edafbe25a1e3633",
+          "kind": "entity_identity",
+          "dimension_ids": [
+            "p02:dimension:a3aa7d30271db9a1cd7e"
+          ],
+          "question": "Does m03 connect the specified announcement's sample-mass report to \"Bennu\", rather than another sample origin?",
+          "decision_impact": "Checks the sample-origin identity within the attribution.",
+          "routes": [
+            "atoms",
+            "evidence",
+            "world"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p02:probe:fa68142c935f5d9844c3",
+          "claim_id": "p02:claim:942b6edafbe25a1e3633",
+          "kind": "entity_identity",
+          "dimension_ids": [
+            "p02:dimension:cdf0cc0305cfd1bdf902"
+          ],
+          "question": "Does m03 connect the specified announcement's sample-mass report to the sample returned by \"OSIRIS-REx\"?",
+          "decision_impact": "Checks the mission identity within the attribution.",
+          "routes": [
+            "atoms",
+            "evidence",
+            "world"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p02:probe:c55d5aa5bc847e04cb9b",
+          "claim_id": "p02:claim:942b6edafbe25a1e3633",
+          "kind": "semantic_core",
+          "dimension_ids": [
+            "p02:dimension:7f564badce0493c7858c",
+            "p02:dimension:9b673305283a523655ee"
+          ],
+          "question": "Does m03 establish that \"NASA's February 15, 2024 bulk-sample announcement\" reported the stated final-total sample mass?",
+          "decision_impact": "Checks the reporting attribution rather than the independent truth of the mass.",
+          "routes": [
+            "atoms",
+            "evidence"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p02:probe:12f9447ca32937e0b070",
+          "claim_id": "p02:claim:942b6edafbe25a1e3633",
+          "kind": "source_lineage",
+          "dimension_ids": [],
+          "question": "Within m03, is the reporting attribution traceable to the specified NASA announcement, rather than solely to an unattributed paraphrase or a different announcement?",
+          "decision_impact": "Checks the provenance of the attribution within the permitted evidence.",
+          "routes": [
+            "lineage",
+            "world"
+          ],
+          "gate": "provenance"
+        },
+        {
+          "id": "p02:probe:27e8ea634a0a3d867fdd",
+          "claim_id": "p02:claim:942b6edafbe25a1e3633",
+          "kind": "time_boundary",
+          "dimension_ids": [
+            "p02:dimension:f21d285927ef4ca80de9"
+          ],
+          "question": "Does m03 identify \"February 15, 2024\" as the date of the announcement to which the target attributes the report?",
+          "decision_impact": "Checks that the attribution concerns the specified dated announcement.",
+          "routes": [
+            "atoms",
+            "evidence"
+          ],
+          "gate": "always"
+        }
+      ]
+    },
+    "evidence": {
+      "target_signature": "3904f681cd1785c5cbbebea55c7a20adc7e7cb77ab5ef6854613150c72ca34e5",
+      "plan_sha256": "5b7e14c64f04a49a18555b7826fe182c51b3f7a1945ff0c4e8fcb6c4748c88f5",
+      "stage": "evidence",
+      "claims": [
+        {
+          "id": "p02:claim:942b6edafbe25a1e3633",
+          "statement": "NASA's February 15, 2024 bulk-sample announcement reported the stated final-total sample mass.",
+          "anchor": {
+            "start": 0,
+            "end": 143,
+            "quote": "NASA's February 15, 2024 bulk-sample announcement reported that the final total mass of the Bennu sample returned by OSIRIS-REx was 70.3 grams."
+          },
+          "role": "attribution",
+          "dimensions": [
+            {
+              "id": "p02:dimension:60aa9b921d4206ae1438",
+              "kind": "entity_identity",
+              "anchor": {
+                "start": 0,
+                "end": 4,
+                "quote": "NASA"
+              }
+            },
+            {
+              "id": "p02:dimension:7f564badce0493c7858c",
+              "kind": "subject",
+              "anchor": {
+                "start": 0,
+                "end": 49,
+                "quote": "NASA's February 15, 2024 bulk-sample announcement"
+              }
+            },
+            {
+              "id": "p02:dimension:f21d285927ef4ca80de9",
+              "kind": "time",
+              "anchor": {
+                "start": 7,
+                "end": 24,
+                "quote": "February 15, 2024"
+              }
+            },
+            {
+              "id": "p02:dimension:9b673305283a523655ee",
+              "kind": "predicate",
+              "anchor": {
+                "start": 50,
+                "end": 58,
+                "quote": "reported"
+              }
+            },
+            {
+              "id": "p02:dimension:a3aa7d30271db9a1cd7e",
+              "kind": "entity_identity",
+              "anchor": {
+                "start": 92,
+                "end": 97,
+                "quote": "Bennu"
+              }
+            },
+            {
+              "id": "p02:dimension:cdf0cc0305cfd1bdf902",
+              "kind": "entity_identity",
+              "anchor": {
+                "start": 117,
+                "end": 127,
+                "quote": "OSIRIS-REx"
+              }
+            }
+          ],
+          "parent_claim_id": null
+        },
+        {
+          "id": "p02:claim:88f64352b040032e23b6",
+          "statement": "The final total mass of the Bennu sample returned by OSIRIS-REx was 70.3 grams.",
+          "anchor": {
+            "start": 64,
+            "end": 142,
+            "quote": "the final total mass of the Bennu sample returned by OSIRIS-REx was 70.3 grams"
+          },
+          "role": "attributed_content",
+          "dimensions": [
+            {
+              "id": "p02:dimension:6ca4c8672c2861093be6",
+              "kind": "subject",
+              "anchor": {
+                "start": 64,
+                "end": 127,
+                "quote": "the final total mass of the Bennu sample returned by OSIRIS-REx"
+              }
+            },
+            {
+              "id": "p02:dimension:ae67b9e2ef028be5f46e",
+              "kind": "baseline_scope",
+              "anchor": {
+                "start": 68,
+                "end": 127,
+                "quote": "final total mass of the Bennu sample returned by OSIRIS-REx"
+              }
+            },
+            {
+              "id": "p02:dimension:1929c6b132d7393f1acc",
+              "kind": "entity_identity",
+              "anchor": {
+                "start": 92,
+                "end": 97,
+                "quote": "Bennu"
+              }
+            },
+            {
+              "id": "p02:dimension:d6bf42b0085c42e98808",
+              "kind": "entity_identity",
+              "anchor": {
+                "start": 117,
+                "end": 127,
+                "quote": "OSIRIS-REx"
+              }
+            },
+            {
+              "id": "p02:dimension:803be2ba248ff2dfe968",
+              "kind": "predicate",
+              "anchor": {
+                "start": 128,
+                "end": 131,
+                "quote": "was"
+              }
+            },
+            {
+              "id": "p02:dimension:681ce91de3d10ce6bcf0",
+              "kind": "quantity_unit",
+              "anchor": {
+                "start": 132,
+                "end": 142,
+                "quote": "70.3 grams"
+              }
+            }
+          ],
+          "parent_claim_id": "p02:claim:942b6edafbe25a1e3633"
+        }
+      ],
+      "probes": [
+        {
+          "id": "p02:probe:8905b2515e6f5cdcd6a2",
+          "claim_id": "p02:claim:88f64352b040032e23b6",
+          "kind": "baseline_scope",
+          "dimension_ids": [
+            "p02:dimension:ae67b9e2ef028be5f46e"
+          ],
+          "question": "Does m03 show that the parent announcement assigned the stated mass to the \"final total mass of the Bennu sample returned by OSIRIS-REx\", rather than a partial, interim, or separately collected portion?",
+          "decision_impact": "Checks that the attributed quantity has the target's final aggregate scope.",
+          "routes": [
+            "atoms",
+            "evidence"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p02:probe:97035a237c24035d08ee",
+          "claim_id": "p02:claim:88f64352b040032e23b6",
+          "kind": "entity_identity",
+          "dimension_ids": [
+            "p02:dimension:1929c6b132d7393f1acc"
+          ],
+          "question": "Does m03 show that the parent announcement identified \"Bennu\" as the origin of the sample whose final total mass it reported?",
+          "decision_impact": "Checks the sample-origin identity in the attributed content.",
+          "routes": [
+            "atoms",
+            "evidence",
+            "world"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p02:probe:ed0494ef8be7ace4d865",
+          "claim_id": "p02:claim:88f64352b040032e23b6",
+          "kind": "entity_identity",
+          "dimension_ids": [
+            "p02:dimension:d6bf42b0085c42e98808"
+          ],
+          "question": "Does m03 show that the parent announcement identified \"OSIRIS-REx\" as the mission that returned the sample whose final total mass it reported?",
+          "decision_impact": "Checks the returning mission's identity in the attributed content.",
+          "routes": [
+            "atoms",
+            "evidence",
+            "world"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p02:probe:25f1d900a660a72631a3",
+          "claim_id": "p02:claim:88f64352b040032e23b6",
+          "kind": "quantity_unit",
+          "dimension_ids": [
+            "p02:dimension:681ce91de3d10ce6bcf0"
+          ],
+          "question": "Does m03 show that the parent announcement reported \"70.3 grams\" as the final total mass, with both that numerical value and unit?",
+          "decision_impact": "Checks the attributed numerical value and measurement unit.",
+          "routes": [
+            "atoms",
+            "evidence"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p02:probe:3a8034865e61f391b06c",
+          "claim_id": "p02:claim:88f64352b040032e23b6",
+          "kind": "semantic_core",
+          "dimension_ids": [
+            "p02:dimension:6ca4c8672c2861093be6",
+            "p02:dimension:803be2ba248ff2dfe968"
+          ],
+          "question": "Does m03 show that the announcement identified in parent claim p02:claim:942b6edafbe25a1e3633 reported that \"the final total mass of the Bennu sample returned by OSIRIS-REx\" was the stated mass?",
+          "decision_impact": "Checks the content attributed to the parent announcement, not its independent truth.",
+          "routes": [
+            "atoms",
+            "evidence"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p02:probe:71fc0acb2b19914c7692",
+          "claim_id": "p02:claim:942b6edafbe25a1e3633",
+          "kind": "entity_identity",
+          "dimension_ids": [
+            "p02:dimension:60aa9b921d4206ae1438"
+          ],
+          "question": "Does m03 identify \"NASA\" as the organization responsible for the specified announcement?",
+          "decision_impact": "Checks the attributed reporting organization's identity.",
+          "routes": [
+            "atoms",
+            "evidence",
+            "world"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p02:probe:d65383c1a43cd1c770cd",
+          "claim_id": "p02:claim:942b6edafbe25a1e3633",
+          "kind": "entity_identity",
+          "dimension_ids": [
+            "p02:dimension:a3aa7d30271db9a1cd7e"
+          ],
+          "question": "Does m03 connect the specified announcement's sample-mass report to \"Bennu\", rather than another sample origin?",
+          "decision_impact": "Checks the sample-origin identity within the attribution.",
+          "routes": [
+            "atoms",
+            "evidence",
+            "world"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p02:probe:fa68142c935f5d9844c3",
+          "claim_id": "p02:claim:942b6edafbe25a1e3633",
+          "kind": "entity_identity",
+          "dimension_ids": [
+            "p02:dimension:cdf0cc0305cfd1bdf902"
+          ],
+          "question": "Does m03 connect the specified announcement's sample-mass report to the sample returned by \"OSIRIS-REx\"?",
+          "decision_impact": "Checks the mission identity within the attribution.",
+          "routes": [
+            "atoms",
+            "evidence",
+            "world"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p02:probe:c55d5aa5bc847e04cb9b",
+          "claim_id": "p02:claim:942b6edafbe25a1e3633",
+          "kind": "semantic_core",
+          "dimension_ids": [
+            "p02:dimension:7f564badce0493c7858c",
+            "p02:dimension:9b673305283a523655ee"
+          ],
+          "question": "Does m03 establish that \"NASA's February 15, 2024 bulk-sample announcement\" reported the stated final-total sample mass?",
+          "decision_impact": "Checks the reporting attribution rather than the independent truth of the mass.",
+          "routes": [
+            "atoms",
+            "evidence"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p02:probe:27e8ea634a0a3d867fdd",
+          "claim_id": "p02:claim:942b6edafbe25a1e3633",
+          "kind": "time_boundary",
+          "dimension_ids": [
+            "p02:dimension:f21d285927ef4ca80de9"
+          ],
+          "question": "Does m03 identify \"February 15, 2024\" as the date of the announcement to which the target attributes the report?",
+          "decision_impact": "Checks that the attribution concerns the specified dated announcement.",
+          "routes": [
+            "atoms",
+            "evidence"
+          ],
+          "gate": "always"
+        }
+      ]
+    },
+    "world": {
+      "target_signature": "3904f681cd1785c5cbbebea55c7a20adc7e7cb77ab5ef6854613150c72ca34e5",
+      "plan_sha256": "5b7e14c64f04a49a18555b7826fe182c51b3f7a1945ff0c4e8fcb6c4748c88f5",
+      "stage": "world",
+      "claims": [
+        {
+          "id": "p02:claim:942b6edafbe25a1e3633",
+          "statement": "NASA's February 15, 2024 bulk-sample announcement reported the stated final-total sample mass.",
+          "anchor": {
+            "start": 0,
+            "end": 143,
+            "quote": "NASA's February 15, 2024 bulk-sample announcement reported that the final total mass of the Bennu sample returned by OSIRIS-REx was 70.3 grams."
+          },
+          "role": "attribution",
+          "dimensions": [
+            {
+              "id": "p02:dimension:60aa9b921d4206ae1438",
+              "kind": "entity_identity",
+              "anchor": {
+                "start": 0,
+                "end": 4,
+                "quote": "NASA"
+              }
+            },
+            {
+              "id": "p02:dimension:7f564badce0493c7858c",
+              "kind": "subject",
+              "anchor": {
+                "start": 0,
+                "end": 49,
+                "quote": "NASA's February 15, 2024 bulk-sample announcement"
+              }
+            },
+            {
+              "id": "p02:dimension:f21d285927ef4ca80de9",
+              "kind": "time",
+              "anchor": {
+                "start": 7,
+                "end": 24,
+                "quote": "February 15, 2024"
+              }
+            },
+            {
+              "id": "p02:dimension:9b673305283a523655ee",
+              "kind": "predicate",
+              "anchor": {
+                "start": 50,
+                "end": 58,
+                "quote": "reported"
+              }
+            },
+            {
+              "id": "p02:dimension:a3aa7d30271db9a1cd7e",
+              "kind": "entity_identity",
+              "anchor": {
+                "start": 92,
+                "end": 97,
+                "quote": "Bennu"
+              }
+            },
+            {
+              "id": "p02:dimension:cdf0cc0305cfd1bdf902",
+              "kind": "entity_identity",
+              "anchor": {
+                "start": 117,
+                "end": 127,
+                "quote": "OSIRIS-REx"
+              }
+            }
+          ],
+          "parent_claim_id": null
+        },
+        {
+          "id": "p02:claim:88f64352b040032e23b6",
+          "statement": "The final total mass of the Bennu sample returned by OSIRIS-REx was 70.3 grams.",
+          "anchor": {
+            "start": 64,
+            "end": 142,
+            "quote": "the final total mass of the Bennu sample returned by OSIRIS-REx was 70.3 grams"
+          },
+          "role": "attributed_content",
+          "dimensions": [
+            {
+              "id": "p02:dimension:6ca4c8672c2861093be6",
+              "kind": "subject",
+              "anchor": {
+                "start": 64,
+                "end": 127,
+                "quote": "the final total mass of the Bennu sample returned by OSIRIS-REx"
+              }
+            },
+            {
+              "id": "p02:dimension:ae67b9e2ef028be5f46e",
+              "kind": "baseline_scope",
+              "anchor": {
+                "start": 68,
+                "end": 127,
+                "quote": "final total mass of the Bennu sample returned by OSIRIS-REx"
+              }
+            },
+            {
+              "id": "p02:dimension:1929c6b132d7393f1acc",
+              "kind": "entity_identity",
+              "anchor": {
+                "start": 92,
+                "end": 97,
+                "quote": "Bennu"
+              }
+            },
+            {
+              "id": "p02:dimension:d6bf42b0085c42e98808",
+              "kind": "entity_identity",
+              "anchor": {
+                "start": 117,
+                "end": 127,
+                "quote": "OSIRIS-REx"
+              }
+            },
+            {
+              "id": "p02:dimension:803be2ba248ff2dfe968",
+              "kind": "predicate",
+              "anchor": {
+                "start": 128,
+                "end": 131,
+                "quote": "was"
+              }
+            },
+            {
+              "id": "p02:dimension:681ce91de3d10ce6bcf0",
+              "kind": "quantity_unit",
+              "anchor": {
+                "start": 132,
+                "end": 142,
+                "quote": "70.3 grams"
+              }
+            }
+          ],
+          "parent_claim_id": "p02:claim:942b6edafbe25a1e3633"
+        }
+      ],
+      "probes": [
+        {
+          "id": "p02:probe:97035a237c24035d08ee",
+          "claim_id": "p02:claim:88f64352b040032e23b6",
+          "kind": "entity_identity",
+          "dimension_ids": [
+            "p02:dimension:1929c6b132d7393f1acc"
+          ],
+          "question": "Does m03 show that the parent announcement identified \"Bennu\" as the origin of the sample whose final total mass it reported?",
+          "decision_impact": "Checks the sample-origin identity in the attributed content.",
+          "routes": [
+            "atoms",
+            "evidence",
+            "world"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p02:probe:ed0494ef8be7ace4d865",
+          "claim_id": "p02:claim:88f64352b040032e23b6",
+          "kind": "entity_identity",
+          "dimension_ids": [
+            "p02:dimension:d6bf42b0085c42e98808"
+          ],
+          "question": "Does m03 show that the parent announcement identified \"OSIRIS-REx\" as the mission that returned the sample whose final total mass it reported?",
+          "decision_impact": "Checks the returning mission's identity in the attributed content.",
+          "routes": [
+            "atoms",
+            "evidence",
+            "world"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p02:probe:2bc6c606089ae836ed72",
+          "claim_id": "p02:claim:88f64352b040032e23b6",
+          "kind": "source_lineage",
+          "dimension_ids": [],
+          "question": "Within m03, can the stated final-total mass content be traced to the announcement identified in parent claim p02:claim:942b6edafbe25a1e3633, rather than to another report or a derived calculation?",
+          "decision_impact": "Checks that the content retains its specified parent-attribution scope.",
+          "routes": [
+            "lineage",
+            "world"
+          ],
+          "gate": "provenance"
+        },
+        {
+          "id": "p02:probe:71fc0acb2b19914c7692",
+          "claim_id": "p02:claim:942b6edafbe25a1e3633",
+          "kind": "entity_identity",
+          "dimension_ids": [
+            "p02:dimension:60aa9b921d4206ae1438"
+          ],
+          "question": "Does m03 identify \"NASA\" as the organization responsible for the specified announcement?",
+          "decision_impact": "Checks the attributed reporting organization's identity.",
+          "routes": [
+            "atoms",
+            "evidence",
+            "world"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p02:probe:d65383c1a43cd1c770cd",
+          "claim_id": "p02:claim:942b6edafbe25a1e3633",
+          "kind": "entity_identity",
+          "dimension_ids": [
+            "p02:dimension:a3aa7d30271db9a1cd7e"
+          ],
+          "question": "Does m03 connect the specified announcement's sample-mass report to \"Bennu\", rather than another sample origin?",
+          "decision_impact": "Checks the sample-origin identity within the attribution.",
+          "routes": [
+            "atoms",
+            "evidence",
+            "world"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p02:probe:fa68142c935f5d9844c3",
+          "claim_id": "p02:claim:942b6edafbe25a1e3633",
+          "kind": "entity_identity",
+          "dimension_ids": [
+            "p02:dimension:cdf0cc0305cfd1bdf902"
+          ],
+          "question": "Does m03 connect the specified announcement's sample-mass report to the sample returned by \"OSIRIS-REx\"?",
+          "decision_impact": "Checks the mission identity within the attribution.",
+          "routes": [
+            "atoms",
+            "evidence",
+            "world"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p02:probe:12f9447ca32937e0b070",
+          "claim_id": "p02:claim:942b6edafbe25a1e3633",
+          "kind": "source_lineage",
+          "dimension_ids": [],
+          "question": "Within m03, is the reporting attribution traceable to the specified NASA announcement, rather than solely to an unattributed paraphrase or a different announcement?",
+          "decision_impact": "Checks the provenance of the attribution within the permitted evidence.",
+          "routes": [
+            "lineage",
+            "world"
+          ],
+          "gate": "provenance"
+        }
+      ]
+    }
+  }
+}

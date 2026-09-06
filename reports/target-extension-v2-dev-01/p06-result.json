@@ -1,0 +1,18 @@
+{
+  "id": "p06",
+  "assessment_mode": "world",
+  "status": "error",
+  "prediction": null,
+  "checkpoints": [],
+  "error_type": "TargetPlanningError",
+  "error_stage": "claim_contract",
+  "usage": {
+    "model_calls": 1,
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "seconds": 9.395183655011351
+  },
+  "checkpoint_hashes": [],
+  "new_api_attempts": 1,
+  "returned_responses": 0
+}

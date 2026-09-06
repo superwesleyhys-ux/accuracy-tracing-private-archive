@@ -1,0 +1,48 @@
+[
+  {
+    "round": 1,
+    "kind": "fixed_corpus_development_reanalysis",
+    "tasks": [
+      {
+        "id": "origin:p08",
+        "question": "Find the producing record and evidenced lineage for: The USGS Unified Geologic Map of the Moon released in 2020 combined six Apollo-era regional maps with newer lunar-mission data.",
+        "stage": "provenance",
+        "dimension": "auto",
+        "blocking": true,
+        "target_id": null,
+        "basis": [],
+        "decision_impact": "",
+        "action": "search",
+        "locator": null,
+        "probe_id": null
+      }
+    ],
+    "returned": [
+      "m14",
+      "m15"
+    ]
+  },
+  {
+    "round": 2,
+    "kind": "fixed_corpus_development_reanalysis",
+    "tasks": [
+      {
+        "id": "inspect-lineage",
+        "question": "Inspect unresolved upstream lineage",
+        "stage": "provenance",
+        "dimension": "auto",
+        "blocking": true,
+        "target_id": null,
+        "basis": [],
+        "decision_impact": "",
+        "action": "search",
+        "locator": null,
+        "probe_id": null
+      }
+    ],
+    "returned": [
+      "m14",
+      "m15"
+    ]
+  }
+]

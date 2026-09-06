@@ -1,0 +1,84 @@
+{
+  "id": "p04",
+  "arm": "single",
+  "assessment_mode": "evidence",
+  "status": "completed",
+  "prediction": {
+    "decision": "false",
+    "origins": [
+      "m07"
+    ],
+    "edges": [],
+    "provenance_evaluable": true,
+    "origin_evaluable": true,
+    "edges_evaluable": true,
+    "provenance_status": "original_material_located",
+    "assessment_valid": true
+  },
+  "usage": {
+    "model_calls": 4,
+    "input_tokens": 5909,
+    "output_tokens": 6218,
+    "seconds": 96.17442510100227
+  },
+  "state_sha256": "955a2f0425ef9cdb2d60f7a6dc9a013e05f9e398b01e8183712a0a53dc6c3f78",
+  "prefix_usage": {
+    "model_calls": 3,
+    "input_tokens": 5478,
+    "output_tokens": 6192,
+    "seconds": 94.8158274219968
+  },
+  "native_prediction": {
+    "id": "p04",
+    "assessment_mode": "evidence",
+    "as_of": "2026-09-05T09:34:36Z",
+    "decision": "false",
+    "assessments": {
+      "evidence": {
+        "raw_verdict": "contradicted",
+        "decision": "contradicted",
+        "blocking_gap_ids": []
+      },
+      "world": {
+        "raw_verdict": "contradicted",
+        "decision": "contradicted",
+        "blocking_gap_ids": []
+      }
+    },
+    "provenance_status": "original_material_located",
+    "assessment_valid": true,
+    "stop_reason": "complete"
+  },
+  "checkpoints": [
+    {
+      "round": 1,
+      "id": "p04",
+      "decision": "false",
+      "assessment_mode": "evidence",
+      "assessments": {
+        "evidence": {
+          "raw_verdict": "contradicted",
+          "decision": "contradicted",
+          "blocking_gap_ids": []
+        },
+        "world": {
+          "raw_verdict": "contradicted",
+          "decision": "contradicted",
+          "blocking_gap_ids": []
+        }
+      },
+      "provenance_status": "original_material_located"
+    }
+  ],
+  "extractor_answer_text": "{\"id\": \"p04\", \"assessment_mode\": \"evidence\", \"as_of\": \"2026-09-05T09:34:36Z\", \"decision\": \"false\", \"assessments\": {\"evidence\": {\"raw_verdict\": \"contradicted\", \"decision\": \"contradicted\", \"blocking_gap_ids\": []}, \"world\": {\"raw_verdict\": \"contradicted\", \"decision\": \"contradicted\", \"blocking_gap_ids\": []}}, \"provenance_status\": \"original_material_located\", \"assessment_valid\": true, \"stop_reason\": \"complete\"}",
+  "extraction": {
+    "decision": "false",
+    "extractable": true,
+    "basis_quote": "\"decision\": \"false\""
+  },
+  "actual_new_api_usage": {
+    "model_calls": 4,
+    "input_tokens": 5909,
+    "output_tokens": 6218
+  }
+}

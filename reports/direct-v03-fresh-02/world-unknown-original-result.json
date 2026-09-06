@@ -1,0 +1,14 @@
+{
+  "id": "world-unknown",
+  "arm": "original",
+  "status": "error",
+  "prediction": null,
+  "assessment_mode": "world",
+  "error_type": "RuntimeError",
+  "usage": {
+    "model_calls": 1,
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "seconds": 4.040270651996252
+  }
+}

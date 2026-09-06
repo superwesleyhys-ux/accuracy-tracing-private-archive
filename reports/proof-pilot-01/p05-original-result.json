@@ -1,0 +1,19 @@
+{
+  "id": "p05",
+  "arm": "original",
+  "assessment_mode": "evidence",
+  "status": "error",
+  "prediction": null,
+  "usage": {
+    "model_calls": 11,
+    "input_tokens": 8348,
+    "output_tokens": 6192,
+    "seconds": 102.9937370330008
+  },
+  "error_type": "RuntimeError",
+  "actual_new_api_usage": {
+    "model_calls": 11,
+    "input_tokens": 8348,
+    "output_tokens": 6192
+  }
+}

@@ -1,0 +1,79 @@
+{
+  "experiment": "staged_psi_development_v1",
+  "scheduled": 2,
+  "completed": 0,
+  "execution_errors": 2,
+  "correct_against_provisional_reference": 0,
+  "execution_gate_passed": false,
+  "provisional_label_gate_passed": false,
+  "task_success_rate": 0.0,
+  "conditional_label_agreement": null,
+  "paired_completed_cases": 0,
+  "fixes": 0,
+  "breaks": 0,
+  "origins": {
+    "evaluable_cases": 0,
+    "excluded_cases": 2,
+    "exclusions": {
+      "gold_not_evaluable_or_unknown": 2
+    },
+    "matched_predictions": 0,
+    "predicted_items": 0,
+    "precision": null,
+    "scope": "corpus-relative, restricted to explicitly evaluable material",
+    "metric": "corpus-relative documentary-root accuracy",
+    "recall": null,
+    "cases_with_acceptable_origin": 0,
+    "recall_denominator": 0,
+    "recall_definition": "fraction of evaluable cases with at least one acceptable origin; gold origins are alternatives"
+  },
+  "edges": {
+    "evaluable_cases": 0,
+    "excluded_cases": 2,
+    "exclusions": {
+      "gold_not_evaluable_or_unknown": 2
+    },
+    "matched_predictions": 0,
+    "predicted_items": 0,
+    "precision": null,
+    "scope": "corpus-relative, restricted to explicitly evaluable material",
+    "recall": null,
+    "gold_edges": 0,
+    "recall_denominator": 0,
+    "recall_definition": "micro recall over known exhaustive excerpt-level edge sets"
+  },
+  "cases": [
+    {
+      "id": "p02",
+      "reference": "false",
+      "status": "error",
+      "first_round_decision": null,
+      "final_decision": null,
+      "correct": false,
+      "verification_rounds": []
+    },
+    {
+      "id": "p04",
+      "reference": "false",
+      "status": "error",
+      "first_round_decision": null,
+      "final_decision": null,
+      "correct": false,
+      "verification_rounds": []
+    }
+  ],
+  "usage": {
+    "model_calls": 2,
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "seconds": 39.19708823200199
+  },
+  "reference_sha256": "4cd818aecf0693559c2b877a7067a7b765159abc4b6b832535fb6a14add13ce5",
+  "results_sha256": "ce132b97f7c454fc1b4f8e060b9f76a0155e1baee4cf5ae789f10b128f8ffd28",
+  "limits": [
+    "Previously seen development cases; reference labels are AI-reviewed, not human-adjudicated.",
+    "This is a changed pipeline and resource configuration, not an equal-budget superiority test.",
+    "Fixed snapshots and forced outer rounds; no open-web collection benchmark.",
+    "Semantic acceptance by a model critic is not independent ground truth."
+  ]
+}

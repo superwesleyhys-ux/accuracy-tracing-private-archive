@@ -1,0 +1,569 @@
+{
+  "schema_version": "0.3",
+  "scope": "plugin-supplied semantic analyses; no built-in truth oracle",
+  "target": {
+    "id": "p07",
+    "text": "NOAA renamed GOES-U to GOES-19 on June 25, 2024.",
+    "as_of": "2026-09-05T09:34:36Z",
+    "source_version_id": "m12",
+    "assessment_mode": "evidence",
+    "evidence_scope": [
+      "m13"
+    ]
+  },
+  "config": {
+    "max_rounds": 1,
+    "max_documents": 24,
+    "max_decomposition_calls": 36,
+    "experimental_force_rounds": false
+  },
+  "provenance_status": "unresolved",
+  "fact_status": "unresolved",
+  "stop_reason": "decomposer_error",
+  "usage": {
+    "rounds": 1,
+    "documents": 2,
+    "unique_versions": 2,
+    "decomposition_calls": 2,
+    "verification_calls": 0
+  },
+  "decision_status": "unresolved",
+  "assessments": null,
+  "assessment_valid": false,
+  "materials": [
+    {
+      "version_id": "m12",
+      "url": "https://www.nesdis.noaa.gov/news/noaas-goes-u-satellite-one-year-later",
+      "content": "NOAA’s GOES-U Satellite: One Year Later\nPublication date: 2025-06-25\n\nOn June 25, 2024, GOES-U, the final satellite in NOAA’s GOES-R Series, launched from NASA’s Kennedy Space Center in Florida. Once GOES-U [reached geostationary orbit](https://www.nesdis.noaa.gov/news/noaas-goes-u-reaches-geostationary-orbit-now-designated-goes-19) on July 7, the satellite was renamed GOES-19. As NOAA marks the first anniversary of sending GOES-U into space, we check in with the newest satellite in NOAA’s fleet.",
+      "retrieved_at": "2026-09-05T09:34:36Z",
+      "published_at": null,
+      "available_at": "2026-09-05T09:34:36Z",
+      "availability_basis": "Current web-tool collection completed at retrieved_at on 2026-09-05. The supplied material is a selected, whitespace-normalized excerpt, not a full page or historical exact-version capture. Availability is asserted only at collection completion. The source's displayed publication date is preserved in content; no exact timezone-qualified publication instant is known.",
+      "issuer": "NOAA NESDIS"
+    },
+    {
+      "version_id": "m13",
+      "url": "https://www.nesdis.noaa.gov/news/noaas-goes-u-reaches-geostationary-orbit-now-designated-goes-19",
+      "content": "NOAA’s GOES-U Reaches Geostationary Orbit, Now Designated GOES-19\nPublication date: 2024-07-08\n\nOn July 7, 2024, NOAA's GOES-U satellite reached geostationary orbit above Earth's equator and was renamed GOES-19.\n\nOn July 7, 2024, NOAA’s GOES-U executed its final engine burn, placing the satellite in geostationary orbit 22,236 miles above Earth’s equator. Upon reaching this milestone, GOES-U was renamed GOES-19. GOES satellites are designated with a letter prior to launch and a number once they achieve geostationary orbit.",
+      "retrieved_at": "2026-09-05T09:34:36Z",
+      "published_at": null,
+      "available_at": "2026-09-05T09:34:36Z",
+      "availability_basis": "Current web-tool collection completed at retrieved_at on 2026-09-05. The supplied material is a selected, whitespace-normalized excerpt, not a full page or historical exact-version capture. Availability is asserted only at collection completion. The source's displayed publication date is preserved in content; no exact timezone-qualified publication instant is known.",
+      "issuer": "NOAA NESDIS"
+    }
+  ],
+  "eligible_version_ids": [
+    "m12"
+  ],
+  "observations": [
+    {
+      "version_id": "m12",
+      "retrieved_at": "2026-09-05T09:34:36Z",
+      "duplicate": false,
+      "eligible": true,
+      "reasons": []
+    },
+    {
+      "version_id": "m13",
+      "retrieved_at": "2026-09-05T09:34:36Z",
+      "duplicate": false,
+      "eligible": true,
+      "reasons": []
+    }
+  ],
+  "analyses": {
+    "m12": {
+      "fragments": [
+        {
+          "id": "p07.publication",
+          "text": "The retrospective displays a publication date of June 25, 2025.",
+          "span": {
+            "version_id": "m12",
+            "start": 40,
+            "end": 68,
+            "quote": "Publication date: 2025-06-25"
+          },
+          "parent_id": "p07",
+          "qualifiers": [],
+          "qualifier_spans": []
+        },
+        {
+          "id": "p07.launch",
+          "text": "GOES-U launched on June 25, 2024, from NASA’s Kennedy Space Center in Florida.",
+          "span": {
+            "version_id": "m12",
+            "start": 70,
+            "end": 194,
+            "quote": "On June 25, 2024, GOES-U, the final satellite in NOAA’s GOES-R Series, launched from NASA’s Kennedy Space Center in Florida."
+          },
+          "parent_id": "p07",
+          "qualifiers": [
+            "June 25 is the launch date, not the renaming date.",
+            "GOES-U is identified as the final satellite in NOAA’s GOES-R Series."
+          ],
+          "qualifier_spans": [
+            {
+              "version_id": "m12",
+              "start": 70,
+              "end": 87,
+              "quote": "On June 25, 2024,"
+            },
+            {
+              "version_id": "m12",
+              "start": 96,
+              "end": 140,
+              "quote": "the final satellite in NOAA’s GOES-R Series,"
+            }
+          ]
+        },
+        {
+          "id": "p07.renaming",
+          "text": "The satellite was renamed GOES-19 once GOES-U reached geostationary orbit on July 7.",
+          "span": {
+            "version_id": "m12",
+            "start": 195,
+            "end": 380,
+            "quote": "Once GOES-U [reached geostationary orbit](https://www.nesdis.noaa.gov/news/noaas-goes-u-reaches-geostationary-orbit-now-designated-goes-19) on July 7, the satellite was renamed GOES-19."
+          },
+          "parent_id": "p07",
+          "qualifiers": [
+            "Renaming is tied to reaching geostationary orbit on July 7, rather than the June 25 launch.",
+            "The sentence does not explicitly repeat the year or name the renaming agent; it uses passive voice.",
+            "The excerpt contains no explicit negation."
+          ],
+          "qualifier_spans": [
+            {
+              "version_id": "m12",
+              "start": 195,
+              "end": 199,
+              "quote": "Once"
+            },
+            {
+              "version_id": "m12",
+              "start": 208,
+              "end": 235,
+              "quote": "reached geostationary orbit"
+            },
+            {
+              "version_id": "m12",
+              "start": 335,
+              "end": 345,
+              "quote": "on July 7,"
+            }
+          ]
+        }
+      ],
+      "relations": [
+        {
+          "id": "m12.citation",
+          "from_version": "m12",
+          "to_version": null,
+          "kind": "cites",
+          "status": "declared",
+          "basis": [
+            {
+              "version_id": "m12",
+              "start": 207,
+              "end": 334,
+              "quote": "[reached geostationary orbit](https://www.nesdis.noaa.gov/news/noaas-goes-u-reaches-geostationary-orbit-now-designated-goes-19)"
+            }
+          ],
+          "rationale": "The visible link identifies an upstream record; its content and support for the target are unavailable.",
+          "upstream_locator": "https://www.nesdis.noaa.gov/news/noaas-goes-u-reaches-geostationary-orbit-now-designated-goes-19"
+        }
+      ],
+      "gaps": [
+        {
+          "id": "p07.upstream",
+          "question": "What does the linked orbit-and-designation record say, and what publishing role does it identify?",
+          "stage": "provenance",
+          "dimension": "provenance",
+          "blocking": false,
+          "target_id": "p07",
+          "basis": [
+            {
+              "version_id": "m12",
+              "start": 207,
+              "end": 334,
+              "quote": "[reached geostationary orbit](https://www.nesdis.noaa.gov/news/noaas-goes-u-reaches-geostationary-orbit-now-designated-goes-19)"
+            }
+          ],
+          "decision_impact": "May establish upstream lineage; does not substitute for the missing evidence-scope snapshot.",
+          "action": "fetch",
+          "locator": "https://www.nesdis.noaa.gov/news/noaas-goes-u-reaches-geostationary-orbit-now-designated-goes-19"
+        }
+      ],
+      "resolutions": [],
+      "origins": [],
+      "notes": "Evidence assessment remains undetermined: the sole evidence-scope document, m13, is not supplied. Outside that scope, m12 distinguishes the June 25 launch from renaming upon reaching orbit on July 7, conflicting with the target’s date. World verification is unknown. The existing origin:p07 gap remains unresolved.",
+      "revisit_versions": []
+    }
+  },
+  "analysis_history": [
+    {
+      "revision": 1,
+      "round": 1,
+      "version_id": "m12",
+      "duplicate": false,
+      "revisit": false,
+      "accepted": true,
+      "analysis": {
+        "fragments": [
+          {
+            "id": "p07.publication",
+            "text": "The retrospective displays a publication date of June 25, 2025.",
+            "span": {
+              "version_id": "m12",
+              "start": 40,
+              "end": 68,
+              "quote": "Publication date: 2025-06-25"
+            },
+            "parent_id": "p07",
+            "qualifiers": [],
+            "qualifier_spans": []
+          },
+          {
+            "id": "p07.launch",
+            "text": "GOES-U launched on June 25, 2024, from NASA’s Kennedy Space Center in Florida.",
+            "span": {
+              "version_id": "m12",
+              "start": 70,
+              "end": 194,
+              "quote": "On June 25, 2024, GOES-U, the final satellite in NOAA’s GOES-R Series, launched from NASA’s Kennedy Space Center in Florida."
+            },
+            "parent_id": "p07",
+            "qualifiers": [
+              "June 25 is the launch date, not the renaming date.",
+              "GOES-U is identified as the final satellite in NOAA’s GOES-R Series."
+            ],
+            "qualifier_spans": [
+              {
+                "version_id": "m12",
+                "start": 70,
+                "end": 87,
+                "quote": "On June 25, 2024,"
+              },
+              {
+                "version_id": "m12",
+                "start": 96,
+                "end": 140,
+                "quote": "the final satellite in NOAA’s GOES-R Series,"
+              }
+            ]
+          },
+          {
+            "id": "p07.renaming",
+            "text": "The satellite was renamed GOES-19 once GOES-U reached geostationary orbit on July 7.",
+            "span": {
+              "version_id": "m12",
+              "start": 195,
+              "end": 380,
+              "quote": "Once GOES-U [reached geostationary orbit](https://www.nesdis.noaa.gov/news/noaas-goes-u-reaches-geostationary-orbit-now-designated-goes-19) on July 7, the satellite was renamed GOES-19."
+            },
+            "parent_id": "p07",
+            "qualifiers": [
+              "Renaming is tied to reaching geostationary orbit on July 7, rather than the June 25 launch.",
+              "The sentence does not explicitly repeat the year or name the renaming agent; it uses passive voice.",
+              "The excerpt contains no explicit negation."
+            ],
+            "qualifier_spans": [
+              {
+                "version_id": "m12",
+                "start": 195,
+                "end": 199,
+                "quote": "Once"
+              },
+              {
+                "version_id": "m12",
+                "start": 208,
+                "end": 235,
+                "quote": "reached geostationary orbit"
+              },
+              {
+                "version_id": "m12",
+                "start": 335,
+                "end": 345,
+                "quote": "on July 7,"
+              }
+            ]
+          }
+        ],
+        "relations": [
+          {
+            "id": "m12.citation",
+            "from_version": "m12",
+            "to_version": null,
+            "kind": "cites",
+            "status": "declared",
+            "basis": [
+              {
+                "version_id": "m12",
+                "start": 207,
+                "end": 334,
+                "quote": "[reached geostationary orbit](https://www.nesdis.noaa.gov/news/noaas-goes-u-reaches-geostationary-orbit-now-designated-goes-19)"
+              }
+            ],
+            "rationale": "The visible link identifies an upstream record; its content and support for the target are unavailable.",
+            "upstream_locator": "https://www.nesdis.noaa.gov/news/noaas-goes-u-reaches-geostationary-orbit-now-designated-goes-19"
+          }
+        ],
+        "gaps": [
+          {
+            "id": "p07.upstream",
+            "question": "What does the linked orbit-and-designation record say, and what publishing role does it identify?",
+            "stage": "provenance",
+            "dimension": "provenance",
+            "blocking": false,
+            "target_id": "p07",
+            "basis": [
+              {
+                "version_id": "m12",
+                "start": 207,
+                "end": 334,
+                "quote": "[reached geostationary orbit](https://www.nesdis.noaa.gov/news/noaas-goes-u-reaches-geostationary-orbit-now-designated-goes-19)"
+              }
+            ],
+            "decision_impact": "May establish upstream lineage; does not substitute for the missing evidence-scope snapshot.",
+            "action": "fetch",
+            "locator": "https://www.nesdis.noaa.gov/news/noaas-goes-u-reaches-geostationary-orbit-now-designated-goes-19"
+          }
+        ],
+        "resolutions": [],
+        "origins": [],
+        "notes": "Evidence assessment remains undetermined: the sole evidence-scope document, m13, is not supplied. Outside that scope, m12 distinguishes the June 25 launch from renaming upon reaching orbit on July 7, conflicting with the target’s date. World verification is unknown. The existing origin:p07 gap remains unresolved.",
+        "revisit_versions": []
+      },
+      "exclusion_reasons": []
+    }
+  ],
+  "fragments": [
+    {
+      "id": "p07.publication",
+      "text": "The retrospective displays a publication date of June 25, 2025.",
+      "span": {
+        "version_id": "m12",
+        "start": 40,
+        "end": 68,
+        "quote": "Publication date: 2025-06-25"
+      },
+      "parent_id": "p07",
+      "qualifiers": [],
+      "qualifier_spans": []
+    },
+    {
+      "id": "p07.launch",
+      "text": "GOES-U launched on June 25, 2024, from NASA’s Kennedy Space Center in Florida.",
+      "span": {
+        "version_id": "m12",
+        "start": 70,
+        "end": 194,
+        "quote": "On June 25, 2024, GOES-U, the final satellite in NOAA’s GOES-R Series, launched from NASA’s Kennedy Space Center in Florida."
+      },
+      "parent_id": "p07",
+      "qualifiers": [
+        "June 25 is the launch date, not the renaming date.",
+        "GOES-U is identified as the final satellite in NOAA’s GOES-R Series."
+      ],
+      "qualifier_spans": [
+        {
+          "version_id": "m12",
+          "start": 70,
+          "end": 87,
+          "quote": "On June 25, 2024,"
+        },
+        {
+          "version_id": "m12",
+          "start": 96,
+          "end": 140,
+          "quote": "the final satellite in NOAA’s GOES-R Series,"
+        }
+      ]
+    },
+    {
+      "id": "p07.renaming",
+      "text": "The satellite was renamed GOES-19 once GOES-U reached geostationary orbit on July 7.",
+      "span": {
+        "version_id": "m12",
+        "start": 195,
+        "end": 380,
+        "quote": "Once GOES-U [reached geostationary orbit](https://www.nesdis.noaa.gov/news/noaas-goes-u-reaches-geostationary-orbit-now-designated-goes-19) on July 7, the satellite was renamed GOES-19."
+      },
+      "parent_id": "p07",
+      "qualifiers": [
+        "Renaming is tied to reaching geostationary orbit on July 7, rather than the June 25 launch.",
+        "The sentence does not explicitly repeat the year or name the renaming agent; it uses passive voice.",
+        "The excerpt contains no explicit negation."
+      ],
+      "qualifier_spans": [
+        {
+          "version_id": "m12",
+          "start": 195,
+          "end": 199,
+          "quote": "Once"
+        },
+        {
+          "version_id": "m12",
+          "start": 208,
+          "end": 235,
+          "quote": "reached geostationary orbit"
+        },
+        {
+          "version_id": "m12",
+          "start": 335,
+          "end": 345,
+          "quote": "on July 7,"
+        }
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "m12.citation",
+      "from_version": "m12",
+      "to_version": null,
+      "kind": "cites",
+      "status": "declared",
+      "basis": [
+        {
+          "version_id": "m12",
+          "start": 207,
+          "end": 334,
+          "quote": "[reached geostationary orbit](https://www.nesdis.noaa.gov/news/noaas-goes-u-reaches-geostationary-orbit-now-designated-goes-19)"
+        }
+      ],
+      "rationale": "The visible link identifies an upstream record; its content and support for the target are unavailable.",
+      "upstream_locator": "https://www.nesdis.noaa.gov/news/noaas-goes-u-reaches-geostationary-orbit-now-designated-goes-19"
+    }
+  ],
+  "origins": [],
+  "gaps": [
+    {
+      "id": "origin:p07",
+      "question": "Find the producing record and evidenced lineage for: NOAA renamed GOES-U to GOES-19 on June 25, 2024.",
+      "stage": "provenance",
+      "dimension": "auto",
+      "blocking": true,
+      "target_id": null,
+      "basis": [],
+      "decision_impact": "",
+      "action": "search",
+      "locator": null
+    },
+    {
+      "id": "p07.upstream",
+      "question": "What does the linked orbit-and-designation record say, and what publishing role does it identify?",
+      "stage": "provenance",
+      "dimension": "provenance",
+      "blocking": false,
+      "target_id": "p07",
+      "basis": [
+        {
+          "version_id": "m12",
+          "start": 207,
+          "end": 334,
+          "quote": "[reached geostationary orbit](https://www.nesdis.noaa.gov/news/noaas-goes-u-reaches-geostationary-orbit-now-designated-goes-19)"
+        }
+      ],
+      "decision_impact": "May establish upstream lineage; does not substitute for the missing evidence-scope snapshot.",
+      "action": "fetch",
+      "locator": "https://www.nesdis.noaa.gov/news/noaas-goes-u-reaches-geostationary-orbit-now-designated-goes-19"
+    }
+  ],
+  "resolutions": [],
+  "verification_history": [],
+  "operations": [
+    {
+      "sequence": 1,
+      "round": 1,
+      "action": "search",
+      "tasks": [
+        {
+          "id": "origin:p07",
+          "question": "Find the producing record and evidenced lineage for: NOAA renamed GOES-U to GOES-19 on June 25, 2024.",
+          "stage": "provenance",
+          "dimension": "auto",
+          "blocking": true,
+          "target_id": null,
+          "basis": [],
+          "decision_impact": "",
+          "action": "search",
+          "locator": null
+        }
+      ],
+      "limit": 24
+    },
+    {
+      "sequence": 2,
+      "round": 1,
+      "action": "snapshot_saved",
+      "version_id": "m12",
+      "sha256": "b3ff6ae6ade45c6030f96e28d89e58755ca95d1fa1ead4eaa65893e803932b1d",
+      "eligible": true
+    },
+    {
+      "sequence": 3,
+      "round": 1,
+      "action": "decompose_started",
+      "version_id": "m12",
+      "duplicate": false,
+      "revisit": false
+    },
+    {
+      "sequence": 4,
+      "round": 1,
+      "action": "decompose_completed",
+      "version_id": "m12",
+      "revision": 1
+    },
+    {
+      "sequence": 5,
+      "round": 1,
+      "action": "alignment_checked",
+      "version_id": "m12",
+      "analysis_changed": true
+    },
+    {
+      "sequence": 6,
+      "round": 1,
+      "action": "graph_updated",
+      "version_id": "m12",
+      "open_gaps": 2
+    },
+    {
+      "sequence": 7,
+      "round": 1,
+      "action": "snapshot_saved",
+      "version_id": "m13",
+      "sha256": "1f1f899c5cc29c9108069d48c5f667b383292a6375406aed920f588bba8190e8",
+      "eligible": true
+    },
+    {
+      "sequence": 8,
+      "round": 1,
+      "action": "decompose_started",
+      "version_id": "m13",
+      "duplicate": false,
+      "revisit": false
+    },
+    {
+      "sequence": 9,
+      "round": 1,
+      "action": "error",
+      "stage": "decomposer",
+      "message": "Model call failed: RuntimeError"
+    },
+    {
+      "sequence": 10,
+      "round": 1,
+      "action": "stopped",
+      "reason": "decomposer_error"
+    }
+  ],
+  "errors": [
+    {
+      "stage": "decomposer",
+      "type": "RuntimeError",
+      "message": "Model call failed: RuntimeError"
+    }
+  ]
+}

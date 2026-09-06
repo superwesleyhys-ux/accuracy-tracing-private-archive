@@ -1,0 +1,34 @@
+{
+  "id": "p02",
+  "assessment_mode": "evidence",
+  "status": "error",
+  "prediction": null,
+  "checkpoints": [],
+  "native_prediction": {
+    "id": "p02",
+    "assessment_mode": "evidence",
+    "as_of": "2026-09-05T09:34:36Z",
+    "decision": "unverifiable",
+    "assessments": null,
+    "provenance_status": "unresolved",
+    "assessment_valid": false,
+    "stop_reason": "decomposer_error"
+  },
+  "engine_usage": {
+    "rounds": 1,
+    "documents": 1,
+    "unique_versions": 1,
+    "decomposition_calls": 1,
+    "verification_calls": 0
+  },
+  "error_type": "ValueError",
+  "usage": {
+    "model_calls": 1,
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "seconds": 19.92253388700192
+  },
+  "checkpoint_hashes": [],
+  "new_api_attempts": 1,
+  "returned_responses": 0
+}

@@ -1,0 +1,24 @@
+{
+  "status": "frozen_before_live_calls",
+  "supersedes": "target-extension-freeze-05 only for a repaired execution environment",
+  "frozen_contract": "experiments/target-extension-freeze-05.json",
+  "frozen_contract_sha256": "e2fbb88f8cf48449acfdab0a215f379f63186e6b8159b41d271dd33e1b0f53c4",
+  "source_or_prompt_changes_since_freeze_05": false,
+  "preserved_failed_run": "reports/target-extension-v2-smoke-01",
+  "preserved_failure": {
+    "error_type": "ModuleNotFoundError",
+    "scheduled_cases": 2,
+    "api_attempts": 0,
+    "returned_responses": 0,
+    "interpretation": "The optional model client dependency was absent before case inference began; this is an execution-environment failure, not a model or semantic result."
+  },
+  "runtime_dependency_overlay": {
+    "location_kind": "isolated temporary PYTHONPATH outside the repository",
+    "openai": "3.8.0",
+    "socksio": "1.0.0",
+    "repository_files_modified": false,
+    "credential_persisted": false
+  },
+  "next_run": "reports/target-extension-v2-smoke-02",
+  "gate": "Apply every unchanged conjunctive gate from target-extension-freeze-05. Preserve smoke-02 on any failure and do not run all eight unless it passes."
+}

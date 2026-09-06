@@ -1,0 +1,1149 @@
+[
+  {
+    "id": "p03",
+    "arm": "original",
+    "assessment_mode": "evidence",
+    "status": "completed",
+    "prediction": {
+      "decision": "true",
+      "origins": [
+        "m05",
+        "m06"
+      ],
+      "edges": [],
+      "provenance_evaluable": true,
+      "origin_evaluable": true,
+      "edges_evaluable": false,
+      "edge_export_limit": "No native source-to-source edge representation"
+    },
+    "usage": {
+      "model_calls": 17,
+      "input_tokens": 23131,
+      "output_tokens": 9549,
+      "seconds": 160.9892551219964
+    },
+    "extractor_answer_text": "m06明确支持原说法：NIST的FIPS 203规定三组参数，名称逐一为ML-KEM-512、ML-KEM-768、ML-KEM-1024，无须纠偏。文档标示2024-08-13发布，快照于2026-09-05采集；三组按安全递增、性能递减排列。判断依据是原文明列，世界真实性仍未知。未见来源冲突；m05未列参数且不在评估范围，不能算独立佐证。（基于2个信源、评估限1个 | 覆盖1类媒体 | 0条事实多源一致 | 0条存在分歧 | 因果锚定1/1）",
+    "extraction": {
+      "decision": "true",
+      "extractable": true,
+      "basis_quote": "m06明确支持原说法：NIST的FIPS 203规定三组参数，名称逐一为ML-KEM-512、ML-KEM-768、ML-KEM-1024，无须纠偏。"
+    },
+    "actual_new_api_usage": {
+      "model_calls": 17,
+      "input_tokens": 23131,
+      "output_tokens": 9549
+    }
+  },
+  {
+    "id": "p03",
+    "arm": "single",
+    "assessment_mode": "evidence",
+    "status": "error",
+    "prediction": null,
+    "usage": {
+      "model_calls": 2,
+      "input_tokens": 4044,
+      "output_tokens": 4673,
+      "seconds": 76.56296976299927
+    },
+    "error_type": "ValueError",
+    "actual_new_api_usage": {
+      "model_calls": 2,
+      "input_tokens": 4044,
+      "output_tokens": 4673
+    }
+  },
+  {
+    "id": "p03",
+    "arm": "loop_psi",
+    "assessment_mode": "evidence",
+    "status": "error",
+    "prediction": null,
+    "usage": {
+      "model_calls": 0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "seconds": 0
+    },
+    "error_type": "InvalidSharedPrefix",
+    "actual_new_api_usage": {
+      "model_calls": 0,
+      "input_tokens": 0,
+      "output_tokens": 0
+    }
+  },
+  {
+    "id": "p03",
+    "arm": "loop_frozen",
+    "assessment_mode": "evidence",
+    "status": "error",
+    "prediction": null,
+    "usage": {
+      "model_calls": 0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "seconds": 0
+    },
+    "error_type": "InvalidSharedPrefix",
+    "actual_new_api_usage": {
+      "model_calls": 0,
+      "input_tokens": 0,
+      "output_tokens": 0
+    }
+  },
+  {
+    "id": "p03",
+    "arm": "independent",
+    "assessment_mode": "evidence",
+    "status": "error",
+    "prediction": null,
+    "usage": {
+      "model_calls": 0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "seconds": 0
+    },
+    "error_type": "InvalidSharedPrefix",
+    "actual_new_api_usage": {
+      "model_calls": 0,
+      "input_tokens": 0,
+      "output_tokens": 0
+    }
+  },
+  {
+    "id": "p07",
+    "arm": "original",
+    "assessment_mode": "evidence",
+    "status": "completed",
+    "prediction": {
+      "decision": "false",
+      "origins": [
+        "m13"
+      ],
+      "edges": [],
+      "provenance_evaluable": true,
+      "origin_evaluable": true,
+      "edges_evaluable": false,
+      "edge_export_limit": "No native source-to-source edge representation"
+    },
+    "usage": {
+      "model_calls": 17,
+      "input_tokens": 23586,
+      "output_tokens": 10373,
+      "seconds": 168.38651102100266
+    },
+    "extractor_answer_text": "仅按m13评估，NOAA的GOES-U更名GOES-19有据，但“2024年6月25日更名”在1个信源中未找到，且被7月7日的记载反驳。m12将6月25日记为发射日，仅作背景；m13称7月7日完成最后点火、抵达地球静止轨道并更名，原因是入轨后按规则由字母改用数字。两文无分歧，但同属NOAA且存在引用关系，并非独立确认；真实世界未独立核实。（基于2个信源 | 覆盖1类媒体 | 2条事实多源一致 | 0条存在分歧 | 因果锚定2/2）",
+    "extraction": {
+      "decision": "false",
+      "extractable": true,
+      "basis_quote": "仅按m13评估，NOAA的GOES-U更名GOES-19有据，但“2024年6月25日更名”在1个信源中未找到，且被7月7日的记载反驳。"
+    },
+    "actual_new_api_usage": {
+      "model_calls": 17,
+      "input_tokens": 23586,
+      "output_tokens": 10373
+    }
+  },
+  {
+    "id": "p07",
+    "arm": "single",
+    "assessment_mode": "evidence",
+    "status": "error",
+    "prediction": null,
+    "usage": {
+      "model_calls": 2,
+      "input_tokens": 3921,
+      "output_tokens": 4633,
+      "seconds": 71.07353061199683
+    },
+    "error_type": "ValueError",
+    "actual_new_api_usage": {
+      "model_calls": 2,
+      "input_tokens": 3921,
+      "output_tokens": 4633
+    }
+  },
+  {
+    "id": "p07",
+    "arm": "loop_psi",
+    "assessment_mode": "evidence",
+    "status": "error",
+    "prediction": null,
+    "usage": {
+      "model_calls": 0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "seconds": 0
+    },
+    "error_type": "InvalidSharedPrefix",
+    "actual_new_api_usage": {
+      "model_calls": 0,
+      "input_tokens": 0,
+      "output_tokens": 0
+    }
+  },
+  {
+    "id": "p07",
+    "arm": "loop_frozen",
+    "assessment_mode": "evidence",
+    "status": "error",
+    "prediction": null,
+    "usage": {
+      "model_calls": 0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "seconds": 0
+    },
+    "error_type": "InvalidSharedPrefix",
+    "actual_new_api_usage": {
+      "model_calls": 0,
+      "input_tokens": 0,
+      "output_tokens": 0
+    }
+  },
+  {
+    "id": "p07",
+    "arm": "independent",
+    "assessment_mode": "evidence",
+    "status": "error",
+    "prediction": null,
+    "usage": {
+      "model_calls": 0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "seconds": 0
+    },
+    "error_type": "InvalidSharedPrefix",
+    "actual_new_api_usage": {
+      "model_calls": 0,
+      "input_tokens": 0,
+      "output_tokens": 0
+    }
+  },
+  {
+    "id": "p02",
+    "arm": "original",
+    "assessment_mode": "evidence",
+    "status": "completed",
+    "prediction": {
+      "decision": "false",
+      "origins": [
+        "m03",
+        "m04"
+      ],
+      "edges": [],
+      "provenance_evaluable": true,
+      "origin_evaluable": true,
+      "edges_evaluable": false,
+      "edge_export_limit": "No native source-to-source edge representation"
+    },
+    "usage": {
+      "model_calls": 18,
+      "input_tokens": 28066,
+      "output_tokens": 12722,
+      "seconds": 202.50457914700382
+    },
+    "extractor_answer_text": "m03证实NASA公告日期为2024年2月15日、对象为OSIRIS-REx返回的贝努样本；在1个范围内信源中未找到“最终总质量70.3克”的表述，公告明确为121.6克，故声明与证据矛盾。70.3克是此前测量值：样本于2023年9月返回，2024年1月采样头拆解后又倒出51.2克，加上额外颗粒形成总量。差异源于把阶段值误作总量。范围内无来源分歧；现实质量未独立核验，另一NASA快照不作独立确认。（基于1个信源 | 覆盖1类媒体 | 0条事实多源一致 | 0条存在分歧 | 因果锚定2/2）",
+    "extraction": {
+      "decision": "false",
+      "extractable": true,
+      "basis_quote": "公告明确为121.6克，故声明与证据矛盾。"
+    },
+    "actual_new_api_usage": {
+      "model_calls": 18,
+      "input_tokens": 28066,
+      "output_tokens": 12722
+    }
+  },
+  {
+    "id": "p02",
+    "arm": "single",
+    "assessment_mode": "evidence",
+    "status": "error",
+    "prediction": null,
+    "usage": {
+      "model_calls": 1,
+      "input_tokens": 1787,
+      "output_tokens": 2500,
+      "seconds": 40.67189407200203
+    },
+    "error_type": "ValueError",
+    "actual_new_api_usage": {
+      "model_calls": 1,
+      "input_tokens": 1787,
+      "output_tokens": 2500
+    }
+  },
+  {
+    "id": "p02",
+    "arm": "loop_psi",
+    "assessment_mode": "evidence",
+    "status": "error",
+    "prediction": null,
+    "usage": {
+      "model_calls": 0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "seconds": 0
+    },
+    "error_type": "InvalidSharedPrefix",
+    "actual_new_api_usage": {
+      "model_calls": 0,
+      "input_tokens": 0,
+      "output_tokens": 0
+    }
+  },
+  {
+    "id": "p02",
+    "arm": "loop_frozen",
+    "assessment_mode": "evidence",
+    "status": "error",
+    "prediction": null,
+    "usage": {
+      "model_calls": 0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "seconds": 0
+    },
+    "error_type": "InvalidSharedPrefix",
+    "actual_new_api_usage": {
+      "model_calls": 0,
+      "input_tokens": 0,
+      "output_tokens": 0
+    }
+  },
+  {
+    "id": "p02",
+    "arm": "independent",
+    "assessment_mode": "evidence",
+    "status": "error",
+    "prediction": null,
+    "usage": {
+      "model_calls": 0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "seconds": 0
+    },
+    "error_type": "InvalidSharedPrefix",
+    "actual_new_api_usage": {
+      "model_calls": 0,
+      "input_tokens": 0,
+      "output_tokens": 0
+    }
+  },
+  {
+    "id": "p01",
+    "arm": "original",
+    "assessment_mode": "evidence",
+    "status": "completed",
+    "prediction": {
+      "decision": "true",
+      "origins": [
+        "m02"
+      ],
+      "edges": [],
+      "provenance_evaluable": true,
+      "origin_evaluable": true,
+      "edges_evaluable": false,
+      "edge_export_limit": "No native source-to-source edge representation"
+    },
+    "usage": {
+      "model_calls": 17,
+      "input_tokens": 25189,
+      "output_tokens": 9908,
+      "seconds": 161.80229537899868
+    },
+    "extractor_answer_text": "m02支持原说法：NASA公告日期为2022年10月11日，报告DART使Dimorphos绕Didymos的周期缩短32分钟，不确定度约±2分钟。无需纠偏；m01记载的后续33分钟修订不否定当时报告。公告记述9月26日撞击、随后地面望远镜测量、10月11日公布结果，将周期变化归因于撞击。两篇快照无分歧，但均出自NASA，非独立互证；仅m02用于本次判定，现实验证仍未知。（基于2份快照、1个信源 | 覆盖1类媒体 | 3条同源一致 | 0条存在分歧 | 因果锚定2/2）",
+    "extraction": {
+      "decision": "true",
+      "extractable": true,
+      "basis_quote": "m02支持原说法：NASA公告日期为2022年10月11日，报告DART使Dimorphos绕Didymos的周期缩短32分钟，不确定度约±2分钟。无需纠偏；m01记载的后续33分钟修订不否定当时报告。"
+    },
+    "actual_new_api_usage": {
+      "model_calls": 17,
+      "input_tokens": 25189,
+      "output_tokens": 9908
+    }
+  },
+  {
+    "id": "p01",
+    "arm": "single",
+    "assessment_mode": "evidence",
+    "status": "error",
+    "prediction": null,
+    "usage": {
+      "model_calls": 1,
+      "input_tokens": 1783,
+      "output_tokens": 2500,
+      "seconds": 38.86004653300188
+    },
+    "error_type": "ValueError",
+    "actual_new_api_usage": {
+      "model_calls": 1,
+      "input_tokens": 1783,
+      "output_tokens": 2500
+    }
+  },
+  {
+    "id": "p01",
+    "arm": "loop_psi",
+    "assessment_mode": "evidence",
+    "status": "error",
+    "prediction": null,
+    "usage": {
+      "model_calls": 0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "seconds": 0
+    },
+    "error_type": "InvalidSharedPrefix",
+    "actual_new_api_usage": {
+      "model_calls": 0,
+      "input_tokens": 0,
+      "output_tokens": 0
+    }
+  },
+  {
+    "id": "p01",
+    "arm": "loop_frozen",
+    "assessment_mode": "evidence",
+    "status": "error",
+    "prediction": null,
+    "usage": {
+      "model_calls": 0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "seconds": 0
+    },
+    "error_type": "InvalidSharedPrefix",
+    "actual_new_api_usage": {
+      "model_calls": 0,
+      "input_tokens": 0,
+      "output_tokens": 0
+    }
+  },
+  {
+    "id": "p01",
+    "arm": "independent",
+    "assessment_mode": "evidence",
+    "status": "error",
+    "prediction": null,
+    "usage": {
+      "model_calls": 0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "seconds": 0
+    },
+    "error_type": "InvalidSharedPrefix",
+    "actual_new_api_usage": {
+      "model_calls": 0,
+      "input_tokens": 0,
+      "output_tokens": 0
+    }
+  },
+  {
+    "id": "p06",
+    "arm": "original",
+    "assessment_mode": "world",
+    "status": "completed",
+    "prediction": {
+      "decision": "unverifiable",
+      "origins": [
+        "m10",
+        "m11"
+      ],
+      "edges": [],
+      "provenance_evaluable": true,
+      "origin_evaluable": true,
+      "edges_evaluable": false,
+      "edge_export_limit": "No native source-to-source edge representation"
+    },
+    "usage": {
+      "model_calls": 16,
+      "input_tokens": 20040,
+      "output_tokens": 10601,
+      "seconds": 175.51830312299717
+    },
+    "extractor_answer_text": "“木卫二冰下海洋存在活生物”的确认，在2个信源中未找到；现实核验为未知，并非判假。实际是有潜在宜居线索，而非已发现生命。m10称1990年代伽利略观测支持冰下咸水海洋存在，2024年10月任务介绍将目标定为研究宜居条件；同期m11称探测器不寻找生命，也无发现生命的能力。因此，宜居线索不能证明生命存在，任务介绍亦不足以确认。两份NASA材料无分歧，但同源不构成独立确认。（基于2个信源 | 覆盖1类媒体 | 0条事实多源一致 | 0条存在分歧 | 因果锚定2/2）",
+    "extraction": {
+      "decision": "unverifiable",
+      "extractable": true,
+      "basis_quote": "“木卫二冰下海洋存在活生物”的确认，在2个信源中未找到；现实核验为未知，并非判假。"
+    },
+    "actual_new_api_usage": {
+      "model_calls": 16,
+      "input_tokens": 20040,
+      "output_tokens": 10601
+    }
+  },
+  {
+    "id": "p06",
+    "arm": "single",
+    "assessment_mode": "world",
+    "status": "error",
+    "prediction": null,
+    "usage": {
+      "model_calls": 1,
+      "input_tokens": 1668,
+      "output_tokens": 2500,
+      "seconds": 40.199622423999244
+    },
+    "error_type": "ValueError",
+    "actual_new_api_usage": {
+      "model_calls": 1,
+      "input_tokens": 1668,
+      "output_tokens": 2500
+    }
+  },
+  {
+    "id": "p06",
+    "arm": "loop_psi",
+    "assessment_mode": "world",
+    "status": "error",
+    "prediction": null,
+    "usage": {
+      "model_calls": 0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "seconds": 0
+    },
+    "error_type": "InvalidSharedPrefix",
+    "actual_new_api_usage": {
+      "model_calls": 0,
+      "input_tokens": 0,
+      "output_tokens": 0
+    }
+  },
+  {
+    "id": "p06",
+    "arm": "loop_frozen",
+    "assessment_mode": "world",
+    "status": "error",
+    "prediction": null,
+    "usage": {
+      "model_calls": 0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "seconds": 0
+    },
+    "error_type": "InvalidSharedPrefix",
+    "actual_new_api_usage": {
+      "model_calls": 0,
+      "input_tokens": 0,
+      "output_tokens": 0
+    }
+  },
+  {
+    "id": "p06",
+    "arm": "independent",
+    "assessment_mode": "world",
+    "status": "error",
+    "prediction": null,
+    "usage": {
+      "model_calls": 0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "seconds": 0
+    },
+    "error_type": "InvalidSharedPrefix",
+    "actual_new_api_usage": {
+      "model_calls": 0,
+      "input_tokens": 0,
+      "output_tokens": 0
+    }
+  },
+  {
+    "id": "p08",
+    "arm": "original",
+    "assessment_mode": "evidence",
+    "status": "completed",
+    "prediction": {
+      "decision": "true",
+      "origins": [
+        "m15"
+      ],
+      "edges": [],
+      "provenance_evaluable": true,
+      "origin_evaluable": true,
+      "edges_evaluable": false,
+      "edge_export_limit": "No native source-to-source edge representation"
+    },
+    "usage": {
+      "model_calls": 17,
+      "input_tokens": 23260,
+      "output_tokens": 11969,
+      "seconds": 199.65422445800505
+    },
+    "extractor_answer_text": "限定证据m15支持核心说法：USGS于2020年发布新图，整合六幅阿波罗时代区域图与较新月球任务资料；正式名称“统一月球地质图”在1个信源中未找到。应区分核心内容获支持与全称获证实。材料标示4月20日发布，此前先重绘旧图对齐现代数据，再统一地层描述，以解决岩石名称、描述及年代不一致。所供两文无分歧，但同属USGS，不能视为独立确认；现实真实性仍未知。（基于2个信源，评估限m15 | 覆盖1类媒体 | 3条事实多源一致 | 0条存在分歧 | 因果锚定2/2）",
+    "extraction": {
+      "decision": "true",
+      "extractable": true,
+      "basis_quote": "限定证据m15支持核心说法：USGS于2020年发布新图，整合六幅阿波罗时代区域图与较新月球任务资料；正式名称“统一月球地质图”在1个信源中未找到。"
+    },
+    "actual_new_api_usage": {
+      "model_calls": 17,
+      "input_tokens": 23260,
+      "output_tokens": 11969
+    }
+  },
+  {
+    "id": "p08",
+    "arm": "single",
+    "assessment_mode": "evidence",
+    "status": "error",
+    "prediction": null,
+    "usage": {
+      "model_calls": 2,
+      "input_tokens": 4022,
+      "output_tokens": 4652,
+      "seconds": 66.53987373700511
+    },
+    "error_type": "ValueError",
+    "actual_new_api_usage": {
+      "model_calls": 2,
+      "input_tokens": 4022,
+      "output_tokens": 4652
+    }
+  },
+  {
+    "id": "p08",
+    "arm": "loop_psi",
+    "assessment_mode": "evidence",
+    "status": "error",
+    "prediction": null,
+    "usage": {
+      "model_calls": 0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "seconds": 0
+    },
+    "error_type": "InvalidSharedPrefix",
+    "actual_new_api_usage": {
+      "model_calls": 0,
+      "input_tokens": 0,
+      "output_tokens": 0
+    }
+  },
+  {
+    "id": "p08",
+    "arm": "loop_frozen",
+    "assessment_mode": "evidence",
+    "status": "error",
+    "prediction": null,
+    "usage": {
+      "model_calls": 0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "seconds": 0
+    },
+    "error_type": "InvalidSharedPrefix",
+    "actual_new_api_usage": {
+      "model_calls": 0,
+      "input_tokens": 0,
+      "output_tokens": 0
+    }
+  },
+  {
+    "id": "p08",
+    "arm": "independent",
+    "assessment_mode": "evidence",
+    "status": "error",
+    "prediction": null,
+    "usage": {
+      "model_calls": 0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "seconds": 0
+    },
+    "error_type": "InvalidSharedPrefix",
+    "actual_new_api_usage": {
+      "model_calls": 0,
+      "input_tokens": 0,
+      "output_tokens": 0
+    }
+  },
+  {
+    "id": "p04",
+    "arm": "original",
+    "assessment_mode": "evidence",
+    "status": "completed",
+    "prediction": {
+      "decision": "false",
+      "origins": [
+        "m07",
+        "m08"
+      ],
+      "edges": [],
+      "provenance_evaluable": true,
+      "origin_evaluable": true,
+      "edges_evaluable": false,
+      "edge_export_limit": "No native source-to-source edge representation"
+    },
+    "usage": {
+      "model_calls": 17,
+      "input_tokens": 23685,
+      "output_tokens": 12579,
+      "seconds": 201.97979575200588
+    },
+    "extractor_answer_text": "仅据m07，NOAA摘要标示2025年1月10日，涉及2024年及1.29°C，但该值对应20世纪均值；相对1850—1900年为1.46°C，故声明与快照矛盾。2024年比2023年高0.10°C，刷新纪录，随后发布年度摘要。矛盾源于基准错配，错配成因不明；现实真实性未独立核验。范围外NASA报约1.47°C，与NOAA差0.01°C，非实质矛盾，不参与判定。（基于2个信源 | 覆盖1类媒体 | 2条事实多源一致 | 1条存在分歧 | 因果锚定1/1）",
+    "extraction": {
+      "decision": "false",
+      "extractable": true,
+      "basis_quote": "仅据m07，NOAA摘要标示2025年1月10日，涉及2024年及1.29°C，但该值对应20世纪均值；相对1850—1900年为1.46°C，故声明与快照矛盾。"
+    },
+    "actual_new_api_usage": {
+      "model_calls": 17,
+      "input_tokens": 23685,
+      "output_tokens": 12579
+    }
+  },
+  {
+    "id": "p04",
+    "arm": "single",
+    "assessment_mode": "evidence",
+    "status": "completed",
+    "prediction": {
+      "decision": "false",
+      "origins": [
+        "m07"
+      ],
+      "edges": [],
+      "provenance_evaluable": true,
+      "origin_evaluable": true,
+      "edges_evaluable": true,
+      "provenance_status": "original_material_located",
+      "assessment_valid": true
+    },
+    "usage": {
+      "model_calls": 4,
+      "input_tokens": 5909,
+      "output_tokens": 6218,
+      "seconds": 96.17442510100227
+    },
+    "state_sha256": "955a2f0425ef9cdb2d60f7a6dc9a013e05f9e398b01e8183712a0a53dc6c3f78",
+    "prefix_usage": {
+      "model_calls": 3,
+      "input_tokens": 5478,
+      "output_tokens": 6192,
+      "seconds": 94.8158274219968
+    },
+    "native_prediction": {
+      "id": "p04",
+      "assessment_mode": "evidence",
+      "as_of": "2026-09-05T09:34:36Z",
+      "decision": "false",
+      "assessments": {
+        "evidence": {
+          "raw_verdict": "contradicted",
+          "decision": "contradicted",
+          "blocking_gap_ids": []
+        },
+        "world": {
+          "raw_verdict": "contradicted",
+          "decision": "contradicted",
+          "blocking_gap_ids": []
+        }
+      },
+      "provenance_status": "original_material_located",
+      "assessment_valid": true,
+      "stop_reason": "complete"
+    },
+    "checkpoints": [
+      {
+        "round": 1,
+        "id": "p04",
+        "decision": "false",
+        "assessment_mode": "evidence",
+        "assessments": {
+          "evidence": {
+            "raw_verdict": "contradicted",
+            "decision": "contradicted",
+            "blocking_gap_ids": []
+          },
+          "world": {
+            "raw_verdict": "contradicted",
+            "decision": "contradicted",
+            "blocking_gap_ids": []
+          }
+        },
+        "provenance_status": "original_material_located"
+      }
+    ],
+    "extractor_answer_text": "{\"id\": \"p04\", \"assessment_mode\": \"evidence\", \"as_of\": \"2026-09-05T09:34:36Z\", \"decision\": \"false\", \"assessments\": {\"evidence\": {\"raw_verdict\": \"contradicted\", \"decision\": \"contradicted\", \"blocking_gap_ids\": []}, \"world\": {\"raw_verdict\": \"contradicted\", \"decision\": \"contradicted\", \"blocking_gap_ids\": []}}, \"provenance_status\": \"original_material_located\", \"assessment_valid\": true, \"stop_reason\": \"complete\"}",
+    "extraction": {
+      "decision": "false",
+      "extractable": true,
+      "basis_quote": "\"decision\": \"false\""
+    },
+    "actual_new_api_usage": {
+      "model_calls": 4,
+      "input_tokens": 5909,
+      "output_tokens": 6218
+    }
+  },
+  {
+    "id": "p04",
+    "arm": "loop_frozen",
+    "assessment_mode": "evidence",
+    "status": "completed",
+    "prediction": {
+      "decision": "false",
+      "origins": [
+        "m07"
+      ],
+      "edges": [],
+      "provenance_evaluable": true,
+      "origin_evaluable": true,
+      "edges_evaluable": true,
+      "provenance_status": "original_material_located",
+      "assessment_valid": true
+    },
+    "usage": {
+      "model_calls": 6,
+      "input_tokens": 10211,
+      "output_tokens": 8352,
+      "seconds": 136.78391443899454
+    },
+    "shared_state_sha256": "955a2f0425ef9cdb2d60f7a6dc9a013e05f9e398b01e8183712a0a53dc6c3f78",
+    "prefix_usage": {
+      "model_calls": 3,
+      "input_tokens": 5478,
+      "output_tokens": 6192,
+      "seconds": 94.8158274219968
+    },
+    "frozen_psi_adapter_returns": 4,
+    "native_prediction": {
+      "id": "p04",
+      "assessment_mode": "evidence",
+      "as_of": "2026-09-05T09:34:36Z",
+      "decision": "false",
+      "assessments": {
+        "evidence": {
+          "raw_verdict": "contradicted",
+          "decision": "contradicted",
+          "blocking_gap_ids": []
+        },
+        "world": {
+          "raw_verdict": "contradicted",
+          "decision": "contradicted",
+          "blocking_gap_ids": []
+        }
+      },
+      "provenance_status": "original_material_located",
+      "assessment_valid": true,
+      "stop_reason": "round_budget"
+    },
+    "checkpoints": [
+      {
+        "round": 1,
+        "id": "p04",
+        "decision": "false",
+        "assessment_mode": "evidence",
+        "assessments": {
+          "evidence": {
+            "raw_verdict": "contradicted",
+            "decision": "contradicted",
+            "blocking_gap_ids": []
+          },
+          "world": {
+            "raw_verdict": "contradicted",
+            "decision": "contradicted",
+            "blocking_gap_ids": []
+          }
+        },
+        "provenance_status": "original_material_located"
+      },
+      {
+        "round": 2,
+        "id": "p04",
+        "decision": "false",
+        "assessment_mode": "evidence",
+        "assessments": {
+          "evidence": {
+            "raw_verdict": "contradicted",
+            "decision": "contradicted",
+            "blocking_gap_ids": []
+          },
+          "world": {
+            "raw_verdict": "contradicted",
+            "decision": "contradicted",
+            "blocking_gap_ids": []
+          }
+        },
+        "provenance_status": "original_material_located"
+      },
+      {
+        "round": 3,
+        "id": "p04",
+        "decision": "false",
+        "assessment_mode": "evidence",
+        "assessments": {
+          "evidence": {
+            "raw_verdict": "contradicted",
+            "decision": "contradicted",
+            "blocking_gap_ids": []
+          },
+          "world": {
+            "raw_verdict": "contradicted",
+            "decision": "contradicted",
+            "blocking_gap_ids": []
+          }
+        },
+        "provenance_status": "original_material_located"
+      }
+    ],
+    "extractor_answer_text": "{\"id\": \"p04\", \"assessment_mode\": \"evidence\", \"as_of\": \"2026-09-05T09:34:36Z\", \"decision\": \"false\", \"assessments\": {\"evidence\": {\"raw_verdict\": \"contradicted\", \"decision\": \"contradicted\", \"blocking_gap_ids\": []}, \"world\": {\"raw_verdict\": \"contradicted\", \"decision\": \"contradicted\", \"blocking_gap_ids\": []}}, \"provenance_status\": \"original_material_located\", \"assessment_valid\": true, \"stop_reason\": \"round_budget\"}",
+    "extraction": {
+      "decision": "false",
+      "extractable": true,
+      "basis_quote": "\"decision\": \"false\""
+    },
+    "actual_new_api_usage": {
+      "model_calls": 3,
+      "input_tokens": 4733,
+      "output_tokens": 2160
+    }
+  },
+  {
+    "id": "p04",
+    "arm": "loop_psi",
+    "assessment_mode": "evidence",
+    "status": "completed",
+    "prediction": {
+      "decision": "false",
+      "origins": [],
+      "edges": [],
+      "provenance_evaluable": true,
+      "origin_evaluable": true,
+      "edges_evaluable": true,
+      "provenance_status": "partial",
+      "assessment_valid": true
+    },
+    "usage": {
+      "model_calls": 10,
+      "input_tokens": 24333,
+      "output_tokens": 15359,
+      "seconds": 235.3092521459912
+    },
+    "shared_state_sha256": "955a2f0425ef9cdb2d60f7a6dc9a013e05f9e398b01e8183712a0a53dc6c3f78",
+    "prefix_usage": {
+      "model_calls": 3,
+      "input_tokens": 5478,
+      "output_tokens": 6192,
+      "seconds": 94.8158274219968
+    },
+    "frozen_psi_adapter_returns": 0,
+    "native_prediction": {
+      "id": "p04",
+      "assessment_mode": "evidence",
+      "as_of": "2026-09-05T09:34:36Z",
+      "decision": "false",
+      "assessments": {
+        "evidence": {
+          "raw_verdict": "contradicted",
+          "decision": "contradicted",
+          "blocking_gap_ids": []
+        },
+        "world": {
+          "raw_verdict": "contradicted",
+          "decision": "contradicted",
+          "blocking_gap_ids": []
+        }
+      },
+      "provenance_status": "partial",
+      "assessment_valid": true,
+      "stop_reason": "round_budget"
+    },
+    "checkpoints": [
+      {
+        "round": 1,
+        "id": "p04",
+        "decision": "false",
+        "assessment_mode": "evidence",
+        "assessments": {
+          "evidence": {
+            "raw_verdict": "contradicted",
+            "decision": "contradicted",
+            "blocking_gap_ids": []
+          },
+          "world": {
+            "raw_verdict": "contradicted",
+            "decision": "contradicted",
+            "blocking_gap_ids": []
+          }
+        },
+        "provenance_status": "original_material_located"
+      },
+      {
+        "round": 2,
+        "id": "p04",
+        "decision": "false",
+        "assessment_mode": "evidence",
+        "assessments": {
+          "evidence": {
+            "raw_verdict": "contradicted",
+            "decision": "contradicted",
+            "blocking_gap_ids": []
+          },
+          "world": {
+            "raw_verdict": "contradicted",
+            "decision": "contradicted",
+            "blocking_gap_ids": []
+          }
+        },
+        "provenance_status": "partial"
+      },
+      {
+        "round": 3,
+        "id": "p04",
+        "decision": "false",
+        "assessment_mode": "evidence",
+        "assessments": {
+          "evidence": {
+            "raw_verdict": "contradicted",
+            "decision": "contradicted",
+            "blocking_gap_ids": []
+          },
+          "world": {
+            "raw_verdict": "contradicted",
+            "decision": "contradicted",
+            "blocking_gap_ids": []
+          }
+        },
+        "provenance_status": "partial"
+      }
+    ],
+    "extractor_answer_text": "{\"id\": \"p04\", \"assessment_mode\": \"evidence\", \"as_of\": \"2026-09-05T09:34:36Z\", \"decision\": \"false\", \"assessments\": {\"evidence\": {\"raw_verdict\": \"contradicted\", \"decision\": \"contradicted\", \"blocking_gap_ids\": []}, \"world\": {\"raw_verdict\": \"contradicted\", \"decision\": \"contradicted\", \"blocking_gap_ids\": []}}, \"provenance_status\": \"partial\", \"assessment_valid\": true, \"stop_reason\": \"round_budget\"}",
+    "extraction": {
+      "decision": "false",
+      "extractable": true,
+      "basis_quote": "\"decision\": \"false\""
+    },
+    "actual_new_api_usage": {
+      "model_calls": 7,
+      "input_tokens": 18855,
+      "output_tokens": 9167
+    }
+  },
+  {
+    "id": "p04",
+    "arm": "independent",
+    "assessment_mode": "evidence",
+    "status": "error",
+    "prediction": null,
+    "usage": {
+      "model_calls": 5,
+      "input_tokens": 9227,
+      "output_tokens": 11032,
+      "seconds": 161.25273803299933
+    },
+    "shared_state_sha256": "955a2f0425ef9cdb2d60f7a6dc9a013e05f9e398b01e8183712a0a53dc6c3f78",
+    "prefix_usage": {
+      "model_calls": 3,
+      "input_tokens": 5478,
+      "output_tokens": 6192,
+      "seconds": 94.8158274219968
+    },
+    "error_type": "ValueError",
+    "actual_new_api_usage": {
+      "model_calls": 2,
+      "input_tokens": 3749,
+      "output_tokens": 4840
+    }
+  },
+  {
+    "id": "p05",
+    "arm": "original",
+    "assessment_mode": "evidence",
+    "status": "error",
+    "prediction": null,
+    "usage": {
+      "model_calls": 11,
+      "input_tokens": 8348,
+      "output_tokens": 6192,
+      "seconds": 102.9937370330008
+    },
+    "error_type": "RuntimeError",
+    "actual_new_api_usage": {
+      "model_calls": 11,
+      "input_tokens": 8348,
+      "output_tokens": 6192
+    }
+  },
+  {
+    "id": "p05",
+    "arm": "single",
+    "assessment_mode": "evidence",
+    "status": "error",
+    "prediction": null,
+    "usage": {
+      "model_calls": 1,
+      "input_tokens": 1734,
+      "output_tokens": 2500,
+      "seconds": 39.13466652599891
+    },
+    "error_type": "ValueError",
+    "actual_new_api_usage": {
+      "model_calls": 1,
+      "input_tokens": 1734,
+      "output_tokens": 2500
+    }
+  },
+  {
+    "id": "p05",
+    "arm": "loop_psi",
+    "assessment_mode": "evidence",
+    "status": "error",
+    "prediction": null,
+    "usage": {
+      "model_calls": 0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "seconds": 0
+    },
+    "error_type": "InvalidSharedPrefix",
+    "actual_new_api_usage": {
+      "model_calls": 0,
+      "input_tokens": 0,
+      "output_tokens": 0
+    }
+  },
+  {
+    "id": "p05",
+    "arm": "loop_frozen",
+    "assessment_mode": "evidence",
+    "status": "error",
+    "prediction": null,
+    "usage": {
+      "model_calls": 0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "seconds": 0
+    },
+    "error_type": "InvalidSharedPrefix",
+    "actual_new_api_usage": {
+      "model_calls": 0,
+      "input_tokens": 0,
+      "output_tokens": 0
+    }
+  },
+  {
+    "id": "p05",
+    "arm": "independent",
+    "assessment_mode": "evidence",
+    "status": "error",
+    "prediction": null,
+    "usage": {
+      "model_calls": 0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "seconds": 0
+    },
+    "error_type": "InvalidSharedPrefix",
+    "actual_new_api_usage": {
+      "model_calls": 0,
+      "input_tokens": 0,
+      "output_tokens": 0
+    }
+  }
+]

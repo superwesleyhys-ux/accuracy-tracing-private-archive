@@ -1,0 +1,2008 @@
+{
+  "schema_version": "0.3",
+  "scope": "plugin-supplied semantic analyses; no built-in truth oracle",
+  "target": {
+    "id": "p01",
+    "text": "NASA's October 11, 2022 announcement reported that DART shortened Dimorphos' orbital period around Didymos by 32 minutes, with an uncertainty of approximately plus or minus 2 minutes.",
+    "as_of": "2026-09-05T09:34:36Z",
+    "source_version_id": "m01",
+    "assessment_mode": "evidence",
+    "evidence_scope": [
+      "m02"
+    ]
+  },
+  "config": {
+    "max_rounds": 2,
+    "max_documents": 24,
+    "max_decomposition_calls": 24,
+    "experimental_force_rounds": true
+  },
+  "provenance_status": "original_material_located",
+  "fact_status": "supported",
+  "stop_reason": "round_budget",
+  "usage": {
+    "rounds": 2,
+    "documents": 4,
+    "unique_versions": 2,
+    "decomposition_calls": 5,
+    "verification_calls": 2
+  },
+  "decision_status": "supported",
+  "assessments": {
+    "evidence": {
+      "raw_verdict": "supported",
+      "decision": "supported",
+      "blocking_gap_ids": []
+    },
+    "world": {
+      "raw_verdict": "supported",
+      "decision": "supported",
+      "blocking_gap_ids": []
+    }
+  },
+  "assessment_valid": true,
+  "materials": [
+    {
+      "version_id": "m01",
+      "url": "https://www.nasa.gov/science-research/planetary-science/from-impact-to-innovation-a-year-of-science-and-triumph-for-historic-dart-mission/",
+      "content": "From Impact to Innovation: A Year of Science and Triumph for Historic DART Mission\nPublication date: 2023-09-26\n\nOctober 2022\n\n[NASA Confirms DART Mission Impact Changed Asteroid’s Motion in Space (Oct. 11, 2022)](https://www.nasa.gov/press-release/nasa-confirms-dart-mission-impact-changed-asteroid-s-motion-in-space)\n\nIt didn’t take long to learn just how much of an impact DART had made. Just a little over two weeks since it intentionally crashed head-on into Dimorphos, the science investigation team’s early data analysis confirmed the collision had significantly altered the asteroid’s orbit by 32 minutes, with an uncertainty of plus or minus 2 minutes (later revised to 33 minutes after more observation). Prior to DART’s impact, it took Dimorphos 11 hours and 55 minutes to orbit its larger parent asteroid, Didymos.",
+      "retrieved_at": "2026-09-05T09:34:36Z",
+      "published_at": null,
+      "available_at": "2026-09-05T09:34:36Z",
+      "availability_basis": "Current web-tool collection completed at retrieved_at on 2026-09-05. The supplied material is a selected, whitespace-normalized excerpt, not a full page or historical exact-version capture. Availability is asserted only at collection completion. The source's displayed publication date is preserved in content; no exact timezone-qualified publication instant is known.",
+      "issuer": "NASA"
+    },
+    {
+      "version_id": "m02",
+      "url": "https://www.nasa.gov/press-release/nasa-confirms-dart-mission-impact-changed-asteroid-s-motion-in-space",
+      "content": "NASA Confirms DART Mission Impact Changed Asteroid’s Motion in Space\nPublication date: 2022-10-11\n\nPrior to DART’s impact, it took Dimorphos 11 hours and 55 minutes to orbit its larger parent asteroid, Didymos. Since DART’s intentional collision with Dimorphos on Sept. 26, astronomers have been using telescopes on Earth to measure how much that time has changed. Now, the investigation team has confirmed the spacecraft’s impact altered Dimorphos’ orbit around Didymos by 32 minutes, shortening the 11 hour and 55-minute orbit to 11 hours and 23 minutes.\n\nThis measurement has a margin of uncertainty of approximately plus or minus 2 minutes.",
+      "retrieved_at": "2026-09-05T09:34:36Z",
+      "published_at": null,
+      "available_at": "2026-09-05T09:34:36Z",
+      "availability_basis": "Current web-tool collection completed at retrieved_at on 2026-09-05. The supplied material is a selected, whitespace-normalized excerpt, not a full page or historical exact-version capture. Availability is asserted only at collection completion. The source's displayed publication date is preserved in content; no exact timezone-qualified publication instant is known.",
+      "issuer": "NASA"
+    }
+  ],
+  "eligible_version_ids": [
+    "m01",
+    "m02"
+  ],
+  "observations": [
+    {
+      "version_id": "m01",
+      "retrieved_at": "2026-09-05T09:34:36Z",
+      "duplicate": false,
+      "eligible": true,
+      "reasons": []
+    },
+    {
+      "version_id": "m02",
+      "retrieved_at": "2026-09-05T09:34:36Z",
+      "duplicate": false,
+      "eligible": true,
+      "reasons": []
+    },
+    {
+      "version_id": "m01",
+      "retrieved_at": "2026-09-05T09:34:36Z",
+      "duplicate": true,
+      "eligible": true,
+      "reasons": []
+    },
+    {
+      "version_id": "m02",
+      "retrieved_at": "2026-09-05T09:34:36Z",
+      "duplicate": true,
+      "eligible": true,
+      "reasons": []
+    }
+  ],
+  "analyses": {
+    "m01": {
+      "fragments": [
+        {
+          "id": "m01:atom:3275d5e55c36dba55034",
+          "text": "A little over two weeks after DART intentionally crashed head-on into Dimorphos, the science investigation team’s early data analysis confirmed that the collision had significantly altered Dimorphos’ orbit by 32 minutes, with an uncertainty of plus or minus 2 minutes; the change was later revised to 33 minutes after more observation.",
+          "span": {
+            "version_id": "m01",
+            "start": 320,
+            "end": 714,
+            "quote": "It didn’t take long to learn just how much of an impact DART had made. Just a little over two weeks since it intentionally crashed head-on into Dimorphos, the science investigation team’s early data analysis confirmed the collision had significantly altered the asteroid’s orbit by 32 minutes, with an uncertainty of plus or minus 2 minutes (later revised to 33 minutes after more observation)."
+          },
+          "parent_id": "p01",
+          "qualifiers": [
+            "Just a little over two weeks since it intentionally crashed head-on into Dimorphos",
+            "early data analysis",
+            "by 32 minutes",
+            "with an uncertainty of plus or minus 2 minutes",
+            "later revised to 33 minutes after more observation"
+          ],
+          "qualifier_spans": [
+            {
+              "version_id": "m01",
+              "start": 391,
+              "end": 473,
+              "quote": "Just a little over two weeks since it intentionally crashed head-on into Dimorphos"
+            },
+            {
+              "version_id": "m01",
+              "start": 508,
+              "end": 527,
+              "quote": "early data analysis"
+            },
+            {
+              "version_id": "m01",
+              "start": 599,
+              "end": 612,
+              "quote": "by 32 minutes"
+            },
+            {
+              "version_id": "m01",
+              "start": 614,
+              "end": 660,
+              "quote": "with an uncertainty of plus or minus 2 minutes"
+            },
+            {
+              "version_id": "m01",
+              "start": 662,
+              "end": 712,
+              "quote": "later revised to 33 minutes after more observation"
+            }
+          ]
+        },
+        {
+          "id": "m01:atom:3a300c23d2baf3bf3fa4",
+          "text": "Before DART’s impact, Dimorphos took 11 hours and 55 minutes to orbit its larger parent asteroid, Didymos.",
+          "span": {
+            "version_id": "m01",
+            "start": 715,
+            "end": 826,
+            "quote": "Prior to DART’s impact, it took Dimorphos 11 hours and 55 minutes to orbit its larger parent asteroid, Didymos."
+          },
+          "parent_id": "p01",
+          "qualifiers": [
+            "Prior to DART’s impact",
+            "11 hours and 55 minutes",
+            "its larger parent asteroid, Didymos"
+          ],
+          "qualifier_spans": [
+            {
+              "version_id": "m01",
+              "start": 715,
+              "end": 737,
+              "quote": "Prior to DART’s impact"
+            },
+            {
+              "version_id": "m01",
+              "start": 757,
+              "end": 780,
+              "quote": "11 hours and 55 minutes"
+            },
+            {
+              "version_id": "m01",
+              "start": 790,
+              "end": 825,
+              "quote": "its larger parent asteroid, Didymos"
+            }
+          ]
+        },
+        {
+          "id": "m01:atom:b4c2136da81baf892c9b",
+          "text": "The source lists “NASA Confirms DART Mission Impact Changed Asteroid’s Motion in Space” dated October 11, 2022.",
+          "span": {
+            "version_id": "m01",
+            "start": 127,
+            "end": 318,
+            "quote": "[NASA Confirms DART Mission Impact Changed Asteroid’s Motion in Space (Oct. 11, 2022)](https://www.nasa.gov/press-release/nasa-confirms-dart-mission-impact-changed-asteroid-s-motion-in-space)"
+          },
+          "parent_id": "p01",
+          "qualifiers": [
+            "Oct. 11, 2022"
+          ],
+          "qualifier_spans": [
+            {
+              "version_id": "m01",
+              "start": 198,
+              "end": 211,
+              "quote": "Oct. 11, 2022"
+            }
+          ]
+        },
+        {
+          "id": "m01:atom:d3fb1a977e31ffe66611",
+          "text": "The initially reported 32-minute change in Dimorphos’ orbit was later revised to 33 minutes after more observation.",
+          "span": {
+            "version_id": "m01",
+            "start": 391,
+            "end": 714,
+            "quote": "Just a little over two weeks since it intentionally crashed head-on into Dimorphos, the science investigation team’s early data analysis confirmed the collision had significantly altered the asteroid’s orbit by 32 minutes, with an uncertainty of plus or minus 2 minutes (later revised to 33 minutes after more observation)."
+          },
+          "parent_id": "p01",
+          "qualifiers": [
+            "early data analysis",
+            "by 32 minutes",
+            "later revised to 33 minutes after more observation"
+          ],
+          "qualifier_spans": [
+            {
+              "version_id": "m01",
+              "start": 508,
+              "end": 527,
+              "quote": "early data analysis"
+            },
+            {
+              "version_id": "m01",
+              "start": 599,
+              "end": 612,
+              "quote": "by 32 minutes"
+            },
+            {
+              "version_id": "m01",
+              "start": 662,
+              "end": 712,
+              "quote": "later revised to 33 minutes after more observation"
+            }
+          ]
+        }
+      ],
+      "relations": [
+        {
+          "id": "m01:citation:2cfcee4182250fae4504",
+          "from_version": "m01",
+          "to_version": "m02",
+          "kind": "cites",
+          "status": "direct",
+          "basis": [
+            {
+              "version_id": "m01",
+              "start": 127,
+              "end": 318,
+              "quote": "[NASA Confirms DART Mission Impact Changed Asteroid’s Motion in Space (Oct. 11, 2022)](https://www.nasa.gov/press-release/nasa-confirms-dart-mission-impact-changed-asteroid-s-motion-in-space)"
+            }
+          ],
+          "rationale": "The retrospective explicitly links the October 11, 2022 announcement alongside its summary of the early orbital analysis.",
+          "upstream_locator": "https://www.nasa.gov/press-release/nasa-confirms-dart-mission-impact-changed-asteroid-s-motion-in-space"
+        }
+      ],
+      "gaps": [],
+      "resolutions": [
+        {
+          "gap_id": "m01:upstream:5c667c35de1d5511d890",
+          "basis": [
+            {
+              "version_id": "m01",
+              "start": 127,
+              "end": 318,
+              "quote": "[NASA Confirms DART Mission Impact Changed Asteroid’s Motion in Space (Oct. 11, 2022)](https://www.nasa.gov/press-release/nasa-confirms-dart-mission-impact-changed-asteroid-s-motion-in-space)"
+            }
+          ],
+          "rationale": "The source-side citation now identifies a visible upstream version."
+        }
+      ],
+      "origins": [],
+      "notes": "All four previous atoms remain supported by the visible current material; none withdrawn. The excerpt says “altered,” not explicitly “shortened.” These atoms describe the supplied material only; non-atom findings are outside this stage.\nThe previous lineage citation remains supported; none withdrawn. The current excerpt does not establish this retrospective as an original record, interview, dataset, or observation relevant to the target. No m02 content is supplied, so its support cannot be assessed here.",
+      "revisit_versions": []
+    },
+    "m02": {
+      "fragments": [
+        {
+          "id": "m02:atom:1e076c4ee4b707edc544",
+          "text": "The investigation team confirmed that DART’s impact shortened Dimorphos’ orbital period around Didymos by 32 minutes, from 11 hours and 55 minutes to 11 hours and 23 minutes.",
+          "span": {
+            "version_id": "m02",
+            "start": 211,
+            "end": 556,
+            "quote": "Since DART’s intentional collision with Dimorphos on Sept. 26, astronomers have been using telescopes on Earth to measure how much that time has changed. Now, the investigation team has confirmed the spacecraft’s impact altered Dimorphos’ orbit around Didymos by 32 minutes, shortening the 11 hour and 55-minute orbit to 11 hours and 23 minutes."
+          },
+          "parent_id": "p01",
+          "qualifiers": [
+            "the investigation team has confirmed",
+            "Dimorphos’ orbit around Didymos",
+            "by 32 minutes",
+            "shortening the 11 hour and 55-minute orbit to 11 hours and 23 minutes"
+          ],
+          "qualifier_spans": [
+            {
+              "version_id": "m02",
+              "start": 370,
+              "end": 406,
+              "quote": "the investigation team has confirmed"
+            },
+            {
+              "version_id": "m02",
+              "start": 439,
+              "end": 470,
+              "quote": "Dimorphos’ orbit around Didymos"
+            },
+            {
+              "version_id": "m02",
+              "start": 471,
+              "end": 484,
+              "quote": "by 32 minutes"
+            },
+            {
+              "version_id": "m02",
+              "start": 486,
+              "end": 555,
+              "quote": "shortening the 11 hour and 55-minute orbit to 11 hours and 23 minutes"
+            }
+          ]
+        },
+        {
+          "id": "m02:atom:b5c7a40234b04dc1c1a5",
+          "text": "The reported measurement of the 32-minute shortening of Dimorphos’ orbital period around Didymos has a margin of uncertainty of approximately plus or minus 2 minutes.",
+          "span": {
+            "version_id": "m02",
+            "start": 365,
+            "end": 644,
+            "quote": "Now, the investigation team has confirmed the spacecraft’s impact altered Dimorphos’ orbit around Didymos by 32 minutes, shortening the 11 hour and 55-minute orbit to 11 hours and 23 minutes.\n\nThis measurement has a margin of uncertainty of approximately plus or minus 2 minutes."
+          },
+          "parent_id": "p01",
+          "qualifiers": [
+            "Dimorphos’ orbit around Didymos by 32 minutes",
+            "shortening the 11 hour and 55-minute orbit to 11 hours and 23 minutes",
+            "margin of uncertainty of approximately plus or minus 2 minutes"
+          ],
+          "qualifier_spans": [
+            {
+              "version_id": "m02",
+              "start": 439,
+              "end": 484,
+              "quote": "Dimorphos’ orbit around Didymos by 32 minutes"
+            },
+            {
+              "version_id": "m02",
+              "start": 486,
+              "end": 555,
+              "quote": "shortening the 11 hour and 55-minute orbit to 11 hours and 23 minutes"
+            },
+            {
+              "version_id": "m02",
+              "start": 581,
+              "end": 643,
+              "quote": "margin of uncertainty of approximately plus or minus 2 minutes"
+            }
+          ]
+        },
+        {
+          "id": "m02:atom:db2383cd8705d2cf9058",
+          "text": "The NASA announcement displays a publication date of October 11, 2022.",
+          "span": {
+            "version_id": "m02",
+            "start": 0,
+            "end": 97,
+            "quote": "NASA Confirms DART Mission Impact Changed Asteroid’s Motion in Space\nPublication date: 2022-10-11"
+          },
+          "parent_id": "p01",
+          "qualifiers": [
+            "Publication date: 2022-10-11"
+          ],
+          "qualifier_spans": [
+            {
+              "version_id": "m02",
+              "start": 69,
+              "end": 97,
+              "quote": "Publication date: 2022-10-11"
+            }
+          ]
+        }
+      ],
+      "relations": [],
+      "gaps": [],
+      "resolutions": [
+        {
+          "gap_id": "origin:p01",
+          "basis": [
+            {
+              "version_id": "m02",
+              "start": 0,
+              "end": 644,
+              "quote": "NASA Confirms DART Mission Impact Changed Asteroid’s Motion in Space\nPublication date: 2022-10-11\n\nPrior to DART’s impact, it took Dimorphos 11 hours and 55 minutes to orbit its larger parent asteroid, Didymos. Since DART’s intentional collision with Dimorphos on Sept. 26, astronomers have been using telescopes on Earth to measure how much that time has changed. Now, the investigation team has confirmed the spacecraft’s impact altered Dimorphos’ orbit around Didymos by 32 minutes, shortening the 11 hour and 55-minute orbit to 11 hours and 23 minutes.\n\nThis measurement has a margin of uncertainty of approximately plus or minus 2 minutes."
+            }
+          ],
+          "rationale": "Rechecked source findings establish the target source's path to an original material."
+        }
+      ],
+      "origins": [
+        {
+          "target_id": "p01",
+          "version_id": "m02",
+          "basis": [
+            {
+              "version_id": "m02",
+              "start": 0,
+              "end": 644,
+              "quote": "NASA Confirms DART Mission Impact Changed Asteroid’s Motion in Space\nPublication date: 2022-10-11\n\nPrior to DART’s impact, it took Dimorphos 11 hours and 55 minutes to orbit its larger parent asteroid, Didymos. Since DART’s intentional collision with Dimorphos on Sept. 26, astronomers have been using telescopes on Earth to measure how much that time has changed. Now, the investigation team has confirmed the spacecraft’s impact altered Dimorphos’ orbit around Didymos by 32 minutes, shortening the 11 hour and 55-minute orbit to 11 hours and 23 minutes.\n\nThis measurement has a margin of uncertainty of approximately plus or minus 2 minutes."
+            }
+          ],
+          "material_kind": "original_record",
+          "rationale": "The supplied NASA press-release snapshot is the original published announcement relevant to the target: it records NASA’s dated report of the 32-minute shortening and approximately plus or minus 2-minute uncertainty. This establishes originality for the announcement’s content, not independent verification or original production of the underlying measurements."
+        }
+      ],
+      "notes": "All three previous atomic findings remain supported by the visible excerpt and are re-emitted. No atomic findings were withdrawn.\nNo explicit source-side citations appear in the excerpt. The previous rationale for leaving origin unassigned is withdrawn because it assessed originality of the measurements rather than the announcement. No previous citation findings require re-emission.",
+      "revisit_versions": []
+    }
+  },
+  "analysis_history": [
+    {
+      "revision": 1,
+      "round": 1,
+      "version_id": "m01",
+      "duplicate": false,
+      "revisit": false,
+      "accepted": true,
+      "analysis": {
+        "fragments": [
+          {
+            "id": "m01:atom:3a300c23d2baf3bf3fa4",
+            "text": "Before DART’s impact, Dimorphos took 11 hours and 55 minutes to orbit its larger parent asteroid, Didymos.",
+            "span": {
+              "version_id": "m01",
+              "start": 715,
+              "end": 826,
+              "quote": "Prior to DART’s impact, it took Dimorphos 11 hours and 55 minutes to orbit its larger parent asteroid, Didymos."
+            },
+            "parent_id": "p01",
+            "qualifiers": [
+              "Prior to DART’s impact",
+              "11 hours and 55 minutes"
+            ],
+            "qualifier_spans": [
+              {
+                "version_id": "m01",
+                "start": 715,
+                "end": 737,
+                "quote": "Prior to DART’s impact"
+              },
+              {
+                "version_id": "m01",
+                "start": 757,
+                "end": 780,
+                "quote": "11 hours and 55 minutes"
+              }
+            ]
+          },
+          {
+            "id": "m01:atom:5d4513bf2f84896f0f6a",
+            "text": "A little over two weeks after DART intentionally collided head-on with Dimorphos, the science investigation team’s early analysis reported an orbital change of 32 minutes, with an uncertainty of plus or minus 2 minutes.",
+            "span": {
+              "version_id": "m01",
+              "start": 391,
+              "end": 714,
+              "quote": "Just a little over two weeks since it intentionally crashed head-on into Dimorphos, the science investigation team’s early data analysis confirmed the collision had significantly altered the asteroid’s orbit by 32 minutes, with an uncertainty of plus or minus 2 minutes (later revised to 33 minutes after more observation)."
+            },
+            "parent_id": "p01",
+            "qualifiers": [
+              "Just a little over two weeks",
+              "early data analysis",
+              "by 32 minutes",
+              "with an uncertainty of plus or minus 2 minutes"
+            ],
+            "qualifier_spans": [
+              {
+                "version_id": "m01",
+                "start": 391,
+                "end": 419,
+                "quote": "Just a little over two weeks"
+              },
+              {
+                "version_id": "m01",
+                "start": 508,
+                "end": 527,
+                "quote": "early data analysis"
+              },
+              {
+                "version_id": "m01",
+                "start": 599,
+                "end": 612,
+                "quote": "by 32 minutes"
+              },
+              {
+                "version_id": "m01",
+                "start": 614,
+                "end": 660,
+                "quote": "with an uncertainty of plus or minus 2 minutes"
+              }
+            ]
+          },
+          {
+            "id": "m01:atom:f65ab53e3896668e6649",
+            "text": "The initially reported 32-minute orbital change was later revised to 33 minutes after more observation.",
+            "span": {
+              "version_id": "m01",
+              "start": 391,
+              "end": 714,
+              "quote": "Just a little over two weeks since it intentionally crashed head-on into Dimorphos, the science investigation team’s early data analysis confirmed the collision had significantly altered the asteroid’s orbit by 32 minutes, with an uncertainty of plus or minus 2 minutes (later revised to 33 minutes after more observation)."
+            },
+            "parent_id": "p01",
+            "qualifiers": [
+              "by 32 minutes",
+              "later revised to 33 minutes after more observation"
+            ],
+            "qualifier_spans": [
+              {
+                "version_id": "m01",
+                "start": 599,
+                "end": 612,
+                "quote": "by 32 minutes"
+              },
+              {
+                "version_id": "m01",
+                "start": 662,
+                "end": 712,
+                "quote": "later revised to 33 minutes after more observation"
+              }
+            ]
+          },
+          {
+            "id": "m01:atom:f86cdfd47c1c2c3e71e9",
+            "text": "The source lists an October 11, 2022 NASA announcement titled “NASA Confirms DART Mission Impact Changed Asteroid’s Motion in Space.”",
+            "span": {
+              "version_id": "m01",
+              "start": 127,
+              "end": 318,
+              "quote": "[NASA Confirms DART Mission Impact Changed Asteroid’s Motion in Space (Oct. 11, 2022)](https://www.nasa.gov/press-release/nasa-confirms-dart-mission-impact-changed-asteroid-s-motion-in-space)"
+            },
+            "parent_id": "p01",
+            "qualifiers": [
+              "Oct. 11, 2022"
+            ],
+            "qualifier_spans": [
+              {
+                "version_id": "m01",
+                "start": 198,
+                "end": 211,
+                "quote": "Oct. 11, 2022"
+              }
+            ]
+          }
+        ],
+        "relations": [
+          {
+            "id": "m01:citation:2cfcee4182250fae4504",
+            "from_version": "m01",
+            "to_version": null,
+            "kind": "cites",
+            "status": "declared",
+            "basis": [
+              {
+                "version_id": "m01",
+                "start": 127,
+                "end": 318,
+                "quote": "[NASA Confirms DART Mission Impact Changed Asteroid’s Motion in Space (Oct. 11, 2022)](https://www.nasa.gov/press-release/nasa-confirms-dart-mission-impact-changed-asteroid-s-motion-in-space)"
+              }
+            ],
+            "rationale": "The retrospective explicitly links the October 11, 2022 announcement alongside its account of the early orbital-period analysis.",
+            "upstream_locator": "https://www.nasa.gov/press-release/nasa-confirms-dart-mission-impact-changed-asteroid-s-motion-in-space"
+          }
+        ],
+        "gaps": [
+          {
+            "id": "m01:upstream:5c667c35de1d5511d890",
+            "question": "Locate the explicitly cited upstream: https://www.nasa.gov/press-release/nasa-confirms-dart-mission-impact-changed-asteroid-s-motion-in-space",
+            "stage": "provenance",
+            "dimension": "provenance",
+            "blocking": true,
+            "target_id": "p01",
+            "basis": [
+              {
+                "version_id": "m01",
+                "start": 127,
+                "end": 318,
+                "quote": "[NASA Confirms DART Mission Impact Changed Asteroid’s Motion in Space (Oct. 11, 2022)](https://www.nasa.gov/press-release/nasa-confirms-dart-mission-impact-changed-asteroid-s-motion-in-space)"
+              }
+            ],
+            "decision_impact": "Locating the cited announcement could establish whether the 32-minute change and plus-or-minus-2-minute uncertainty were reported there, rather than only in this later retrospective.",
+            "action": "fetch",
+            "locator": "https://www.nasa.gov/press-release/nasa-confirms-dart-mission-impact-changed-asteroid-s-motion-in-space"
+          }
+        ],
+        "resolutions": [],
+        "origins": [],
+        "notes": "Atoms describe the supplied m01 snapshot. Its excerpt says “altered,” not explicitly “shortened.” No previous findings were supplied.\nThe visible material is a retrospective citing an earlier announcement; it does not establish itself as the original record of the relevant measurement or announcement. The cited record's contents are not supplied, so its support for the target is not assessed. No previous findings were supplied.",
+        "revisit_versions": []
+      },
+      "exclusion_reasons": []
+    },
+    {
+      "revision": 2,
+      "round": 1,
+      "version_id": "m02",
+      "duplicate": false,
+      "revisit": false,
+      "accepted": true,
+      "analysis": {
+        "fragments": [
+          {
+            "id": "m02:atom:1e076c4ee4b707edc544",
+            "text": "The investigation team confirmed that DART’s impact shortened Dimorphos’ orbital period around Didymos by 32 minutes, from 11 hours and 55 minutes to 11 hours and 23 minutes.",
+            "span": {
+              "version_id": "m02",
+              "start": 211,
+              "end": 556,
+              "quote": "Since DART’s intentional collision with Dimorphos on Sept. 26, astronomers have been using telescopes on Earth to measure how much that time has changed. Now, the investigation team has confirmed the spacecraft’s impact altered Dimorphos’ orbit around Didymos by 32 minutes, shortening the 11 hour and 55-minute orbit to 11 hours and 23 minutes."
+            },
+            "parent_id": "p01",
+            "qualifiers": [
+              "the investigation team has confirmed",
+              "Dimorphos’ orbit around Didymos",
+              "by 32 minutes",
+              "shortening the 11 hour and 55-minute orbit to 11 hours and 23 minutes"
+            ],
+            "qualifier_spans": [
+              {
+                "version_id": "m02",
+                "start": 370,
+                "end": 406,
+                "quote": "the investigation team has confirmed"
+              },
+              {
+                "version_id": "m02",
+                "start": 439,
+                "end": 470,
+                "quote": "Dimorphos’ orbit around Didymos"
+              },
+              {
+                "version_id": "m02",
+                "start": 471,
+                "end": 484,
+                "quote": "by 32 minutes"
+              },
+              {
+                "version_id": "m02",
+                "start": 486,
+                "end": 555,
+                "quote": "shortening the 11 hour and 55-minute orbit to 11 hours and 23 minutes"
+              }
+            ]
+          },
+          {
+            "id": "m02:atom:b5c7a40234b04dc1c1a5",
+            "text": "The reported measurement of the 32-minute shortening of Dimorphos’ orbital period around Didymos has a margin of uncertainty of approximately plus or minus 2 minutes.",
+            "span": {
+              "version_id": "m02",
+              "start": 365,
+              "end": 644,
+              "quote": "Now, the investigation team has confirmed the spacecraft’s impact altered Dimorphos’ orbit around Didymos by 32 minutes, shortening the 11 hour and 55-minute orbit to 11 hours and 23 minutes.\n\nThis measurement has a margin of uncertainty of approximately plus or minus 2 minutes."
+            },
+            "parent_id": "p01",
+            "qualifiers": [
+              "Dimorphos’ orbit around Didymos by 32 minutes",
+              "margin of uncertainty of approximately plus or minus 2 minutes"
+            ],
+            "qualifier_spans": [
+              {
+                "version_id": "m02",
+                "start": 439,
+                "end": 484,
+                "quote": "Dimorphos’ orbit around Didymos by 32 minutes"
+              },
+              {
+                "version_id": "m02",
+                "start": 581,
+                "end": 643,
+                "quote": "margin of uncertainty of approximately plus or minus 2 minutes"
+              }
+            ]
+          },
+          {
+            "id": "m02:atom:db2383cd8705d2cf9058",
+            "text": "The NASA announcement displays a publication date of October 11, 2022.",
+            "span": {
+              "version_id": "m02",
+              "start": 0,
+              "end": 97,
+              "quote": "NASA Confirms DART Mission Impact Changed Asteroid’s Motion in Space\nPublication date: 2022-10-11"
+            },
+            "parent_id": "p01",
+            "qualifiers": [
+              "Publication date: 2022-10-11"
+            ],
+            "qualifier_spans": [
+              {
+                "version_id": "m02",
+                "start": 69,
+                "end": 97,
+                "quote": "Publication date: 2022-10-11"
+              }
+            ]
+          }
+        ],
+        "relations": [],
+        "gaps": [],
+        "resolutions": [],
+        "origins": [],
+        "notes": "The excerpt reports the investigation team's measurements but explicitly cites no external record. It does not establish the current material's own producing or publishing role as an original record of those measurements; NASA attribution and the announcement title alone are insufficient to assign origin. No previous findings were supplied.",
+        "revisit_versions": []
+      },
+      "exclusion_reasons": []
+    },
+    {
+      "revision": 3,
+      "round": 1,
+      "version_id": "m01",
+      "duplicate": true,
+      "revisit": true,
+      "accepted": true,
+      "analysis": {
+        "fragments": [
+          {
+            "id": "m01:atom:05c7c7d78aaa661141cc",
+            "text": "The source lists a NASA announcement titled “NASA Confirms DART Mission Impact Changed Asteroid’s Motion in Space” dated October 11, 2022.",
+            "span": {
+              "version_id": "m01",
+              "start": 127,
+              "end": 318,
+              "quote": "[NASA Confirms DART Mission Impact Changed Asteroid’s Motion in Space (Oct. 11, 2022)](https://www.nasa.gov/press-release/nasa-confirms-dart-mission-impact-changed-asteroid-s-motion-in-space)"
+            },
+            "parent_id": "p01",
+            "qualifiers": [
+              "Oct. 11, 2022"
+            ],
+            "qualifier_spans": [
+              {
+                "version_id": "m01",
+                "start": 198,
+                "end": 211,
+                "quote": "Oct. 11, 2022"
+              }
+            ]
+          },
+          {
+            "id": "m01:atom:3a300c23d2baf3bf3fa4",
+            "text": "Before DART’s impact, Dimorphos took 11 hours and 55 minutes to orbit its larger parent asteroid, Didymos.",
+            "span": {
+              "version_id": "m01",
+              "start": 715,
+              "end": 826,
+              "quote": "Prior to DART’s impact, it took Dimorphos 11 hours and 55 minutes to orbit its larger parent asteroid, Didymos."
+            },
+            "parent_id": "p01",
+            "qualifiers": [
+              "Prior to DART’s impact",
+              "11 hours and 55 minutes"
+            ],
+            "qualifier_spans": [
+              {
+                "version_id": "m01",
+                "start": 715,
+                "end": 737,
+                "quote": "Prior to DART’s impact"
+              },
+              {
+                "version_id": "m01",
+                "start": 757,
+                "end": 780,
+                "quote": "11 hours and 55 minutes"
+              }
+            ]
+          },
+          {
+            "id": "m01:atom:d3fb1a977e31ffe66611",
+            "text": "The initially reported 32-minute change in Dimorphos’ orbit was later revised to 33 minutes after more observation.",
+            "span": {
+              "version_id": "m01",
+              "start": 391,
+              "end": 714,
+              "quote": "Just a little over two weeks since it intentionally crashed head-on into Dimorphos, the science investigation team’s early data analysis confirmed the collision had significantly altered the asteroid’s orbit by 32 minutes, with an uncertainty of plus or minus 2 minutes (later revised to 33 minutes after more observation)."
+            },
+            "parent_id": "p01",
+            "qualifiers": [
+              "by 32 minutes",
+              "later revised to 33 minutes after more observation"
+            ],
+            "qualifier_spans": [
+              {
+                "version_id": "m01",
+                "start": 599,
+                "end": 612,
+                "quote": "by 32 minutes"
+              },
+              {
+                "version_id": "m01",
+                "start": 662,
+                "end": 712,
+                "quote": "later revised to 33 minutes after more observation"
+              }
+            ]
+          },
+          {
+            "id": "m01:atom:e757fe86eb3df8118e31",
+            "text": "A little over two weeks after DART intentionally crashed head-on into Dimorphos, the science investigation team’s early data analysis confirmed that the collision had altered Dimorphos’ orbit by 32 minutes, with an uncertainty of plus or minus 2 minutes.",
+            "span": {
+              "version_id": "m01",
+              "start": 391,
+              "end": 714,
+              "quote": "Just a little over two weeks since it intentionally crashed head-on into Dimorphos, the science investigation team’s early data analysis confirmed the collision had significantly altered the asteroid’s orbit by 32 minutes, with an uncertainty of plus or minus 2 minutes (later revised to 33 minutes after more observation)."
+            },
+            "parent_id": "p01",
+            "qualifiers": [
+              "Just a little over two weeks since it intentionally crashed head-on into Dimorphos",
+              "early data analysis",
+              "by 32 minutes",
+              "with an uncertainty of plus or minus 2 minutes"
+            ],
+            "qualifier_spans": [
+              {
+                "version_id": "m01",
+                "start": 391,
+                "end": 473,
+                "quote": "Just a little over two weeks since it intentionally crashed head-on into Dimorphos"
+              },
+              {
+                "version_id": "m01",
+                "start": 508,
+                "end": 527,
+                "quote": "early data analysis"
+              },
+              {
+                "version_id": "m01",
+                "start": 599,
+                "end": 612,
+                "quote": "by 32 minutes"
+              },
+              {
+                "version_id": "m01",
+                "start": 614,
+                "end": 660,
+                "quote": "with an uncertainty of plus or minus 2 minutes"
+              }
+            ]
+          }
+        ],
+        "relations": [
+          {
+            "id": "m01:citation:2cfcee4182250fae4504",
+            "from_version": "m01",
+            "to_version": "m02",
+            "kind": "cites",
+            "status": "direct",
+            "basis": [
+              {
+                "version_id": "m01",
+                "start": 127,
+                "end": 318,
+                "quote": "[NASA Confirms DART Mission Impact Changed Asteroid’s Motion in Space (Oct. 11, 2022)](https://www.nasa.gov/press-release/nasa-confirms-dart-mission-impact-changed-asteroid-s-motion-in-space)"
+              }
+            ],
+            "rationale": "The retrospective explicitly links the October 11, 2022 announcement alongside its account of the early orbital analysis.",
+            "upstream_locator": "https://www.nasa.gov/press-release/nasa-confirms-dart-mission-impact-changed-asteroid-s-motion-in-space"
+          }
+        ],
+        "gaps": [],
+        "resolutions": [
+          {
+            "gap_id": "m01:upstream:5c667c35de1d5511d890",
+            "basis": [
+              {
+                "version_id": "m01",
+                "start": 127,
+                "end": 318,
+                "quote": "[NASA Confirms DART Mission Impact Changed Asteroid’s Motion in Space (Oct. 11, 2022)](https://www.nasa.gov/press-release/nasa-confirms-dart-mission-impact-changed-asteroid-s-motion-in-space)"
+              }
+            ],
+            "rationale": "The source-side citation now identifies a visible upstream version."
+          }
+        ],
+        "origins": [],
+        "notes": "All four previous atoms remain supported by the visible m01 snapshot; none withdrawn. The excerpt says “altered,” not explicitly “shortened.” These atoms describe m01 only; no m02 text was supplied. Previous non-atom findings are outside this stage.\nThe previous lineage citation remains supported; no lineage findings are withdrawn. The current excerpt does not establish this retrospective as an original record, interview, dataset, or observation relevant to the target. Citation extraction does not establish the cited announcement's support for the target.",
+        "revisit_versions": []
+      },
+      "exclusion_reasons": []
+    },
+    {
+      "revision": 4,
+      "round": 2,
+      "version_id": "m01",
+      "duplicate": true,
+      "revisit": false,
+      "accepted": true,
+      "analysis": {
+        "fragments": [
+          {
+            "id": "m01:atom:3275d5e55c36dba55034",
+            "text": "A little over two weeks after DART intentionally crashed head-on into Dimorphos, the science investigation team’s early data analysis confirmed that the collision had significantly altered Dimorphos’ orbit by 32 minutes, with an uncertainty of plus or minus 2 minutes; the change was later revised to 33 minutes after more observation.",
+            "span": {
+              "version_id": "m01",
+              "start": 320,
+              "end": 714,
+              "quote": "It didn’t take long to learn just how much of an impact DART had made. Just a little over two weeks since it intentionally crashed head-on into Dimorphos, the science investigation team’s early data analysis confirmed the collision had significantly altered the asteroid’s orbit by 32 minutes, with an uncertainty of plus or minus 2 minutes (later revised to 33 minutes after more observation)."
+            },
+            "parent_id": "p01",
+            "qualifiers": [
+              "Just a little over two weeks since it intentionally crashed head-on into Dimorphos",
+              "early data analysis",
+              "by 32 minutes",
+              "with an uncertainty of plus or minus 2 minutes",
+              "later revised to 33 minutes after more observation"
+            ],
+            "qualifier_spans": [
+              {
+                "version_id": "m01",
+                "start": 391,
+                "end": 473,
+                "quote": "Just a little over two weeks since it intentionally crashed head-on into Dimorphos"
+              },
+              {
+                "version_id": "m01",
+                "start": 508,
+                "end": 527,
+                "quote": "early data analysis"
+              },
+              {
+                "version_id": "m01",
+                "start": 599,
+                "end": 612,
+                "quote": "by 32 minutes"
+              },
+              {
+                "version_id": "m01",
+                "start": 614,
+                "end": 660,
+                "quote": "with an uncertainty of plus or minus 2 minutes"
+              },
+              {
+                "version_id": "m01",
+                "start": 662,
+                "end": 712,
+                "quote": "later revised to 33 minutes after more observation"
+              }
+            ]
+          },
+          {
+            "id": "m01:atom:3a300c23d2baf3bf3fa4",
+            "text": "Before DART’s impact, Dimorphos took 11 hours and 55 minutes to orbit its larger parent asteroid, Didymos.",
+            "span": {
+              "version_id": "m01",
+              "start": 715,
+              "end": 826,
+              "quote": "Prior to DART’s impact, it took Dimorphos 11 hours and 55 minutes to orbit its larger parent asteroid, Didymos."
+            },
+            "parent_id": "p01",
+            "qualifiers": [
+              "Prior to DART’s impact",
+              "11 hours and 55 minutes",
+              "its larger parent asteroid, Didymos"
+            ],
+            "qualifier_spans": [
+              {
+                "version_id": "m01",
+                "start": 715,
+                "end": 737,
+                "quote": "Prior to DART’s impact"
+              },
+              {
+                "version_id": "m01",
+                "start": 757,
+                "end": 780,
+                "quote": "11 hours and 55 minutes"
+              },
+              {
+                "version_id": "m01",
+                "start": 790,
+                "end": 825,
+                "quote": "its larger parent asteroid, Didymos"
+              }
+            ]
+          },
+          {
+            "id": "m01:atom:b4c2136da81baf892c9b",
+            "text": "The source lists “NASA Confirms DART Mission Impact Changed Asteroid’s Motion in Space” dated October 11, 2022.",
+            "span": {
+              "version_id": "m01",
+              "start": 127,
+              "end": 318,
+              "quote": "[NASA Confirms DART Mission Impact Changed Asteroid’s Motion in Space (Oct. 11, 2022)](https://www.nasa.gov/press-release/nasa-confirms-dart-mission-impact-changed-asteroid-s-motion-in-space)"
+            },
+            "parent_id": "p01",
+            "qualifiers": [
+              "Oct. 11, 2022"
+            ],
+            "qualifier_spans": [
+              {
+                "version_id": "m01",
+                "start": 198,
+                "end": 211,
+                "quote": "Oct. 11, 2022"
+              }
+            ]
+          },
+          {
+            "id": "m01:atom:d3fb1a977e31ffe66611",
+            "text": "The initially reported 32-minute change in Dimorphos’ orbit was later revised to 33 minutes after more observation.",
+            "span": {
+              "version_id": "m01",
+              "start": 391,
+              "end": 714,
+              "quote": "Just a little over two weeks since it intentionally crashed head-on into Dimorphos, the science investigation team’s early data analysis confirmed the collision had significantly altered the asteroid’s orbit by 32 minutes, with an uncertainty of plus or minus 2 minutes (later revised to 33 minutes after more observation)."
+            },
+            "parent_id": "p01",
+            "qualifiers": [
+              "early data analysis",
+              "by 32 minutes",
+              "later revised to 33 minutes after more observation"
+            ],
+            "qualifier_spans": [
+              {
+                "version_id": "m01",
+                "start": 508,
+                "end": 527,
+                "quote": "early data analysis"
+              },
+              {
+                "version_id": "m01",
+                "start": 599,
+                "end": 612,
+                "quote": "by 32 minutes"
+              },
+              {
+                "version_id": "m01",
+                "start": 662,
+                "end": 712,
+                "quote": "later revised to 33 minutes after more observation"
+              }
+            ]
+          }
+        ],
+        "relations": [
+          {
+            "id": "m01:citation:2cfcee4182250fae4504",
+            "from_version": "m01",
+            "to_version": "m02",
+            "kind": "cites",
+            "status": "direct",
+            "basis": [
+              {
+                "version_id": "m01",
+                "start": 127,
+                "end": 318,
+                "quote": "[NASA Confirms DART Mission Impact Changed Asteroid’s Motion in Space (Oct. 11, 2022)](https://www.nasa.gov/press-release/nasa-confirms-dart-mission-impact-changed-asteroid-s-motion-in-space)"
+              }
+            ],
+            "rationale": "The retrospective explicitly links the October 11, 2022 announcement alongside its summary of the early orbital analysis.",
+            "upstream_locator": "https://www.nasa.gov/press-release/nasa-confirms-dart-mission-impact-changed-asteroid-s-motion-in-space"
+          }
+        ],
+        "gaps": [],
+        "resolutions": [
+          {
+            "gap_id": "m01:upstream:5c667c35de1d5511d890",
+            "basis": [
+              {
+                "version_id": "m01",
+                "start": 127,
+                "end": 318,
+                "quote": "[NASA Confirms DART Mission Impact Changed Asteroid’s Motion in Space (Oct. 11, 2022)](https://www.nasa.gov/press-release/nasa-confirms-dart-mission-impact-changed-asteroid-s-motion-in-space)"
+              }
+            ],
+            "rationale": "The source-side citation now identifies a visible upstream version."
+          }
+        ],
+        "origins": [],
+        "notes": "All four previous atoms remain supported by the visible current material; none withdrawn. The excerpt says “altered,” not explicitly “shortened.” These atoms describe the supplied material only; non-atom findings are outside this stage.\nThe previous lineage citation remains supported; none withdrawn. The current excerpt does not establish this retrospective as an original record, interview, dataset, or observation relevant to the target. No m02 content is supplied, so its support cannot be assessed here.",
+        "revisit_versions": []
+      },
+      "exclusion_reasons": []
+    },
+    {
+      "revision": 5,
+      "round": 2,
+      "version_id": "m02",
+      "duplicate": true,
+      "revisit": false,
+      "accepted": true,
+      "analysis": {
+        "fragments": [
+          {
+            "id": "m02:atom:1e076c4ee4b707edc544",
+            "text": "The investigation team confirmed that DART’s impact shortened Dimorphos’ orbital period around Didymos by 32 minutes, from 11 hours and 55 minutes to 11 hours and 23 minutes.",
+            "span": {
+              "version_id": "m02",
+              "start": 211,
+              "end": 556,
+              "quote": "Since DART’s intentional collision with Dimorphos on Sept. 26, astronomers have been using telescopes on Earth to measure how much that time has changed. Now, the investigation team has confirmed the spacecraft’s impact altered Dimorphos’ orbit around Didymos by 32 minutes, shortening the 11 hour and 55-minute orbit to 11 hours and 23 minutes."
+            },
+            "parent_id": "p01",
+            "qualifiers": [
+              "the investigation team has confirmed",
+              "Dimorphos’ orbit around Didymos",
+              "by 32 minutes",
+              "shortening the 11 hour and 55-minute orbit to 11 hours and 23 minutes"
+            ],
+            "qualifier_spans": [
+              {
+                "version_id": "m02",
+                "start": 370,
+                "end": 406,
+                "quote": "the investigation team has confirmed"
+              },
+              {
+                "version_id": "m02",
+                "start": 439,
+                "end": 470,
+                "quote": "Dimorphos’ orbit around Didymos"
+              },
+              {
+                "version_id": "m02",
+                "start": 471,
+                "end": 484,
+                "quote": "by 32 minutes"
+              },
+              {
+                "version_id": "m02",
+                "start": 486,
+                "end": 555,
+                "quote": "shortening the 11 hour and 55-minute orbit to 11 hours and 23 minutes"
+              }
+            ]
+          },
+          {
+            "id": "m02:atom:b5c7a40234b04dc1c1a5",
+            "text": "The reported measurement of the 32-minute shortening of Dimorphos’ orbital period around Didymos has a margin of uncertainty of approximately plus or minus 2 minutes.",
+            "span": {
+              "version_id": "m02",
+              "start": 365,
+              "end": 644,
+              "quote": "Now, the investigation team has confirmed the spacecraft’s impact altered Dimorphos’ orbit around Didymos by 32 minutes, shortening the 11 hour and 55-minute orbit to 11 hours and 23 minutes.\n\nThis measurement has a margin of uncertainty of approximately plus or minus 2 minutes."
+            },
+            "parent_id": "p01",
+            "qualifiers": [
+              "Dimorphos’ orbit around Didymos by 32 minutes",
+              "shortening the 11 hour and 55-minute orbit to 11 hours and 23 minutes",
+              "margin of uncertainty of approximately plus or minus 2 minutes"
+            ],
+            "qualifier_spans": [
+              {
+                "version_id": "m02",
+                "start": 439,
+                "end": 484,
+                "quote": "Dimorphos’ orbit around Didymos by 32 minutes"
+              },
+              {
+                "version_id": "m02",
+                "start": 486,
+                "end": 555,
+                "quote": "shortening the 11 hour and 55-minute orbit to 11 hours and 23 minutes"
+              },
+              {
+                "version_id": "m02",
+                "start": 581,
+                "end": 643,
+                "quote": "margin of uncertainty of approximately plus or minus 2 minutes"
+              }
+            ]
+          },
+          {
+            "id": "m02:atom:db2383cd8705d2cf9058",
+            "text": "The NASA announcement displays a publication date of October 11, 2022.",
+            "span": {
+              "version_id": "m02",
+              "start": 0,
+              "end": 97,
+              "quote": "NASA Confirms DART Mission Impact Changed Asteroid’s Motion in Space\nPublication date: 2022-10-11"
+            },
+            "parent_id": "p01",
+            "qualifiers": [
+              "Publication date: 2022-10-11"
+            ],
+            "qualifier_spans": [
+              {
+                "version_id": "m02",
+                "start": 69,
+                "end": 97,
+                "quote": "Publication date: 2022-10-11"
+              }
+            ]
+          }
+        ],
+        "relations": [],
+        "gaps": [],
+        "resolutions": [
+          {
+            "gap_id": "origin:p01",
+            "basis": [
+              {
+                "version_id": "m02",
+                "start": 0,
+                "end": 644,
+                "quote": "NASA Confirms DART Mission Impact Changed Asteroid’s Motion in Space\nPublication date: 2022-10-11\n\nPrior to DART’s impact, it took Dimorphos 11 hours and 55 minutes to orbit its larger parent asteroid, Didymos. Since DART’s intentional collision with Dimorphos on Sept. 26, astronomers have been using telescopes on Earth to measure how much that time has changed. Now, the investigation team has confirmed the spacecraft’s impact altered Dimorphos’ orbit around Didymos by 32 minutes, shortening the 11 hour and 55-minute orbit to 11 hours and 23 minutes.\n\nThis measurement has a margin of uncertainty of approximately plus or minus 2 minutes."
+              }
+            ],
+            "rationale": "Rechecked source findings establish the target source's path to an original material."
+          }
+        ],
+        "origins": [
+          {
+            "target_id": "p01",
+            "version_id": "m02",
+            "basis": [
+              {
+                "version_id": "m02",
+                "start": 0,
+                "end": 644,
+                "quote": "NASA Confirms DART Mission Impact Changed Asteroid’s Motion in Space\nPublication date: 2022-10-11\n\nPrior to DART’s impact, it took Dimorphos 11 hours and 55 minutes to orbit its larger parent asteroid, Didymos. Since DART’s intentional collision with Dimorphos on Sept. 26, astronomers have been using telescopes on Earth to measure how much that time has changed. Now, the investigation team has confirmed the spacecraft’s impact altered Dimorphos’ orbit around Didymos by 32 minutes, shortening the 11 hour and 55-minute orbit to 11 hours and 23 minutes.\n\nThis measurement has a margin of uncertainty of approximately plus or minus 2 minutes."
+              }
+            ],
+            "material_kind": "original_record",
+            "rationale": "The supplied NASA press-release snapshot is the original published announcement relevant to the target: it records NASA’s dated report of the 32-minute shortening and approximately plus or minus 2-minute uncertainty. This establishes originality for the announcement’s content, not independent verification or original production of the underlying measurements."
+          }
+        ],
+        "notes": "All three previous atomic findings remain supported by the visible excerpt and are re-emitted. No atomic findings were withdrawn.\nNo explicit source-side citations appear in the excerpt. The previous rationale for leaving origin unassigned is withdrawn because it assessed originality of the measurements rather than the announcement. No previous citation findings require re-emission.",
+        "revisit_versions": []
+      },
+      "exclusion_reasons": []
+    }
+  ],
+  "fragments": [
+    {
+      "id": "m01:atom:3275d5e55c36dba55034",
+      "text": "A little over two weeks after DART intentionally crashed head-on into Dimorphos, the science investigation team’s early data analysis confirmed that the collision had significantly altered Dimorphos’ orbit by 32 minutes, with an uncertainty of plus or minus 2 minutes; the change was later revised to 33 minutes after more observation.",
+      "span": {
+        "version_id": "m01",
+        "start": 320,
+        "end": 714,
+        "quote": "It didn’t take long to learn just how much of an impact DART had made. Just a little over two weeks since it intentionally crashed head-on into Dimorphos, the science investigation team’s early data analysis confirmed the collision had significantly altered the asteroid’s orbit by 32 minutes, with an uncertainty of plus or minus 2 minutes (later revised to 33 minutes after more observation)."
+      },
+      "parent_id": "p01",
+      "qualifiers": [
+        "Just a little over two weeks since it intentionally crashed head-on into Dimorphos",
+        "early data analysis",
+        "by 32 minutes",
+        "with an uncertainty of plus or minus 2 minutes",
+        "later revised to 33 minutes after more observation"
+      ],
+      "qualifier_spans": [
+        {
+          "version_id": "m01",
+          "start": 391,
+          "end": 473,
+          "quote": "Just a little over two weeks since it intentionally crashed head-on into Dimorphos"
+        },
+        {
+          "version_id": "m01",
+          "start": 508,
+          "end": 527,
+          "quote": "early data analysis"
+        },
+        {
+          "version_id": "m01",
+          "start": 599,
+          "end": 612,
+          "quote": "by 32 minutes"
+        },
+        {
+          "version_id": "m01",
+          "start": 614,
+          "end": 660,
+          "quote": "with an uncertainty of plus or minus 2 minutes"
+        },
+        {
+          "version_id": "m01",
+          "start": 662,
+          "end": 712,
+          "quote": "later revised to 33 minutes after more observation"
+        }
+      ]
+    },
+    {
+      "id": "m01:atom:3a300c23d2baf3bf3fa4",
+      "text": "Before DART’s impact, Dimorphos took 11 hours and 55 minutes to orbit its larger parent asteroid, Didymos.",
+      "span": {
+        "version_id": "m01",
+        "start": 715,
+        "end": 826,
+        "quote": "Prior to DART’s impact, it took Dimorphos 11 hours and 55 minutes to orbit its larger parent asteroid, Didymos."
+      },
+      "parent_id": "p01",
+      "qualifiers": [
+        "Prior to DART’s impact",
+        "11 hours and 55 minutes",
+        "its larger parent asteroid, Didymos"
+      ],
+      "qualifier_spans": [
+        {
+          "version_id": "m01",
+          "start": 715,
+          "end": 737,
+          "quote": "Prior to DART’s impact"
+        },
+        {
+          "version_id": "m01",
+          "start": 757,
+          "end": 780,
+          "quote": "11 hours and 55 minutes"
+        },
+        {
+          "version_id": "m01",
+          "start": 790,
+          "end": 825,
+          "quote": "its larger parent asteroid, Didymos"
+        }
+      ]
+    },
+    {
+      "id": "m01:atom:b4c2136da81baf892c9b",
+      "text": "The source lists “NASA Confirms DART Mission Impact Changed Asteroid’s Motion in Space” dated October 11, 2022.",
+      "span": {
+        "version_id": "m01",
+        "start": 127,
+        "end": 318,
+        "quote": "[NASA Confirms DART Mission Impact Changed Asteroid’s Motion in Space (Oct. 11, 2022)](https://www.nasa.gov/press-release/nasa-confirms-dart-mission-impact-changed-asteroid-s-motion-in-space)"
+      },
+      "parent_id": "p01",
+      "qualifiers": [
+        "Oct. 11, 2022"
+      ],
+      "qualifier_spans": [
+        {
+          "version_id": "m01",
+          "start": 198,
+          "end": 211,
+          "quote": "Oct. 11, 2022"
+        }
+      ]
+    },
+    {
+      "id": "m01:atom:d3fb1a977e31ffe66611",
+      "text": "The initially reported 32-minute change in Dimorphos’ orbit was later revised to 33 minutes after more observation.",
+      "span": {
+        "version_id": "m01",
+        "start": 391,
+        "end": 714,
+        "quote": "Just a little over two weeks since it intentionally crashed head-on into Dimorphos, the science investigation team’s early data analysis confirmed the collision had significantly altered the asteroid’s orbit by 32 minutes, with an uncertainty of plus or minus 2 minutes (later revised to 33 minutes after more observation)."
+      },
+      "parent_id": "p01",
+      "qualifiers": [
+        "early data analysis",
+        "by 32 minutes",
+        "later revised to 33 minutes after more observation"
+      ],
+      "qualifier_spans": [
+        {
+          "version_id": "m01",
+          "start": 508,
+          "end": 527,
+          "quote": "early data analysis"
+        },
+        {
+          "version_id": "m01",
+          "start": 599,
+          "end": 612,
+          "quote": "by 32 minutes"
+        },
+        {
+          "version_id": "m01",
+          "start": 662,
+          "end": 712,
+          "quote": "later revised to 33 minutes after more observation"
+        }
+      ]
+    },
+    {
+      "id": "m02:atom:1e076c4ee4b707edc544",
+      "text": "The investigation team confirmed that DART’s impact shortened Dimorphos’ orbital period around Didymos by 32 minutes, from 11 hours and 55 minutes to 11 hours and 23 minutes.",
+      "span": {
+        "version_id": "m02",
+        "start": 211,
+        "end": 556,
+        "quote": "Since DART’s intentional collision with Dimorphos on Sept. 26, astronomers have been using telescopes on Earth to measure how much that time has changed. Now, the investigation team has confirmed the spacecraft’s impact altered Dimorphos’ orbit around Didymos by 32 minutes, shortening the 11 hour and 55-minute orbit to 11 hours and 23 minutes."
+      },
+      "parent_id": "p01",
+      "qualifiers": [
+        "the investigation team has confirmed",
+        "Dimorphos’ orbit around Didymos",
+        "by 32 minutes",
+        "shortening the 11 hour and 55-minute orbit to 11 hours and 23 minutes"
+      ],
+      "qualifier_spans": [
+        {
+          "version_id": "m02",
+          "start": 370,
+          "end": 406,
+          "quote": "the investigation team has confirmed"
+        },
+        {
+          "version_id": "m02",
+          "start": 439,
+          "end": 470,
+          "quote": "Dimorphos’ orbit around Didymos"
+        },
+        {
+          "version_id": "m02",
+          "start": 471,
+          "end": 484,
+          "quote": "by 32 minutes"
+        },
+        {
+          "version_id": "m02",
+          "start": 486,
+          "end": 555,
+          "quote": "shortening the 11 hour and 55-minute orbit to 11 hours and 23 minutes"
+        }
+      ]
+    },
+    {
+      "id": "m02:atom:b5c7a40234b04dc1c1a5",
+      "text": "The reported measurement of the 32-minute shortening of Dimorphos’ orbital period around Didymos has a margin of uncertainty of approximately plus or minus 2 minutes.",
+      "span": {
+        "version_id": "m02",
+        "start": 365,
+        "end": 644,
+        "quote": "Now, the investigation team has confirmed the spacecraft’s impact altered Dimorphos’ orbit around Didymos by 32 minutes, shortening the 11 hour and 55-minute orbit to 11 hours and 23 minutes.\n\nThis measurement has a margin of uncertainty of approximately plus or minus 2 minutes."
+      },
+      "parent_id": "p01",
+      "qualifiers": [
+        "Dimorphos’ orbit around Didymos by 32 minutes",
+        "shortening the 11 hour and 55-minute orbit to 11 hours and 23 minutes",
+        "margin of uncertainty of approximately plus or minus 2 minutes"
+      ],
+      "qualifier_spans": [
+        {
+          "version_id": "m02",
+          "start": 439,
+          "end": 484,
+          "quote": "Dimorphos’ orbit around Didymos by 32 minutes"
+        },
+        {
+          "version_id": "m02",
+          "start": 486,
+          "end": 555,
+          "quote": "shortening the 11 hour and 55-minute orbit to 11 hours and 23 minutes"
+        },
+        {
+          "version_id": "m02",
+          "start": 581,
+          "end": 643,
+          "quote": "margin of uncertainty of approximately plus or minus 2 minutes"
+        }
+      ]
+    },
+    {
+      "id": "m02:atom:db2383cd8705d2cf9058",
+      "text": "The NASA announcement displays a publication date of October 11, 2022.",
+      "span": {
+        "version_id": "m02",
+        "start": 0,
+        "end": 97,
+        "quote": "NASA Confirms DART Mission Impact Changed Asteroid’s Motion in Space\nPublication date: 2022-10-11"
+      },
+      "parent_id": "p01",
+      "qualifiers": [
+        "Publication date: 2022-10-11"
+      ],
+      "qualifier_spans": [
+        {
+          "version_id": "m02",
+          "start": 69,
+          "end": 97,
+          "quote": "Publication date: 2022-10-11"
+        }
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "m01:citation:2cfcee4182250fae4504",
+      "from_version": "m01",
+      "to_version": "m02",
+      "kind": "cites",
+      "status": "direct",
+      "basis": [
+        {
+          "version_id": "m01",
+          "start": 127,
+          "end": 318,
+          "quote": "[NASA Confirms DART Mission Impact Changed Asteroid’s Motion in Space (Oct. 11, 2022)](https://www.nasa.gov/press-release/nasa-confirms-dart-mission-impact-changed-asteroid-s-motion-in-space)"
+        }
+      ],
+      "rationale": "The retrospective explicitly links the October 11, 2022 announcement alongside its summary of the early orbital analysis.",
+      "upstream_locator": "https://www.nasa.gov/press-release/nasa-confirms-dart-mission-impact-changed-asteroid-s-motion-in-space"
+    }
+  ],
+  "origins": [
+    {
+      "target_id": "p01",
+      "version_id": "m02",
+      "basis": [
+        {
+          "version_id": "m02",
+          "start": 0,
+          "end": 644,
+          "quote": "NASA Confirms DART Mission Impact Changed Asteroid’s Motion in Space\nPublication date: 2022-10-11\n\nPrior to DART’s impact, it took Dimorphos 11 hours and 55 minutes to orbit its larger parent asteroid, Didymos. Since DART’s intentional collision with Dimorphos on Sept. 26, astronomers have been using telescopes on Earth to measure how much that time has changed. Now, the investigation team has confirmed the spacecraft’s impact altered Dimorphos’ orbit around Didymos by 32 minutes, shortening the 11 hour and 55-minute orbit to 11 hours and 23 minutes.\n\nThis measurement has a margin of uncertainty of approximately plus or minus 2 minutes."
+        }
+      ],
+      "material_kind": "original_record",
+      "rationale": "The supplied NASA press-release snapshot is the original published announcement relevant to the target: it records NASA’s dated report of the 32-minute shortening and approximately plus or minus 2-minute uncertainty. This establishes originality for the announcement’s content, not independent verification or original production of the underlying measurements."
+    }
+  ],
+  "gaps": [],
+  "gap_registry": [
+    {
+      "id": "origin:p01",
+      "question": "Find the producing record and evidenced lineage for: NASA's October 11, 2022 announcement reported that DART shortened Dimorphos' orbital period around Didymos by 32 minutes, with an uncertainty of approximately plus or minus 2 minutes.",
+      "stage": "provenance",
+      "dimension": "auto",
+      "blocking": true,
+      "target_id": null,
+      "basis": [],
+      "decision_impact": "",
+      "action": "search",
+      "locator": null
+    },
+    {
+      "id": "m01:upstream:5c667c35de1d5511d890",
+      "question": "Locate the explicitly cited upstream: https://www.nasa.gov/press-release/nasa-confirms-dart-mission-impact-changed-asteroid-s-motion-in-space",
+      "stage": "provenance",
+      "dimension": "provenance",
+      "blocking": true,
+      "target_id": "p01",
+      "basis": [
+        {
+          "version_id": "m01",
+          "start": 127,
+          "end": 318,
+          "quote": "[NASA Confirms DART Mission Impact Changed Asteroid’s Motion in Space (Oct. 11, 2022)](https://www.nasa.gov/press-release/nasa-confirms-dart-mission-impact-changed-asteroid-s-motion-in-space)"
+        }
+      ],
+      "decision_impact": "Locating the cited announcement could establish whether the 32-minute change and plus-or-minus-2-minute uncertainty were reported there, rather than only in this later retrospective.",
+      "action": "fetch",
+      "locator": "https://www.nasa.gov/press-release/nasa-confirms-dart-mission-impact-changed-asteroid-s-motion-in-space"
+    }
+  ],
+  "resolutions": [
+    {
+      "gap_id": "m01:upstream:5c667c35de1d5511d890",
+      "basis": [
+        {
+          "version_id": "m01",
+          "start": 127,
+          "end": 318,
+          "quote": "[NASA Confirms DART Mission Impact Changed Asteroid’s Motion in Space (Oct. 11, 2022)](https://www.nasa.gov/press-release/nasa-confirms-dart-mission-impact-changed-asteroid-s-motion-in-space)"
+        }
+      ],
+      "rationale": "The source-side citation now identifies a visible upstream version."
+    },
+    {
+      "gap_id": "origin:p01",
+      "basis": [
+        {
+          "version_id": "m02",
+          "start": 0,
+          "end": 644,
+          "quote": "NASA Confirms DART Mission Impact Changed Asteroid’s Motion in Space\nPublication date: 2022-10-11\n\nPrior to DART’s impact, it took Dimorphos 11 hours and 55 minutes to orbit its larger parent asteroid, Didymos. Since DART’s intentional collision with Dimorphos on Sept. 26, astronomers have been using telescopes on Earth to measure how much that time has changed. Now, the investigation team has confirmed the spacecraft’s impact altered Dimorphos’ orbit around Didymos by 32 minutes, shortening the 11 hour and 55-minute orbit to 11 hours and 23 minutes.\n\nThis measurement has a margin of uncertainty of approximately plus or minus 2 minutes."
+        }
+      ],
+      "rationale": "Rechecked source findings establish the target source's path to an original material."
+    }
+  ],
+  "verification_history": [
+    {
+      "round": 1,
+      "verdict": "supported",
+      "basis": [
+        {
+          "version_id": "m02",
+          "start": 0,
+          "end": 97,
+          "quote": "NASA Confirms DART Mission Impact Changed Asteroid’s Motion in Space\nPublication date: 2022-10-11"
+        },
+        {
+          "version_id": "m02",
+          "start": 211,
+          "end": 644,
+          "quote": "Since DART’s intentional collision with Dimorphos on Sept. 26, astronomers have been using telescopes on Earth to measure how much that time has changed. Now, the investigation team has confirmed the spacecraft’s impact altered Dimorphos’ orbit around Didymos by 32 minutes, shortening the 11 hour and 55-minute orbit to 11 hours and 23 minutes.\n\nThis measurement has a margin of uncertainty of approximately plus or minus 2 minutes."
+        }
+      ],
+      "rationale": "The scoped NASA excerpt displays the October 11, 2022 publication date and explicitly reports a 32-minute shortening of Dimorphos’ orbit around Didymos, with approximately plus or minus 2 minutes of uncertainty.",
+      "gaps": [],
+      "resolutions": [],
+      "evidence_verdict": "supported",
+      "world_verdict": "supported",
+      "world_basis": [
+        {
+          "version_id": "m02",
+          "start": 0,
+          "end": 97,
+          "quote": "NASA Confirms DART Mission Impact Changed Asteroid’s Motion in Space\nPublication date: 2022-10-11"
+        },
+        {
+          "version_id": "m02",
+          "start": 365,
+          "end": 644,
+          "quote": "Now, the investigation team has confirmed the spacecraft’s impact altered Dimorphos’ orbit around Didymos by 32 minutes, shortening the 11 hour and 55-minute orbit to 11 hours and 23 minutes.\n\nThis measurement has a margin of uncertainty of approximately plus or minus 2 minutes."
+        }
+      ],
+      "world_rationale": "The supplied NASA press-release snapshot is direct primary evidence of what NASA announced, which is the target claim. Its displayed date and reported shortening and uncertainty match the target. This establishes the announcement’s content without treating the later retrospective as independent confirmation or claiming independent verification of the underlying physical measurement."
+    },
+    {
+      "round": 2,
+      "verdict": "supported",
+      "basis": [
+        {
+          "version_id": "m02",
+          "start": 0,
+          "end": 97,
+          "quote": "NASA Confirms DART Mission Impact Changed Asteroid’s Motion in Space\nPublication date: 2022-10-11"
+        },
+        {
+          "version_id": "m02",
+          "start": 211,
+          "end": 644,
+          "quote": "Since DART’s intentional collision with Dimorphos on Sept. 26, astronomers have been using telescopes on Earth to measure how much that time has changed. Now, the investigation team has confirmed the spacecraft’s impact altered Dimorphos’ orbit around Didymos by 32 minutes, shortening the 11 hour and 55-minute orbit to 11 hours and 23 minutes.\n\nThis measurement has a margin of uncertainty of approximately plus or minus 2 minutes."
+        }
+      ],
+      "rationale": "The scoped NASA snapshot displays the October 11, 2022 publication date and explicitly reports a 32-minute shortening of Dimorphos’ orbital period around Didymos, with approximately plus or minus 2 minutes of uncertainty.",
+      "gaps": [],
+      "resolutions": [],
+      "evidence_verdict": "supported",
+      "world_verdict": "supported",
+      "world_basis": [
+        {
+          "version_id": "m02",
+          "start": 0,
+          "end": 97,
+          "quote": "NASA Confirms DART Mission Impact Changed Asteroid’s Motion in Space\nPublication date: 2022-10-11"
+        },
+        {
+          "version_id": "m02",
+          "start": 365,
+          "end": 644,
+          "quote": "Now, the investigation team has confirmed the spacecraft’s impact altered Dimorphos’ orbit around Didymos by 32 minutes, shortening the 11 hour and 55-minute orbit to 11 hours and 23 minutes.\n\nThis measurement has a margin of uncertainty of approximately plus or minus 2 minutes."
+        }
+      ],
+      "world_rationale": "The supplied NASA-issued original announcement directly establishes what NASA reported and its displayed date. It reports both the 32-minute shortening and approximately ±2-minute uncertainty. The target concerns the announcement’s content, not independent validation of the underlying measurements; the primary announcement is sufficient without counting downstream summaries as corroboration."
+    }
+  ],
+  "operations": [
+    {
+      "sequence": 1,
+      "round": 1,
+      "action": "search",
+      "tasks": [
+        {
+          "id": "origin:p01",
+          "question": "Find the producing record and evidenced lineage for: NASA's October 11, 2022 announcement reported that DART shortened Dimorphos' orbital period around Didymos by 32 minutes, with an uncertainty of approximately plus or minus 2 minutes.",
+          "stage": "provenance",
+          "dimension": "auto",
+          "blocking": true,
+          "target_id": null,
+          "basis": [],
+          "decision_impact": "",
+          "action": "search",
+          "locator": null
+        }
+      ],
+      "limit": 24
+    },
+    {
+      "sequence": 2,
+      "round": 1,
+      "action": "snapshot_saved",
+      "version_id": "m01",
+      "sha256": "6bd7f8c09bb32a362aa8d0b52292160fa41a214aa4ab68b84b9e100a079f3c9f",
+      "eligible": true
+    },
+    {
+      "sequence": 3,
+      "round": 1,
+      "action": "decompose_started",
+      "version_id": "m01",
+      "duplicate": false,
+      "revisit": false
+    },
+    {
+      "sequence": 4,
+      "round": 1,
+      "action": "decompose_completed",
+      "version_id": "m01",
+      "revision": 1
+    },
+    {
+      "sequence": 5,
+      "round": 1,
+      "action": "alignment_checked",
+      "version_id": "m01",
+      "analysis_changed": true
+    },
+    {
+      "sequence": 6,
+      "round": 1,
+      "action": "graph_updated",
+      "version_id": "m01",
+      "open_gaps": 2
+    },
+    {
+      "sequence": 7,
+      "round": 1,
+      "action": "snapshot_saved",
+      "version_id": "m02",
+      "sha256": "d2a240cf2766d2ad7a33379ade8869304b50ed7486c1ba480a486754ba75b878",
+      "eligible": true
+    },
+    {
+      "sequence": 8,
+      "round": 1,
+      "action": "decompose_started",
+      "version_id": "m02",
+      "duplicate": false,
+      "revisit": false
+    },
+    {
+      "sequence": 9,
+      "round": 1,
+      "action": "decompose_completed",
+      "version_id": "m02",
+      "revision": 2
+    },
+    {
+      "sequence": 10,
+      "round": 1,
+      "action": "alignment_checked",
+      "version_id": "m02",
+      "analysis_changed": true
+    },
+    {
+      "sequence": 11,
+      "round": 1,
+      "action": "graph_updated",
+      "version_id": "m02",
+      "open_gaps": 2
+    },
+    {
+      "sequence": 12,
+      "round": 1,
+      "action": "upstream_arrival_reanalysis",
+      "version_id": "m01",
+      "upstream_version": "m02",
+      "relation_id": "m01:citation:2cfcee4182250fae4504"
+    },
+    {
+      "sequence": 13,
+      "round": 1,
+      "action": "revisit_requested",
+      "version_id": "m01"
+    },
+    {
+      "sequence": 14,
+      "round": 1,
+      "action": "decompose_started",
+      "version_id": "m01",
+      "duplicate": true,
+      "revisit": true
+    },
+    {
+      "sequence": 15,
+      "round": 1,
+      "action": "decompose_completed",
+      "version_id": "m01",
+      "revision": 3
+    },
+    {
+      "sequence": 16,
+      "round": 1,
+      "action": "alignment_checked",
+      "version_id": "m01",
+      "analysis_changed": true
+    },
+    {
+      "sequence": 17,
+      "round": 1,
+      "action": "graph_updated",
+      "version_id": "m01",
+      "open_gaps": 1
+    },
+    {
+      "sequence": 18,
+      "round": 1,
+      "action": "verification_started"
+    },
+    {
+      "sequence": 19,
+      "round": 1,
+      "action": "verification_completed",
+      "verdict": "supported",
+      "decision": "supported",
+      "assessments": {
+        "evidence": {
+          "raw_verdict": "supported",
+          "decision": "supported",
+          "blocking_gap_ids": []
+        },
+        "world": {
+          "raw_verdict": "supported",
+          "decision": "supported",
+          "blocking_gap_ids": []
+        }
+      },
+      "followup_tasks": 0,
+      "provenance_status": "partial"
+    },
+    {
+      "sequence": 20,
+      "round": 1,
+      "action": "assessment_changed",
+      "previous": null,
+      "current": {
+        "evidence": {
+          "raw_verdict": "supported",
+          "decision": "supported",
+          "blocking_gap_ids": []
+        },
+        "world": {
+          "raw_verdict": "supported",
+          "decision": "supported",
+          "blocking_gap_ids": []
+        }
+      },
+      "basis": [
+        {
+          "version_id": "m02",
+          "start": 0,
+          "end": 97,
+          "quote": "NASA Confirms DART Mission Impact Changed Asteroid’s Motion in Space\nPublication date: 2022-10-11"
+        },
+        {
+          "version_id": "m02",
+          "start": 211,
+          "end": 644,
+          "quote": "Since DART’s intentional collision with Dimorphos on Sept. 26, astronomers have been using telescopes on Earth to measure how much that time has changed. Now, the investigation team has confirmed the spacecraft’s impact altered Dimorphos’ orbit around Didymos by 32 minutes, shortening the 11 hour and 55-minute orbit to 11 hours and 23 minutes.\n\nThis measurement has a margin of uncertainty of approximately plus or minus 2 minutes."
+        }
+      ],
+      "world_basis": [
+        {
+          "version_id": "m02",
+          "start": 0,
+          "end": 97,
+          "quote": "NASA Confirms DART Mission Impact Changed Asteroid’s Motion in Space\nPublication date: 2022-10-11"
+        },
+        {
+          "version_id": "m02",
+          "start": 365,
+          "end": 644,
+          "quote": "Now, the investigation team has confirmed the spacecraft’s impact altered Dimorphos’ orbit around Didymos by 32 minutes, shortening the 11 hour and 55-minute orbit to 11 hours and 23 minutes.\n\nThis measurement has a margin of uncertainty of approximately plus or minus 2 minutes."
+        }
+      ]
+    },
+    {
+      "sequence": 21,
+      "round": 1,
+      "action": "progress_checked",
+      "new_eligible_versions": 2,
+      "new_structure": true
+    },
+    {
+      "sequence": 22,
+      "round": 2,
+      "action": "search",
+      "tasks": [
+        {
+          "id": "origin:p01",
+          "question": "Find the producing record and evidenced lineage for: NASA's October 11, 2022 announcement reported that DART shortened Dimorphos' orbital period around Didymos by 32 minutes, with an uncertainty of approximately plus or minus 2 minutes.",
+          "stage": "provenance",
+          "dimension": "auto",
+          "blocking": true,
+          "target_id": null,
+          "basis": [],
+          "decision_impact": "",
+          "action": "search",
+          "locator": null
+        }
+      ],
+      "limit": 21
+    },
+    {
+      "sequence": 23,
+      "round": 2,
+      "action": "duplicate_observed",
+      "version_id": "m01",
+      "sha256": "6bd7f8c09bb32a362aa8d0b52292160fa41a214aa4ab68b84b9e100a079f3c9f",
+      "eligible": true
+    },
+    {
+      "sequence": 24,
+      "round": 2,
+      "action": "decompose_started",
+      "version_id": "m01",
+      "duplicate": true,
+      "revisit": false
+    },
+    {
+      "sequence": 25,
+      "round": 2,
+      "action": "decompose_completed",
+      "version_id": "m01",
+      "revision": 4
+    },
+    {
+      "sequence": 26,
+      "round": 2,
+      "action": "alignment_checked",
+      "version_id": "m01",
+      "analysis_changed": true
+    },
+    {
+      "sequence": 27,
+      "round": 2,
+      "action": "graph_updated",
+      "version_id": "m01",
+      "open_gaps": 1
+    },
+    {
+      "sequence": 28,
+      "round": 2,
+      "action": "duplicate_observed",
+      "version_id": "m02",
+      "sha256": "d2a240cf2766d2ad7a33379ade8869304b50ed7486c1ba480a486754ba75b878",
+      "eligible": true
+    },
+    {
+      "sequence": 29,
+      "round": 2,
+      "action": "decompose_started",
+      "version_id": "m02",
+      "duplicate": true,
+      "revisit": false
+    },
+    {
+      "sequence": 30,
+      "round": 2,
+      "action": "decompose_completed",
+      "version_id": "m02",
+      "revision": 5
+    },
+    {
+      "sequence": 31,
+      "round": 2,
+      "action": "alignment_checked",
+      "version_id": "m02",
+      "analysis_changed": true
+    },
+    {
+      "sequence": 32,
+      "round": 2,
+      "action": "graph_updated",
+      "version_id": "m02",
+      "open_gaps": 0
+    },
+    {
+      "sequence": 33,
+      "round": 2,
+      "action": "verification_started"
+    },
+    {
+      "sequence": 34,
+      "round": 2,
+      "action": "verification_completed",
+      "verdict": "supported",
+      "decision": "supported",
+      "assessments": {
+        "evidence": {
+          "raw_verdict": "supported",
+          "decision": "supported",
+          "blocking_gap_ids": []
+        },
+        "world": {
+          "raw_verdict": "supported",
+          "decision": "supported",
+          "blocking_gap_ids": []
+        }
+      },
+      "followup_tasks": 0,
+      "provenance_status": "original_material_located"
+    },
+    {
+      "sequence": 35,
+      "round": 2,
+      "action": "progress_checked",
+      "new_eligible_versions": 0,
+      "new_structure": true
+    },
+    {
+      "sequence": 36,
+      "round": 2,
+      "action": "stopped",
+      "reason": "round_budget"
+    }
+  ],
+  "errors": []
+}

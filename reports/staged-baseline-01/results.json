@@ -1,0 +1,254 @@
+[
+  {
+    "id": "p01",
+    "arm": "original",
+    "assessment_mode": "evidence",
+    "status": "completed",
+    "prediction": {
+      "decision": "true",
+      "origins": [
+        "m02"
+      ],
+      "edges": [],
+      "provenance_evaluable": true,
+      "origin_evaluable": true,
+      "edges_evaluable": false,
+      "edge_export_limit": "No native source-to-source edge representation"
+    },
+    "extractor_answer_text": "仅据范围内m02，NASA公告日期2022年10月11日、DART使Dimorphos绕Didymos周期缩短32分钟及不确定度约±2分钟均获文本支持，无缺项。原说法无需纠偏：9月26日撞击后，地面望远镜测量周期变化，随后公告结果；公告将缩短归因于撞击。无来源分歧，m01所述后来修订为33分钟不否定早期报告，亦非独立确认；现实测量准确性未另核。（基于2份同源材料，判定仅用m02 | 覆盖1类媒体 | 2条事实同源一致 | 0条存在分歧 | 因果锚定2/2）",
+    "extraction": {
+      "decision": "true",
+      "extractable": true,
+      "basis_quote": "仅据范围内m02，NASA公告日期2022年10月11日、DART使Dimorphos绕Didymos周期缩短32分钟及不确定度约±2分钟均获文本支持，无缺项。"
+    },
+    "usage": {
+      "model_calls": 17,
+      "input_tokens": 24730,
+      "output_tokens": 10412,
+      "seconds": 187.59028485699673
+    },
+    "new_api_attempts": 17,
+    "returned_responses": 17
+  },
+  {
+    "id": "p02",
+    "arm": "original",
+    "assessment_mode": "evidence",
+    "status": "completed",
+    "prediction": {
+      "decision": "false",
+      "origins": [
+        "m03",
+        "m04"
+      ],
+      "edges": [],
+      "provenance_evaluable": true,
+      "origin_evaluable": true,
+      "edges_evaluable": false,
+      "edge_export_limit": "No native source-to-source edge representation"
+    },
+    "extractor_answer_text": "仅据m03，NASA、2024年2月15日及OSIRIS-REx返回贝努样本均有记载；“最终70.3克”在指定1个信源中未找到支持，且与公告总量121.6克矛盾。公告称样本2023年9月返回，此前测得70.3克，次年1月拆头后另收集51.2克；加上额外颗粒才完成总量合计。两份NASA快照无分歧，但同机构一致不等于独立确认；本判断仅针对文档，现实核验未知。（基于2个信源 | 覆盖1类媒体 | 2条事实多源一致 | 0条存在分歧 | 因果锚定2/2）",
+    "extraction": {
+      "decision": "false",
+      "extractable": true,
+      "basis_quote": "“最终70.3克”在指定1个信源中未找到支持，且与公告总量121.6克矛盾。"
+    },
+    "usage": {
+      "model_calls": 18,
+      "input_tokens": 27911,
+      "output_tokens": 13608,
+      "seconds": 226.2043112770043
+    },
+    "new_api_attempts": 18,
+    "returned_responses": 18
+  },
+  {
+    "id": "p03",
+    "arm": "original",
+    "assessment_mode": "evidence",
+    "status": "completed",
+    "prediction": {
+      "decision": "true",
+      "origins": [
+        "m05",
+        "m06"
+      ],
+      "edges": [],
+      "provenance_evaluable": true,
+      "origin_evaluable": true,
+      "edges_evaluable": false,
+      "edge_export_limit": "No native source-to-source edge representation"
+    },
+    "extractor_answer_text": "m06明确支持原声明：NIST的FIPS 203规定三种参数集，名称确为ML-KEM-512、ML-KEM-768、ML-KEM-1024，无需纠偏。该页标示2024年8月13日发布，先定义ML-KEM密钥封装机制，再列出上述参数集，安全强度递增、性能递减。判断获支持是因为m06直接列明数量及名称，并非解释标准制定原因。两文档无分歧，但均来自NIST，不构成独立确认；现实核验仍未知。（基于2个信源〔同机构两文档〕 | 覆盖1类媒体 | 2条事实多源一致 | 0条存在分歧 | 因果锚定1/1）",
+    "extraction": {
+      "decision": "true",
+      "extractable": true,
+      "basis_quote": "m06明确支持原声明：NIST的FIPS 203规定三种参数集，名称确为ML-KEM-512、ML-KEM-768、ML-KEM-1024，无需纠偏。"
+    },
+    "usage": {
+      "model_calls": 17,
+      "input_tokens": 23293,
+      "output_tokens": 10570,
+      "seconds": 180.3913303629961
+    },
+    "new_api_attempts": 17,
+    "returned_responses": 17
+  },
+  {
+    "id": "p04",
+    "arm": "original",
+    "assessment_mode": "evidence",
+    "status": "completed",
+    "prediction": {
+      "decision": "false",
+      "origins": [
+        "m07",
+        "m08"
+      ],
+      "edges": [],
+      "provenance_evaluable": true,
+      "origin_evaluable": true,
+      "edges_evaluable": false,
+      "edge_export_limit": "No native source-to-source edge representation"
+    },
+    "extractor_answer_text": "仅据m07，NOAA、2025年1月10日、2024年及1.29°C均有记载，但声明与文本矛盾：1.29°C对应20世纪均值，1850—1900年对应1.46°C。2024年超过2023年纪录0.10°C，次年发布总结。错误在于基准错配，形成原因在2个信源中未找到。范围外NASA估计约1.47°C，与NOAA差0.01°C，未必构成矛盾；文本一致不代表独立核验，现实核验未知。（基于2个信源 | 覆盖1类媒体 | 2条事实多源一致 | 1条存在分歧 | 因果锚定1/1）",
+    "extraction": {
+      "decision": "false",
+      "extractable": true,
+      "basis_quote": "但声明与文本矛盾：1.29°C对应20世纪均值，1850—1900年对应1.46°C。"
+    },
+    "usage": {
+      "model_calls": 16,
+      "input_tokens": 22296,
+      "output_tokens": 11935,
+      "seconds": 198.6744759400026
+    },
+    "new_api_attempts": 16,
+    "returned_responses": 16
+  },
+  {
+    "id": "p05",
+    "arm": "original",
+    "assessment_mode": "evidence",
+    "status": "completed",
+    "prediction": {
+      "decision": "unverifiable",
+      "origins": [
+        "m09"
+      ],
+      "edges": [],
+      "provenance_evaluable": true,
+      "origin_evaluable": true,
+      "edges_evaluable": false,
+      "edge_export_limit": "No native source-to-source edge representation"
+    },
+    "extractor_answer_text": "NASA的m09证实机智号于2024年1月18日飞行，但“触地瞬间直立”的证据在1个信源中未找到，该说法不获支持，实际姿态未知。“仍直立”指声明时，非触地时。当天距地约1米失联，次日恢复通信；1月25日宣布任务结束，原因是着陆期间旋翼受损、无法再飞。失联原因及触地姿态仍在调查，失联与损伤的因果关系未定；仅有单一来源，无来源间分歧。（基于1个信源 | 覆盖1类媒体 | 0条事实多源一致 | 0条存在分歧 | 因果锚定0/0）",
+    "extraction": {
+      "decision": "unverifiable",
+      "extractable": true,
+      "basis_quote": "“触地瞬间直立”的证据在1个信源中未找到，该说法不获支持，实际姿态未知。"
+    },
+    "usage": {
+      "model_calls": 17,
+      "input_tokens": 17694,
+      "output_tokens": 9359,
+      "seconds": 167.7027898249944
+    },
+    "new_api_attempts": 17,
+    "returned_responses": 17
+  },
+  {
+    "id": "p06",
+    "arm": "original",
+    "assessment_mode": "world",
+    "status": "completed",
+    "prediction": {
+      "decision": "unverifiable",
+      "origins": [
+        "m10",
+        "m11"
+      ],
+      "edges": [],
+      "provenance_evaluable": true,
+      "origin_evaluable": true,
+      "edges_evaluable": false,
+      "edge_export_limit": "No native source-to-source edge representation"
+    },
+    "extractor_answer_text": "对“木卫二冰下海洋存在生物”，在2个信源中未找到证实，现实判断仍未知，并非已否定。材料说的是可能宜居，不是发现生命：m10称20世纪90年代伽利略数据提供冰下咸水海洋的强证据；2024年10月NASA说明快船任务研究宜居条件。原因是宜居线索不等于生命证据，且m11明确航天器不具备探测生命的能力。两份材料无已见分歧，均来自NASA，不能算独立确认。（基于2个信源 | 覆盖1类媒体 | 0条事实多源一致 | 0条存在分歧 | 因果锚定2/2）",
+    "extraction": {
+      "decision": "unverifiable",
+      "extractable": true,
+      "basis_quote": "对“木卫二冰下海洋存在生物”，在2个信源中未找到证实，现实判断仍未知，并非已否定。"
+    },
+    "usage": {
+      "model_calls": 17,
+      "input_tokens": 21070,
+      "output_tokens": 11510,
+      "seconds": 200.92698254399875
+    },
+    "new_api_attempts": 17,
+    "returned_responses": 17
+  },
+  {
+    "id": "p07",
+    "arm": "original",
+    "assessment_mode": "evidence",
+    "status": "completed",
+    "prediction": {
+      "decision": "false",
+      "origins": [
+        "m13"
+      ],
+      "edges": [],
+      "provenance_evaluable": true,
+      "origin_evaluable": true,
+      "edges_evaluable": false,
+      "edge_export_limit": "No native source-to-source edge representation"
+    },
+    "extractor_answer_text": "限定证据m13记载了NOAA的GOES-U更名为GOES-19；“2024年6月25日更名”在1个信源中未找到，且被7月7日的记载反驳。范围外m12称6月25日为发射日；m13称7月7日完成末次点火、入轨后更名，因为抵达地球静止轨道才改用数字标识。两文无分歧，但同属NOAA且相互链接，不构成独立确认；现实核验未知。（基于2个信源，判定限1个 | 覆盖1类媒体 | 2条事实多源一致但同源 | 0条存在分歧 | 因果锚定2/2）",
+    "extraction": {
+      "decision": "false",
+      "extractable": true,
+      "basis_quote": "“2024年6月25日更名”在1个信源中未找到，且被7月7日的记载反驳。"
+    },
+    "usage": {
+      "model_calls": 17,
+      "input_tokens": 23362,
+      "output_tokens": 10476,
+      "seconds": 180.13715989499178
+    },
+    "new_api_attempts": 17,
+    "returned_responses": 17
+  },
+  {
+    "id": "p08",
+    "arm": "original",
+    "assessment_mode": "evidence",
+    "status": "completed",
+    "prediction": {
+      "decision": "true",
+      "origins": [
+        "m15"
+      ],
+      "edges": [],
+      "provenance_evaluable": true,
+      "origin_evaluable": true,
+      "edges_evaluable": false,
+      "edge_export_limit": "No native source-to-source edge representation"
+    },
+    "extractor_answer_text": "限定证据m15支持USGS于2020年发布、整合六幅阿波罗时代区域地图及较新月球任务数据；所称正式地图名在1个信源中未找到。核心说法获支持，但不等于现实核验，后者未知。材料显示：旧图重绘对齐新数据，统一地层描述，4月20日宣布发布；整合工作解决了数据对齐及岩名、描述、年代不一致的问题。两份材料无分歧，但同属USGS且相互关联，一致不算独立确认。（基于2个信源 | 覆盖1类媒体 | 3条事实多源一致 | 0条存在分歧 | 因果锚定2/2）",
+    "extraction": {
+      "decision": "true",
+      "extractable": true,
+      "basis_quote": "核心说法获支持"
+    },
+    "usage": {
+      "model_calls": 17,
+      "input_tokens": 22825,
+      "output_tokens": 10882,
+      "seconds": 188.3589953710034
+    },
+    "new_api_attempts": 17,
+    "returned_responses": 17
+  }
+]

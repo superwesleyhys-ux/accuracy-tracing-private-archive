@@ -1,0 +1,40 @@
+{
+  "target": {
+    "id": "p06",
+    "text": "Living organisms exist in the ocean beneath Europa's ice.",
+    "as_of": "2026-09-05T09:34:36Z",
+    "source_version_id": "m10",
+    "assessment_mode": "world",
+    "evidence_scope": [
+      "m10",
+      "m11"
+    ]
+  },
+  "materials": [
+    {
+      "version_id": "m10",
+      "url": "https://www.nasa.gov/news-release/liftoff-nasas-europa-clipper-sails-toward-ocean-moon-of-jupiter/",
+      "content": "Liftoff! NASA’s Europa Clipper Sails Toward Ocean Moon of Jupiter\nPublication date: 2024-10-14\n\nThe main goal of the mission is to determine whether Europa has conditions that could support life. Europa is about the size of our own Moon, but its interior is different. Information from NASA’s Galileo mission in the 1990s showed strong evidence that under Europa’s ice lies an enormous, salty ocean with more water than all of Earth’s oceans combined. Scientists also have found evidence that Europa may host organic compounds and energy sources under its surface.\n\nIf the mission determines Europa is habitable, it may mean there are more habitable worlds in our solar system and beyond than imagined.",
+      "retrieved_at": "2026-09-05T09:34:36Z",
+      "published_at": null,
+      "available_at": "2026-09-05T09:34:36Z",
+      "availability_basis": "Current web-tool collection completed at retrieved_at on 2026-09-05. The supplied material is a selected, whitespace-normalized excerpt, not a full page or historical exact-version capture. Availability is asserted only at collection completion. The source's displayed publication date is preserved in content; no exact timezone-qualified publication instant is known.",
+      "issuer": "NASA Headquarters"
+    },
+    {
+      "version_id": "m11",
+      "url": "https://www.nasa.gov/podcasts/curious-universe/europa-clippers-voyage-to-jupiters-ocean-moon/",
+      "content": "Europa Clipper's Voyage to Jupiter's Ocean Moon\nPublication date: 2024-10-01\n\nEuropa Clipper is not looking for life. Even if Europa does have life, this spacecraft is not equipped to find it.",
+      "retrieved_at": "2026-09-05T09:34:36Z",
+      "published_at": null,
+      "available_at": "2026-09-05T09:34:36Z",
+      "availability_basis": "Current web-tool collection completed at retrieved_at on 2026-09-05. The supplied material is a selected, whitespace-normalized excerpt, not a full page or historical exact-version capture. Availability is asserted only at collection completion. The source's displayed publication date is preserved in content; no exact timezone-qualified publication instant is known.",
+      "issuer": "NASA Curious Universe"
+    }
+  ],
+  "seed_ids": [
+    "m10",
+    "m11"
+  ],
+  "full_evidence_control": true
+}

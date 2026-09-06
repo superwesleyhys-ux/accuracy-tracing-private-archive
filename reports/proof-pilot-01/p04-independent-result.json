@@ -1,0 +1,26 @@
+{
+  "id": "p04",
+  "arm": "independent",
+  "assessment_mode": "evidence",
+  "status": "error",
+  "prediction": null,
+  "usage": {
+    "model_calls": 5,
+    "input_tokens": 9227,
+    "output_tokens": 11032,
+    "seconds": 161.25273803299933
+  },
+  "shared_state_sha256": "955a2f0425ef9cdb2d60f7a6dc9a013e05f9e398b01e8183712a0a53dc6c3f78",
+  "prefix_usage": {
+    "model_calls": 3,
+    "input_tokens": 5478,
+    "output_tokens": 6192,
+    "seconds": 94.8158274219968
+  },
+  "error_type": "ValueError",
+  "actual_new_api_usage": {
+    "model_calls": 2,
+    "input_tokens": 3749,
+    "output_tokens": 4840
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "id": "p02",
+  "arm": "original",
+  "assessment_mode": "evidence",
+  "status": "completed",
+  "prediction": {
+    "decision": "false",
+    "origins": [
+      "m03",
+      "m04"
+    ],
+    "edges": [],
+    "provenance_evaluable": true,
+    "origin_evaluable": true,
+    "edges_evaluable": false,
+    "edge_export_limit": "No native source-to-source edge representation"
+  },
+  "extractor_answer_text": "仅据m03，NASA、2024年2月15日及OSIRIS-REx返回贝努样本均有记载；“最终70.3克”在指定1个信源中未找到支持，且与公告总量121.6克矛盾。公告称样本2023年9月返回，此前测得70.3克，次年1月拆头后另收集51.2克；加上额外颗粒才完成总量合计。两份NASA快照无分歧，但同机构一致不等于独立确认；本判断仅针对文档，现实核验未知。（基于2个信源 | 覆盖1类媒体 | 2条事实多源一致 | 0条存在分歧 | 因果锚定2/2）",
+  "extraction": {
+    "decision": "false",
+    "extractable": true,
+    "basis_quote": "“最终70.3克”在指定1个信源中未找到支持，且与公告总量121.6克矛盾。"
+  },
+  "usage": {
+    "model_calls": 18,
+    "input_tokens": 27911,
+    "output_tokens": 13608,
+    "seconds": 226.2043112770043
+  },
+  "new_api_attempts": 18,
+  "returned_responses": 18
+}

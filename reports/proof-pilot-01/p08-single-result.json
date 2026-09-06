@@ -1,0 +1,19 @@
+{
+  "id": "p08",
+  "arm": "single",
+  "assessment_mode": "evidence",
+  "status": "error",
+  "prediction": null,
+  "usage": {
+    "model_calls": 2,
+    "input_tokens": 4022,
+    "output_tokens": 4652,
+    "seconds": 66.53987373700511
+  },
+  "error_type": "ValueError",
+  "actual_new_api_usage": {
+    "model_calls": 2,
+    "input_tokens": 4022,
+    "output_tokens": 4652
+  }
+}

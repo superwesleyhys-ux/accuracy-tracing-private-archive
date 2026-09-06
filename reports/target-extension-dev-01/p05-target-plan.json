@@ -1,0 +1,607 @@
+{
+  "target_signature": "ef18562c53de5a23e8980c59dad4f803b806fdb0a92bb3673ef929623d4bfe75",
+  "logic": "single",
+  "claims": [
+    {
+      "id": "p05:claim:3a4c8669384002e9e542",
+      "statement": "Ingenuity was upright at touchdown during its January 18, 2024 flight.",
+      "anchor": {
+        "start": 0,
+        "end": 87,
+        "quote": "Ingenuity was upright at the moment it touched down during its January 18, 2024 flight."
+      },
+      "role": "main",
+      "dimensions": [
+        {
+          "id": "p05:dimension:f891075d82a02b9c5f56",
+          "kind": "entity_identity",
+          "anchor": {
+            "start": 0,
+            "end": 9,
+            "quote": "Ingenuity"
+          }
+        },
+        {
+          "id": "p05:dimension:44ef57e66e0a667a97ff",
+          "kind": "subject",
+          "anchor": {
+            "start": 0,
+            "end": 9,
+            "quote": "Ingenuity"
+          }
+        },
+        {
+          "id": "p05:dimension:2e5168f467bae8c99974",
+          "kind": "predicate",
+          "anchor": {
+            "start": 10,
+            "end": 21,
+            "quote": "was upright"
+          }
+        },
+        {
+          "id": "p05:dimension:4f59a3ac25d970e186a0",
+          "kind": "time",
+          "anchor": {
+            "start": 22,
+            "end": 86,
+            "quote": "at the moment it touched down during its January 18, 2024 flight"
+          }
+        }
+      ],
+      "parent_claim_id": null
+    }
+  ],
+  "probes": [
+    {
+      "id": "p05:probe:c5353503761871d44373",
+      "claim_id": "p05:claim:3a4c8669384002e9e542",
+      "kind": "entity_identity",
+      "dimension_ids": [
+        "p05:dimension:f891075d82a02b9c5f56"
+      ],
+      "question": "Does the relevant evidence in m09 identify \"Ingenuity\" as the entity whose touchdown orientation is described?",
+      "decision_impact": "Prevents evidence about another entity from being bound to this claim.",
+      "routes": [
+        "atoms",
+        "evidence",
+        "world"
+      ],
+      "gate": "always"
+    },
+    {
+      "id": "p05:probe:27343a401c02fb7c6370",
+      "claim_id": "p05:claim:3a4c8669384002e9e542",
+      "kind": "semantic_core",
+      "dimension_ids": [
+        "p05:dimension:2e5168f467bae8c99974",
+        "p05:dimension:44ef57e66e0a667a97ff"
+      ],
+      "question": "Does m09 support that Ingenuity \"was upright\", rather than merely describing a landing without establishing its orientation?",
+      "decision_impact": "Determines whether the evidence establishes the claimed subject–predicate relationship.",
+      "routes": [
+        "atoms",
+        "evidence"
+      ],
+      "gate": "always"
+    },
+    {
+      "id": "p05:probe:f2467b1578f3a8dba3ba",
+      "claim_id": "p05:claim:3a4c8669384002e9e542",
+      "kind": "source_lineage",
+      "dimension_ids": [],
+      "question": "What origin and attribution does m09 provide for any evidence concerning Ingenuity’s orientation at the specified touchdown, and is that evidence distinguishable from inference or repetition within m09?",
+      "decision_impact": "Determines the provenance and evidentiary basis available within the permitted source.",
+      "routes": [
+        "lineage",
+        "world"
+      ],
+      "gate": "provenance"
+    },
+    {
+      "id": "p05:probe:9ba0ec04cc276c712362",
+      "claim_id": "p05:claim:3a4c8669384002e9e542",
+      "kind": "time_boundary",
+      "dimension_ids": [
+        "p05:dimension:4f59a3ac25d970e186a0"
+      ],
+      "question": "Does m09 establish the upright orientation \"at the moment it touched down during its January 18, 2024 flight\", rather than only before touchdown or after landing?",
+      "decision_impact": "Determines whether the evidence matches both the specified flight and the precise touchdown moment.",
+      "routes": [
+        "atoms",
+        "evidence"
+      ],
+      "gate": "always"
+    }
+  ],
+  "notes": "The contract preserves the target’s entity, orientation, flight date, and touchdown-moment restriction. Probes are limited to m09.",
+  "sha256": "f2c45534991705c661b96c09c2492dbdac9ba577d21891173dd080489513b638",
+  "projections": {
+    "atoms": {
+      "target_signature": "ef18562c53de5a23e8980c59dad4f803b806fdb0a92bb3673ef929623d4bfe75",
+      "plan_sha256": "f2c45534991705c661b96c09c2492dbdac9ba577d21891173dd080489513b638",
+      "stage": "atoms",
+      "claims": [
+        {
+          "id": "p05:claim:3a4c8669384002e9e542",
+          "statement": "Ingenuity was upright at touchdown during its January 18, 2024 flight.",
+          "anchor": {
+            "start": 0,
+            "end": 87,
+            "quote": "Ingenuity was upright at the moment it touched down during its January 18, 2024 flight."
+          },
+          "role": "main",
+          "dimensions": [
+            {
+              "id": "p05:dimension:f891075d82a02b9c5f56",
+              "kind": "entity_identity",
+              "anchor": {
+                "start": 0,
+                "end": 9,
+                "quote": "Ingenuity"
+              }
+            },
+            {
+              "id": "p05:dimension:44ef57e66e0a667a97ff",
+              "kind": "subject",
+              "anchor": {
+                "start": 0,
+                "end": 9,
+                "quote": "Ingenuity"
+              }
+            },
+            {
+              "id": "p05:dimension:2e5168f467bae8c99974",
+              "kind": "predicate",
+              "anchor": {
+                "start": 10,
+                "end": 21,
+                "quote": "was upright"
+              }
+            },
+            {
+              "id": "p05:dimension:4f59a3ac25d970e186a0",
+              "kind": "time",
+              "anchor": {
+                "start": 22,
+                "end": 86,
+                "quote": "at the moment it touched down during its January 18, 2024 flight"
+              }
+            }
+          ],
+          "parent_claim_id": null
+        }
+      ],
+      "probes": [
+        {
+          "id": "p05:probe:c5353503761871d44373",
+          "claim_id": "p05:claim:3a4c8669384002e9e542",
+          "kind": "entity_identity",
+          "dimension_ids": [
+            "p05:dimension:f891075d82a02b9c5f56"
+          ],
+          "question": "Does the relevant evidence in m09 identify \"Ingenuity\" as the entity whose touchdown orientation is described?",
+          "decision_impact": "Prevents evidence about another entity from being bound to this claim.",
+          "routes": [
+            "atoms",
+            "evidence",
+            "world"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p05:probe:27343a401c02fb7c6370",
+          "claim_id": "p05:claim:3a4c8669384002e9e542",
+          "kind": "semantic_core",
+          "dimension_ids": [
+            "p05:dimension:2e5168f467bae8c99974",
+            "p05:dimension:44ef57e66e0a667a97ff"
+          ],
+          "question": "Does m09 support that Ingenuity \"was upright\", rather than merely describing a landing without establishing its orientation?",
+          "decision_impact": "Determines whether the evidence establishes the claimed subject–predicate relationship.",
+          "routes": [
+            "atoms",
+            "evidence"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p05:probe:9ba0ec04cc276c712362",
+          "claim_id": "p05:claim:3a4c8669384002e9e542",
+          "kind": "time_boundary",
+          "dimension_ids": [
+            "p05:dimension:4f59a3ac25d970e186a0"
+          ],
+          "question": "Does m09 establish the upright orientation \"at the moment it touched down during its January 18, 2024 flight\", rather than only before touchdown or after landing?",
+          "decision_impact": "Determines whether the evidence matches both the specified flight and the precise touchdown moment.",
+          "routes": [
+            "atoms",
+            "evidence"
+          ],
+          "gate": "always"
+        }
+      ]
+    },
+    "lineage": {
+      "target_signature": "ef18562c53de5a23e8980c59dad4f803b806fdb0a92bb3673ef929623d4bfe75",
+      "plan_sha256": "f2c45534991705c661b96c09c2492dbdac9ba577d21891173dd080489513b638",
+      "stage": "lineage",
+      "claims": [
+        {
+          "id": "p05:claim:3a4c8669384002e9e542",
+          "statement": "Ingenuity was upright at touchdown during its January 18, 2024 flight.",
+          "anchor": {
+            "start": 0,
+            "end": 87,
+            "quote": "Ingenuity was upright at the moment it touched down during its January 18, 2024 flight."
+          },
+          "role": "main",
+          "dimensions": [
+            {
+              "id": "p05:dimension:f891075d82a02b9c5f56",
+              "kind": "entity_identity",
+              "anchor": {
+                "start": 0,
+                "end": 9,
+                "quote": "Ingenuity"
+              }
+            },
+            {
+              "id": "p05:dimension:44ef57e66e0a667a97ff",
+              "kind": "subject",
+              "anchor": {
+                "start": 0,
+                "end": 9,
+                "quote": "Ingenuity"
+              }
+            },
+            {
+              "id": "p05:dimension:2e5168f467bae8c99974",
+              "kind": "predicate",
+              "anchor": {
+                "start": 10,
+                "end": 21,
+                "quote": "was upright"
+              }
+            },
+            {
+              "id": "p05:dimension:4f59a3ac25d970e186a0",
+              "kind": "time",
+              "anchor": {
+                "start": 22,
+                "end": 86,
+                "quote": "at the moment it touched down during its January 18, 2024 flight"
+              }
+            }
+          ],
+          "parent_claim_id": null
+        }
+      ],
+      "probes": [
+        {
+          "id": "p05:probe:f2467b1578f3a8dba3ba",
+          "claim_id": "p05:claim:3a4c8669384002e9e542",
+          "kind": "source_lineage",
+          "dimension_ids": [],
+          "question": "What origin and attribution does m09 provide for any evidence concerning Ingenuity’s orientation at the specified touchdown, and is that evidence distinguishable from inference or repetition within m09?",
+          "decision_impact": "Determines the provenance and evidentiary basis available within the permitted source.",
+          "routes": [
+            "lineage",
+            "world"
+          ],
+          "gate": "provenance"
+        }
+      ]
+    },
+    "critic": {
+      "target_signature": "ef18562c53de5a23e8980c59dad4f803b806fdb0a92bb3673ef929623d4bfe75",
+      "plan_sha256": "f2c45534991705c661b96c09c2492dbdac9ba577d21891173dd080489513b638",
+      "stage": "critic",
+      "claims": [
+        {
+          "id": "p05:claim:3a4c8669384002e9e542",
+          "statement": "Ingenuity was upright at touchdown during its January 18, 2024 flight.",
+          "anchor": {
+            "start": 0,
+            "end": 87,
+            "quote": "Ingenuity was upright at the moment it touched down during its January 18, 2024 flight."
+          },
+          "role": "main",
+          "dimensions": [
+            {
+              "id": "p05:dimension:f891075d82a02b9c5f56",
+              "kind": "entity_identity",
+              "anchor": {
+                "start": 0,
+                "end": 9,
+                "quote": "Ingenuity"
+              }
+            },
+            {
+              "id": "p05:dimension:44ef57e66e0a667a97ff",
+              "kind": "subject",
+              "anchor": {
+                "start": 0,
+                "end": 9,
+                "quote": "Ingenuity"
+              }
+            },
+            {
+              "id": "p05:dimension:2e5168f467bae8c99974",
+              "kind": "predicate",
+              "anchor": {
+                "start": 10,
+                "end": 21,
+                "quote": "was upright"
+              }
+            },
+            {
+              "id": "p05:dimension:4f59a3ac25d970e186a0",
+              "kind": "time",
+              "anchor": {
+                "start": 22,
+                "end": 86,
+                "quote": "at the moment it touched down during its January 18, 2024 flight"
+              }
+            }
+          ],
+          "parent_claim_id": null
+        }
+      ],
+      "probes": [
+        {
+          "id": "p05:probe:c5353503761871d44373",
+          "claim_id": "p05:claim:3a4c8669384002e9e542",
+          "kind": "entity_identity",
+          "dimension_ids": [
+            "p05:dimension:f891075d82a02b9c5f56"
+          ],
+          "question": "Does the relevant evidence in m09 identify \"Ingenuity\" as the entity whose touchdown orientation is described?",
+          "decision_impact": "Prevents evidence about another entity from being bound to this claim.",
+          "routes": [
+            "atoms",
+            "evidence",
+            "world"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p05:probe:27343a401c02fb7c6370",
+          "claim_id": "p05:claim:3a4c8669384002e9e542",
+          "kind": "semantic_core",
+          "dimension_ids": [
+            "p05:dimension:2e5168f467bae8c99974",
+            "p05:dimension:44ef57e66e0a667a97ff"
+          ],
+          "question": "Does m09 support that Ingenuity \"was upright\", rather than merely describing a landing without establishing its orientation?",
+          "decision_impact": "Determines whether the evidence establishes the claimed subject–predicate relationship.",
+          "routes": [
+            "atoms",
+            "evidence"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p05:probe:f2467b1578f3a8dba3ba",
+          "claim_id": "p05:claim:3a4c8669384002e9e542",
+          "kind": "source_lineage",
+          "dimension_ids": [],
+          "question": "What origin and attribution does m09 provide for any evidence concerning Ingenuity’s orientation at the specified touchdown, and is that evidence distinguishable from inference or repetition within m09?",
+          "decision_impact": "Determines the provenance and evidentiary basis available within the permitted source.",
+          "routes": [
+            "lineage",
+            "world"
+          ],
+          "gate": "provenance"
+        },
+        {
+          "id": "p05:probe:9ba0ec04cc276c712362",
+          "claim_id": "p05:claim:3a4c8669384002e9e542",
+          "kind": "time_boundary",
+          "dimension_ids": [
+            "p05:dimension:4f59a3ac25d970e186a0"
+          ],
+          "question": "Does m09 establish the upright orientation \"at the moment it touched down during its January 18, 2024 flight\", rather than only before touchdown or after landing?",
+          "decision_impact": "Determines whether the evidence matches both the specified flight and the precise touchdown moment.",
+          "routes": [
+            "atoms",
+            "evidence"
+          ],
+          "gate": "always"
+        }
+      ]
+    },
+    "evidence": {
+      "target_signature": "ef18562c53de5a23e8980c59dad4f803b806fdb0a92bb3673ef929623d4bfe75",
+      "plan_sha256": "f2c45534991705c661b96c09c2492dbdac9ba577d21891173dd080489513b638",
+      "stage": "evidence",
+      "claims": [
+        {
+          "id": "p05:claim:3a4c8669384002e9e542",
+          "statement": "Ingenuity was upright at touchdown during its January 18, 2024 flight.",
+          "anchor": {
+            "start": 0,
+            "end": 87,
+            "quote": "Ingenuity was upright at the moment it touched down during its January 18, 2024 flight."
+          },
+          "role": "main",
+          "dimensions": [
+            {
+              "id": "p05:dimension:f891075d82a02b9c5f56",
+              "kind": "entity_identity",
+              "anchor": {
+                "start": 0,
+                "end": 9,
+                "quote": "Ingenuity"
+              }
+            },
+            {
+              "id": "p05:dimension:44ef57e66e0a667a97ff",
+              "kind": "subject",
+              "anchor": {
+                "start": 0,
+                "end": 9,
+                "quote": "Ingenuity"
+              }
+            },
+            {
+              "id": "p05:dimension:2e5168f467bae8c99974",
+              "kind": "predicate",
+              "anchor": {
+                "start": 10,
+                "end": 21,
+                "quote": "was upright"
+              }
+            },
+            {
+              "id": "p05:dimension:4f59a3ac25d970e186a0",
+              "kind": "time",
+              "anchor": {
+                "start": 22,
+                "end": 86,
+                "quote": "at the moment it touched down during its January 18, 2024 flight"
+              }
+            }
+          ],
+          "parent_claim_id": null
+        }
+      ],
+      "probes": [
+        {
+          "id": "p05:probe:c5353503761871d44373",
+          "claim_id": "p05:claim:3a4c8669384002e9e542",
+          "kind": "entity_identity",
+          "dimension_ids": [
+            "p05:dimension:f891075d82a02b9c5f56"
+          ],
+          "question": "Does the relevant evidence in m09 identify \"Ingenuity\" as the entity whose touchdown orientation is described?",
+          "decision_impact": "Prevents evidence about another entity from being bound to this claim.",
+          "routes": [
+            "atoms",
+            "evidence",
+            "world"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p05:probe:27343a401c02fb7c6370",
+          "claim_id": "p05:claim:3a4c8669384002e9e542",
+          "kind": "semantic_core",
+          "dimension_ids": [
+            "p05:dimension:2e5168f467bae8c99974",
+            "p05:dimension:44ef57e66e0a667a97ff"
+          ],
+          "question": "Does m09 support that Ingenuity \"was upright\", rather than merely describing a landing without establishing its orientation?",
+          "decision_impact": "Determines whether the evidence establishes the claimed subject–predicate relationship.",
+          "routes": [
+            "atoms",
+            "evidence"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p05:probe:9ba0ec04cc276c712362",
+          "claim_id": "p05:claim:3a4c8669384002e9e542",
+          "kind": "time_boundary",
+          "dimension_ids": [
+            "p05:dimension:4f59a3ac25d970e186a0"
+          ],
+          "question": "Does m09 establish the upright orientation \"at the moment it touched down during its January 18, 2024 flight\", rather than only before touchdown or after landing?",
+          "decision_impact": "Determines whether the evidence matches both the specified flight and the precise touchdown moment.",
+          "routes": [
+            "atoms",
+            "evidence"
+          ],
+          "gate": "always"
+        }
+      ]
+    },
+    "world": {
+      "target_signature": "ef18562c53de5a23e8980c59dad4f803b806fdb0a92bb3673ef929623d4bfe75",
+      "plan_sha256": "f2c45534991705c661b96c09c2492dbdac9ba577d21891173dd080489513b638",
+      "stage": "world",
+      "claims": [
+        {
+          "id": "p05:claim:3a4c8669384002e9e542",
+          "statement": "Ingenuity was upright at touchdown during its January 18, 2024 flight.",
+          "anchor": {
+            "start": 0,
+            "end": 87,
+            "quote": "Ingenuity was upright at the moment it touched down during its January 18, 2024 flight."
+          },
+          "role": "main",
+          "dimensions": [
+            {
+              "id": "p05:dimension:f891075d82a02b9c5f56",
+              "kind": "entity_identity",
+              "anchor": {
+                "start": 0,
+                "end": 9,
+                "quote": "Ingenuity"
+              }
+            },
+            {
+              "id": "p05:dimension:44ef57e66e0a667a97ff",
+              "kind": "subject",
+              "anchor": {
+                "start": 0,
+                "end": 9,
+                "quote": "Ingenuity"
+              }
+            },
+            {
+              "id": "p05:dimension:2e5168f467bae8c99974",
+              "kind": "predicate",
+              "anchor": {
+                "start": 10,
+                "end": 21,
+                "quote": "was upright"
+              }
+            },
+            {
+              "id": "p05:dimension:4f59a3ac25d970e186a0",
+              "kind": "time",
+              "anchor": {
+                "start": 22,
+                "end": 86,
+                "quote": "at the moment it touched down during its January 18, 2024 flight"
+              }
+            }
+          ],
+          "parent_claim_id": null
+        }
+      ],
+      "probes": [
+        {
+          "id": "p05:probe:c5353503761871d44373",
+          "claim_id": "p05:claim:3a4c8669384002e9e542",
+          "kind": "entity_identity",
+          "dimension_ids": [
+            "p05:dimension:f891075d82a02b9c5f56"
+          ],
+          "question": "Does the relevant evidence in m09 identify \"Ingenuity\" as the entity whose touchdown orientation is described?",
+          "decision_impact": "Prevents evidence about another entity from being bound to this claim.",
+          "routes": [
+            "atoms",
+            "evidence",
+            "world"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p05:probe:f2467b1578f3a8dba3ba",
+          "claim_id": "p05:claim:3a4c8669384002e9e542",
+          "kind": "source_lineage",
+          "dimension_ids": [],
+          "question": "What origin and attribution does m09 provide for any evidence concerning Ingenuity’s orientation at the specified touchdown, and is that evidence distinguishable from inference or repetition within m09?",
+          "decision_impact": "Determines the provenance and evidentiary basis available within the permitted source.",
+          "routes": [
+            "lineage",
+            "world"
+          ],
+          "gate": "provenance"
+        }
+      ]
+    }
+  }
+}

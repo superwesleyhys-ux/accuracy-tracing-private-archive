@@ -1,0 +1,14 @@
+{
+  "id": "conflict-evidence",
+  "arm": "original",
+  "status": "error",
+  "prediction": null,
+  "assessment_mode": "evidence",
+  "error_type": "RuntimeError",
+  "usage": {
+    "model_calls": 1,
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "seconds": 4.266046732001996
+  }
+}

@@ -1,0 +1,752 @@
+[
+  {
+    "id": "p01",
+    "assessment_mode": "evidence",
+    "status": "completed",
+    "prediction": "true",
+    "checkpoints": [
+      {
+        "round": 1,
+        "id": "p01",
+        "decision": "true",
+        "assessment_mode": "evidence",
+        "assessments": {
+          "evidence": {
+            "raw_verdict": "supported",
+            "decision": "supported",
+            "blocking_gap_ids": []
+          },
+          "world": {
+            "raw_verdict": "supported",
+            "decision": "supported",
+            "blocking_gap_ids": []
+          }
+        },
+        "provenance_status": "partial"
+      },
+      {
+        "round": 2,
+        "id": "p01",
+        "decision": "true",
+        "assessment_mode": "evidence",
+        "assessments": {
+          "evidence": {
+            "raw_verdict": "supported",
+            "decision": "supported",
+            "blocking_gap_ids": []
+          },
+          "world": {
+            "raw_verdict": "supported",
+            "decision": "supported",
+            "blocking_gap_ids": []
+          }
+        },
+        "provenance_status": "original_material_located"
+      }
+    ],
+    "target_plan_sha256": "d61f46d0075d93d13c9e15ed124867c0e6463433d97a0733764a569ea6e52b19",
+    "native_prediction": {
+      "id": "p01",
+      "assessment_mode": "evidence",
+      "as_of": "2026-09-05T09:34:36Z",
+      "decision": "true",
+      "assessments": {
+        "evidence": {
+          "raw_verdict": "supported",
+          "decision": "supported",
+          "blocking_gap_ids": []
+        },
+        "world": {
+          "raw_verdict": "supported",
+          "decision": "supported",
+          "blocking_gap_ids": []
+        }
+      },
+      "provenance_status": "original_material_located",
+      "assessment_valid": true,
+      "stop_reason": "round_budget"
+    },
+    "engine_usage": {
+      "rounds": 2,
+      "documents": 4,
+      "unique_versions": 2,
+      "decomposition_calls": 5,
+      "verification_calls": 2
+    },
+    "usage": {
+      "model_calls": 23,
+      "input_tokens": 130836,
+      "output_tokens": 13718,
+      "seconds": 221.51310452498728
+    },
+    "checkpoint_hashes": [
+      {
+        "round": 1,
+        "sha256": "57c3b10275e580f792617eb0b8e0de544e4592589d5ed4ea55f1e24927f794db"
+      },
+      {
+        "round": 2,
+        "sha256": "fce351d221eb0b85eebb1339c829aad96bb13cbbf4cb0fdec500bca241a3a2f0"
+      }
+    ],
+    "new_api_attempts": 23,
+    "returned_responses": 23
+  },
+  {
+    "id": "p02",
+    "assessment_mode": "evidence",
+    "status": "completed",
+    "prediction": "false",
+    "checkpoints": [
+      {
+        "round": 1,
+        "id": "p02",
+        "decision": "false",
+        "assessment_mode": "evidence",
+        "assessments": {
+          "evidence": {
+            "raw_verdict": "contradicted",
+            "decision": "contradicted",
+            "blocking_gap_ids": []
+          },
+          "world": {
+            "raw_verdict": "contradicted",
+            "decision": "contradicted",
+            "blocking_gap_ids": []
+          }
+        },
+        "provenance_status": "original_material_located"
+      },
+      {
+        "round": 2,
+        "id": "p02",
+        "decision": "false",
+        "assessment_mode": "evidence",
+        "assessments": {
+          "evidence": {
+            "raw_verdict": "contradicted",
+            "decision": "contradicted",
+            "blocking_gap_ids": []
+          },
+          "world": {
+            "raw_verdict": "contradicted",
+            "decision": "contradicted",
+            "blocking_gap_ids": []
+          }
+        },
+        "provenance_status": "original_material_located"
+      }
+    ],
+    "target_plan_sha256": "30705a00c872e4542cbbfed4830cb47518b73feed90bb59d5765ee9966605c7e",
+    "native_prediction": {
+      "id": "p02",
+      "assessment_mode": "evidence",
+      "as_of": "2026-09-05T09:34:36Z",
+      "decision": "false",
+      "assessments": {
+        "evidence": {
+          "raw_verdict": "contradicted",
+          "decision": "contradicted",
+          "blocking_gap_ids": []
+        },
+        "world": {
+          "raw_verdict": "contradicted",
+          "decision": "contradicted",
+          "blocking_gap_ids": []
+        }
+      },
+      "provenance_status": "original_material_located",
+      "assessment_valid": true,
+      "stop_reason": "round_budget"
+    },
+    "engine_usage": {
+      "rounds": 2,
+      "documents": 4,
+      "unique_versions": 2,
+      "decomposition_calls": 4,
+      "verification_calls": 2
+    },
+    "usage": {
+      "model_calls": 20,
+      "input_tokens": 95262,
+      "output_tokens": 10608,
+      "seconds": 173.46962159899704
+    },
+    "checkpoint_hashes": [
+      {
+        "round": 1,
+        "sha256": "559655db4fb07e6fec4f457fb3e0fce61d0d0c072a480e394952145bb8782a97"
+      },
+      {
+        "round": 2,
+        "sha256": "b935072211ba6917ccd2618fad560675b70a28a5304100fe0fb8ade856240aa8"
+      }
+    ],
+    "new_api_attempts": 20,
+    "returned_responses": 20
+  },
+  {
+    "id": "p03",
+    "assessment_mode": "evidence",
+    "status": "completed",
+    "prediction": "true",
+    "checkpoints": [
+      {
+        "round": 1,
+        "id": "p03",
+        "decision": "true",
+        "assessment_mode": "evidence",
+        "assessments": {
+          "evidence": {
+            "raw_verdict": "supported",
+            "decision": "supported",
+            "blocking_gap_ids": []
+          },
+          "world": {
+            "raw_verdict": "supported",
+            "decision": "supported",
+            "blocking_gap_ids": []
+          }
+        },
+        "provenance_status": "partial"
+      },
+      {
+        "round": 2,
+        "id": "p03",
+        "decision": "true",
+        "assessment_mode": "evidence",
+        "assessments": {
+          "evidence": {
+            "raw_verdict": "supported",
+            "decision": "supported",
+            "blocking_gap_ids": []
+          },
+          "world": {
+            "raw_verdict": "supported",
+            "decision": "supported",
+            "blocking_gap_ids": []
+          }
+        },
+        "provenance_status": "original_material_located"
+      }
+    ],
+    "target_plan_sha256": "7eaccdeb2749e835782fd5b479138b8f0e8f8a43056497a4021e5b0067da1f9b",
+    "native_prediction": {
+      "id": "p03",
+      "assessment_mode": "evidence",
+      "as_of": "2026-09-05T09:34:36Z",
+      "decision": "true",
+      "assessments": {
+        "evidence": {
+          "raw_verdict": "supported",
+          "decision": "supported",
+          "blocking_gap_ids": []
+        },
+        "world": {
+          "raw_verdict": "supported",
+          "decision": "supported",
+          "blocking_gap_ids": []
+        }
+      },
+      "provenance_status": "original_material_located",
+      "assessment_valid": true,
+      "stop_reason": "round_budget"
+    },
+    "engine_usage": {
+      "rounds": 2,
+      "documents": 4,
+      "unique_versions": 2,
+      "decomposition_calls": 5,
+      "verification_calls": 2
+    },
+    "usage": {
+      "model_calls": 23,
+      "input_tokens": 84701,
+      "output_tokens": 8359,
+      "seconds": 151.80651121999836
+    },
+    "checkpoint_hashes": [
+      {
+        "round": 1,
+        "sha256": "db5fa85161a68fb7f940845df0528357f7ca4e1ff1ca14a72ec586dbbf166c96"
+      },
+      {
+        "round": 2,
+        "sha256": "3362013ad35d0593bdfaba622431f866cb3383c14a5d054796e581b6b0176c1e"
+      }
+    ],
+    "new_api_attempts": 23,
+    "returned_responses": 23
+  },
+  {
+    "id": "p04",
+    "assessment_mode": "evidence",
+    "status": "completed",
+    "prediction": "false",
+    "checkpoints": [
+      {
+        "round": 1,
+        "id": "p04",
+        "decision": "false",
+        "assessment_mode": "evidence",
+        "assessments": {
+          "evidence": {
+            "raw_verdict": "contradicted",
+            "decision": "contradicted",
+            "blocking_gap_ids": []
+          },
+          "world": {
+            "raw_verdict": "contradicted",
+            "decision": "contradicted",
+            "blocking_gap_ids": []
+          }
+        },
+        "provenance_status": "original_material_located"
+      },
+      {
+        "round": 2,
+        "id": "p04",
+        "decision": "false",
+        "assessment_mode": "evidence",
+        "assessments": {
+          "evidence": {
+            "raw_verdict": "contradicted",
+            "decision": "contradicted",
+            "blocking_gap_ids": []
+          },
+          "world": {
+            "raw_verdict": "contradicted",
+            "decision": "contradicted",
+            "blocking_gap_ids": []
+          }
+        },
+        "provenance_status": "original_material_located"
+      }
+    ],
+    "target_plan_sha256": "6c2afaada769731083273649e14fd155e9d1458b1fc8345b570eca0b0ac56d82",
+    "native_prediction": {
+      "id": "p04",
+      "assessment_mode": "evidence",
+      "as_of": "2026-09-05T09:34:36Z",
+      "decision": "false",
+      "assessments": {
+        "evidence": {
+          "raw_verdict": "contradicted",
+          "decision": "contradicted",
+          "blocking_gap_ids": []
+        },
+        "world": {
+          "raw_verdict": "contradicted",
+          "decision": "contradicted",
+          "blocking_gap_ids": []
+        }
+      },
+      "provenance_status": "original_material_located",
+      "assessment_valid": true,
+      "stop_reason": "round_budget"
+    },
+    "engine_usage": {
+      "rounds": 2,
+      "documents": 4,
+      "unique_versions": 2,
+      "decomposition_calls": 4,
+      "verification_calls": 2
+    },
+    "usage": {
+      "model_calls": 22,
+      "input_tokens": 94696,
+      "output_tokens": 10073,
+      "seconds": 177.6121414389927
+    },
+    "checkpoint_hashes": [
+      {
+        "round": 1,
+        "sha256": "d450f6cfb7870f8f41bbeaf45b7649cdfb13245f37fa200efc99bdfd9ad6714a"
+      },
+      {
+        "round": 2,
+        "sha256": "9c462c9dfff52042dd238a6c34a6f1faaa0e88d215379a889a4f404c6f73a125"
+      }
+    ],
+    "new_api_attempts": 22,
+    "returned_responses": 22
+  },
+  {
+    "id": "p05",
+    "assessment_mode": "evidence",
+    "status": "completed",
+    "prediction": "unverifiable",
+    "checkpoints": [
+      {
+        "round": 1,
+        "id": "p05",
+        "decision": "unverifiable",
+        "assessment_mode": "evidence",
+        "assessments": {
+          "evidence": {
+            "raw_verdict": "unresolved",
+            "decision": "unresolved",
+            "blocking_gap_ids": []
+          },
+          "world": {
+            "raw_verdict": "unresolved",
+            "decision": "unresolved",
+            "blocking_gap_ids": [
+              "p05:verification:world:ba5d52d6db58bb333ebe"
+            ]
+          }
+        },
+        "provenance_status": "partial"
+      },
+      {
+        "round": 2,
+        "id": "p05",
+        "decision": "unverifiable",
+        "assessment_mode": "evidence",
+        "assessments": {
+          "evidence": {
+            "raw_verdict": "unresolved",
+            "decision": "unresolved",
+            "blocking_gap_ids": []
+          },
+          "world": {
+            "raw_verdict": "unresolved",
+            "decision": "unresolved",
+            "blocking_gap_ids": [
+              "p05:verification:world:ba5d52d6db58bb333ebe"
+            ]
+          }
+        },
+        "provenance_status": "partial"
+      }
+    ],
+    "target_plan_sha256": "a7598d6737a52d160790d25b6abd69d2b76de3399068464461bb6a24b3fa0830",
+    "native_prediction": {
+      "id": "p05",
+      "assessment_mode": "evidence",
+      "as_of": "2026-09-05T09:34:36Z",
+      "decision": "unverifiable",
+      "assessments": {
+        "evidence": {
+          "raw_verdict": "unresolved",
+          "decision": "unresolved",
+          "blocking_gap_ids": []
+        },
+        "world": {
+          "raw_verdict": "unresolved",
+          "decision": "unresolved",
+          "blocking_gap_ids": [
+            "p05:verification:world:ba5d52d6db58bb333ebe"
+          ]
+        }
+      },
+      "provenance_status": "partial",
+      "assessment_valid": true,
+      "stop_reason": "round_budget"
+    },
+    "engine_usage": {
+      "rounds": 2,
+      "documents": 2,
+      "unique_versions": 1,
+      "decomposition_calls": 2,
+      "verification_calls": 2
+    },
+    "usage": {
+      "model_calls": 14,
+      "input_tokens": 38368,
+      "output_tokens": 4586,
+      "seconds": 93.06282648000342
+    },
+    "checkpoint_hashes": [
+      {
+        "round": 1,
+        "sha256": "2a492198b80524e80020a9645a71b714311f08fc585abafab3c44c502015d98b"
+      },
+      {
+        "round": 2,
+        "sha256": "777045fe20c4b9867b438eae4be71dcb7e2988308e62cd69820066448e8b991f"
+      }
+    ],
+    "new_api_attempts": 14,
+    "returned_responses": 14
+  },
+  {
+    "id": "p06",
+    "assessment_mode": "world",
+    "status": "completed",
+    "prediction": "unverifiable",
+    "checkpoints": [
+      {
+        "round": 1,
+        "id": "p06",
+        "decision": "unverifiable",
+        "assessment_mode": "world",
+        "assessments": {
+          "evidence": {
+            "raw_verdict": "unresolved",
+            "decision": "unresolved",
+            "blocking_gap_ids": []
+          },
+          "world": {
+            "raw_verdict": "unresolved",
+            "decision": "unresolved",
+            "blocking_gap_ids": []
+          }
+        },
+        "provenance_status": "partial"
+      },
+      {
+        "round": 2,
+        "id": "p06",
+        "decision": "unverifiable",
+        "assessment_mode": "world",
+        "assessments": {
+          "evidence": {
+            "raw_verdict": "unresolved",
+            "decision": "unresolved",
+            "blocking_gap_ids": []
+          },
+          "world": {
+            "raw_verdict": "unresolved",
+            "decision": "unresolved",
+            "blocking_gap_ids": []
+          }
+        },
+        "provenance_status": "partial"
+      }
+    ],
+    "target_plan_sha256": "a22825661999ee8419bec75d4d778134b4384e4279e90e09fb70a3094609fccb",
+    "native_prediction": {
+      "id": "p06",
+      "assessment_mode": "world",
+      "as_of": "2026-09-05T09:34:36Z",
+      "decision": "unverifiable",
+      "assessments": {
+        "evidence": {
+          "raw_verdict": "unresolved",
+          "decision": "unresolved",
+          "blocking_gap_ids": []
+        },
+        "world": {
+          "raw_verdict": "unresolved",
+          "decision": "unresolved",
+          "blocking_gap_ids": []
+        }
+      },
+      "provenance_status": "partial",
+      "assessment_valid": true,
+      "stop_reason": "round_budget"
+    },
+    "engine_usage": {
+      "rounds": 2,
+      "documents": 4,
+      "unique_versions": 2,
+      "decomposition_calls": 4,
+      "verification_calls": 2
+    },
+    "usage": {
+      "model_calls": 20,
+      "input_tokens": 62666,
+      "output_tokens": 6082,
+      "seconds": 118.93022548299632
+    },
+    "checkpoint_hashes": [
+      {
+        "round": 1,
+        "sha256": "9509a0492286ce99594f0316af17a8051949f4967e4217ce06ff18dc839158f2"
+      },
+      {
+        "round": 2,
+        "sha256": "0d06b57b7240dad0b21cd191b2f1a98ebbad8dcca5bf7460cb00501552bdf553"
+      }
+    ],
+    "new_api_attempts": 20,
+    "returned_responses": 20
+  },
+  {
+    "id": "p07",
+    "assessment_mode": "evidence",
+    "status": "completed",
+    "prediction": "false",
+    "checkpoints": [
+      {
+        "round": 1,
+        "id": "p07",
+        "decision": "false",
+        "assessment_mode": "evidence",
+        "assessments": {
+          "evidence": {
+            "raw_verdict": "contradicted",
+            "decision": "contradicted",
+            "blocking_gap_ids": []
+          },
+          "world": {
+            "raw_verdict": "contradicted",
+            "decision": "contradicted",
+            "blocking_gap_ids": []
+          }
+        },
+        "provenance_status": "partial"
+      },
+      {
+        "round": 2,
+        "id": "p07",
+        "decision": "false",
+        "assessment_mode": "evidence",
+        "assessments": {
+          "evidence": {
+            "raw_verdict": "contradicted",
+            "decision": "contradicted",
+            "blocking_gap_ids": []
+          },
+          "world": {
+            "raw_verdict": "contradicted",
+            "decision": "contradicted",
+            "blocking_gap_ids": []
+          }
+        },
+        "provenance_status": "partial"
+      }
+    ],
+    "target_plan_sha256": "57b0905574bdcec1c0a56f012a62ebb8fa4faadbd232602ba67d119dd189167c",
+    "native_prediction": {
+      "id": "p07",
+      "assessment_mode": "evidence",
+      "as_of": "2026-09-05T09:34:36Z",
+      "decision": "false",
+      "assessments": {
+        "evidence": {
+          "raw_verdict": "contradicted",
+          "decision": "contradicted",
+          "blocking_gap_ids": []
+        },
+        "world": {
+          "raw_verdict": "contradicted",
+          "decision": "contradicted",
+          "blocking_gap_ids": []
+        }
+      },
+      "provenance_status": "partial",
+      "assessment_valid": true,
+      "stop_reason": "round_budget"
+    },
+    "engine_usage": {
+      "rounds": 2,
+      "documents": 4,
+      "unique_versions": 2,
+      "decomposition_calls": 5,
+      "verification_calls": 2
+    },
+    "usage": {
+      "model_calls": 23,
+      "input_tokens": 80842,
+      "output_tokens": 8238,
+      "seconds": 153.95159647600667
+    },
+    "checkpoint_hashes": [
+      {
+        "round": 1,
+        "sha256": "769460cd433865cceb38f644bb504b6670f98d1c9489736ee945c4552436cb22"
+      },
+      {
+        "round": 2,
+        "sha256": "38f7f73a1fb1eeb37f83d08ab8ba42a0ffa7439041463640d7d275158a3ef585"
+      }
+    ],
+    "new_api_attempts": 23,
+    "returned_responses": 23
+  },
+  {
+    "id": "p08",
+    "assessment_mode": "evidence",
+    "status": "completed",
+    "prediction": "true",
+    "checkpoints": [
+      {
+        "round": 1,
+        "id": "p08",
+        "decision": "true",
+        "assessment_mode": "evidence",
+        "assessments": {
+          "evidence": {
+            "raw_verdict": "supported",
+            "decision": "supported",
+            "blocking_gap_ids": []
+          },
+          "world": {
+            "raw_verdict": "supported",
+            "decision": "supported",
+            "blocking_gap_ids": []
+          }
+        },
+        "provenance_status": "original_material_located"
+      },
+      {
+        "round": 2,
+        "id": "p08",
+        "decision": "true",
+        "assessment_mode": "evidence",
+        "assessments": {
+          "evidence": {
+            "raw_verdict": "supported",
+            "decision": "supported",
+            "blocking_gap_ids": []
+          },
+          "world": {
+            "raw_verdict": "supported",
+            "decision": "supported",
+            "blocking_gap_ids": []
+          }
+        },
+        "provenance_status": "original_material_located"
+      }
+    ],
+    "target_plan_sha256": "15fa1edb52292d740e23a3b0e7132d54b79bf91bae128e83110d365bf3fb0101",
+    "native_prediction": {
+      "id": "p08",
+      "assessment_mode": "evidence",
+      "as_of": "2026-09-05T09:34:36Z",
+      "decision": "true",
+      "assessments": {
+        "evidence": {
+          "raw_verdict": "supported",
+          "decision": "supported",
+          "blocking_gap_ids": []
+        },
+        "world": {
+          "raw_verdict": "supported",
+          "decision": "supported",
+          "blocking_gap_ids": []
+        }
+      },
+      "provenance_status": "original_material_located",
+      "assessment_valid": true,
+      "stop_reason": "round_budget"
+    },
+    "engine_usage": {
+      "rounds": 2,
+      "documents": 4,
+      "unique_versions": 2,
+      "decomposition_calls": 5,
+      "verification_calls": 2
+    },
+    "usage": {
+      "model_calls": 23,
+      "input_tokens": 112675,
+      "output_tokens": 12579,
+      "seconds": 232.70441598999605
+    },
+    "checkpoint_hashes": [
+      {
+        "round": 1,
+        "sha256": "cf63148854f122fadbb1f544cc2beb4594b8bc4817a22264c60d2096f098d28e"
+      },
+      {
+        "round": 2,
+        "sha256": "e60ce4053cfbd8d58cabb83ca0b686fdd1d07b268688bbc1f82afd1691020dbb"
+      }
+    ],
+    "new_api_attempts": 23,
+    "returned_responses": 23
+  }
+]

@@ -1,0 +1,44 @@
+{
+  "phase": "post_inference_repairs_and_offline_postprocessing",
+  "preregistered_inference_commit": "8dbca73c5b0a1497139ce9ac701ae7de968f3896",
+  "original_inference_and_gold_unchanged": true,
+  "no_new_model_calls_after_repairs": true,
+  "offline_tests": {
+    "run": 154,
+    "failures": 0,
+    "model_calls": 0
+  },
+  "changes": [
+    {
+      "kind": "scoring_mode_validation",
+      "effect": "Per-case contract equality replaces erroneous global equality; no label or formula changes."
+    },
+    {
+      "kind": "logical_cost_accounting",
+      "effect": "21 inherited failures charged shared prefix in derived matrix; actual spend and outcomes unchanged."
+    },
+    {
+      "kind": "transport_diagnostics",
+      "effect": "Safe finish reason, optional reasoning token and limited SDK code logging; no retry or budget change."
+    },
+    {
+      "kind": "semantic_prompt_contract",
+      "effect": "Explicit complete replacement, grounded retention and withdrawal; not evaluated live."
+    }
+  ],
+  "current_file_sha256": {
+    "experiments/proof_score.py": "a13b583ab169ddb39c7bc5cff8e760831fdabdbd2da788c32bd093b78763b3e5",
+    "tests/test_proof_score.py": "aeaeb9a3fb7143212e04a6c7973ef71b38b078ec090ad33e5696efc9ddb82547",
+    "experiments/model_io.py": "e9e47716192142bc97c8e9113e7edbc77ce2b34c7af355a441327f93fc083b12",
+    "tests/test_transport_diagnostics.py": "23899ac1de931de83b0e1627d0c114bc99507cf0854838f4b4d7d0a3bc0a754b",
+    "experiments/semantic_adapter.py": "79c4b2395ab40ef8511d3afa1581933586258d5a7bf03188d083cba19e3b7a32",
+    "experiments/proof_run.py": "a510b75cfcb1497d706385a8e0c1049a3f5e9a78b9c8b1dd46ab942b537edd55",
+    "tests/test_proof_run.py": "6cd9894666a1a830f5100c457b1a9b8bdb05d62c543d2d1354637e996b93d505",
+    "experiments/proof_reconcile_costs.py": "49a6bf1c38b2e9d36c4e2a38b8c623f16293dab6a5ee54f00834cf858a917a13",
+    "tests/test_proof_costs.py": "3a2ade85c26609ac88b977cd9e907b6bb1ef30ee16264c547d045e29d975da63"
+  },
+  "frozen_inference_code_location": "executed-code/accuracy",
+  "offline_scoring_code_location": "scoring-code",
+  "raw_results_sha256": "4f5a3fab19065356e339d2ac08426968e8e3f62611bb63a7feb2f4dac68776f6",
+  "gold_sha256": "4cd818aecf0693559c2b877a7067a7b765159abc4b6b832535fb6a14add13ce5"
+}

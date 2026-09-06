@@ -1,0 +1,659 @@
+{
+  "target_signature": "853962dbe36845a84f84cd29830a84d7b1f6c566aeaa77d98cad89167908aa42",
+  "logic": "single",
+  "claims": [
+    {
+      "id": "p06:claim:57c48c00a3fabc06f634",
+      "statement": "Living organisms exist in the ocean beneath Europa's ice.",
+      "anchor": {
+        "start": 0,
+        "end": 57,
+        "quote": "Living organisms exist in the ocean beneath Europa's ice."
+      },
+      "role": "main",
+      "dimensions": [
+        {
+          "id": "p06:dimension:40197928e222d2d27511",
+          "kind": "subject",
+          "anchor": {
+            "start": 0,
+            "end": 16,
+            "quote": "Living organisms"
+          }
+        },
+        {
+          "id": "p06:dimension:feeb635d7201ad15573a",
+          "kind": "predicate",
+          "anchor": {
+            "start": 17,
+            "end": 22,
+            "quote": "exist"
+          }
+        },
+        {
+          "id": "p06:dimension:328f35a149f0d32c01dc",
+          "kind": "baseline_scope",
+          "anchor": {
+            "start": 23,
+            "end": 56,
+            "quote": "in the ocean beneath Europa's ice"
+          }
+        },
+        {
+          "id": "p06:dimension:f04e53f3d320c09a8c0d",
+          "kind": "entity_identity",
+          "anchor": {
+            "start": 44,
+            "end": 50,
+            "quote": "Europa"
+          }
+        }
+      ],
+      "parent_claim_id": null
+    }
+  ],
+  "probes": [
+    {
+      "id": "p06:probe:3eca360105e7d155efbe",
+      "claim_id": "p06:claim:57c48c00a3fabc06f634",
+      "kind": "baseline_scope",
+      "dimension_ids": [
+        "p06:dimension:328f35a149f0d32c01dc"
+      ],
+      "question": "Does the evidence locate the asserted organisms specifically \"in the ocean beneath Europa's ice\", rather than elsewhere?",
+      "decision_impact": "Evidence concerning a different location would not establish the claimed scope.",
+      "routes": [
+        "atoms",
+        "evidence"
+      ],
+      "gate": "always"
+    },
+    {
+      "id": "p06:probe:b38d4e5c1f732fdafe6f",
+      "claim_id": "p06:claim:57c48c00a3fabc06f634",
+      "kind": "entity_identity",
+      "dimension_ids": [
+        "p06:dimension:f04e53f3d320c09a8c0d"
+      ],
+      "question": "Does \"Europa\" in the evidence identify the same entity whose ice and underlying ocean the target describes?",
+      "decision_impact": "An entity mismatch would prevent the evidence from supporting this claim.",
+      "routes": [
+        "atoms",
+        "evidence",
+        "world"
+      ],
+      "gate": "always"
+    },
+    {
+      "id": "p06:probe:7033220f734506ea89fe",
+      "claim_id": "p06:claim:57c48c00a3fabc06f634",
+      "kind": "semantic_core",
+      "dimension_ids": [
+        "p06:dimension:40197928e222d2d27511",
+        "p06:dimension:feeb635d7201ad15573a"
+      ],
+      "question": "Does the permitted evidence establish that living organisms actually exist, rather than merely that their existence is possible?",
+      "decision_impact": "Evidence of possibility or habitability alone would not establish the asserted existence.",
+      "routes": [
+        "atoms",
+        "evidence"
+      ],
+      "gate": "always"
+    },
+    {
+      "id": "p06:probe:c6a44ed31842c3799787",
+      "claim_id": "p06:claim:57c48c00a3fabc06f634",
+      "kind": "source_independence",
+      "dimension_ids": [],
+      "question": "Do m10 and m11 provide independent evidentiary grounds for this claim, or do they depend on the same originating material?",
+      "decision_impact": "Shared origins would limit the weight of apparent corroboration.",
+      "routes": [
+        "lineage",
+        "world"
+      ],
+      "gate": "positive_world_only"
+    },
+    {
+      "id": "p06:probe:4b0670fae04e84ad962f",
+      "claim_id": "p06:claim:57c48c00a3fabc06f634",
+      "kind": "source_lineage",
+      "dimension_ids": [],
+      "question": "Within m10 and m11, what originating observations, analyses or attributed reports underlie this claim, and is their relationship traceable as of 2026-09-05T09:34:36Z?",
+      "decision_impact": "Traceability determines whether the evidence supports the world claim rather than merely repeats an assertion.",
+      "routes": [
+        "lineage",
+        "world"
+      ],
+      "gate": "provenance"
+    }
+  ],
+  "notes": "",
+  "sha256": "f257eadf8b874c5ec26ba33b67423bf4ad3aa2268520c738583402d4c06ea5ca",
+  "projections": {
+    "atoms": {
+      "target_signature": "853962dbe36845a84f84cd29830a84d7b1f6c566aeaa77d98cad89167908aa42",
+      "plan_sha256": "f257eadf8b874c5ec26ba33b67423bf4ad3aa2268520c738583402d4c06ea5ca",
+      "stage": "atoms",
+      "claims": [
+        {
+          "id": "p06:claim:57c48c00a3fabc06f634",
+          "statement": "Living organisms exist in the ocean beneath Europa's ice.",
+          "anchor": {
+            "start": 0,
+            "end": 57,
+            "quote": "Living organisms exist in the ocean beneath Europa's ice."
+          },
+          "role": "main",
+          "dimensions": [
+            {
+              "id": "p06:dimension:40197928e222d2d27511",
+              "kind": "subject",
+              "anchor": {
+                "start": 0,
+                "end": 16,
+                "quote": "Living organisms"
+              }
+            },
+            {
+              "id": "p06:dimension:feeb635d7201ad15573a",
+              "kind": "predicate",
+              "anchor": {
+                "start": 17,
+                "end": 22,
+                "quote": "exist"
+              }
+            },
+            {
+              "id": "p06:dimension:328f35a149f0d32c01dc",
+              "kind": "baseline_scope",
+              "anchor": {
+                "start": 23,
+                "end": 56,
+                "quote": "in the ocean beneath Europa's ice"
+              }
+            },
+            {
+              "id": "p06:dimension:f04e53f3d320c09a8c0d",
+              "kind": "entity_identity",
+              "anchor": {
+                "start": 44,
+                "end": 50,
+                "quote": "Europa"
+              }
+            }
+          ],
+          "parent_claim_id": null
+        }
+      ],
+      "probes": [
+        {
+          "id": "p06:probe:3eca360105e7d155efbe",
+          "claim_id": "p06:claim:57c48c00a3fabc06f634",
+          "kind": "baseline_scope",
+          "dimension_ids": [
+            "p06:dimension:328f35a149f0d32c01dc"
+          ],
+          "question": "Does the evidence locate the asserted organisms specifically \"in the ocean beneath Europa's ice\", rather than elsewhere?",
+          "decision_impact": "Evidence concerning a different location would not establish the claimed scope.",
+          "routes": [
+            "atoms",
+            "evidence"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p06:probe:b38d4e5c1f732fdafe6f",
+          "claim_id": "p06:claim:57c48c00a3fabc06f634",
+          "kind": "entity_identity",
+          "dimension_ids": [
+            "p06:dimension:f04e53f3d320c09a8c0d"
+          ],
+          "question": "Does \"Europa\" in the evidence identify the same entity whose ice and underlying ocean the target describes?",
+          "decision_impact": "An entity mismatch would prevent the evidence from supporting this claim.",
+          "routes": [
+            "atoms",
+            "evidence",
+            "world"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p06:probe:7033220f734506ea89fe",
+          "claim_id": "p06:claim:57c48c00a3fabc06f634",
+          "kind": "semantic_core",
+          "dimension_ids": [
+            "p06:dimension:40197928e222d2d27511",
+            "p06:dimension:feeb635d7201ad15573a"
+          ],
+          "question": "Does the permitted evidence establish that living organisms actually exist, rather than merely that their existence is possible?",
+          "decision_impact": "Evidence of possibility or habitability alone would not establish the asserted existence.",
+          "routes": [
+            "atoms",
+            "evidence"
+          ],
+          "gate": "always"
+        }
+      ]
+    },
+    "lineage": {
+      "target_signature": "853962dbe36845a84f84cd29830a84d7b1f6c566aeaa77d98cad89167908aa42",
+      "plan_sha256": "f257eadf8b874c5ec26ba33b67423bf4ad3aa2268520c738583402d4c06ea5ca",
+      "stage": "lineage",
+      "claims": [
+        {
+          "id": "p06:claim:57c48c00a3fabc06f634",
+          "statement": "Living organisms exist in the ocean beneath Europa's ice.",
+          "anchor": {
+            "start": 0,
+            "end": 57,
+            "quote": "Living organisms exist in the ocean beneath Europa's ice."
+          },
+          "role": "main",
+          "dimensions": [
+            {
+              "id": "p06:dimension:40197928e222d2d27511",
+              "kind": "subject",
+              "anchor": {
+                "start": 0,
+                "end": 16,
+                "quote": "Living organisms"
+              }
+            },
+            {
+              "id": "p06:dimension:feeb635d7201ad15573a",
+              "kind": "predicate",
+              "anchor": {
+                "start": 17,
+                "end": 22,
+                "quote": "exist"
+              }
+            },
+            {
+              "id": "p06:dimension:328f35a149f0d32c01dc",
+              "kind": "baseline_scope",
+              "anchor": {
+                "start": 23,
+                "end": 56,
+                "quote": "in the ocean beneath Europa's ice"
+              }
+            },
+            {
+              "id": "p06:dimension:f04e53f3d320c09a8c0d",
+              "kind": "entity_identity",
+              "anchor": {
+                "start": 44,
+                "end": 50,
+                "quote": "Europa"
+              }
+            }
+          ],
+          "parent_claim_id": null
+        }
+      ],
+      "probes": [
+        {
+          "id": "p06:probe:c6a44ed31842c3799787",
+          "claim_id": "p06:claim:57c48c00a3fabc06f634",
+          "kind": "source_independence",
+          "dimension_ids": [],
+          "question": "Do m10 and m11 provide independent evidentiary grounds for this claim, or do they depend on the same originating material?",
+          "decision_impact": "Shared origins would limit the weight of apparent corroboration.",
+          "routes": [
+            "lineage",
+            "world"
+          ],
+          "gate": "positive_world_only"
+        },
+        {
+          "id": "p06:probe:4b0670fae04e84ad962f",
+          "claim_id": "p06:claim:57c48c00a3fabc06f634",
+          "kind": "source_lineage",
+          "dimension_ids": [],
+          "question": "Within m10 and m11, what originating observations, analyses or attributed reports underlie this claim, and is their relationship traceable as of 2026-09-05T09:34:36Z?",
+          "decision_impact": "Traceability determines whether the evidence supports the world claim rather than merely repeats an assertion.",
+          "routes": [
+            "lineage",
+            "world"
+          ],
+          "gate": "provenance"
+        }
+      ]
+    },
+    "critic": {
+      "target_signature": "853962dbe36845a84f84cd29830a84d7b1f6c566aeaa77d98cad89167908aa42",
+      "plan_sha256": "f257eadf8b874c5ec26ba33b67423bf4ad3aa2268520c738583402d4c06ea5ca",
+      "stage": "critic",
+      "claims": [
+        {
+          "id": "p06:claim:57c48c00a3fabc06f634",
+          "statement": "Living organisms exist in the ocean beneath Europa's ice.",
+          "anchor": {
+            "start": 0,
+            "end": 57,
+            "quote": "Living organisms exist in the ocean beneath Europa's ice."
+          },
+          "role": "main",
+          "dimensions": [
+            {
+              "id": "p06:dimension:40197928e222d2d27511",
+              "kind": "subject",
+              "anchor": {
+                "start": 0,
+                "end": 16,
+                "quote": "Living organisms"
+              }
+            },
+            {
+              "id": "p06:dimension:feeb635d7201ad15573a",
+              "kind": "predicate",
+              "anchor": {
+                "start": 17,
+                "end": 22,
+                "quote": "exist"
+              }
+            },
+            {
+              "id": "p06:dimension:328f35a149f0d32c01dc",
+              "kind": "baseline_scope",
+              "anchor": {
+                "start": 23,
+                "end": 56,
+                "quote": "in the ocean beneath Europa's ice"
+              }
+            },
+            {
+              "id": "p06:dimension:f04e53f3d320c09a8c0d",
+              "kind": "entity_identity",
+              "anchor": {
+                "start": 44,
+                "end": 50,
+                "quote": "Europa"
+              }
+            }
+          ],
+          "parent_claim_id": null
+        }
+      ],
+      "probes": [
+        {
+          "id": "p06:probe:3eca360105e7d155efbe",
+          "claim_id": "p06:claim:57c48c00a3fabc06f634",
+          "kind": "baseline_scope",
+          "dimension_ids": [
+            "p06:dimension:328f35a149f0d32c01dc"
+          ],
+          "question": "Does the evidence locate the asserted organisms specifically \"in the ocean beneath Europa's ice\", rather than elsewhere?",
+          "decision_impact": "Evidence concerning a different location would not establish the claimed scope.",
+          "routes": [
+            "atoms",
+            "evidence"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p06:probe:b38d4e5c1f732fdafe6f",
+          "claim_id": "p06:claim:57c48c00a3fabc06f634",
+          "kind": "entity_identity",
+          "dimension_ids": [
+            "p06:dimension:f04e53f3d320c09a8c0d"
+          ],
+          "question": "Does \"Europa\" in the evidence identify the same entity whose ice and underlying ocean the target describes?",
+          "decision_impact": "An entity mismatch would prevent the evidence from supporting this claim.",
+          "routes": [
+            "atoms",
+            "evidence",
+            "world"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p06:probe:7033220f734506ea89fe",
+          "claim_id": "p06:claim:57c48c00a3fabc06f634",
+          "kind": "semantic_core",
+          "dimension_ids": [
+            "p06:dimension:40197928e222d2d27511",
+            "p06:dimension:feeb635d7201ad15573a"
+          ],
+          "question": "Does the permitted evidence establish that living organisms actually exist, rather than merely that their existence is possible?",
+          "decision_impact": "Evidence of possibility or habitability alone would not establish the asserted existence.",
+          "routes": [
+            "atoms",
+            "evidence"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p06:probe:c6a44ed31842c3799787",
+          "claim_id": "p06:claim:57c48c00a3fabc06f634",
+          "kind": "source_independence",
+          "dimension_ids": [],
+          "question": "Do m10 and m11 provide independent evidentiary grounds for this claim, or do they depend on the same originating material?",
+          "decision_impact": "Shared origins would limit the weight of apparent corroboration.",
+          "routes": [
+            "lineage",
+            "world"
+          ],
+          "gate": "positive_world_only"
+        },
+        {
+          "id": "p06:probe:4b0670fae04e84ad962f",
+          "claim_id": "p06:claim:57c48c00a3fabc06f634",
+          "kind": "source_lineage",
+          "dimension_ids": [],
+          "question": "Within m10 and m11, what originating observations, analyses or attributed reports underlie this claim, and is their relationship traceable as of 2026-09-05T09:34:36Z?",
+          "decision_impact": "Traceability determines whether the evidence supports the world claim rather than merely repeats an assertion.",
+          "routes": [
+            "lineage",
+            "world"
+          ],
+          "gate": "provenance"
+        }
+      ]
+    },
+    "evidence": {
+      "target_signature": "853962dbe36845a84f84cd29830a84d7b1f6c566aeaa77d98cad89167908aa42",
+      "plan_sha256": "f257eadf8b874c5ec26ba33b67423bf4ad3aa2268520c738583402d4c06ea5ca",
+      "stage": "evidence",
+      "claims": [
+        {
+          "id": "p06:claim:57c48c00a3fabc06f634",
+          "statement": "Living organisms exist in the ocean beneath Europa's ice.",
+          "anchor": {
+            "start": 0,
+            "end": 57,
+            "quote": "Living organisms exist in the ocean beneath Europa's ice."
+          },
+          "role": "main",
+          "dimensions": [
+            {
+              "id": "p06:dimension:40197928e222d2d27511",
+              "kind": "subject",
+              "anchor": {
+                "start": 0,
+                "end": 16,
+                "quote": "Living organisms"
+              }
+            },
+            {
+              "id": "p06:dimension:feeb635d7201ad15573a",
+              "kind": "predicate",
+              "anchor": {
+                "start": 17,
+                "end": 22,
+                "quote": "exist"
+              }
+            },
+            {
+              "id": "p06:dimension:328f35a149f0d32c01dc",
+              "kind": "baseline_scope",
+              "anchor": {
+                "start": 23,
+                "end": 56,
+                "quote": "in the ocean beneath Europa's ice"
+              }
+            },
+            {
+              "id": "p06:dimension:f04e53f3d320c09a8c0d",
+              "kind": "entity_identity",
+              "anchor": {
+                "start": 44,
+                "end": 50,
+                "quote": "Europa"
+              }
+            }
+          ],
+          "parent_claim_id": null
+        }
+      ],
+      "probes": [
+        {
+          "id": "p06:probe:3eca360105e7d155efbe",
+          "claim_id": "p06:claim:57c48c00a3fabc06f634",
+          "kind": "baseline_scope",
+          "dimension_ids": [
+            "p06:dimension:328f35a149f0d32c01dc"
+          ],
+          "question": "Does the evidence locate the asserted organisms specifically \"in the ocean beneath Europa's ice\", rather than elsewhere?",
+          "decision_impact": "Evidence concerning a different location would not establish the claimed scope.",
+          "routes": [
+            "atoms",
+            "evidence"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p06:probe:b38d4e5c1f732fdafe6f",
+          "claim_id": "p06:claim:57c48c00a3fabc06f634",
+          "kind": "entity_identity",
+          "dimension_ids": [
+            "p06:dimension:f04e53f3d320c09a8c0d"
+          ],
+          "question": "Does \"Europa\" in the evidence identify the same entity whose ice and underlying ocean the target describes?",
+          "decision_impact": "An entity mismatch would prevent the evidence from supporting this claim.",
+          "routes": [
+            "atoms",
+            "evidence",
+            "world"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p06:probe:7033220f734506ea89fe",
+          "claim_id": "p06:claim:57c48c00a3fabc06f634",
+          "kind": "semantic_core",
+          "dimension_ids": [
+            "p06:dimension:40197928e222d2d27511",
+            "p06:dimension:feeb635d7201ad15573a"
+          ],
+          "question": "Does the permitted evidence establish that living organisms actually exist, rather than merely that their existence is possible?",
+          "decision_impact": "Evidence of possibility or habitability alone would not establish the asserted existence.",
+          "routes": [
+            "atoms",
+            "evidence"
+          ],
+          "gate": "always"
+        }
+      ]
+    },
+    "world": {
+      "target_signature": "853962dbe36845a84f84cd29830a84d7b1f6c566aeaa77d98cad89167908aa42",
+      "plan_sha256": "f257eadf8b874c5ec26ba33b67423bf4ad3aa2268520c738583402d4c06ea5ca",
+      "stage": "world",
+      "claims": [
+        {
+          "id": "p06:claim:57c48c00a3fabc06f634",
+          "statement": "Living organisms exist in the ocean beneath Europa's ice.",
+          "anchor": {
+            "start": 0,
+            "end": 57,
+            "quote": "Living organisms exist in the ocean beneath Europa's ice."
+          },
+          "role": "main",
+          "dimensions": [
+            {
+              "id": "p06:dimension:40197928e222d2d27511",
+              "kind": "subject",
+              "anchor": {
+                "start": 0,
+                "end": 16,
+                "quote": "Living organisms"
+              }
+            },
+            {
+              "id": "p06:dimension:feeb635d7201ad15573a",
+              "kind": "predicate",
+              "anchor": {
+                "start": 17,
+                "end": 22,
+                "quote": "exist"
+              }
+            },
+            {
+              "id": "p06:dimension:328f35a149f0d32c01dc",
+              "kind": "baseline_scope",
+              "anchor": {
+                "start": 23,
+                "end": 56,
+                "quote": "in the ocean beneath Europa's ice"
+              }
+            },
+            {
+              "id": "p06:dimension:f04e53f3d320c09a8c0d",
+              "kind": "entity_identity",
+              "anchor": {
+                "start": 44,
+                "end": 50,
+                "quote": "Europa"
+              }
+            }
+          ],
+          "parent_claim_id": null
+        }
+      ],
+      "probes": [
+        {
+          "id": "p06:probe:b38d4e5c1f732fdafe6f",
+          "claim_id": "p06:claim:57c48c00a3fabc06f634",
+          "kind": "entity_identity",
+          "dimension_ids": [
+            "p06:dimension:f04e53f3d320c09a8c0d"
+          ],
+          "question": "Does \"Europa\" in the evidence identify the same entity whose ice and underlying ocean the target describes?",
+          "decision_impact": "An entity mismatch would prevent the evidence from supporting this claim.",
+          "routes": [
+            "atoms",
+            "evidence",
+            "world"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p06:probe:c6a44ed31842c3799787",
+          "claim_id": "p06:claim:57c48c00a3fabc06f634",
+          "kind": "source_independence",
+          "dimension_ids": [],
+          "question": "Do m10 and m11 provide independent evidentiary grounds for this claim, or do they depend on the same originating material?",
+          "decision_impact": "Shared origins would limit the weight of apparent corroboration.",
+          "routes": [
+            "lineage",
+            "world"
+          ],
+          "gate": "positive_world_only"
+        },
+        {
+          "id": "p06:probe:4b0670fae04e84ad962f",
+          "claim_id": "p06:claim:57c48c00a3fabc06f634",
+          "kind": "source_lineage",
+          "dimension_ids": [],
+          "question": "Within m10 and m11, what originating observations, analyses or attributed reports underlie this claim, and is their relationship traceable as of 2026-09-05T09:34:36Z?",
+          "decision_impact": "Traceability determines whether the evidence supports the world claim rather than merely repeats an assertion.",
+          "routes": [
+            "lineage",
+            "world"
+          ],
+          "gate": "provenance"
+        }
+      ]
+    }
+  }
+}

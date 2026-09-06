@@ -1,0 +1,29 @@
+{
+  "status": "interrupted_by_execution_environment_network_policy",
+  "complete_results": [
+    {
+      "id": "p07",
+      "status": "completed",
+      "prediction": "false"
+    }
+  ],
+  "call_files": {
+    "p02-calls.json": {
+      "attempts": 13,
+      "responses": 13,
+      "errors": []
+    },
+    "p07-calls.json": {
+      "attempts": 19,
+      "responses": 19,
+      "errors": []
+    },
+    "p08-calls.json": {
+      "attempts": 1,
+      "responses": 0,
+      "errors": [
+        "APIConnectionError"
+      ]
+    }
+  }
+}

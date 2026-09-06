@@ -1,0 +1,18 @@
+[
+  {
+    "sequence": 1,
+    "material": null,
+    "round": 1,
+    "stage": "evidence",
+    "repair": 0,
+    "status": "structure_repair_requested"
+  },
+  {
+    "sequence": 2,
+    "material": null,
+    "round": 1,
+    "stage": "evidence",
+    "repair": 1,
+    "status": "structure_repair_exhausted"
+  }
+]

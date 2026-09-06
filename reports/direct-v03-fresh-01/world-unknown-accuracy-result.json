@@ -1,0 +1,61 @@
+{
+  "id": "world-unknown",
+  "arm": "accuracy",
+  "status": "completed",
+  "prediction": "unverifiable",
+  "assessment_mode": "world",
+  "checkpoints": [
+    {
+      "round": 1,
+      "id": "world-unknown",
+      "decision": "unverifiable",
+      "assessment_mode": "world",
+      "assessments": {
+        "evidence": {
+          "raw_verdict": "supported",
+          "decision": "supported",
+          "blocking_gap_ids": []
+        },
+        "world": {
+          "raw_verdict": "unresolved",
+          "decision": "unresolved",
+          "blocking_gap_ids": []
+        }
+      },
+      "provenance_status": "original_material_located"
+    }
+  ],
+  "native_prediction": {
+    "id": "world-unknown",
+    "assessment_mode": "world",
+    "as_of": "2026-09-04T20:00:00Z",
+    "decision": "unverifiable",
+    "assessments": {
+      "evidence": {
+        "raw_verdict": "supported",
+        "decision": "supported",
+        "blocking_gap_ids": []
+      },
+      "world": {
+        "raw_verdict": "unresolved",
+        "decision": "unresolved",
+        "blocking_gap_ids": []
+      }
+    },
+    "provenance_status": "original_material_located",
+    "assessment_valid": true,
+    "stop_reason": "provider_exhausted"
+  },
+  "extractor_answer_text": "{\"id\": \"world-unknown\", \"assessment_mode\": \"world\", \"as_of\": \"2026-09-04T20:00:00Z\", \"decision\": \"unverifiable\", \"assessments\": {\"evidence\": {\"raw_verdict\": \"supported\", \"decision\": \"supported\", \"blocking_gap_ids\": []}, \"world\": {\"raw_verdict\": \"unresolved\", \"decision\": \"unresolved\", \"blocking_gap_ids\": []}}, \"provenance_status\": \"original_material_located\", \"assessment_valid\": true, \"stop_reason\": \"provider_exhausted\"}",
+  "extraction": {
+    "decision": "unverifiable",
+    "extractable": true,
+    "basis_quote": "\"decision\": \"unverifiable\""
+  },
+  "usage": {
+    "model_calls": 5,
+    "input_tokens": 7189,
+    "output_tokens": 3559,
+    "seconds": 63.57168012699549
+  }
+}

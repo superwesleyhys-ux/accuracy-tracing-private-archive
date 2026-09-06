@@ -1,0 +1,35 @@
+{
+  "id": "p06",
+  "arm": "original",
+  "assessment_mode": "world",
+  "status": "completed",
+  "prediction": {
+    "decision": "unverifiable",
+    "origins": [
+      "m10",
+      "m11"
+    ],
+    "edges": [],
+    "provenance_evaluable": true,
+    "origin_evaluable": true,
+    "edges_evaluable": false,
+    "edge_export_limit": "No native source-to-source edge representation"
+  },
+  "usage": {
+    "model_calls": 16,
+    "input_tokens": 20040,
+    "output_tokens": 10601,
+    "seconds": 175.51830312299717
+  },
+  "extractor_answer_text": "“木卫二冰下海洋存在活生物”的确认，在2个信源中未找到；现实核验为未知，并非判假。实际是有潜在宜居线索，而非已发现生命。m10称1990年代伽利略观测支持冰下咸水海洋存在，2024年10月任务介绍将目标定为研究宜居条件；同期m11称探测器不寻找生命，也无发现生命的能力。因此，宜居线索不能证明生命存在，任务介绍亦不足以确认。两份NASA材料无分歧，但同源不构成独立确认。（基于2个信源 | 覆盖1类媒体 | 0条事实多源一致 | 0条存在分歧 | 因果锚定2/2）",
+  "extraction": {
+    "decision": "unverifiable",
+    "extractable": true,
+    "basis_quote": "“木卫二冰下海洋存在活生物”的确认，在2个信源中未找到；现实核验为未知，并非判假。"
+  },
+  "actual_new_api_usage": {
+    "model_calls": 16,
+    "input_tokens": 20040,
+    "output_tokens": 10601
+  }
+}

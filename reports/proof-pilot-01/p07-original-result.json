@@ -1,0 +1,34 @@
+{
+  "id": "p07",
+  "arm": "original",
+  "assessment_mode": "evidence",
+  "status": "completed",
+  "prediction": {
+    "decision": "false",
+    "origins": [
+      "m13"
+    ],
+    "edges": [],
+    "provenance_evaluable": true,
+    "origin_evaluable": true,
+    "edges_evaluable": false,
+    "edge_export_limit": "No native source-to-source edge representation"
+  },
+  "usage": {
+    "model_calls": 17,
+    "input_tokens": 23586,
+    "output_tokens": 10373,
+    "seconds": 168.38651102100266
+  },
+  "extractor_answer_text": "仅按m13评估，NOAA的GOES-U更名GOES-19有据，但“2024年6月25日更名”在1个信源中未找到，且被7月7日的记载反驳。m12将6月25日记为发射日，仅作背景；m13称7月7日完成最后点火、抵达地球静止轨道并更名，原因是入轨后按规则由字母改用数字。两文无分歧，但同属NOAA且存在引用关系，并非独立确认；真实世界未独立核实。（基于2个信源 | 覆盖1类媒体 | 2条事实多源一致 | 0条存在分歧 | 因果锚定2/2）",
+  "extraction": {
+    "decision": "false",
+    "extractable": true,
+    "basis_quote": "仅按m13评估，NOAA的GOES-U更名GOES-19有据，但“2024年6月25日更名”在1个信源中未找到，且被7月7日的记载反驳。"
+  },
+  "actual_new_api_usage": {
+    "model_calls": 17,
+    "input_tokens": 23586,
+    "output_tokens": 10373
+  }
+}

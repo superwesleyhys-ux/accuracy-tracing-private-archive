@@ -1,0 +1,35 @@
+{
+  "id": "p02",
+  "arm": "original",
+  "assessment_mode": "evidence",
+  "status": "completed",
+  "prediction": {
+    "decision": "false",
+    "origins": [
+      "m03",
+      "m04"
+    ],
+    "edges": [],
+    "provenance_evaluable": true,
+    "origin_evaluable": true,
+    "edges_evaluable": false,
+    "edge_export_limit": "No native source-to-source edge representation"
+  },
+  "usage": {
+    "model_calls": 18,
+    "input_tokens": 28066,
+    "output_tokens": 12722,
+    "seconds": 202.50457914700382
+  },
+  "extractor_answer_text": "m03证实NASA公告日期为2024年2月15日、对象为OSIRIS-REx返回的贝努样本；在1个范围内信源中未找到“最终总质量70.3克”的表述，公告明确为121.6克，故声明与证据矛盾。70.3克是此前测量值：样本于2023年9月返回，2024年1月采样头拆解后又倒出51.2克，加上额外颗粒形成总量。差异源于把阶段值误作总量。范围内无来源分歧；现实质量未独立核验，另一NASA快照不作独立确认。（基于1个信源 | 覆盖1类媒体 | 0条事实多源一致 | 0条存在分歧 | 因果锚定2/2）",
+  "extraction": {
+    "decision": "false",
+    "extractable": true,
+    "basis_quote": "公告明确为121.6克，故声明与证据矛盾。"
+  },
+  "actual_new_api_usage": {
+    "model_calls": 18,
+    "input_tokens": 28066,
+    "output_tokens": 12722
+  }
+}

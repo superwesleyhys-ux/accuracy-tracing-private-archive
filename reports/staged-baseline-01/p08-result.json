@@ -1,0 +1,31 @@
+{
+  "id": "p08",
+  "arm": "original",
+  "assessment_mode": "evidence",
+  "status": "completed",
+  "prediction": {
+    "decision": "true",
+    "origins": [
+      "m15"
+    ],
+    "edges": [],
+    "provenance_evaluable": true,
+    "origin_evaluable": true,
+    "edges_evaluable": false,
+    "edge_export_limit": "No native source-to-source edge representation"
+  },
+  "extractor_answer_text": "限定证据m15支持USGS于2020年发布、整合六幅阿波罗时代区域地图及较新月球任务数据；所称正式地图名在1个信源中未找到。核心说法获支持，但不等于现实核验，后者未知。材料显示：旧图重绘对齐新数据，统一地层描述，4月20日宣布发布；整合工作解决了数据对齐及岩名、描述、年代不一致的问题。两份材料无分歧，但同属USGS且相互关联，一致不算独立确认。（基于2个信源 | 覆盖1类媒体 | 3条事实多源一致 | 0条存在分歧 | 因果锚定2/2）",
+  "extraction": {
+    "decision": "true",
+    "extractable": true,
+    "basis_quote": "核心说法获支持"
+  },
+  "usage": {
+    "model_calls": 17,
+    "input_tokens": 22825,
+    "output_tokens": 10882,
+    "seconds": 188.3589953710034
+  },
+  "new_api_attempts": 17,
+  "returned_responses": 17
+}

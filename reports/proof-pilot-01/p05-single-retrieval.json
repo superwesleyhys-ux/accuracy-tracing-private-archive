@@ -1,0 +1,23 @@
+[
+  {
+    "round": 1,
+    "kind": "fixed_corpus_experimental_reanalysis",
+    "returned": [
+      "m09"
+    ],
+    "tasks": [
+      {
+        "id": "origin:p05",
+        "question": "Find the producing record and evidenced lineage for: Ingenuity was upright at the moment it touched down during its January 18, 2024 flight.",
+        "stage": "provenance",
+        "dimension": "auto",
+        "blocking": true,
+        "target_id": null,
+        "basis": [],
+        "decision_impact": "",
+        "action": "search",
+        "locator": null
+      }
+    ]
+  }
+]

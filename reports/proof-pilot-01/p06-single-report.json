@@ -1,0 +1,135 @@
+{
+  "schema_version": "0.3",
+  "scope": "plugin-supplied semantic analyses; no built-in truth oracle",
+  "target": {
+    "id": "p06",
+    "text": "Living organisms exist in the ocean beneath Europa's ice.",
+    "as_of": "2026-09-05T09:34:36Z",
+    "source_version_id": "m10",
+    "assessment_mode": "world",
+    "evidence_scope": [
+      "m10",
+      "m11"
+    ]
+  },
+  "config": {
+    "max_rounds": 1,
+    "max_documents": 24,
+    "max_decomposition_calls": 36,
+    "experimental_force_rounds": false
+  },
+  "provenance_status": "unresolved",
+  "fact_status": "unresolved",
+  "stop_reason": "decomposer_error",
+  "usage": {
+    "rounds": 1,
+    "documents": 1,
+    "unique_versions": 1,
+    "decomposition_calls": 1,
+    "verification_calls": 0
+  },
+  "decision_status": "unresolved",
+  "assessments": null,
+  "assessment_valid": false,
+  "materials": [
+    {
+      "version_id": "m10",
+      "url": "https://www.nasa.gov/news-release/liftoff-nasas-europa-clipper-sails-toward-ocean-moon-of-jupiter/",
+      "content": "Liftoff! NASA’s Europa Clipper Sails Toward Ocean Moon of Jupiter\nPublication date: 2024-10-14\n\nThe main goal of the mission is to determine whether Europa has conditions that could support life. Europa is about the size of our own Moon, but its interior is different. Information from NASA’s Galileo mission in the 1990s showed strong evidence that under Europa’s ice lies an enormous, salty ocean with more water than all of Earth’s oceans combined. Scientists also have found evidence that Europa may host organic compounds and energy sources under its surface.\n\nIf the mission determines Europa is habitable, it may mean there are more habitable worlds in our solar system and beyond than imagined.",
+      "retrieved_at": "2026-09-05T09:34:36Z",
+      "published_at": null,
+      "available_at": "2026-09-05T09:34:36Z",
+      "availability_basis": "Current web-tool collection completed at retrieved_at on 2026-09-05. The supplied material is a selected, whitespace-normalized excerpt, not a full page or historical exact-version capture. Availability is asserted only at collection completion. The source's displayed publication date is preserved in content; no exact timezone-qualified publication instant is known.",
+      "issuer": "NASA Headquarters"
+    }
+  ],
+  "eligible_version_ids": [],
+  "observations": [
+    {
+      "version_id": "m10",
+      "retrieved_at": "2026-09-05T09:34:36Z",
+      "duplicate": false,
+      "eligible": true,
+      "reasons": []
+    }
+  ],
+  "analyses": {},
+  "analysis_history": [],
+  "fragments": [],
+  "relations": [],
+  "origins": [],
+  "gaps": [
+    {
+      "id": "origin:p06",
+      "question": "Find the producing record and evidenced lineage for: Living organisms exist in the ocean beneath Europa's ice.",
+      "stage": "provenance",
+      "dimension": "auto",
+      "blocking": true,
+      "target_id": null,
+      "basis": [],
+      "decision_impact": "",
+      "action": "search",
+      "locator": null
+    }
+  ],
+  "resolutions": [],
+  "verification_history": [],
+  "operations": [
+    {
+      "sequence": 1,
+      "round": 1,
+      "action": "search",
+      "tasks": [
+        {
+          "id": "origin:p06",
+          "question": "Find the producing record and evidenced lineage for: Living organisms exist in the ocean beneath Europa's ice.",
+          "stage": "provenance",
+          "dimension": "auto",
+          "blocking": true,
+          "target_id": null,
+          "basis": [],
+          "decision_impact": "",
+          "action": "search",
+          "locator": null
+        }
+      ],
+      "limit": 24
+    },
+    {
+      "sequence": 2,
+      "round": 1,
+      "action": "snapshot_saved",
+      "version_id": "m10",
+      "sha256": "e48629264529179fe3b3e70af1fbf38ee18401008d4fbb2d080785dea3ae7976",
+      "eligible": true
+    },
+    {
+      "sequence": 3,
+      "round": 1,
+      "action": "decompose_started",
+      "version_id": "m10",
+      "duplicate": false,
+      "revisit": false
+    },
+    {
+      "sequence": 4,
+      "round": 1,
+      "action": "error",
+      "stage": "decomposer",
+      "message": "Model call failed: RuntimeError"
+    },
+    {
+      "sequence": 5,
+      "round": 1,
+      "action": "stopped",
+      "reason": "decomposer_error"
+    }
+  ],
+  "errors": [
+    {
+      "stage": "decomposer",
+      "type": "RuntimeError",
+      "message": "Model call failed: RuntimeError"
+    }
+  ]
+}

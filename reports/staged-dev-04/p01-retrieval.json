@@ -1,0 +1,46 @@
+[
+  {
+    "round": 1,
+    "kind": "fixed_corpus_development_reanalysis",
+    "tasks": [
+      {
+        "id": "origin:p01",
+        "question": "Find the producing record and evidenced lineage for: NASA's October 11, 2022 announcement reported that DART shortened Dimorphos' orbital period around Didymos by 32 minutes, with an uncertainty of approximately plus or minus 2 minutes.",
+        "stage": "provenance",
+        "dimension": "auto",
+        "blocking": true,
+        "target_id": null,
+        "basis": [],
+        "decision_impact": "",
+        "action": "search",
+        "locator": null
+      }
+    ],
+    "returned": [
+      "m01",
+      "m02"
+    ]
+  },
+  {
+    "round": 2,
+    "kind": "fixed_corpus_development_reanalysis",
+    "tasks": [
+      {
+        "id": "origin:p01",
+        "question": "Find the producing record and evidenced lineage for: NASA's October 11, 2022 announcement reported that DART shortened Dimorphos' orbital period around Didymos by 32 minutes, with an uncertainty of approximately plus or minus 2 minutes.",
+        "stage": "provenance",
+        "dimension": "auto",
+        "blocking": true,
+        "target_id": null,
+        "basis": [],
+        "decision_impact": "",
+        "action": "search",
+        "locator": null
+      }
+    ],
+    "returned": [
+      "m01",
+      "m02"
+    ]
+  }
+]

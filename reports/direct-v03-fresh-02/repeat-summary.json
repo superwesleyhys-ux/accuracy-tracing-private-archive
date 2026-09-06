@@ -1,0 +1,36 @@
+{
+  "status": "blocked_api_quota_exhausted",
+  "accuracy": null,
+  "cross_run_label_stability": null,
+  "prior_successful_run": "direct-v03-fresh-01",
+  "same_configuration": true,
+  "benchmark_request_attempts": 10,
+  "diagnostic_request_attempts": 1,
+  "successful_model_responses": 0,
+  "server_token_usage": null,
+  "arms": {
+    "original": {
+      "planned": 5,
+      "completed": 0,
+      "errors": 5,
+      "accuracy": null
+    },
+    "accuracy": {
+      "planned": 5,
+      "completed": 0,
+      "errors": 5,
+      "accuracy": null
+    }
+  },
+  "diagnosis": {
+    "purpose": "diagnose infrastructure rejection; not benchmark inference",
+    "benchmark_score": null,
+    "status": "rejected",
+    "http_status": 429,
+    "error_type": "RateLimitError",
+    "api_code": "credit_balance_exhausted",
+    "api_type": "insufficient_quota",
+    "retry_after": null
+  },
+  "interpretation": "Infrastructure rejection before semantic output; no new model performance measurement."
+}

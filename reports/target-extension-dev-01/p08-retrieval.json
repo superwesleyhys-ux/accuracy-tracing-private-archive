@@ -1,0 +1,84 @@
+[
+  {
+    "round": 1,
+    "kind": "fixed_corpus_development_reanalysis",
+    "tasks": [
+      {
+        "id": "origin:p08",
+        "question": "Find the producing record and evidenced lineage for: The USGS Unified Geologic Map of the Moon released in 2020 combined six Apollo-era regional maps with newer lunar-mission data.",
+        "stage": "provenance",
+        "dimension": "auto",
+        "blocking": true,
+        "target_id": null,
+        "basis": [],
+        "decision_impact": "",
+        "action": "search",
+        "locator": null
+      }
+    ],
+    "returned": [
+      "m14",
+      "m15"
+    ]
+  },
+  {
+    "round": 2,
+    "kind": "fixed_corpus_development_reanalysis",
+    "tasks": [
+      {
+        "id": "origin:p08",
+        "question": "Find the producing record and evidenced lineage for: The USGS Unified Geologic Map of the Moon released in 2020 combined six Apollo-era regional maps with newer lunar-mission data.",
+        "stage": "provenance",
+        "dimension": "auto",
+        "blocking": true,
+        "target_id": null,
+        "basis": [],
+        "decision_impact": "",
+        "action": "search",
+        "locator": null
+      },
+      {
+        "id": "p08:verification:evidence:ef9f86f2f37501378c9c",
+        "question": "Does the full scoped announcement identify the released map combining these inputs as the Unified Geologic Map of the Moon?",
+        "stage": "verification",
+        "dimension": "evidence",
+        "blocking": true,
+        "target_id": "p08",
+        "basis": [
+          {
+            "version_id": "m15",
+            "start": 404,
+            "end": 544,
+            "quote": "Along with merging new and old data, USGS researchers also developed a unified description of the stratigraphy, or rock layers, of the moon."
+          }
+        ],
+        "decision_impact": "Fetch the full announcement to establish the named product's identity. An explicit identification would connect the supported release year and input combination to the unchanged target.",
+        "action": "fetch",
+        "locator": "https://www.usgs.gov/news/usgs-releases-first-ever-comprehensive-geologic-map-moon"
+      },
+      {
+        "id": "p08:verification:world:ef9f86f2f37501378c9c",
+        "question": "Does the full USGS release identify the map released in 2020 and made from these inputs as the Unified Geologic Map of the Moon?",
+        "stage": "verification",
+        "dimension": "world",
+        "blocking": true,
+        "target_id": "p08",
+        "basis": [
+          {
+            "version_id": "m15",
+            "start": 94,
+            "end": 261,
+            "quote": "To create the new digital map, scientists used information from six Apollo-era regional maps along with updated information from recent satellite missions to the moon."
+          }
+        ],
+        "decision_impact": "An explicit product-name connection in the full announcement or its linked product record could establish the remaining identity requirement; identification of a different product could instead undermine the target.",
+        "action": "fetch",
+        "locator": "https://www.usgs.gov/news/usgs-releases-first-ever-comprehensive-geologic-map-moon"
+      }
+    ],
+    "returned": [
+      "m14",
+      "m15"
+    ]
+  }
+]

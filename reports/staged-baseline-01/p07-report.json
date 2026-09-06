@@ -1,0 +1,238 @@
+{
+  "event": {
+    "title": "m13称NOAA的GOES-U于2024年7月7日抵达地球静止轨道并更名为GOES-19，与目标声明的更名日期不符。",
+    "date": "2024-07-07",
+    "summary": "证据范围内的m13明确将更名日期记为2024年7月7日，因此反驳目标声明中的2024年6月25日。\nm13称GOES-U于2024年7月7日完成最后一次发动机点火，进入赤道上空22,236英里的地球静止轨道。\nm13称GOES卫星发射前使用字母标识，抵达地球静止轨道后使用数字标识。\n上述判断仅评估m13所述内容；现实世界中的事实是否得到独立核实，未知。",
+    "sources": [],
+    "relation": "",
+    "causes": [
+      {
+        "title": "m13所述最后一次发动机点火使GOES-U抵达地球静止轨道",
+        "date": "2024-07-07",
+        "summary": "m13称，GOES-U于当日完成最后一次发动机点火，进入赤道上空22,236英里的地球静止轨道，并在达到这一里程碑后更名为GOES-19。该文本明确将更名日期记为7月7日，因此反驳目标声明中的6月25日；此判断仅针对m13的记载，现实事实是否得到独立核实仍未知。",
+        "sources": [
+          {
+            "url": "https://www.nesdis.noaa.gov/news/noaas-goes-u-reaches-geostationary-orbit-now-designated-goes-19",
+            "title": "NOAA NESDIS：NOAA’s GOES-U Reaches Geostationary Orbit, Now Designated GOES-19（m13）"
+          }
+        ],
+        "relation": "抵达地球静止轨道直接触发更名；m13记载的日期构成反驳目标声明的直接依据",
+        "causes": [],
+        "confidence": 1.0,
+        "grounded": true
+      },
+      {
+        "title": "GOES卫星以抵达地球静止轨道作为改用数字标识的条件",
+        "date": "既有命名规则，起始时间未载明",
+        "summary": "m13说明，GOES卫星在发射前使用字母标识，抵达地球静止轨道后使用数字标识。这一规则解释了为何文中将GOES-U更名为GOES-19与入轨里程碑相联系。",
+        "sources": [
+          {
+            "url": "https://www.nesdis.noaa.gov/news/noaas-goes-u-reaches-geostationary-orbit-now-designated-goes-19",
+            "title": "NOAA NESDIS：NOAA’s GOES-U Reaches Geostationary Orbit, Now Designated GOES-19（m13）"
+          }
+        ],
+        "relation": "更名的制度性背景与触发条件",
+        "causes": [],
+        "confidence": 1.0,
+        "grounded": true
+      }
+    ],
+    "confidence": 0.0,
+    "grounded": true
+  },
+  "direct_response": "限定证据m13记载了NOAA的GOES-U更名为GOES-19；“2024年6月25日更名”在1个信源中未找到，且被7月7日的记载反驳。范围外m12称6月25日为发射日；m13称7月7日完成末次点火、入轨后更名，因为抵达地球静止轨道才改用数字标识。两文无分歧，但同属NOAA且相互链接，不构成独立确认；现实核验未知。（基于2个信源，判定限1个 | 覆盖1类媒体 | 2条事实多源一致但同源 | 0条存在分歧 | 因果锚定2/2）",
+  "credibility": {
+    "source_count": 2,
+    "source_types": [
+      "官方媒体"
+    ],
+    "consistent_count": 2,
+    "disputed_count": 0,
+    "grounding_rate": 1.0,
+    "grounded_count": 2,
+    "total_causal_nodes": 2
+  },
+  "event_timeline": [
+    {
+      "date": "既有规则，起始时间未载明",
+      "title": "GOES卫星抵达地球静止轨道后改用数字标识",
+      "description": "m13说明，GOES卫星在发射前使用字母标识，抵达地球静止轨道后使用数字标识。这一规则解释了GOES-U更名与入轨里程碑的联系。",
+      "significance": "背景",
+      "sources": [
+        {
+          "url": "https://www.nesdis.noaa.gov/news/noaas-goes-u-reaches-geostationary-orbit-now-designated-goes-19",
+          "title": "NOAA’s GOES-U Reaches Geostationary Orbit, Now Designated GOES-19"
+        }
+      ],
+      "perspectives": [],
+      "verified": false,
+      "causal_links": [
+        "GOES-U抵达地球静止轨道并更名为GOES-19"
+      ]
+    },
+    {
+      "date": "2024-06-25",
+      "title": "GOES-U从肯尼迪航天中心发射",
+      "description": "据m12周年回顾，GOES-U于当日从佛罗里达州NASA肯尼迪航天中心发射。它是NOAA GOES-R系列的最后一颗卫星；该日期在报道中对应发射，而非更名。",
+      "significance": "重大",
+      "sources": [
+        {
+          "url": "https://www.nesdis.noaa.gov/news/noaas-goes-u-satellite-one-year-later",
+          "title": "NOAA’s GOES-U Satellite: One Year Later"
+        }
+      ],
+      "perspectives": [],
+      "verified": false,
+      "causal_links": []
+    },
+    {
+      "date": "2024-07-07",
+      "title": "GOES-U抵达地球静止轨道并更名为GOES-19",
+      "description": "据m13，GOES-U当日完成最后一次发动机点火，进入地球赤道上空22,236英里的地球静止轨道，随后更名为GOES-19。m12周年回顾也记载了7月7日入轨后更名，但两篇材料均来自NOAA NESDIS，且m12链接至m13，不构成独立核实。",
+      "significance": "重大",
+      "sources": [
+        {
+          "url": "https://www.nesdis.noaa.gov/news/noaas-goes-u-reaches-geostationary-orbit-now-designated-goes-19",
+          "title": "NOAA’s GOES-U Reaches Geostationary Orbit, Now Designated GOES-19"
+        },
+        {
+          "url": "https://www.nesdis.noaa.gov/news/noaas-goes-u-satellite-one-year-later",
+          "title": "NOAA’s GOES-U Satellite: One Year Later"
+        }
+      ],
+      "perspectives": [],
+      "verified": true,
+      "causal_links": []
+    }
+  ],
+  "sources": [
+    {
+      "outlet": "NOAA 国家环境卫星、数据和信息服务局（NESDIS）",
+      "url": "https://www.nesdis.noaa.gov/news/noaas-goes-u-reaches-geostationary-orbit-now-designated-goes-19",
+      "publish_time": "2024-07-08",
+      "source_type": "官方媒体",
+      "is_original": true,
+      "key_facts": [
+        {
+          "claim": "2024年7月7日，GOES-U完成最后一次发动机点火，进入地球赤道上空22,236英里的地球静止轨道。",
+          "source_urls": [
+            "https://www.nesdis.noaa.gov/news/noaas-goes-u-reaches-geostationary-orbit-now-designated-goes-19"
+          ],
+          "agreed": true
+        },
+        {
+          "claim": "GOES-U于2024年7月7日抵达地球静止轨道后，更名为GOES-19。",
+          "source_urls": [
+            "https://www.nesdis.noaa.gov/news/noaas-goes-u-reaches-geostationary-orbit-now-designated-goes-19"
+          ],
+          "agreed": true
+        }
+      ]
+    },
+    {
+      "outlet": "NOAA 国家环境卫星、数据和信息服务局（NESDIS）",
+      "url": "https://www.nesdis.noaa.gov/news/noaas-goes-u-satellite-one-year-later",
+      "publish_time": "2025-06-25",
+      "source_type": "官方媒体",
+      "is_original": false,
+      "key_facts": [
+        {
+          "claim": "2024年6月25日，GOES-U作为NOAA GOES-R系列的最后一颗卫星，从佛罗里达州NASA肯尼迪航天中心发射。",
+          "source_urls": [
+            "https://www.nesdis.noaa.gov/news/noaas-goes-u-satellite-one-year-later"
+          ],
+          "agreed": true
+        },
+        {
+          "claim": "周年回顾报道记载，GOES-U于7月7日抵达地球静止轨道后更名为GOES-19。",
+          "source_urls": [
+            "https://www.nesdis.noaa.gov/news/noaas-goes-u-satellite-one-year-later"
+          ],
+          "agreed": true
+        }
+      ]
+    }
+  ],
+  "source_timeline": [
+    {
+      "outlet": "NOAA 国家环境卫星、数据和信息服务局（NESDIS）",
+      "url": "https://www.nesdis.noaa.gov/news/noaas-goes-u-reaches-geostationary-orbit-now-designated-goes-19",
+      "publish_time": "2024-07-08",
+      "source_type": "官方媒体",
+      "is_original": true,
+      "key_facts": [
+        {
+          "claim": "2024年7月7日，GOES-U完成最后一次发动机点火，进入地球赤道上空22,236英里的地球静止轨道。",
+          "source_urls": [
+            "https://www.nesdis.noaa.gov/news/noaas-goes-u-reaches-geostationary-orbit-now-designated-goes-19"
+          ],
+          "agreed": true
+        },
+        {
+          "claim": "GOES-U于2024年7月7日抵达地球静止轨道后，更名为GOES-19。",
+          "source_urls": [
+            "https://www.nesdis.noaa.gov/news/noaas-goes-u-reaches-geostationary-orbit-now-designated-goes-19"
+          ],
+          "agreed": true
+        }
+      ]
+    },
+    {
+      "outlet": "NOAA 国家环境卫星、数据和信息服务局（NESDIS）",
+      "url": "https://www.nesdis.noaa.gov/news/noaas-goes-u-satellite-one-year-later",
+      "publish_time": "2025-06-25",
+      "source_type": "官方媒体",
+      "is_original": false,
+      "key_facts": [
+        {
+          "claim": "2024年6月25日，GOES-U作为NOAA GOES-R系列的最后一颗卫星，从佛罗里达州NASA肯尼迪航天中心发射。",
+          "source_urls": [
+            "https://www.nesdis.noaa.gov/news/noaas-goes-u-satellite-one-year-later"
+          ],
+          "agreed": true
+        },
+        {
+          "claim": "周年回顾报道记载，GOES-U于7月7日抵达地球静止轨道后更名为GOES-19。",
+          "source_urls": [
+            "https://www.nesdis.noaa.gov/news/noaas-goes-u-satellite-one-year-later"
+          ],
+          "agreed": true
+        }
+      ]
+    }
+  ],
+  "key_findings": [
+    "【证据判定】限定证据范围为m13：其明确记载GOES-U于2024年7月7日抵达地球静止轨道并更名为GOES-19，反驳目标声明“2024年6月25日更名”。此结论评估文本所述，不等同于现实世界的独立核实。",
+    "【时间线】背景材料m12将2024年6月25日记为发射日，将7月7日记为入轨及更名日；m13页面标注的7月8日是发布日期，而非事件日期。m12不作为本次目标判定的范围内证据。",
+    "【信源】m13为同期公告，m12为次年回顾；二者同属NOAA NESDIS，且m12链接至m13。内容一致，但不构成两个独立来源的确认。",
+    "【因果】m13记载最后一次发动机点火使卫星进入地球静止轨道，并说明GOES卫星抵达该轨道后改用数字标识。因此，入轨是文中更名的触发条件，而非发射本身。"
+  ],
+  "information_gaps": [
+    "现实世界核实状态：未知。所供材料没有独立于NOAA NESDIS的记录，因果节点2/2锚定仅表明有文本依据。",
+    "材料是采集于2026年9月5日的选取、空白规范化摘录，并非完整页面或历史精确版本；无法据此确认页面最初发布时的完整内容及后续修订情况。",
+    "既有命名规则的起始时间及目标声明日期错误的形成过程未载明；将错误归因于混淆发射日与更名日，只能是推断。"
+  ],
+  "consistent_facts": [
+    {
+      "claim": "GOES-U于2024年7月7日抵达地球静止轨道。",
+      "source_urls": [
+        "https://www.nesdis.noaa.gov/news/noaas-goes-u-reaches-geostationary-orbit-now-designated-goes-19",
+        "https://www.nesdis.noaa.gov/news/noaas-goes-u-satellite-one-year-later"
+      ],
+      "agreed": true
+    },
+    {
+      "claim": "GOES-U在2024年7月7日抵达地球静止轨道后更名为GOES-19，而非在6月25日更名。",
+      "source_urls": [
+        "https://www.nesdis.noaa.gov/news/noaas-goes-u-reaches-geostationary-orbit-now-designated-goes-19",
+        "https://www.nesdis.noaa.gov/news/noaas-goes-u-satellite-one-year-later"
+      ],
+      "agreed": true
+    }
+  ],
+  "disputed_facts": [],
+  "causal_summary": "据背景材料m12，GOES-U于2024年6月25日发射。范围内证据m13随后记载，卫星于7月7日完成最后一次发动机点火并抵达地球静止轨道，按照抵达该轨道后改用数字标识的规则，更名为GOES-19。因此，m13直接反驳目标声明中的6月25日更名日期。该错误可能源于混淆发射与入轨更名两个里程碑，但错误成因没有直接证据；实际事件是否获得独立核实仍未知。",
+  "bias_notes": [
+    "两篇材料均为主管机构发布，提供的是同一机构的叙述，缺少外部视角。摘录中未见明显立场冲突；不能仅凭官方身份认定内容失实，也不能将同源一致视为独立确认。"
+  ]
+}

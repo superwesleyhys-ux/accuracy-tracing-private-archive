@@ -1,0 +1,10 @@
+{
+  "status": "has_errors",
+  "jobs": 40,
+  "actual_new_api_usage": {
+    "model_calls": 156,
+    "input_tokens": 227510,
+    "output_tokens": 130236
+  },
+  "logical_arm_calls": 165
+}

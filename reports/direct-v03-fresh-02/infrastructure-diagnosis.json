@@ -1,0 +1,10 @@
+{
+  "purpose": "diagnose infrastructure rejection; not benchmark inference",
+  "benchmark_score": null,
+  "status": "rejected",
+  "http_status": 429,
+  "error_type": "RateLimitError",
+  "api_code": "credit_balance_exhausted",
+  "api_type": "insufficient_quota",
+  "retry_after": null
+}

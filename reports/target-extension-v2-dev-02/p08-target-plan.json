@@ -1,0 +1,1849 @@
+{
+  "schema_version": "decision-probe-v2",
+  "target_signature": "a948189abfe20066e0032b6a7e4009f857ae3933dfb93872475b7a6516a03230",
+  "logic": "and",
+  "claims": [
+    {
+      "id": "p08:claim:d01a763cfbcb54acff80",
+      "statement": "The USGS Unified Geologic Map of the Moon was released in 2020.",
+      "anchor": {
+        "start": 0,
+        "end": 58,
+        "quote": "The USGS Unified Geologic Map of the Moon released in 2020"
+      },
+      "role": "conjunct",
+      "dimensions": [
+        {
+          "id": "p08:dimension:cb30c491da2a808e2af9",
+          "kind": "subject",
+          "anchor": {
+            "start": 0,
+            "end": 41,
+            "quote": "The USGS Unified Geologic Map of the Moon"
+          }
+        },
+        {
+          "id": "p08:dimension:a2c89326d73603af102b",
+          "kind": "entity_identity",
+          "anchor": {
+            "start": 4,
+            "end": 41,
+            "quote": "USGS Unified Geologic Map of the Moon"
+          }
+        },
+        {
+          "id": "p08:dimension:2e83e629734c954b00bd",
+          "kind": "predicate",
+          "anchor": {
+            "start": 42,
+            "end": 50,
+            "quote": "released"
+          }
+        },
+        {
+          "id": "p08:dimension:69a06508f32a5bfd698c",
+          "kind": "time",
+          "anchor": {
+            "start": 51,
+            "end": 58,
+            "quote": "in 2020"
+          }
+        }
+      ],
+      "parent_claim_id": null
+    },
+    {
+      "id": "p08:claim:25759528c91e6b502892",
+      "statement": "The USGS Unified Geologic Map of the Moon combined six Apollo-era regional maps with newer lunar-mission data.",
+      "anchor": {
+        "start": 0,
+        "end": 127,
+        "quote": "The USGS Unified Geologic Map of the Moon released in 2020 combined six Apollo-era regional maps with newer lunar-mission data."
+      },
+      "role": "conjunct",
+      "dimensions": [
+        {
+          "id": "p08:dimension:4457fc9cba510c20eaa4",
+          "kind": "subject",
+          "anchor": {
+            "start": 0,
+            "end": 41,
+            "quote": "The USGS Unified Geologic Map of the Moon"
+          }
+        },
+        {
+          "id": "p08:dimension:3c6755f9a61e53251020",
+          "kind": "entity_identity",
+          "anchor": {
+            "start": 4,
+            "end": 41,
+            "quote": "USGS Unified Geologic Map of the Moon"
+          }
+        },
+        {
+          "id": "p08:dimension:b73c07129b12c4477fcc",
+          "kind": "predicate",
+          "anchor": {
+            "start": 59,
+            "end": 126,
+            "quote": "combined six Apollo-era regional maps with newer lunar-mission data"
+          }
+        },
+        {
+          "id": "p08:dimension:c082f4b8f0737d24ee40",
+          "kind": "entity_identity",
+          "anchor": {
+            "start": 68,
+            "end": 96,
+            "quote": "six Apollo-era regional maps"
+          }
+        },
+        {
+          "id": "p08:dimension:f61a0cd2f3245c384467",
+          "kind": "quantity_unit",
+          "anchor": {
+            "start": 68,
+            "end": 96,
+            "quote": "six Apollo-era regional maps"
+          }
+        },
+        {
+          "id": "p08:dimension:8e4d0ca5c26999988216",
+          "kind": "time",
+          "anchor": {
+            "start": 72,
+            "end": 82,
+            "quote": "Apollo-era"
+          }
+        },
+        {
+          "id": "p08:dimension:75319963721471b86c05",
+          "kind": "baseline_scope",
+          "anchor": {
+            "start": 102,
+            "end": 126,
+            "quote": "newer lunar-mission data"
+          }
+        },
+        {
+          "id": "p08:dimension:0c44b3d74f5088e213a6",
+          "kind": "entity_identity",
+          "anchor": {
+            "start": 102,
+            "end": 126,
+            "quote": "newer lunar-mission data"
+          }
+        }
+      ],
+      "parent_claim_id": null
+    }
+  ],
+  "probes": [
+    {
+      "id": "p08:probe:c2f959841ceeb949ccda",
+      "claim_id": "p08:claim:25759528c91e6b502892",
+      "kind": "baseline_scope",
+      "dimension_ids": [
+        "p08:dimension:75319963721471b86c05"
+      ],
+      "question": "Does the evidence establish that the lunar-mission data used in the combination are newer relative to the Apollo-era regional map inputs, rather than relative to an unrelated baseline?",
+      "decision_impact": "Checks the scope and temporal baseline of 'newer lunar-mission data'.",
+      "match_policy": "semantic_constraint",
+      "routes": [
+        "atoms",
+        "evidence",
+        "world"
+      ],
+      "gate": "always"
+    },
+    {
+      "id": "p08:probe:847c57b1171a6845a51a",
+      "claim_id": "p08:claim:25759528c91e6b502892",
+      "kind": "entity_identity",
+      "dimension_ids": [
+        "p08:dimension:0c44b3d74f5088e213a6"
+      ],
+      "question": "Does the evidence identify the other input as the target's newer lunar-mission data through an exact mention, alias, unambiguous description or anaphora?",
+      "decision_impact": "Checks that the data input has the asserted lunar-mission referent.",
+      "match_policy": "same_referent",
+      "routes": [
+        "atoms",
+        "evidence",
+        "world"
+      ],
+      "gate": "always"
+    },
+    {
+      "id": "p08:probe:e85be442ad0016d6da5e",
+      "claim_id": "p08:claim:25759528c91e6b502892",
+      "kind": "entity_identity",
+      "dimension_ids": [
+        "p08:dimension:3c6755f9a61e53251020"
+      ],
+      "question": "Is the map described as combining the inputs referentially equivalent to the USGS Unified Geologic Map of the Moon through an exact mention, alias, unambiguous description or anaphora?",
+      "decision_impact": "Checks that the combination concerns the target map.",
+      "match_policy": "same_referent",
+      "routes": [
+        "atoms",
+        "evidence",
+        "world"
+      ],
+      "gate": "always"
+    },
+    {
+      "id": "p08:probe:39b2237712c39c850bd2",
+      "claim_id": "p08:claim:25759528c91e6b502892",
+      "kind": "entity_identity",
+      "dimension_ids": [
+        "p08:dimension:c082f4b8f0737d24ee40"
+      ],
+      "question": "Does the evidence identify the input maps as the target's six Apollo-era regional maps through an exact mention, alias, unambiguous description or anaphora?",
+      "decision_impact": "Checks the identity and regional-map character of the asserted map inputs.",
+      "match_policy": "same_referent",
+      "routes": [
+        "atoms",
+        "evidence",
+        "world"
+      ],
+      "gate": "always"
+    },
+    {
+      "id": "p08:probe:8882c8c253784a35ff90",
+      "claim_id": "p08:claim:25759528c91e6b502892",
+      "kind": "quantity_unit",
+      "dimension_ids": [
+        "p08:dimension:f61a0cd2f3245c384467"
+      ],
+      "question": "Does the evidence specify six regional maps as inputs, counting maps rather than missions, datasets or another unit?",
+      "decision_impact": "Checks the asserted count and counted unit.",
+      "match_policy": "semantic_constraint",
+      "routes": [
+        "atoms",
+        "evidence",
+        "world"
+      ],
+      "gate": "always"
+    },
+    {
+      "id": "p08:probe:76201a7635d1058d15f0",
+      "claim_id": "p08:claim:25759528c91e6b502892",
+      "kind": "semantic_core",
+      "dimension_ids": [
+        "p08:dimension:4457fc9cba510c20eaa4",
+        "p08:dimension:b73c07129b12c4477fcc"
+      ],
+      "question": "Does the scoped evidence establish that the identified map combined six Apollo-era regional maps with newer lunar-mission data, with both inputs participating in that combination?",
+      "decision_impact": "Checks the complete combination predicate rather than separate mentions of its inputs.",
+      "match_policy": "semantic_constraint",
+      "routes": [
+        "atoms",
+        "evidence",
+        "world"
+      ],
+      "gate": "always"
+    },
+    {
+      "id": "p08:probe:f18f8b7d651c09823049",
+      "claim_id": "p08:claim:25759528c91e6b502892",
+      "kind": "source_lineage",
+      "dimension_ids": [],
+      "question": "Within m15, what identifiable source or attribution chain supports the combination claim, including the map count, Apollo-era qualification and newer lunar-mission data?",
+      "decision_impact": "Checks the provenance of support for the complete claim within the permitted evidence scope.",
+      "match_policy": "semantic_constraint",
+      "routes": [
+        "lineage",
+        "world"
+      ],
+      "gate": "provenance"
+    },
+    {
+      "id": "p08:probe:0c2940916590dd39508a",
+      "claim_id": "p08:claim:25759528c91e6b502892",
+      "kind": "time_boundary",
+      "dimension_ids": [
+        "p08:dimension:8e4d0ca5c26999988216"
+      ],
+      "question": "Does the evidence characterize the regional map inputs themselves as Apollo-era?",
+      "decision_impact": "Checks the temporal qualification of the map inputs.",
+      "match_policy": "semantic_constraint",
+      "routes": [
+        "atoms",
+        "evidence",
+        "world"
+      ],
+      "gate": "always"
+    },
+    {
+      "id": "p08:probe:dfc82fa956761ed0d3e0",
+      "claim_id": "p08:claim:d01a763cfbcb54acff80",
+      "kind": "entity_identity",
+      "dimension_ids": [
+        "p08:dimension:a2c89326d73603af102b"
+      ],
+      "question": "Does the evidence refer to the USGS Unified Geologic Map of the Moon through an exact mention, alias, unambiguous description or anaphora?",
+      "decision_impact": "Checks referential equivalence without requiring identical wording.",
+      "match_policy": "same_referent",
+      "routes": [
+        "atoms",
+        "evidence",
+        "world"
+      ],
+      "gate": "always"
+    },
+    {
+      "id": "p08:probe:cf9b136940156dedde85",
+      "claim_id": "p08:claim:d01a763cfbcb54acff80",
+      "kind": "semantic_core",
+      "dimension_ids": [
+        "p08:dimension:2e83e629734c954b00bd",
+        "p08:dimension:cb30c491da2a808e2af9"
+      ],
+      "question": "Does the scoped evidence establish that the USGS Unified Geologic Map of the Moon was released?",
+      "decision_impact": "Checks the asserted release of the identified map.",
+      "match_policy": "semantic_constraint",
+      "routes": [
+        "atoms",
+        "evidence",
+        "world"
+      ],
+      "gate": "always"
+    },
+    {
+      "id": "p08:probe:f1ac287da766cafc46c7",
+      "claim_id": "p08:claim:d01a763cfbcb54acff80",
+      "kind": "source_lineage",
+      "dimension_ids": [],
+      "question": "Within m15, what identifiable source or attribution chain supports the map-release claim and its date?",
+      "decision_impact": "Checks the provenance of support within the permitted evidence scope.",
+      "match_policy": "semantic_constraint",
+      "routes": [
+        "lineage",
+        "world"
+      ],
+      "gate": "provenance"
+    },
+    {
+      "id": "p08:probe:8cf412ca1386f24adb3c",
+      "claim_id": "p08:claim:d01a763cfbcb54acff80",
+      "kind": "time_boundary",
+      "dimension_ids": [
+        "p08:dimension:69a06508f32a5bfd698c"
+      ],
+      "question": "Does the evidence place the map's release in 2020, rather than merely dating another event or the source itself to that year?",
+      "decision_impact": "Checks that the year qualifies the release act.",
+      "match_policy": "semantic_constraint",
+      "routes": [
+        "atoms",
+        "evidence",
+        "world"
+      ],
+      "gate": "always"
+    }
+  ],
+  "notes": "The release date qualifies the release act. The combination of both inputs remains one claim; no exact-designation assertion is made.\nThe contract retains the target dimensions. Its and logic does not authorize a comparison relation probe; the map title identifies the subject rather than asserting a naming act.",
+  "sha256": "15fa1edb52292d740e23a3b0e7132d54b79bf91bae128e83110d365bf3fb0101",
+  "projections": {
+    "atoms": {
+      "schema_version": "decision-probe-v2",
+      "target_signature": "a948189abfe20066e0032b6a7e4009f857ae3933dfb93872475b7a6516a03230",
+      "plan_sha256": "15fa1edb52292d740e23a3b0e7132d54b79bf91bae128e83110d365bf3fb0101",
+      "stage": "atoms",
+      "logic": "and",
+      "claims": [
+        {
+          "id": "p08:claim:d01a763cfbcb54acff80",
+          "statement": "The USGS Unified Geologic Map of the Moon was released in 2020.",
+          "anchor": {
+            "start": 0,
+            "end": 58,
+            "quote": "The USGS Unified Geologic Map of the Moon released in 2020"
+          },
+          "role": "conjunct",
+          "dimensions": [
+            {
+              "id": "p08:dimension:cb30c491da2a808e2af9",
+              "kind": "subject",
+              "anchor": {
+                "start": 0,
+                "end": 41,
+                "quote": "The USGS Unified Geologic Map of the Moon"
+              }
+            },
+            {
+              "id": "p08:dimension:a2c89326d73603af102b",
+              "kind": "entity_identity",
+              "anchor": {
+                "start": 4,
+                "end": 41,
+                "quote": "USGS Unified Geologic Map of the Moon"
+              }
+            },
+            {
+              "id": "p08:dimension:2e83e629734c954b00bd",
+              "kind": "predicate",
+              "anchor": {
+                "start": 42,
+                "end": 50,
+                "quote": "released"
+              }
+            },
+            {
+              "id": "p08:dimension:69a06508f32a5bfd698c",
+              "kind": "time",
+              "anchor": {
+                "start": 51,
+                "end": 58,
+                "quote": "in 2020"
+              }
+            }
+          ],
+          "parent_claim_id": null
+        },
+        {
+          "id": "p08:claim:25759528c91e6b502892",
+          "statement": "The USGS Unified Geologic Map of the Moon combined six Apollo-era regional maps with newer lunar-mission data.",
+          "anchor": {
+            "start": 0,
+            "end": 127,
+            "quote": "The USGS Unified Geologic Map of the Moon released in 2020 combined six Apollo-era regional maps with newer lunar-mission data."
+          },
+          "role": "conjunct",
+          "dimensions": [
+            {
+              "id": "p08:dimension:4457fc9cba510c20eaa4",
+              "kind": "subject",
+              "anchor": {
+                "start": 0,
+                "end": 41,
+                "quote": "The USGS Unified Geologic Map of the Moon"
+              }
+            },
+            {
+              "id": "p08:dimension:3c6755f9a61e53251020",
+              "kind": "entity_identity",
+              "anchor": {
+                "start": 4,
+                "end": 41,
+                "quote": "USGS Unified Geologic Map of the Moon"
+              }
+            },
+            {
+              "id": "p08:dimension:b73c07129b12c4477fcc",
+              "kind": "predicate",
+              "anchor": {
+                "start": 59,
+                "end": 126,
+                "quote": "combined six Apollo-era regional maps with newer lunar-mission data"
+              }
+            },
+            {
+              "id": "p08:dimension:c082f4b8f0737d24ee40",
+              "kind": "entity_identity",
+              "anchor": {
+                "start": 68,
+                "end": 96,
+                "quote": "six Apollo-era regional maps"
+              }
+            },
+            {
+              "id": "p08:dimension:f61a0cd2f3245c384467",
+              "kind": "quantity_unit",
+              "anchor": {
+                "start": 68,
+                "end": 96,
+                "quote": "six Apollo-era regional maps"
+              }
+            },
+            {
+              "id": "p08:dimension:8e4d0ca5c26999988216",
+              "kind": "time",
+              "anchor": {
+                "start": 72,
+                "end": 82,
+                "quote": "Apollo-era"
+              }
+            },
+            {
+              "id": "p08:dimension:75319963721471b86c05",
+              "kind": "baseline_scope",
+              "anchor": {
+                "start": 102,
+                "end": 126,
+                "quote": "newer lunar-mission data"
+              }
+            },
+            {
+              "id": "p08:dimension:0c44b3d74f5088e213a6",
+              "kind": "entity_identity",
+              "anchor": {
+                "start": 102,
+                "end": 126,
+                "quote": "newer lunar-mission data"
+              }
+            }
+          ],
+          "parent_claim_id": null
+        }
+      ],
+      "probes": [
+        {
+          "id": "p08:probe:c2f959841ceeb949ccda",
+          "claim_id": "p08:claim:25759528c91e6b502892",
+          "kind": "baseline_scope",
+          "dimension_ids": [
+            "p08:dimension:75319963721471b86c05"
+          ],
+          "question": "Does the evidence establish that the lunar-mission data used in the combination are newer relative to the Apollo-era regional map inputs, rather than relative to an unrelated baseline?",
+          "decision_impact": "Checks the scope and temporal baseline of 'newer lunar-mission data'.",
+          "match_policy": "semantic_constraint",
+          "routes": [
+            "atoms",
+            "evidence",
+            "world"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p08:probe:847c57b1171a6845a51a",
+          "claim_id": "p08:claim:25759528c91e6b502892",
+          "kind": "entity_identity",
+          "dimension_ids": [
+            "p08:dimension:0c44b3d74f5088e213a6"
+          ],
+          "question": "Does the evidence identify the other input as the target's newer lunar-mission data through an exact mention, alias, unambiguous description or anaphora?",
+          "decision_impact": "Checks that the data input has the asserted lunar-mission referent.",
+          "match_policy": "same_referent",
+          "routes": [
+            "atoms",
+            "evidence",
+            "world"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p08:probe:e85be442ad0016d6da5e",
+          "claim_id": "p08:claim:25759528c91e6b502892",
+          "kind": "entity_identity",
+          "dimension_ids": [
+            "p08:dimension:3c6755f9a61e53251020"
+          ],
+          "question": "Is the map described as combining the inputs referentially equivalent to the USGS Unified Geologic Map of the Moon through an exact mention, alias, unambiguous description or anaphora?",
+          "decision_impact": "Checks that the combination concerns the target map.",
+          "match_policy": "same_referent",
+          "routes": [
+            "atoms",
+            "evidence",
+            "world"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p08:probe:39b2237712c39c850bd2",
+          "claim_id": "p08:claim:25759528c91e6b502892",
+          "kind": "entity_identity",
+          "dimension_ids": [
+            "p08:dimension:c082f4b8f0737d24ee40"
+          ],
+          "question": "Does the evidence identify the input maps as the target's six Apollo-era regional maps through an exact mention, alias, unambiguous description or anaphora?",
+          "decision_impact": "Checks the identity and regional-map character of the asserted map inputs.",
+          "match_policy": "same_referent",
+          "routes": [
+            "atoms",
+            "evidence",
+            "world"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p08:probe:8882c8c253784a35ff90",
+          "claim_id": "p08:claim:25759528c91e6b502892",
+          "kind": "quantity_unit",
+          "dimension_ids": [
+            "p08:dimension:f61a0cd2f3245c384467"
+          ],
+          "question": "Does the evidence specify six regional maps as inputs, counting maps rather than missions, datasets or another unit?",
+          "decision_impact": "Checks the asserted count and counted unit.",
+          "match_policy": "semantic_constraint",
+          "routes": [
+            "atoms",
+            "evidence",
+            "world"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p08:probe:76201a7635d1058d15f0",
+          "claim_id": "p08:claim:25759528c91e6b502892",
+          "kind": "semantic_core",
+          "dimension_ids": [
+            "p08:dimension:4457fc9cba510c20eaa4",
+            "p08:dimension:b73c07129b12c4477fcc"
+          ],
+          "question": "Does the scoped evidence establish that the identified map combined six Apollo-era regional maps with newer lunar-mission data, with both inputs participating in that combination?",
+          "decision_impact": "Checks the complete combination predicate rather than separate mentions of its inputs.",
+          "match_policy": "semantic_constraint",
+          "routes": [
+            "atoms",
+            "evidence",
+            "world"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p08:probe:0c2940916590dd39508a",
+          "claim_id": "p08:claim:25759528c91e6b502892",
+          "kind": "time_boundary",
+          "dimension_ids": [
+            "p08:dimension:8e4d0ca5c26999988216"
+          ],
+          "question": "Does the evidence characterize the regional map inputs themselves as Apollo-era?",
+          "decision_impact": "Checks the temporal qualification of the map inputs.",
+          "match_policy": "semantic_constraint",
+          "routes": [
+            "atoms",
+            "evidence",
+            "world"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p08:probe:dfc82fa956761ed0d3e0",
+          "claim_id": "p08:claim:d01a763cfbcb54acff80",
+          "kind": "entity_identity",
+          "dimension_ids": [
+            "p08:dimension:a2c89326d73603af102b"
+          ],
+          "question": "Does the evidence refer to the USGS Unified Geologic Map of the Moon through an exact mention, alias, unambiguous description or anaphora?",
+          "decision_impact": "Checks referential equivalence without requiring identical wording.",
+          "match_policy": "same_referent",
+          "routes": [
+            "atoms",
+            "evidence",
+            "world"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p08:probe:cf9b136940156dedde85",
+          "claim_id": "p08:claim:d01a763cfbcb54acff80",
+          "kind": "semantic_core",
+          "dimension_ids": [
+            "p08:dimension:2e83e629734c954b00bd",
+            "p08:dimension:cb30c491da2a808e2af9"
+          ],
+          "question": "Does the scoped evidence establish that the USGS Unified Geologic Map of the Moon was released?",
+          "decision_impact": "Checks the asserted release of the identified map.",
+          "match_policy": "semantic_constraint",
+          "routes": [
+            "atoms",
+            "evidence",
+            "world"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p08:probe:8cf412ca1386f24adb3c",
+          "claim_id": "p08:claim:d01a763cfbcb54acff80",
+          "kind": "time_boundary",
+          "dimension_ids": [
+            "p08:dimension:69a06508f32a5bfd698c"
+          ],
+          "question": "Does the evidence place the map's release in 2020, rather than merely dating another event or the source itself to that year?",
+          "decision_impact": "Checks that the year qualifies the release act.",
+          "match_policy": "semantic_constraint",
+          "routes": [
+            "atoms",
+            "evidence",
+            "world"
+          ],
+          "gate": "always"
+        }
+      ],
+      "notes": "The release date qualifies the release act. The combination of both inputs remains one claim; no exact-designation assertion is made.\nThe contract retains the target dimensions. Its and logic does not authorize a comparison relation probe; the map title identifies the subject rather than asserting a naming act."
+    },
+    "lineage": {
+      "schema_version": "decision-probe-v2",
+      "target_signature": "a948189abfe20066e0032b6a7e4009f857ae3933dfb93872475b7a6516a03230",
+      "plan_sha256": "15fa1edb52292d740e23a3b0e7132d54b79bf91bae128e83110d365bf3fb0101",
+      "stage": "lineage",
+      "logic": "and",
+      "claims": [
+        {
+          "id": "p08:claim:d01a763cfbcb54acff80",
+          "statement": "The USGS Unified Geologic Map of the Moon was released in 2020.",
+          "anchor": {
+            "start": 0,
+            "end": 58,
+            "quote": "The USGS Unified Geologic Map of the Moon released in 2020"
+          },
+          "role": "conjunct",
+          "dimensions": [
+            {
+              "id": "p08:dimension:cb30c491da2a808e2af9",
+              "kind": "subject",
+              "anchor": {
+                "start": 0,
+                "end": 41,
+                "quote": "The USGS Unified Geologic Map of the Moon"
+              }
+            },
+            {
+              "id": "p08:dimension:a2c89326d73603af102b",
+              "kind": "entity_identity",
+              "anchor": {
+                "start": 4,
+                "end": 41,
+                "quote": "USGS Unified Geologic Map of the Moon"
+              }
+            },
+            {
+              "id": "p08:dimension:2e83e629734c954b00bd",
+              "kind": "predicate",
+              "anchor": {
+                "start": 42,
+                "end": 50,
+                "quote": "released"
+              }
+            },
+            {
+              "id": "p08:dimension:69a06508f32a5bfd698c",
+              "kind": "time",
+              "anchor": {
+                "start": 51,
+                "end": 58,
+                "quote": "in 2020"
+              }
+            }
+          ],
+          "parent_claim_id": null
+        },
+        {
+          "id": "p08:claim:25759528c91e6b502892",
+          "statement": "The USGS Unified Geologic Map of the Moon combined six Apollo-era regional maps with newer lunar-mission data.",
+          "anchor": {
+            "start": 0,
+            "end": 127,
+            "quote": "The USGS Unified Geologic Map of the Moon released in 2020 combined six Apollo-era regional maps with newer lunar-mission data."
+          },
+          "role": "conjunct",
+          "dimensions": [
+            {
+              "id": "p08:dimension:4457fc9cba510c20eaa4",
+              "kind": "subject",
+              "anchor": {
+                "start": 0,
+                "end": 41,
+                "quote": "The USGS Unified Geologic Map of the Moon"
+              }
+            },
+            {
+              "id": "p08:dimension:3c6755f9a61e53251020",
+              "kind": "entity_identity",
+              "anchor": {
+                "start": 4,
+                "end": 41,
+                "quote": "USGS Unified Geologic Map of the Moon"
+              }
+            },
+            {
+              "id": "p08:dimension:b73c07129b12c4477fcc",
+              "kind": "predicate",
+              "anchor": {
+                "start": 59,
+                "end": 126,
+                "quote": "combined six Apollo-era regional maps with newer lunar-mission data"
+              }
+            },
+            {
+              "id": "p08:dimension:c082f4b8f0737d24ee40",
+              "kind": "entity_identity",
+              "anchor": {
+                "start": 68,
+                "end": 96,
+                "quote": "six Apollo-era regional maps"
+              }
+            },
+            {
+              "id": "p08:dimension:f61a0cd2f3245c384467",
+              "kind": "quantity_unit",
+              "anchor": {
+                "start": 68,
+                "end": 96,
+                "quote": "six Apollo-era regional maps"
+              }
+            },
+            {
+              "id": "p08:dimension:8e4d0ca5c26999988216",
+              "kind": "time",
+              "anchor": {
+                "start": 72,
+                "end": 82,
+                "quote": "Apollo-era"
+              }
+            },
+            {
+              "id": "p08:dimension:75319963721471b86c05",
+              "kind": "baseline_scope",
+              "anchor": {
+                "start": 102,
+                "end": 126,
+                "quote": "newer lunar-mission data"
+              }
+            },
+            {
+              "id": "p08:dimension:0c44b3d74f5088e213a6",
+              "kind": "entity_identity",
+              "anchor": {
+                "start": 102,
+                "end": 126,
+                "quote": "newer lunar-mission data"
+              }
+            }
+          ],
+          "parent_claim_id": null
+        }
+      ],
+      "probes": [
+        {
+          "id": "p08:probe:f18f8b7d651c09823049",
+          "claim_id": "p08:claim:25759528c91e6b502892",
+          "kind": "source_lineage",
+          "dimension_ids": [],
+          "question": "Within m15, what identifiable source or attribution chain supports the combination claim, including the map count, Apollo-era qualification and newer lunar-mission data?",
+          "decision_impact": "Checks the provenance of support for the complete claim within the permitted evidence scope.",
+          "match_policy": "semantic_constraint",
+          "routes": [
+            "lineage",
+            "world"
+          ],
+          "gate": "provenance"
+        },
+        {
+          "id": "p08:probe:f1ac287da766cafc46c7",
+          "claim_id": "p08:claim:d01a763cfbcb54acff80",
+          "kind": "source_lineage",
+          "dimension_ids": [],
+          "question": "Within m15, what identifiable source or attribution chain supports the map-release claim and its date?",
+          "decision_impact": "Checks the provenance of support within the permitted evidence scope.",
+          "match_policy": "semantic_constraint",
+          "routes": [
+            "lineage",
+            "world"
+          ],
+          "gate": "provenance"
+        }
+      ],
+      "notes": "The release date qualifies the release act. The combination of both inputs remains one claim; no exact-designation assertion is made.\nThe contract retains the target dimensions. Its and logic does not authorize a comparison relation probe; the map title identifies the subject rather than asserting a naming act."
+    },
+    "critic": {
+      "schema_version": "decision-probe-v2",
+      "target_signature": "a948189abfe20066e0032b6a7e4009f857ae3933dfb93872475b7a6516a03230",
+      "plan_sha256": "15fa1edb52292d740e23a3b0e7132d54b79bf91bae128e83110d365bf3fb0101",
+      "stage": "critic",
+      "logic": "and",
+      "claims": [
+        {
+          "id": "p08:claim:d01a763cfbcb54acff80",
+          "statement": "The USGS Unified Geologic Map of the Moon was released in 2020.",
+          "anchor": {
+            "start": 0,
+            "end": 58,
+            "quote": "The USGS Unified Geologic Map of the Moon released in 2020"
+          },
+          "role": "conjunct",
+          "dimensions": [
+            {
+              "id": "p08:dimension:cb30c491da2a808e2af9",
+              "kind": "subject",
+              "anchor": {
+                "start": 0,
+                "end": 41,
+                "quote": "The USGS Unified Geologic Map of the Moon"
+              }
+            },
+            {
+              "id": "p08:dimension:a2c89326d73603af102b",
+              "kind": "entity_identity",
+              "anchor": {
+                "start": 4,
+                "end": 41,
+                "quote": "USGS Unified Geologic Map of the Moon"
+              }
+            },
+            {
+              "id": "p08:dimension:2e83e629734c954b00bd",
+              "kind": "predicate",
+              "anchor": {
+                "start": 42,
+                "end": 50,
+                "quote": "released"
+              }
+            },
+            {
+              "id": "p08:dimension:69a06508f32a5bfd698c",
+              "kind": "time",
+              "anchor": {
+                "start": 51,
+                "end": 58,
+                "quote": "in 2020"
+              }
+            }
+          ],
+          "parent_claim_id": null
+        },
+        {
+          "id": "p08:claim:25759528c91e6b502892",
+          "statement": "The USGS Unified Geologic Map of the Moon combined six Apollo-era regional maps with newer lunar-mission data.",
+          "anchor": {
+            "start": 0,
+            "end": 127,
+            "quote": "The USGS Unified Geologic Map of the Moon released in 2020 combined six Apollo-era regional maps with newer lunar-mission data."
+          },
+          "role": "conjunct",
+          "dimensions": [
+            {
+              "id": "p08:dimension:4457fc9cba510c20eaa4",
+              "kind": "subject",
+              "anchor": {
+                "start": 0,
+                "end": 41,
+                "quote": "The USGS Unified Geologic Map of the Moon"
+              }
+            },
+            {
+              "id": "p08:dimension:3c6755f9a61e53251020",
+              "kind": "entity_identity",
+              "anchor": {
+                "start": 4,
+                "end": 41,
+                "quote": "USGS Unified Geologic Map of the Moon"
+              }
+            },
+            {
+              "id": "p08:dimension:b73c07129b12c4477fcc",
+              "kind": "predicate",
+              "anchor": {
+                "start": 59,
+                "end": 126,
+                "quote": "combined six Apollo-era regional maps with newer lunar-mission data"
+              }
+            },
+            {
+              "id": "p08:dimension:c082f4b8f0737d24ee40",
+              "kind": "entity_identity",
+              "anchor": {
+                "start": 68,
+                "end": 96,
+                "quote": "six Apollo-era regional maps"
+              }
+            },
+            {
+              "id": "p08:dimension:f61a0cd2f3245c384467",
+              "kind": "quantity_unit",
+              "anchor": {
+                "start": 68,
+                "end": 96,
+                "quote": "six Apollo-era regional maps"
+              }
+            },
+            {
+              "id": "p08:dimension:8e4d0ca5c26999988216",
+              "kind": "time",
+              "anchor": {
+                "start": 72,
+                "end": 82,
+                "quote": "Apollo-era"
+              }
+            },
+            {
+              "id": "p08:dimension:75319963721471b86c05",
+              "kind": "baseline_scope",
+              "anchor": {
+                "start": 102,
+                "end": 126,
+                "quote": "newer lunar-mission data"
+              }
+            },
+            {
+              "id": "p08:dimension:0c44b3d74f5088e213a6",
+              "kind": "entity_identity",
+              "anchor": {
+                "start": 102,
+                "end": 126,
+                "quote": "newer lunar-mission data"
+              }
+            }
+          ],
+          "parent_claim_id": null
+        }
+      ],
+      "probes": [
+        {
+          "id": "p08:probe:c2f959841ceeb949ccda",
+          "claim_id": "p08:claim:25759528c91e6b502892",
+          "kind": "baseline_scope",
+          "dimension_ids": [
+            "p08:dimension:75319963721471b86c05"
+          ],
+          "question": "Does the evidence establish that the lunar-mission data used in the combination are newer relative to the Apollo-era regional map inputs, rather than relative to an unrelated baseline?",
+          "decision_impact": "Checks the scope and temporal baseline of 'newer lunar-mission data'.",
+          "match_policy": "semantic_constraint",
+          "routes": [
+            "atoms",
+            "evidence",
+            "world"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p08:probe:847c57b1171a6845a51a",
+          "claim_id": "p08:claim:25759528c91e6b502892",
+          "kind": "entity_identity",
+          "dimension_ids": [
+            "p08:dimension:0c44b3d74f5088e213a6"
+          ],
+          "question": "Does the evidence identify the other input as the target's newer lunar-mission data through an exact mention, alias, unambiguous description or anaphora?",
+          "decision_impact": "Checks that the data input has the asserted lunar-mission referent.",
+          "match_policy": "same_referent",
+          "routes": [
+            "atoms",
+            "evidence",
+            "world"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p08:probe:e85be442ad0016d6da5e",
+          "claim_id": "p08:claim:25759528c91e6b502892",
+          "kind": "entity_identity",
+          "dimension_ids": [
+            "p08:dimension:3c6755f9a61e53251020"
+          ],
+          "question": "Is the map described as combining the inputs referentially equivalent to the USGS Unified Geologic Map of the Moon through an exact mention, alias, unambiguous description or anaphora?",
+          "decision_impact": "Checks that the combination concerns the target map.",
+          "match_policy": "same_referent",
+          "routes": [
+            "atoms",
+            "evidence",
+            "world"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p08:probe:39b2237712c39c850bd2",
+          "claim_id": "p08:claim:25759528c91e6b502892",
+          "kind": "entity_identity",
+          "dimension_ids": [
+            "p08:dimension:c082f4b8f0737d24ee40"
+          ],
+          "question": "Does the evidence identify the input maps as the target's six Apollo-era regional maps through an exact mention, alias, unambiguous description or anaphora?",
+          "decision_impact": "Checks the identity and regional-map character of the asserted map inputs.",
+          "match_policy": "same_referent",
+          "routes": [
+            "atoms",
+            "evidence",
+            "world"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p08:probe:8882c8c253784a35ff90",
+          "claim_id": "p08:claim:25759528c91e6b502892",
+          "kind": "quantity_unit",
+          "dimension_ids": [
+            "p08:dimension:f61a0cd2f3245c384467"
+          ],
+          "question": "Does the evidence specify six regional maps as inputs, counting maps rather than missions, datasets or another unit?",
+          "decision_impact": "Checks the asserted count and counted unit.",
+          "match_policy": "semantic_constraint",
+          "routes": [
+            "atoms",
+            "evidence",
+            "world"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p08:probe:76201a7635d1058d15f0",
+          "claim_id": "p08:claim:25759528c91e6b502892",
+          "kind": "semantic_core",
+          "dimension_ids": [
+            "p08:dimension:4457fc9cba510c20eaa4",
+            "p08:dimension:b73c07129b12c4477fcc"
+          ],
+          "question": "Does the scoped evidence establish that the identified map combined six Apollo-era regional maps with newer lunar-mission data, with both inputs participating in that combination?",
+          "decision_impact": "Checks the complete combination predicate rather than separate mentions of its inputs.",
+          "match_policy": "semantic_constraint",
+          "routes": [
+            "atoms",
+            "evidence",
+            "world"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p08:probe:f18f8b7d651c09823049",
+          "claim_id": "p08:claim:25759528c91e6b502892",
+          "kind": "source_lineage",
+          "dimension_ids": [],
+          "question": "Within m15, what identifiable source or attribution chain supports the combination claim, including the map count, Apollo-era qualification and newer lunar-mission data?",
+          "decision_impact": "Checks the provenance of support for the complete claim within the permitted evidence scope.",
+          "match_policy": "semantic_constraint",
+          "routes": [
+            "lineage",
+            "world"
+          ],
+          "gate": "provenance"
+        },
+        {
+          "id": "p08:probe:0c2940916590dd39508a",
+          "claim_id": "p08:claim:25759528c91e6b502892",
+          "kind": "time_boundary",
+          "dimension_ids": [
+            "p08:dimension:8e4d0ca5c26999988216"
+          ],
+          "question": "Does the evidence characterize the regional map inputs themselves as Apollo-era?",
+          "decision_impact": "Checks the temporal qualification of the map inputs.",
+          "match_policy": "semantic_constraint",
+          "routes": [
+            "atoms",
+            "evidence",
+            "world"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p08:probe:dfc82fa956761ed0d3e0",
+          "claim_id": "p08:claim:d01a763cfbcb54acff80",
+          "kind": "entity_identity",
+          "dimension_ids": [
+            "p08:dimension:a2c89326d73603af102b"
+          ],
+          "question": "Does the evidence refer to the USGS Unified Geologic Map of the Moon through an exact mention, alias, unambiguous description or anaphora?",
+          "decision_impact": "Checks referential equivalence without requiring identical wording.",
+          "match_policy": "same_referent",
+          "routes": [
+            "atoms",
+            "evidence",
+            "world"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p08:probe:cf9b136940156dedde85",
+          "claim_id": "p08:claim:d01a763cfbcb54acff80",
+          "kind": "semantic_core",
+          "dimension_ids": [
+            "p08:dimension:2e83e629734c954b00bd",
+            "p08:dimension:cb30c491da2a808e2af9"
+          ],
+          "question": "Does the scoped evidence establish that the USGS Unified Geologic Map of the Moon was released?",
+          "decision_impact": "Checks the asserted release of the identified map.",
+          "match_policy": "semantic_constraint",
+          "routes": [
+            "atoms",
+            "evidence",
+            "world"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p08:probe:f1ac287da766cafc46c7",
+          "claim_id": "p08:claim:d01a763cfbcb54acff80",
+          "kind": "source_lineage",
+          "dimension_ids": [],
+          "question": "Within m15, what identifiable source or attribution chain supports the map-release claim and its date?",
+          "decision_impact": "Checks the provenance of support within the permitted evidence scope.",
+          "match_policy": "semantic_constraint",
+          "routes": [
+            "lineage",
+            "world"
+          ],
+          "gate": "provenance"
+        },
+        {
+          "id": "p08:probe:8cf412ca1386f24adb3c",
+          "claim_id": "p08:claim:d01a763cfbcb54acff80",
+          "kind": "time_boundary",
+          "dimension_ids": [
+            "p08:dimension:69a06508f32a5bfd698c"
+          ],
+          "question": "Does the evidence place the map's release in 2020, rather than merely dating another event or the source itself to that year?",
+          "decision_impact": "Checks that the year qualifies the release act.",
+          "match_policy": "semantic_constraint",
+          "routes": [
+            "atoms",
+            "evidence",
+            "world"
+          ],
+          "gate": "always"
+        }
+      ],
+      "notes": "The release date qualifies the release act. The combination of both inputs remains one claim; no exact-designation assertion is made.\nThe contract retains the target dimensions. Its and logic does not authorize a comparison relation probe; the map title identifies the subject rather than asserting a naming act."
+    },
+    "evidence": {
+      "schema_version": "decision-probe-v2",
+      "target_signature": "a948189abfe20066e0032b6a7e4009f857ae3933dfb93872475b7a6516a03230",
+      "plan_sha256": "15fa1edb52292d740e23a3b0e7132d54b79bf91bae128e83110d365bf3fb0101",
+      "stage": "evidence",
+      "logic": "and",
+      "claims": [
+        {
+          "id": "p08:claim:d01a763cfbcb54acff80",
+          "statement": "The USGS Unified Geologic Map of the Moon was released in 2020.",
+          "anchor": {
+            "start": 0,
+            "end": 58,
+            "quote": "The USGS Unified Geologic Map of the Moon released in 2020"
+          },
+          "role": "conjunct",
+          "dimensions": [
+            {
+              "id": "p08:dimension:cb30c491da2a808e2af9",
+              "kind": "subject",
+              "anchor": {
+                "start": 0,
+                "end": 41,
+                "quote": "The USGS Unified Geologic Map of the Moon"
+              }
+            },
+            {
+              "id": "p08:dimension:a2c89326d73603af102b",
+              "kind": "entity_identity",
+              "anchor": {
+                "start": 4,
+                "end": 41,
+                "quote": "USGS Unified Geologic Map of the Moon"
+              }
+            },
+            {
+              "id": "p08:dimension:2e83e629734c954b00bd",
+              "kind": "predicate",
+              "anchor": {
+                "start": 42,
+                "end": 50,
+                "quote": "released"
+              }
+            },
+            {
+              "id": "p08:dimension:69a06508f32a5bfd698c",
+              "kind": "time",
+              "anchor": {
+                "start": 51,
+                "end": 58,
+                "quote": "in 2020"
+              }
+            }
+          ],
+          "parent_claim_id": null
+        },
+        {
+          "id": "p08:claim:25759528c91e6b502892",
+          "statement": "The USGS Unified Geologic Map of the Moon combined six Apollo-era regional maps with newer lunar-mission data.",
+          "anchor": {
+            "start": 0,
+            "end": 127,
+            "quote": "The USGS Unified Geologic Map of the Moon released in 2020 combined six Apollo-era regional maps with newer lunar-mission data."
+          },
+          "role": "conjunct",
+          "dimensions": [
+            {
+              "id": "p08:dimension:4457fc9cba510c20eaa4",
+              "kind": "subject",
+              "anchor": {
+                "start": 0,
+                "end": 41,
+                "quote": "The USGS Unified Geologic Map of the Moon"
+              }
+            },
+            {
+              "id": "p08:dimension:3c6755f9a61e53251020",
+              "kind": "entity_identity",
+              "anchor": {
+                "start": 4,
+                "end": 41,
+                "quote": "USGS Unified Geologic Map of the Moon"
+              }
+            },
+            {
+              "id": "p08:dimension:b73c07129b12c4477fcc",
+              "kind": "predicate",
+              "anchor": {
+                "start": 59,
+                "end": 126,
+                "quote": "combined six Apollo-era regional maps with newer lunar-mission data"
+              }
+            },
+            {
+              "id": "p08:dimension:c082f4b8f0737d24ee40",
+              "kind": "entity_identity",
+              "anchor": {
+                "start": 68,
+                "end": 96,
+                "quote": "six Apollo-era regional maps"
+              }
+            },
+            {
+              "id": "p08:dimension:f61a0cd2f3245c384467",
+              "kind": "quantity_unit",
+              "anchor": {
+                "start": 68,
+                "end": 96,
+                "quote": "six Apollo-era regional maps"
+              }
+            },
+            {
+              "id": "p08:dimension:8e4d0ca5c26999988216",
+              "kind": "time",
+              "anchor": {
+                "start": 72,
+                "end": 82,
+                "quote": "Apollo-era"
+              }
+            },
+            {
+              "id": "p08:dimension:75319963721471b86c05",
+              "kind": "baseline_scope",
+              "anchor": {
+                "start": 102,
+                "end": 126,
+                "quote": "newer lunar-mission data"
+              }
+            },
+            {
+              "id": "p08:dimension:0c44b3d74f5088e213a6",
+              "kind": "entity_identity",
+              "anchor": {
+                "start": 102,
+                "end": 126,
+                "quote": "newer lunar-mission data"
+              }
+            }
+          ],
+          "parent_claim_id": null
+        }
+      ],
+      "probes": [
+        {
+          "id": "p08:probe:c2f959841ceeb949ccda",
+          "claim_id": "p08:claim:25759528c91e6b502892",
+          "kind": "baseline_scope",
+          "dimension_ids": [
+            "p08:dimension:75319963721471b86c05"
+          ],
+          "question": "Does the evidence establish that the lunar-mission data used in the combination are newer relative to the Apollo-era regional map inputs, rather than relative to an unrelated baseline?",
+          "decision_impact": "Checks the scope and temporal baseline of 'newer lunar-mission data'.",
+          "match_policy": "semantic_constraint",
+          "routes": [
+            "atoms",
+            "evidence",
+            "world"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p08:probe:847c57b1171a6845a51a",
+          "claim_id": "p08:claim:25759528c91e6b502892",
+          "kind": "entity_identity",
+          "dimension_ids": [
+            "p08:dimension:0c44b3d74f5088e213a6"
+          ],
+          "question": "Does the evidence identify the other input as the target's newer lunar-mission data through an exact mention, alias, unambiguous description or anaphora?",
+          "decision_impact": "Checks that the data input has the asserted lunar-mission referent.",
+          "match_policy": "same_referent",
+          "routes": [
+            "atoms",
+            "evidence",
+            "world"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p08:probe:e85be442ad0016d6da5e",
+          "claim_id": "p08:claim:25759528c91e6b502892",
+          "kind": "entity_identity",
+          "dimension_ids": [
+            "p08:dimension:3c6755f9a61e53251020"
+          ],
+          "question": "Is the map described as combining the inputs referentially equivalent to the USGS Unified Geologic Map of the Moon through an exact mention, alias, unambiguous description or anaphora?",
+          "decision_impact": "Checks that the combination concerns the target map.",
+          "match_policy": "same_referent",
+          "routes": [
+            "atoms",
+            "evidence",
+            "world"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p08:probe:39b2237712c39c850bd2",
+          "claim_id": "p08:claim:25759528c91e6b502892",
+          "kind": "entity_identity",
+          "dimension_ids": [
+            "p08:dimension:c082f4b8f0737d24ee40"
+          ],
+          "question": "Does the evidence identify the input maps as the target's six Apollo-era regional maps through an exact mention, alias, unambiguous description or anaphora?",
+          "decision_impact": "Checks the identity and regional-map character of the asserted map inputs.",
+          "match_policy": "same_referent",
+          "routes": [
+            "atoms",
+            "evidence",
+            "world"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p08:probe:8882c8c253784a35ff90",
+          "claim_id": "p08:claim:25759528c91e6b502892",
+          "kind": "quantity_unit",
+          "dimension_ids": [
+            "p08:dimension:f61a0cd2f3245c384467"
+          ],
+          "question": "Does the evidence specify six regional maps as inputs, counting maps rather than missions, datasets or another unit?",
+          "decision_impact": "Checks the asserted count and counted unit.",
+          "match_policy": "semantic_constraint",
+          "routes": [
+            "atoms",
+            "evidence",
+            "world"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p08:probe:76201a7635d1058d15f0",
+          "claim_id": "p08:claim:25759528c91e6b502892",
+          "kind": "semantic_core",
+          "dimension_ids": [
+            "p08:dimension:4457fc9cba510c20eaa4",
+            "p08:dimension:b73c07129b12c4477fcc"
+          ],
+          "question": "Does the scoped evidence establish that the identified map combined six Apollo-era regional maps with newer lunar-mission data, with both inputs participating in that combination?",
+          "decision_impact": "Checks the complete combination predicate rather than separate mentions of its inputs.",
+          "match_policy": "semantic_constraint",
+          "routes": [
+            "atoms",
+            "evidence",
+            "world"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p08:probe:0c2940916590dd39508a",
+          "claim_id": "p08:claim:25759528c91e6b502892",
+          "kind": "time_boundary",
+          "dimension_ids": [
+            "p08:dimension:8e4d0ca5c26999988216"
+          ],
+          "question": "Does the evidence characterize the regional map inputs themselves as Apollo-era?",
+          "decision_impact": "Checks the temporal qualification of the map inputs.",
+          "match_policy": "semantic_constraint",
+          "routes": [
+            "atoms",
+            "evidence",
+            "world"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p08:probe:dfc82fa956761ed0d3e0",
+          "claim_id": "p08:claim:d01a763cfbcb54acff80",
+          "kind": "entity_identity",
+          "dimension_ids": [
+            "p08:dimension:a2c89326d73603af102b"
+          ],
+          "question": "Does the evidence refer to the USGS Unified Geologic Map of the Moon through an exact mention, alias, unambiguous description or anaphora?",
+          "decision_impact": "Checks referential equivalence without requiring identical wording.",
+          "match_policy": "same_referent",
+          "routes": [
+            "atoms",
+            "evidence",
+            "world"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p08:probe:cf9b136940156dedde85",
+          "claim_id": "p08:claim:d01a763cfbcb54acff80",
+          "kind": "semantic_core",
+          "dimension_ids": [
+            "p08:dimension:2e83e629734c954b00bd",
+            "p08:dimension:cb30c491da2a808e2af9"
+          ],
+          "question": "Does the scoped evidence establish that the USGS Unified Geologic Map of the Moon was released?",
+          "decision_impact": "Checks the asserted release of the identified map.",
+          "match_policy": "semantic_constraint",
+          "routes": [
+            "atoms",
+            "evidence",
+            "world"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p08:probe:8cf412ca1386f24adb3c",
+          "claim_id": "p08:claim:d01a763cfbcb54acff80",
+          "kind": "time_boundary",
+          "dimension_ids": [
+            "p08:dimension:69a06508f32a5bfd698c"
+          ],
+          "question": "Does the evidence place the map's release in 2020, rather than merely dating another event or the source itself to that year?",
+          "decision_impact": "Checks that the year qualifies the release act.",
+          "match_policy": "semantic_constraint",
+          "routes": [
+            "atoms",
+            "evidence",
+            "world"
+          ],
+          "gate": "always"
+        }
+      ],
+      "notes": "The release date qualifies the release act. The combination of both inputs remains one claim; no exact-designation assertion is made.\nThe contract retains the target dimensions. Its and logic does not authorize a comparison relation probe; the map title identifies the subject rather than asserting a naming act."
+    },
+    "world": {
+      "schema_version": "decision-probe-v2",
+      "target_signature": "a948189abfe20066e0032b6a7e4009f857ae3933dfb93872475b7a6516a03230",
+      "plan_sha256": "15fa1edb52292d740e23a3b0e7132d54b79bf91bae128e83110d365bf3fb0101",
+      "stage": "world",
+      "logic": "and",
+      "claims": [
+        {
+          "id": "p08:claim:d01a763cfbcb54acff80",
+          "statement": "The USGS Unified Geologic Map of the Moon was released in 2020.",
+          "anchor": {
+            "start": 0,
+            "end": 58,
+            "quote": "The USGS Unified Geologic Map of the Moon released in 2020"
+          },
+          "role": "conjunct",
+          "dimensions": [
+            {
+              "id": "p08:dimension:cb30c491da2a808e2af9",
+              "kind": "subject",
+              "anchor": {
+                "start": 0,
+                "end": 41,
+                "quote": "The USGS Unified Geologic Map of the Moon"
+              }
+            },
+            {
+              "id": "p08:dimension:a2c89326d73603af102b",
+              "kind": "entity_identity",
+              "anchor": {
+                "start": 4,
+                "end": 41,
+                "quote": "USGS Unified Geologic Map of the Moon"
+              }
+            },
+            {
+              "id": "p08:dimension:2e83e629734c954b00bd",
+              "kind": "predicate",
+              "anchor": {
+                "start": 42,
+                "end": 50,
+                "quote": "released"
+              }
+            },
+            {
+              "id": "p08:dimension:69a06508f32a5bfd698c",
+              "kind": "time",
+              "anchor": {
+                "start": 51,
+                "end": 58,
+                "quote": "in 2020"
+              }
+            }
+          ],
+          "parent_claim_id": null
+        },
+        {
+          "id": "p08:claim:25759528c91e6b502892",
+          "statement": "The USGS Unified Geologic Map of the Moon combined six Apollo-era regional maps with newer lunar-mission data.",
+          "anchor": {
+            "start": 0,
+            "end": 127,
+            "quote": "The USGS Unified Geologic Map of the Moon released in 2020 combined six Apollo-era regional maps with newer lunar-mission data."
+          },
+          "role": "conjunct",
+          "dimensions": [
+            {
+              "id": "p08:dimension:4457fc9cba510c20eaa4",
+              "kind": "subject",
+              "anchor": {
+                "start": 0,
+                "end": 41,
+                "quote": "The USGS Unified Geologic Map of the Moon"
+              }
+            },
+            {
+              "id": "p08:dimension:3c6755f9a61e53251020",
+              "kind": "entity_identity",
+              "anchor": {
+                "start": 4,
+                "end": 41,
+                "quote": "USGS Unified Geologic Map of the Moon"
+              }
+            },
+            {
+              "id": "p08:dimension:b73c07129b12c4477fcc",
+              "kind": "predicate",
+              "anchor": {
+                "start": 59,
+                "end": 126,
+                "quote": "combined six Apollo-era regional maps with newer lunar-mission data"
+              }
+            },
+            {
+              "id": "p08:dimension:c082f4b8f0737d24ee40",
+              "kind": "entity_identity",
+              "anchor": {
+                "start": 68,
+                "end": 96,
+                "quote": "six Apollo-era regional maps"
+              }
+            },
+            {
+              "id": "p08:dimension:f61a0cd2f3245c384467",
+              "kind": "quantity_unit",
+              "anchor": {
+                "start": 68,
+                "end": 96,
+                "quote": "six Apollo-era regional maps"
+              }
+            },
+            {
+              "id": "p08:dimension:8e4d0ca5c26999988216",
+              "kind": "time",
+              "anchor": {
+                "start": 72,
+                "end": 82,
+                "quote": "Apollo-era"
+              }
+            },
+            {
+              "id": "p08:dimension:75319963721471b86c05",
+              "kind": "baseline_scope",
+              "anchor": {
+                "start": 102,
+                "end": 126,
+                "quote": "newer lunar-mission data"
+              }
+            },
+            {
+              "id": "p08:dimension:0c44b3d74f5088e213a6",
+              "kind": "entity_identity",
+              "anchor": {
+                "start": 102,
+                "end": 126,
+                "quote": "newer lunar-mission data"
+              }
+            }
+          ],
+          "parent_claim_id": null
+        }
+      ],
+      "probes": [
+        {
+          "id": "p08:probe:c2f959841ceeb949ccda",
+          "claim_id": "p08:claim:25759528c91e6b502892",
+          "kind": "baseline_scope",
+          "dimension_ids": [
+            "p08:dimension:75319963721471b86c05"
+          ],
+          "question": "Does the evidence establish that the lunar-mission data used in the combination are newer relative to the Apollo-era regional map inputs, rather than relative to an unrelated baseline?",
+          "decision_impact": "Checks the scope and temporal baseline of 'newer lunar-mission data'.",
+          "match_policy": "semantic_constraint",
+          "routes": [
+            "atoms",
+            "evidence",
+            "world"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p08:probe:847c57b1171a6845a51a",
+          "claim_id": "p08:claim:25759528c91e6b502892",
+          "kind": "entity_identity",
+          "dimension_ids": [
+            "p08:dimension:0c44b3d74f5088e213a6"
+          ],
+          "question": "Does the evidence identify the other input as the target's newer lunar-mission data through an exact mention, alias, unambiguous description or anaphora?",
+          "decision_impact": "Checks that the data input has the asserted lunar-mission referent.",
+          "match_policy": "same_referent",
+          "routes": [
+            "atoms",
+            "evidence",
+            "world"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p08:probe:e85be442ad0016d6da5e",
+          "claim_id": "p08:claim:25759528c91e6b502892",
+          "kind": "entity_identity",
+          "dimension_ids": [
+            "p08:dimension:3c6755f9a61e53251020"
+          ],
+          "question": "Is the map described as combining the inputs referentially equivalent to the USGS Unified Geologic Map of the Moon through an exact mention, alias, unambiguous description or anaphora?",
+          "decision_impact": "Checks that the combination concerns the target map.",
+          "match_policy": "same_referent",
+          "routes": [
+            "atoms",
+            "evidence",
+            "world"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p08:probe:39b2237712c39c850bd2",
+          "claim_id": "p08:claim:25759528c91e6b502892",
+          "kind": "entity_identity",
+          "dimension_ids": [
+            "p08:dimension:c082f4b8f0737d24ee40"
+          ],
+          "question": "Does the evidence identify the input maps as the target's six Apollo-era regional maps through an exact mention, alias, unambiguous description or anaphora?",
+          "decision_impact": "Checks the identity and regional-map character of the asserted map inputs.",
+          "match_policy": "same_referent",
+          "routes": [
+            "atoms",
+            "evidence",
+            "world"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p08:probe:8882c8c253784a35ff90",
+          "claim_id": "p08:claim:25759528c91e6b502892",
+          "kind": "quantity_unit",
+          "dimension_ids": [
+            "p08:dimension:f61a0cd2f3245c384467"
+          ],
+          "question": "Does the evidence specify six regional maps as inputs, counting maps rather than missions, datasets or another unit?",
+          "decision_impact": "Checks the asserted count and counted unit.",
+          "match_policy": "semantic_constraint",
+          "routes": [
+            "atoms",
+            "evidence",
+            "world"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p08:probe:76201a7635d1058d15f0",
+          "claim_id": "p08:claim:25759528c91e6b502892",
+          "kind": "semantic_core",
+          "dimension_ids": [
+            "p08:dimension:4457fc9cba510c20eaa4",
+            "p08:dimension:b73c07129b12c4477fcc"
+          ],
+          "question": "Does the scoped evidence establish that the identified map combined six Apollo-era regional maps with newer lunar-mission data, with both inputs participating in that combination?",
+          "decision_impact": "Checks the complete combination predicate rather than separate mentions of its inputs.",
+          "match_policy": "semantic_constraint",
+          "routes": [
+            "atoms",
+            "evidence",
+            "world"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p08:probe:f18f8b7d651c09823049",
+          "claim_id": "p08:claim:25759528c91e6b502892",
+          "kind": "source_lineage",
+          "dimension_ids": [],
+          "question": "Within m15, what identifiable source or attribution chain supports the combination claim, including the map count, Apollo-era qualification and newer lunar-mission data?",
+          "decision_impact": "Checks the provenance of support for the complete claim within the permitted evidence scope.",
+          "match_policy": "semantic_constraint",
+          "routes": [
+            "lineage",
+            "world"
+          ],
+          "gate": "provenance"
+        },
+        {
+          "id": "p08:probe:0c2940916590dd39508a",
+          "claim_id": "p08:claim:25759528c91e6b502892",
+          "kind": "time_boundary",
+          "dimension_ids": [
+            "p08:dimension:8e4d0ca5c26999988216"
+          ],
+          "question": "Does the evidence characterize the regional map inputs themselves as Apollo-era?",
+          "decision_impact": "Checks the temporal qualification of the map inputs.",
+          "match_policy": "semantic_constraint",
+          "routes": [
+            "atoms",
+            "evidence",
+            "world"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p08:probe:dfc82fa956761ed0d3e0",
+          "claim_id": "p08:claim:d01a763cfbcb54acff80",
+          "kind": "entity_identity",
+          "dimension_ids": [
+            "p08:dimension:a2c89326d73603af102b"
+          ],
+          "question": "Does the evidence refer to the USGS Unified Geologic Map of the Moon through an exact mention, alias, unambiguous description or anaphora?",
+          "decision_impact": "Checks referential equivalence without requiring identical wording.",
+          "match_policy": "same_referent",
+          "routes": [
+            "atoms",
+            "evidence",
+            "world"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p08:probe:cf9b136940156dedde85",
+          "claim_id": "p08:claim:d01a763cfbcb54acff80",
+          "kind": "semantic_core",
+          "dimension_ids": [
+            "p08:dimension:2e83e629734c954b00bd",
+            "p08:dimension:cb30c491da2a808e2af9"
+          ],
+          "question": "Does the scoped evidence establish that the USGS Unified Geologic Map of the Moon was released?",
+          "decision_impact": "Checks the asserted release of the identified map.",
+          "match_policy": "semantic_constraint",
+          "routes": [
+            "atoms",
+            "evidence",
+            "world"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p08:probe:f1ac287da766cafc46c7",
+          "claim_id": "p08:claim:d01a763cfbcb54acff80",
+          "kind": "source_lineage",
+          "dimension_ids": [],
+          "question": "Within m15, what identifiable source or attribution chain supports the map-release claim and its date?",
+          "decision_impact": "Checks the provenance of support within the permitted evidence scope.",
+          "match_policy": "semantic_constraint",
+          "routes": [
+            "lineage",
+            "world"
+          ],
+          "gate": "provenance"
+        },
+        {
+          "id": "p08:probe:8cf412ca1386f24adb3c",
+          "claim_id": "p08:claim:d01a763cfbcb54acff80",
+          "kind": "time_boundary",
+          "dimension_ids": [
+            "p08:dimension:69a06508f32a5bfd698c"
+          ],
+          "question": "Does the evidence place the map's release in 2020, rather than merely dating another event or the source itself to that year?",
+          "decision_impact": "Checks that the year qualifies the release act.",
+          "match_policy": "semantic_constraint",
+          "routes": [
+            "atoms",
+            "evidence",
+            "world"
+          ],
+          "gate": "always"
+        }
+      ],
+      "notes": "The release date qualifies the release act. The combination of both inputs remains one claim; no exact-designation assertion is made.\nThe contract retains the target dimensions. Its and logic does not authorize a comparison relation probe; the map title identifies the subject rather than asserting a naming act."
+    }
+  }
+}

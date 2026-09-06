@@ -1,0 +1,60 @@
+{
+  "experiment": "original_staged_budget_development_v1",
+  "model": "gpt-6-astra",
+  "reasoning_effort": "medium",
+  "budget_per_case": {
+    "calls": 64,
+    "output_tokens": 64000,
+    "per_call_output_tokens": 4000,
+    "seconds": 900.0
+  },
+  "original_depth": 1,
+  "workers": 2,
+  "ordering_seed": 20260906,
+  "case_ids": [
+    "p01",
+    "p02",
+    "p03",
+    "p04",
+    "p05",
+    "p06",
+    "p07",
+    "p08"
+  ],
+  "scheduled_cases": 8,
+  "gold_read_during_inference": false,
+  "new_response_only": true,
+  "automatic_transport_retries": 0,
+  "dataset_status": "previously_seen_development_cases_not_hidden_benchmark",
+  "provider": "fixed eligible snapshots, no open-web collection",
+  "extractor": "unchanged original report-only label extractor; one call charged to case budget",
+  "staged_extractor_asymmetry": "staged uses a validated native decision without an extractor call",
+  "input_tokens_capped": false,
+  "actual_spend_equal": false,
+  "input_sha256": "4b1e1d3bbad7d72f77822aa8cf402e923db1af9d85df3b5c732a5279ac2fa825",
+  "source_sha256": {
+    "experiments/loop_compare.py": "5f0f7f9349522f76e55fe18f1f27a3600ee85e8d0dc5db29b5e410c14508cbf0",
+    "experiments/model_io.py": "e9e47716192142bc97c8e9113e7edbc77ce2b34c7af355a441327f93fc083b12",
+    "experiments/original_compare.py": "f51fa33b37d28045c1d0087b7acb73191b001fd19bfcb44612a1bee3caf883d9",
+    "experiments/semantic_adapter.py": "79c4b2395ab40ef8511d3afa1581933586258d5a7bf03188d083cba19e3b7a32",
+    "experiments/staged_baseline_run.py": "be82beadf662f65ab801fad9170b2700ac8a47169b206a5d79904a160aabf038",
+    "newsverify/__init__.py": "0ac9f5e7253a49739180448259a9dfe2dc85ab7537f23074481d449136b77c96",
+    "newsverify/__main__.py": "935a1c1166b0c1ea35a82256345000bf2c73ded718d77773bc27a71ecce28f7d",
+    "newsverify/cli.py": "8c810053cae5b605d46d4004fd92e8920ca6fcc9a813d205f68ed96bb73a515b",
+    "newsverify/comparison.py": "b35ddbb2e82a5a763aac31982f28c984ca50a242ecb07a1245128e09199279c5",
+    "newsverify/core.py": "8f148c272de3be772581dc78644411fa2b56d1eb809045ef6423620ac7a41d88",
+    "newsverify/decisions.py": "fe93d618b0f122591b39def16e952a4076c4fc66d69d81198c28489e245b4b3e",
+    "newsverify/evaluation.py": "2c971584562232d979fa9523c610b94a53c6d76a74940dbc58a581773c336e4f",
+    "newsverify/provenance.py": "8671ccb1066016a73d1f511622bbe52bcd442f2bcc4e82e6194d0c875f1dbb7f",
+    "newsverify/providers.py": "7cb362d1f89270e82b1b34590eecac607a43896a6bbe763c3b88b0254970b568",
+    "newsverify/retrieval.py": "0fac14ff28e05bb9b0df4d070584a627b09d98b02d7d29141e297e5f128b2321",
+    "newsverify/trace_demo.py": "960c78e0fc2aa2bb428dd13db59c3c8314c7e7ffe533d2fe64d80267474b1251"
+  },
+  "original_source_sha256": {
+    "agent/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "agent/core.py": "b168bf2ad605ef7d0ac44018bdd0bacce08b38c385be31d68523a42f36e8d093",
+    "agent/llm_client.py": "1536b8cdcf101f083ae79133a1e6ea1c3c633438730172c15abaaa7b0061b524",
+    "agent/models.py": "907c5a6fd0eb0a30d2a527198fbc0e6b684e3e53e0276a7bbfcf254ec99b2666",
+    "agent/prompts.py": "95637ab0a7364a73d9f3ca5402f67bd4604a93ae53f053ca84a5b4a672204859"
+  }
+}

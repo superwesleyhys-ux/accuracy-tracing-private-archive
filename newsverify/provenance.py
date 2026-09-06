@@ -8,11 +8,11 @@ default decomposer deliberately leaves provenance unresolved. All inputs are dat
 from __future__ import annotations
 
 from copy import deepcopy
-from dataclasses import asdict, dataclass
+from dataclasses import asdict, dataclass, fields, is_dataclass, replace
 from datetime import datetime, timezone
 import hashlib
 import json
-from typing import Iterable, Protocol
+from typing import Callable, Iterable, Protocol
 
 
 @dataclass(frozen=True)
@@ -21,6 +21,8 @@ class Target:
     text: str
     as_of: str
     source_version_id: str | None = None
+    assessment_mode: str = "world"
+    evidence_scope: tuple[str, ...] = ()
 
 
 @dataclass(frozen=True)
@@ -33,6 +35,20 @@ class MaterialVersion:
     available_at: str | None = None
     availability_basis: str | None = None
     issuer: str = "unknown"
+
+
+@dataclass(frozen=True)
+class RetrievalHit:
+    """One provider return attributed to one or more tasks issued this round.
+
+    Bare ``MaterialVersion`` returns remain valid in the legacy-compatible
+    runner mode.  A ``RetrievalHit`` always opts into attribution validation;
+    strict runner mode additionally requires every provider return to use this
+    envelope.
+    """
+
+    material: MaterialVersion
+    task_ids: tuple[str, ...]
 
 
 @dataclass(frozen=True)
@@ -50,6 +66,7 @@ class Fragment:
     span: Span
     parent_id: str
     qualifiers: tuple[str, ...] = ()
+    qualifier_spans: tuple[Span, ...] = ()
 
 
 @dataclass(frozen=True)
@@ -69,6 +86,14 @@ class Gap:
     id: str
     question: str
     stage: str = "provenance"
+    dimension: str = "auto"
+    blocking: bool = True
+    target_id: str | None = None
+    basis: tuple[Span, ...] = ()
+    decision_impact: str = ""
+    action: str = "search"
+    locator: str | None = None
+    probe_id: str | None = None
 
 
 @dataclass(frozen=True)
@@ -99,12 +124,43 @@ class Analysis:
 
 
 @dataclass(frozen=True)
+class ProbeAssessment:
+    """One grounded answer to one immutable decision probe in one layer."""
+
+    probe_id: str
+    claim_id: str
+    stage: str
+    status: str
+    basis: tuple[Span, ...]
+    rationale: str
+    referent_relation: str = "not_applicable"
+
+
+@dataclass(frozen=True)
+class ProbeStop:
+    """Auditable reason why one unresolved probe has no retrieval task."""
+
+    probe_id: str
+    stage: str
+    reason: str
+    rationale: str
+
+
+@dataclass(frozen=True)
 class VerificationResult:
     verdict: str = "unresolved"
     basis: tuple[Span, ...] = ()
     rationale: str = ""
     gaps: tuple[Gap, ...] = ()
     resolutions: tuple[Resolution, ...] = ()
+    evidence_verdict: str | None = None
+    world_verdict: str | None = None
+    world_basis: tuple[Span, ...] = ()
+    world_rationale: str = ""
+    evidence_probe_results: tuple[ProbeAssessment, ...] = ()
+    world_probe_results: tuple[ProbeAssessment, ...] = ()
+    strict_probe_followups: bool = False
+    probe_stops: tuple[ProbeStop, ...] = ()
 
 
 @dataclass(frozen=True)
@@ -112,11 +168,77 @@ class TraceConfig:
     max_rounds: int = 5
     max_documents: int = 30
     max_decomposition_calls: int = 30
+    experimental_force_rounds: bool = False
+
+
+@dataclass(frozen=True)
+class TraceCheckpoint:
+    """An isolated, in-memory continuation point after a successful verification.
+
+    ``state`` retains typed analyses and exact collection order. The checksum
+    detects accidental edits; this is not an authenticated interchange format.
+    Provider, decomposer, and verifier instances are deliberately not retained.
+    """
+
+    target: Target
+    config: TraceConfig
+    state: dict
+    schema_version: str = "experimental-round-checkpoint-v2"
+    sha256: str = ""
+
+
+def _checkpoint_value(value):
+    # Mapping order affects future contexts and search tasks, so encode mappings
+    # as ordered entries. Tagged tuples also preserve the origin graph's keys.
+    if is_dataclass(value) and not isinstance(value, type):
+        return {"type": type(value).__name__, "fields": {
+            field.name: _checkpoint_value(getattr(value, field.name)) for field in fields(value)}}
+    if isinstance(value, dict):
+        return {"mapping": [[_checkpoint_value(key), _checkpoint_value(item)]
+                            for key, item in value.items()]}
+    if isinstance(value, tuple):
+        return {"tuple": [_checkpoint_value(item) for item in value]}
+    if isinstance(value, (set, frozenset)):
+        items = [_checkpoint_value(item) for item in value]
+        return {"set": sorted(items, key=lambda item: json.dumps(item, sort_keys=True))}
+    if isinstance(value, list):
+        return [_checkpoint_value(item) for item in value]
+    if value is None or type(value) in (str, int, float, bool):
+        return value
+    raise ValueError(f"unsupported checkpoint value: {type(value).__name__}")
+
+
+def canonical_checkpoint_json(checkpoint: TraceCheckpoint) -> str:
+    """Return deterministic audit JSON, excluding the stored checksum itself.
+
+    This serialization is for inspection and hashing, not external resumption.
+    """
+    if not isinstance(checkpoint, TraceCheckpoint):
+        raise ValueError("checkpoint must be a TraceCheckpoint")
+    payload = {"schema_version": checkpoint.schema_version,
+               "target": _checkpoint_value(checkpoint.target),
+               "config": _checkpoint_value(checkpoint.config),
+               "state": _checkpoint_value(checkpoint.state)}
+    return json.dumps(payload, sort_keys=True, separators=(",", ":"), ensure_ascii=False, allow_nan=False)
+
+
+def checkpoint_sha256(checkpoint: TraceCheckpoint) -> str:
+    return hashlib.sha256(canonical_checkpoint_json(checkpoint).encode("utf-8")).hexdigest()
+
+
+_CHECKPOINT_STATE_KEYS = frozenset({
+    "materials", "eligible", "fingerprints", "current_analyses", "history", "verifications",
+    "operations", "observations", "errors", "initial", "gaps", "resolved", "verification_gaps",
+    "verification_resolved", "runtime_gaps", "fragments", "relations", "origins", "usage",
+    "fact_status", "decision_status", "assessments", "stop_reason", "fatal", "seen_structures",
+    "previous_structure", "has_verifier",
+    "gap_registry", "gap_owners", "strict_retrieval_attribution",
+})
 
 
 class TraceProvider(Protocol):
     def search(self, target: Target, tasks: tuple[Gap, ...], round_number: int,
-               limit: int) -> Iterable[MaterialVersion]: ...
+               limit: int) -> Iterable[MaterialVersion | RetrievalHit]: ...
 
 
 class Decomposer(Protocol):
@@ -223,19 +345,388 @@ def _basis(items, materials):
         _span(item, materials)
 
 
-def _gap(gap):
+def _gap(gap, target=None, materials=None):
     if not isinstance(gap, Gap):
         raise ValueError("invalid gap type")
     _nonempty(gap.id, "gap.id")
     _nonempty(gap.question, "gap.question")
     if gap.stage not in {"provenance", "verification"}:
         raise ValueError("gap.stage must be provenance or verification")
+    if gap.dimension not in {"auto", "provenance", "evidence", "world"}:
+        raise ValueError("invalid gap dimension")
+    if gap.dimension != "auto" and (gap.dimension == "provenance") != (gap.stage == "provenance"):
+        raise ValueError("gap stage and dimension disagree")
+    if type(gap.blocking) is not bool:
+        raise ValueError("gap.blocking must be boolean")
+    if target and gap.target_id is not None and gap.target_id != target.id:
+        raise ValueError("gap belongs to another target")
+    if gap.action not in {"fetch", "search", "reanalyse"}:
+        raise ValueError("invalid gap action")
+    if gap.action in {"fetch", "reanalyse"}:
+        _nonempty(gap.locator, "gap.locator")
+    if gap.probe_id is not None:
+        _nonempty(gap.probe_id, "gap.probe_id")
+    _tuple_of(gap.basis, Span, "gap.basis")
+    if materials is not None:
+        for span in gap.basis:
+            _span(span, materials)
+    if gap.dimension in {"evidence", "world"} and gap.blocking:
+        _nonempty(gap.decision_impact, "blocking gap decision_impact")
+        if not gap.basis:
+            raise ValueError("an explicit blocking gap needs a source basis")
+
+
+def gap_dimension(gap):
+    return ("provenance" if gap.stage == "provenance" else "world") if gap.dimension == "auto" else gap.dimension
+
+
+def select_assessments(check, target, gaps):
+    """One shared decision policy; preserve evidence findings even when world facts are unknown."""
+    evidence = check.evidence_verdict if check.evidence_verdict is not None else check.verdict
+    world = check.world_verdict if check.world_verdict is not None else check.verdict
+    result = {}
+    for dimension, raw in (("evidence", evidence), ("world", world)):
+        blockers = sorted(g.id for g in gaps if g.blocking and gap_dimension(g) == dimension)
+        result[dimension] = {"raw_verdict": raw, "decision": "unresolved" if blockers else raw,
+                             "blocking_gap_ids": blockers}
+    return result
 
 
 def _resolution(resolution, materials):
     _nonempty(resolution.gap_id, "resolution.gap_id")
     _nonempty(resolution.rationale, "resolution.rationale")
     _basis(resolution.basis, materials)
+
+
+def _probe_assessment(item, stage, materials):
+    if not isinstance(item, ProbeAssessment):
+        raise ValueError("invalid probe assessment type")
+    _nonempty(item.probe_id, "probe assessment probe_id")
+    _nonempty(item.claim_id, "probe assessment claim_id")
+    if item.stage != stage:
+        raise ValueError("probe assessment is stored in the wrong layer")
+    if item.status not in {"supported", "contradicted", "conflicting", "unresolved"}:
+        raise ValueError("invalid probe assessment status")
+    if item.referent_relation not in {"not_applicable", "exact", "alias", "description",
+                                      "anaphora", "ambiguous", "different", "unresolved"}:
+        raise ValueError("invalid probe referent relation")
+    _nonempty(item.rationale, "probe assessment rationale")
+    _tuple_of(item.basis, Span, "probe assessment basis")
+    for span in item.basis:
+        _span(span, materials)
+    if item.status != "unresolved" and not item.basis:
+        raise ValueError("conclusive probe assessment needs source basis")
+    if item.status == "conflicting" and len(item.basis) < 2:
+        raise ValueError("conflicting probe assessment needs at least two source passages")
+
+
+_PROBE_STOP_REASONS = {"no_source_lead", "corpus_exhausted", "budget_exhausted"}
+
+
+def _probe_stop(item):
+    if not isinstance(item, ProbeStop):
+        raise ValueError("invalid probe stop type")
+    _nonempty(item.probe_id, "probe stop probe_id")
+    if item.stage not in {"evidence", "world"}:
+        raise ValueError("probe stop stage must be evidence or world")
+    if item.reason not in _PROBE_STOP_REASONS:
+        raise ValueError("invalid probe stop reason")
+    _nonempty(item.rationale, "probe stop rationale")
+
+
+def _retrieval_return(value, issued_tasks, strict):
+    """Validate and unwrap one provider return before material processing."""
+    if isinstance(value, RetrievalHit):
+        if not isinstance(value.material, MaterialVersion):
+            raise ValueError("retrieval hit material must be a MaterialVersion")
+        if (not isinstance(value.task_ids, tuple) or not value.task_ids or
+                any(not isinstance(item, str) or not item.strip()
+                    for item in value.task_ids)):
+            raise ValueError("retrieval hit task_ids must be a nonempty tuple of task IDs")
+        if len(value.task_ids) != len(set(value.task_ids)):
+            raise ValueError("retrieval hit contains duplicate task attribution")
+        unknown = [item for item in value.task_ids if item not in issued_tasks]
+        if unknown:
+            raise ValueError("retrieval hit references a task not issued in this round: " +
+                             ", ".join(unknown))
+        probe_ids = tuple(dict.fromkeys(
+            issued_tasks[item].probe_id for item in value.task_ids
+            if issued_tasks[item].probe_id is not None))
+        return value.material, value.task_ids, probe_ids, True
+    if not isinstance(value, MaterialVersion):
+        raise ValueError("provider must yield MaterialVersion or RetrievalHit objects")
+    if strict:
+        raise ValueError("strict retrieval attribution requires RetrievalHit objects")
+    return value, (), (), False
+
+
+def _verification_record(check):
+    """Keep legacy histories byte-shaped unless strict follow-ups are enabled."""
+    record = asdict(check)
+    if not check.strict_probe_followups:
+        record.pop("strict_probe_followups")
+        record.pop("probe_stops")
+    return record
+
+
+def _strict_followup_projection(check, candidate_verify_gaps, current_probe_results,
+                                superseded_gap_ids=()):
+    """Validate strict probe/task XOR and apply explicit no-task stops.
+
+    A stop ends any older active task for the same layer/probe without claiming
+    an evidence resolution.  It remains auditable in verification history.
+    """
+    if type(check.strict_probe_followups) is not bool:
+        raise ValueError("strict_probe_followups must be boolean")
+    _tuple_of(check.probe_stops, ProbeStop, "probe_stops")
+    stops = {}
+    for item in check.probe_stops:
+        _probe_stop(item)
+        key = (item.stage, item.probe_id)
+        if key in stops:
+            raise ValueError("duplicate probe stop in one verification result")
+        stops[key] = item
+    if not check.strict_probe_followups:
+        if stops:
+            raise ValueError("probe stops require strict_probe_followups")
+        return candidate_verify_gaps, {}
+
+    current_gap_ids = set()
+    current_gap_keys = set()
+    superseded_gap_ids = set(superseded_gap_ids)
+    for gap in check.gaps:
+        if gap.id in current_gap_ids:
+            raise ValueError("duplicate strict follow-up gap ID")
+        if gap.id in superseded_gap_ids:
+            raise ValueError("a superseded strict follow-up gap ID cannot be reactivated")
+        current_gap_ids.add(gap.id)
+        if gap.probe_id is None or gap.dimension not in {"evidence", "world"}:
+            raise ValueError(
+                "strict verification follow-up gaps need an explicit layer and probe_id")
+        key = (gap.dimension, gap.probe_id)
+        if key not in current_probe_results:
+            raise ValueError("strict verification gap references an unassessed layer/probe")
+        if current_probe_results[key].status != "unresolved":
+            raise ValueError("conclusive probes cannot retain a gap or stop")
+        if key in current_gap_keys:
+            raise ValueError("duplicate strict follow-up gap for one layer/probe")
+        if key in stops:
+            raise ValueError("an unresolved probe cannot have both a gap and a stop")
+        current_gap_keys.add(key)
+    for key in stops:
+        if key not in current_probe_results:
+            raise ValueError("probe stop references an unassessed layer/probe")
+
+    # A newly emitted task atomically supersedes any older active task in the
+    # same (layer, probe) slot.  The lifecycle identity may legitimately gain a
+    # new ID/action/locator as new source leads arrive.  Cross-layer tasks are
+    # distinct slots and are never replaced here.  Supersession is not an
+    # evidence-bearing Resolution: both definitions remain in the registry and
+    # the transition is retained in the operation audit.
+    new_gaps_by_slot = {
+        (gap.dimension, gap.probe_id): gap for gap in check.gaps
+    }
+    superseded_prior_gaps = []
+    for gap_id, gap in list(candidate_verify_gaps.items()):
+        key = (gap_dimension(gap), gap.probe_id) if gap.probe_id is not None else None
+        replacement = new_gaps_by_slot.get(key)
+        if replacement is not None and replacement.id != gap_id:
+            candidate_verify_gaps.pop(gap_id)
+            superseded_prior_gaps.append({
+                "stage": key[0], "probe_id": key[1],
+                "prior_gap_id": gap_id, "replacement_gap_id": replacement.id,
+            })
+
+    # A current stop likewise replaces older active search tasks for the same
+    # probe but does not fabricate an evidence-bearing Resolution.
+    stopped_gap_ids = []
+    for gap_id, gap in list(candidate_verify_gaps.items()):
+        key = (gap_dimension(gap), gap.probe_id) if gap.probe_id is not None else None
+        if key in stops:
+            candidate_verify_gaps.pop(gap_id)
+            stopped_gap_ids.append(gap_id)
+
+    layer_verdicts = {
+        "evidence": (check.evidence_verdict
+                     if check.evidence_verdict is not None else check.verdict),
+        "world": (check.world_verdict
+                  if check.world_verdict is not None else check.verdict),
+    }
+    active_by_probe = {}
+    for gap in candidate_verify_gaps.values():
+        if gap.probe_id is None or gap.dimension not in {"evidence", "world"}:
+            raise ValueError(
+                "strict active verification gaps need an explicit layer and probe_id")
+        expected_blocking = layer_verdicts[gap.dimension] == "unresolved"
+        if gap.blocking is not expected_blocking:
+            raise ValueError(
+                "strict probe follow-up blocking must match whether its layer is unresolved")
+        key = (gap.dimension, gap.probe_id)
+        if key not in current_probe_results:
+            raise ValueError("strict active gap references an unassessed layer/probe")
+        active_by_probe.setdefault(key, []).append(gap.id)
+
+    for key, assessment in current_probe_results.items():
+        gap_ids = active_by_probe.get(key, [])
+        has_stop = key in stops
+        if assessment.status == "unresolved":
+            if (len(gap_ids) == 1) == has_stop:
+                raise ValueError(
+                    "each unresolved probe needs exactly one active gap or one stop")
+        elif gap_ids or has_stop:
+            raise ValueError("conclusive probes cannot retain a gap or stop")
+    return candidate_verify_gaps, {
+        "active": [{"stage": stage, "probe_id": probe_id,
+                    "gap_id": gap_ids[0],
+                    "blocking": candidate_verify_gaps[gap_ids[0]].blocking}
+                   for (stage, probe_id), gap_ids in sorted(active_by_probe.items())],
+        "stops": [asdict(item) for _, item in sorted(stops.items())],
+        "stopped_prior_gap_ids": sorted(stopped_gap_ids),
+        "superseded_prior_gaps": sorted(
+            superseded_prior_gaps,
+            key=lambda item: (item["stage"], item["probe_id"],
+                              item["prior_gap_id"], item["replacement_gap_id"])),
+    }
+
+
+def _index_findings(items, kind):
+    """Shared IDs denote exactly equal findings; conflicting definitions fail.
+
+    Revisions are permitted by replacing the submitting owner's analysis before
+    building this index. Equal shared findings are deliberately deduplicated.
+    """
+    indexed = {}
+    for item in items:
+        if item.id in indexed and indexed[item.id] != item:
+            raise ValueError(f"conflicting {kind} id: {item.id}")
+        indexed[item.id] = item
+    return indexed
+
+
+def _gap_identity(gap, target):
+    # Description and source support may improve within an owner's revisions;
+    # an ID must never silently become a task in another lifecycle or scope.
+    return (gap.stage, gap_dimension(gap), gap.target_id or target.id,
+            gap.action, gap.locator, gap.probe_id)
+
+
+def _register_gaps(registry, owners, items, owner, target):
+    updated, updated_owners = dict(registry), {key: set(value) for key, value in owners.items()}
+    for item in _index_findings(items, "gap").values():
+        previous = updated.get(item.id)
+        if previous is not None:
+            if _gap_identity(previous, target) != _gap_identity(item, target):
+                raise ValueError(f"conflicting gap lifecycle identity: {item.id}")
+            if previous != item and owner not in updated_owners[item.id]:
+                raise ValueError(f"conflicting gap id across owners: {item.id}")
+        updated[item.id] = item
+        updated_owners.setdefault(item.id, set()).add(owner)
+    return updated, updated_owners
+
+
+def _validate_resolution_references(resolutions, registry, stage):
+    for item in resolutions:
+        known = registry.get(item.gap_id)
+        if known is None:
+            raise ValueError(f"resolution references unknown gap: {item.gap_id}")
+        if stage == "verification" and (known.stage != "verification"
+                                          or gap_dimension(known) not in {"evidence", "world"}):
+            raise ValueError(f"verifier may not resolve provenance gaps: {item.gap_id}")
+
+
+def _combine_resolutions(items):
+    # A gap ID is a reference, not ownership of a resolution finding. Different
+    # materials may independently supply valid closure evidence for one task.
+    by_gap = {}
+    for item in items:
+        by_gap.setdefault(item.gap_id, []).append(item)
+    combined = {}
+    for gap_id, contributions in by_gap.items():
+        basis = {span for item in contributions for span in item.basis}
+        rationales = {item.rationale for item in contributions}
+        combined[gap_id] = Resolution(gap_id,
+            tuple(sorted(basis, key=lambda span: (span.version_id, span.start, span.end, span.quote))),
+            "\n".join(sorted(rationales)))
+    return combined
+
+
+_LINEAGE_KINDS = {"quotes", "cites", "reprints", "translates", "derives"}
+
+
+def _record_value(record, name):
+    return record.get(name) if isinstance(record, dict) else getattr(record, name)
+
+
+def _evidenced_lineage_versions(source_version_id, materials, relations, *,
+                                 include_declared_matches=False):
+    """Return versions reachable from the target source through propagation edges.
+
+    A declared source-side locator may be used by a semantic stage to decide
+    whether a newly arrived material is a plausible target-level origin. It is
+    not promoted to a confirmed graph edge: final report roots still require a
+    validated direct relation.
+    """
+    by_version = {_record_value(item, "version_id"): item for item in materials}
+    if source_version_id not in by_version:
+        return frozenset()
+    adjacency = {}
+    for edge in relations:
+        if _record_value(edge, "kind") not in _LINEAGE_KINDS:
+            continue
+        origin = _record_value(edge, "from_version")
+        if origin not in by_version:
+            continue
+        destination = None
+        status = _record_value(edge, "status")
+        if status == "direct":
+            candidate = _record_value(edge, "to_version")
+            if candidate in by_version:
+                destination = candidate
+        elif (include_declared_matches and status == "declared"
+              and _record_value(edge, "to_version") is None):
+            locator = _record_value(edge, "upstream_locator")
+            matches = [version for version, material in by_version.items()
+                       if locator and locator in (version, _record_value(material, "url"))]
+            if len(matches) == 1:
+                destination = matches[0]
+        if destination is not None:
+            adjacency.setdefault(origin, set()).add(destination)
+    reached, pending = set(), [source_version_id]
+    while pending:
+        version = pending.pop()
+        if version in reached:
+            continue
+        reached.add(version)
+        pending.extend(adjacency.get(version, ()))
+    return frozenset(reached)
+
+
+def _terminal_origin_candidates(source_version_id, materials, relations, candidates):
+    """Return confirmed terminal roots and whether any candidate chain is incomplete.
+
+    Candidate declarations remain part of their raw analyses. A candidate is
+    confirmed only when the target source reaches it through direct documentary
+    propagation. A reachable candidate is terminal only when it cannot reach a
+    different reachable candidate. This removes intermediate "original" records
+    while preserving independent parallel roots. Disconnected candidates and
+    reachable candidate cycles without a terminal root remain explicit gaps.
+    """
+    material_items, relation_items = tuple(materials), tuple(relations)
+    reached = _evidenced_lineage_versions(source_version_id, material_items,
+                                           relation_items)
+    reachable = {key: item for key, item in candidates.items()
+                 if item.version_id in reached}
+    candidate_versions = {item.version_id for item in reachable.values()}
+    downstream = {key: _evidenced_lineage_versions(
+        item.version_id, material_items, relation_items)
+        for key, item in reachable.items()}
+    terminal = {key: item for key, item in reachable.items()
+                if not ((downstream[key] - {item.version_id}) & candidate_versions)}
+    terminal_versions = {item.version_id for item in terminal.values()}
+    disconnected = len(reachable) != len(candidates)
+    nonterminating = any(not (versions & terminal_versions)
+                         for versions in downstream.values())
+    return terminal, disconnected or nonterminating
 
 
 def _validate_analysis(analysis, target, material, materials):
@@ -246,6 +737,8 @@ def _validate_analysis(analysis, target, material, materials):
         _tuple_of(getattr(analysis, name), cls, name)
     if not isinstance(analysis.notes, str):
         raise ValueError("analysis.notes must be a string")
+    for name in ("fragments", "relations", "gaps"):
+        _index_findings(getattr(analysis, name), name.rstrip("s"))
     _tuple_of(analysis.revisit_versions, str, "revisit_versions")
     if any(version not in materials for version in analysis.revisit_versions):
         raise ValueError("revisit_versions must refer to available material versions")
@@ -254,6 +747,17 @@ def _validate_analysis(analysis, target, material, materials):
             _nonempty(getattr(fragment, name), f"fragment.{name}")
         _span(fragment.span, materials)
         _tuple_of(fragment.qualifiers, str, "qualifiers")
+        _tuple_of(fragment.qualifier_spans, Span, "qualifier_spans")
+        for span in fragment.qualifier_spans:
+            _span(span, materials)
+    parents = {item.id: item.parent_id for item in analysis.fragments}
+    for fragment in analysis.fragments:
+        cursor, seen = fragment.id, set()
+        while cursor != target.id:
+            if cursor in seen or cursor not in parents:
+                raise ValueError("fragment parents must form an acyclic path to target")
+            seen.add(cursor)
+            cursor = parents[cursor]
     for edge in analysis.relations:
         _nonempty(edge.id, "relation.id")
         _nonempty(edge.rationale, "relation.rationale")
@@ -273,7 +777,7 @@ def _validate_analysis(analysis, target, material, materials):
         if edge.status == "direct" and edge.to_version is None:
             raise ValueError("direct relation requires an available upstream version")
     for gap in analysis.gaps:
-        _gap(gap)
+        _gap(gap, target, materials)
     for resolution in analysis.resolutions:
         _resolution(resolution, materials)
     for origin in analysis.origins:
@@ -289,26 +793,84 @@ def _validate_analysis(analysis, target, material, materials):
 
 def run_provenance(target: Target | dict, provider: TraceProvider,
                    decomposer: Decomposer | None = None, verifier: Verifier | None = None,
-                   config: TraceConfig | dict | None = None) -> dict:
+                   config: TraceConfig | dict | None = None, *,
+                   checkpoint: TraceCheckpoint | None = None,
+                   checkpoint_callback: Callable[[TraceCheckpoint], None] | None = None,
+                   strict_retrieval_attribution: bool = False) -> dict:
     """Run a bounded trace. Provider/analysis errors are audited and fail unresolved.
 
     Historical eligibility needs an explicit, evidenced ``available_at`` for the
     exact version. ``published_at`` alone never proves historical availability.
     A late retrieval of an evidenced old version is allowed; there is no age cap.
     All returned valid versions, including duplicates/ineligible ones, visit psi.
+
+    Experimental checkpoints retain all runner state after a verified round and
+    before its terminal stop event. Resumption starts at the next round without
+    rerunning the prefix. Explicit continuation config may change round limits
+    and forced stopping behavior, but must retain the shared document and
+    decomposition budgets. Omitting config inherits the checkpoint's config.
+    Callbacks receive isolated copies; callback exceptions propagate to callers.
+    Forced rounds still stop on empty retrieval, fatal errors, and any budget.
+    Strict retrieval attribution requires each provider return to be a
+    ``RetrievalHit`` tied only to tasks issued in that exact round.  The keyword
+    is outside ``TraceConfig`` so legacy v1-v3 serialized run configurations
+    remain unchanged.
     """
-    target = Target(**target) if isinstance(target, dict) else target
+    if isinstance(target, dict):
+        raw_target = dict(target)
+        if isinstance(raw_target.get("evidence_scope"), list):
+            raw_target["evidence_scope"] = tuple(raw_target["evidence_scope"])
+        target = Target(**raw_target)
+    if checkpoint is not None and not isinstance(checkpoint, TraceCheckpoint):
+        raise ValueError("checkpoint must be a TraceCheckpoint")
+    if checkpoint_callback is not None and not callable(checkpoint_callback):
+        raise ValueError("checkpoint_callback must be callable")
+    if type(strict_retrieval_attribution) is not bool:
+        raise ValueError("strict_retrieval_attribution must be boolean")
+    if config is None and checkpoint is not None:
+        config = checkpoint.config
     config = TraceConfig(**config) if isinstance(config, dict) else (config or TraceConfig())
     if not isinstance(target, Target) or not isinstance(config, TraceConfig):
         raise ValueError("invalid target or config type")
     _nonempty(target.id, "target.id")
     _nonempty(target.text, "target.text")
+    if target.assessment_mode not in {"evidence", "world"}:
+        raise ValueError("assessment_mode must be evidence or world")
+    _tuple_of(target.evidence_scope, str, "evidence_scope")
+    if len(set(target.evidence_scope)) != len(target.evidence_scope):
+        raise ValueError("duplicate evidence_scope version")
     if target.source_version_id is not None:
         _nonempty(target.source_version_id, "target.source_version_id")
     cutoff = _time(target.as_of, "target.as_of")
     for name in ("max_rounds", "max_documents", "max_decomposition_calls"):
         if type(getattr(config, name)) is not int or getattr(config, name) < 1:
             raise ValueError(f"{name} must be a positive integer")
+    if type(config.experimental_force_rounds) is not bool:
+        raise ValueError("experimental_force_rounds must be boolean")
+    saved = None
+    if checkpoint is not None:
+        if checkpoint.target != target:
+            raise ValueError("checkpoint target mismatch")
+        if checkpoint.schema_version != "experimental-round-checkpoint-v2":
+            raise ValueError("unsupported checkpoint schema version; v2 requires historical gap registration; regenerate the verified prefix")
+        if not isinstance(checkpoint.config, TraceConfig) or not isinstance(checkpoint.state, dict):
+            raise ValueError("invalid checkpoint config or state")
+        if checkpoint.sha256 != checkpoint_sha256(checkpoint):
+            raise ValueError("checkpoint integrity checksum mismatch")
+        if set(checkpoint.state) != _CHECKPOINT_STATE_KEYS:
+            raise ValueError("invalid checkpoint state fields")
+        if checkpoint.state["strict_retrieval_attribution"] is not strict_retrieval_attribution:
+            raise ValueError("checkpoint continuation must preserve strict retrieval attribution")
+        for name in ("max_documents", "max_decomposition_calls"):
+            if getattr(config, name) != getattr(checkpoint.config, name):
+                raise ValueError(f"checkpoint continuation must preserve {name}")
+        saved = deepcopy(checkpoint.state)
+        if saved["fatal"] or not saved["verifications"] or not saved["has_verifier"]:
+            raise ValueError("checkpoint must follow a successful verification")
+        if verifier is None:
+            raise ValueError("checkpoint continuation requires a verifier")
+        if config.max_rounds < saved["usage"]["rounds"]:
+            raise ValueError("max_rounds is below the checkpoint round")
     decomposer = decomposer or ConservativeDecomposer()
     materials = {}
     eligible = {}
@@ -320,6 +882,8 @@ def run_provenance(target: Target | dict, provider: TraceProvider,
     observations = []
     errors = []
     initial = Gap("origin:" + target.id, "Find the producing record and evidenced lineage for: " + target.text)
+    gap_registry = {initial.id: initial}
+    gap_owners = {initial.id: {"runner"}}
     gaps = {initial.id: initial}
     resolved = {}
     verification_gaps = {}
@@ -330,126 +894,291 @@ def run_provenance(target: Target | dict, provider: TraceProvider,
     origins = {}
     usage = {"rounds": 0, "documents": 0, "unique_versions": 0, "decomposition_calls": 0, "verification_calls": 0}
     fact_status = "not_checked" if verifier is None else "unresolved"
+    decision_status = fact_status
+    assessments = None
     stop_reason = "round_budget"
     fatal = False
+    current_round_returns = []
+
+    if saved is not None:
+        materials = saved["materials"]
+        eligible = saved["eligible"]
+        fingerprints = saved["fingerprints"]
+        current_analyses = saved["current_analyses"]
+        history = saved["history"]
+        verifications = saved["verifications"]
+        operations = saved["operations"]
+        observations = saved["observations"]
+        errors = saved["errors"]
+        initial = saved["initial"]
+        gap_registry = saved["gap_registry"]
+        gap_owners = saved["gap_owners"]
+        gaps = saved["gaps"]
+        resolved = saved["resolved"]
+        verification_gaps = saved["verification_gaps"]
+        verification_resolved = saved["verification_resolved"]
+        runtime_gaps = saved["runtime_gaps"]
+        fragments = saved["fragments"]
+        relations = saved["relations"]
+        origins = saved["origins"]
+        usage = saved["usage"]
+        fact_status = saved["fact_status"]
+        decision_status = saved["decision_status"]
+        assessments = saved["assessments"]
+        if usage["rounds"] >= config.max_rounds:
+            # A no-op resume reproduces the completed prefix's terminal reason.
+            stop_reason = saved["stop_reason"]
+
+    # Superseded task IDs are permanent tombstones.  Reconstruct them from the
+    # append-only operation audit so checkpoint resumes preserve the rule
+    # without extending the frozen checkpoint schema.
+    superseded_gap_ids = set()
+    for operation in operations:
+        if not isinstance(operation, dict) or operation.get(
+                "action") != "probe_followups_validated":
+            continue
+        # Pre-supersession v2 checkpoints could contain strict follow-up events
+        # without this field; those runs could not have accepted a replacement,
+        # so the compatible reconstruction is an empty transition list.
+        transitions = operation.get("superseded_prior_gaps", [])
+        if not isinstance(transitions, list):
+            raise ValueError("invalid superseded follow-up lifecycle audit")
+        for transition in transitions:
+            if (not isinstance(transition, dict) or set(transition) != {
+                    "stage", "probe_id", "prior_gap_id", "replacement_gap_id"} or
+                    transition.get("stage") not in {"evidence", "world"} or
+                    any(not isinstance(transition.get(key), str) or
+                        not transition[key].strip()
+                        for key in ("probe_id", "prior_gap_id", "replacement_gap_id")) or
+                    transition["prior_gap_id"] == transition["replacement_gap_id"] or
+                    transition["prior_gap_id"] in superseded_gap_ids):
+                raise ValueError("invalid superseded follow-up lifecycle audit")
+            superseded_gap_ids.add(transition["prior_gap_id"])
 
     def event(action, **values):
         operations.append({"sequence": len(operations) + 1, "round": usage["rounds"], "action": action, **values})
 
     def context():
-        return deepcopy({
+        payload = {
             "target": asdict(target), "materials": [asdict(item) for item in eligible.values()],
             "analyses": {key: asdict(item) for key, item in current_analyses.items()},
             "fragments": [asdict(item) for item in fragments.values()],
             "relations": [asdict(item) for item in relations.values()],
             "origins": [asdict(item) for item in origins.values()],
             "gaps": [asdict(item) for item in gaps.values()],
+            "gap_registry": [asdict(item) for item in gap_registry.values()],
+            "resolutions": [asdict(item) for item in resolved.values()],
             "verification_history": deepcopy(verifications), "usage": dict(usage),
-        })
+            "assessments": deepcopy(assessments),
+        }
+        # Strict routing exposes an immutable snapshot of every provider return
+        # attributed in this round.  The verifier can therefore audit whether
+        # its new material came from a frozen round-start task, without
+        # reconstructing ownership from active gaps that decomposition may have
+        # since changed.  Preserve the legacy prompt shape outside strict mode.
+        if strict_retrieval_attribution:
+            payload["current_round_returns"] = deepcopy(current_round_returns)
+        return deepcopy(payload)
+
+    def project(analyses, available, registry, owners, verify_gaps, verify_resolved,
+                updated_owner=None, verification_update=None):
+        """Build and validate a candidate without modifying any accepted state."""
+        projected_fragments = _index_findings(
+            (item for analysis in analyses.values() for item in analysis.fragments), "fragment")
+        projected_relations = _index_findings(
+            (item for analysis in analyses.values() for item in analysis.relations), "relation")
+        candidate_origins = {}
+        proposed_gaps = _index_findings(
+            [initial, *runtime_gaps.values(),
+             *(item for analysis in analyses.values() for item in analysis.gaps),
+             *verify_gaps.values()], "gap")
+        # A fresh verifier request reopens its task. An older psi resolution
+        # cannot silently close it again just because another owner is updated.
+        analysis_rounds = {entry["version_id"]: entry["round"] for entry in history if entry["accepted"]}
+        if updated_owner is not None:
+            analysis_rounds[updated_owner] = usage["rounds"]
+        reopened_rounds = {item["id"]: entry["round"] for entry in verifications for item in entry["gaps"]}
+        if verification_update is not None:
+            reopened_rounds.update({item.id: usage["rounds"] for item in verification_update.gaps})
+        resolution_items = []
+        for owner, analysis in analyses.items():
+            _validate_resolution_references(analysis.resolutions, registry, "decomposition")
+            for item in analysis.origins:
+                candidate_origins[(item.target_id, item.version_id)] = item
+            for item in analysis.resolutions:
+                if item.gap_id not in verify_gaps or analysis_rounds.get(owner, 0) > reopened_rounds.get(item.gap_id, 0):
+                    resolution_items.append(item)
+        # Preserve verification tasks until explicitly resolved by either stage.
+        _validate_resolution_references(tuple(verify_resolved.values()), registry, "verification")
+        resolution_items.extend(verify_resolved.values())
+        proposed_resolved = _combine_resolutions(resolution_items)
+        generated_gaps = list(runtime_gaps.values())
+        projected_origins, incomplete_origin_chain = _terminal_origin_candidates(
+            target.source_version_id, available.values(), projected_relations.values(),
+            candidate_origins)
+        if incomplete_origin_chain:
+            lineage_id = "lineage:" + target.id
+            # Connectivity is recomputed from the current complete graph. A
+            # historical or model-supplied closure cannot suppress a newly
+            # observed disconnected chain or candidate cycle.
+            proposed_resolved.pop(lineage_id, None)
+            lineage_gap = Gap(lineage_id,
+                "Provide an evidenced direct citation/derivation path from the target source to a terminal original material")
+            generated_gaps.append(lineage_gap)
+            proposed_gaps = _index_findings([*proposed_gaps.values(), lineage_gap], "gap")
+        registry, owners = _register_gaps(registry, owners, generated_gaps, "runner", target)
+        return (projected_fragments, projected_relations, projected_origins,
+                {key: value for key, value in proposed_gaps.items() if key not in proposed_resolved},
+                proposed_resolved, registry, owners)
+
+    def commit_projection(projection):
+        nonlocal fragments, relations, origins, gaps, resolved, gap_registry, gap_owners
+        fragments, relations, origins, gaps, resolved, gap_registry, gap_owners = projection
 
     def rebuild():
-        # Rebuild from current revisions so removed findings cannot linger.
-        fragments.clear()
-        relations.clear()
-        origins.clear()
-        proposed_gaps = {initial.id: initial, **runtime_gaps}
-        proposed_resolved = {}
-        for analysis in current_analyses.values():
-            for item in analysis.fragments:
-                fragments[item.id] = item
-            for item in analysis.relations:
-                relations[item.id] = item
-            for item in analysis.origins:
-                origins[(item.target_id, item.version_id)] = item
-            for item in analysis.gaps:
-                proposed_gaps[item.id] = item
-            for item in analysis.resolutions:
-                proposed_resolved[item.gap_id] = item
-        # Preserve verification tasks until explicitly resolved by either stage.
-        proposed_gaps.update(verification_gaps)
-        proposed_resolved.update(verification_resolved)
-        if origins and not has_origin_path():
-            proposed_gaps["lineage:" + target.id] = Gap("lineage:" + target.id,
-                "Provide the target source version and an evidenced citation/derivation path to an original material")
-        gaps.clear()
-        gaps.update({key: value for key, value in proposed_gaps.items() if key not in proposed_resolved})
-        resolved.clear()
-        resolved.update(proposed_resolved)
+        commit_projection(project(current_analyses, eligible, gap_registry, gap_owners,
+                                  verification_gaps, verification_resolved))
 
-    def has_origin_path():
-        if target.source_version_id is None or target.source_version_id not in eligible:
-            return False
-        roots = {item.version_id for item in origins.values()}
-        adjacency = {}
-        for edge in relations.values():
-            if edge.status == "direct" and edge.kind in {"quotes", "cites", "reprints", "translates", "derives"}:
-                adjacency.setdefault(edge.from_version, set()).add(edge.to_version)
-        pending = [target.source_version_id]
-        visited = set()
-        while pending:
-            version = pending.pop()
-            if version in roots:
-                return True
-            if version not in visited:
-                visited.add(version)
-                pending.extend(adjacency.get(version, ()))
-        return False
+    def has_origin_path(available=None, origin_findings=None, relation_findings=None):
+        available = eligible if available is None else available
+        origin_findings = origins if origin_findings is None else origin_findings
+        relation_findings = relations if relation_findings is None else relation_findings
+        roots = {item.version_id for item in origin_findings.values()}
+        reachable = _evidenced_lineage_versions(
+            target.source_version_id, available.values(), relation_findings.values())
+        return bool(roots & reachable)
 
     def structural_fingerprint():
         def records(values, excluded=()):
             items = [{key: value for key, value in asdict(item).items() if key not in excluded}
                      for item in values]
             return sorted(items, key=lambda item: json.dumps(item, sort_keys=True))
-        state = {"fragments": records(fragments.values()),
-                 "relations": records(relations.values(), ("rationale",)),
+        # Natural-language paraphrases and regenerated IDs are not evidence progress.
+        state = {"fragments": records(fragments.values(), ("id", "text", "qualifiers")),
+                 "relations": records(relations.values(), ("id", "rationale")),
                  "origins": records(origins.values(), ("rationale",)),
-                 "gaps": records(gaps.values())}
+                 "gaps": records((g for g in gaps.values() if not g.id.startswith("revisit:")),
+                                 ("id", "question", "decision_impact"))}
         return hashlib.sha256(json.dumps(state, sort_keys=True).encode()).hexdigest()
 
     def fail(stage, exc):
-        nonlocal fatal, fact_status, stop_reason
+        nonlocal fatal, fact_status, decision_status, stop_reason
         fatal = True
         fact_status = "unresolved" if verifier is not None else "not_checked"
+        decision_status = fact_status
         stop_reason = "integrity_error" if stage == "integrity" else f"{stage}_error"
-        errors.append({"stage": stage, "type": type(exc).__name__, "message": str(exc)})
+        error = {"stage": stage, "type": type(exc).__name__, "message": str(exc)}
+        semantic_stage = getattr(exc, "stage", None)
+        if isinstance(semantic_stage, str) and semantic_stage:
+            error["semantic_stage"] = semantic_stage
+        errors.append(error)
         event("error", stage=stage, message=str(exc))
 
-    def analyze(material, reasons, duplicate, revisit=False):
+    def analyze(material, reasons, duplicate, revisit=False, retrieval_attribution=None):
         usage["decomposition_calls"] += 1
-        event("decompose_started", version_id=material.version_id, duplicate=duplicate, revisit=revisit)
+        attribution_event = {}
+        if retrieval_attribution is not None:
+            attribution_event = {
+                "trigger_task_ids": list(retrieval_attribution["task_ids"]),
+                "trigger_probe_ids": list(retrieval_attribution["probe_ids"]),
+            }
+        event("decompose_started", version_id=material.version_id, duplicate=duplicate,
+              revisit=revisit, **attribution_event)
         psi_context = context()
         psi_context["current_material_eligible"] = not reasons
         psi_context["current_material_exclusion_reasons"] = reasons
-        analysis = decomposer.decompose(target, material, psi_context)
+        if retrieval_attribution is not None:
+            current_return = {
+                "version_id": material.version_id,
+                "trigger_task_ids": list(retrieval_attribution["task_ids"]),
+                "trigger_probe_ids": list(retrieval_attribution["probe_ids"]),
+                "issued_tasks": [asdict(item)
+                                 for item in retrieval_attribution["issued_tasks"]],
+            }
+            psi_context["current_return"] = current_return
+            # Direct aliases keep plug-ins simple while ``current_return`` makes
+            # the per-return ownership explicit in persisted prompt context.
+            psi_context["trigger_task_ids"] = list(retrieval_attribution["task_ids"])
+            psi_context["trigger_probe_ids"] = list(retrieval_attribution["probe_ids"])
+        # Archive decomposition is isolated from stateful semantic plugins: a
+        # future version must not contaminate a historical prediction.
+        analysis = (ConservativeDecomposer().decompose(target, material, {}) if reasons
+                    else decomposer.decompose(target, material, psi_context))
         validation_materials = dict(eligible)
         validation_materials[material.version_id] = material
-        _validate_analysis(analysis, target, material, validation_materials)
+        try:
+            _validate_analysis(analysis, target, material, validation_materials)
+            if not reasons:
+                candidate_registry, candidate_owners = _register_gaps(
+                    gap_registry, gap_owners, analysis.gaps, "material:" + material.version_id, target)
+                _validate_resolution_references(analysis.resolutions, candidate_registry, "decomposition")
+                candidate_analyses = {**current_analyses, material.version_id: analysis}
+                projection = project(candidate_analyses, validation_materials, candidate_registry,
+                    candidate_owners, verification_gaps, verification_resolved, updated_owner=material.version_id)
+        except Exception as exc:
+            event("analysis_rejected", version_id=material.version_id,
+                  analysis=asdict(analysis) if isinstance(analysis, Analysis) else None,
+                  message=str(exc))
+            raise
         revision = {"revision": len(history) + 1, "round": usage["rounds"],
                     "version_id": material.version_id, "duplicate": duplicate, "revisit": revisit,
                     "accepted": not reasons, "analysis": asdict(analysis), "exclusion_reasons": reasons}
+        if retrieval_attribution is not None:
+            revision.update(trigger_task_ids=list(retrieval_attribution["task_ids"]),
+                            trigger_probe_ids=list(retrieval_attribution["probe_ids"]))
         history.append(revision)
-        event("decompose_completed", version_id=material.version_id, revision=revision["revision"])
+        event("decompose_completed", version_id=material.version_id,
+              revision=revision["revision"], **attribution_event)
         if reasons:
             event("excluded_from_graph", version_id=material.version_id, reasons=reasons)
             return ()
         eligible[material.version_id] = material
-        previous = current_analyses.pop(material.version_id, None)
+        previous = current_analyses.get(material.version_id)
         current_analyses[material.version_id] = analysis
         event("alignment_checked", version_id=material.version_id, analysis_changed=previous != analysis)
-        rebuild()
+        commit_projection(projection)
         event("graph_updated", version_id=material.version_id, open_gaps=len(gaps))
         return analysis.revisit_versions
 
-    seen_structures = {structural_fingerprint()}
-    previous_structure = structural_fingerprint()
-    for round_number in range(1, config.max_rounds + 1):
+    seen_structures = saved["seen_structures"] if saved is not None else {structural_fingerprint()}
+    previous_structure = saved["previous_structure"] if saved is not None else structural_fingerprint()
+
+    def save_checkpoint():
+        if checkpoint_callback is None or not round_verified:
+            return
+        state = deepcopy({
+            "materials": materials, "eligible": eligible, "fingerprints": fingerprints,
+            "current_analyses": current_analyses, "history": history, "verifications": verifications,
+            "operations": operations, "observations": observations, "errors": errors,
+            "initial": initial, "gaps": gaps, "resolved": resolved,
+            "gap_registry": gap_registry, "gap_owners": gap_owners,
+            "verification_gaps": verification_gaps, "verification_resolved": verification_resolved,
+            "runtime_gaps": runtime_gaps, "fragments": fragments, "relations": relations,
+            "origins": origins, "usage": usage, "fact_status": fact_status,
+            "decision_status": decision_status, "assessments": assessments, "stop_reason": stop_reason,
+            "fatal": fatal, "seen_structures": seen_structures, "previous_structure": previous_structure,
+            "has_verifier": verifier is not None,
+            "strict_retrieval_attribution": strict_retrieval_attribution,
+        })
+        point = TraceCheckpoint(target=target, config=config, state=state)
+        checkpoint_callback(replace(point, sha256=checkpoint_sha256(point)))
+
+    for round_number in range(usage["rounds"] + 1, config.max_rounds + 1):
         capacity = min(config.max_documents - usage["documents"], config.max_decomposition_calls - usage["decomposition_calls"])
         if capacity <= 0:
             stop_reason = "document_budget" if usage["documents"] >= config.max_documents else "decomposition_budget"
             break
         usage["rounds"] = round_number
+        round_verified = False
         tasks = tuple(gaps.values()) or (Gap("inspect-lineage", "Inspect unresolved upstream lineage"),)
+        if not gaps:
+            try:
+                gap_registry, gap_owners = _register_gaps(gap_registry, gap_owners, tasks, "runner", target)
+            except Exception as exc:
+                fail("integrity", exc)
+                break
         event("search", tasks=[asdict(item) for item in tasks], limit=capacity)
+        issued_tasks = {item.id: item for item in tasks}
         try:
             iterator = iter(provider.search(target, tasks, round_number, capacity))
         except Exception as exc:
@@ -457,17 +1186,49 @@ def run_provenance(target: Target | dict, provider: TraceProvider,
             break
         new_eligible = 0
         received = 0
+        probe_owned_novel_returns = []
+        current_round_returns = []
         for _ in range(capacity):
             if usage["decomposition_calls"] >= config.max_decomposition_calls:
                 break
             try:
-                material = next(iterator)
+                returned = next(iterator)
             except StopIteration:
                 break
             except Exception as exc:
                 fail("provider", exc)
                 break
             received += 1
+            try:
+                material, trigger_task_ids, trigger_probe_ids, attributed = _retrieval_return(
+                    returned, issued_tasks, strict_retrieval_attribution)
+            except Exception as exc:
+                event("retrieval_attribution_rejected",
+                      return_type=type(returned).__name__, message=str(exc))
+                fail("provider", exc)
+                break
+            retrieval_attribution = ({"task_ids": trigger_task_ids,
+                                      "probe_ids": trigger_probe_ids,
+                                      # Freeze the exact round-start tasks for
+                                      # this hit. Active gaps may change after
+                                      # an earlier return from the same provider
+                                      # iterator, so downstream semantic stages
+                                      # must not infer issuance from live state.
+                                      "issued_tasks": tuple(
+                                          issued_tasks[item]
+                                          for item in trigger_task_ids)}
+                                     if attributed else None)
+            if attributed:
+                current_round_returns.append({
+                    "version_id": material.version_id,
+                    "trigger_task_ids": list(trigger_task_ids),
+                    "trigger_probe_ids": list(trigger_probe_ids),
+                    "issued_tasks": [asdict(item)
+                                     for item in retrieval_attribution["issued_tasks"]],
+                })
+                event("retrieval_attribution_validated", version_id=material.version_id,
+                      trigger_task_ids=list(trigger_task_ids),
+                      trigger_probe_ids=list(trigger_probe_ids))
             usage["documents"] += 1
             try:
                 reasons = _material_eligibility(material, cutoff)
@@ -484,21 +1245,40 @@ def run_provenance(target: Target | dict, provider: TraceProvider,
                 materials[material.version_id] = material
                 fingerprints[material.version_id] = fingerprint
                 usage["unique_versions"] += 1
-            observations.append({"version_id": material.version_id, "retrieved_at": material.retrieved_at,
-                                 "duplicate": duplicate, "eligible": not reasons, "reasons": reasons})
+            observation = {"version_id": material.version_id,
+                           "retrieved_at": material.retrieved_at,
+                           "duplicate": duplicate, "eligible": not reasons,
+                           "reasons": reasons}
+            if retrieval_attribution is not None:
+                observation.update(trigger_task_ids=list(trigger_task_ids),
+                                   trigger_probe_ids=list(trigger_probe_ids))
+            observations.append(observation)
             event("snapshot_saved" if not duplicate else "duplicate_observed", version_id=material.version_id,
                   sha256=fingerprint, eligible=not reasons)
             was_eligible = material.version_id in eligible
             try:
                 # Nothing may enter the graph or verifier before this call.
-                pending = list(analyze(material, reasons, duplicate))
+                pending = list(analyze(material, reasons, duplicate,
+                                       retrieval_attribution=retrieval_attribution))
+                # New upstream snapshots can invalidate an old 'not yet seen'
+                # interpretation even if the semantic plugin forgot to request
+                # reanalysis. Schedule psi; never silently promote the edge.
+                if not reasons and not was_eligible:
+                    for edge in relations.values():
+                        if (edge.from_version != material.version_id and edge.from_version in eligible
+                                and edge.to_version is None
+                                and edge.upstream_locator in {material.url, material.version_id}
+                                and edge.from_version not in pending):
+                            pending.append(edge.from_version)
+                            event("upstream_arrival_reanalysis", version_id=edge.from_version,
+                                  upstream_version=material.version_id, relation_id=edge.id)
                 visited = {material.version_id}
                 while pending:
                     version_id = pending.pop(0)
                     if version_id in visited:
                         event("revisit_cycle_detected", version_id=version_id)
-                        runtime_gaps["revisit:" + version_id] = Gap("revisit:" + version_id, "Resolve repeated reanalysis dependency for " + version_id)
-                        rebuild()
+                        # Already analysed in this dependency traversal. Audit the
+                        # redundant request; it is not a missing news fact.
                         continue
                     if usage["decomposition_calls"] >= config.max_decomposition_calls:
                         runtime_gaps["revisit:" + version_id] = Gap("revisit:" + version_id, "Reanalysis pending after decomposition budget: " + version_id)
@@ -514,17 +1294,52 @@ def run_provenance(target: Target | dict, provider: TraceProvider,
                 continue
             if not was_eligible:
                 new_eligible += 1
+            if (strict_retrieval_attribution and
+                    not config.experimental_force_rounds and round_number > 1 and
+                    not duplicate and not reasons):
+                qualifying_task_ids = [task_id for task_id in trigger_task_ids
+                    if issued_tasks[task_id].stage == "verification" and
+                    gap_dimension(issued_tasks[task_id]) in {"evidence", "world"} and
+                    issued_tasks[task_id].probe_id is not None and
+                    issued_tasks[task_id].action in {"fetch", "search"}]
+                if qualifying_task_ids:
+                    driver = {
+                        "version_id": material.version_id,
+                        "task_ids": qualifying_task_ids,
+                        "probe_ids": list(dict.fromkeys(
+                            issued_tasks[task_id].probe_id
+                            for task_id in qualifying_task_ids)),
+                    }
+                    probe_owned_novel_returns.append(driver)
+                    event("probe_owned_novel_return_accepted", **driver)
         if fatal:
             break
-        if verifier is not None and eligible:
+        feedback = getattr(provider, "last_feedback", ())
+        for item in feedback:
+            event("retrieval_feedback", feedback=deepcopy(dict(item)))
+        if received == 0 and (feedback or config.experimental_force_rounds):
+            stop_reason = "provider_exhausted" if feedback else "empty_results"
+            break
+        adaptive_driver_required = (strict_retrieval_attribution and
+                                    not config.experimental_force_rounds and
+                                    round_number > 1)
+        verification_permitted = (not adaptive_driver_required or
+                                  bool(probe_owned_novel_returns))
+        if verifier is not None and eligible and verification_permitted:
             usage["verification_calls"] += 1
-            event("verification_started")
+            event("verification_started", **(
+                {"probe_owned_novel_returns": deepcopy(probe_owned_novel_returns)}
+                if adaptive_driver_required else {}))
+            check = None
             try:
                 check = verifier.verify(target, context())
                 if not isinstance(check, VerificationResult):
                     raise ValueError("verifier must return VerificationResult")
                 if check.verdict not in {"supported", "contradicted", "conflicting", "unresolved"}:
                     raise ValueError("invalid verification verdict")
+                for name in ("evidence_verdict", "world_verdict"):
+                    if getattr(check, name) not in {None, "supported", "contradicted", "conflicting", "unresolved"}:
+                        raise ValueError("invalid layered verification verdict")
                 if not isinstance(check.rationale, str):
                     raise ValueError("verification rationale must be a string")
                 _tuple_of(check.basis, Span, "verification basis")
@@ -536,56 +1351,192 @@ def run_provenance(target: Target | dict, provider: TraceProvider,
                         _span(item, eligible)
                 _tuple_of(check.gaps, Gap, "verification gaps")
                 _tuple_of(check.resolutions, Resolution, "verification resolutions")
+                if type(check.strict_probe_followups) is not bool:
+                    raise ValueError("strict_probe_followups must be boolean")
+                _tuple_of(check.probe_stops, ProbeStop, "probe_stops")
+                for item in check.probe_stops:
+                    _probe_stop(item)
                 for item in check.gaps:
-                    _gap(item)
+                    _gap(item, target, eligible)
                     if item.stage != "verification":
                         raise ValueError("verifier search gaps must use stage=verification")
                 for item in check.resolutions:
                     _resolution(item, eligible)
-                    if item.gap_id in gaps and gaps[item.gap_id].stage != "verification":
-                        raise ValueError("verifier may not resolve provenance gaps")
+                if check.evidence_verdict not in {None, "unresolved"}:
+                    _basis(check.basis, eligible)
+                    if target.evidence_scope and not {s.version_id for s in check.basis} <= set(target.evidence_scope):
+                        raise ValueError("evidence judgement cites outside the frozen evidence_scope")
+                _tuple_of(check.world_basis, Span, "world_basis")
+                for span in check.world_basis:
+                    _span(span, eligible)
+                if check.world_verdict not in {None, "unresolved"}:
+                    _basis(check.world_basis, eligible)
+                    _nonempty(check.world_rationale, "world_rationale")
+                for field_name, stage in (("evidence_probe_results", "evidence"),
+                                          ("world_probe_results", "world")):
+                    probe_results = getattr(check, field_name)
+                    _tuple_of(probe_results, ProbeAssessment, field_name)
+                    probe_ids = set()
+                    for item in probe_results:
+                        _probe_assessment(item, stage, eligible)
+                        if item.probe_id in probe_ids:
+                            raise ValueError("duplicate probe assessment in one layer")
+                        probe_ids.add(item.probe_id)
+                        if (stage == "evidence" and target.evidence_scope and
+                                not {span.version_id for span in item.basis} <=
+                                set(target.evidence_scope)):
+                            raise ValueError(
+                                "evidence probe assessment cites outside the frozen evidence_scope")
+                candidate_registry, candidate_owners = _register_gaps(
+                    gap_registry, gap_owners, check.gaps, "verifier", target)
+                _validate_resolution_references(check.resolutions, candidate_registry, "verification")
+                candidate_verify_gaps = dict(verification_gaps)
+                candidate_verify_resolved = dict(verification_resolved)
+                for item in check.gaps:
+                    candidate_verify_gaps[item.id] = item
+                    candidate_verify_resolved.pop(item.id, None)
+                for item in check.resolutions:
+                    candidate_verify_gaps.pop(item.gap_id, None)
+                candidate_verify_resolved.update(_combine_resolutions(check.resolutions))
+                # In the typed probe contract, whether an old task still blocks
+                # is recomputed from the current result instead of being frozen
+                # to the round in which it was opened.  A conclusive result
+                # closes that probe's old active tasks using its current basis.
+                # An unresolved branch of an already-decided OR/AND expression
+                # remains historically unresolved, but becomes nonblocking; it
+                # is never mislabeled as resolved merely because another branch
+                # now decides the aggregate.
+                current_probe_results = {
+                    (item.stage, item.probe_id): item
+                    for item in (*check.evidence_probe_results,
+                                 *check.world_probe_results)
+                }
+                layer_verdicts = {
+                    "evidence": check.evidence_verdict
+                        if check.evidence_verdict is not None else check.verdict,
+                    "world": check.world_verdict
+                        if check.world_verdict is not None else check.verdict,
+                }
+                new_gap_ids = {item.id for item in check.gaps}
+                explicit_resolution_ids = {item.gap_id for item in check.resolutions}
+                revised_active_gaps = []
+                automatic_resolutions = []
+                for gap_id, gap in list(candidate_verify_gaps.items()):
+                    if gap_id in new_gap_ids or gap.probe_id is None:
+                        continue
+                    dimension = gap_dimension(gap)
+                    result = current_probe_results.get((dimension, gap.probe_id))
+                    if result is None:
+                        continue
+                    if result.status != "unresolved":
+                        candidate_verify_gaps.pop(gap_id, None)
+                        if gap_id not in explicit_resolution_ids:
+                            automatic_resolutions.append(Resolution(
+                                gap_id, result.basis,
+                                "The current grounded probe assessment conclusively "
+                                "supersedes this earlier unresolved task."))
+                    elif layer_verdicts[dimension] != "unresolved" and gap.blocking:
+                        updated = replace(gap, blocking=False)
+                        candidate_verify_gaps[gap_id] = updated
+                        revised_active_gaps.append(updated)
+                    elif (layer_verdicts[dimension] == "unresolved" and
+                          not gap.blocking and gap.basis):
+                        updated = replace(gap, blocking=True)
+                        candidate_verify_gaps[gap_id] = updated
+                        revised_active_gaps.append(updated)
+                if revised_active_gaps:
+                    candidate_registry, candidate_owners = _register_gaps(
+                        candidate_registry, candidate_owners,
+                        tuple(revised_active_gaps), "verifier", target)
+                if automatic_resolutions:
+                    _validate_resolution_references(
+                        tuple(automatic_resolutions), candidate_registry, "verification")
+                    candidate_verify_resolved.update(
+                        _combine_resolutions(automatic_resolutions))
+                candidate_verify_gaps, followup_audit = _strict_followup_projection(
+                    check, candidate_verify_gaps, current_probe_results,
+                    superseded_gap_ids)
+                projection = project(current_analyses, eligible, candidate_registry, candidate_owners,
+                    candidate_verify_gaps, candidate_verify_resolved, verification_update=check)
+                if check.strict_probe_followups:
+                    # Publish lifecycle transitions only after the complete
+                    # candidate projection has validated. A later projection
+                    # failure must roll back active state and tombstones too.
+                    event("probe_followups_validated", **followup_audit)
+                    superseded_gap_ids.update(
+                        item["prior_gap_id"]
+                        for item in followup_audit["superseded_prior_gaps"])
             except Exception as exc:
+                event("verification_rejected", verification=_verification_record(check)
+                      if isinstance(check, VerificationResult) else None,
+                      message=str(exc))
                 fail("verifier", exc)
                 break
-            verifications.append({"round": round_number, **asdict(check)})
-            for item in check.gaps:
-                verification_gaps[item.id] = item
-                verification_resolved.pop(item.id, None)
-            for item in check.resolutions:
-                verification_gaps.pop(item.gap_id, None)
-                verification_resolved[item.gap_id] = item
-            rebuild()
-            fact_status = "unresolved" if any(item.stage == "verification" for item in gaps.values()) else check.verdict
-            event("verification_completed", verdict=fact_status, followup_tasks=len(check.gaps))
-        provenance_complete = has_origin_path() and not any(item.stage == "provenance" for item in gaps.values())
-        if provenance_complete and (verifier is None or fact_status != "unresolved") and not gaps:
+            verifications.append({"round": round_number, **_verification_record(check)})
+            verification_gaps = candidate_verify_gaps
+            verification_resolved = candidate_verify_resolved
+            commit_projection(projection)
+            previous_assessments = assessments
+            assessments = select_assessments(check, target, gaps.values())
+            fact_status = assessments["world"]["decision"]
+            decision_status = assessments[target.assessment_mode]["decision"]
+            event("verification_completed", verdict=fact_status, decision=decision_status,
+                  assessments=deepcopy(assessments), followup_tasks=len(check.gaps),
+                  probe_stops=len(check.probe_stops),
+                  provenance_status="original_material_located" if has_origin_path() and not any(
+                      g.stage == "provenance" and g.blocking for g in gaps.values()) else "partial")
+            if previous_assessments != assessments:
+                event("assessment_changed", previous=previous_assessments, current=deepcopy(assessments),
+                      basis=[asdict(s) for s in check.basis], world_basis=[asdict(s) for s in check.world_basis])
+            round_verified = True
+        elif verifier is not None and eligible and adaptive_driver_required:
+            event("verification_skipped",
+                  reason="no_probe_owned_novel_return",
+                  received=received, new_eligible_versions=new_eligible)
+        provenance_complete = has_origin_path() and not any(item.stage == "provenance" and item.blocking for item in gaps.values())
+        if (not config.experimental_force_rounds and not adaptive_driver_required and
+                provenance_complete and (verifier is None or decision_status != "unresolved") and not any(
+                g.blocking and gap_dimension(g) in {"provenance", target.assessment_mode}
+                for g in gaps.values())):
             stop_reason = "complete"
+            save_checkpoint()
             break
         if received == 0:
-            stop_reason = "empty_results"
+            stop_reason = "provider_exhausted" if feedback else "empty_results"
+            save_checkpoint()
+            break
+        if adaptive_driver_required and not probe_owned_novel_returns and round_number >= config.max_rounds:
+            stop_reason = "no_probe_owned_novel_evidence"
             break
         structure = structural_fingerprint()
         structural_progress = structure not in seen_structures
         event("progress_checked", new_eligible_versions=new_eligible, new_structure=structural_progress)
-        if new_eligible == 0 and not structural_progress:
+        if not config.experimental_force_rounds and new_eligible == 0 and not structural_progress:
             stop_reason = "no_new_eligible_materials" if structure == previous_structure else "repeated_state"
+            save_checkpoint()
             break
         seen_structures.add(structure)
         previous_structure = structure
         if usage["documents"] >= config.max_documents:
             stop_reason = "document_budget"
+            save_checkpoint()
             break
         if usage["decomposition_calls"] >= config.max_decomposition_calls:
             stop_reason = "decomposition_budget"
+            save_checkpoint()
             break
-    provenance_status = "original_material_located" if has_origin_path() and not any(item.stage == "provenance" for item in gaps.values()) else ("partial" if eligible else "unresolved")
+        save_checkpoint()
+    provenance_status = "original_material_located" if has_origin_path() and not any(item.stage == "provenance" and item.blocking for item in gaps.values()) else ("partial" if eligible else "unresolved")
     if fatal:
         provenance_status = "unresolved"
     event("stopped", reason=stop_reason)
     return {
-        "schema_version": "0.2", "scope": "plugin-supplied semantic analyses; no built-in truth oracle",
+        "schema_version": "0.3", "scope": "plugin-supplied semantic analyses; no built-in truth oracle",
         "target": asdict(target), "config": asdict(config), "provenance_status": provenance_status,
+        "retrieval_attribution_mode": ("strict" if strict_retrieval_attribution
+                                       else "legacy-compatible"),
         "fact_status": fact_status, "stop_reason": stop_reason, "usage": usage,
+        "decision_status": decision_status, "assessments": assessments, "assessment_valid": not fatal,
         "materials": [asdict(item) for item in materials.values()],
         "eligible_version_ids": list(eligible), "observations": observations,
         "analyses": {key: asdict(item) for key, item in current_analyses.items()}, "analysis_history": history,
@@ -593,6 +1544,7 @@ def run_provenance(target: Target | dict, provider: TraceProvider,
         "relations": [asdict(item) for item in relations.values()],
         "origins": [asdict(item) for item in origins.values()],
         "gaps": [asdict(item) for item in gaps.values()],
+        "gap_registry": [asdict(item) for item in gap_registry.values()],
         "resolutions": [asdict(item) for item in resolved.values()],
         "verification_history": verifications, "operations": operations, "errors": errors,
     }

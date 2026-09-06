@@ -1,0 +1,33 @@
+{
+  "status": "frozen_before_live_calls",
+  "experiment": "target_extended_psi_development_v1",
+  "model": "gpt-6-astra",
+  "reasoning_effort": "medium",
+  "smoke_cases": ["p02", "p04"],
+  "full_cases": ["p01", "p02", "p03", "p04", "p05", "p06", "p07", "p08"],
+  "outer_rounds": 2,
+  "max_target_repairs": 1,
+  "max_material_repairs": 1,
+  "max_judgement_repairs": 1,
+  "budget_per_case": {
+    "calls": 64,
+    "output_tokens": 64000,
+    "per_call_output_tokens": 4000,
+    "seconds": 900
+  },
+  "workers": 2,
+  "offline_tests": 223,
+  "inputs_sha256": "4b1e1d3bbad7d72f77822aa8cf402e923db1af9d85df3b5c732a5279ac2fa825",
+  "provisional_reference_sha256": "4cd818aecf0693559c2b877a7067a7b765159abc4b6b832535fb6a14add13ce5",
+  "files": {
+    "experiments/extended_semantic.py": "1547c8261a9018b18168d7393996673fd1cec583fc42e063c16b13273d8cd77c",
+    "experiments/staged_semantic.py": "01b272733bb00e1f30d1e5c1577bb910ce653e13b6eaa882a1e315526cf8f70f",
+    "experiments/staged_run.py": "cf43a807cfa7d30ef5c21182255e8b30697581922fda8e82dba8363dd663a9a9",
+    "tests/test_extended_semantic.py": "53dacd62a79bfd142f4e64864a9e3c3f4782e9f1aaa18b0ede59b6c19f2c2712",
+    "tests/test_extended_staged_integration.py": "caed6abdf8b91a41f6458b9b8f7b78e4c45f1ccf9d32671027523c427c35ef3e",
+    "tests/test_staged_run.py": "6c0755952bdb44dbe73fcdc1f1f54093059295b745cd9dc4246ddb6a7bbb8448",
+    "docs/TARGET_EXTENSION.md": "7f108c5cc250b34e5f0e488a0268e355056507e1d34cd0e2df1ba1bb6486476b",
+    "docs/STAGED_PSI.md": "022b4048a960b33ff014928221ecac87ab6cfbde12283c94359ee8b5d6b919b8"
+  },
+  "gate": "Run p02 and p04 first. If both complete and match the provisional reference without code changes, run all eight in a new directory. Preserve every failed attempt."
+}

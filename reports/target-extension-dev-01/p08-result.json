@@ -1,0 +1,105 @@
+{
+  "id": "p08",
+  "assessment_mode": "evidence",
+  "status": "completed",
+  "prediction": "unverifiable",
+  "checkpoints": [
+    {
+      "round": 1,
+      "id": "p08",
+      "decision": "unverifiable",
+      "assessment_mode": "evidence",
+      "assessments": {
+        "evidence": {
+          "raw_verdict": "unresolved",
+          "decision": "unresolved",
+          "blocking_gap_ids": [
+            "p08:verification:evidence:ef9f86f2f37501378c9c"
+          ]
+        },
+        "world": {
+          "raw_verdict": "unresolved",
+          "decision": "unresolved",
+          "blocking_gap_ids": [
+            "p08:verification:world:ef9f86f2f37501378c9c"
+          ]
+        }
+      },
+      "provenance_status": "partial"
+    },
+    {
+      "round": 2,
+      "id": "p08",
+      "decision": "unverifiable",
+      "assessment_mode": "evidence",
+      "assessments": {
+        "evidence": {
+          "raw_verdict": "unresolved",
+          "decision": "unresolved",
+          "blocking_gap_ids": [
+            "p08:verification:evidence:ef9f86f2f37501378c9c"
+          ]
+        },
+        "world": {
+          "raw_verdict": "unresolved",
+          "decision": "unresolved",
+          "blocking_gap_ids": [
+            "p08:verification:world:ef9f86f2f37501378c9c"
+          ]
+        }
+      },
+      "provenance_status": "original_material_located"
+    }
+  ],
+  "target_plan_sha256": "f71ba27104418b875435bb8a5321a2705888b40963a1d4f59e140f7f97d72000",
+  "native_prediction": {
+    "id": "p08",
+    "assessment_mode": "evidence",
+    "as_of": "2026-09-05T09:34:36Z",
+    "decision": "unverifiable",
+    "assessments": {
+      "evidence": {
+        "raw_verdict": "unresolved",
+        "decision": "unresolved",
+        "blocking_gap_ids": [
+          "p08:verification:evidence:ef9f86f2f37501378c9c"
+        ]
+      },
+      "world": {
+        "raw_verdict": "unresolved",
+        "decision": "unresolved",
+        "blocking_gap_ids": [
+          "p08:verification:world:ef9f86f2f37501378c9c"
+        ]
+      }
+    },
+    "provenance_status": "original_material_located",
+    "assessment_valid": true,
+    "stop_reason": "round_budget"
+  },
+  "engine_usage": {
+    "rounds": 2,
+    "documents": 4,
+    "unique_versions": 2,
+    "decomposition_calls": 5,
+    "verification_calls": 2
+  },
+  "usage": {
+    "model_calls": 23,
+    "input_tokens": 102320,
+    "output_tokens": 9496,
+    "seconds": 170.83085144299548
+  },
+  "checkpoint_hashes": [
+    {
+      "round": 1,
+      "sha256": "be450e9757d326264646fe332f2b2c2535bb7393efc2d9184faa572b68ad7dcd"
+    },
+    {
+      "round": 2,
+      "sha256": "cb6a3c4bf051ff9999687772d4b15244fba26af71ee8dbb6729a6f50dcc33291"
+    }
+  ],
+  "new_api_attempts": 23,
+  "returned_responses": 23
+}

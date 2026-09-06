@@ -1,0 +1,38 @@
+{
+  "target": {
+    "id": "p01",
+    "text": "NASA's October 11, 2022 announcement reported that DART shortened Dimorphos' orbital period around Didymos by 32 minutes, with an uncertainty of approximately plus or minus 2 minutes.",
+    "as_of": "2026-09-05T09:34:36Z",
+    "source_version_id": "m01",
+    "assessment_mode": "evidence",
+    "evidence_scope": [
+      "m02"
+    ]
+  },
+  "materials": [
+    {
+      "version_id": "m01",
+      "url": "https://www.nasa.gov/science-research/planetary-science/from-impact-to-innovation-a-year-of-science-and-triumph-for-historic-dart-mission/",
+      "content": "From Impact to Innovation: A Year of Science and Triumph for Historic DART Mission\nPublication date: 2023-09-26\n\nOctober 2022\n\n[NASA Confirms DART Mission Impact Changed Asteroid’s Motion in Space (Oct. 11, 2022)](https://www.nasa.gov/press-release/nasa-confirms-dart-mission-impact-changed-asteroid-s-motion-in-space)\n\nIt didn’t take long to learn just how much of an impact DART had made. Just a little over two weeks since it intentionally crashed head-on into Dimorphos, the science investigation team’s early data analysis confirmed the collision had significantly altered the asteroid’s orbit by 32 minutes, with an uncertainty of plus or minus 2 minutes (later revised to 33 minutes after more observation). Prior to DART’s impact, it took Dimorphos 11 hours and 55 minutes to orbit its larger parent asteroid, Didymos.",
+      "retrieved_at": "2026-09-05T09:34:36Z",
+      "published_at": null,
+      "available_at": "2026-09-05T09:34:36Z",
+      "availability_basis": "Current web-tool collection completed at retrieved_at on 2026-09-05. The supplied material is a selected, whitespace-normalized excerpt, not a full page or historical exact-version capture. Availability is asserted only at collection completion. The source's displayed publication date is preserved in content; no exact timezone-qualified publication instant is known.",
+      "issuer": "NASA"
+    },
+    {
+      "version_id": "m02",
+      "url": "https://www.nasa.gov/press-release/nasa-confirms-dart-mission-impact-changed-asteroid-s-motion-in-space",
+      "content": "NASA Confirms DART Mission Impact Changed Asteroid’s Motion in Space\nPublication date: 2022-10-11\n\nPrior to DART’s impact, it took Dimorphos 11 hours and 55 minutes to orbit its larger parent asteroid, Didymos. Since DART’s intentional collision with Dimorphos on Sept. 26, astronomers have been using telescopes on Earth to measure how much that time has changed. Now, the investigation team has confirmed the spacecraft’s impact altered Dimorphos’ orbit around Didymos by 32 minutes, shortening the 11 hour and 55-minute orbit to 11 hours and 23 minutes.\n\nThis measurement has a margin of uncertainty of approximately plus or minus 2 minutes.",
+      "retrieved_at": "2026-09-05T09:34:36Z",
+      "published_at": null,
+      "available_at": "2026-09-05T09:34:36Z",
+      "availability_basis": "Current web-tool collection completed at retrieved_at on 2026-09-05. The supplied material is a selected, whitespace-normalized excerpt, not a full page or historical exact-version capture. Availability is asserted only at collection completion. The source's displayed publication date is preserved in content; no exact timezone-qualified publication instant is known.",
+      "issuer": "NASA"
+    }
+  ],
+  "seed_ids": [
+    "m01"
+  ],
+  "full_evidence_control": true
+}

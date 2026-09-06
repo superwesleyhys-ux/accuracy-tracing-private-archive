@@ -1,0 +1,35 @@
+{
+  "id": "p07",
+  "assessment_mode": "evidence",
+  "status": "error",
+  "prediction": null,
+  "checkpoints": [],
+  "target_plan_sha256": "c628561ed86eb684cc3a5b7e45fb0313aeec6aedf12db7e244a960e141ce4efe",
+  "native_prediction": {
+    "id": "p07",
+    "assessment_mode": "evidence",
+    "as_of": "2026-09-05T09:34:36Z",
+    "decision": "unverifiable",
+    "assessments": null,
+    "provenance_status": "unresolved",
+    "assessment_valid": false,
+    "stop_reason": "verifier_error"
+  },
+  "engine_usage": {
+    "rounds": 1,
+    "documents": 2,
+    "unique_versions": 2,
+    "decomposition_calls": 3,
+    "verification_calls": 1
+  },
+  "error_type": "ValueError",
+  "usage": {
+    "model_calls": 13,
+    "input_tokens": 37915,
+    "output_tokens": 5156,
+    "seconds": 100.31352206099837
+  },
+  "checkpoint_hashes": [],
+  "new_api_attempts": 13,
+  "returned_responses": 13
+}

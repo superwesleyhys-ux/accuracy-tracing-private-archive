@@ -1,0 +1,39 @@
+{
+  "target": {
+    "id": "library-evidence",
+    "text": "The library now closes at 9 pm.",
+    "as_of": "2026-09-04T20:00:00Z",
+    "source_version_id": "library-article",
+    "assessment_mode": "evidence",
+    "evidence_scope": [
+      "library-notice"
+    ]
+  },
+  "materials": [
+    {
+      "version_id": "library-article",
+      "url": "https://example.org/library-article",
+      "content": "The library now closes at 9 pm, quoting https://example.org/library-notice.",
+      "retrieved_at": "2026-09-04T20:00:00Z",
+      "published_at": "2026-09-04T10:00:00Z",
+      "available_at": "2026-09-04T10:00:00Z",
+      "availability_basis": "Synthetic exact-version capture; no external authentication.",
+      "issuer": "Fictional publisher"
+    },
+    {
+      "version_id": "library-notice",
+      "url": "https://example.org/library-notice",
+      "content": "Library schedule bulletin: The library extends its closing time to 9 pm starting today.",
+      "retrieved_at": "2026-09-04T20:00:00Z",
+      "published_at": "2026-09-04T10:00:00Z",
+      "available_at": "2026-09-04T10:00:00Z",
+      "availability_basis": "Synthetic exact-version capture; no external authentication.",
+      "issuer": "Fictional publisher"
+    }
+  ],
+  "seed_ids": [
+    "library-article",
+    "library-notice"
+  ],
+  "full_evidence_control": false
+}

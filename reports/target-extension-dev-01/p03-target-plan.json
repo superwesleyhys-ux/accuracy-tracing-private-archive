@@ -1,0 +1,1277 @@
+{
+  "target_signature": "2fa0ca4256696dcf0aac74615e8f2e4d5aa5871378faa39028c773b01ff9077f",
+  "logic": "single",
+  "claims": [
+    {
+      "id": "p03:claim:e23b8631fd0a7effca07",
+      "statement": "NIST's FIPS 203 specifies three ML-KEM parameter sets: ML-KEM-512, ML-KEM-768, and ML-KEM-1024.",
+      "anchor": {
+        "start": 0,
+        "end": 95,
+        "quote": "NIST's FIPS 203 specifies three ML-KEM parameter sets: ML-KEM-512, ML-KEM-768, and ML-KEM-1024."
+      },
+      "role": "main",
+      "dimensions": [
+        {
+          "id": "p03:dimension:54ebc688ad244de82b51",
+          "kind": "entity_identity",
+          "anchor": {
+            "start": 0,
+            "end": 4,
+            "quote": "NIST"
+          }
+        },
+        {
+          "id": "p03:dimension:3a67ee3fa75a857d03e0",
+          "kind": "subject",
+          "anchor": {
+            "start": 0,
+            "end": 15,
+            "quote": "NIST's FIPS 203"
+          }
+        },
+        {
+          "id": "p03:dimension:726b1aad054478654be7",
+          "kind": "entity_identity",
+          "anchor": {
+            "start": 7,
+            "end": 15,
+            "quote": "FIPS 203"
+          }
+        },
+        {
+          "id": "p03:dimension:c0b249a644b6e4d2ed98",
+          "kind": "predicate",
+          "anchor": {
+            "start": 16,
+            "end": 25,
+            "quote": "specifies"
+          }
+        },
+        {
+          "id": "p03:dimension:df9becca34a55ec8e61e",
+          "kind": "quantity_unit",
+          "anchor": {
+            "start": 26,
+            "end": 53,
+            "quote": "three ML-KEM parameter sets"
+          }
+        },
+        {
+          "id": "p03:dimension:57e20905d29c24be2dcc",
+          "kind": "entity_identity",
+          "anchor": {
+            "start": 32,
+            "end": 53,
+            "quote": "ML-KEM parameter sets"
+          }
+        },
+        {
+          "id": "p03:dimension:816885ae64ae68ce0208",
+          "kind": "entity_identity",
+          "anchor": {
+            "start": 55,
+            "end": 65,
+            "quote": "ML-KEM-512"
+          }
+        },
+        {
+          "id": "p03:dimension:4e0a5ff186815f82bbbf",
+          "kind": "entity_identity",
+          "anchor": {
+            "start": 67,
+            "end": 77,
+            "quote": "ML-KEM-768"
+          }
+        },
+        {
+          "id": "p03:dimension:b169c99abd1bbf1acdac",
+          "kind": "entity_identity",
+          "anchor": {
+            "start": 83,
+            "end": 94,
+            "quote": "ML-KEM-1024"
+          }
+        }
+      ],
+      "parent_claim_id": null
+    }
+  ],
+  "probes": [
+    {
+      "id": "p03:probe:0864f0bac8bf0ead3b69",
+      "claim_id": "p03:claim:e23b8631fd0a7effca07",
+      "kind": "entity_identity",
+      "dimension_ids": [
+        "p03:dimension:4e0a5ff186815f82bbbf"
+      ],
+      "question": "Does the scoped evidence identify \"ML-KEM-768\" as one of the ML-KEM parameter sets specified by NIST's FIPS 203?",
+      "decision_impact": "Checks the identity and membership of the second listed set.",
+      "routes": [
+        "atoms",
+        "evidence",
+        "world"
+      ],
+      "gate": "always"
+    },
+    {
+      "id": "p03:probe:8a1384f49cc348828b2d",
+      "claim_id": "p03:claim:e23b8631fd0a7effca07",
+      "kind": "entity_identity",
+      "dimension_ids": [
+        "p03:dimension:54ebc688ad244de82b51"
+      ],
+      "question": "Does the scoped evidence identify \"NIST\" as the institution associated with FIPS 203 in the claimed possessive relationship?",
+      "decision_impact": "Checks the institutional identity and association.",
+      "routes": [
+        "atoms",
+        "evidence",
+        "world"
+      ],
+      "gate": "always"
+    },
+    {
+      "id": "p03:probe:34486d485e90de3425e2",
+      "claim_id": "p03:claim:e23b8631fd0a7effca07",
+      "kind": "entity_identity",
+      "dimension_ids": [
+        "p03:dimension:57e20905d29c24be2dcc"
+      ],
+      "question": "Does the scoped evidence identify the listed items as \"ML-KEM parameter sets\", rather than another algorithm's sets or another category of item?",
+      "decision_impact": "Checks the algorithm family and parameter-set classification.",
+      "routes": [
+        "atoms",
+        "evidence",
+        "world"
+      ],
+      "gate": "always"
+    },
+    {
+      "id": "p03:probe:3e834379ccbf9af34f33",
+      "claim_id": "p03:claim:e23b8631fd0a7effca07",
+      "kind": "entity_identity",
+      "dimension_ids": [
+        "p03:dimension:726b1aad054478654be7"
+      ],
+      "question": "Does the scoped evidence concern \"FIPS 203\", rather than a different standard or document?",
+      "decision_impact": "Checks that support applies to the named standard.",
+      "routes": [
+        "atoms",
+        "evidence",
+        "world"
+      ],
+      "gate": "always"
+    },
+    {
+      "id": "p03:probe:48ad40db90cedfac33fb",
+      "claim_id": "p03:claim:e23b8631fd0a7effca07",
+      "kind": "entity_identity",
+      "dimension_ids": [
+        "p03:dimension:816885ae64ae68ce0208"
+      ],
+      "question": "Does the scoped evidence identify \"ML-KEM-512\" as one of the ML-KEM parameter sets specified by NIST's FIPS 203?",
+      "decision_impact": "Checks the identity and membership of the first listed set.",
+      "routes": [
+        "atoms",
+        "evidence",
+        "world"
+      ],
+      "gate": "always"
+    },
+    {
+      "id": "p03:probe:e7082424a125c697c6cf",
+      "claim_id": "p03:claim:e23b8631fd0a7effca07",
+      "kind": "entity_identity",
+      "dimension_ids": [
+        "p03:dimension:b169c99abd1bbf1acdac"
+      ],
+      "question": "Does the scoped evidence identify \"ML-KEM-1024\" as one of the ML-KEM parameter sets specified by NIST's FIPS 203?",
+      "decision_impact": "Checks the identity and membership of the third listed set.",
+      "routes": [
+        "atoms",
+        "evidence",
+        "world"
+      ],
+      "gate": "always"
+    },
+    {
+      "id": "p03:probe:8f691aa9000ecee063fa",
+      "claim_id": "p03:claim:e23b8631fd0a7effca07",
+      "kind": "quantity_unit",
+      "dimension_ids": [
+        "p03:dimension:df9becca34a55ec8e61e"
+      ],
+      "question": "Does the scoped evidence support \"three ML-KEM parameter sets\", counting ML-KEM-512, ML-KEM-768, and ML-KEM-1024 as the three sets specified?",
+      "decision_impact": "Checks the count, counted category, and correspondence to the enumeration.",
+      "routes": [
+        "atoms",
+        "evidence"
+      ],
+      "gate": "always"
+    },
+    {
+      "id": "p03:probe:e169d303074ab9e3f850",
+      "claim_id": "p03:claim:e23b8631fd0a7effca07",
+      "kind": "semantic_core",
+      "dimension_ids": [
+        "p03:dimension:3a67ee3fa75a857d03e0",
+        "p03:dimension:c0b249a644b6e4d2ed98"
+      ],
+      "question": "Does the scoped evidence support that \"NIST's FIPS 203\" itself \"specifies\" the listed ML-KEM parameter sets?",
+      "decision_impact": "Distinguishes specification by the named standard from mere mention or specification elsewhere.",
+      "routes": [
+        "atoms",
+        "evidence"
+      ],
+      "gate": "always"
+    },
+    {
+      "id": "p03:probe:29e185434f9ec6d19dc2",
+      "claim_id": "p03:claim:e23b8631fd0a7effca07",
+      "kind": "source_lineage",
+      "dimension_ids": [],
+      "question": "What provenance does the scoped evidence provide for this claim, and is its account derived directly from FIPS 203 or through an intermediary?",
+      "decision_impact": "Determines traceability and whether support is direct or derivative.",
+      "routes": [
+        "lineage",
+        "world"
+      ],
+      "gate": "provenance"
+    }
+  ],
+  "notes": "",
+  "sha256": "d6b0d5c083c29d4a9c251aee17ffbc6b12edefb968f2fbe4b8192e5cb1d2e26d",
+  "projections": {
+    "atoms": {
+      "target_signature": "2fa0ca4256696dcf0aac74615e8f2e4d5aa5871378faa39028c773b01ff9077f",
+      "plan_sha256": "d6b0d5c083c29d4a9c251aee17ffbc6b12edefb968f2fbe4b8192e5cb1d2e26d",
+      "stage": "atoms",
+      "claims": [
+        {
+          "id": "p03:claim:e23b8631fd0a7effca07",
+          "statement": "NIST's FIPS 203 specifies three ML-KEM parameter sets: ML-KEM-512, ML-KEM-768, and ML-KEM-1024.",
+          "anchor": {
+            "start": 0,
+            "end": 95,
+            "quote": "NIST's FIPS 203 specifies three ML-KEM parameter sets: ML-KEM-512, ML-KEM-768, and ML-KEM-1024."
+          },
+          "role": "main",
+          "dimensions": [
+            {
+              "id": "p03:dimension:54ebc688ad244de82b51",
+              "kind": "entity_identity",
+              "anchor": {
+                "start": 0,
+                "end": 4,
+                "quote": "NIST"
+              }
+            },
+            {
+              "id": "p03:dimension:3a67ee3fa75a857d03e0",
+              "kind": "subject",
+              "anchor": {
+                "start": 0,
+                "end": 15,
+                "quote": "NIST's FIPS 203"
+              }
+            },
+            {
+              "id": "p03:dimension:726b1aad054478654be7",
+              "kind": "entity_identity",
+              "anchor": {
+                "start": 7,
+                "end": 15,
+                "quote": "FIPS 203"
+              }
+            },
+            {
+              "id": "p03:dimension:c0b249a644b6e4d2ed98",
+              "kind": "predicate",
+              "anchor": {
+                "start": 16,
+                "end": 25,
+                "quote": "specifies"
+              }
+            },
+            {
+              "id": "p03:dimension:df9becca34a55ec8e61e",
+              "kind": "quantity_unit",
+              "anchor": {
+                "start": 26,
+                "end": 53,
+                "quote": "three ML-KEM parameter sets"
+              }
+            },
+            {
+              "id": "p03:dimension:57e20905d29c24be2dcc",
+              "kind": "entity_identity",
+              "anchor": {
+                "start": 32,
+                "end": 53,
+                "quote": "ML-KEM parameter sets"
+              }
+            },
+            {
+              "id": "p03:dimension:816885ae64ae68ce0208",
+              "kind": "entity_identity",
+              "anchor": {
+                "start": 55,
+                "end": 65,
+                "quote": "ML-KEM-512"
+              }
+            },
+            {
+              "id": "p03:dimension:4e0a5ff186815f82bbbf",
+              "kind": "entity_identity",
+              "anchor": {
+                "start": 67,
+                "end": 77,
+                "quote": "ML-KEM-768"
+              }
+            },
+            {
+              "id": "p03:dimension:b169c99abd1bbf1acdac",
+              "kind": "entity_identity",
+              "anchor": {
+                "start": 83,
+                "end": 94,
+                "quote": "ML-KEM-1024"
+              }
+            }
+          ],
+          "parent_claim_id": null
+        }
+      ],
+      "probes": [
+        {
+          "id": "p03:probe:0864f0bac8bf0ead3b69",
+          "claim_id": "p03:claim:e23b8631fd0a7effca07",
+          "kind": "entity_identity",
+          "dimension_ids": [
+            "p03:dimension:4e0a5ff186815f82bbbf"
+          ],
+          "question": "Does the scoped evidence identify \"ML-KEM-768\" as one of the ML-KEM parameter sets specified by NIST's FIPS 203?",
+          "decision_impact": "Checks the identity and membership of the second listed set.",
+          "routes": [
+            "atoms",
+            "evidence",
+            "world"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p03:probe:8a1384f49cc348828b2d",
+          "claim_id": "p03:claim:e23b8631fd0a7effca07",
+          "kind": "entity_identity",
+          "dimension_ids": [
+            "p03:dimension:54ebc688ad244de82b51"
+          ],
+          "question": "Does the scoped evidence identify \"NIST\" as the institution associated with FIPS 203 in the claimed possessive relationship?",
+          "decision_impact": "Checks the institutional identity and association.",
+          "routes": [
+            "atoms",
+            "evidence",
+            "world"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p03:probe:34486d485e90de3425e2",
+          "claim_id": "p03:claim:e23b8631fd0a7effca07",
+          "kind": "entity_identity",
+          "dimension_ids": [
+            "p03:dimension:57e20905d29c24be2dcc"
+          ],
+          "question": "Does the scoped evidence identify the listed items as \"ML-KEM parameter sets\", rather than another algorithm's sets or another category of item?",
+          "decision_impact": "Checks the algorithm family and parameter-set classification.",
+          "routes": [
+            "atoms",
+            "evidence",
+            "world"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p03:probe:3e834379ccbf9af34f33",
+          "claim_id": "p03:claim:e23b8631fd0a7effca07",
+          "kind": "entity_identity",
+          "dimension_ids": [
+            "p03:dimension:726b1aad054478654be7"
+          ],
+          "question": "Does the scoped evidence concern \"FIPS 203\", rather than a different standard or document?",
+          "decision_impact": "Checks that support applies to the named standard.",
+          "routes": [
+            "atoms",
+            "evidence",
+            "world"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p03:probe:48ad40db90cedfac33fb",
+          "claim_id": "p03:claim:e23b8631fd0a7effca07",
+          "kind": "entity_identity",
+          "dimension_ids": [
+            "p03:dimension:816885ae64ae68ce0208"
+          ],
+          "question": "Does the scoped evidence identify \"ML-KEM-512\" as one of the ML-KEM parameter sets specified by NIST's FIPS 203?",
+          "decision_impact": "Checks the identity and membership of the first listed set.",
+          "routes": [
+            "atoms",
+            "evidence",
+            "world"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p03:probe:e7082424a125c697c6cf",
+          "claim_id": "p03:claim:e23b8631fd0a7effca07",
+          "kind": "entity_identity",
+          "dimension_ids": [
+            "p03:dimension:b169c99abd1bbf1acdac"
+          ],
+          "question": "Does the scoped evidence identify \"ML-KEM-1024\" as one of the ML-KEM parameter sets specified by NIST's FIPS 203?",
+          "decision_impact": "Checks the identity and membership of the third listed set.",
+          "routes": [
+            "atoms",
+            "evidence",
+            "world"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p03:probe:8f691aa9000ecee063fa",
+          "claim_id": "p03:claim:e23b8631fd0a7effca07",
+          "kind": "quantity_unit",
+          "dimension_ids": [
+            "p03:dimension:df9becca34a55ec8e61e"
+          ],
+          "question": "Does the scoped evidence support \"three ML-KEM parameter sets\", counting ML-KEM-512, ML-KEM-768, and ML-KEM-1024 as the three sets specified?",
+          "decision_impact": "Checks the count, counted category, and correspondence to the enumeration.",
+          "routes": [
+            "atoms",
+            "evidence"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p03:probe:e169d303074ab9e3f850",
+          "claim_id": "p03:claim:e23b8631fd0a7effca07",
+          "kind": "semantic_core",
+          "dimension_ids": [
+            "p03:dimension:3a67ee3fa75a857d03e0",
+            "p03:dimension:c0b249a644b6e4d2ed98"
+          ],
+          "question": "Does the scoped evidence support that \"NIST's FIPS 203\" itself \"specifies\" the listed ML-KEM parameter sets?",
+          "decision_impact": "Distinguishes specification by the named standard from mere mention or specification elsewhere.",
+          "routes": [
+            "atoms",
+            "evidence"
+          ],
+          "gate": "always"
+        }
+      ]
+    },
+    "lineage": {
+      "target_signature": "2fa0ca4256696dcf0aac74615e8f2e4d5aa5871378faa39028c773b01ff9077f",
+      "plan_sha256": "d6b0d5c083c29d4a9c251aee17ffbc6b12edefb968f2fbe4b8192e5cb1d2e26d",
+      "stage": "lineage",
+      "claims": [
+        {
+          "id": "p03:claim:e23b8631fd0a7effca07",
+          "statement": "NIST's FIPS 203 specifies three ML-KEM parameter sets: ML-KEM-512, ML-KEM-768, and ML-KEM-1024.",
+          "anchor": {
+            "start": 0,
+            "end": 95,
+            "quote": "NIST's FIPS 203 specifies three ML-KEM parameter sets: ML-KEM-512, ML-KEM-768, and ML-KEM-1024."
+          },
+          "role": "main",
+          "dimensions": [
+            {
+              "id": "p03:dimension:54ebc688ad244de82b51",
+              "kind": "entity_identity",
+              "anchor": {
+                "start": 0,
+                "end": 4,
+                "quote": "NIST"
+              }
+            },
+            {
+              "id": "p03:dimension:3a67ee3fa75a857d03e0",
+              "kind": "subject",
+              "anchor": {
+                "start": 0,
+                "end": 15,
+                "quote": "NIST's FIPS 203"
+              }
+            },
+            {
+              "id": "p03:dimension:726b1aad054478654be7",
+              "kind": "entity_identity",
+              "anchor": {
+                "start": 7,
+                "end": 15,
+                "quote": "FIPS 203"
+              }
+            },
+            {
+              "id": "p03:dimension:c0b249a644b6e4d2ed98",
+              "kind": "predicate",
+              "anchor": {
+                "start": 16,
+                "end": 25,
+                "quote": "specifies"
+              }
+            },
+            {
+              "id": "p03:dimension:df9becca34a55ec8e61e",
+              "kind": "quantity_unit",
+              "anchor": {
+                "start": 26,
+                "end": 53,
+                "quote": "three ML-KEM parameter sets"
+              }
+            },
+            {
+              "id": "p03:dimension:57e20905d29c24be2dcc",
+              "kind": "entity_identity",
+              "anchor": {
+                "start": 32,
+                "end": 53,
+                "quote": "ML-KEM parameter sets"
+              }
+            },
+            {
+              "id": "p03:dimension:816885ae64ae68ce0208",
+              "kind": "entity_identity",
+              "anchor": {
+                "start": 55,
+                "end": 65,
+                "quote": "ML-KEM-512"
+              }
+            },
+            {
+              "id": "p03:dimension:4e0a5ff186815f82bbbf",
+              "kind": "entity_identity",
+              "anchor": {
+                "start": 67,
+                "end": 77,
+                "quote": "ML-KEM-768"
+              }
+            },
+            {
+              "id": "p03:dimension:b169c99abd1bbf1acdac",
+              "kind": "entity_identity",
+              "anchor": {
+                "start": 83,
+                "end": 94,
+                "quote": "ML-KEM-1024"
+              }
+            }
+          ],
+          "parent_claim_id": null
+        }
+      ],
+      "probes": [
+        {
+          "id": "p03:probe:29e185434f9ec6d19dc2",
+          "claim_id": "p03:claim:e23b8631fd0a7effca07",
+          "kind": "source_lineage",
+          "dimension_ids": [],
+          "question": "What provenance does the scoped evidence provide for this claim, and is its account derived directly from FIPS 203 or through an intermediary?",
+          "decision_impact": "Determines traceability and whether support is direct or derivative.",
+          "routes": [
+            "lineage",
+            "world"
+          ],
+          "gate": "provenance"
+        }
+      ]
+    },
+    "critic": {
+      "target_signature": "2fa0ca4256696dcf0aac74615e8f2e4d5aa5871378faa39028c773b01ff9077f",
+      "plan_sha256": "d6b0d5c083c29d4a9c251aee17ffbc6b12edefb968f2fbe4b8192e5cb1d2e26d",
+      "stage": "critic",
+      "claims": [
+        {
+          "id": "p03:claim:e23b8631fd0a7effca07",
+          "statement": "NIST's FIPS 203 specifies three ML-KEM parameter sets: ML-KEM-512, ML-KEM-768, and ML-KEM-1024.",
+          "anchor": {
+            "start": 0,
+            "end": 95,
+            "quote": "NIST's FIPS 203 specifies three ML-KEM parameter sets: ML-KEM-512, ML-KEM-768, and ML-KEM-1024."
+          },
+          "role": "main",
+          "dimensions": [
+            {
+              "id": "p03:dimension:54ebc688ad244de82b51",
+              "kind": "entity_identity",
+              "anchor": {
+                "start": 0,
+                "end": 4,
+                "quote": "NIST"
+              }
+            },
+            {
+              "id": "p03:dimension:3a67ee3fa75a857d03e0",
+              "kind": "subject",
+              "anchor": {
+                "start": 0,
+                "end": 15,
+                "quote": "NIST's FIPS 203"
+              }
+            },
+            {
+              "id": "p03:dimension:726b1aad054478654be7",
+              "kind": "entity_identity",
+              "anchor": {
+                "start": 7,
+                "end": 15,
+                "quote": "FIPS 203"
+              }
+            },
+            {
+              "id": "p03:dimension:c0b249a644b6e4d2ed98",
+              "kind": "predicate",
+              "anchor": {
+                "start": 16,
+                "end": 25,
+                "quote": "specifies"
+              }
+            },
+            {
+              "id": "p03:dimension:df9becca34a55ec8e61e",
+              "kind": "quantity_unit",
+              "anchor": {
+                "start": 26,
+                "end": 53,
+                "quote": "three ML-KEM parameter sets"
+              }
+            },
+            {
+              "id": "p03:dimension:57e20905d29c24be2dcc",
+              "kind": "entity_identity",
+              "anchor": {
+                "start": 32,
+                "end": 53,
+                "quote": "ML-KEM parameter sets"
+              }
+            },
+            {
+              "id": "p03:dimension:816885ae64ae68ce0208",
+              "kind": "entity_identity",
+              "anchor": {
+                "start": 55,
+                "end": 65,
+                "quote": "ML-KEM-512"
+              }
+            },
+            {
+              "id": "p03:dimension:4e0a5ff186815f82bbbf",
+              "kind": "entity_identity",
+              "anchor": {
+                "start": 67,
+                "end": 77,
+                "quote": "ML-KEM-768"
+              }
+            },
+            {
+              "id": "p03:dimension:b169c99abd1bbf1acdac",
+              "kind": "entity_identity",
+              "anchor": {
+                "start": 83,
+                "end": 94,
+                "quote": "ML-KEM-1024"
+              }
+            }
+          ],
+          "parent_claim_id": null
+        }
+      ],
+      "probes": [
+        {
+          "id": "p03:probe:0864f0bac8bf0ead3b69",
+          "claim_id": "p03:claim:e23b8631fd0a7effca07",
+          "kind": "entity_identity",
+          "dimension_ids": [
+            "p03:dimension:4e0a5ff186815f82bbbf"
+          ],
+          "question": "Does the scoped evidence identify \"ML-KEM-768\" as one of the ML-KEM parameter sets specified by NIST's FIPS 203?",
+          "decision_impact": "Checks the identity and membership of the second listed set.",
+          "routes": [
+            "atoms",
+            "evidence",
+            "world"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p03:probe:8a1384f49cc348828b2d",
+          "claim_id": "p03:claim:e23b8631fd0a7effca07",
+          "kind": "entity_identity",
+          "dimension_ids": [
+            "p03:dimension:54ebc688ad244de82b51"
+          ],
+          "question": "Does the scoped evidence identify \"NIST\" as the institution associated with FIPS 203 in the claimed possessive relationship?",
+          "decision_impact": "Checks the institutional identity and association.",
+          "routes": [
+            "atoms",
+            "evidence",
+            "world"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p03:probe:34486d485e90de3425e2",
+          "claim_id": "p03:claim:e23b8631fd0a7effca07",
+          "kind": "entity_identity",
+          "dimension_ids": [
+            "p03:dimension:57e20905d29c24be2dcc"
+          ],
+          "question": "Does the scoped evidence identify the listed items as \"ML-KEM parameter sets\", rather than another algorithm's sets or another category of item?",
+          "decision_impact": "Checks the algorithm family and parameter-set classification.",
+          "routes": [
+            "atoms",
+            "evidence",
+            "world"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p03:probe:3e834379ccbf9af34f33",
+          "claim_id": "p03:claim:e23b8631fd0a7effca07",
+          "kind": "entity_identity",
+          "dimension_ids": [
+            "p03:dimension:726b1aad054478654be7"
+          ],
+          "question": "Does the scoped evidence concern \"FIPS 203\", rather than a different standard or document?",
+          "decision_impact": "Checks that support applies to the named standard.",
+          "routes": [
+            "atoms",
+            "evidence",
+            "world"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p03:probe:48ad40db90cedfac33fb",
+          "claim_id": "p03:claim:e23b8631fd0a7effca07",
+          "kind": "entity_identity",
+          "dimension_ids": [
+            "p03:dimension:816885ae64ae68ce0208"
+          ],
+          "question": "Does the scoped evidence identify \"ML-KEM-512\" as one of the ML-KEM parameter sets specified by NIST's FIPS 203?",
+          "decision_impact": "Checks the identity and membership of the first listed set.",
+          "routes": [
+            "atoms",
+            "evidence",
+            "world"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p03:probe:e7082424a125c697c6cf",
+          "claim_id": "p03:claim:e23b8631fd0a7effca07",
+          "kind": "entity_identity",
+          "dimension_ids": [
+            "p03:dimension:b169c99abd1bbf1acdac"
+          ],
+          "question": "Does the scoped evidence identify \"ML-KEM-1024\" as one of the ML-KEM parameter sets specified by NIST's FIPS 203?",
+          "decision_impact": "Checks the identity and membership of the third listed set.",
+          "routes": [
+            "atoms",
+            "evidence",
+            "world"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p03:probe:8f691aa9000ecee063fa",
+          "claim_id": "p03:claim:e23b8631fd0a7effca07",
+          "kind": "quantity_unit",
+          "dimension_ids": [
+            "p03:dimension:df9becca34a55ec8e61e"
+          ],
+          "question": "Does the scoped evidence support \"three ML-KEM parameter sets\", counting ML-KEM-512, ML-KEM-768, and ML-KEM-1024 as the three sets specified?",
+          "decision_impact": "Checks the count, counted category, and correspondence to the enumeration.",
+          "routes": [
+            "atoms",
+            "evidence"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p03:probe:e169d303074ab9e3f850",
+          "claim_id": "p03:claim:e23b8631fd0a7effca07",
+          "kind": "semantic_core",
+          "dimension_ids": [
+            "p03:dimension:3a67ee3fa75a857d03e0",
+            "p03:dimension:c0b249a644b6e4d2ed98"
+          ],
+          "question": "Does the scoped evidence support that \"NIST's FIPS 203\" itself \"specifies\" the listed ML-KEM parameter sets?",
+          "decision_impact": "Distinguishes specification by the named standard from mere mention or specification elsewhere.",
+          "routes": [
+            "atoms",
+            "evidence"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p03:probe:29e185434f9ec6d19dc2",
+          "claim_id": "p03:claim:e23b8631fd0a7effca07",
+          "kind": "source_lineage",
+          "dimension_ids": [],
+          "question": "What provenance does the scoped evidence provide for this claim, and is its account derived directly from FIPS 203 or through an intermediary?",
+          "decision_impact": "Determines traceability and whether support is direct or derivative.",
+          "routes": [
+            "lineage",
+            "world"
+          ],
+          "gate": "provenance"
+        }
+      ]
+    },
+    "evidence": {
+      "target_signature": "2fa0ca4256696dcf0aac74615e8f2e4d5aa5871378faa39028c773b01ff9077f",
+      "plan_sha256": "d6b0d5c083c29d4a9c251aee17ffbc6b12edefb968f2fbe4b8192e5cb1d2e26d",
+      "stage": "evidence",
+      "claims": [
+        {
+          "id": "p03:claim:e23b8631fd0a7effca07",
+          "statement": "NIST's FIPS 203 specifies three ML-KEM parameter sets: ML-KEM-512, ML-KEM-768, and ML-KEM-1024.",
+          "anchor": {
+            "start": 0,
+            "end": 95,
+            "quote": "NIST's FIPS 203 specifies three ML-KEM parameter sets: ML-KEM-512, ML-KEM-768, and ML-KEM-1024."
+          },
+          "role": "main",
+          "dimensions": [
+            {
+              "id": "p03:dimension:54ebc688ad244de82b51",
+              "kind": "entity_identity",
+              "anchor": {
+                "start": 0,
+                "end": 4,
+                "quote": "NIST"
+              }
+            },
+            {
+              "id": "p03:dimension:3a67ee3fa75a857d03e0",
+              "kind": "subject",
+              "anchor": {
+                "start": 0,
+                "end": 15,
+                "quote": "NIST's FIPS 203"
+              }
+            },
+            {
+              "id": "p03:dimension:726b1aad054478654be7",
+              "kind": "entity_identity",
+              "anchor": {
+                "start": 7,
+                "end": 15,
+                "quote": "FIPS 203"
+              }
+            },
+            {
+              "id": "p03:dimension:c0b249a644b6e4d2ed98",
+              "kind": "predicate",
+              "anchor": {
+                "start": 16,
+                "end": 25,
+                "quote": "specifies"
+              }
+            },
+            {
+              "id": "p03:dimension:df9becca34a55ec8e61e",
+              "kind": "quantity_unit",
+              "anchor": {
+                "start": 26,
+                "end": 53,
+                "quote": "three ML-KEM parameter sets"
+              }
+            },
+            {
+              "id": "p03:dimension:57e20905d29c24be2dcc",
+              "kind": "entity_identity",
+              "anchor": {
+                "start": 32,
+                "end": 53,
+                "quote": "ML-KEM parameter sets"
+              }
+            },
+            {
+              "id": "p03:dimension:816885ae64ae68ce0208",
+              "kind": "entity_identity",
+              "anchor": {
+                "start": 55,
+                "end": 65,
+                "quote": "ML-KEM-512"
+              }
+            },
+            {
+              "id": "p03:dimension:4e0a5ff186815f82bbbf",
+              "kind": "entity_identity",
+              "anchor": {
+                "start": 67,
+                "end": 77,
+                "quote": "ML-KEM-768"
+              }
+            },
+            {
+              "id": "p03:dimension:b169c99abd1bbf1acdac",
+              "kind": "entity_identity",
+              "anchor": {
+                "start": 83,
+                "end": 94,
+                "quote": "ML-KEM-1024"
+              }
+            }
+          ],
+          "parent_claim_id": null
+        }
+      ],
+      "probes": [
+        {
+          "id": "p03:probe:0864f0bac8bf0ead3b69",
+          "claim_id": "p03:claim:e23b8631fd0a7effca07",
+          "kind": "entity_identity",
+          "dimension_ids": [
+            "p03:dimension:4e0a5ff186815f82bbbf"
+          ],
+          "question": "Does the scoped evidence identify \"ML-KEM-768\" as one of the ML-KEM parameter sets specified by NIST's FIPS 203?",
+          "decision_impact": "Checks the identity and membership of the second listed set.",
+          "routes": [
+            "atoms",
+            "evidence",
+            "world"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p03:probe:8a1384f49cc348828b2d",
+          "claim_id": "p03:claim:e23b8631fd0a7effca07",
+          "kind": "entity_identity",
+          "dimension_ids": [
+            "p03:dimension:54ebc688ad244de82b51"
+          ],
+          "question": "Does the scoped evidence identify \"NIST\" as the institution associated with FIPS 203 in the claimed possessive relationship?",
+          "decision_impact": "Checks the institutional identity and association.",
+          "routes": [
+            "atoms",
+            "evidence",
+            "world"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p03:probe:34486d485e90de3425e2",
+          "claim_id": "p03:claim:e23b8631fd0a7effca07",
+          "kind": "entity_identity",
+          "dimension_ids": [
+            "p03:dimension:57e20905d29c24be2dcc"
+          ],
+          "question": "Does the scoped evidence identify the listed items as \"ML-KEM parameter sets\", rather than another algorithm's sets or another category of item?",
+          "decision_impact": "Checks the algorithm family and parameter-set classification.",
+          "routes": [
+            "atoms",
+            "evidence",
+            "world"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p03:probe:3e834379ccbf9af34f33",
+          "claim_id": "p03:claim:e23b8631fd0a7effca07",
+          "kind": "entity_identity",
+          "dimension_ids": [
+            "p03:dimension:726b1aad054478654be7"
+          ],
+          "question": "Does the scoped evidence concern \"FIPS 203\", rather than a different standard or document?",
+          "decision_impact": "Checks that support applies to the named standard.",
+          "routes": [
+            "atoms",
+            "evidence",
+            "world"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p03:probe:48ad40db90cedfac33fb",
+          "claim_id": "p03:claim:e23b8631fd0a7effca07",
+          "kind": "entity_identity",
+          "dimension_ids": [
+            "p03:dimension:816885ae64ae68ce0208"
+          ],
+          "question": "Does the scoped evidence identify \"ML-KEM-512\" as one of the ML-KEM parameter sets specified by NIST's FIPS 203?",
+          "decision_impact": "Checks the identity and membership of the first listed set.",
+          "routes": [
+            "atoms",
+            "evidence",
+            "world"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p03:probe:e7082424a125c697c6cf",
+          "claim_id": "p03:claim:e23b8631fd0a7effca07",
+          "kind": "entity_identity",
+          "dimension_ids": [
+            "p03:dimension:b169c99abd1bbf1acdac"
+          ],
+          "question": "Does the scoped evidence identify \"ML-KEM-1024\" as one of the ML-KEM parameter sets specified by NIST's FIPS 203?",
+          "decision_impact": "Checks the identity and membership of the third listed set.",
+          "routes": [
+            "atoms",
+            "evidence",
+            "world"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p03:probe:8f691aa9000ecee063fa",
+          "claim_id": "p03:claim:e23b8631fd0a7effca07",
+          "kind": "quantity_unit",
+          "dimension_ids": [
+            "p03:dimension:df9becca34a55ec8e61e"
+          ],
+          "question": "Does the scoped evidence support \"three ML-KEM parameter sets\", counting ML-KEM-512, ML-KEM-768, and ML-KEM-1024 as the three sets specified?",
+          "decision_impact": "Checks the count, counted category, and correspondence to the enumeration.",
+          "routes": [
+            "atoms",
+            "evidence"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p03:probe:e169d303074ab9e3f850",
+          "claim_id": "p03:claim:e23b8631fd0a7effca07",
+          "kind": "semantic_core",
+          "dimension_ids": [
+            "p03:dimension:3a67ee3fa75a857d03e0",
+            "p03:dimension:c0b249a644b6e4d2ed98"
+          ],
+          "question": "Does the scoped evidence support that \"NIST's FIPS 203\" itself \"specifies\" the listed ML-KEM parameter sets?",
+          "decision_impact": "Distinguishes specification by the named standard from mere mention or specification elsewhere.",
+          "routes": [
+            "atoms",
+            "evidence"
+          ],
+          "gate": "always"
+        }
+      ]
+    },
+    "world": {
+      "target_signature": "2fa0ca4256696dcf0aac74615e8f2e4d5aa5871378faa39028c773b01ff9077f",
+      "plan_sha256": "d6b0d5c083c29d4a9c251aee17ffbc6b12edefb968f2fbe4b8192e5cb1d2e26d",
+      "stage": "world",
+      "claims": [
+        {
+          "id": "p03:claim:e23b8631fd0a7effca07",
+          "statement": "NIST's FIPS 203 specifies three ML-KEM parameter sets: ML-KEM-512, ML-KEM-768, and ML-KEM-1024.",
+          "anchor": {
+            "start": 0,
+            "end": 95,
+            "quote": "NIST's FIPS 203 specifies three ML-KEM parameter sets: ML-KEM-512, ML-KEM-768, and ML-KEM-1024."
+          },
+          "role": "main",
+          "dimensions": [
+            {
+              "id": "p03:dimension:54ebc688ad244de82b51",
+              "kind": "entity_identity",
+              "anchor": {
+                "start": 0,
+                "end": 4,
+                "quote": "NIST"
+              }
+            },
+            {
+              "id": "p03:dimension:3a67ee3fa75a857d03e0",
+              "kind": "subject",
+              "anchor": {
+                "start": 0,
+                "end": 15,
+                "quote": "NIST's FIPS 203"
+              }
+            },
+            {
+              "id": "p03:dimension:726b1aad054478654be7",
+              "kind": "entity_identity",
+              "anchor": {
+                "start": 7,
+                "end": 15,
+                "quote": "FIPS 203"
+              }
+            },
+            {
+              "id": "p03:dimension:c0b249a644b6e4d2ed98",
+              "kind": "predicate",
+              "anchor": {
+                "start": 16,
+                "end": 25,
+                "quote": "specifies"
+              }
+            },
+            {
+              "id": "p03:dimension:df9becca34a55ec8e61e",
+              "kind": "quantity_unit",
+              "anchor": {
+                "start": 26,
+                "end": 53,
+                "quote": "three ML-KEM parameter sets"
+              }
+            },
+            {
+              "id": "p03:dimension:57e20905d29c24be2dcc",
+              "kind": "entity_identity",
+              "anchor": {
+                "start": 32,
+                "end": 53,
+                "quote": "ML-KEM parameter sets"
+              }
+            },
+            {
+              "id": "p03:dimension:816885ae64ae68ce0208",
+              "kind": "entity_identity",
+              "anchor": {
+                "start": 55,
+                "end": 65,
+                "quote": "ML-KEM-512"
+              }
+            },
+            {
+              "id": "p03:dimension:4e0a5ff186815f82bbbf",
+              "kind": "entity_identity",
+              "anchor": {
+                "start": 67,
+                "end": 77,
+                "quote": "ML-KEM-768"
+              }
+            },
+            {
+              "id": "p03:dimension:b169c99abd1bbf1acdac",
+              "kind": "entity_identity",
+              "anchor": {
+                "start": 83,
+                "end": 94,
+                "quote": "ML-KEM-1024"
+              }
+            }
+          ],
+          "parent_claim_id": null
+        }
+      ],
+      "probes": [
+        {
+          "id": "p03:probe:0864f0bac8bf0ead3b69",
+          "claim_id": "p03:claim:e23b8631fd0a7effca07",
+          "kind": "entity_identity",
+          "dimension_ids": [
+            "p03:dimension:4e0a5ff186815f82bbbf"
+          ],
+          "question": "Does the scoped evidence identify \"ML-KEM-768\" as one of the ML-KEM parameter sets specified by NIST's FIPS 203?",
+          "decision_impact": "Checks the identity and membership of the second listed set.",
+          "routes": [
+            "atoms",
+            "evidence",
+            "world"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p03:probe:8a1384f49cc348828b2d",
+          "claim_id": "p03:claim:e23b8631fd0a7effca07",
+          "kind": "entity_identity",
+          "dimension_ids": [
+            "p03:dimension:54ebc688ad244de82b51"
+          ],
+          "question": "Does the scoped evidence identify \"NIST\" as the institution associated with FIPS 203 in the claimed possessive relationship?",
+          "decision_impact": "Checks the institutional identity and association.",
+          "routes": [
+            "atoms",
+            "evidence",
+            "world"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p03:probe:34486d485e90de3425e2",
+          "claim_id": "p03:claim:e23b8631fd0a7effca07",
+          "kind": "entity_identity",
+          "dimension_ids": [
+            "p03:dimension:57e20905d29c24be2dcc"
+          ],
+          "question": "Does the scoped evidence identify the listed items as \"ML-KEM parameter sets\", rather than another algorithm's sets or another category of item?",
+          "decision_impact": "Checks the algorithm family and parameter-set classification.",
+          "routes": [
+            "atoms",
+            "evidence",
+            "world"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p03:probe:3e834379ccbf9af34f33",
+          "claim_id": "p03:claim:e23b8631fd0a7effca07",
+          "kind": "entity_identity",
+          "dimension_ids": [
+            "p03:dimension:726b1aad054478654be7"
+          ],
+          "question": "Does the scoped evidence concern \"FIPS 203\", rather than a different standard or document?",
+          "decision_impact": "Checks that support applies to the named standard.",
+          "routes": [
+            "atoms",
+            "evidence",
+            "world"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p03:probe:48ad40db90cedfac33fb",
+          "claim_id": "p03:claim:e23b8631fd0a7effca07",
+          "kind": "entity_identity",
+          "dimension_ids": [
+            "p03:dimension:816885ae64ae68ce0208"
+          ],
+          "question": "Does the scoped evidence identify \"ML-KEM-512\" as one of the ML-KEM parameter sets specified by NIST's FIPS 203?",
+          "decision_impact": "Checks the identity and membership of the first listed set.",
+          "routes": [
+            "atoms",
+            "evidence",
+            "world"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p03:probe:e7082424a125c697c6cf",
+          "claim_id": "p03:claim:e23b8631fd0a7effca07",
+          "kind": "entity_identity",
+          "dimension_ids": [
+            "p03:dimension:b169c99abd1bbf1acdac"
+          ],
+          "question": "Does the scoped evidence identify \"ML-KEM-1024\" as one of the ML-KEM parameter sets specified by NIST's FIPS 203?",
+          "decision_impact": "Checks the identity and membership of the third listed set.",
+          "routes": [
+            "atoms",
+            "evidence",
+            "world"
+          ],
+          "gate": "always"
+        },
+        {
+          "id": "p03:probe:29e185434f9ec6d19dc2",
+          "claim_id": "p03:claim:e23b8631fd0a7effca07",
+          "kind": "source_lineage",
+          "dimension_ids": [],
+          "question": "What provenance does the scoped evidence provide for this claim, and is its account derived directly from FIPS 203 or through an intermediary?",
+          "decision_impact": "Determines traceability and whether support is direct or derivative.",
+          "routes": [
+            "lineage",
+            "world"
+          ],
+          "gate": "provenance"
+        }
+      ]
+    }
+  }
+}

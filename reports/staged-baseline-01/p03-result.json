@@ -1,0 +1,32 @@
+{
+  "id": "p03",
+  "arm": "original",
+  "assessment_mode": "evidence",
+  "status": "completed",
+  "prediction": {
+    "decision": "true",
+    "origins": [
+      "m05",
+      "m06"
+    ],
+    "edges": [],
+    "provenance_evaluable": true,
+    "origin_evaluable": true,
+    "edges_evaluable": false,
+    "edge_export_limit": "No native source-to-source edge representation"
+  },
+  "extractor_answer_text": "m06明确支持原声明：NIST的FIPS 203规定三种参数集，名称确为ML-KEM-512、ML-KEM-768、ML-KEM-1024，无需纠偏。该页标示2024年8月13日发布，先定义ML-KEM密钥封装机制，再列出上述参数集，安全强度递增、性能递减。判断获支持是因为m06直接列明数量及名称，并非解释标准制定原因。两文档无分歧，但均来自NIST，不构成独立确认；现实核验仍未知。（基于2个信源〔同机构两文档〕 | 覆盖1类媒体 | 2条事实多源一致 | 0条存在分歧 | 因果锚定1/1）",
+  "extraction": {
+    "decision": "true",
+    "extractable": true,
+    "basis_quote": "m06明确支持原声明：NIST的FIPS 203规定三种参数集，名称确为ML-KEM-512、ML-KEM-768、ML-KEM-1024，无需纠偏。"
+  },
+  "usage": {
+    "model_calls": 17,
+    "input_tokens": 23293,
+    "output_tokens": 10570,
+    "seconds": 180.3913303629961
+  },
+  "new_api_attempts": 17,
+  "returned_responses": 17
+}

@@ -1,0 +1,35 @@
+{
+  "id": "p03",
+  "arm": "original",
+  "assessment_mode": "evidence",
+  "status": "completed",
+  "prediction": {
+    "decision": "true",
+    "origins": [
+      "m05",
+      "m06"
+    ],
+    "edges": [],
+    "provenance_evaluable": true,
+    "origin_evaluable": true,
+    "edges_evaluable": false,
+    "edge_export_limit": "No native source-to-source edge representation"
+  },
+  "usage": {
+    "model_calls": 17,
+    "input_tokens": 23131,
+    "output_tokens": 9549,
+    "seconds": 160.9892551219964
+  },
+  "extractor_answer_text": "m06明确支持原说法：NIST的FIPS 203规定三组参数，名称逐一为ML-KEM-512、ML-KEM-768、ML-KEM-1024，无须纠偏。文档标示2024-08-13发布，快照于2026-09-05采集；三组按安全递增、性能递减排列。判断依据是原文明列，世界真实性仍未知。未见来源冲突；m05未列参数且不在评估范围，不能算独立佐证。（基于2个信源、评估限1个 | 覆盖1类媒体 | 0条事实多源一致 | 0条存在分歧 | 因果锚定1/1）",
+  "extraction": {
+    "decision": "true",
+    "extractable": true,
+    "basis_quote": "m06明确支持原说法：NIST的FIPS 203规定三组参数，名称逐一为ML-KEM-512、ML-KEM-768、ML-KEM-1024，无须纠偏。"
+  },
+  "actual_new_api_usage": {
+    "model_calls": 17,
+    "input_tokens": 23131,
+    "output_tokens": 9549
+  }
+}

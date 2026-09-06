@@ -1,0 +1,19 @@
+{
+  "id": "conflict-evidence",
+  "arm": "original",
+  "status": "completed",
+  "prediction": "disputed",
+  "assessment_mode": "evidence",
+  "extractor_answer_text": "“渡轮今天运营”获report-a支持，但report-b明确否认，不能判为范围内证据一致支持；现实运营状态未知。这里“今天”指2026年9月4日：按元数据，两份快照均于10:00 UTC可用，截至20:00 UTC评估时同时在范围内。因两者对同一声明作相反陈述，证据结论为冲突。唯一分歧是当天是否运营：a称运营，b称未运营。两份均为同一虚构发布者的未认证合成快照，不构成独立确认。（基于2个信源 | 覆盖1类媒体 | 0条事实多源一致 | 1条存在分歧 | 因果锚定2/2）",
+  "extraction": {
+    "decision": "disputed",
+    "extractable": true,
+    "basis_quote": "因两者对同一声明作相反陈述，证据结论为冲突。"
+  },
+  "usage": {
+    "model_calls": 17,
+    "input_tokens": 14469,
+    "output_tokens": 8459,
+    "seconds": 153.8010115040015
+  }
+}

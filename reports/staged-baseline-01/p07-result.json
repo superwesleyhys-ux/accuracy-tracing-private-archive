@@ -1,0 +1,31 @@
+{
+  "id": "p07",
+  "arm": "original",
+  "assessment_mode": "evidence",
+  "status": "completed",
+  "prediction": {
+    "decision": "false",
+    "origins": [
+      "m13"
+    ],
+    "edges": [],
+    "provenance_evaluable": true,
+    "origin_evaluable": true,
+    "edges_evaluable": false,
+    "edge_export_limit": "No native source-to-source edge representation"
+  },
+  "extractor_answer_text": "限定证据m13记载了NOAA的GOES-U更名为GOES-19；“2024年6月25日更名”在1个信源中未找到，且被7月7日的记载反驳。范围外m12称6月25日为发射日；m13称7月7日完成末次点火、入轨后更名，因为抵达地球静止轨道才改用数字标识。两文无分歧，但同属NOAA且相互链接，不构成独立确认；现实核验未知。（基于2个信源，判定限1个 | 覆盖1类媒体 | 2条事实多源一致但同源 | 0条存在分歧 | 因果锚定2/2）",
+  "extraction": {
+    "decision": "false",
+    "extractable": true,
+    "basis_quote": "“2024年6月25日更名”在1个信源中未找到，且被7月7日的记载反驳。"
+  },
+  "usage": {
+    "model_calls": 17,
+    "input_tokens": 23362,
+    "output_tokens": 10476,
+    "seconds": 180.13715989499178
+  },
+  "new_api_attempts": 17,
+  "returned_responses": 17
+}

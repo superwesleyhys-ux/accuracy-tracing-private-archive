@@ -1,0 +1,28 @@
+{
+  "target": {
+    "id": "p05",
+    "text": "Ingenuity was upright at the moment it touched down during its January 18, 2024 flight.",
+    "as_of": "2026-09-05T09:34:36Z",
+    "source_version_id": "m09",
+    "assessment_mode": "evidence",
+    "evidence_scope": [
+      "m09"
+    ]
+  },
+  "materials": [
+    {
+      "version_id": "m09",
+      "url": "https://www.nasa.gov/news-release/after-three-years-on-mars-nasas-ingenuity-helicopter-mission-ends/",
+      "content": "After Three Years on Mars, NASA’s Ingenuity Helicopter Mission Ends\nPublication date: 2024-01-25\n\nNASA’s history-making Ingenuity Mars Helicopter has ended its mission at the Red Planet after surpassing expectations and making dozens more flights than planned. While the helicopter remains upright and in communication with ground controllers, imagery of its Jan. 18 flight sent to Earth this week indicates one or more of its rotor blades sustained damage during landing, and it is no longer capable of flight.\n\nHowever, about 3 feet (1 meter) above the surface, Ingenuity lost contact with the rover, which serves as a communications relay for the rotorcraft. The following day, communications were reestablished and more information about the flight was relayed to ground controllers at NASA JPL. Imagery revealing damage to the rotor blade arrived several days later. The cause of the communications dropout and the helicopter’s orientation at time of touchdown are still being investigated.",
+      "retrieved_at": "2026-09-05T09:34:36Z",
+      "published_at": null,
+      "available_at": "2026-09-05T09:34:36Z",
+      "availability_basis": "Current web-tool collection completed at retrieved_at on 2026-09-05. The supplied material is a selected, whitespace-normalized excerpt, not a full page or historical exact-version capture. Availability is asserted only at collection completion. The source's displayed publication date is preserved in content; no exact timezone-qualified publication instant is known.",
+      "issuer": "NASA Headquarters"
+    }
+  ],
+  "seed_ids": [
+    "m09"
+  ],
+  "full_evidence_control": false
+}

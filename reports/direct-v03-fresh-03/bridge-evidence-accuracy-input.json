@@ -1,0 +1,39 @@
+{
+  "target": {
+    "id": "bridge-evidence",
+    "text": "The bridge has already reopened.",
+    "as_of": "2026-09-04T20:00:00Z",
+    "source_version_id": "bridge-article",
+    "assessment_mode": "evidence",
+    "evidence_scope": [
+      "bridge-notice"
+    ]
+  },
+  "materials": [
+    {
+      "version_id": "bridge-article",
+      "url": "https://example.org/bridge-article",
+      "content": "The bridge has already reopened, according to https://example.org/bridge-notice.",
+      "retrieved_at": "2026-09-04T20:00:00Z",
+      "published_at": "2026-09-04T10:00:00Z",
+      "available_at": "2026-09-04T10:00:00Z",
+      "availability_basis": "Synthetic exact-version capture; no external authentication.",
+      "issuer": "Fictional publisher"
+    },
+    {
+      "version_id": "bridge-notice",
+      "url": "https://example.org/bridge-notice",
+      "content": "Bridge operations notice: The bridge remains closed. Reopening is planned for next month.",
+      "retrieved_at": "2026-09-04T20:00:00Z",
+      "published_at": "2026-09-04T10:00:00Z",
+      "available_at": "2026-09-04T10:00:00Z",
+      "availability_basis": "Synthetic exact-version capture; no external authentication.",
+      "issuer": "Fictional publisher"
+    }
+  ],
+  "seed_ids": [
+    "bridge-article",
+    "bridge-notice"
+  ],
+  "full_evidence_control": false
+}

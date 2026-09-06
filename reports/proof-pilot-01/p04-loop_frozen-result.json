@@ -1,0 +1,123 @@
+{
+  "id": "p04",
+  "arm": "loop_frozen",
+  "assessment_mode": "evidence",
+  "status": "completed",
+  "prediction": {
+    "decision": "false",
+    "origins": [
+      "m07"
+    ],
+    "edges": [],
+    "provenance_evaluable": true,
+    "origin_evaluable": true,
+    "edges_evaluable": true,
+    "provenance_status": "original_material_located",
+    "assessment_valid": true
+  },
+  "usage": {
+    "model_calls": 6,
+    "input_tokens": 10211,
+    "output_tokens": 8352,
+    "seconds": 136.78391443899454
+  },
+  "shared_state_sha256": "955a2f0425ef9cdb2d60f7a6dc9a013e05f9e398b01e8183712a0a53dc6c3f78",
+  "prefix_usage": {
+    "model_calls": 3,
+    "input_tokens": 5478,
+    "output_tokens": 6192,
+    "seconds": 94.8158274219968
+  },
+  "frozen_psi_adapter_returns": 4,
+  "native_prediction": {
+    "id": "p04",
+    "assessment_mode": "evidence",
+    "as_of": "2026-09-05T09:34:36Z",
+    "decision": "false",
+    "assessments": {
+      "evidence": {
+        "raw_verdict": "contradicted",
+        "decision": "contradicted",
+        "blocking_gap_ids": []
+      },
+      "world": {
+        "raw_verdict": "contradicted",
+        "decision": "contradicted",
+        "blocking_gap_ids": []
+      }
+    },
+    "provenance_status": "original_material_located",
+    "assessment_valid": true,
+    "stop_reason": "round_budget"
+  },
+  "checkpoints": [
+    {
+      "round": 1,
+      "id": "p04",
+      "decision": "false",
+      "assessment_mode": "evidence",
+      "assessments": {
+        "evidence": {
+          "raw_verdict": "contradicted",
+          "decision": "contradicted",
+          "blocking_gap_ids": []
+        },
+        "world": {
+          "raw_verdict": "contradicted",
+          "decision": "contradicted",
+          "blocking_gap_ids": []
+        }
+      },
+      "provenance_status": "original_material_located"
+    },
+    {
+      "round": 2,
+      "id": "p04",
+      "decision": "false",
+      "assessment_mode": "evidence",
+      "assessments": {
+        "evidence": {
+          "raw_verdict": "contradicted",
+          "decision": "contradicted",
+          "blocking_gap_ids": []
+        },
+        "world": {
+          "raw_verdict": "contradicted",
+          "decision": "contradicted",
+          "blocking_gap_ids": []
+        }
+      },
+      "provenance_status": "original_material_located"
+    },
+    {
+      "round": 3,
+      "id": "p04",
+      "decision": "false",
+      "assessment_mode": "evidence",
+      "assessments": {
+        "evidence": {
+          "raw_verdict": "contradicted",
+          "decision": "contradicted",
+          "blocking_gap_ids": []
+        },
+        "world": {
+          "raw_verdict": "contradicted",
+          "decision": "contradicted",
+          "blocking_gap_ids": []
+        }
+      },
+      "provenance_status": "original_material_located"
+    }
+  ],
+  "extractor_answer_text": "{\"id\": \"p04\", \"assessment_mode\": \"evidence\", \"as_of\": \"2026-09-05T09:34:36Z\", \"decision\": \"false\", \"assessments\": {\"evidence\": {\"raw_verdict\": \"contradicted\", \"decision\": \"contradicted\", \"blocking_gap_ids\": []}, \"world\": {\"raw_verdict\": \"contradicted\", \"decision\": \"contradicted\", \"blocking_gap_ids\": []}}, \"provenance_status\": \"original_material_located\", \"assessment_valid\": true, \"stop_reason\": \"round_budget\"}",
+  "extraction": {
+    "decision": "false",
+    "extractable": true,
+    "basis_quote": "\"decision\": \"false\""
+  },
+  "actual_new_api_usage": {
+    "model_calls": 3,
+    "input_tokens": 4733,
+    "output_tokens": 2160
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "target": {
+    "id": "conflict-evidence",
+    "text": "The ferry is operating today.",
+    "as_of": "2026-09-04T20:00:00Z",
+    "source_version_id": "report-a",
+    "assessment_mode": "evidence",
+    "evidence_scope": [
+      "report-a",
+      "report-b"
+    ]
+  },
+  "materials": [
+    {
+      "version_id": "report-a",
+      "url": "https://example.org/report-a",
+      "content": "The ferry is operating today.",
+      "retrieved_at": "2026-09-04T20:00:00Z",
+      "published_at": "2026-09-04T10:00:00Z",
+      "available_at": "2026-09-04T10:00:00Z",
+      "availability_basis": "Synthetic exact-version capture; no external authentication.",
+      "issuer": "Fictional publisher"
+    },
+    {
+      "version_id": "report-b",
+      "url": "https://example.org/report-b",
+      "content": "The ferry is not operating today.",
+      "retrieved_at": "2026-09-04T20:00:00Z",
+      "published_at": "2026-09-04T10:00:00Z",
+      "available_at": "2026-09-04T10:00:00Z",
+      "availability_basis": "Synthetic exact-version capture; no external authentication.",
+      "issuer": "Fictional publisher"
+    }
+  ],
+  "seed_ids": [
+    "report-a",
+    "report-b"
+  ],
+  "full_evidence_control": false
+}

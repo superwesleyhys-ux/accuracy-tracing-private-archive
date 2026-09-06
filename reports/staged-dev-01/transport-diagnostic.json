@@ -1,0 +1,8 @@
+{
+  "purpose": "single minimal transport diagnostic, not a semantic benchmark",
+  "requested_model": "gpt-6-astra",
+  "status": "error",
+  "error_type": "RateLimitError",
+  "http_status": 429,
+  "api_code": "unclassified"
+}

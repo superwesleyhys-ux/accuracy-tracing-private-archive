@@ -1,0 +1,272 @@
+{
+  "event": {
+    "title": "所提供的 m03 快照显示，NASA于2024年2月15日宣布OSIRIS-REx带回的贝努样本总质量为121.6克，而非目标声明中的70.3克。",
+    "date": "2024-02-15",
+    "summary": "m03将样本总质量明确记为121.6克，因此在指定证据范围内，目标声明与文档内容矛盾。\n公告中的70.3克指此前已测量的样本质量，并非最终总质量。\n公告称，工程团队拆解TAGSAM采样头后，从倾倒出的剩余样本中收集了51.2克材料。\n公告称，OSIRIS-REx于2023年9月24日将样本带回地球，NASA将保存至少70%的样本供后续研究。\n上述判断仅评估m03所述内容，不构成对现实真实性的独立核验；现实核验结果未知。",
+    "sources": [],
+    "relation": "",
+    "causes": [
+      {
+        "title": "完成TAGSAM采样头拆解，收集剩余样本51.2克",
+        "date": "2024年1月至2月15日公告前",
+        "summary": "m03称，工程团队设计、制造并测试新工具后，于1月成功移除紧固件并完成TAGSAM采样头拆解，从随后倾倒的剩余样本中收集了51.2克材料。这些材料与此前测量的样本及倾倒之外收集的额外颗粒合并，构成公告所述的121.6克总质量。",
+        "sources": [
+          {
+            "url": "https://science.nasa.gov/blogs/osiris-rex/2024/02/15/nasa-announces-osiris-rex-bulk-sample-mass/",
+            "title": "NASA Announces OSIRIS-REx Bulk Sample Mass（m03快照）"
+          }
+        ],
+        "relation": "直接促成总质量统计完成，是公告报告121.6克的关键前因",
+        "causes": [],
+        "confidence": 1.0,
+        "grounded": true
+      },
+      {
+        "title": "此前已测量70.3克样本，但该数值并非最终总质量",
+        "date": "2024年2月15日公告前，m03未注明具体测量日期",
+        "summary": "m03明确将70.3克称为“此前已测量”的质量，并将其作为合计总质量的一部分。这一区分是判定目标声明与m03矛盾的直接依据，但不能据此断言目标声明的作者为何发生误读。",
+        "sources": [
+          {
+            "url": "https://science.nasa.gov/blogs/osiris-rex/2024/02/15/nasa-announces-osiris-rex-bulk-sample-mass/",
+            "title": "NASA Announces OSIRIS-REx Bulk Sample Mass（m03快照）"
+          }
+        ],
+        "relation": "为后续总量合计提供基础，并直接支撑对目标声明的证据矛盾判断",
+        "causes": [],
+        "confidence": 1.0,
+        "grounded": true
+      }
+    ],
+    "confidence": 0.0,
+    "grounded": true
+  },
+  "direct_response": "仅据m03，NASA、2024年2月15日及OSIRIS-REx返回贝努样本均有记载；“最终70.3克”在指定1个信源中未找到支持，且与公告总量121.6克矛盾。公告称样本2023年9月返回，此前测得70.3克，次年1月拆头后另收集51.2克；加上额外颗粒才完成总量合计。两份NASA快照无分歧，但同机构一致不等于独立确认；本判断仅针对文档，现实核验未知。（基于2个信源 | 覆盖1类媒体 | 2条事实多源一致 | 0条存在分歧 | 因果锚定2/2）",
+  "credibility": {
+    "source_count": 2,
+    "source_types": [
+      "官方媒体"
+    ],
+    "consistent_count": 2,
+    "disputed_count": 0,
+    "grounding_rate": 1.0,
+    "grounded_count": 2,
+    "total_causal_nodes": 2
+  },
+  "event_timeline": [
+    {
+      "date": "2023-09-24",
+      "title": "OSIRIS-REx将贝努样本带回地球",
+      "description": "据NASA于2024年2月15日发布的公告，OSIRIS-REx在这一天将贝努物质送回地球。公告后来报告的121.6克是返回样本的总质量，不代表返回当天已完成称量。",
+      "significance": "重大",
+      "sources": [
+        {
+          "url": "https://science.nasa.gov/blogs/osiris-rex/2024/02/15/nasa-announces-osiris-rex-bulk-sample-mass/",
+          "title": "NASA Announces OSIRIS-REx Bulk Sample Mass"
+        }
+      ],
+      "perspectives": [],
+      "verified": false,
+      "causal_links": []
+    },
+    {
+      "date": "截至2023-10-20",
+      "title": "NASA已收集70.3克样本，超过任务最低目标",
+      "description": "NASA的10月20日公告称，团队已从采样硬件中移除并收集70.3克岩石和尘埃，超过至少60克的任务目标。这些材料包括采样头外侧物质及经薄膜盖片取出的部分内部样本，头部仍有材料待取出；次年2月公告将70.3克列为此前已测量的部分，而非最终总量。",
+      "significance": "重要",
+      "sources": [
+        {
+          "url": "https://science.nasa.gov/blogs/osiris-rex/2023/10/20/nasas-osiris-rex-achieves-sample-mass-milestone/",
+          "title": "NASA’s OSIRIS-REx Achieves Sample Mass Milestone"
+        },
+        {
+          "url": "https://science.nasa.gov/blogs/osiris-rex/2024/02/15/nasa-announces-osiris-rex-bulk-sample-mass/",
+          "title": "NASA Announces OSIRIS-REx Bulk Sample Mass"
+        }
+      ],
+      "perspectives": [],
+      "verified": false,
+      "causal_links": [
+        "NASA公布贝努样本总质量为121.6克"
+      ]
+    },
+    {
+      "date": "2024年1月至2月15日公告前",
+      "title": "工程团队拆解采样头并从倾倒材料中收集51.2克样本",
+      "description": "据2月15日公告，工程团队设计、制造并测试新工具后，于1月移除紧固件并完成TAGSAM采样头拆解。团队随后将剩余样本倒入容器，从此次倾倒中收集了51.2克材料；公告未注明倾倒的具体日期。",
+      "significance": "重要",
+      "sources": [
+        {
+          "url": "https://science.nasa.gov/blogs/osiris-rex/2024/02/15/nasa-announces-osiris-rex-bulk-sample-mass/",
+          "title": "NASA Announces OSIRIS-REx Bulk Sample Mass"
+        }
+      ],
+      "perspectives": [],
+      "verified": false,
+      "causal_links": [
+        "NASA公布贝努样本总质量为121.6克"
+      ]
+    },
+    {
+      "date": "2024-02-15",
+      "title": "NASA公布贝努样本总质量为121.6克",
+      "description": "NASA将此前测量的70.3克、此次倾倒收集的51.2克及倾倒之外收集的额外颗粒合计，报告总质量为121.6克，超过任务最低要求的两倍。公告同时表示，将保存至少70%的样本供全球科学家及后代研究。",
+      "significance": "重要",
+      "sources": [
+        {
+          "url": "https://science.nasa.gov/blogs/osiris-rex/2024/02/15/nasa-announces-osiris-rex-bulk-sample-mass/",
+          "title": "NASA Announces OSIRIS-REx Bulk Sample Mass"
+        }
+      ],
+      "perspectives": [],
+      "verified": false,
+      "causal_links": []
+    }
+  ],
+  "sources": [
+    {
+      "outlet": "NASA（美国国家航空航天局）",
+      "url": "https://science.nasa.gov/blogs/osiris-rex/2024/02/15/nasa-announces-osiris-rex-bulk-sample-mass/",
+      "publish_time": "2024-02-15",
+      "source_type": "官方媒体",
+      "is_original": true,
+      "key_facts": [
+        {
+          "claim": "NASA公告称，OSIRIS-REx于2023年9月24日返回地球时带回的贝努物质总质量为121.6克，超过任务最低要求的两倍。",
+          "source_urls": [
+            "https://science.nasa.gov/blogs/osiris-rex/2024/02/15/nasa-announces-osiris-rex-bulk-sample-mass/"
+          ],
+          "agreed": true
+        },
+        {
+          "claim": "公告称，工程师于2024年1月移除紧固件并完成采样器头部拆解，随后倒出并收集了51.2克样本。",
+          "source_urls": [
+            "https://science.nasa.gov/blogs/osiris-rex/2024/02/15/nasa-announces-osiris-rex-bulk-sample-mass/"
+          ],
+          "agreed": true
+        },
+        {
+          "claim": "公告将此前已测量的70.3克、此次倒出的51.2克及倒出过程之外收集的额外颗粒合计，报告样本总质量为121.6克。",
+          "source_urls": [
+            "https://science.nasa.gov/blogs/osiris-rex/2024/02/15/nasa-announces-osiris-rex-bulk-sample-mass/"
+          ],
+          "agreed": true
+        }
+      ]
+    },
+    {
+      "outlet": "NASA（美国国家航空航天局）",
+      "url": "https://science.nasa.gov/blogs/osiris-rex/2023/10/20/nasas-osiris-rex-achieves-sample-mass-milestone/",
+      "publish_time": "2023-10-20",
+      "source_type": "官方媒体",
+      "is_original": true,
+      "key_facts": [
+        {
+          "claim": "NASA当时报告，样本管理团队已从采样硬件中移除并收集70.3克岩石和尘埃，超过至少带回60克的任务目标。",
+          "source_urls": [
+            "https://science.nasa.gov/blogs/osiris-rex/2023/10/20/nasas-osiris-rex-achieves-sample-mass-milestone/"
+          ],
+          "agreed": true
+        },
+        {
+          "claim": "该阶段处理的样本包括采样器头部外侧的物质及经薄膜盖片取出的部分内部样本；头部内部仍有材料等待后续取出。",
+          "source_urls": [
+            "https://science.nasa.gov/blogs/osiris-rex/2023/10/20/nasas-osiris-rex-achieves-sample-mass-milestone/"
+          ],
+          "agreed": true
+        }
+      ]
+    }
+  ],
+  "source_timeline": [
+    {
+      "outlet": "NASA（美国国家航空航天局）",
+      "url": "https://science.nasa.gov/blogs/osiris-rex/2023/10/20/nasas-osiris-rex-achieves-sample-mass-milestone/",
+      "publish_time": "2023-10-20",
+      "source_type": "官方媒体",
+      "is_original": true,
+      "key_facts": [
+        {
+          "claim": "NASA当时报告，样本管理团队已从采样硬件中移除并收集70.3克岩石和尘埃，超过至少带回60克的任务目标。",
+          "source_urls": [
+            "https://science.nasa.gov/blogs/osiris-rex/2023/10/20/nasas-osiris-rex-achieves-sample-mass-milestone/"
+          ],
+          "agreed": true
+        },
+        {
+          "claim": "该阶段处理的样本包括采样器头部外侧的物质及经薄膜盖片取出的部分内部样本；头部内部仍有材料等待后续取出。",
+          "source_urls": [
+            "https://science.nasa.gov/blogs/osiris-rex/2023/10/20/nasas-osiris-rex-achieves-sample-mass-milestone/"
+          ],
+          "agreed": true
+        }
+      ]
+    },
+    {
+      "outlet": "NASA（美国国家航空航天局）",
+      "url": "https://science.nasa.gov/blogs/osiris-rex/2024/02/15/nasa-announces-osiris-rex-bulk-sample-mass/",
+      "publish_time": "2024-02-15",
+      "source_type": "官方媒体",
+      "is_original": true,
+      "key_facts": [
+        {
+          "claim": "NASA公告称，OSIRIS-REx于2023年9月24日返回地球时带回的贝努物质总质量为121.6克，超过任务最低要求的两倍。",
+          "source_urls": [
+            "https://science.nasa.gov/blogs/osiris-rex/2024/02/15/nasa-announces-osiris-rex-bulk-sample-mass/"
+          ],
+          "agreed": true
+        },
+        {
+          "claim": "公告称，工程师于2024年1月移除紧固件并完成采样器头部拆解，随后倒出并收集了51.2克样本。",
+          "source_urls": [
+            "https://science.nasa.gov/blogs/osiris-rex/2024/02/15/nasa-announces-osiris-rex-bulk-sample-mass/"
+          ],
+          "agreed": true
+        },
+        {
+          "claim": "公告将此前已测量的70.3克、此次倒出的51.2克及倒出过程之外收集的额外颗粒合计，报告样本总质量为121.6克。",
+          "source_urls": [
+            "https://science.nasa.gov/blogs/osiris-rex/2024/02/15/nasa-announces-osiris-rex-bulk-sample-mass/"
+          ],
+          "agreed": true
+        }
+      ]
+    }
+  ],
+  "key_findings": [
+    "【证据判定】目标声明与指定证据m03矛盾：该公告明确报告贝努样本总质量为121.6克，而70.3克是此前已测量的部分，不是公告所述最终总量。此结论仅评价文档内容，现实真实性的独立核验结果未知。",
+    "【时间线】m03记载样本于2023年9月24日返回地球，工程团队于2024年1月完成采样头拆解，公告显示发布日期为2024年2月15日；不能将返回日期视为总质量称量完成日期。",
+    "【因果链】据m03，团队设计、制造并测试新工具后移除紧固件、拆解采样头，再从倾倒材料中收集51.2克；这些材料与此前70.3克及倾倒之外收集的额外颗粒共同构成公告报告的121.6克。",
+    "【信源关系】m04的2023年10月公告将70.3克描述为阶段性收集量，与m03的后续叙述一致。但两份材料均来自NASA，不构成独立交叉确认；m04仅提供背景，不参与限定为m03的目标判定。"
+  ],
+  "information_gaps": [
+    "没有独立称量记录或第三方核验材料，无法据此确认现实中的样本质量。",
+    "m03未注明此前70.3克的具体测量日期、剩余样本的倾倒日期或最终称量完成日期。",
+    "m03没有单列额外颗粒的质量或称量精度，不能将121.6减去70.3与51.2所得的0.1克直接当作其精确质量。",
+    "提供的是2026年9月5日采集的规范化节选，而非完整网页或2024年的精确历史版本；发布日期来自正文标示。",
+    "没有证据说明目标声明作者为何将70.3克写成最终总量。"
+  ],
+  "consistent_facts": [
+    {
+      "claim": "70.3克是前期已收集、测量的样本质量，而非2024年2月公告报告的总质量。",
+      "source_urls": [
+        "https://science.nasa.gov/blogs/osiris-rex/2024/02/15/nasa-announces-osiris-rex-bulk-sample-mass/",
+        "https://science.nasa.gov/blogs/osiris-rex/2023/10/20/nasas-osiris-rex-achieves-sample-mass-milestone/"
+      ],
+      "agreed": true
+    },
+    {
+      "claim": "70.3克之外，采样器头部还有后续可取出的材料；2023年10月报道说明尚待取出，2024年2月报道说明后来完成拆解并收集。",
+      "source_urls": [
+        "https://science.nasa.gov/blogs/osiris-rex/2024/02/15/nasa-announces-osiris-rex-bulk-sample-mass/",
+        "https://science.nasa.gov/blogs/osiris-rex/2023/10/20/nasas-osiris-rex-achieves-sample-mass-milestone/"
+      ],
+      "agreed": true
+    }
+  ],
+  "disputed_facts": [],
+  "causal_summary": "据m03，OSIRIS-REx将贝努样本送回地球后，部分材料先被取出并测得70.3克，采样头内仍有材料需要处理。工程团队通过新工具完成紧固件移除和采样头拆解，随后从倾倒材料中收集51.2克，再与此前样本及额外颗粒合计，公告报告总质量为121.6克。因此，目标声明把公告中的阶段性质量当成最终总量，与文档明确表述矛盾；至于这种混淆如何产生，只能推测，不能归因于已证实的作者动机。",
+  "bias_notes": [
+    "NASA作为任务执行机构，在两份公告中突出超过任务目标等成果，具有机构成果传播取向；这一取向本身不证明质量数据不实。",
+    "现有材料没有不同机构之间的立场对照。同一机构前后公告的一致性只能说明叙述衔接，不能替代独立验证。"
+  ]
+}

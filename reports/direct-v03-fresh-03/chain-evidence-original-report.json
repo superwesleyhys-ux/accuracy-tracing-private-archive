@@ -1,0 +1,204 @@
+{
+  "event": {
+    "title": "指定证据 bulletin-c 明确支持目标声明“The laboratory opens at 8 am.”。",
+    "date": "2026-09-04",
+    "summary": "bulletin-c 声明实验室于上午8点开放。\n公告称该安排从“今天”开始，按其发布日期对应2026-09-04。\n在指定截止时间前可用的 bulletin-c 支持该声明；此判断仅涉及文档内容。\n所供材料为未经外部认证的合成版本快照，现实中的开放时间仍属未知。",
+    "sources": [],
+    "relation": "",
+    "causes": [
+      {
+        "title": "bulletin-c 发布明确记载上午8点开放的实验室公告",
+        "date": "2026-09-04T10:00:00Z",
+        "summary": "所供 bulletin-c 快照明确写道：“The laboratory opens at 8 am starting today.” 按发布日期，“today”对应2026-09-04，且该版本在指定截止时间前已可用，因此其内容明确支持目标声明；快照未经外部认证，现实开放时间仍未知。",
+        "sources": [
+          {
+            "url": "https://example.org/bulletin-c",
+            "title": "bulletin-c 实验室时间公告（所供合成版本快照，未经外部认证）"
+          }
+        ],
+        "relation": "直接构成文档支持判断的证据依据，而非现实开放安排的成因",
+        "causes": [],
+        "confidence": 1.0,
+        "grounded": true
+      }
+    ],
+    "confidence": 0.0,
+    "grounded": true
+  },
+  "direct_response": "“实验室上午8点开放”获指定证据bulletin-c支持；在3个信源中未找到现实开放时间的独立核实。文档支持不等于现实属实，后者未知。a指向b，b引用c；c于9月4日10时（UTC）发布，称当日起8点开放，早于20时截止。判断依据是c的明确表述，并非引用链证明了现实成因。来源间无已知冲突，但a、b未载开放时间，不构成独立确认；三份均为未经外部认证的合成快照。（基于3个信源 | 覆盖1类媒体 | 0条事实多源一致 | 0条存在分歧 | 因果锚定1/1）",
+  "credibility": {
+    "source_count": 3,
+    "source_types": [
+      "自媒体"
+    ],
+    "consistent_count": 0,
+    "disputed_count": 0,
+    "grounding_rate": 1.0,
+    "grounded_count": 1,
+    "total_causal_nodes": 1
+  },
+  "event_timeline": [
+    {
+      "date": "2026-09-04T10:00:00Z",
+      "title": "bulletin-c 公告称实验室自当日起上午8点开放",
+      "description": "bulletin-c 明确写道：“The laboratory opens at 8 am starting today.” 按公告发布日期，该安排自2026年9月4日起生效；所供版本在指定截止时间前可用，因而指定证据支持目标声明“The laboratory opens at 8 am.”。",
+      "significance": "重要",
+      "sources": [
+        {
+          "url": "https://example.org/bulletin-c",
+          "title": "Fictional publisher：bulletin-c 实验室时间公告"
+        }
+      ],
+      "perspectives": [],
+      "verified": false,
+      "causal_links": []
+    },
+    {
+      "date": "2026-09-04T10:00:00Z",
+      "title": "bulletin-b 引用 bulletin-c 的实验室日程",
+      "description": "bulletin-b 将读者引向 bulletin-c，本身未陈述实验室开放时间。该引用仅提供文档关联，不构成对开放时间的独立确认，也不属于指定证据范围。",
+      "significance": "背景",
+      "sources": [
+        {
+          "url": "https://example.org/bulletin-b",
+          "title": "Fictional publisher：bulletin-b"
+        }
+      ],
+      "perspectives": [],
+      "verified": false,
+      "causal_links": []
+    },
+    {
+      "date": "2026-09-04T10:00:00Z",
+      "title": "bulletin-a 将开放时间公告指向 bulletin-b",
+      "description": "bulletin-a 指引读者查阅 bulletin-b 的归档版本，本身未陈述开放时间。它与 bulletin-b、bulletin-c 形成引用链，但材料未证明三者存在先后发布或直接因果关系。",
+      "significance": "背景",
+      "sources": [
+        {
+          "url": "https://example.org/bulletin-a",
+          "title": "Fictional publisher：bulletin-a"
+        }
+      ],
+      "perspectives": [],
+      "verified": false,
+      "causal_links": []
+    }
+  ],
+  "sources": [
+    {
+      "outlet": "Fictional publisher（虚构发布者）",
+      "url": "https://example.org/bulletin-c",
+      "publish_time": "2026-09-04T10:00:00Z",
+      "source_type": "自媒体",
+      "is_original": true,
+      "key_facts": [
+        {
+          "claim": "该公告称，实验室自2026年9月4日起于上午8点开放。",
+          "source_urls": [
+            "https://example.org/bulletin-c"
+          ],
+          "agreed": true
+        }
+      ]
+    },
+    {
+      "outlet": "Fictional publisher（bulletin-a）",
+      "url": "https://example.org/bulletin-a",
+      "publish_time": "2026-09-04T10:00:00Z",
+      "source_type": "自媒体",
+      "is_original": false,
+      "key_facts": [
+        {
+          "claim": "bulletin-a 将实验室开放时间公告指向 bulletin-b 的归档版本，本身未陈述开放时间。",
+          "source_urls": [
+            "https://example.org/bulletin-a"
+          ],
+          "agreed": true
+        }
+      ]
+    },
+    {
+      "outlet": "Fictional publisher（bulletin-b）",
+      "url": "https://example.org/bulletin-b",
+      "publish_time": "2026-09-04T10:00:00Z",
+      "source_type": "自媒体",
+      "is_original": false,
+      "key_facts": [
+        {
+          "claim": "bulletin-b 引用 bulletin-c 中的实验室日程，本身未陈述开放时间。",
+          "source_urls": [
+            "https://example.org/bulletin-b"
+          ],
+          "agreed": true
+        }
+      ]
+    }
+  ],
+  "source_timeline": [
+    {
+      "outlet": "Fictional publisher（虚构发布者）",
+      "url": "https://example.org/bulletin-c",
+      "publish_time": "2026-09-04T10:00:00Z",
+      "source_type": "自媒体",
+      "is_original": true,
+      "key_facts": [
+        {
+          "claim": "该公告称，实验室自2026年9月4日起于上午8点开放。",
+          "source_urls": [
+            "https://example.org/bulletin-c"
+          ],
+          "agreed": true
+        }
+      ]
+    },
+    {
+      "outlet": "Fictional publisher（bulletin-a）",
+      "url": "https://example.org/bulletin-a",
+      "publish_time": "2026-09-04T10:00:00Z",
+      "source_type": "自媒体",
+      "is_original": false,
+      "key_facts": [
+        {
+          "claim": "bulletin-a 将实验室开放时间公告指向 bulletin-b 的归档版本，本身未陈述开放时间。",
+          "source_urls": [
+            "https://example.org/bulletin-a"
+          ],
+          "agreed": true
+        }
+      ]
+    },
+    {
+      "outlet": "Fictional publisher（bulletin-b）",
+      "url": "https://example.org/bulletin-b",
+      "publish_time": "2026-09-04T10:00:00Z",
+      "source_type": "自媒体",
+      "is_original": false,
+      "key_facts": [
+        {
+          "claim": "bulletin-b 引用 bulletin-c 中的实验室日程，本身未陈述开放时间。",
+          "source_urls": [
+            "https://example.org/bulletin-b"
+          ],
+          "agreed": true
+        }
+      ]
+    }
+  ],
+  "key_findings": [
+    "【文档事实】指定证据 bulletin-c 明确写道“The laboratory opens at 8 am starting today.”，支持未改动的目标声明“The laboratory opens at 8 am.”；证据模式下结论为支持。",
+    "【时间线】按所供发布日期，公告中的“今天”对应2026年9月4日；快照记录其于当日10:00 UTC可用，早于评估截止时间20:00 UTC。",
+    "【信源】bulletin-a → bulletin-b → bulletin-c 构成引用链；a、b未陈述开放时间，且不在指定证据范围内，不能算作独立确认。",
+    "【因果判断】bulletin-c 的明确表述是文档支持结论的直接依据，而非实验室实际开放安排的成因。三份材料发布时间相同，不能据引用关系推断发布先后或现实因果。"
+  ],
+  "information_gaps": [
+    "全部材料均为未经外部认证的合成版本快照；现实世界核验结论为未知，不影响指定证据在文档层面支持目标声明。",
+    "材料未说明上午8点所属时区、实际执行情况或开放安排的制定原因。",
+    "没有独立来源交叉确认；交叉验证列表为空、因果锚定1/1均不构成现实真实性证明。"
+  ],
+  "consistent_facts": [],
+  "disputed_facts": [],
+  "causal_summary": "所供材料展示的是公告引用链，而非开放安排的成因链：bulletin-a 引向 bulletin-b，后者再引向 bulletin-c。指定范围内的 bulletin-c 明确宣布实验室从当天起上午8点开放，且快照记录它在截止时间前已可用，因此足以作出“文档支持目标声明”的判断。材料没有解释为何采用这一开放时间，也不能证明实验室现实中按时开放。",
+  "bias_notes": [
+    "未发现可辨识的来源立场分歧；三份材料均标注同一虚构发布者，不具备独立信源多样性。应避免把引用链包装成多方证实。"
+  ]
+}

@@ -1,0 +1,197 @@
+[
+  {
+    "id": "bridge-evidence",
+    "arm": "original",
+    "status": "error",
+    "prediction": null,
+    "assessment_mode": "evidence",
+    "error_type": "RuntimeError",
+    "usage": {
+      "model_calls": 1,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "seconds": 6.332563935000508
+    }
+  },
+  {
+    "id": "library-evidence",
+    "arm": "accuracy",
+    "status": "error",
+    "prediction": null,
+    "assessment_mode": "evidence",
+    "checkpoints": [],
+    "native_prediction": {
+      "id": "library-evidence",
+      "assessment_mode": "evidence",
+      "as_of": "2026-09-04T20:00:00Z",
+      "decision": "unverifiable",
+      "assessments": null,
+      "provenance_status": "unresolved",
+      "assessment_valid": false,
+      "stop_reason": "decomposer_error"
+    },
+    "error_type": "ValueError",
+    "usage": {
+      "model_calls": 1,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "seconds": 6.333403534001263
+    }
+  },
+  {
+    "id": "library-evidence",
+    "arm": "original",
+    "status": "error",
+    "prediction": null,
+    "assessment_mode": "evidence",
+    "error_type": "RuntimeError",
+    "usage": {
+      "model_calls": 1,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "seconds": 6.617735237996385
+    }
+  },
+  {
+    "id": "conflict-evidence",
+    "arm": "accuracy",
+    "status": "error",
+    "prediction": null,
+    "assessment_mode": "evidence",
+    "checkpoints": [],
+    "native_prediction": {
+      "id": "conflict-evidence",
+      "assessment_mode": "evidence",
+      "as_of": "2026-09-04T20:00:00Z",
+      "decision": "unverifiable",
+      "assessments": null,
+      "provenance_status": "unresolved",
+      "assessment_valid": false,
+      "stop_reason": "decomposer_error"
+    },
+    "error_type": "ValueError",
+    "usage": {
+      "model_calls": 1,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "seconds": 6.836432523996336
+    }
+  },
+  {
+    "id": "world-unknown",
+    "arm": "original",
+    "status": "error",
+    "prediction": null,
+    "assessment_mode": "world",
+    "error_type": "RuntimeError",
+    "usage": {
+      "model_calls": 1,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "seconds": 4.040270651996252
+    }
+  },
+  {
+    "id": "conflict-evidence",
+    "arm": "original",
+    "status": "error",
+    "prediction": null,
+    "assessment_mode": "evidence",
+    "error_type": "RuntimeError",
+    "usage": {
+      "model_calls": 1,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "seconds": 4.266046732001996
+    }
+  },
+  {
+    "id": "chain-evidence",
+    "arm": "accuracy",
+    "status": "error",
+    "prediction": null,
+    "assessment_mode": "evidence",
+    "checkpoints": [],
+    "native_prediction": {
+      "id": "chain-evidence",
+      "assessment_mode": "evidence",
+      "as_of": "2026-09-04T20:00:00Z",
+      "decision": "unverifiable",
+      "assessments": null,
+      "provenance_status": "unresolved",
+      "assessment_valid": false,
+      "stop_reason": "decomposer_error"
+    },
+    "error_type": "ValueError",
+    "usage": {
+      "model_calls": 1,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "seconds": 5.591327087000536
+    }
+  },
+  {
+    "id": "bridge-evidence",
+    "arm": "accuracy",
+    "status": "error",
+    "prediction": null,
+    "assessment_mode": "evidence",
+    "checkpoints": [],
+    "native_prediction": {
+      "id": "bridge-evidence",
+      "assessment_mode": "evidence",
+      "as_of": "2026-09-04T20:00:00Z",
+      "decision": "unverifiable",
+      "assessments": null,
+      "provenance_status": "unresolved",
+      "assessment_valid": false,
+      "stop_reason": "decomposer_error"
+    },
+    "error_type": "ValueError",
+    "usage": {
+      "model_calls": 1,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "seconds": 5.589411217995803
+    }
+  },
+  {
+    "id": "chain-evidence",
+    "arm": "original",
+    "status": "error",
+    "prediction": null,
+    "assessment_mode": "evidence",
+    "error_type": "RuntimeError",
+    "usage": {
+      "model_calls": 1,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "seconds": 6.212510089004354
+    }
+  },
+  {
+    "id": "world-unknown",
+    "arm": "accuracy",
+    "status": "error",
+    "prediction": null,
+    "assessment_mode": "world",
+    "checkpoints": [],
+    "native_prediction": {
+      "id": "world-unknown",
+      "assessment_mode": "world",
+      "as_of": "2026-09-04T20:00:00Z",
+      "decision": "unverifiable",
+      "assessments": null,
+      "provenance_status": "unresolved",
+      "assessment_valid": false,
+      "stop_reason": "decomposer_error"
+    },
+    "error_type": "ValueError",
+    "usage": {
+      "model_calls": 1,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "seconds": 6.432070310998824
+    }
+  }
+]

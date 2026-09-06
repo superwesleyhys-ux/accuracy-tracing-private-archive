@@ -1,0 +1,48 @@
+[
+  {
+    "round": 1,
+    "kind": "fixed_corpus_development_reanalysis",
+    "tasks": [
+      {
+        "id": "origin:p03",
+        "question": "Find the producing record and evidenced lineage for: NIST's FIPS 203 specifies three ML-KEM parameter sets: ML-KEM-512, ML-KEM-768, and ML-KEM-1024.",
+        "stage": "provenance",
+        "dimension": "auto",
+        "blocking": true,
+        "target_id": null,
+        "basis": [],
+        "decision_impact": "",
+        "action": "search",
+        "locator": null,
+        "probe_id": null
+      }
+    ],
+    "returned": [
+      "m05",
+      "m06"
+    ]
+  },
+  {
+    "round": 2,
+    "kind": "fixed_corpus_development_reanalysis",
+    "tasks": [
+      {
+        "id": "origin:p03",
+        "question": "Find the producing record and evidenced lineage for: NIST's FIPS 203 specifies three ML-KEM parameter sets: ML-KEM-512, ML-KEM-768, and ML-KEM-1024.",
+        "stage": "provenance",
+        "dimension": "auto",
+        "blocking": true,
+        "target_id": null,
+        "basis": [],
+        "decision_impact": "",
+        "action": "search",
+        "locator": null,
+        "probe_id": null
+      }
+    ],
+    "returned": [
+      "m05",
+      "m06"
+    ]
+  }
+]
