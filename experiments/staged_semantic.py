@@ -9,6 +9,7 @@ from __future__ import annotations
 from dataclasses import asdict, is_dataclass
 import hashlib
 import json
+import re
 from urllib.parse import urlsplit
 
 from newsverify import provenance as p
@@ -22,7 +23,7 @@ try:  # Experiment scripts place this directory directly on sys.path.
         WORLD_PROMPT,
     )
     from target_plan import (build_target_plan, dimension_evidence_is_grounded,
-                             evidence_terms)
+                             dimension_signal_is_grounded, evidence_terms)
 except ModuleNotFoundError:  # Also support namespace-package imports in tests.
     from experiments.prompt_specs import (
         ATOMS_PROMPT, ATOMS_SCHEMA, DECOMPOSITION_CRITIC_PROMPT,
@@ -31,9 +32,9 @@ except ModuleNotFoundError:  # Also support namespace-package imports in tests.
         LINEAGE_PROMPT, LINEAGE_SCHEMA, PROMPT_VERSION, WORLD_CRITIC_PROMPT,
         WORLD_PROMPT,
     )
-    from experiments.target_plan import (build_target_plan,
-                                         dimension_evidence_is_grounded,
-                                         evidence_terms)
+    from experiments.target_plan import (
+        build_target_plan, dimension_evidence_is_grounded,
+        dimension_signal_is_grounded, evidence_terms)
 
 
 class StagedSemanticError(ValueError):
@@ -55,6 +56,7 @@ STAGE_OUTPUT_CAPS = {
     "world_critic": 1500,
 }
 MAX_STAGE_INPUT_CHARS = 250_000
+MAX_ADJACENT_GAP_CHARS = 128
 
 _GATE_REPAIR_ISSUES = {
     "probe_coverage": "Return every immutable target probe exactly once.",
@@ -872,6 +874,43 @@ class StagedVerifier(_StageClient):
                 raise ValueError("duplicate basis quotes")
             return tuple(result)
 
+        def coalesce_adjacent_spans(spans):
+            """Merge exact spans only across visible punctuation/whitespace.
+
+            The returned synthesized span is persisted in the final basis, so
+            deterministic grounding never reads text that the audit omits.
+            """
+            grouped = {}
+            for span in spans:
+                grouped.setdefault(span.version_id, []).append(span)
+            result = []
+            for version_id, selected in grouped.items():
+                content = allowed[version_id]["content"]
+                selected = sorted(
+                    set(selected), key=lambda span: (span.start, span.end))
+                current_start, current_end = selected[0].start, selected[0].end
+                for span in selected[1:]:
+                    gap = content[current_end:span.start]
+                    whitespace_only = (
+                        len(gap) <= MAX_ADJACENT_GAP_CHARS
+                        and (not gap or gap.isspace()))
+                    if span.start <= current_end or whitespace_only:
+                        current_end = max(current_end, span.end)
+                    else:
+                        result.append(p.Span(
+                            version_id, current_start, current_end,
+                            content[current_start:current_end]))
+                        current_start, current_end = span.start, span.end
+                result.append(p.Span(
+                    version_id, current_start, current_end,
+                    content[current_start:current_end]))
+            return tuple(result)
+
+        def contains_span(container, child):
+            return (container.version_id == child.version_id
+                    and container.start <= child.start
+                    and container.end >= child.end)
+
         deferred_evidence_scope = (
             {version_id for version_id in target.evidence_scope
              if version_id not in allowed}
@@ -899,7 +938,7 @@ class StagedVerifier(_StageClient):
             if (len(checks) != len(expected_dimensions)
                     or {item["dimension"] for item in checks} != expected_dimensions):
                 raise ValueError(f"dimension_coverage:{probe['number']}")
-            check_verdicts, probe_basis, check_rationales = [], [], []
+            prepared_checks, conclusive_basis = [], []
             for check in sorted(checks, key=lambda item: item["dimension"]):
                 indices = check["basis_indices"]
                 if len(indices) != len(set(indices)) or any(
@@ -907,31 +946,60 @@ class StagedVerifier(_StageClient):
                     raise ValueError(
                         f"dimension_basis_index:{probe['number']}:{check['dimension']}")
                 check_basis = tuple(basis_pool[index] for index in indices)
+                prepared_checks.append((check, check_basis))
+                if check["verdict"] != "unresolved":
+                    conclusive_basis.extend(check_basis)
+
+            shared_passages = coalesce_adjacent_spans(conclusive_basis)
+            check_verdicts, probe_basis, check_rationales = [], [], []
+            for check, check_basis in prepared_checks:
                 if check["verdict"] != "unresolved":
                     if not check_basis or missing_scope:
                         raise ValueError(
                             f"dimension_basis_or_scope:{probe['number']}:{check['dimension']}")
-                    if not any(dimension_evidence_is_grounded(
-                            check["dimension"], probe["text"], span.quote,
-                            check["verdict"]) for span in check_basis):
+                    candidates = [
+                        passage for passage in shared_passages
+                        if all(contains_span(passage, span)
+                               for span in check_basis)
+                    ]
+                    grounded = next((
+                        passage for passage in candidates
+                        if dimension_evidence_is_grounded(
+                            check["dimension"], probe["text"], passage.quote,
+                            check["verdict"])
+                        and any(dimension_signal_is_grounded(
+                            check["dimension"], probe["text"], local.quote,
+                            check["verdict"])
+                            for local in coalesce_adjacent_spans(check_basis))),
+                        None)
+                    if grounded is None:
                         raise ValueError(
                             f"dimension_grounding:{probe['number']}:{check['dimension']}")
+                    probe_basis.append(grounded)
+                else:
+                    probe_basis.extend(check_basis)
                 check_verdicts.append(check["verdict"])
-                probe_basis.extend(check_basis)
                 check_rationales.append(
                     check["dimension"] + "=" + check["verdict"] + ": " +
                     check["rationale"])
             verdict_by_dimension = {
                 item["dimension"]: item["verdict"] for item in checks
             }
-            core_unresolved = any(
-                verdict_by_dimension.get(name) == "unresolved"
-                for name in ("actor_subject", "predicate_object",
-                             "scope_location"))
-            if core_unresolved:
-                # A qualifier cannot refute or authenticate an event whose
-                # actor, predicate or scope is still unidentified.
+            actor_scope_supported = all(
+                verdict_by_dimension.get(name) == "supported"
+                for name in ("actor_subject", "scope_location"))
+            predicate_verdict = verdict_by_dimension.get("predicate_object")
+            if (not actor_scope_supported
+                    or predicate_verdict not in {
+                        "supported", "contradicted", "conflicting"}):
+                # Qualifiers can decide an outcome only after one grounded
+                # passage affirmatively identifies actor and scope, while the
+                # action itself must be supported or explicitly contradicted.
                 verdict = "unresolved"
+            elif predicate_verdict == "contradicted":
+                verdict = "contradicted"
+            elif predicate_verdict == "conflicting":
+                verdict = "conflicting"
             elif "contradicted" in check_verdicts:
                 verdict = "contradicted"
             elif "conflicting" in check_verdicts:

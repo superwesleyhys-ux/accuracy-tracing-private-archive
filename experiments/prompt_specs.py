@@ -9,7 +9,7 @@ import hashlib
 import json
 
 
-PROMPT_VERSION = "staged-validation-v5"
+PROMPT_VERSION = "staged-validation-v6"
 
 
 def _string(maximum=1200, minimum=1, values=None):
@@ -163,7 +163,12 @@ task for one of its gap IDs. The program closes a returned exact frozen-scope ve
 An unresolved probe must either emit concrete tasks with stop_reason=none or emit no tasks and use
 an explicit stop. It may use scope_unavailable only when missing_scope is nonempty; with that stop,
 set gaps=[] because the program schedules exact missing-scope retrieval. Conclusive probes use
-stop_reason=none.
+stop_reason=none. Keep event identity separate from qualifiers: when actor, action and object match,
+mark actor_subject, predicate_object and scope_location supported even if a time, quantity or
+comparison value differs; put that disagreement only in its qualifier dimension. A qualifier can
+make the probe conclusive only when all three core dimensions are supported. Ground them in one
+contiguous event passage. When an adjacent filing/results heading supplies the issuer, include the
+exact heading and adjacent event sentence in basis_pool; the program may persist them as one span.
 If repair is supplied, fix that issue and return the complete evidence layer again.
 Program-generated repair fields identify the exact error_code and, when known, probe_number and
 dimension; correct that named ledger entry while still returning the complete layer.
@@ -183,7 +188,13 @@ assessment_mode=evidence and an exact evidence_scope version ID is absent from m
 retrieval is owned by the evidence layer: do not duplicate that world task; use gaps=[] and
 stop_reason=scope_unavailable. This deferral applies only to exact missing evidence_scope IDs;
 other fetch locators must be explicit HTTP(S) URLs. If repair is supplied, fix that issue and
-return the complete world layer again.
+return the complete world layer again. Keep event identity separate from qualifiers: when actor,
+action and object match, mark actor_subject, predicate_object and scope_location supported even if
+a time, quantity or comparison value differs; put that disagreement only in its qualifier
+dimension. A qualifier can make the probe conclusive only when all three core dimensions are
+supported. Ground them in one contiguous event passage. When an adjacent filing/results heading
+supplies the issuer, include the exact heading and adjacent event sentence in basis_pool; the
+program may persist them as one span.
 Program-generated repair fields identify the exact error_code and, when known, probe_number and
 dimension; correct that named ledger entry while still returning the complete layer.
 """

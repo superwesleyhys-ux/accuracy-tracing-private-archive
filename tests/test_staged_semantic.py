@@ -42,7 +42,15 @@ def audit_digest(value):
 def layer(verdict="unresolved", basis=(), gaps=(), resolutions=(), rationale="No conclusion yet."):
     stop = "none" if verdict != "unresolved" or gaps else "no_source_lead"
     pool = [{"version_id": version, "quote": quote} for version, quote in basis]
-    dimensions = [{"dimension": dimension, "verdict": verdict,
+    dimension_verdicts = {
+        dimension: (
+            "supported" if verdict in {"contradicted", "conflicting"}
+            and dimension in {"actor_subject", "scope_location"}
+            else verdict)
+        for dimension in DEFAULT_DIMENSIONS
+    }
+    dimensions = [{"dimension": dimension,
+                   "verdict": dimension_verdicts[dimension],
                    "basis_indices": list(range(len(pool))),
                    "rationale": rationale}
                   for dimension in DEFAULT_DIMENSIONS]
@@ -454,7 +462,7 @@ class StagedSemanticTests(unittest.TestCase):
                          set(manifest["stages"]))
         hashes = {value["prompt_sha256"] for value in manifest["stages"].values()}
         self.assertEqual(7, len(hashes))
-        self.assertEqual("deterministic-target-plan-v4",
+        self.assertEqual("deterministic-target-plan-v6",
                          manifest["target_plan_version"])
 
     def test_gap_return_reenters_every_material_stage_before_second_verification(self):
@@ -841,6 +849,534 @@ class StagedSemanticTests(unittest.TestCase):
 
         self.assertEqual("unresolved", assembled["verdict"])
 
+    def test_short_same_source_envelope_binds_actor_and_event_dimensions(self):
+        heading = (
+            "Virgin Galactic 2023 Form 10-K | SEC filing dated February 27, "
+            "2024")
+        body = (
+            "In June 2023, we completed our first commercial spaceflight, "
+            "'Galactic 01,' which marked the start of our commercial service.")
+        target, material = self.fixture(heading + "\n" + body)
+        target = replace(
+            target,
+            text=("Virgin Galactic will commence commercial service during "
+                  "the second quarter of 2023."))
+        plan = build_target_plan(target)
+        raw = {"probe_results": [{
+            "probe_number": 1,
+            "basis_pool": [
+                {"version_id": "m", "quote": heading},
+                {"version_id": "m", "quote": body},
+            ],
+            "dimension_results": [
+                {"dimension": "actor_subject", "verdict": "supported",
+                 "basis_indices": [0, 1], "rationale": "Issuer and event bind."},
+                {"dimension": "predicate_object", "verdict": "supported",
+                 "basis_indices": [1], "rationale": "Service started."},
+                {"dimension": "scope_location", "verdict": "supported",
+                 "basis_indices": [0, 1], "rationale": "Same service scope."},
+                {"dimension": "time", "verdict": "supported",
+                 "basis_indices": [1], "rationale": "June is in Q2."},
+            ],
+            "gaps": [], "resolutions": [], "stop_reason": "none",
+        }]}
+
+        assembled = StagedVerifier(ScriptClient())._assemble_layer(
+            target, "evidence", raw, {"m": asdict(material)}, {}, [], plan,
+            [], [])
+
+        self.assertEqual("supported", assembled["verdict"])
+        self.assertEqual((heading + "\n" + body,),
+                         tuple(span.quote for span in assembled["basis"]))
+
+    def test_far_apart_quotes_cannot_inject_hidden_event_text(self):
+        content = (
+            "Alice filed a notice. Bob bought Widget. Footer Widget."
+        )
+        target, material = self.fixture(content)
+        target = replace(target, text="Alice bought Widget.")
+        plan = build_target_plan(target)
+        raw = {"probe_results": [{
+            "probe_number": 1,
+            "basis_pool": [
+                {"version_id": "m", "quote": "Alice filed a notice."},
+                {"version_id": "m", "quote": "Footer Widget."},
+            ],
+            "dimension_results": [{
+                "dimension": dimension, "verdict": "supported",
+                "basis_indices": [0, 1], "rationale": "Purported support.",
+            } for dimension in plan["probes"][0]["required_dimensions"]],
+            "gaps": [], "resolutions": [], "stop_reason": "none",
+        }]}
+
+        with self.assertRaisesRegex(ValueError, "dimension_grounding"):
+            StagedVerifier(ScriptClient())._assemble_layer(
+                target, "evidence", raw, {"m": asdict(material)}, {}, [],
+                plan, [], [])
+
+    def test_nested_or_cross_clause_events_cannot_supply_target_roles(self):
+        attacks = (
+            "Alice said Bob bought Widget.",
+            "Alice denied Bob bought Widget.",
+            "Bob said Alice bought Widget.",
+            "Alice's rival Bob bought Widget.",
+            "Alice bought Gadget; Bob bought Widget.",
+        )
+        for content in attacks:
+            with self.subTest(content=content):
+                target, material = self.fixture(content)
+                target = replace(target, text="Alice bought Widget.")
+                plan = build_target_plan(target)
+                raw = {"probe_results": [{
+                    "probe_number": 1,
+                    "basis_pool": [{
+                        "version_id": "m", "quote": material.content}],
+                    "dimension_results": [{
+                        "dimension": dimension, "verdict": "supported",
+                        "basis_indices": [0], "rationale": "Purported support.",
+                    } for dimension in
+                    plan["probes"][0]["required_dimensions"]],
+                    "gaps": [], "resolutions": [], "stop_reason": "none",
+                }]}
+                with self.assertRaisesRegex(ValueError, "dimension_grounding"):
+                    StagedVerifier(ScriptClient())._assemble_layer(
+                        target, "evidence", raw,
+                        {"m": asdict(material)}, {}, [], plan, [], [])
+
+    def test_action_and_object_cannot_cross_a_second_event(self):
+        attacks = (
+            "Alice produced Gadget, Bob delivered Widget.",
+            "Alice produced 12,000, Bob delivered Widget.",
+            "Alice produced Gadget. Bob delivered Widget.",
+            "Alice produced Gadget Bob delivered Widget.",
+            "Alice produced Gadget — Bob delivered Widget.",
+            "Alice produced Gadget — Widget appeared later.",
+            "Alice produced Gadget -- Widget appeared later.",
+            "Alice produced Gadget because Widget failed.",
+        )
+        for content in attacks:
+            with self.subTest(content=content):
+                target, material = self.fixture(content)
+                target = replace(target, text="Alice produced Widget.")
+                plan = build_target_plan(target)
+                raw = {"probe_results": [{
+                    "probe_number": 1,
+                    "basis_pool": [{"version_id": "m", "quote": content}],
+                    "dimension_results": [{
+                        "dimension": dimension, "verdict": "supported",
+                        "basis_indices": [0],
+                        "rationale": "Purported cross-event.",
+                    } for dimension in
+                    plan["probes"][0]["required_dimensions"]],
+                    "gaps": [], "resolutions": [], "stop_reason": "none",
+                }]}
+
+                with self.assertRaisesRegex(ValueError, "dimension_grounding"):
+                    StagedVerifier(ScriptClient())._assemble_layer(
+                        target, "evidence", raw,
+                        {"m": asdict(material)}, {}, [], plan, [], [])
+
+    def test_dimensions_cannot_stitch_an_event_across_sources(self):
+        target, first = self.fixture("Alice filed a notice.", version="a")
+        target = replace(target, text="Alice bought Widget.",
+                         source_version_id="a", evidence_scope=())
+        second = replace(first, version_id="b", url="https://example.org/b",
+                         content="Bob bought Widget.")
+        plan = build_target_plan(target)
+        indices = {
+            "actor_subject": [0],
+            "predicate_object": [1],
+            "scope_location": [1],
+        }
+        raw = {"probe_results": [{
+            "probe_number": 1,
+            "basis_pool": [
+                {"version_id": "a", "quote": first.content},
+                {"version_id": "b", "quote": second.content},
+            ],
+            "dimension_results": [{
+                "dimension": dimension, "verdict": "supported",
+                "basis_indices": indices[dimension],
+                "rationale": "Purported cross-source support.",
+            } for dimension in plan["probes"][0]["required_dimensions"]],
+            "gaps": [], "resolutions": [], "stop_reason": "none",
+        }]}
+
+        with self.assertRaisesRegex(ValueError, "dimension_grounding"):
+            StagedVerifier(ScriptClient())._assemble_layer(
+                target, "evidence", raw,
+                {"a": asdict(first), "b": asdict(second)}, {}, [], plan,
+                [], [])
+
+    def test_wrong_predicate_time_cannot_refute_target_event(self):
+        content = "Alice repaired Widget on June 5, 2024."
+        target, material = self.fixture(content)
+        target = replace(
+            target, text="Alice sold Widget by December 31, 2023.")
+        plan = build_target_plan(target)
+        verdicts = {
+            "actor_subject": "supported",
+            "predicate_object": "unresolved",
+            "scope_location": "supported",
+            "time": "contradicted",
+        }
+        raw = {"probe_results": [{
+            "probe_number": 1,
+            "basis_pool": [{"version_id": "m", "quote": content}],
+            "dimension_results": [{
+                "dimension": dimension, "verdict": verdicts[dimension],
+                "basis_indices": [0], "rationale": "Purported refutation.",
+            } for dimension in plan["probes"][0]["required_dimensions"]],
+            "gaps": [], "resolutions": [], "stop_reason": "none",
+        }]}
+
+        with self.assertRaisesRegex(ValueError, "dimension_grounding"):
+            StagedVerifier(ScriptClient())._assemble_layer(
+                target, "evidence", raw, {"m": asdict(material)}, {}, [],
+                plan, [], [])
+
+    def test_header_cannot_assign_nested_actor_event_to_issuer(self):
+        content = (
+            "Acme 2024 results | SEC filing dated February 21, 2024\n"
+            "The Company said Bob produced Widget during 2023."
+        )
+        target, material = self.fixture(content)
+        target = replace(
+            target, text="Acme will manufacture Widget during 2023.")
+        plan = build_target_plan(target)
+        raw = {"probe_results": [{
+            "probe_number": 1,
+            "basis_pool": [{"version_id": "m", "quote": content}],
+            "dimension_results": [{
+                "dimension": dimension, "verdict": "supported",
+                "basis_indices": [0], "rationale": "Purported issuer event.",
+            } for dimension in plan["probes"][0]["required_dimensions"]],
+            "gaps": [], "resolutions": [], "stop_reason": "none",
+        }]}
+
+        with self.assertRaisesRegex(ValueError, "dimension_grounding"):
+            StagedVerifier(ScriptClient())._assemble_layer(
+                target, "evidence", raw, {"m": asdict(material)}, {}, [],
+                plan, [], [])
+
+    def test_header_nominal_event_needs_first_person_issuer_ownership(self):
+        attacks = (
+            "Rival launch marked the start of commercial service in June 2023.",
+            "Beta's 'Acme One' flight marked the start of commercial service "
+            "in June 2023.",
+        )
+        for body in attacks:
+            with self.subTest(body=body):
+                content = "Acme 2023 results | SEC exhibit\n" + body
+                target, material = self.fixture(content)
+                target = replace(
+                    target,
+                    text="Acme will commence commercial service during 2023.")
+                plan = build_target_plan(target)
+                raw = {"probe_results": [{
+                    "probe_number": 1,
+                    "basis_pool": [{"version_id": "m", "quote": content}],
+                    "dimension_results": [{
+                        "dimension": dimension, "verdict": "supported",
+                        "basis_indices": [0],
+                        "rationale": "Purported issuer event.",
+                    } for dimension in
+                    plan["probes"][0]["required_dimensions"]],
+                    "gaps": [], "resolutions": [], "stop_reason": "none",
+                }]}
+
+                with self.assertRaisesRegex(ValueError, "dimension_grounding"):
+                    StagedVerifier(ScriptClient())._assemble_layer(
+                        target, "evidence", raw,
+                        {"m": asdict(material)}, {}, [], plan, [], [])
+
+    def test_filing_date_cannot_become_contrary_event_time(self):
+        content = (
+            "Acme 2024 results | SEC filing dated February 21, 2024\n"
+            "The Company produced Widget."
+        )
+        target, material = self.fixture(content)
+        target = replace(
+            target, text="Acme will manufacture Widget during 2023.")
+        plan = build_target_plan(target)
+        verdicts = {
+            "actor_subject": "supported",
+            "predicate_object": "supported",
+            "scope_location": "supported",
+            "time": "contradicted",
+        }
+        raw = {"probe_results": [{
+            "probe_number": 1,
+            "basis_pool": [{"version_id": "m", "quote": content}],
+            "dimension_results": [{
+                "dimension": dimension, "verdict": verdicts[dimension],
+                "basis_indices": [0], "rationale": "Purported event time.",
+            } for dimension in plan["probes"][0]["required_dimensions"]],
+            "gaps": [], "resolutions": [], "stop_reason": "none",
+        }]}
+
+        with self.assertRaisesRegex(ValueError, "dimension_grounding:1:time"):
+            StagedVerifier(ScriptClient())._assemble_layer(
+                target, "evidence", raw, {"m": asdict(material)}, {}, [],
+                plan, [], [])
+
+    def test_passive_role_reversal_cannot_ground_active_event(self):
+        cases = (
+            ("Alice defeated Bob before Friday.",
+             "Alice was defeated by Bob after Friday."),
+            ("Acme sold Beta.", "Acme was sold by Beta."),
+            ("Acme bought Beta.", "Acme was bought by Beta."),
+            ("Acme built Beta.", "Acme was built by Beta."),
+            ("Alice brought Bob before Friday.",
+             "Alice was brought by Bob after Friday."),
+            ("Alice brought Bob before Friday.",
+             "Alice was brought over by Bob after Friday."),
+            ("Alice brought Bob before Friday.",
+             "Alice was brought back by Bob after Friday."),
+            ("Alice brought Bob before Friday.",
+             "Alice was brought to school by Bob after Friday."),
+            ("Alice brought Bob before Friday.",
+             "Alice was brought all the way home from the old central train "
+             "station by Bob after Friday."),
+            ("Alice brought Bob.", "Alice was brought home to Bob."),
+            ("Acme sold Beta.", "Acme was sold to Beta."),
+            ("Acme built Beta.", "Acme was built for Beta."),
+            ("Acme bought Beta.", "Acme was bought from Beta."),
+        )
+        for target_text, content in cases:
+            with self.subTest(target=target_text):
+                target, material = self.fixture(content)
+                target = replace(target, text=target_text)
+                plan = build_target_plan(target)
+                verdicts = {
+                    "actor_subject": "supported",
+                    "predicate_object": "supported",
+                    "scope_location": "supported",
+                    "time": "contradicted",
+                }
+                raw = {"probe_results": [{
+                    "probe_number": 1,
+                    "basis_pool": [{"version_id": "m", "quote": content}],
+                    "dimension_results": [{
+                        "dimension": dimension,
+                        "verdict": verdicts.get(dimension, "supported"),
+                        "basis_indices": [0],
+                        "rationale": "Purported reversal.",
+                    } for dimension in
+                    plan["probes"][0]["required_dimensions"]],
+                    "gaps": [], "resolutions": [], "stop_reason": "none",
+                }]}
+
+                with self.assertRaisesRegex(ValueError, "dimension_grounding"):
+                    StagedVerifier(ScriptClient())._assemble_layer(
+                        target, "evidence", raw,
+                        {"m": asdict(material)}, {}, [], plan, [], [])
+
+    def test_negated_event_cannot_be_marked_fully_supported(self):
+        content = "Acme did not produce Widget."
+        target, material = self.fixture(content)
+        target = replace(target, text="Acme produced Widget.")
+        plan = build_target_plan(target)
+        raw = {"probe_results": [{
+            "probe_number": 1,
+            "basis_pool": [{"version_id": "m", "quote": content}],
+            "dimension_results": [{
+                "dimension": dimension, "verdict": "supported",
+                "basis_indices": [0], "rationale": "Purported support.",
+            } for dimension in plan["probes"][0]["required_dimensions"]],
+            "gaps": [], "resolutions": [], "stop_reason": "none",
+        }]}
+
+        with self.assertRaisesRegex(
+                ValueError, "dimension_grounding:1:predicate_object"):
+            StagedVerifier(ScriptClient())._assemble_layer(
+                target, "evidence", raw, {"m": asdict(material)}, {}, [],
+                plan, [], [])
+
+    def test_semantic_symbol_gap_is_never_auto_selected(self):
+        content = "Acme produced 10% Widget."
+        target, material = self.fixture(content)
+        target = replace(target, text="Acme will manufacture 10% Widget.")
+        plan = build_target_plan(target)
+        raw = {"probe_results": [{
+            "probe_number": 1,
+            "basis_pool": [
+                {"version_id": "m", "quote": "Acme produced 10"},
+                {"version_id": "m", "quote": " Widget."},
+            ],
+            "dimension_results": [{
+                "dimension": dimension, "verdict": "supported",
+                "basis_indices": [0, 1], "rationale": "Purported support.",
+            } for dimension in plan["probes"][0]["required_dimensions"]],
+            "gaps": [], "resolutions": [], "stop_reason": "none",
+        }]}
+
+        with self.assertRaisesRegex(ValueError, "dimension_grounding"):
+            StagedVerifier(ScriptClient())._assemble_layer(
+                target, "evidence", raw, {"m": asdict(material)}, {}, [],
+                plan, [], [])
+
+    def test_comparison_threshold_and_metric_value_are_one_obligation(self):
+        target_text = "Lucid will manufacture more than 10,000 vehicles."
+        for body in (
+                "The Company produced 12,000 vehicles.",
+                "The Company produced 12,000 vehicles, while deliveries were 8,000.",
+                "The Company produced 12,000 batteries, Bob delivered 8,000 "
+                "vehicles.",
+                "The Company produced 8,428 vehicles, Bob produced 12,000 "
+                "vehicles.",
+                "The Company produced vehicles. Bob produced 12,000 vehicles."):
+            with self.subTest(body=body):
+                content = "Lucid results | SEC exhibit\n" + body
+                target, material = self.fixture(content)
+                target = replace(target, text=target_text)
+                plan = build_target_plan(target)
+                verdicts = {
+                    "actor_subject": "supported",
+                    "predicate_object": "supported",
+                    "scope_location": "supported",
+                    "quantity_unit_denominator": "contradicted",
+                    "comparison_baseline": (
+                        "supported" if body.endswith("12,000 vehicles.")
+                        else "contradicted"),
+                }
+                raw = {"probe_results": [{
+                    "probe_number": 1,
+                    "basis_pool": [{"version_id": "m", "quote": content}],
+                    "dimension_results": [{
+                        "dimension": dimension,
+                        "verdict": verdicts[dimension],
+                        "basis_indices": [0],
+                        "rationale": "Purported threshold result.",
+                    } for dimension in
+                    plan["probes"][0]["required_dimensions"]],
+                    "gaps": [], "resolutions": [], "stop_reason": "none",
+                }]}
+
+                with self.assertRaisesRegex(ValueError, "dimension_grounding:1"):
+                    StagedVerifier(ScriptClient())._assemble_layer(
+                        target, "evidence", raw,
+                        {"m": asdict(material)}, {}, [], plan, [], [])
+
+    def test_direct_lucid_quantity_outcome_is_a_grounded_contradiction(self):
+        heading = "Lucid Q4 2023 results | SEC exhibit filed February 21, 2024"
+        bodies = (
+            "On a full-year basis, the Company produced 8,428 vehicles.",
+            "On a full-year basis, the Company produced 8,428 vehicles, "
+            "while Bob delivered 12,000 batteries.",
+        )
+        for body in bodies:
+            with self.subTest(body=body):
+                target, material = self.fixture(heading + "\n" + body)
+                target = replace(
+                    target,
+                    text=("Lucid will manufacture more than 10,000 vehicles "
+                          "during 2023."))
+                plan = build_target_plan(target)
+                verdicts = {
+                    "actor_subject": "supported",
+                    "predicate_object": "supported",
+                    "scope_location": "supported",
+                    "quantity_unit_denominator": "contradicted",
+                    "time": "supported",
+                    "comparison_baseline": "contradicted",
+                }
+                raw = {"probe_results": [{
+                    "probe_number": 1,
+                    "basis_pool": [
+                        {"version_id": "m", "quote": heading},
+                        {"version_id": "m", "quote": body},
+                    ],
+                    "dimension_results": [{
+                        "dimension": dimension,
+                        "verdict": verdicts[dimension],
+                        "basis_indices": ([0, 1] if dimension in {
+                            "actor_subject", "time"} else [1]),
+                        "rationale": "The full-year result binds the event.",
+                    } for dimension in
+                    plan["probes"][0]["required_dimensions"]],
+                    "gaps": [], "resolutions": [], "stop_reason": "none",
+                }]}
+
+                assembled = StagedVerifier(ScriptClient())._assemble_layer(
+                    target, "evidence", raw,
+                    {"m": asdict(material)}, {}, [], plan, [], [])
+
+                self.assertEqual("contradicted", assembled["verdict"])
+                self.assertEqual(
+                    (heading + "\n" + body,),
+                    tuple(span.quote for span in assembled["basis"]))
+
+    def test_inferred_prerequisite_cannot_refute_with_predicate_unresolved(self):
+        context = (
+            "Boeing Q3 2024 Form 10-Q | SEC filing dated October 23, 2024\n"
+            "Commercial Crew\nNational Aeronautics and Space Administration "
+            "has contracted us to design and build the CST-100 Starliner "
+            "spacecraft to transport crews to the International Space Station "
+            "(ISS). In the second quarter of 2022, we successfully completed "
+            "the uncrewed Orbital Flight Test. During 2023, we increased the "
+            "reach-forward loss by $288 primarily as a result of delaying the "
+            "Crewed Flight Test (CFT) following notification by a parachute "
+            "supplier of an issue identified through testing. The CFT launched "
+            "on June 5, 2024, and docked with the ISS.")
+        heading = context[:context.index(
+            " In the second quarter of 2022")]
+        delay = (
+            "During 2023, we increased the reach-forward loss by $288 primarily "
+            "as a result of delaying the Crewed Flight Test (CFT) following "
+            "notification by a parachute supplier of an issue identified "
+            "through testing.")
+        launch = "The CFT launched on June 5, 2024, and docked with the ISS."
+        target, material = self.fixture(context)
+        target = replace(
+            target,
+            text=("Boeing will complete the Starliner crewed flight test by "
+                  "December 31, 2023."))
+        plan = build_target_plan(target)
+        raw = {"probe_results": [{
+            "probe_number": 1,
+            "basis_pool": [
+                {"version_id": "m", "quote": heading},
+                {"version_id": "m", "quote": delay},
+                {"version_id": "m", "quote": launch},
+            ],
+            "dimension_results": [
+                {"dimension": "actor_subject", "verdict": "supported",
+                 "basis_indices": [0, 1], "rationale": "Boeing program."},
+                {"dimension": "predicate_object", "verdict": "unresolved",
+                 "basis_indices": [1, 2], "rationale": "No completion text."},
+                {"dimension": "scope_location", "verdict": "supported",
+                 "basis_indices": [0, 1, 2], "rationale": "Same CFT."},
+                {"dimension": "time", "verdict": "contradicted",
+                 "basis_indices": [1, 2], "rationale": "Launch was in 2024."},
+            ],
+            "gaps": [], "resolutions": [], "stop_reason": "none",
+        }]}
+
+        with self.assertRaisesRegex(ValueError, "dimension_grounding"):
+            StagedVerifier(ScriptClient())._assemble_layer(
+                target, "evidence", raw, {"m": asdict(material)}, {}, [],
+                plan, [], [])
+
+    def test_role_reversal_cannot_assemble_as_a_contradiction(self):
+        target, material = self.fixture("Bob defeated Alice.")
+        target = replace(target, text="Alice defeated Bob.")
+        plan = build_target_plan(target)
+        raw = {"probe_results": [{
+            "probe_number": 1,
+            "basis_pool": [{"version_id": "m", "quote": material.content}],
+            "dimension_results": [{
+                "dimension": dimension, "verdict": "contradicted",
+                "basis_indices": [0], "rationale": "Purported contradiction.",
+            } for dimension in plan["probes"][0]["required_dimensions"]],
+            "gaps": [], "resolutions": [], "stop_reason": "none",
+        }]}
+
+        with self.assertRaisesRegex(ValueError, "dimension_grounding"):
+            StagedVerifier(ScriptClient())._assemble_layer(
+                target, "evidence", raw, {"m": asdict(material)}, {}, [],
+                plan, [], [])
+
     def test_probe_specific_unavailable_feedback_cannot_stop_another_probe(self):
         target, material = self.fixture("Alice was mentioned.")
         target = replace(target, text="Alice won and Bob lost.",
@@ -990,7 +1526,7 @@ class StagedSemanticTests(unittest.TestCase):
                 target, "evidence", raw, {"m": asdict(material)}, {}, [],
                 plan, [], [])
 
-    def test_supported_core_dimensions_require_all_target_content_terms(self):
+    def test_supported_core_dimensions_jointly_reject_wrong_claim_roles(self):
         cases = (
             ("Officials denied the report.", "Officials confirmed the report."),
             ("Alice bought Widget.", "Bob bought Widget."),
@@ -998,26 +1534,28 @@ class StagedSemanticTests(unittest.TestCase):
             ("Alice will buy Widget.", "Alice sold Widget."),
         )
         for probe, basis in cases:
-            for dimension in ("actor_subject", "predicate_object", "scope_location"):
-                with self.subTest(probe=probe, basis=basis, dimension=dimension):
-                    self.assertFalse(dimension_evidence_is_grounded(
-                        dimension, probe, basis, "supported"))
+            with self.subTest(probe=probe, basis=basis):
+                grounded = [dimension_evidence_is_grounded(
+                    dimension, probe, basis, "supported")
+                    for dimension in (
+                        "actor_subject", "predicate_object", "scope_location")]
+                self.assertFalse(all(grounded))
         self.assertTrue(dimension_evidence_is_grounded(
             "predicate_object", "Revenue increased.",
             "Revenue will increase.", "supported"))
 
-    def test_supported_core_dimensions_preserve_role_and_scope_order(self):
+    def test_supported_core_dimensions_jointly_preserve_role_and_scope_order(self):
         for probe, basis in (
                 ("Alice defeated Bob.", "Bob defeated Alice."),
                 ("The agency alleged that Alice failed and Bob cheated.",
                  "The agency alleged that Alice failed. Bob cheated."),
                 ("苹果公司在北京收购微软。", "苹果公司在上海发布新品。")):
-            for dimension in ("actor_subject", "predicate_object",
-                              "scope_location"):
-                with self.subTest(probe=probe, basis=basis,
-                                  dimension=dimension):
-                    self.assertFalse(dimension_evidence_is_grounded(
-                        dimension, probe, basis, "supported"))
+            with self.subTest(probe=probe, basis=basis):
+                grounded = [dimension_evidence_is_grounded(
+                    dimension, probe, basis, "supported")
+                    for dimension in (
+                        "actor_subject", "predicate_object", "scope_location")]
+                self.assertFalse(all(grounded))
 
     def test_quantity_support_requires_matching_unit_and_denominator(self):
         self.assertFalse(dimension_evidence_is_grounded(
@@ -1030,13 +1568,18 @@ class StagedSemanticTests(unittest.TestCase):
             "quantity_unit_denominator", "There were 10 votes per member.",
             "There were 10 votes per member.", "supported"))
 
-    def test_contradicted_dimension_dominates_conflicting_dimension_for_all(self):
+    def test_grounded_predicate_contradiction_dominates_qualifier_conflict(self):
         target, material = self.fixture()
         plan = build_target_plan(target)
         quote = material.content
         checks = []
-        for index, dimension in enumerate(plan["probes"][0]["required_dimensions"]):
-            verdict = "conflicting" if index == 1 else "contradicted"
+        for dimension in plan["probes"][0]["required_dimensions"]:
+            verdict = {
+                "actor_subject": "supported",
+                "predicate_object": "contradicted",
+                "scope_location": "supported",
+                "time": "conflicting",
+            }[dimension]
             checks.append({
                 "dimension": dimension, "verdict": verdict,
                 "basis_indices": [0], "rationale": "Fixture mixed result.",
@@ -1061,11 +1604,16 @@ class StagedSemanticTests(unittest.TestCase):
         self.assertEqual(2, len(plan["probes"]))
         raw_results = []
         for probe, verdict in zip(plan["probes"], ("conflicting", "contradicted")):
+            statuses = {
+                "actor_subject": "supported",
+                "predicate_object": verdict,
+                "scope_location": "supported",
+            }
             raw_results.append({
                 "probe_number": probe["number"],
                 "basis_pool": [{"version_id": "m", "quote": material.content}],
                 "dimension_results": [{
-                    "dimension": dimension, "verdict": verdict,
+                    "dimension": dimension, "verdict": statuses[dimension],
                     "basis_indices": [0], "rationale": "Fixture mixed result.",
                 } for dimension in probe["required_dimensions"]],
                 "gaps": [], "resolutions": [], "stop_reason": "none",

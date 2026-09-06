@@ -269,7 +269,7 @@ class AdapterTests(unittest.TestCase):
             config = json.loads((output / "config.json").read_text())
             self.assertEqual("staged", config["semantic_mode"])
             self.assertEqual(1, config["max_inner_repairs"])
-            self.assertEqual("staged-validation-v5", config["prompt_manifest"]["version"])
+            self.assertEqual("staged-validation-v6", config["prompt_manifest"]["version"])
             self.assertEqual("blocked_missing_auth",
                              json.loads((output / "status.json").read_text())["status"])
 
