@@ -836,10 +836,16 @@ class StagedVerifier(_StageClient):
                 raise ValueError("duplicate basis quotes")
             return tuple(result)
 
+        deferred_evidence_scope = (
+            {version_id for version_id in target.evidence_scope
+             if version_id not in allowed}
+            if dimension == "world" and target.assessment_mode == "evidence"
+            else set())
+        unavailable_program_scope = set(missing_scope) | deferred_evidence_scope
+
         def is_program_scope_wrapper(item):
-            return (dimension == "evidence"
-                    and item["action"] == "fetch"
-                    and item["locator"] in missing_scope)
+            return (item["action"] == "fetch"
+                    and item["locator"] in unavailable_program_scope)
 
         probes = {item["number"]: item for item in plan["probes"]}
         results = raw["probe_results"]
@@ -898,7 +904,8 @@ class StagedVerifier(_StageClient):
                             for item in result["gaps"])):
                 raise ValueError(
                     f"stop_task_exclusivity:{probe['number']}")
-            if verdict == "unresolved" and stop == "scope_unavailable" and not missing_scope:
+            if (verdict == "unresolved" and stop == "scope_unavailable"
+                    and not unavailable_program_scope):
                 raise ValueError("scope_unavailable needs a missing scoped version")
             elif verdict == "unresolved" and stop == "no_source_lead":
                 exhausted_ids = {item.get("gap_id") for item in retrieval_feedback
@@ -931,9 +938,10 @@ class StagedVerifier(_StageClient):
                     raise ValueError("blocking verification gap needs source basis")
                 locator, action = item["locator"], item["action"]
                 if is_program_scope_wrapper(item):
-                    # Frozen-scope acquisition is a program-owned task with a
-                    # canonical ID. Ignore the model's duplicate wrapper so it
-                    # cannot steal the locator and evade automatic closure.
+                    # Frozen-scope acquisition is an evidence-program-owned task
+                    # with a canonical ID. Ignore duplicate evidence wrappers and
+                    # auxiliary-world wrappers for that exact missing version so
+                    # neither can steal the locator or evade automatic closure.
                     continue
                 if action == "reanalyse":
                     if locator not in allowed:

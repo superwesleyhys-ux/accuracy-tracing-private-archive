@@ -9,7 +9,7 @@ import hashlib
 import json
 
 
-PROMPT_VERSION = "staged-validation-v3"
+PROMPT_VERSION = "staged-validation-v4"
 
 
 def _string(maximum=1200, minimum=1, values=None):
@@ -176,8 +176,12 @@ required dimension. Put exact quotes once in basis_pool and use basis_indices. A
 dimension verdict requires exact world basis. Every gap names one
 concrete fetch/search/reanalyse action, a nonempty locator and the possible decision impact. A
 blocking gap requires source basis. Resolve only registered world gaps with fresh basis. If
-unresolved, emit a task or explicitly use no_source_lead. If repair is supplied, fix that issue
-and return the complete world layer again.
+unresolved, emit tasks with stop_reason=none or emit no tasks and use no_source_lead. When
+assessment_mode=evidence and an exact evidence_scope version ID is absent from materials, its
+retrieval is owned by the evidence layer: do not duplicate that world task; use gaps=[] and
+stop_reason=scope_unavailable. This deferral applies only to exact missing evidence_scope IDs;
+other fetch locators must be explicit HTTP(S) URLs. If repair is supplied, fix that issue and
+return the complete world layer again.
 Program-generated repair fields identify the exact error_code and, when known, probe_number and
 dimension; correct that named ledger entry while still returning the complete layer.
 """

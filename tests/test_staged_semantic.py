@@ -312,6 +312,92 @@ class StagedSemanticTests(unittest.TestCase):
         self.assertIn("set gaps=[] because the program schedules exact missing-scope retrieval",
                       client.calls[0]["system"])
 
+    def test_auxiliary_world_defers_exact_missing_evidence_scope_wrapper(self):
+        target, material = self.fixture()
+        target = replace(target, evidence_scope=("m", "missing"))
+        evidence = layer()
+        evidence["probe_results"][0]["stop_reason"] = "scope_unavailable"
+        world = layer("unresolved", (("m", material.content),), gaps=({
+            "question": "Fetch the designated outcome snapshot.",
+            "action": "fetch", "locator": "missing", "blocking": True,
+            "basis": [{"version_id": "m", "quote": material.content}],
+            "decision_impact": "The outcome could change the world assessment.",
+        },))
+        world["probe_results"][0]["stop_reason"] = "scope_unavailable"
+        client = ScriptClient(
+            ("evidence", evidence), ("evidence_critic", LAYER_CRITIC_ACCEPT),
+            ("world", world), ("world_critic", LAYER_CRITIC_ACCEPT))
+
+        result = StagedVerifier(client).verify(
+            target, self.context(target, material))
+
+        task, = result.gaps
+        self.assertEqual("missing", task.locator)
+        self.assertEqual("evidence", task.dimension)
+        self.assertIsNone(task.probe_id)
+        world_prompt = next(call["system"] for call in client.calls
+                            if call["stage"] == "world")
+        self.assertIn("retrieval is owned by the evidence layer", world_prompt)
+
+    def test_auxiliary_world_rejects_a_non_scope_version_id_fetch(self):
+        target, material = self.fixture()
+        target = replace(target, evidence_scope=("m", "missing"))
+        evidence = layer()
+        evidence["probe_results"][0]["stop_reason"] = "scope_unavailable"
+        invalid_world = layer(gaps=({
+            "question": "Fetch an unregistered outcome snapshot.",
+            "action": "fetch", "locator": "other-missing", "blocking": False,
+            "basis": [], "decision_impact": "It might change the world assessment.",
+        },))
+        client = ScriptClient(
+            ("evidence", evidence), ("evidence_critic", LAYER_CRITIC_ACCEPT),
+            ("world", invalid_world))
+
+        with self.assertRaisesRegex(
+                StagedSemanticError, "fetch locator must be an explicit HTTP URL"):
+            StagedVerifier(client, max_repairs=0).verify(
+                target, self.context(target, material))
+
+    def test_auxiliary_world_stop_rejects_a_noncanonical_task(self):
+        target, material = self.fixture()
+        target = replace(target, evidence_scope=("m", "missing"))
+        evidence = layer()
+        evidence["probe_results"][0]["stop_reason"] = "scope_unavailable"
+        invalid_world = layer(gaps=({
+            "question": "Search for another bridge report.",
+            "action": "search", "locator": "bridge report", "blocking": False,
+            "basis": [], "decision_impact": "It might change the world assessment.",
+        },))
+        invalid_world["probe_results"][0]["stop_reason"] = "scope_unavailable"
+        client = ScriptClient(
+            ("evidence", evidence), ("evidence_critic", LAYER_CRITIC_ACCEPT),
+            ("world", invalid_world))
+
+        with self.assertRaisesRegex(
+                StagedSemanticError, "stop_task_exclusivity:1"):
+            StagedVerifier(client, max_repairs=0).verify(
+                target, self.context(target, material))
+
+    def test_world_assessment_cannot_defer_to_the_evidence_program(self):
+        target, material = self.fixture()
+        target = replace(target, assessment_mode="world",
+                         evidence_scope=("m", "missing"))
+        evidence = layer()
+        evidence["probe_results"][0]["stop_reason"] = "scope_unavailable"
+        invalid_world = layer(gaps=({
+            "question": "Fetch the designated evidence snapshot.",
+            "action": "fetch", "locator": "missing", "blocking": False,
+            "basis": [], "decision_impact": "It might change the world assessment.",
+        },))
+        client = ScriptClient(
+            ("evidence", evidence), ("evidence_critic", LAYER_CRITIC_ACCEPT),
+            ("world", invalid_world))
+
+        with self.assertRaisesRegex(
+                StagedSemanticError, "fetch locator must be an explicit HTTP URL"):
+            StagedVerifier(client, max_repairs=0).verify(
+                target, self.context(target, material))
+
     def test_explicit_stop_still_rejects_a_noncanonical_task(self):
         target, material = self.fixture()
         target = p.Target(**{**asdict(target), "evidence_scope": ("m", "missing")})
