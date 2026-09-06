@@ -28,7 +28,9 @@ search with query text in locator for other retrieval, reanalyse with a known ve
 specific missed interpretation. Explicit blocking evidence/world gaps require source-side basis.
 Do not demand world authentication to resolve an evidence-only question. Provenance gaps use
 stage=provenance and dimension=provenance. Leave resolved gaps out; resolve only named existing
-gaps with a quote and rationale. Empty arrays are preferable to duplicating all prior findings.
+gaps with a quote and rationale. This response is a COMPLETE replacement for the current
+material's prior Analysis: re-emit every still-grounded finding and omit only findings that the
+current source/context no longer supports. Never return a partial delta.
 """
 
 VERIFY_PROMPT = DATA_RULE + """Return TWO distinct assessments of the unchanged target.
@@ -51,11 +53,25 @@ Output both layered verdicts explicitly, never null. No probability or confidenc
 
 
 def compact_context(context):
-    return {"materials": context["materials"],
-            "relations": [{k: r[k] for k in ("id", "from_version", "to_version", "kind", "status", "upstream_locator")}
-                          for r in context["relations"]],
-            "origins": context["origins"], "gaps": context["gaps"],
-            "assessments": context.get("assessments"), "round": context["usage"]["rounds"]}
+    fragments = [{"parent_id": item.get("parent_id"), "span": item["span"],
+                  "qualifier_spans": item.get("qualifier_spans", [])}
+                 for item in context.get("fragments", [])]
+    relations = [{key: item.get(key) for key in (
+        "from_version", "to_version", "kind", "status", "basis",
+        "upstream_locator")} for item in context.get("relations", [])]
+    origins = [{key: item.get(key) for key in (
+        "target_id", "version_id", "basis", "material_kind")}
+               for item in context.get("origins", [])]
+    materials = [{key: value for key, value in item.items() if key != "retrieved_at"}
+                 for item in context["materials"]]
+    return {"materials": materials,
+            "fragments": fragments,
+            "relations": relations,
+            "origins": origins, "gaps": context["gaps"],
+            "retrieval_receipts": [{key: item.get(key, [] if key in {"task_ids", "tasks"} else None)
+                                     for key in ("version_id", "task_ids", "tasks", "attribution")}
+                                    for item in context.get("current_round_returns", [])
+                                    if item.get("task_ids")]}
 
 
 class Decomposer:

@@ -1,8 +1,8 @@
 # Accuracy Tracing — NewsVerify Harness
 
-Version 0.3.0: a bounded news provenance loop with **decomposition on every material return**, separate evidence/world assessments, task-directed snapshot retrieval, and a shared single-round/multi-round decision policy.
+Version 0.3.0: a bounded news provenance loop with **decomposition on every material return**, split single-responsibility semantic prompts, separate evidence/world assessments, task-directed snapshot retrieval, and a shared single-round/multi-round decision policy.
 
-**Status: model adapter and targeted regression experiments implemented.** The optional OpenAI adapter is in `experiments/`; the original demos remain hand-annotated. A searchable snapshot provider executes fetch/search/reanalysis tasks and reports missing coverage. It does not browse the open web. There is no independently reviewed real-news accuracy claim. See [v0.3 repair contract](docs/REPAIR_V0.3.md) and [observed results](reports/REPAIR_RESULTS_V0.3.md).
+**Status: staged model adapter and targeted regression experiments implemented.** The optional adapter in `experiments/` builds a deterministic target plan and runs seven bounded model stages: atoms, lineage, decomposition critic, evidence, evidence critic, world, and world critic. Python then performs atomic decomposition and judgement assembly. Eligible returns use that path; historically ineligible returns use isolated conservative archival decomposition. A searchable snapshot provider executes fetch/search/reanalysis tasks and reports exact task attribution and coverage. It does not browse the open web. There is no independently reviewed real-news accuracy claim. See the [staged validation loop](docs/STAGED_VALIDATION_LOOP.md), [v0.3 repair contract](docs/REPAIR_V0.3.md), and [observed earlier results](reports/REPAIR_RESULTS_V0.3.md).
 
 Repository Discussions are enabled, and the repository includes a prepared **Accuracy decline** reporting form for reproducible metric regressions or weaker trace outcomes. Reports should identify the affected metric or behavior, include the run configuration, and avoid treating synthetic fixtures as real-world performance evidence.
 
@@ -11,9 +11,9 @@ Repository Discussions are enabled, and the repository includes a prepared **Acc
 Python 3.11+; standard library only. From this project directory:
 
 ```bash
-python -m newsverify trace-demo --output reports/trace-demo-v0.2.json
-python -m newsverify score examples/evaluation_gold.json examples/evaluation_predictions.json --output reports/all-metrics-v0.2.json
-python -m newsverify compare examples/evaluation_gold.json examples/comparison_baseline.json examples/comparison_candidate.json --bootstrap-samples 100 --seed 0 --output reports/comparison-v0.2.json
+python -m newsverify trace-demo --output reports/trace-demo-v0.3.json
+python -m newsverify score examples/evaluation_gold.json examples/evaluation_predictions.json --output reports/all-metrics-v0.3.json
+python -m newsverify compare examples/evaluation_gold.json examples/comparison_baseline.json examples/comparison_candidate.json --bootstrap-samples 100 --seed 0 --output reports/comparison-v0.3.json
 python -m unittest discover -s tests -v
 ```
 
@@ -32,6 +32,7 @@ The metric example is a deliberately imperfect set of four **handwritten predict
 - Original-source completion requires an explicit finding and a direct lineage path from the target's source version. Support/contradiction edges do not substitute for that path.
 - `revisit_versions` triggers affected earlier analyses; current results are rebuilt while history remains available.
 - Verification gaps follow the same retrieval/decomposition route.
+- Task-aware returns carry exact issued-gap attribution; staged verification persists each task's target-probe identity and validates provider feedback against actual consumed versions.
 - Round, material and decomposition budgets, plus explicit no-progress and error results.
 - Historical admission requires an exact version availability declaration and basis. There is no arbitrary age cutoff for old original records.
 
@@ -42,11 +43,15 @@ Historically excluded versions now receive isolated archival decomposition and a
 Install optional model dependencies with `python -m pip install '.[model]'` and configure `OPENAI_API_KEY` in the execution environment. Keep credentials out of repository files. Then:
 
 ```bash
-python experiments/loop_compare.py run --inputs experiments/inputs-v03.json --output reports/my-run --model gpt-6-astra --max-rounds 5
+python experiments/loop_compare.py run --inputs experiments/inputs-v03.json --output reports/my-run --model MODEL_NAME --semantic-mode staged --max-repairs 1 --max-rounds 5
 python experiments/loop_compare.py score --gold experiments/gold-v03.json --run reports/my-run
 ```
 
-The first-round checkpoint and continued loop share the actual first-round model output and the same deterministic final decision function. A flagged case also runs once with all snapshots supplied, to distinguish additional source access from repeated reasoning. These five author-written synthetic contract cases are not a hidden or independently reviewed benchmark, and their scores are not comparable with the earlier ambiguous two-case trial.
+The staged mode is the default for new runs. Each eligible material follows `atoms → lineage → decomposition_critic`; the complete graph state then follows the isolated `evidence → evidence_critic` and `world → world_critic` paths before deterministic judgement assembly. The decomposition transaction shares one repair allowance, and each judgement layer separately shares one allowance between its deterministic gate and critic. Every immutable target probe and required dimension must appear exactly once with source-grounded basis before Python aggregates the result. Prompt/schema/input/output hashes, transaction links and stage audit records are retained. `--semantic-mode monolithic --max-repairs 0` preserves the earlier adapter for compatibility and later ablation. The two modes use different budgets and response caches, so their current results are not an equal-cost causal measurement of prompt splitting.
+
+A built `newsverify-harness` wheel contains the standard-library core CLI and trace engine. The optional staged experiment runtime remains source-checkout-only under `experiments/`; it is smoke-tested from a checkout but is not advertised as an installed console entry point.
+
+The first-round checkpoint and continued loop share the actual first-round model output and the same deterministic final decision function. A flagged case also runs once with all snapshots supplied, to distinguish additional source access from repeated reasoning. These five author-written synthetic contract cases are not a hidden or independently reviewed benchmark, and splitting prompts does not itself prove an accuracy gain.
 
 `Target.assessment_mode` is `evidence` or `world`. `evidence_scope` fixes which snapshot texts are assessed for entailment. The engine preserves raw evidence findings while applying only relevant blocking gaps to the chosen assessment. `present_decision()` performs the same final mapping in every variant; it cannot resample an answer into a higher score.
 
@@ -75,10 +80,12 @@ The trace engine and scorer have separate schemas. A production exporter and ind
 - [Chinese design conclusion and all metric definitions](docs/ACCURACY_TRACING_SPEC.md)
 - [Codex execution plan and remaining implementation sequence](docs/CODEX_EXECUTION_PLAN.md)
 - [Trace adapter API](docs/TRACE_ADAPTER.md)
+- [Staged prompt and validation loop](docs/STAGED_VALIDATION_LOOP.md)
 - [Evaluation schema](docs/EVALUATION_SCHEMA.md)
-- [Observed validation report](reports/VALIDATION_V0.2.md)
+- [Current offline validation report](reports/VALIDATION_V0.3.md)
+- [Historical v0.2 validation report](reports/VALIDATION_V0.2.md)
 - [v0.3 repair and migration contract](docs/REPAIR_V0.3.md)
-- [v0.3 regression and actual API results](reports/REPAIR_RESULTS_V0.3.md)
+- [v0.3 regression notes and historical pre-staged API results](reports/REPAIR_RESULTS_V0.3.md)
 
 ## Legacy compatibility
 

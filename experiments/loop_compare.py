@@ -19,9 +19,16 @@ from newsverify import provenance as p
 from newsverify.decisions import present_decision, round_decisions
 from newsverify.retrieval import SnapshotSearchProvider
 from model_io import Budget, BudgetClient, PriorResponseCache, write
-from semantic_adapter import Decomposer, Verifier
+from semantic_adapter import Decomposer as MonolithicDecomposer, Verifier as MonolithicVerifier
+from staged_semantic import StagedDecomposer, StagedVerifier
+from prompt_specs import prompt_manifest
 
-BUDGET = Budget(calls=24, output_tokens=36000, per_call_output_tokens=2500, seconds=600)
+MONOLITHIC_BUDGET = Budget(calls=24, output_tokens=36000,
+                           per_call_output_tokens=2500, seconds=600)
+STAGED_BUDGET = Budget(calls=128, output_tokens=480000,
+                       per_call_output_tokens=8000, seconds=1800)
+# Backwards-compatible import for external experiment helpers.
+BUDGET = MONOLITHIC_BUDGET
 
 
 def load_inputs(path):
@@ -44,15 +51,30 @@ def load_inputs(path):
 
 def run(args):
     data = load_inputs(args.inputs)
+    # Programmatic callers created before staged mode keep legacy semantics;
+    # the current CLI explicitly supplies its staged default.
+    semantic_mode = getattr(args, "semantic_mode", "monolithic")
+    if semantic_mode not in {"monolithic", "staged"}:
+        raise ValueError("semantic_mode must be monolithic or staged")
+    requested_repairs = getattr(args, "max_repairs", 1)
+    if type(requested_repairs) is not int or requested_repairs not in (0, 1):
+        raise ValueError("max_repairs must be 0 or 1")
+    max_repairs = requested_repairs if semantic_mode == "staged" else 0
+    budget = STAGED_BUDGET if semantic_mode == "staged" else MONOLITHIC_BUDGET
     reuse = Path(args.reuse_from) if getattr(args, "reuse_from", None) else None
     if reuse:
         old = json.loads((reuse / "config.json").read_text())
         if (old["input_sha256"] != hashlib.sha256(Path(args.inputs).read_bytes()).hexdigest()
-                or old["model"] != args.model or old["budget"] != asdict(BUDGET)):
-            raise ValueError("Cached run must have the same frozen inputs, model, and resource caps")
+                or old["model"] != args.model or old["budget"] != asdict(budget)
+                or old.get("semantic_mode", "monolithic") != semantic_mode
+                or old.get("max_inner_repairs", 0) != max_repairs
+                or (semantic_mode == "staged"
+                    and old.get("prompt_manifest") != prompt_manifest())):
+            raise ValueError("Cached run must have identical inputs, model, prompt mode, repairs, and resource caps")
     out = Path(args.output)
     out.mkdir(parents=True, exist_ok=False)
-    config = {"model": args.model, "max_rounds": args.max_rounds, "budget": asdict(BUDGET),
+    config = {"model": args.model, "max_rounds": args.max_rounds, "budget": asdict(budget),
+        "semantic_mode": semantic_mode, "max_inner_repairs": max_repairs,
         "input_sha256": hashlib.sha256(Path(args.inputs).read_bytes()).hexdigest(),
         "source_sha256": {str(f.relative_to(ROOT)): hashlib.sha256(f.read_bytes()).hexdigest()
                           for base in [ROOT / "newsverify", ROOT / "experiments"] for f in sorted(base.glob("*.py"))},
@@ -60,8 +82,11 @@ def run(args):
         "control": "one-round all-materials control for flagged cases separates access from repeated reasoning",
         "original_agent_reexecuted": False, "gold_access_during_inference": False,
         "actual_spend_equal": False, "input_tokens_capped": False}
+    config["prompt_manifest"] = prompt_manifest() if semantic_mode == "staged" else None
     config["reuse_from"] = str(reuse) if reuse else None
-    config["cache_rule"] = "same case/variant, exact system/user/schema/model/output-cap match; historical time/tokens charged"
+    config["cache_rule"] = ("same case/variant, exact requested-model/reasoning/system/user/"
+                            "schema/response-mode/output-cap match; one-shot replay; "
+                            "historical time/tokens charged")
     write(out / "config.json", config)
     if not os.environ.get("OPENAI_API_KEY"):
         write(out / "status.json", {"status": "blocked_missing_auth", "model_calls": 0})
@@ -88,7 +113,7 @@ def run(args):
                     print(json.dumps({"case": identifier, "calls": self.calls}), flush=True)
                     if self.usage()["seconds"] > self.budget.seconds:
                         raise RuntimeError("Historical plus new wall-time budget exceeded")
-        client = RecordedClient(args.model, BUDGET, transport=cache)
+        client = RecordedClient(args.model, budget, transport=cache)
         row = {"id": case["target"]["id"], "variant": "full_evidence_once" if control else "loop",
                "status": "error", "prediction": None, "checkpoints": []}
         try:
@@ -96,10 +121,25 @@ def run(args):
             provider = SnapshotSearchProvider(materials, [m.version_id for m in materials] if control else case["seed_ids"])
             t = case["target"]
             target = p.Target(**{**t, "evidence_scope": tuple(t["evidence_scope"])})
-            report = p.run_provenance(target, provider, Decomposer(client), Verifier(client),
-                p.TraceConfig(max_rounds=1 if control else args.max_rounds, max_documents=18, max_decomposition_calls=18))
+            if semantic_mode == "staged":
+                decomposer = StagedDecomposer(client, max_repairs=max_repairs)
+                verifier = StagedVerifier(client, max_repairs=max_repairs)
+            else:
+                decomposer = MonolithicDecomposer(client)
+                verifier = MonolithicVerifier(client)
+            report = p.run_provenance(target, provider, decomposer, verifier,
+                p.TraceConfig(max_rounds=1 if control else args.max_rounds,
+                              max_documents=8 if semantic_mode == "staged" else 18,
+                              max_decomposition_calls=8 if semantic_mode == "staged" else 18))
             write(out / f"{identifier}-trace.json", report)
             write(out / f"{identifier}-retrieval.json", provider.history)
+            if semantic_mode == "staged":
+                write(out / f"{identifier}-semantic-stages.json", {
+                    "prompt_manifest": prompt_manifest(),
+                    "target_plans": {**decomposer.plans, **verifier.plans},
+                    "decomposition": decomposer.history,
+                    "verification": verifier.history,
+                })
             row["checkpoints"] = round_decisions(report)
             row["prediction"] = present_decision(report)
             row["status"] = "completed" if report["assessment_valid"] else "error"
@@ -123,8 +163,14 @@ def run(args):
             results.append(row)
             write(out / "results.json", results)
             print(json.dumps({"case": row["id"], "variant": row["variant"], "status": row["status"]}), flush=True)
-    write(out / "status.json", {"status": "completed" if all(r["status"] == "completed" for r in results) else "has_errors",
-        "actual_model_calls": sum(r["usage"]["model_calls"] for r in results)})
+    logical_calls = sum(r["usage"]["model_calls"] for r in results)
+    actual_calls = sum(r["actual_new_api_usage"]["model_calls"] for r in results)
+    write(out / "status.json", {
+        "status": "completed" if all(r["status"] == "completed" for r in results) else "has_errors",
+        "actual_model_calls": actual_calls,
+        "logical_model_calls": logical_calls,
+        "replayed_model_calls": logical_calls - actual_calls,
+    })
     return 0 if all(r["status"] == "completed" for r in results) else 1
 
 
@@ -168,6 +214,8 @@ def main():
     for name in ["inputs", "output", "model"]: r.add_argument("--" + name, required=True)
     r.add_argument("--max-rounds", type=int, default=5)
     r.add_argument("--reuse-from")
+    r.add_argument("--semantic-mode", choices=["staged", "monolithic"], default="staged")
+    r.add_argument("--max-repairs", type=int, choices=[0, 1], default=1)
     s = sub.add_parser("score")
     for name in ["gold", "run"]: s.add_argument("--" + name, required=True)
     args = cli.parse_args()
