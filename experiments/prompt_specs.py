@@ -9,7 +9,7 @@ import hashlib
 import json
 
 
-PROMPT_VERSION = "staged-validation-v4"
+PROMPT_VERSION = "staged-validation-v5"
 
 
 def _string(maximum=1200, minimum=1, values=None):
@@ -158,6 +158,8 @@ verdict requires exact basis quotes and every scoped version
 to be present. Otherwise return unresolved. Every gap must name
 one concrete fetch/search/reanalyse action, a nonempty locator and the possible decision impact.
 A blocking gap requires source basis. Resolve only registered evidence gaps with fresh basis.
+scope_acquisition_state is read-only program state: never emit a resolution or a replacement
+task for one of its gap IDs. The program closes a returned exact frozen-scope version.
 An unresolved probe must either emit concrete tasks with stop_reason=none or emit no tasks and use
 an explicit stop. It may use scope_unavailable only when missing_scope is nonempty; with that stop,
 set gaps=[] because the program schedules exact missing-scope retrieval. Conclusive probes use

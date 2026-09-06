@@ -12,7 +12,7 @@ import json
 import re
 
 
-TARGET_PLAN_VERSION = "deterministic-target-plan-v3"
+TARGET_PLAN_VERSION = "deterministic-target-plan-v4"
 MAX_PROBES = 8
 
 _SENTENCE_BREAK = re.compile(r"[;；。!?！？]+|(?<!\d)\.(?!\d)")
@@ -70,6 +70,17 @@ _CORE_DIMENSIONS = {"actor_subject", "predicate_object", "scope_location"}
 _POTENTIALLY_SHARED_DIMENSIONS = {
     "time", "negation", "modality", "comparison_baseline",
 }
+_CORE_ACTION_EQUIVALENTS = {
+    "commence": "start", "commenced": "start", "commences": "start",
+    "commencing": "start", "begin": "start", "began": "start",
+    "begun": "start", "begins": "start", "beginning": "start",
+    "start": "start", "started": "start", "starts": "start",
+    "starting": "start",
+}
+_TEMPORAL_LINKER = re.compile(
+    r"\b(?:in|during|by|through|throughout|on|at)\s+(?:the\s+)?$",
+    re.IGNORECASE,
+)
 
 
 def _sha(value):
@@ -300,6 +311,75 @@ def _claim_tokens(value):
             if token not in ignored]
 
 
+def _without_temporal_surface(value):
+    """Blank only target-plan-recognised temporal spans and their linkers."""
+    covered = [False] * len(value)
+    for pattern in (_TEMPORAL_VALUE, _TIME_SIGNAL):
+        for match in pattern.finditer(value):
+            start, end = match.span()
+            linker = _TEMPORAL_LINKER.search(value[:start])
+            if linker is not None:
+                start = linker.start()
+            covered[start:end] = [True] * (end - start)
+    return "".join(" " if hidden else character
+                   for character, hidden in zip(value, covered))
+
+
+def _core_claim_tokens(value):
+    """Canonical core surface while retaining role and conjunction order."""
+    tokens = _claim_tokens(_without_temporal_surface(value))
+    result = []
+    for index, token in enumerate(tokens):
+        # A retrospective outcome can support the future action without
+        # repeating its auxiliary, but do not discard auxiliaries generally.
+        if (token in {"will", "would"} and index + 1 < len(tokens)
+                and tokens[index + 1] in _CORE_ACTION_EQUIVALENTS):
+            continue
+        result.append(_CORE_ACTION_EQUIVALENTS.get(token, token))
+    return result
+
+
+def _core_content_tokens(value):
+    return [_CORE_ACTION_EQUIVALENTS.get(token, token)
+            for token in _content_tokens(_without_temporal_surface(value))]
+
+
+def _target_identity_tokens(value):
+    """Conservative ordered actor/object anchors with the predicate removed."""
+    surface = _without_temporal_surface(value)
+    auxiliaries = {
+        "is", "are", "was", "were", "be", "been", "has", "have", "had",
+        "do", "does", "did", "will", "would", "can", "could", "may",
+        "might", "must", "should",
+    }
+    candidates = list(_PREDICATE.finditer(surface))
+    # Suffix heuristics can mistake a capitalized subject such as "Boeing"
+    # or "Officials" for a verb. Prefer an explicit auxiliary; otherwise
+    # require a visible subject before the predicate when one exists.
+    predicate = next(
+        (item for item in candidates if item.group().lower() in auxiliaries),
+        None)
+    if predicate is None:
+        predicate = next(
+            (item for item in candidates
+             if _content_tokens(surface[:item.start()])),
+            candidates[0] if candidates else None)
+    if predicate is None:
+        return _core_content_tokens(surface)
+    before = _core_content_tokens(surface[:predicate.start()])
+    after = _core_content_tokens(surface[predicate.end():])
+    if predicate.group().lower() in auxiliaries and after:
+        # The first content word after an auxiliary is the predicate head.
+        after = after[1:]
+    return before + after
+
+
+def _ordered_identity_surface(probe_text, basis_text):
+    anchors = _target_identity_tokens(probe_text)
+    return not anchors or _ordered_token_match(
+        anchors, _core_content_tokens(basis_text))
+
+
 def _ordered_token_match(target_tokens, basis_tokens):
     cursor = 0
     for target_token in target_tokens:
@@ -316,12 +396,14 @@ def _ordered_token_match(target_tokens, basis_tokens):
 
 def _ordered_supported_surface(probe_text, basis_text):
     """Fail closed on role reversal and detached conjunction scope."""
-    target_tokens = _claim_tokens(probe_text)
+    target_tokens = _core_claim_tokens(probe_text)
     if target_tokens and not _ordered_token_match(
-            target_tokens, _claim_tokens(basis_text)):
+            target_tokens, _core_claim_tokens(basis_text)):
         return False
-    target_cjk = re.findall(r"[\u3400-\u4dbf\u4e00-\u9fff]", probe_text)
-    basis_cjk = re.findall(r"[\u3400-\u4dbf\u4e00-\u9fff]", basis_text)
+    target_cjk = re.findall(
+        r"[\u3400-\u4dbf\u4e00-\u9fff]", _without_temporal_surface(probe_text))
+    basis_cjk = re.findall(
+        r"[\u3400-\u4dbf\u4e00-\u9fff]", _without_temporal_surface(basis_text))
     if target_cjk and not _ordered_token_match(target_cjk, basis_cjk):
         return False
     return True
@@ -456,9 +538,15 @@ def dimension_evidence_is_grounded(dimension, probe_text, basis_text,
         if not _ordered_supported_surface(probe_text, basis_text):
             return False
         basis_forms = set().union(
-            *(_word_forms(token) for token in _content_tokens(basis_text)))
+            *(_word_forms(token) for token in _core_content_tokens(basis_text)))
         if any(not (_word_forms(token) & basis_forms)
-               for token in _content_tokens(probe_text)):
+               for token in _core_content_tokens(probe_text)):
+            return False
+    if verdict in {"contradicted", "conflicting"}:
+        # A contrary qualifier or action must still bind to the target's
+        # ordered actor/object identity. An unrelated filing date is not a
+        # refutation merely because the issuer name overlaps.
+        if not _ordered_identity_surface(probe_text, basis_text):
             return False
     if dimension == "predicate_object" and verdict == "supported":
         markers = _predicate_markers(probe_text)

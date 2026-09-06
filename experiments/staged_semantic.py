@@ -163,6 +163,18 @@ def _dimension(gap):
     return ("provenance" if gap["stage"] == "provenance" else "world") if value == "auto" else value
 
 
+def _is_program_scope_gap(target, dimension, gap_id, gap):
+    """Identify the one target-level task whose lifecycle the engine owns."""
+    locator = gap.get("locator")
+    return (dimension == "evidence"
+            and gap.get("stage") == "verification"
+            and _dimension(gap) == "evidence"
+            and gap.get("action") == "fetch"
+            and gap.get("probe_id") is None
+            and locator in target.evidence_scope
+            and gap_id == _id(target.id, "missing-scope", locator))
+
+
 def _feedback(context, target, material):
     receipt = context.get("current_return", {})
     task_ids = receipt.get("task_ids", [])
@@ -672,6 +684,19 @@ class StagedVerifier(_StageClient):
                     "tasks": matching_tasks,
                     "attribution": receipt.get("attribution"),
                 })
+            program_scope = {
+                gap_id: gap for gap_id, gap in registered.items()
+                if _is_program_scope_gap(target, dimension, gap_id, gap)
+            }
+            model_registered = [
+                gap for gap_id, gap in registered.items()
+                if gap_id not in program_scope
+            ]
+            returned_pairs = {
+                (gap_id, receipt["version_id"])
+                for receipt in receipts
+                for gap_id in receipt.get("task_ids", [])
+            }
             payload = {
                 "target": asdict(target),
                 "target_plan": plan,
@@ -681,7 +706,17 @@ class StagedVerifier(_StageClient):
                 "fragments": [_canonical_fragment(fragment)
                               for fragment in context.get("fragments", [])
                               if fragment["span"]["version_id"] in allowed],
-                "registered_gaps": list(registered.values()),
+                "registered_gaps": model_registered,
+                "scope_acquisition_state": [{
+                    "gap_id": gap_id,
+                    "version_id": gap["locator"],
+                    "status": (
+                        "returned"
+                        if (gap_id, gap["locator"]) in returned_pairs
+                        else "eligible"
+                        if gap["locator"] in allowed
+                        else "missing"),
+                } for gap_id, gap in sorted(program_scope.items())],
                 "retrieval_feedback": [item for item in
                                        context.get("retrieval_feedback", [])
                                        if item.get("gap_id") in registered],
@@ -758,6 +793,7 @@ class StagedVerifier(_StageClient):
                     "fragments": payload["fragments"],
                     "materials": payload["materials"],
                     "registered_gaps": payload["registered_gaps"],
+                    "scope_acquisition_state": payload["scope_acquisition_state"],
                     "retrieval_feedback": payload["retrieval_feedback"],
                 }
                 if dimension == "world":
@@ -885,7 +921,18 @@ class StagedVerifier(_StageClient):
                 check_rationales.append(
                     check["dimension"] + "=" + check["verdict"] + ": " +
                     check["rationale"])
-            if "contradicted" in check_verdicts:
+            verdict_by_dimension = {
+                item["dimension"]: item["verdict"] for item in checks
+            }
+            core_unresolved = any(
+                verdict_by_dimension.get(name) == "unresolved"
+                for name in ("actor_subject", "predicate_object",
+                             "scope_location"))
+            if core_unresolved:
+                # A qualifier cannot refute or authenticate an event whose
+                # actor, predicate or scope is still unidentified.
+                verdict = "unresolved"
+            elif "contradicted" in check_verdicts:
                 verdict = "contradicted"
             elif "conflicting" in check_verdicts:
                 verdict = "conflicting"
@@ -989,7 +1036,10 @@ class StagedVerifier(_StageClient):
                 resolution_ids.add(gap_id)
                 if gap_id not in registered:
                     raise ValueError("resolution needs one registered layer gap")
-                if registered[gap_id].get("probe_id") != probe["id"]:
+                program_scope_gap = _is_program_scope_gap(
+                    target, dimension, gap_id, registered[gap_id])
+                if (registered[gap_id].get("probe_id") != probe["id"]
+                        and not program_scope_gap):
                     raise ValueError("resolution belongs to a different target probe")
                 support = refs(item["basis"])
                 if not support:
@@ -1030,10 +1080,7 @@ class StagedVerifier(_StageClient):
             existing_resolution_ids = {item.gap_id for item in resolutions}
             program_scope_gaps = {
                 gap_id: gap for gap_id, gap in registered.items()
-                if (gap_id == _id(target.id, "missing-scope", gap.get("locator"))
-                    or (gap.get("action") == "fetch"
-                        and gap.get("locator") in target.evidence_scope
-                        and gap.get("probe_id") is None))
+                if _is_program_scope_gap(target, dimension, gap_id, gap)
             }
             for gap_id, gap in program_scope_gaps.items():
                 version_id = gap.get("locator")

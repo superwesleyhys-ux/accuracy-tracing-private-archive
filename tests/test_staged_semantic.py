@@ -454,7 +454,7 @@ class StagedSemanticTests(unittest.TestCase):
                          set(manifest["stages"]))
         hashes = {value["prompt_sha256"] for value in manifest["stages"].values()}
         self.assertEqual(7, len(hashes))
-        self.assertEqual("deterministic-target-plan-v3",
+        self.assertEqual("deterministic-target-plan-v4",
                          manifest["target_plan_version"])
 
     def test_gap_return_reenters_every_material_stage_before_second_verification(self):
@@ -750,6 +750,96 @@ class StagedSemanticTests(unittest.TestCase):
         }]
         second = verifier.verify(target, second_context)
         self.assertIn(gap.id, {item.gap_id for item in second.resolutions})
+
+    def test_program_scope_resolution_is_accepted_once_then_auto_deduplicated(self):
+        target, material = self.fixture()
+        target = replace(target, evidence_scope=("m", "missing"))
+        missing = replace(
+            material, version_id="missing", url="https://example.org/missing")
+        first_evidence = layer()
+        first_evidence["probe_results"][0]["stop_reason"] = "scope_unavailable"
+        first_client = ScriptClient(
+            ("evidence", first_evidence),
+            ("evidence_critic", LAYER_CRITIC_ACCEPT),
+            ("world", layer()), ("world_critic", LAYER_CRITIC_ACCEPT))
+        first = StagedVerifier(first_client).verify(
+            target, self.context(target, material))
+        gap, = [item for item in first.gaps if item.locator == "missing"]
+
+        explicit = layer(
+            "contradicted", (("missing", missing.content),),
+            resolutions=({
+                "gap_id": gap.id,
+                "basis": [{"version_id": "missing",
+                           "quote": missing.content}],
+                "rationale": "The exact scoped return closes acquisition.",
+            },), rationale="The scoped record contradicts the target.")
+        second_client = ScriptClient(
+            ("evidence", explicit),
+            ("evidence_critic", LAYER_CRITIC_ACCEPT),
+            ("world", layer()), ("world_critic", LAYER_CRITIC_ACCEPT))
+        second_context = self.context(target, material, gaps=(asdict(gap),))
+        second_context["materials"].append(asdict(missing))
+        second_context["current_round_returns"] = [{
+            "version_id": "missing", "task_ids": [gap.id],
+            "tasks": [asdict(gap)], "attribution": "envelope",
+        }]
+        second_context["retrieval_feedback"] = [{
+            "gap_id": gap.id, "action": gap.action, "locator": gap.locator,
+            "status": "returned", "version_ids": ["missing"],
+        }]
+
+        second = StagedVerifier(second_client).verify(target, second_context)
+
+        self.assertEqual([gap.id], [item.gap_id for item in second.resolutions])
+        evidence_payload = second_client.calls[0]["payload"]
+        self.assertEqual([], evidence_payload["registered_gaps"])
+        self.assertEqual([{
+            "gap_id": gap.id, "version_id": "missing", "status": "returned",
+        }], evidence_payload["scope_acquisition_state"])
+        self.assertIn("never emit a resolution", second_client.calls[0]["system"])
+
+    def test_ownerless_non_program_resolution_stays_rejected(self):
+        target, material = self.fixture()
+        plan = build_target_plan(target)
+        gap = p.Gap(
+            "ownerless-model-task", "Reanalyse the bridge record.",
+            "verification", "evidence", True, target.id,
+            (p.Span("m", 0, len(material.content), material.content),),
+            "The record could change the result.", "reanalyse", "m", None)
+        raw = layer(
+            "contradicted", (("m", material.content),),
+            resolutions=({
+                "gap_id": gap.id,
+                "basis": [{"version_id": "m", "quote": material.content}],
+                "rationale": "Attempted ownerless closure.",
+            },), rationale="The record contradicts reopening.")
+        receipt = [{
+            "version_id": "m", "task_ids": [gap.id],
+            "tasks": [asdict(gap)], "attribution": "envelope",
+        }]
+
+        with self.assertRaisesRegex(
+                ValueError, "resolution belongs to a different target probe"):
+            StagedVerifier(ScriptClient())._assemble_layer(
+                target, "evidence", raw, {"m": asdict(material)},
+                {gap.id: asdict(gap)}, [], plan, receipt, [])
+
+    def test_contradicted_qualifier_cannot_override_unresolved_event_identity(self):
+        target, material = self.fixture()
+        plan = build_target_plan(target)
+        raw = layer("unresolved", (("m", material.content),))
+        for item in raw["probe_results"][0]["dimension_results"]:
+            if item["dimension"] == "time":
+                item["verdict"] = "contradicted"
+                item["rationale"] = "The date conflicts, but identity is unresolved."
+        raw["probe_results"][0]["stop_reason"] = "no_source_lead"
+
+        assembled = StagedVerifier(ScriptClient())._assemble_layer(
+            target, "evidence", raw, {"m": asdict(material)}, {}, [], plan,
+            [], [])
+
+        self.assertEqual("unresolved", assembled["verdict"])
 
     def test_probe_specific_unavailable_feedback_cannot_stop_another_probe(self):
         target, material = self.fixture("Alice was mentioned.")
