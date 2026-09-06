@@ -110,6 +110,8 @@ class StagedSemanticTests(unittest.TestCase):
                          [call["stage"] for call in client.calls])
         self.assertTrue(all(call["prompt_version"] == PROMPT_VERSION
                             for call in client.calls))
+        self.assertTrue(all("retrieved_at" not in json.dumps(call["payload"])
+                            for call in client.calls))
         evidence_payload = client.calls[3]["payload"]
         expected_fragments = [{
             "parent_id": report["fragments"][0]["parent_id"],
@@ -155,6 +157,7 @@ class StagedSemanticTests(unittest.TestCase):
         record = next(item for item in adapter.history
                       if item["stage"] == "decomposition_assembly")
         source = asdict(material)
+        source.pop("retrieved_at")
         plan = build_target_plan(target)
         expected = {
             "target": asdict(target),

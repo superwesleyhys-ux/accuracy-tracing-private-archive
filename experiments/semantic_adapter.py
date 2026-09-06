@@ -74,11 +74,18 @@ def compact_context(context):
                                     if item.get("task_ids")]}
 
 
+def model_material(material):
+    """Return publisher-version fields only; retrieval time is run metadata."""
+    value = asdict(material) if not isinstance(material, dict) else dict(material)
+    value.pop("retrieved_at", None)
+    return value
+
+
 class Decomposer:
     def __init__(self, client): self.client = client
 
     def decompose(self, target, material, context):
-        payload = {"target": asdict(target), "material": asdict(material),
+        payload = {"target": asdict(target), "material": model_material(material),
                    "context": compact_context(context),
                    "previous_analysis": context["analyses"].get(material.version_id)}
         raw = self.client.call(PSI_PROMPT, json.dumps(payload, ensure_ascii=False), schema(p.Analysis))

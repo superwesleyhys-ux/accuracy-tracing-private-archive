@@ -355,7 +355,7 @@ class StagedDecomposer(_StageClient):
         self._begin_transaction("decompose", target.id, material.version_id)
         self._reserve(3 + 2 * self.max_repairs,
                       6000 + 3500 * self.max_repairs)
-        source = asdict(material)
+        source = _canonical_material(asdict(material))
         visible = {item["version_id"]: item for item in context.get("materials", [])}
         visible[material.version_id] = source
         plan = build_target_plan(target)

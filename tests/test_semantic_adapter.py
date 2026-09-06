@@ -189,6 +189,8 @@ class AdapterTests(unittest.TestCase):
         self.assertEqual("unresolved", trace["fact_status"])
         self.assertEqual(2, len(calls))
         self.assertTrue(all("earlier_report" not in c["messages"][1]["content"] for c in calls))
+        self.assertTrue(all('"retrieved_at"' not in c["messages"][1]["content"]
+                            for c in calls))
 
     def test_frozen_inputs_have_no_gold_labels(self):
         path = Path(__file__).resolve().parents[1] / "experiments/inputs-v03.json"

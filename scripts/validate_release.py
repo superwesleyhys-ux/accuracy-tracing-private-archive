@@ -22,6 +22,9 @@ from newsverify.trace_demo import run_demo
 
 SERIES = ".".join(__version__.split(".")[:2])
 TAG = "v" + SERIES
+HISTORICAL_DATA = ROOT / "experiments" / "historical-2023"
+HISTORICAL_AUDIT_NAME = f"historical-2023-audit-{TAG}.json"
+HISTORICAL_CASE_COUNT = 8
 
 
 def flatten(suite):
@@ -113,6 +116,64 @@ def package_smoke():
     return result
 
 
+def historical_benchmark_audit(output_path):
+    """Run and persist the frozen historical-2023 contract audit.
+
+    This invokes the public CLI with the four fixed benchmark artifacts.  The
+    release wrapper adds scope metadata so the resulting report cannot be
+    mistaken for a live model comparison or an accuracy measurement.
+    """
+    command = [
+        sys.executable, "experiments/historical_compare.py", "audit",
+        "--inputs", HISTORICAL_DATA / "inputs.json",
+        "--sources", HISTORICAL_DATA / "sources.json",
+        "--gold", HISTORICAL_DATA / "gold.json",
+        "--freeze", HISTORICAL_DATA / "freeze.json",
+    ]
+    completed = _run(command)
+    try:
+        payload = json.loads(completed.stdout)
+    except (json.JSONDecodeError, TypeError):
+        payload = {
+            "status": "failed",
+            "failure_stage": "historical_contract_audit",
+            "output_tail": completed.stdout[-2000:],
+        }
+    if completed.returncode:
+        payload.update({
+            "status": "failed",
+            "failure_stage": "historical_contract_audit",
+            "return_code": completed.returncode,
+        })
+    elif (payload.get("status") != "passed"
+          or payload.get("case_count") != HISTORICAL_CASE_COUNT):
+        payload.update({
+            "status": "failed",
+            "failure_stage": "historical_contract_expectation",
+        })
+
+    passed = payload.get("status") == "passed"
+    payload.update({
+        "corpus_description": (
+            "8 real-world 2023 propositions with declared official-source "
+            "claim and outcome evidence"
+        ),
+        "corpus_synthetic": False,
+        "release_validation_scope": {
+            "contract_audit_performed": passed,
+            "remote_artifacts_independently_authenticated": False,
+            "live_model_ab_performed": False,
+            "accuracy_measured": False,
+        },
+    })
+    output_path = Path(output_path)
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    output_path.write_text(json.dumps(
+        payload, ensure_ascii=False, indent=2, allow_nan=False) + "\n",
+        encoding="utf-8")
+    return payload
+
+
 def main():
     reports = ROOT / "reports"
     reports.mkdir(exist_ok=True)
@@ -144,6 +205,8 @@ def main():
     (reports / f"package-smoke-{TAG}.json").write_text(
         json.dumps(packaging, ensure_ascii=False, indent=2) + "\n",
         encoding="utf-8")
+    historical_audit = historical_benchmark_audit(
+        reports / HISTORICAL_AUDIT_NAME)
     validation = {
         "release": __version__,
         "generated_at": datetime.now(timezone.utc).isoformat(),
@@ -159,10 +222,26 @@ def main():
         "trace_demo_fact_status": trace["fact_status"],
         "trace_demo_stop": trace["stop_reason"],
         "packaging": packaging,
-        "all_data_synthetic": True,
+        "all_data_synthetic": False,
+        "offline_demo_data_synthetic": True,
+        "historical_2023_audit": {
+            "status": historical_audit["status"],
+            "artifact": f"reports/{HISTORICAL_AUDIT_NAME}",
+            "benchmark_id": historical_audit.get("benchmark_id"),
+            "case_count": historical_audit.get("case_count"),
+            "claim_window": historical_audit.get("claim_window"),
+            "evidence_cutoff": historical_audit.get("evidence_cutoff"),
+            "labels": historical_audit.get("labels"),
+            "corpus_synthetic": False,
+            "declared_official_source_evidence": True,
+            "contract_audit_performed": (
+                historical_audit["status"] == "passed"),
+            "remote_artifacts_independently_authenticated": False,
+        },
         "live_news_requests": 0,
         "model_api_calls": 0,
         "staged_model_run_performed": False,
+        "live_model_ab_performed": False,
         "realworld_accuracy_measured": False,
     }
     (reports / f"validation-{TAG}.json").write_text(
@@ -172,7 +251,7 @@ def main():
     lines = [
         f"# Accuracy Tracing {TAG}：离线验收记录", "",
         f"生成时间：{validation['generated_at']}", "",
-        "本报告只描述当前源码的离线测试和安装烟测。没有调用新闻检索服务或模型 API，没有测得真实新闻准确率。", "",
+        "本报告描述当前源码的离线测试、安装烟测，以及 historical-2023 真实命题语料的合同审计。没有调用新闻检索服务或模型 API，没有执行 live staged/monolithic A/B，也没有测得真实准确率。", "",
         "## 运行结果", "",
         f"- 测试：{test_result.testsRun} 项；失败 {len(test_result.failures)}；错误 {len(test_result.errors)}；跳过 {len(test_result.skipped)}。",
         f"- 核心 wheel 安装检查：{packaging['status']}。",
@@ -181,6 +260,12 @@ def main():
     ]
     lines += [f"| {name} | {count} |" for name, count in sorted(groups.items())]
     lines += [
+        "", "## Historical-2023 合同审计", "",
+        f"- 状态：`{historical_audit['status']}`；语料：{historical_audit.get('case_count', 0)} 条 2023 年真实世界命题。",
+        f"- 标签：true {historical_audit.get('labels', {}).get('true', 0)} 条 / false {historical_audit.get('labels', {}).get('false', 0)} 条。",
+        f"- 推理证据截止：`{historical_audit.get('evidence_cutoff', 'unknown')}`。",
+        f"- 审计产物：`reports/{HISTORICAL_AUDIT_NAME}`。", "",
+        "这 8 条语料使用声明为官方来源的命题与定论材料；本次检查覆盖时间窗、角色隔离、内部内容哈希、gold 隔离及冻结校验和等合同。它不会重新抓取并独立认证远端原件，也没有运行任何模型，因此不能产生 staged/monolithic live A/B 或准确率结论。",
         "", "## 双回环演示", "",
         f"- 检索轮次：{trace['usage']['rounds']}。",
         f"- 不同材料版本：{trace['usage']['unique_versions']}。",
@@ -198,15 +283,18 @@ def main():
     ]
     lines += [
         "", "## 仍需外部验证", "",
-        "- 真实新闻检索适配器、来源信任与历史可用性审计。",
+        "- 真实新闻检索适配器，以及对 historical-2023 远端来源原件的独立重抓取/认证。",
         "- 独立人工 gold、隐藏且按事件/时间隔离的真实新闻测试集。",
-        "- 等总预算 staged/monolithic 消融；当前离线通过不能推导真实准确率增益。",
+        "- 等总预算 staged/monolithic live A/B；当前离线合同审计不能推导真实准确率增益。",
         "- 生产并发、网络故障、成本和长期稳定性测试。", "",
     ]
     (reports / f"VALIDATION_{TAG.upper()}.md").write_text(
         "\n".join(lines), encoding="utf-8")
     print(json.dumps(validation, ensure_ascii=False, indent=2))
-    return 0 if test_result.wasSuccessful() and packaging["status"] == "passed" else 1
+    passed = (test_result.wasSuccessful()
+              and packaging["status"] == "passed"
+              and historical_audit["status"] == "passed")
+    return 0 if passed else 1
 
 
 if __name__ == "__main__":
