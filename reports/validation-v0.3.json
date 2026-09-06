@@ -1,7 +1,7 @@
 {
   "release": "0.3.0",
-  "generated_at": "2026-09-06T06:07:20.228441+00:00",
-  "tests_run": 198,
+  "generated_at": "2026-09-06T09:12:55.370754+00:00",
+  "tests_run": 250,
   "failures": 0,
   "errors": 0,
   "skipped": 0,
@@ -14,8 +14,9 @@
     "test_provenance": 26,
     "test_release": 4,
     "test_repair": 48,
-    "test_semantic_adapter": 16,
-    "test_staged_semantic": 32
+    "test_semantic_adapter": 18,
+    "test_staged_semantic": 58,
+    "test_target_plan_grounding": 24
   },
   "metric_contracts_checked": [
     "VP",

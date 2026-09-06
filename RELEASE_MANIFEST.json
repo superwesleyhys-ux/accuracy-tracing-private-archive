@@ -9,19 +9,29 @@
       "sha256": "ac1d96d21e2197ea9576d1b5f9aca8531ccfecd34b605fe36de1668c44a157b2"
     },
     {
+      "path": ".github/dependabot.yml",
+      "bytes": 260,
+      "sha256": "1df1ce6ae55e6f7f34531a0a7af8440f9df86a6cac9c7625ac24adfe259cfae0"
+    },
+    {
       "path": ".github/workflows/ci.yml",
       "bytes": 766,
       "sha256": "7edad7bec5fd18a6462a8b797ad059091df99d1cdc72d284f1d08b6bb282fd1c"
     },
     {
       "path": ".gitignore",
-      "bytes": 95,
-      "sha256": "b5f4897670de569603ff01354bc3fdcdbf40df25871261604d367ef8fcca2d1a"
+      "bytes": 155,
+      "sha256": "a0e1a2960f8ec951997781d9b9218040b1ae56d6154f868cea99dc59bccda9f9"
+    },
+    {
+      "path": "CHANGELOG.md",
+      "bytes": 2035,
+      "sha256": "c95d0f8fb5748019270df4e8d859362d76d3072930ffa5737dcb8fc1be1f06cd"
     },
     {
       "path": "CONTRIBUTING.md",
-      "bytes": 1668,
-      "sha256": "e7a46ca3ce5215e2d8a86fea0d55c22ed06495c9e1ef23ece62471be92251659"
+      "bytes": 2253,
+      "sha256": "9e635188c45de0f14ede17aa43ccd7f63c307ebab9cb04cdf415d9b1d11fa3e3"
     },
     {
       "path": "LICENSE",
@@ -30,8 +40,13 @@
     },
     {
       "path": "README.md",
-      "bytes": 10207,
-      "sha256": "532bc833575e98d99300f4ad6d28b56ee3bf8b5dcb1c95e9e4445f492064bdad"
+      "bytes": 11644,
+      "sha256": "65dd14b254feb2e0bbeb9912e7c18e4e4215a557ad9f9a79fa438b1020cf5e8c"
+    },
+    {
+      "path": "SECURITY.md",
+      "bytes": 1538,
+      "sha256": "0167de9d46bc9d789385942ce80d089b2c16be9ad1ec6c1d5468b465f2214d44"
     },
     {
       "path": "docs/ACCURACY_TRACING_SPEC.md",
@@ -56,17 +71,12 @@
     {
       "path": "docs/HISTORICAL_2023_BENCHMARK.md",
       "bytes": 8348,
-      "sha256": "ab0e93a5b65e61735c284ec3077475f82e93aec8cce7e3a9eac2dc100a75753f"
-    },
-    {
-      "path": "docs/PROGRAM_APPLICATION.md",
-      "bytes": 3761,
-      "sha256": "d2483133c8ef9c92fbc815223ece88292a7453e7468064d83c9d69c33b57b758"
+      "sha256": "fe9097ef5f6c5d50c87b8f2964c732692af0a1e0ef1b21f29ba53d33f915731f"
     },
     {
       "path": "docs/PROJECT_BRIEF.md",
-      "bytes": 3529,
-      "sha256": "462ea923d43667bab8292e82528f796f99646a495ba6fa2cc500eb63087bf537"
+      "bytes": 4313,
+      "sha256": "e762a2801290397b22ed1697522e6226dcb55102b8f7d12cc166095d655c2953"
     },
     {
       "path": "docs/REPAIR_V0.3.md",
@@ -75,8 +85,8 @@
     },
     {
       "path": "docs/ROADMAP.md",
-      "bytes": 3947,
-      "sha256": "e191e6d7ee0ac2b3fbf061427def6d0c6ef9b93c5738a776b57cf816fb48cd32"
+      "bytes": 3667,
+      "sha256": "588c423f056736b16eab6b3bd25e5b8a9d3311102a83475769d2b14586824608"
     },
     {
       "path": "docs/STAGED_VALIDATION_LOOP.md",
@@ -340,8 +350,8 @@
     },
     {
       "path": "reports/VALIDATION.md",
-      "bytes": 1332,
-      "sha256": "5e8221d11ff42c93c91e44f7ad3aba1dcf77698a65eaa6d919ef9c526968dd83"
+      "bytes": 1602,
+      "sha256": "401940e5974948eb6c347e9bda4a658372b20e70282b832d1783f9563a5dd823"
     },
     {
       "path": "reports/VALIDATION_V0.2.md",
@@ -350,8 +360,8 @@
     },
     {
       "path": "reports/VALIDATION_V0.3.md",
-      "bytes": 2475,
-      "sha256": "0a79dd5f96f8e9abe22dd36e3dd8f7a7263e322505968645640268099af7d6d6"
+      "bytes": 3952,
+      "sha256": "2032b5ff868c7977c96673d52f0a47aa93cf3cb7c40ab1bc1d17adf9b05052b8"
     },
     {
       "path": "reports/all-metrics-v0.2.json",
@@ -1625,8 +1635,8 @@
     },
     {
       "path": "reports/test-output-v0.3.txt",
-      "bytes": 30362,
-      "sha256": "6cb3bdb2dd5367c5e53e0f125f1dc77ab029afc3328fc72f1a69d6dc8e061230"
+      "bytes": 39054,
+      "sha256": "23e6f7c788ba331ee4a182933c4dc4d592d98e75f001c2b062e60f12ece40ec1"
     },
     {
       "path": "reports/tests.txt",
@@ -1650,8 +1660,8 @@
     },
     {
       "path": "reports/validation-v0.3.json",
-      "bytes": 2178,
-      "sha256": "dc862d140ded567cd24ce013a7751fda3cce1ae6089f64d9075d5c4fbb05adf8"
+      "bytes": 2216,
+      "sha256": "864975dac2eae9d255097e2c4cf343f87123ba1ed52fadba453723f01bd8f782"
     },
     {
       "path": "scripts/release_manifest.py",
@@ -1660,8 +1670,8 @@
     },
     {
       "path": "scripts/validate_release.py",
-      "bytes": 13370,
-      "sha256": "90558b903bb50de2a7bd319cc811c1beb634162c97c37d94bcced86a8b609617"
+      "bytes": 14986,
+      "sha256": "d767c98cba66f49a5cd7f4acb70226b2949f8ebf8b3e286e338daa6f912dbab6"
     },
     {
       "path": "tests/test_comparison.py",

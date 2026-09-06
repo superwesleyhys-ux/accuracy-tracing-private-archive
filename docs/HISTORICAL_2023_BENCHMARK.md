@@ -66,7 +66,7 @@ python3 experiments/historical_compare.py audit \
 For a live comparison, first commit the frozen benchmark, revoke any credential ever pasted into chat, and configure a fresh credential outside chat. The runner additionally requires an explicit local opt-in and never prints or persists the credential:
 
 ```bash
-export OPENAI_API_KEY='fresh-rotated-key-set-locally'
+# OPENAI_API_KEY must already be present in the process environment.
 export ACCURACY_TRACING_ALLOW_MODEL_CALLS=1
 python3 experiments/historical_compare.py run \
   --inputs experiments/historical-2023/inputs.json \
@@ -75,7 +75,7 @@ python3 experiments/historical_compare.py run \
   --output reports/historical-2023-run-001 \
   --model MODEL_NAME \
   --reasoning-effort medium
-unset OPENAI_API_KEY ACCURACY_TRACING_ALLOW_MODEL_CALLS
+unset ACCURACY_TRACING_ALLOW_MODEL_CALLS
 ```
 
 Only after both arms finish, score against the separately checksummed gold:
